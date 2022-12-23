@@ -335,7 +335,7 @@ typedef struct _CBS_CONFIG {
 } CBS_CONFIG;
 
 
-///CbsVariableStructUniqueValue 0x4c1d976c 
+///CbsVariableStructUniqueValue 0x6ec964bb 
 
 #pragma pack(pop)
 

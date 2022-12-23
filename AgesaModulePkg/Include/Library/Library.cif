@@ -83,6 +83,7 @@
 "FchInitHookLib.h"
 "FchPeiLib.h"
 "FchSmmLib.h"
+"FchSpiAccessLib.h"
 "GfxCardInfoLib.h"
 "GfxEnumConnectorsLib.h"
 "GnbAzaliaLib.h"

@@ -14,48 +14,8 @@
 /*
  ******************************************************************************
  *
- * Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
  *
- * AMD is granting you permission to use this software and documentation (if
- * any) (collectively, the "Materials") pursuant to the terms and conditions of
- * the Software License Agreement included with the Materials.  If you do not
- * have a copy of the Software License Agreement, contact your AMD
- * representative for a copy.
- *
- * You agree that you will not reverse engineer or decompile the Materials, in
- * whole or in part, except as allowed by applicable law.
- *
- * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
- * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
- * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
- * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
- * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
- * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
- * exclusion of implied warranties, so the above exclusion may not apply to
- * You.
- *
- * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
- * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
- * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
- * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
- * liability to You for all damages, losses, and causes of action (whether in
- * contract, tort (including negligence) or otherwise) exceed the amount of
- * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
- * licensors, and any of their directors, officers, employees, affiliates or
- * agents from and against any and all loss, damage, liability and other
- * expenses (including reasonable attorneys' fees), resulting from Your use of
- * the Materials or violation of the terms and conditions of this Agreement.
- *
- * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
- * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
- * subject to the restrictions as set forth in FAR 52.227-14 and
- * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
- * Government constitutes acknowledgment of AMD's proprietary rights in them.
- *
- * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
- * stated in the Software License Agreement.
  *******************************************************************************
  **/
 
@@ -122,6 +82,9 @@ enum _PSP_DIRECTORY_ENTRY_TYPE {
   AGESA_BOOT_LOADER_7             = 0x37,           ///< PSP entry points to PSP AGESA Binary 7
   PSP_VM_GUARD_DATA               = 0x38,           ///< PSP entry points to VM Guard data
   PSP_DIR_LV2                     = 0x40,           ///< PSP entry points to Level 2 PSP DIR
+  PSP_REGION_A_DIR                = 0x48,           ///< PSP entry points to PSP DIR in Region A
+  BIOS_REGION_DIR                 = 0x49,           ///< PSP entry points to BIOS DIR in Region A or B
+  PSP_REGION_B_DIR                = 0x4A,           ///< PSP entry points to PSP DIR in Region B
   PSP_NVRAM                       = 0x54,           ///< PSP entry points to PSP NVRAM for RPMC
   AMD_SCS_BINARY                  = 0x5F,           ///< Software Configuration Settings Data Block
   PSP_BOOT_OEM_TRUSTLET           = 0x80,           ///< PSP entry points to boot-loaded OEM trustlet binary

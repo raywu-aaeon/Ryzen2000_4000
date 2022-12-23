@@ -601,6 +601,8 @@ SuccessfulCompletion (
 
   case EfiSmbusReadBlock:
     BlockCount = Smbus->SmbusIoRead (Smbus, HD0);
+    // Do a read from Reg02 to reset the counter 
+    Smbus->SmbusIoRead (Smbus, HCTL);
     if (*Length < BlockCount) {
       BlockCount = *Length;
     }

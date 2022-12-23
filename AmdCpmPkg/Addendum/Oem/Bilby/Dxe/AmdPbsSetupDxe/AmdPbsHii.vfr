@@ -287,36 +287,32 @@ formset
       option text = STRING_TOKEN(STR_XGBE_PORT_PHY_BACKPLANE),   value = 2, flags = INTERACTIVE | RESET_REQUIRED ;
     endoneof;
 
-    suppressif  ideqval AMD_PBS_SETUP.XgbePortPhySwitch == 1;
+    suppressif NOT ideqval AMD_PBS_SETUP.XgbePortPhySwitch == 0;
       oneof
-        varid       = AMD_PBS_SETUP.XgbePortSpeedSwitch,
-        prompt      = STRING_TOKEN(STR_XGBE_PORT_SPEED_SELECT_STRING),
-        help        = STRING_TOKEN(STR_XGBE_PORT_SPEED_SELECT_HELP),
-        option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_1G),       value = 0,  flags = INTERACTIVE | RESET_REQUIRED;
-        option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_10G),      value = 1, flags = INTERACTIVE | RESET_REQUIRED;
-//      option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_100M),     value = 2, flags = INTERACTIVE | RESET_REQUIRED;
-        option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_ALL),      value = 3, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
-        suppressif NOT ideqval AMD_PBS_SETUP.XgbePortPhySwitch == 2;
-           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_2_5G),     value = 4, flags = INTERACTIVE | RESET_REQUIRED;
-        endif
+        varid       = AMD_PBS_SETUP.XgbePortRJ45Mode,
+        questionid  = KEY_XGBE_PORT_RJ45_MODE,
+        prompt      = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_SELECT_STRING),
+        help        = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_SELECT_HELP),
+        option text = STRING_TOKEN(STR_XGBE_PORT_MODE_10_1_RJ45),                  value =1,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_XGBE_PORT_MODE_1000BASET),                  value = 3,  flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_XGBE_PORT_MODE_NBASET),                     value = 5,  flags = INTERACTIVE | RESET_REQUIRED;
       endoneof;
     endif;
 
-//   suppressif NOT ideqval AMD_PBS_SETUP.XgbePortPhySwitch == 2;
-//      oneof
-//        varid       = AMD_PBS_SETUP.XgbePortRJ45Mode,
-//        prompt      = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_SELECT_STRING),
-//        help        = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_SELECT_HELP),
-//        option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_10_1_BACKPLANE),        value = 1,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
-//        option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_2_5_BACKPLANE),         value = 2,  flags = INTERACTIVE | RESET_REQUIRED;
-//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_1000BASET),             value = 3,  flags = INTERACTIVE | RESET_REQUIRED;
-//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_1000BASEX),             value = 4,  flags = INTERACTIVE | RESET_REQUIRED;
-//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_NBASET),                value = 5,  flags = INTERACTIVE | RESET_REQUIRED;
-//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_10GBASET),              value = 6,  flags = INTERACTIVE | RESET_REQUIRED;
-//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_10GBASER),              value = 7,  flags = INTERACTIVE | RESET_REQUIRED;
-//      endoneof;
-//    endif;
-endif;
+    suppressif  ideqval AMD_PBS_SETUP.XgbePortPhySwitch == 1 OR NOT ideqval AMD_PBS_SETUP.XgbePortRJ45Mode == 1;
+          oneof
+            varid       = AMD_PBS_SETUP.XgbePortSpeedSwitch,
+            prompt      = STRING_TOKEN(STR_XGBE_PORT_SPEED_SELECT_STRING),
+            help        = STRING_TOKEN(STR_XGBE_PORT_SPEED_SELECT_HELP),
+            option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_1G),       value = 0,  flags = INTERACTIVE | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_10G),      value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    //      option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_100M),     value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_ALL),      value = 3, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+            suppressif NOT ideqval AMD_PBS_SETUP.XgbePortPhySwitch == 2;
+               option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_2_5G),     value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+            endif
+          endoneof;     endif;
+    endif;
     oneof
       varid       = AMD_PBS_SETUP.VDDP,
       prompt      = STRING_TOKEN(STR_VDDP_STRING),
@@ -361,15 +357,18 @@ endif;
     endoneof;
 
     suppressif TRUE;
-    	oneof
-	  varid       = AMD_PBS_SETUP.PxeBoot,
-	  prompt      = STRING_TOKEN(STR_PXE_BOOT_SELECT_STRING),
-	  help        = STRING_TOKEN(STR_PXE_BOOT_SELECT_HELP),
-	  option text = STRING_TOKEN(STR_PXE_BOOT_PORT_0),         value = 1,  flags = INTERACTIVE | RESET_REQUIRED ;
-	  option text = STRING_TOKEN(STR_PXE_BOOT_PORT_1),         value = 2,  flags = INTERACTIVE | RESET_REQUIRED ;
-	  option text = STRING_TOKEN(STR_DISABLED_TEXT),           value = 0,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
-	endoneof;
+        oneof
+          varid       = AMD_PBS_SETUP.PxeBoot,
+          prompt      = STRING_TOKEN(STR_PXE_BOOT_SELECT_STRING),
+          help        = STRING_TOKEN(STR_PXE_BOOT_SELECT_HELP),
+          option text = STRING_TOKEN(STR_PXE_BOOT_PORT_0),         value = 1,  flags = INTERACTIVE | RESET_REQUIRED ;
+          option text = STRING_TOKEN(STR_PXE_BOOT_PORT_1),         value = 2,  flags = INTERACTIVE | RESET_REQUIRED ;
+          option text = STRING_TOKEN(STR_DISABLED_TEXT),           value = 0,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        endoneof;
     endif;
+
+
+
 
     // EMBSWDEV-6181: Add any Setup Option before this code
     oneof
@@ -379,7 +378,7 @@ endif;
         help        = STRING_TOKEN(STR_XGBE_VS_PCIEX2_SELECT_HELP),
         option text = STRING_TOKEN(STR_XGBE_VS_PCIEX2_M2_SATA),         value = 0,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
         option text = STRING_TOKEN(STR_XGBE_VS_PCIEX2_PCIEX2),       value = 1,  flags = INTERACTIVE | RESET_REQUIRED ;
-	option text = STRING_TOKEN(STR_XGBE_VS_PCIEX2_PCIEX4),       value = 2,  flags = INTERACTIVE | RESET_REQUIRED ;
+        option text = STRING_TOKEN(STR_XGBE_VS_PCIEX2_PCIEX4),       value = 2,  flags = INTERACTIVE | RESET_REQUIRED ;
 	//option text = STRING_TOKEN(STR_XGBE_VS_PCIEX2_X2NVME),  value = 3,  flags = INTERACTIVE | RESET_REQUIRED ;
     endoneof;
 

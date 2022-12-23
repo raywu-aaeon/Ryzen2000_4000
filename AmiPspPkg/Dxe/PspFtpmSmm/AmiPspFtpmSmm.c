@@ -91,7 +91,7 @@ GetPspLv1Dir (
     PspComboDir = (PSP_COMBO_DIRECTORY *) (UINTN) PspComboDirBase;
     PspComboEntry = &PspComboDir->ComboEntry[0];
     // Check the signature
-    if (PspComboDir->Header.PspCookie != PSP_COMBO_DIRECTORY_HEADER_SIGNATURE)
+    if (PspComboDir->Header.PspCookie != PSP_COMBO_DIRECTORY_COOKIE)
     {
         return FALSE;
     }

@@ -250,6 +250,8 @@
   FchInitHookLibDxe|AgesaModulePkg/Library/FchInitHookLib/FchInitHookLibDxe.inf
   FchIdsHookLib|AgesaModulePkg/Library/FchIdsHookLib/FchIdsHookLib.inf
   Mp2I2cLibDxe|AgesaModulePkg/Fch/Sandstone/FchSandstoneI2cDxe/Mp2I2cLibDxe.inf
+  ## FCH SPI ACCESS lib
+  FchSpiAccessLib|AgesaModulePkg/Library/FchSpiAccessLib/FchSpiAccessRom2Lib.inf
   ## Ras Lib
   RasRvBaseLib|AgesaModulePkg/Library/RasRvBaseLib/RasRvBaseLib.inf
 
@@ -421,7 +423,7 @@
 
 [PcdsFixedAtBuild]
   # AMD AGESA PI Name & Version string
-  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPackageString|"AGESA!V9\0EmbeddedR2KPI-FP5_1.0.0.0"
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPackageString|"AGESA!V9\0EmbeddedR2KPI-FP5_1.0.0.1"
 
 [PcdsDynamicDefault]
   # Gnb Gbs Override

@@ -60,6 +60,7 @@
 #include "AmdPspP2CmboxV2.h"
 #include <AmdPspSmmCommunication.h>
 #include <Library/S3BootScriptLib.h>
+#include <Library/AmdPspBaseLibV2.h>
 #include <Filecode.h>
 
 #define FILECODE PSP_AMDPSPP2CMBOXV2_AMDPSPP2CMBOXV2_FILECODE
@@ -120,9 +121,32 @@ PSP_NV_DESCRIPTOR mPspNvDb[] = {
   {SMI_TARGET_PSP_NVRAM, DIR_TYPE_PSP, PSP_NVRAM,  FALSE, 0, 0},
   {SMI_TARGET_END, DIR_TYPE_END, 0, FALSE, 0, 0},
 };
+/**
+ * @brief List writable PSP entry types which will use this driver
+ *
+ */
+UINT32 WritablePspEntryTypes[] = {
+  // fTPM NVRAM
+  0x4,
+  // PSP NVRAM for RPMC
+  0x54
+};
+
+/**
+ * @brief List writable BIOS entry types which will use this driver
+ *
+ */
+UINT32 WritableBiosEntryTypes[] = {
+  // Agesa PSP Customization Block
+  0x60,
+  // APOB NV Copy
+  0x63
+};
 
 PSP_MBOX_SMMBUFFER_ADDRESS_PROTOCOL mPspMboxSmmBufferAddressProtocol;
 
+ENTRY_REGION                          mWritableEntryRegions[MAX_WRITABLE_ENTRY_REGIONS];
+UINT32                                mEntryRegionIndex = 0;
 UINT64                                mTsegBase = 0;
 UINT64                                mTsegMask = 0;
 BIOS_MBOX                             *mPspToBiosMbox = NULL;
@@ -427,6 +451,101 @@ InitPspNvDb (
   }
 }
 
+VOID
+FillPspWritableRegions (
+  IN PSP_DIRECTORY               *PspDir,
+  IN UINT64                      DirectoryHdrAddr
+) {
+  UINTN                       i;
+  UINT32                      j;
+  UINT64                      EntryAddress;
+  for (i = 0; i < PspDir->Header.TotalEntries; i++) {
+    for (j = 0; j < sizeof(WritablePspEntryTypes) / sizeof(UINT32); j++) {
+      if (PspDir->PspEntry[i].Type.Field.Type == WritablePspEntryTypes[j]) {
+        if (mEntryRegionIndex < MAX_WRITABLE_ENTRY_REGIONS) {
+          EntryAddress = TranslateEntryLocation (PspDir->PspEntry[i].Location, DirectoryHdrAddr,
+                                                  (UINT32)(DirectoryHdrAddr & 0xFFFFFFFF));
+          mWritableEntryRegions[mEntryRegionIndex].Address = EntryAddress;
+          mWritableEntryRegions[mEntryRegionIndex].Size = PspDir->PspEntry[i].Size;
+          mEntryRegionIndex++;
+        } else {
+          IDS_HDT_CONSOLE_PSP_TRACE ("\nindex overflow for writable entry regions(Current=%d, Max=%d)",
+                                        mEntryRegionIndex, MAX_WRITABLE_ENTRY_REGIONS);
+        }
+      }
+    }
+  }
+}
+
+VOID
+FillBiosWritableRegions (
+  IN BIOS_DIRECTORY              *BiosDir,
+  IN UINT64                      DirectoryHdrAddr
+) {
+  UINTN                       i;
+  UINT32                      j;
+  UINT64                      EntryAddress;
+  for (i = 0; i < BiosDir->Header.TotalEntries; i++) {
+    for (j = 0; j < sizeof(WritableBiosEntryTypes) / sizeof(UINT32); j++) {
+      if (BiosDir->BiosEntry[i].TypeAttrib.Type == WritableBiosEntryTypes[j]) {
+        if (mEntryRegionIndex < MAX_WRITABLE_ENTRY_REGIONS) {
+          EntryAddress = TranslateEntryLocation (BiosDir->BiosEntry[i].Location, DirectoryHdrAddr,
+                                                  (UINT32)(DirectoryHdrAddr & 0xFFFFFFFF));
+          mWritableEntryRegions[mEntryRegionIndex].Address = EntryAddress;
+          mWritableEntryRegions[mEntryRegionIndex].Size = BiosDir->BiosEntry[i].Size;
+          mEntryRegionIndex++;
+          } else {
+            IDS_HDT_CONSOLE_PSP_TRACE ("\nindex overflow for writable entry regions(Current=%d, Max=%d)",
+                                        mEntryRegionIndex, MAX_WRITABLE_ENTRY_REGIONS);
+        }
+      }
+    }
+  }
+}
+
+VOID
+InitWritableEntryRegions (
+  )
+{
+  PSP_DIRECTORY               *PspDir;
+  BIOS_DIRECTORY              *BiosDir;
+  UINTN                       i;
+  UINT64                      PspLv2BaseAddress;
+  UINT64                      BiosLv2BaseAddress;
+
+  PspDir = NULL;
+  BiosDir = NULL;
+  PspLv2BaseAddress = 0;
+  BiosLv2BaseAddress = 0;
+  mEntryRegionIndex = 0;
+
+  if (GetPspBiosLv2BaseAddr (&PspLv2BaseAddress, &BiosLv2BaseAddress) == TRUE) {
+    if (GetPspLv2DirBaseV2 (PspLv2BaseAddress, &PspDir) == TRUE) {
+      FillPspWritableRegions (PspDir, PspLv2BaseAddress);
+    }
+
+    if (GetBiosLv2DirBaseV2 (BiosLv2BaseAddress, &BiosDir) == TRUE) {
+      FillBiosWritableRegions (BiosDir, BiosLv2BaseAddress);
+    }
+  } else { // cannot find PSP & BIOS L2, then find them in L1
+    if (GetPspDirBaseV2 (&PspDir) == TRUE) {
+      FillPspWritableRegions (PspDir, 0);
+    }
+
+    if (GetBiosDirBaseV2 (&BiosDir) == TRUE) {
+      FillBiosWritableRegions (BiosDir, 0);
+    }
+  }
+
+  // print writable regions
+  IDS_HDT_CONSOLE_PSP_TRACE ("\nWritable regions:");
+  for (i = 0; i < mEntryRegionIndex; i++) {
+    IDS_HDT_CONSOLE_PSP_TRACE ("\n%lx-%lx", mWritableEntryRegions[i].Address,
+    (mWritableEntryRegions[i].Address + mWritableEntryRegions[i].Size - 1));
+  }
+  IDS_HDT_CONSOLE_PSP_TRACE ("\n");
+}
+
 EFI_STATUS
 EFIAPI
 AmdPspP2CmboxEntry (
@@ -441,6 +560,8 @@ AmdPspP2CmboxEntry (
   BOOLEAN                         *PspMboxSmmFlagAddr;
   EFI_HANDLE                      Handle;
 
+
+  InitWritableEntryRegions ();
   LocalPspMboxSmmBuffer = NULL;
   PspMboxSmmBuffer = NULL;
   PspMboxSmmFlagAddr = NULL;

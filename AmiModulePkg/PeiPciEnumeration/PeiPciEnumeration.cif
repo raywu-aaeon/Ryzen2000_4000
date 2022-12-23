@@ -1,0 +1,17 @@
+<component>
+    name = "PeiPciEnumeration"
+    category = eModule
+    LocalRoot = "AmiModulePkg\PeiPciEnumeration\"
+    RefName = "PeiPciEnumeration"
+[INF]
+"PeiPciEnumeration.inf"
+"PeiPciEnumerationResourceLib.inf"
+[files]
+"PeiPciEnumeration.sdl"	
+"PeiPciEnumerationElink.txt"	
+"PeiPciEnumeration.chm"	
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_48"
+[dependency.incompatible]
+NvmeRecovery = "SS: AptioV;$/AptioV/Source/Modules/NvmeRecovery;NvmeRecovery_07"
+<endComponent>

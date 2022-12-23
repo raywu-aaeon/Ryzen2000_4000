@@ -769,15 +769,19 @@ GfxIntegratedEnumerateAllConnectors (
         break;
       }
     }
-
+	//<Embedded_Override_Start>
+    /*
     if (DdiCounter == 2 || DdiCounter == 3) {
-      StoreDisplayPathList->usCaps = (DdiComplexData[DdiCounter].Type.Ddi.DdiData.Flags | ATOM_ENCODER_CAP_RECORD_USB_C_TYPE);
+      StoreDisplayPathList->usCaps |= (DdiComplexData[DdiCounter].Type.Ddi.DdiData.Flags | ATOM_ENCODER_CAP_RECORD_USB_C_TYPE);
     }
-	
+	//<Embedded_Override_Start>
 	if (ExtConnectorInfo->ConnectorType == ConnectorTypeHDMI || ExtConnectorInfo->ConnectorType == ConnectorTypeDP || ExtConnectorInfo->ConnectorType == ConnectorTypeEDP  )
     {
      StoreDisplayPathList->usCaps &= ~ATOM_ENCODER_CAP_RECORD_USB_C_TYPE;
     }
+	//<Embedded_Override_End>
+	*/
+	//<Embedded_Override_End>
 
     if (ExtConnectorInfo->ConnectorType == UnusedType) {
       StoreDisplayPathList->usDeviceTag = 0;

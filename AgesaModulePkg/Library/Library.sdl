@@ -796,6 +796,13 @@ INFComponent
 End
 
 INFComponent
+	Name  = "FchSpiAccessRom2Lib"
+	File  = "FchSpiAccessLib\FchSpiAccessRom2Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
 	Name  = "GnbCommonLib"
 	File  = "GnbCommonLib\GnbCommonLib.inf"
 	Package  = "AgesaModulePkg"
@@ -2838,6 +2845,11 @@ End
 LibraryMapping
 	Class  = "FchSmmLibV9"
 	Instance  = "AgesaModulePkg.FchSmmLibV9"
+End
+
+LibraryMapping
+	Class  = "FchSpiAccessLib"
+	Instance  = "AgesaModulePkg.FchSpiAccessRom2Lib"
 End
 
 LibraryMapping

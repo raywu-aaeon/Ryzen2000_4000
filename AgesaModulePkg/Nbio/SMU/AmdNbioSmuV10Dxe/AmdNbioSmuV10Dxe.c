@@ -1985,11 +1985,22 @@ AmdNbioSmuV10DxeEntry (
     GetOPNNameString(OPNNameString);
   
     if (!AsciiStrCmp(OPNNameString, NPU_OPN_V1500B)) {
-        PPTable->SUSTAINED_POWER_LIMIT = 16000;//Assign 16W for V1500B NPU OPN 
+      if(PcdGet8 (PcdEnableV1500BExtPptLimit ) &&
+         (PcdGet8 (PcdCfgSystemConfiguration) == SYSTEM_CONFIG_TDP_25W) ) {
+        //Update the Config to 25W
+        PPTable->SUSTAINED_POWER_LIMIT = 25000;
+		PcdSet8 (PcdCfgSystemConfiguration, (UINT8) SYSTEM_CONFIG_TDP_25W);//Set Embedded 25W
+        PPTable->SLOW_PPT_LIMIT = 25000;
+        PPTable->FAST_PPT_LIMIT = 30000;
+        IDS_HDT_CONSOLE (MAIN_FLOW, "25W NPU OPN\n");
+      } else {
+        PPTable->SUSTAINED_POWER_LIMIT = 16000;//Assign 16W for V1500B NPU OPN
         PcdSet8 (PcdCfgSystemConfiguration, (UINT8) SYSTEM_CONFIG_TDP_15W);//Set Embedded 15W
         PPTable->SLOW_PPT_LIMIT = 16000;
         PPTable->FAST_PPT_LIMIT = 16000;
         IDS_HDT_CONSOLE (MAIN_FLOW, "16W NPU OPN\n");
+      }
+      
     } else {
       switch (PowerLimit) {
         case POWER_LIMIT_15W:

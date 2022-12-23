@@ -223,6 +223,7 @@
   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdWaitVidCompDis
   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdVoltageSlewRate
   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSparseControlDisable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEnableV1500BExtPptLimit 
 
 [Depex]
   gAmdNbioSmuV10DxeDepexProtocol AND

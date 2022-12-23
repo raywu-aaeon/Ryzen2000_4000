@@ -4,6 +4,7 @@
     RefName = "AES-R2000"
 [files]
 "AES-R2000.sdl"	
+"AgesaModulePkg\AgesaModuleNbioPkg.dec"	
 "AgesaModulePkg\Fch\Sandstone\FchSandstoneCore\Sandstone\FchRaven.asi"	
 "AgesaModulePkg\Fch\Sandstone\FchSandstoneCore\Sandstone\SSHwAcpi\SSHwAcpiLate.c"	
 "AgesaModulePkg\Fch\Sandstone\FchSandstoneSmmControlDxe\SmmControl.c"	
@@ -85,6 +86,7 @@
 "AmiModulePkg\PCI\PciDxeInit.c"	
 "AmiModulePkg\PCI\PciDxeInit.inf"	
 "AmiModulePkg\PCI\PciRootBridge.inf"	
+"AmiModulePkg\PeiPciEnumeration\PeiPciEnumerationResourceLib.c"	
 "AmiModulePkg\Library\AmiPciBusLib\AmiPciBusLib.c"	
 "AmiModulePkg\Library\AmiPciExpressLib\AmiPciExpressLib.inf"	
 "AmiModulePkg\TCG2\CRB_lib\Tpm20CRBLib.c"	
@@ -115,4 +117,5 @@
 "MdeModulePkg\Core\PiSmmCore\PiSmmCore.c"	
 "MdeModulePkg\Core\PiSmmCore\PiSmmIpl.c"	
 "EmbeddedR2000ReleaseNotes.chm"	
+"AmiPspPkg\Dxe\PspFtpmSmm\AmiPspFtpmSmm.c"	
 <endComponent>

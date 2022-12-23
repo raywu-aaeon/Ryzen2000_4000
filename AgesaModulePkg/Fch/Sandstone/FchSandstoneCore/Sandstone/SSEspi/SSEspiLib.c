@@ -684,8 +684,9 @@ FchinitSSEspiSlave0Device (
   //De-assert PLTRST#
   SSeSPI_PltResetDeassert (EspiBase);
 #endif 
-  }
 //<Embedded_Override_End>
+  }
+
   //
   // PC Channel
   //
@@ -781,6 +782,7 @@ FchinitSSEspiTimer (
   RwMem (EspiBase + 0x30, AccessWidth32, 0xFF00008F, 0x000FFF70);
   RwMem (EspiBase + 0x30, AccessWidth32, ~(UINT32)BIT0, BIT0);                            // WDG_EN
   RwMem (EspiBase + 0x30, AccessWidth32, ~(UINT32)BIT1, BIT1);                            // WAIT_CHKEN.
+  RwMem (EspiBase + 0x30, AccessWidth32, 0xC0FFFFFF, 0x3F000000);                         // WAIT_CNT.
 }
 
 /**

@@ -242,6 +242,7 @@ AmiModulePkg\Ofbd\OemGetPattern\OemGetPattern.sdl AmiModulePkg\Ofbd\Ofbd.sdl\
 AmiModulePkg\OpalSecurity\OpalSecurity.sdl\
 AmiModulePkg\PauseKey\PauseKey.sdl\
 AmiModulePkg\PcdRecovery\PcdRecovery.sdl\
+AmiModulePkg\PeiPciEnumeration\PeiPciEnumeration.sdl\
 AmiModulePkg\PlatformEmmcController\PlatformEmmcController.sdl\
 AmiModulePkg\CSM\CsmRt32\CsmRt32.sdl\
 SecurityPkg\RandomNumberGenerator\RandomNumberGen.sdl\

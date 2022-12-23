@@ -2182,6 +2182,14 @@ ConfigureEthernetDxioPorts (
            if(  DxioPortList->EtherNet.EthPortProp0.SuppSpeed == XGBE_PORT_SPEED_2_5G)
 		  		 DxioPortList->EtherNet.EthPortProp0.PlatConf = XGBE_2_5G_BACKPLANE;    
         }
+        else {
+            DxioPortList->EtherNet.EthPortProp0.PlatConf = AmdPbsConfiguration.XgbePortRJ45Mode;
+            if(DxioPortList->EtherNet.EthPortProp0.PlatConf != XGBE_10G_1G_BACKPLANE){
+            DxioPortList->EtherNet.EthPortProp0.ConnType = XGBE_CONNECTION_MDIO_PHY;
+            if ((DxioPortList->EtherNet.EthPortProp0.PlatConf == XGBE_SOLDERED_DOWN_1000BASE_T) || (DxioPortList->EtherNet.EthPortProp0.PlatConf == XGBE_SOLDERED_DOWN_NBASE_T))
+               DxioPortList->EtherNet.EthPortProp0.SuppSpeed = (XGBE_PORT_SPEED_1G | XGBE_PORT_SPEED_100M);
+            }
+        }
 
         DEBUG((DEBUG_INFO, "PlatConf  = %x\n", DxioPortList->EtherNet.EthPortProp0.PlatConf));
         DEBUG((DEBUG_INFO, "ConnType  = %x\n", DxioPortList->EtherNet.EthPortProp0.ConnType));

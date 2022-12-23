@@ -2,6 +2,73 @@
 | SMU Firmware Release Notes - RAVEN1X  |
 
 +---------------------------------------+
+| Version 30.98.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                16/11/21
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.291
+|                - [PMFW-8649] [ETB] Perform range check, use macros
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.98.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.98.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------------------+
+| Version 30.97.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                18/05/21
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.291
+|                - [PMFW-7126] [IMP] Core voltage is not constant when Temp goes < 0
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.97.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.97.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------------------+
+| Version 30.96.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                01/04/21
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.291
+|                - [PMFW-6900] [IMP] dGPU Mailbox read/write policy update
+|                - [PMFW-6849] [ETB] GPU performance shows N/A on V1000 series SoC
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.96.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.96.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------------------+
 | Version 30.95.0           |
 +---------------------------+-------------------------------------------------------------------------------
 |        * Date (dd/mm/yy)

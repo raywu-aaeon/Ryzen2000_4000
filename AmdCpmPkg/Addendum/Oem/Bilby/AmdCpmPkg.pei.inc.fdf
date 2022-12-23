@@ -58,4 +58,4 @@ INF AmdCpmPkg/Addendum/Oem/Bilby/Devices/Pca9545a/Pei/Pca9545aPei.inf
 INF AmdCpmPkg/Addendum/Oem/Bilby/Pei/PlatformMemoryConfigurationPei/PlatformMemoryConfigurationPei.inf
 INF AmdCpmPkg/Addendum/Oem/Bilby/Pei/PlatformCustomizePei/PlatformCustomizePei.inf
 INF AmdCpmPkg/Addendum/Oem/Bilby/Pei/AmdXgbeAndDisplayConfigure/AmdXgbeAndDisplayConfigure.inf
-INF AmdCpmPkg/Addendum/Oem/Bilby/Pei/AmdXgbeWorkaround/AmdXgbeWorkaround.inf
+#INF AmdCpmPkg/Addendum/Oem/Bilby/Pei/AmdXgbeWorkaround/AmdXgbeWorkaround.inf

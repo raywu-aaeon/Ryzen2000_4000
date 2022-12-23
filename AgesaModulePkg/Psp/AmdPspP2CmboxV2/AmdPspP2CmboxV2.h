@@ -81,7 +81,7 @@
 #include <Protocol/PspMboxSmmBufferAddressProtocol.h>
 
 #define EFI_LBA_LIST_TERMINATOR   0xFFFFFFFFFFFFFFFFULL
-
+#define MAX_WRITABLE_ENTRY_REGIONS            16
 
 P2C_MBOX_STATUS
 EFIAPI

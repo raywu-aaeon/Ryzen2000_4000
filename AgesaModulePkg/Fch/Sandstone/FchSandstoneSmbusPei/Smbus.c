@@ -516,10 +516,10 @@ SmBusExecute (
                           0xed
                           );
         StsReg = Private.IoRead8 (&Private, SMB_IOREG00);
-        if ( ! ( bValue & BIT0) ) {
-          break;   // Bit0 = 0, Host is not busy
+        if ( ! ( StsReg & BIT0) ) {
+          break;   // SmBusStat Bit0 = 0, Host is not busy
         }
-      } while (DwLoopCount--);
+      } while (--DwLoopCount);
       if ( DwLoopCount == 0) {
         Private.IoWrite8 (&Private, SMB_IOREG02, BIT1);     // Set [1] = Kill current host transaction
         return EFI_TIMEOUT;

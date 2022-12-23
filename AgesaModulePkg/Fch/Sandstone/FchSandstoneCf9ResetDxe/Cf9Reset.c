@@ -120,6 +120,7 @@ Returns:
   UINT16     PmCntl;
   UINT16     PwrSts;
   BOOLEAN    IsFullHardReset = FALSE;
+  UINT8      SleepIoWriteWidth;
 
   DEBUG ((DEBUG_INFO, "[FchCf9Reset] ResetSystem invoked:  ResetType = %d\n", ResetType));
   switch (ResetType) {
@@ -168,7 +169,14 @@ Returns:
     AcpiPm1CntBase = ReadPmio16 (FCH_PMIOA_REG62);
     PmCntl  = IoRead16 (AcpiPm1CntBase);
     PmCntl  = (PmCntl & ~SLP_TYPE) | SUS_S5 | SLP_EN;
-    IoWrite16 (AcpiPm1CntBase, PmCntl);
+
+    SleepIoWriteWidth = PcdGet8 (PcdFchPmCtrlSlpIoWrWidth);
+    if (SleepIoWriteWidth == 0x01) { // Byte IO write Width
+      IoWrite8 (AcpiPm1CntBase + 1, (UINT8)(PmCntl >> 8));
+    } else {
+      IoWrite16 (AcpiPm1CntBase, PmCntl);
+    }
+
     return ;
 
   default:

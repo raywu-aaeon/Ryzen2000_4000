@@ -142,10 +142,12 @@ AmdPspGetApobEntry (
   UINT64            EntryAddress;
   UINT32            EntrySize;
   UINT64            EntryDest;
+  UINT8             *Buffer;
 
   *NumofEntry = 0;
   *ApobEntries = NULL;
   ApobEntryBin = NULL;
+  Buffer = NULL;
   IDS_HDT_CONSOLE_PSP_TRACE ("AmdPspGetApobEntry %x %x\n", GroupID, DataTypeID);
 
 
@@ -154,7 +156,14 @@ AmdPspGetApobEntry (
       IDS_HDT_CONSOLE_PSP_TRACE ("APOB NV Entry not found\n");
       return EFI_NOT_FOUND;
     }
-    ApobHeaderPtr = (APOB_BASE_HEADER *) (UINTN) EntryAddress;
+    Buffer = AllocateZeroPool (EntrySize);
+    ASSERT (Buffer != NULL);
+    if (Buffer == NULL) {
+      IDS_HDT_CONSOLE_PSP_TRACE ("Allocate temp buffer fail\n");
+      return EFI_OUT_OF_RESOURCES;
+    }
+    MapSpiDataToBuffer ((UINT32) (UINTN) EntryAddress, Buffer, EntrySize);
+    ApobHeaderPtr = (APOB_BASE_HEADER *) (UINTN) Buffer;
   } else {
     Status = AmdPspGetApobInfo (&ApobInfoPtr);
     if (EFI_ERROR (Status)) {
@@ -179,6 +188,9 @@ AmdPspGetApobEntry (
     ApobEntryBin += ApobHeaderPtr->OffsetOfFirstEntry;
   } else {
     IDS_HDT_CONSOLE_PSP_TRACE ("APOB version is not supported\n");
+    if (Buffer != NULL) {
+      FreePool (Buffer);
+    }
     ASSERT (FALSE);
     return EFI_UNSUPPORTED;
   }
@@ -198,7 +210,9 @@ AmdPspGetApobEntry (
     ApobEntryBin += (ApobEntry->TypeSize);
     ApobEntry = (APOB_TYPE_HEADER *) ApobEntryBin;
   }
-
+  if (Buffer != NULL) {
+    FreePool (Buffer);
+  }
   *NumofEntry = _NumofEntry;
   IDS_HDT_CONSOLE_PSP_TRACE ("Total  %d entries found\n", _NumofEntry);
 

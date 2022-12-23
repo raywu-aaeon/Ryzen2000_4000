@@ -87,7 +87,7 @@ AmdCpmDisplayFeatureSmmEntryPoint (
     //
     // Initialize global variables
     //
-    Status = gBS->LocateProtocol (
+    Status = gSmst->SmmLocateProtocol (
                     &gAmdCpmTableSmmProtocolGuid,
                     NULL,
                     (VOID**)&gCpmTableSmmProtocol
@@ -95,8 +95,6 @@ AmdCpmDisplayFeatureSmmEntryPoint (
     if (EFI_ERROR (Status)) {
       return Status;
     }
-
-    gCpmTableSmmProtocol->CommonFunction.PostCode (CpmTpDisplayFeatureSmmDriverBegin);
 
     Status = gBS->LocateProtocol (
                     &gAmdCpmDisplayFeatureProtocolGuid,
@@ -106,6 +104,8 @@ AmdCpmDisplayFeatureSmmEntryPoint (
     if (EFI_ERROR (Status)) {
       return EFI_ABORTED;
     }
+
+    gCpmTableSmmProtocol->CommonFunction.PostCode (CpmTpDisplayFeatureSmmDriverBegin);
 
     gCpmDisplayFeatureSmmProtocol->TableProtocolSmmPtr = gCpmTableSmmProtocol;
 

@@ -74,6 +74,6 @@ INF AmdCpmPkg/Addendum/Oem/Bilby/Devices/Pca9545a/Dxe/Pca9545aDxe.inf
 INF AmdCpmPkg/Addendum/Oem/Bilby/Dxe/PspPlatformDriver/PspPlatform.inf
 INF AmdCpmPkg/Addendum/Oem/Bilby/Dxe/AmdPbsSetupDxe/AmdPbsSetupDxe.inf
 INF AmdCpmPkg/Addendum/Oem/Bilby/Dxe/AmdCpmOemInitDxe/AmdCpmOemInitDxe.inf
-INF AmdCpmPkg/Addendum/Oem/Bilby/Dxe/AmdXgbeWorkaround/AmdXgbeWorkaround.inf
+#INF AmdCpmPkg/Addendum/Oem/Bilby/Dxe/AmdXgbeWorkaround/AmdXgbeWorkaround.inf
 INF AmdCpmPkg/Addendum/Oem/Bilby/Dxe/FanPolicyDxe/FanPolicyDxe.inf
 INF AmdCpmPkg/Addendum/Oem/Bilby/Smm/AmdCpmOemSmm.inf

@@ -1,3 +1,10 @@
+/*
+ ******************************************************************************
+ *
+ * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ *******************************************************************************
+ **/
 /* $NoKeywords:$ */
 /**
  * @file
@@ -12,54 +19,6 @@
  * @e \$Revision: 309090 $   @e \$Date: 2014-12-10 02:28:05 +0800 (Wed, 10 Dec 2014) $
  *
  */
-/*
- ******************************************************************************
- *
- * Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
- *
- * AMD is granting you permission to use this software and documentation (if
- * any) (collectively, the "Materials") pursuant to the terms and conditions of
- * the Software License Agreement included with the Materials.  If you do not
- * have a copy of the Software License Agreement, contact your AMD
- * representative for a copy.
- *
- * You agree that you will not reverse engineer or decompile the Materials, in
- * whole or in part, except as allowed by applicable law.
- *
- * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
- * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
- * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
- * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
- * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
- * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
- * exclusion of implied warranties, so the above exclusion may not apply to
- * You.
- *
- * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
- * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
- * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
- * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
- * liability to You for all damages, losses, and causes of action (whether in
- * contract, tort (including negligence) or otherwise) exceed the amount of
- * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
- * licensors, and any of their directors, officers, employees, affiliates or
- * agents from and against any and all loss, damage, liability and other
- * expenses (including reasonable attorneys' fees), resulting from Your use of
- * the Materials or violation of the terms and conditions of this Agreement.
- *
- * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
- * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
- * subject to the restrictions as set forth in FAR 52.227-14 and
- * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
- * Government constitutes acknowledgment of AMD's proprietary rights in them.
- *
- * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
- * stated in the Software License Agreement.
- *******************************************************************************
- **/
-
 #ifndef _AMD_PSP_BASELIB_V2_H_
 #define _AMD_PSP_BASELIB_V2_H_
 
@@ -68,6 +27,17 @@
 
 #define PSP_MAILBOX_BASE            0x70    ///< Mailbox base offset on PCIe BAR
 #define PSP_MAILBOX_STATUS_OFFSET   0x4     ///< Staus Offset
+#define IS_ADDRESS_MODE_1(a) (((a) >> 62) == 1 ? TRUE : FALSE)  //relative to BIOS image base 0
+#define IS_ADDRESS_MODE_2(a) (((a) >> 62) == 2 ? TRUE : FALSE)  //relative to current directory header
+#define IS_ADDRESS_MODE_3(a) (((a) >> 62) == 3 ? TRUE : FALSE)  //relative to active image slot address (as of now, active image slot address is equal to PSP L2 base address)
+#define IS_SPI_OFFSET(a) (((a) & 0xFF000000) != 0xFF000000 ? TRUE : FALSE)
+#define MaxDirEntryNumber 64
+#define MaxPspDirSize sizeof(PSP_DIRECTORY_HEADER) + (sizeof(BIOS_DIRECTORY_ENTRY) * MaxDirEntryNumber)
+
+#define MP0PUBLIC0_SMN_ADDR    0x03800000
+#define MP0_C2PMSG_28_SMN_ADDR (MP0PUBLIC0_SMN_ADDR + 0x10570)
+#define MP0_C2PMSG_29_SMN_ADDR (MP0PUBLIC0_SMN_ADDR + 0x10574)
+#define MP0_C2PMSG_30_SMN_ADDR (MP0PUBLIC0_SMN_ADDR + 0x10578)
 #pragma pack (push, 1)
 
 ///
@@ -94,15 +64,18 @@ typedef volatile struct {
 #define FIRMWARE_TABLE_SIGNATURE  0x55AA55AAul
 /// Define the structure OEM signature table
 typedef struct _FIRMWARE_ENTRY_TABLEV2 {
-  UINT32  Signature;    ///< Signature should be 0x55AA55AAul
-  UINT32  ImcRomBase;   ///< Base Address for Imc Firmware
-  UINT32  GecRomBase;   ///< Base Address for Gmc Firmware
-  UINT32  XHCRomBase;   ///< Base Address for XHCI Firmware
-  UINT32  LegacyPspDirBase;   ///< Base Address of PSP directory for legacy program (ML, BP, CZ, BR, ST)
-  UINT32  PspDirBase;   ///< Base Address for PSP directory
-  UINT32  ZpBiosDirBase;   ///< Base Address for ZP BIOS directory
-  UINT32  RvBiosDirBase;   ///< Base Address for RV BIOS directory
-  UINT32  SspBiosDirBase;   ///< Base Address for RV BIOS directory
+  UINT32  Signature;          ///< 0x00 Signature should be 0x55AA55AAul
+  UINT32  ImcRomBase;         ///< 0x04 Base Address for Imc Firmware
+  UINT32  GecRomBase;         ///< 0x08 Base Address for Gmc Firmware
+  UINT32  XHCRomBase;         ///< 0x0C Base Address for XHCI Firmware
+  UINT32  LegacyPspDirBase;   ///< 0x10 Base Address of PSP directory for legacy program (ML, BP, CZ, BR, ST)
+  UINT32  PspDirBase;         ///< 0x14 Base Address for PSP directory
+  UINT32  ZpBiosDirBase;      ///< 0x18 Base Address for ZP BIOS directory
+  UINT32  RvBiosDirBase;      ///< 0x1C Base Address for RV BIOS directory
+  UINT32  SspBiosDirBase;     ///< 0x20 Base Address for RV BIOS directory
+  UINT32  Config;             ///< 0x24 reserved for EFS configuration
+  UINT32  NewBiosDirBase;     ///< 0x28 Generic Base address for all program start from RN
+  UINT32  PspDirBackupBase;   ///< 0x2C Backup PSP directory address for all programs starting from RMB
 } FIRMWARE_ENTRY_TABLEV2;
 
 
@@ -121,6 +94,12 @@ enum _BIOS_DIRECTORY_ENTRY_TYPE {
   BIOS_APCB_INFO_BACKUP         = 0x68,       ///< Backup Agesa PSP Customization Block (APCB)
   BIOS_DIR_LV2                  = 0x70,       ///< BIOS entry points to Level 2 BIOS DIR
 };
+
+/// Directory type
+typedef enum _DIRECTORY_TYPE {
+  DIR_TYPE_PSP_LV2               = 0,         ///< Level 2 PSP DIR
+  DIR_TYPE_BIOS_LV2              = 1,         ///< Level 2 BIOS DIR
+} DIRECTORY_TYPE;
 
 /// Type attribute for BIOS Directory entry
 typedef struct {
@@ -156,7 +135,8 @@ typedef struct {
 } BIOS_DIRECTORY;
 
 /// Structure for PSP Combo directory
-#define PSP_COMBO_DIRECTORY_HEADER_SIGNATURE 0x50535032ul   ///< 2PSP PSP Combo Directory Signature
+#define PSP_COMBO_DIRECTORY_COOKIE      0x50535032ul   ///< 2PSP PSP Combo Directory Signature
+#define BIOS_COMBO_DIRECTORY_COOKIE     0x44484232ul     ///< "BHD2" BIOS Combo Directory Signature
 typedef struct {
   UINT32  PspCookie;      ///< "2PSP"
   UINT32  Checksum;       ///< 32 bit CRC of header items below and the entire table
@@ -172,11 +152,36 @@ typedef struct {
   UINT64 PspDirTableAddr; ///< Point to PSP directory table (level 2)
 } PSP_COMBO_DIRECTORY_ENTRY;
 
+/**
+ * @brief PSP/BIOS entry region with start address and size
+ *
+ */
+typedef struct {
+  UINT64 Address;
+  UINT32 Size;
+} ENTRY_REGION;
+
+/// RECOVERY_REASON_VERSION
+typedef enum {
+  RECOVERY_REASON_VERSION_IGNORE = 0xFFFFFFFFul, //before RN
+  RECOVERY_REASON_VERSION_1 = 1,   //RN, CZN
+  RECOVERY_REASON_VERSION_2 = 2,   //Starting from VN
+} RECOVERY_REASON_VERSION;
+
 #define ZP_PSP_CHIP_ID   0xBC090000  ///< ZP Chip ID in combo structure
 #define RV_PSP_CHIP_ID   0xBC0A0000  ///< RV Chip ID in combo structure
-#define RV2_PSP_CHIP_ID   0xBC0A0100  ///< RV2 Chip ID in combo structure
+#define RV2_PSP_CHIP_ID  0xBC0A0100  ///< RV2 Chip ID in combo structure
 #define SSP_PSP_CHIP_ID  0xBC0B0000  ///< SSP Chip ID in combo structure
 #define MTS_PSP_CHIP_ID  0xBC0B0500  ///< MTS Chip ID in combo structure
+#define RN_PSP_CHIP_ID   0xBC0C0000  ///< RN Chip ID in combo structure
+#define VMR_PSP_CHIP_ID  0xBC0B0500  ///< VMR Chip ID in combo structure
+#define GN_PSP_CHIP_ID   0xBC0B0D00  ///< GN Chip ID in combo structure
+#define CZN_PSP_CHIP_ID  0xBC0C0140  ///< CZN Chip ID in combo structure
+#define BA_PSP_CHIP_ID   0xBC0B0F00  ///< BA Chip ID in combo structure
+#define MR_PSP_CHIP_ID   0xBC0B0800  ///< MR Chip ID in combo structure
+#define VN_PSP_CHIP_ID   0xBC0B0800  ///< VN Chip ID in combo structure
+#define RMB_PSP_CHIP_ID  0xBC0D0200  ///< RMB chip ID
+#define RS_PSP_CHIP_ID   0XBC0D0111  ///< Stone chip id
 
 typedef struct {
   PSP_COMBO_DIRECTORY_HEADER  Header;       ///< PSP Combo directory header
@@ -202,10 +207,71 @@ typedef struct {
   UINT32 DisableAmdKeyUsage : 1;            ///< Fuse bit that controls of BIOS signed by an AMD Key (with vendor ID == 0) is permitted to boot on a CPU with non-zero Vendor ID
   UINT32 DisableSecureDebugUnlock : 1;      ///< Fuse bit that controls if Secure Debug Unlock feature is disabled permanently or not
   UINT32 CustomerKeyLock : 1;               ///< Fuse bit that controls of customer region fuse bits can be programmed or not.
-  UINT32 Reserved2 : 3;                     ///< Set to zero  
+  UINT32 Reserved2 : 3;                     ///< Set to zero
 } PSB_STATUS_2;
 
 #pragma pack (pop)
+BOOLEAN
+MapSpiDataToBuffer (
+  IN       UINT32                      Address,
+  IN OUT   VOID                        *Buffer,
+  IN       UINT32                      Size
+  );
+
+/**
+ * @brief translate entry offset to correct location based on address mode
+ *
+ * @param EntryLocation     the location of the entry before translation
+ * @param DirectoryHdrAddr  directory header address
+ * @param ImageSlotAddr     image slot address if applicable, if no image slot, leave it as 0
+ * @return UINT64           return translated entry location
+ */
+UINT64
+TranslateEntryLocation (
+  IN       UINT64                      EntryLocation,
+  IN       UINT64                      DirectoryHdrAddr,
+  IN       UINT32                      ImageSlotAddr
+  );
+
+/**
+  This function is to get the PSP level 2 directory buffer.
+
+  @param[out]  pointer to PSP level 2 directory base
+
+  @retval TRUE            Successfully get the valid PSP level 2 directory.
+  @retval FALSE           Valid PSP level 2 directory is not found.
+
+**/
+BOOLEAN
+GetPspLv2DirBaseV2 (
+  IN       UINT64             PspLevel2BaseAddress,
+  IN OUT   PSP_DIRECTORY     **PspLv2Dir
+  );
+
+BOOLEAN
+GetPspDirBaseV2 (
+  IN OUT   PSP_DIRECTORY     **PspDir
+  );
+
+/**
+  This function is to get the BIOS level 2 directory buffer.
+
+  @param[out]  pointer to BIOS level 2 directory base
+
+  @retval TRUE            Successfully get the valid BIOS level 2 irectory.
+  @retval FALSE           Valid BIOS level 2 directory is not found.
+
+**/
+BOOLEAN
+GetBiosLv2DirBaseV2 (
+  IN       UINT64             BiosLevel2BaseAddress,
+  IN OUT   BIOS_DIRECTORY     **BiosLv2Dir
+  );
+
+BOOLEAN
+GetBiosDirBaseV2 (
+  IN OUT   BIOS_DIRECTORY     **BiosDir
+  );
 
 BOOLEAN
 PSPEntryInfoV2 (
@@ -215,6 +281,7 @@ PSPEntryInfoV2 (
   );
 
 #define INSTANCE_IGNORED 0xFF
+#define SUBPROGRAM_IGNORED 0xFF
 BOOLEAN
 BIOSEntryInfo (
   IN       UINT8                       EntryType,
@@ -223,6 +290,30 @@ BIOSEntryInfo (
   IN OUT   UINT64                      *EntryAddress,
   IN OUT   UINT32                      *EntrySize,
   IN OUT   UINT64                      *EntryDest
+  );
+
+/**
+ * @brief Get the PSP level 2 Base Address
+ *
+ * @param PspLv2BaseAddress  the pointer to save the PSP level 2 base address
+ * @return BOOLEAN           return TRUE if correct address found, otherise, return FALSE
+ */
+BOOLEAN
+GetPspLv2BaseAddr (
+  IN OUT UINT64                      *PspLv2BaseAddress
+  );
+
+/**
+ * @brief Get the Base Addresses of both PSP level 2 and BIOS level 2
+ *
+ * @param PspLv2BaseAddress   the pointer to save the PSP level 2 base address
+ * @param BiosLv2BaseAddress  the pointer to save the BIOS level 2 base address
+ * @return BOOLEAN            return TRUE if correct addresses found, otherise, return FALSE
+ */
+BOOLEAN
+GetPspBiosLv2BaseAddr (
+  IN OUT UINT64                      *PspLv2BaseAddress,
+  IN OUT UINT64                      *BiosLv2BaseAddress
   );
 
 BOOLEAN

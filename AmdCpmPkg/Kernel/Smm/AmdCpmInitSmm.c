@@ -127,8 +127,8 @@ AmdCpmInitSmmEntryPoint (
     CpmRegisterFch (CpmTableSmmProtocolPtr);
 
     Handle = NULL;
-    DEBUG((DEBUG_INFO, "FEA-SMM-%a-InstallProtocolInterface-gAmdCpmTableSmmProtocolGuid\n", __FUNCTION__));
-    Status = gBS->InstallProtocolInterface (
+    DEBUG((DEBUG_INFO, "FEA-SMM-%a-SmmInstallProtocolInterface-gAmdCpmTableSmmProtocolGuid\n", __FUNCTION__));
+    Status = gSmst->SmmInstallProtocolInterface (
                     &Handle,
                     &gAmdCpmTableSmmProtocolGuid,
                     EFI_NATIVE_INTERFACE,

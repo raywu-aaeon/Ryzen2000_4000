@@ -15,48 +15,8 @@
 /*
 *****************************************************************************
 *
-* Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+* Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
 *
-* AMD is granting you permission to use this software and documentation (if
-* any) (collectively, the "Materials") pursuant to the terms and conditions of
-* the Software License Agreement included with the Materials.  If you do not
-* have a copy of the Software License Agreement, contact your AMD
-* representative for a copy.
-*
-* You agree that you will not reverse engineer or decompile the Materials, in
-* whole or in part, except as allowed by applicable law.
-*
-* WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
-* ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
-* INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
-* MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
-* CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
-* OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
-* exclusion of implied warranties, so the above exclusion may not apply to
-* You.
-*
-* LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
-* NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
-* INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
-* THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
-* liability to You for all damages, losses, and causes of action (whether in
-* contract, tort (including negligence) or otherwise) exceed the amount of
-* $100 USD. You agree to defend, indemnify and hold harmless AMD and its
-* licensors, and any of their directors, officers, employees, affiliates or
-* agents from and against any and all loss, damage, liability and other
-* expenses (including reasonable attorneys' fees), resulting from Your use of
-* the Materials or violation of the terms and conditions of this Agreement.
-*
-* U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
-* "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
-* subject to the restrictions as set forth in FAR 52.227-14 and
-* DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
-* Government constitutes acknowledgment of AMD's proprietary rights in them.
-*
-* EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
-* stated in the Software License Agreement.
 *******************************************************************************
 */
 
@@ -1195,6 +1155,7 @@ FCH_AOAC_REG4X-7x State field
 //
 // FCH SPI
 //
+#define FCH_SPI_BASE_ADDRESS     0xFEC10000
 #define FCH_SPI_MMIO_REG00       0x00        //SPI_
  #define FCH_SPI_OPCODE           0x000000FFl  //
  #define FCH_SPI_TX_COUNT         0x00000F00l  //
@@ -1218,6 +1179,11 @@ FCH_AOAC_REG4X-7x State field
 #define FCH_SPI_MMIO_REG20       0x20        //
 #define FCH_SPI_MMIO_REG22       0x22        //
 #define FCH_SPI_MMIO_REG2C       0x2C        //
+#define FCH_SPI_MMIO_REG30       0x30        //
+#define FCH_SPI_R2VAL24          0x00000001l //
+#define FCH_SPI_R2VAL25          0x00000002l //
+#define FCH_SPI_R2MSK24          0x00000004l //
+#define FCH_SPI_R2MSK25          0x00000008l //
 #define FCH_SPI_MMIO_REG38       0x38        //
 #define FCH_SPI_MMIO_REG32       0x32        //
 #define FCH_SPI_MMIO_REG3C       0x3C        //
@@ -1229,6 +1195,10 @@ FCH_AOAC_REG4X-7x State field
 #define FCH_SPI_MMIO_REG4C_SPISTATUS         0x4C        //
 #define FCH_SPI_MMIO_REG4E       0x4E        //
 #define FCH_SPI_MMIO_REG50_Addr32_Ctrl0       0x50        //
+#define FCH_SPI_MMIO_REG54_Addr32_Ctrl1      0x54        //
+#define FCH_SPI_MMIO_REG58_Addr32_Ctrl2      0x58        //
+#define FCH_SPI_MMIO_REG5C_Addr32_Ctrl3      0x5C        //
+#define FCH_SPI_SPIROM_PAGE_MASK             0xFF        //
 #define FCH_SPI_MMIO_REG80_FIFO              0x80        //
 
 #define FCH_SPI_RETRY_TIMES      0x3         //

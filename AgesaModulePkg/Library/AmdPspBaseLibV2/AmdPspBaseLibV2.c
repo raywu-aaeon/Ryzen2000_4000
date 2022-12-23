@@ -1,3 +1,10 @@
+/*
+ ******************************************************************************
+ *
+ * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ *******************************************************************************
+ **/
 /* $NoKeywords:$ */
 /**
  * @file
@@ -12,54 +19,6 @@
  * @e \$Revision: 309090 $   @e \$Date: 2014-12-10 02:28:05 +0800 (Wed, 10 Dec 2014) $
  *
  */
-/*
- ******************************************************************************
- *
- * Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
- *
- * AMD is granting you permission to use this software and documentation (if
- * any) (collectively, the "Materials") pursuant to the terms and conditions of
- * the Software License Agreement included with the Materials.  If you do not
- * have a copy of the Software License Agreement, contact your AMD
- * representative for a copy.
- *
- * You agree that you will not reverse engineer or decompile the Materials, in
- * whole or in part, except as allowed by applicable law.
- *
- * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
- * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
- * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
- * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
- * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
- * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
- * exclusion of implied warranties, so the above exclusion may not apply to
- * You.
- *
- * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
- * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
- * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
- * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
- * liability to You for all damages, losses, and causes of action (whether in
- * contract, tort (including negligence) or otherwise) exceed the amount of
- * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
- * licensors, and any of their directors, officers, employees, affiliates or
- * agents from and against any and all loss, damage, liability and other
- * expenses (including reasonable attorneys' fees), resulting from Your use of
- * the Materials or violation of the terms and conditions of this Agreement.
- *
- * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
- * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
- * subject to the restrictions as set forth in FAR 52.227-14 and
- * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
- * Government constitutes acknowledgment of AMD's proprietary rights in them.
- *
- * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
- * stated in the Software License Agreement.
- *******************************************************************************
- */
-
 
 /*----------------------------------------------------------------------------------------
  *                             M O D U L E S    U S E D
@@ -77,6 +36,11 @@
 #include <Library/CcxRolesLib.h>
 #include <Library/FabricResourceManagerLib.h>
 #include <Library/PciLib.h>
+#include <Library/FchBaseLib.h>
+#include <Library/FchSpiAccessLib.h>
+//#include <FchBiosRamUsage.h>
+#include <Library/AmdHeapLib.h>
+#include <Library/SmnAccessLib.h>
 
 #define FILECODE LIBRARY_AMDPSPBASELIBV2_AMDPSPBASELIBV2_FILECODE
 
@@ -108,12 +72,78 @@
  *----------------------------------------------------------------------------------------
  */
 
+#define BIOS_DIR_EFS_OFFSET_IGNORE  0xFFFFFFFFul   //Ignored
+#define ISH_VERSION_1         1   //1: IMAGE_SLOT_HEADER version 1, IMAGE_SLOT_HEADER
+#define ISH_VERSION_2         2   //1: IMAGE_SLOT_HEADER version 2, IMAGE_SLOT_HEADER_V2
+#define ISH_VERSION_IGNORE    0xFFFFFFFFul   //Ignored
+
+/// Structure to store Directory related information
+typedef struct {
+  UINT32                  FamilyRawId;          //CpuId.0x80000001.EAX_Reg & RAW_FAMILY_ID_MASK;
+  UINT32                  PspId;                //Id defined by bootrom
+  UINT32                  BiosDirEfsOffset;     //Used in the previous programs, when combo BIOS dir and A/B recovery is not supported, check BiosDirBase in FIRMWARE_ENTRY_TABLEV2
+  BOOLEAN                 ComboBisoDirSupport;  //TRUE: Combo Dir supported, FALSE: Combo Dir not supported
+  UINT32                  IshStructVersion;     //Version for ISH structure, 1: IMAGE_SLOT_HEADER, 2: IMAGE_SLOT_HEADER_V2, 0xFFFFFFF, ignored
+  RECOVERY_REASON_VERSION RecoveryReasonVersion;//Version for Recovery Reason, 1: RECOVERY_REASON_VERSION_1, 2: RECOVERY_REASON_VERSION_2, 0xFFFFFFF, ignored
+} DIR_INFO;
+
 
 /*----------------------------------------------------------------------------------------
  *           P R O T O T Y P E S     O F     L O C A L     F U N C T I O N S
  *----------------------------------------------------------------------------------------
  */
-UINT32 Fletcher32 (
+/// Table to store all supported program directory infomation
+DIR_INFO mDirInfoTbl[] = {
+  {F19_RMB_RAW_ID, RMB_PSP_CHIP_ID, BIOS_DIR_EFS_OFFSET_IGNORE,                        FALSE, ISH_VERSION_2,      RECOVERY_REASON_VERSION_2},
+  {F19_VMR_RAW_ID, VMR_PSP_CHIP_ID, OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, SspBiosDirBase), FALSE, ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_1},
+  {F19_CZN_RAW_ID, CZN_PSP_CHIP_ID, OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, NewBiosDirBase), TRUE,  ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_1},
+  {F19_BA_RAW_ID,  BA_PSP_CHIP_ID,  OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, SspBiosDirBase), FALSE, ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_IGNORE},
+  {F19_GN_RAW_ID,  GN_PSP_CHIP_ID,  OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, NewBiosDirBase), FALSE, ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_IGNORE},
+  {F17_VN_RAW_ID,  VN_PSP_CHIP_ID,  BIOS_DIR_EFS_OFFSET_IGNORE,                        TRUE,  ISH_VERSION_1,      RECOVERY_REASON_VERSION_2},
+  {F17_MR_RAW_ID,  MR_PSP_CHIP_ID,  BIOS_DIR_EFS_OFFSET_IGNORE,                        TRUE,  ISH_VERSION_1,      RECOVERY_REASON_VERSION_2},
+  {F17_RN_RAW_ID,  RN_PSP_CHIP_ID,  OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, NewBiosDirBase), TRUE,  ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_1},
+  {F17_ZP_RAW_ID,  ZP_PSP_CHIP_ID,  OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, ZpBiosDirBase),  FALSE, ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_IGNORE},
+  {F17_RV_RAW_ID,  RV_PSP_CHIP_ID,  OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, RvBiosDirBase),  FALSE, ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_IGNORE},
+  {F17_PIC_RAW_ID, RV_PSP_CHIP_ID,  OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, RvBiosDirBase),  FALSE, ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_IGNORE},
+  {F17_RV2_RAW_ID, RV2_PSP_CHIP_ID, OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, RvBiosDirBase),  FALSE, ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_IGNORE},
+  {F17_MTS_RAW_ID, MTS_PSP_CHIP_ID, OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, SspBiosDirBase), FALSE, ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_IGNORE},
+  {F17_SSP_RAW_ID, SSP_PSP_CHIP_ID, OFFSET_OF(FIRMWARE_ENTRY_TABLEV2, SspBiosDirBase), FALSE, ISH_VERSION_IGNORE, RECOVERY_REASON_VERSION_IGNORE},
+};
+/**
+  Get DIR_INFO information according RAW_FAMILY_ID from mDirInfoTbl, return NULL if not found
+
+  @retval return NULL if not found
+
+**/
+DIR_INFO *
+GetDirInfoEntry (
+  VOID
+  )
+{
+  UINT32 i;
+  DIR_INFO *DirInfoTblEntry;
+
+  DirInfoTblEntry = NULL;
+  for (i = 0; i < (sizeof (mDirInfoTbl)/ sizeof (DIR_INFO)); i++) {
+    if (SocFamilyIdentificationCheck (mDirInfoTbl[i].FamilyRawId)) {
+      DirInfoTblEntry = &mDirInfoTbl[i];
+      break;
+    }
+  }
+  return DirInfoTblEntry;
+}
+
+/**
+  This function is to calculate the crc checksum
+
+  @param[in]  pointer to content
+  @param[in]  length of content
+
+  @retval CRC value
+
+**/
+UINT32
+Fletcher32 (
   IN OUT   UINT16  *data,
   IN       UINTN   words
   )
@@ -140,22 +170,138 @@ UINT32 Fletcher32 (
   return sum2 << 16 | sum1;
 }
 
+BOOLEAN
+GetHeapBufferByHandle (
+  IN      UINT32  BufferHandle,                    ///< An unique ID of buffer.
+  IN      UINT32  BufferSize,                      ///< Data buffer size.
+  IN OUT  UINT8   **BufferPtr                       ///< Pointer to buffer.
+  )
+{
+  ALLOCATE_HEAP_PARAMS        AllocHeapParams;
+  LOCATE_HEAP_PTR             LocateHeapParams;
+  AGESA_STATUS                AgesaStatus;
+  //Get buffer allocated in heap
+  LocateHeapParams.BufferHandle = BufferHandle;
+  if (HeapLocateBuffer (&LocateHeapParams, NULL) == AGESA_SUCCESS) {
+    *BufferPtr = LocateHeapParams.BufferPtr;
+  } else {
+    //Allocate Heap buffer for PSP directory
+    AllocHeapParams.RequestedBufferSize = BufferSize;
+    AllocHeapParams.BufferHandle        = BufferHandle;
+    AllocHeapParams.Persist             = HEAP_BOOTTIME_SYSTEM_MEM;
+    AgesaStatus = HeapAllocateBuffer (&AllocHeapParams, NULL);
+    ASSERT (AgesaStatus == AGESA_SUCCESS);
+    if (AgesaStatus != AGESA_SUCCESS) {
+      return FALSE;
+    }
+    *BufferPtr = AllocHeapParams.BufferPtr;
+  }
+  return TRUE;
+}
 
+BOOLEAN
+IsPspDirAddrRom2Decoded (
+  IN      UINT64                      EntryLocation
+  )
+{
+  if (PcdGetBool (PcdPspDirUsing16MAddress) == TRUE) {
+      return TRUE;
+  } else if (IsRom2Decoded (EntryLocation)) {
+      return TRUE;
+  } else {
+      return FALSE;
+  }
+}
+
+UINT64
+TryToTranslateOffsetToPhysicalAddress (
+  IN      UINT64                      EntryLocation
+  )
+{
+ if (IS_SPI_OFFSET (EntryLocation)) {
+      if (IsPspDirAddrRom2Decoded (EntryLocation)) {
+         EntryLocation = FORCE_SPIADDR_BIT24 (EntryLocation);
+      }
+  }
+  return EntryLocation;
+}
+
+UINT64
+TranslateEntryLocation (
+  IN       UINT64                      EntryLocation,
+  IN       UINT64                      DirectoryHdrAddr,
+  IN       UINT32                      ImageSlotAddr    //if no image slot header, just leave it as 0
+  )
+{
+  //address mode 1, relative to BIOS image base
+  if (IS_ADDRESS_MODE_1 (EntryLocation)) {
+      EntryLocation = EntryLocation & ~BIT62;
+  } else if (IS_ADDRESS_MODE_2 (EntryLocation)) { //address mode 2, relative to current directory header
+      EntryLocation = EntryLocation & ~BIT63;
+      //get the relative offset compare to directory header
+      EntryLocation += DirectoryHdrAddr;
+  } else if (IS_ADDRESS_MODE_3 (EntryLocation)) { //address mode 3, relative to current image slot
+      EntryLocation = EntryLocation & ~(BIT63 | BIT62);
+      //get the relative offset compare to L2
+      EntryLocation += ImageSlotAddr;
+  }
+  return TryToTranslateOffsetToPhysicalAddress (EntryLocation);
+}
+
+/**
+ *
+ *  Map SPI data to the Buffer,
+ *  if SPI offset is specified, call FchSpiRomRead to get data, otherwise, access directly
+ *
+ *  @param[in]     Address    where to get the data, it may be a SPI offset or physical address
+ *  @param[in,out] Buffer     where the data save to, the buffer must be allocated by the caller
+ *  @param[in]     Size       how big the data is
+ *
+ *  @retval TRUE   Success to get the content from Address
+ *  @retval FALSE  Fail to get the content from Address
+ *
+ **/
+BOOLEAN
+MapSpiDataToBuffer (
+  IN       UINT32                      Address,
+  IN OUT   VOID                        *Buffer,
+  IN       UINT32                      Size
+  )
+{
+  ZeroMem(Buffer, Size);
+  if (FchSpiRomReadEx (Address, Buffer, Size) != TRUE) {
+    return FALSE;
+  }
+  return TRUE;
+}
+
+/**
+  This function is to validate PSP directory address on signature and crc checksum
+
+  @param[in]  pointer to PSP directory base
+  @param[in]  value of the signaure
+
+  @retval TRUE            the PSP directory base address is valid.
+  @retval FALSE           the PSP directory base address is not valid.
+
+**/
 BOOLEAN
 ValidatePspDir (
   IN       PSP_DIRECTORY     *PspDir,
-  IN       UINT32     Signature
+  IN       UINT32            Signature
   )
 {
   //Validate Signature
   if (PspDir->Header.PspCookie != Signature) {
     return FALSE;
   }
+
   //Do the checksum
   if (PspDir->Header.Checksum != Fletcher32 ((UINT16 *) &PspDir->Header.TotalEntries, \
       (sizeof (PSP_DIRECTORY_HEADER) - OFFSET_OF (PSP_DIRECTORY_HEADER, TotalEntries) + PspDir->Header.TotalEntries * sizeof (PSP_DIRECTORY_ENTRY)) / 2)) {
     return FALSE;
   }
+
   return TRUE;
 }
 
@@ -193,7 +339,7 @@ GetComboDir (
   PspComboDir = (PSP_COMBO_DIRECTORY *) (UINTN) PspComboDirBase;
   PspComboEntry = &PspComboDir->ComboEntry[0];
   //Check the signature
-  if (PspComboDir->Header.PspCookie != PSP_COMBO_DIRECTORY_HEADER_SIGNATURE) {
+  if (PspComboDir->Header.PspCookie != PSP_COMBO_DIRECTORY_COOKIE) {
     return FALSE;
   }
   //Loop to found matched entry
@@ -206,162 +352,521 @@ GetComboDir (
   return FALSE;
 }
 
+/* -----------------------------------------------------------------------------*/
+/**
+ *
+ *
+ *      This function checks if the CPU/APU is Zen 2 or later (starting from Family 17 Model 30h)
+ *
+ *     @return          TRUE -  Zen 2 or later SOC.
+ *     @return          FALSE - Zen 1 SOC or previous CPU/APU.
+ */
 BOOLEAN
-GetDirBase (
-  IN OUT   UINT32     *PspDirBase,
-  IN OUT   UINT32     *BiosDirBase
+IsZen2OrLater (
+  VOID
   )
 {
-  UINTN                     i;
-  FIRMWARE_ENTRY_TABLEV2      *FirmwareTableBase;
-  UINT32  FamilyId;
-  UINT32  PspChipId;
-  BOOLEAN PspDirSigValid;
-  BOOLEAN BiosDirSigValid;
+  CPUID_DATA    CpuId;
+  UINT32        Family;
+  UINT32        Model;
+  AsmCpuid (
+      AMD_CPUID_FMF,
+      &(CpuId.EAX_Reg),
+      &(CpuId.EBX_Reg),
+      &(CpuId.ECX_Reg),
+      &(CpuId.EDX_Reg)
+      );
 
-  CONST UINT32 RomSigAddrTable[] =
-  {
-    0xFFFA0000, //  --> 512KB base
-    0xFFF20000, //  --> 1MB base
-    0xFFE20000, //  --> 2MB base
-    0xFFC20000, //  --> 4MB base
-    0xFF820000, //  --> 8MB base
-    0xFF020000  //  --> 16MB base
-  };
+  Family = (((CpuId.EAX_Reg & CPUID_EXT_FAMILY_MASK) >> 20) + ((CpuId.EAX_Reg & CPUID_BASE_FAMILY_MASK) >> 8));
+  Model = (((CpuId.EAX_Reg & CPUID_EXT_MODEL_MASK) >> 12) | ((CpuId.EAX_Reg & CPUID_BASE_MODEL_MASK) >> 4));
 
-  FamilyId = 0;
-  PspChipId = 0;
-
-  if (SocFamilyIdentificationCheck (F17_ZP_RAW_ID)) {
-    FamilyId = F17_ZP_RAW_ID;
-  } else if (SocFamilyIdentificationCheck (F17_RV_RAW_ID)) {
-    FamilyId = F17_RV_RAW_ID;
-  } else if (SocFamilyIdentificationCheck (F17_RV2_RAW_ID)) {
-    FamilyId = F17_RV2_RAW_ID;
-  } else if (SocFamilyIdentificationCheck (F17_SSP_RAW_ID)) {
-    FamilyId = F17_SSP_RAW_ID;
-  } else if (SocFamilyIdentificationCheck (F17_PIC_RAW_ID)) {
-    FamilyId = F17_PIC_RAW_ID;
-  } else if (SocFamilyIdentificationCheck (F17_MTS_RAW_ID)) {
-    FamilyId = F17_MTS_RAW_ID;
+  if ((Family == 0x17 && Model >= 0x30) || (Family > 0x17)) {
+      return TRUE;
   } else {
-    //Unsupported Family detected
-    return (FALSE);
+      return FALSE;
   }
-
-
-  for (i = 0; i < sizeof (RomSigAddrTable) / sizeof (UINT32); i++) {
-    FirmwareTableBase  = (FIRMWARE_ENTRY_TABLEV2 *) (UINTN) RomSigAddrTable[i];
-    // Search flash for unique signature 0x55AA55AA
-    if (FirmwareTableBase->Signature  == FIRMWARE_TABLE_SIGNATURE) {
-      switch (FamilyId) {
-      case F17_ZP_RAW_ID:
-        *BiosDirBase = FirmwareTableBase->ZpBiosDirBase;
-        PspChipId = ZP_PSP_CHIP_ID;
-        break;
-      case F17_RV_RAW_ID:
-      case F17_PIC_RAW_ID:
-        *BiosDirBase = FirmwareTableBase->RvBiosDirBase;
-        PspChipId = RV_PSP_CHIP_ID;
-        break;
-      case F17_RV2_RAW_ID:
-        *BiosDirBase = FirmwareTableBase->RvBiosDirBase;
-        PspChipId = RV2_PSP_CHIP_ID;
-        break;
-      case F17_MTS_RAW_ID:
-        *BiosDirBase = FirmwareTableBase->SspBiosDirBase;
-        PspChipId = MTS_PSP_CHIP_ID;
-        break;
-      case F17_SSP_RAW_ID:
-        *BiosDirBase = FirmwareTableBase->SspBiosDirBase;
-        PspChipId = SSP_PSP_CHIP_ID;
-        break;
-      default:
-        //Unsupported Family detected
-        break;
-      }
-      *BiosDirBase = FORCE_SPIADDR_BIT24 (*BiosDirBase);
-      //Check if combo structure
-      if (GetComboDir (FORCE_SPIADDR_BIT24 (FirmwareTableBase->PspDirBase), PspChipId, PspDirBase) == FALSE) {
-        //Using the address Get from ROMSIG directly if not combo DIR
-        *PspDirBase = FORCE_SPIADDR_BIT24 (FirmwareTableBase->PspDirBase);
-      }
-      PspDirSigValid = FALSE;
-      BiosDirSigValid = FALSE;
-      PspDirSigValid = ValidatePspDir ((PSP_DIRECTORY *) (UINTN) *PspDirBase, PSP_DIRECTORY_HEADER_SIGNATURE);
-      BiosDirSigValid = ValidateBiosDir ((BIOS_DIRECTORY *) (UINTN) *BiosDirBase, BIOS_DIRECTORY_HEADER_SIGNATURE);
-
-      ASSERT (PspDirSigValid);
-      ASSERT (BiosDirSigValid);
-      if (PspDirSigValid && BiosDirSigValid) {
-        return TRUE;
-      } else {
-        return FALSE;
-      }
-    }
-  }
-
-  return (FALSE);
 }
 
-
 BOOLEAN
-PSPEntryInfoV2 (
-  IN       UINT32                      EntryType,
-  IN OUT   UINT64                      *EntryAddress,
-  IN       UINT32                      *EntrySize
+ShouldFirstGenEfsBeIgnored (
+  IN FIRMWARE_ENTRY_TABLEV2      *FirmwareTableBase
   )
 {
-  PSP_DIRECTORY         *PspDir;
-  PSP_DIRECTORY         *PspLv2Dir;
-  UINT32                Ignored;
-  UINTN                 i;
-  BOOLEAN               Lv2DirExist;
-  BOOLEAN               Lv2DirValid;
-  UINT64                Level2EntryAddress;
-  UINT32                IgnoredEntrySize;
-  PSP_DIRECTORY_ENTRY_TYPE EntryTypeValue;
+  BOOLEAN    FirstGenFfsStructure;
+  FirstGenFfsStructure = FALSE;
+  //check if it's first generation of EFS structure
+  if ((FirmwareTableBase->Config & 0xFF) == 0xFF) {
+      FirstGenFfsStructure = TRUE;
+  }
 
-  PspDir = NULL;
-  PspLv2Dir = NULL;
-  Lv2DirExist = FALSE;
-  Lv2DirValid = FALSE;
-  Level2EntryAddress = 0;
-  EntryTypeValue.Value= EntryType;
-
-  if (GetDirBase ((UINT32 *)&PspDir, &Ignored) != TRUE) {
+  if (FirstGenFfsStructure && IsZen2OrLater ()) {
+    return TRUE;
+  } else {
     return FALSE;
   }
-  //Check the existence of Level 2 DIR
-  if (EntryType != PSP_DIR_LV2) {
-    Lv2DirExist = PSPEntryInfoV2 (PSP_DIR_LV2, &Level2EntryAddress, &IgnoredEntrySize);
+}
+
+/**
+  This function is to get the PSP level 2 directory buffer.
+
+  @param[out]  pointer to PSP level 2 directory base
+
+  @retval TRUE            Successfully get the valid PSP level 2 directory.
+  @retval FALSE           Valid PSP level 2 directory is not found.
+
+**/
+BOOLEAN
+GetPspLv2DirBaseV2 (
+  IN       UINT64             PspLevel2BaseAddress,
+  IN OUT   PSP_DIRECTORY     **PspLv2Dir
+  )
+{
+  BOOLEAN                  PspDirValid;
+  PSP_DIRECTORY            *PspRegionDir;
+  UINT8                    *PspDirBuffer;
+
+  PspDirValid = FALSE;
+  PspRegionDir = NULL;
+  PspDirBuffer = NULL;
+  if (PspLevel2BaseAddress != 0) {
+    if (GetHeapBufferByHandle (AMD_PSP_L2_DIRECTORY_BUFFER_HANDLE, MaxPspDirSize, &PspDirBuffer) != TRUE) {
+      return FALSE;
+    }
+
+    // Get the PSP Dir
+    if (MapSpiDataToBuffer ((UINT32)PspLevel2BaseAddress, PspDirBuffer, MaxPspDirSize) != TRUE) {
+      return FALSE;
+    }
+    PspRegionDir = (PSP_DIRECTORY*)PspDirBuffer;
+
+
+    PspDirValid = ValidatePspDir (PspRegionDir, PSP_LV2_DIRECTORY_HEADER_SIGNATURE);
+    if (PspDirValid) {
+      *PspLv2Dir = PspRegionDir;
+      return TRUE;
+    }
   }
-  //Try to load entry from level2 if exist
-  if (Lv2DirExist) {
-    PspLv2Dir = (PSP_DIRECTORY *) (UINTN) Level2EntryAddress;
-    Lv2DirValid = ValidatePspDir (PspLv2Dir, PSP_LV2_DIRECTORY_HEADER_SIGNATURE);
-    if (Lv2DirValid) {
-      for (i = 0; i < PspLv2Dir->Header.TotalEntries; i++) {
-        if ((PspLv2Dir->PspEntry[i].Type.Field.Type == EntryTypeValue.Field.Type) && 
-            (PspLv2Dir->PspEntry[i].Type.Field.SubProgram == EntryTypeValue.Field.SubProgram)) {
-          *EntryAddress = FORCE_SPIADDR_BIT24 (PspLv2Dir->PspEntry[i].Location);
-          *EntrySize = PspLv2Dir->PspEntry[i].Size;
-          return (TRUE);
+  return FALSE;
+}
+
+/**
+  This function is to search EFS structure and get the valid PSP L1 directory base address.
+
+  @param[out]  pointer to PSP directory base
+
+  @retval TRUE            Successfully get the valid PSP directory base address.
+  @retval FALSE           Valid PSP directory is not found.
+
+**/
+BOOLEAN
+GetPspDirBaseV2 (
+  IN OUT   PSP_DIRECTORY     **PspDir
+  )
+{
+  UINT32                      i;
+  UINT32                      j;
+  FIRMWARE_ENTRY_TABLEV2      FirmwareTableBase;
+  UINT32                      PspChipId;
+  BOOLEAN                     PspDirSigValid;
+  UINT8                       *PspDirBuffer;
+  UINT32                      PspDirBase;
+  DIR_INFO                    *DirInfo;
+
+  CONST UINT32 RomSigOffsetTable[] =  {
+    0x020000,  //  --> 16MB base
+    0x820000,  //  --> 8MB base
+    0xC20000,  //  --> 4MB base
+    0xE20000,  //  --> 2MB base
+    0xF20000,  //  --> 1MB base
+    0xFA0000   //  --> 512KB base
+  };
+  PspChipId = 0;
+  PspDirBuffer = NULL;
+  PspDirBase = 0;
+
+  DirInfo = GetDirInfoEntry ();
+  if (DirInfo == NULL) {
+    //Unsupported Family detected
+    ASSERT (FALSE);
+    return (FALSE);
+  }
+  PspChipId = DirInfo->PspId;
+
+  //search beyond ROM2 to find ROMSIG
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < sizeof (RomSigOffsetTable) / sizeof (UINT32); j++) {
+      //Get the ROM SIG from SPI ROM
+      if (FchSpiRomRead ((RomSigOffsetTable[j] + 0x1000000 * i), (UINT8 *)&FirmwareTableBase, sizeof (FIRMWARE_ENTRY_TABLEV2)) != TRUE) {
+        ASSERT (FALSE);
+        return FALSE;
+      }
+      // Search flash for unique signature 0x55AA55AA
+      if (FirmwareTableBase.Signature  == FIRMWARE_TABLE_SIGNATURE) {
+        if (ShouldFirstGenEfsBeIgnored (&FirmwareTableBase) == TRUE) {
+          continue;
+        }
+        if (GetHeapBufferByHandle (AMD_PSP_DIRECTORY_BUFFER_HANDLE, MaxPspDirSize, &PspDirBuffer) != TRUE) {
+          return FALSE;
+        }
+        if (MapSpiDataToBuffer (FirmwareTableBase.PspDirBase, PspDirBuffer, MaxPspDirSize) != TRUE) {
+          return FALSE;
+        }
+        //Check if PSP combo structure
+        if (GetComboDir ((UINT32)(UINTN)PspDirBuffer, PspChipId, &PspDirBase) == TRUE) {
+          if(MapSpiDataToBuffer(PspDirBase, PspDirBuffer, MaxPspDirSize) != TRUE) {
+            return FALSE;
+          }
+        }
+        PspDirSigValid = FALSE;
+        PspDirSigValid = ValidatePspDir ((PSP_DIRECTORY *) (UINTN)PspDirBuffer, PSP_DIRECTORY_HEADER_SIGNATURE);
+        if (PspDirSigValid) {
+          *PspDir = (PSP_DIRECTORY *) (UINTN)PspDirBuffer;
+          return TRUE;
+        } else {
+          if (DirInfo->IshStructVersion == ISH_VERSION_2) {
+            //Start from ISH version 2, it start to support PspDirBackupBase
+            if (MapSpiDataToBuffer (FirmwareTableBase.PspDirBackupBase, PspDirBuffer, MaxPspDirSize) != TRUE) {
+              return FALSE;
+            }
+            PspDirSigValid = ValidatePspDir ((PSP_DIRECTORY *) (UINTN)PspDirBuffer, PSP_DIRECTORY_HEADER_SIGNATURE);
+            if (PspDirSigValid) {
+              *PspDir = (PSP_DIRECTORY *) (UINTN)PspDirBuffer;
+              return TRUE;
+            } else {
+              return FALSE;
+            }
+          } else {
+            return FALSE;
+          }
         }
       }
     }
   }
-
-  // If level 2 not exist, or can't find according entry in level 2, try in Level 1
-  for (i = 0; i < PspDir->Header.TotalEntries; i++) {
-  if ((PspDir->PspEntry[i].Type.Field.Type == EntryTypeValue.Field.Type) && 
-            (PspDir->PspEntry[i].Type.Field.SubProgram == EntryTypeValue.Field.SubProgram)) {
-    *EntryAddress = FORCE_SPIADDR_BIT24 (PspDir->PspEntry[i].Location);
-    *EntrySize = PspDir->PspEntry[i].Size;
-    return (TRUE);
-  }
+  return (FALSE);
 }
 
+/**
+  This function is to get the BIOS level 2 directory buffer.
+
+  @param[out]  pointer to BIOS level 2 directory base
+
+  @retval TRUE            Successfully get the valid BIOS directory base address.
+  @retval FALSE           Valid BIOS directory is not found.
+
+**/
+BOOLEAN
+GetBiosLv2DirBaseV2 (
+  IN       UINT64             BiosLevel2BaseAddress,
+  IN OUT   BIOS_DIRECTORY     **BiosLv2Dir
+  )
+{
+  BOOLEAN               BiosDirValid;
+  UINT8                 *BiosDirBuffer;
+  BIOS_DIRECTORY        *BiosDir;
+
+  BiosDirValid = FALSE;
+  BiosDirBuffer = NULL;
+  BiosDir = NULL;
+
+  if (BiosLevel2BaseAddress != 0) {
+    // get buffer
+    if (GetHeapBufferByHandle (AMD_PSP_L2_DIRECTORY_BUFFER_HANDLE, MaxPspDirSize, &BiosDirBuffer) != TRUE) {
+      return FALSE;
+    }
+
+    // Get the Level2 Dir
+    if (MapSpiDataToBuffer ((UINT32)BiosLevel2BaseAddress, BiosDirBuffer, MaxPspDirSize) != TRUE) {
+      return FALSE;
+    }
+
+    BiosDir = (BIOS_DIRECTORY*)BiosDirBuffer;
+    BiosDirValid = ValidateBiosDir (BiosDir, BIOS_LV2_DIRECTORY_HEADER_SIGNATURE);
+
+    if (BiosDirValid) {
+      *BiosLv2Dir = BiosDir;
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+  This function is to get the BIOS Level 1 directory.
+
+  @param[out]  pointer to BIOS directory base
+
+  @retval TRUE            Successfully get the valid BIOS directory base address.
+  @retval FALSE           Valid BIOS directory is not found.
+
+**/
+BOOLEAN
+GetBiosDirBaseV2 (
+  IN OUT   BIOS_DIRECTORY     **BiosDir
+  )
+{
+  UINT32                      i;
+  UINT32                      j;
+  FIRMWARE_ENTRY_TABLEV2      FirmwareTableBase;
+  UINT32                      FamilyId;
+  UINT32                      PspChipId;
+  BOOLEAN                     BiosDirSigValid;
+  BOOLEAN                     ComboBisoDirSupport;
+  UINT8                      *BiosDirBuffer;
+  UINT32                      BiosDirBase;
+  UINT32                      BiosDirEfsOffset;
+  DIR_INFO                    *DirInfo;
+
+  CONST UINT32 RomSigOffsetTable[] =  {
+    0x020000,  //  --> 16MB base
+    0x820000,  //  --> 8MB base
+    0xC20000,  //  --> 4MB base
+    0xE20000,  //  --> 2MB base
+    0xF20000,  //  --> 1MB base
+    0xFA0000   //  --> 512KB base
+  };
+
+  FamilyId = 0;
+  PspChipId = 0;
+  ComboBisoDirSupport = FALSE;
+  BiosDirBuffer = NULL;
+  BiosDirBase = 0;
+  BiosDirEfsOffset = 0;
+
+  DirInfo = GetDirInfoEntry ();
+  if (DirInfo == NULL) {
+    //Unsupported Family detected
+    ASSERT (FALSE);
+    return (FALSE);
+  }
+  PspChipId = DirInfo->PspId;
+  ComboBisoDirSupport = DirInfo->ComboBisoDirSupport;
+  BiosDirEfsOffset = DirInfo->BiosDirEfsOffset;
+  //search beyond ROM2 to find ROMSIG
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < sizeof (RomSigOffsetTable) / sizeof (UINT32); j++) {
+      //Get the ROM SIG from SPI ROM
+      if (FchSpiRomRead ((RomSigOffsetTable[j] + 0x1000000 * i), (UINT8 *)&FirmwareTableBase, sizeof (FIRMWARE_ENTRY_TABLEV2)) != TRUE) {
+        return FALSE;
+      }
+      // Search flash for unique signature 0x55AA55AA
+      if (FirmwareTableBase.Signature  == FIRMWARE_TABLE_SIGNATURE) {
+        if (ShouldFirstGenEfsBeIgnored (&FirmwareTableBase) == TRUE) {
+            continue;
+         }
+
+        BiosDirBase = *((UINT32 *) ((UINT8 *)&FirmwareTableBase + BiosDirEfsOffset));
+        if (GetHeapBufferByHandle (AMD_PSP_DIRECTORY_BUFFER_HANDLE, MaxPspDirSize, &BiosDirBuffer) != TRUE) {
+          return FALSE;
+        }
+
+        //If support Combo BIOS directory, try to get from combo 1st
+        if (ComboBisoDirSupport) {
+          //Get the BIOS COMBO Dir
+          if (MapSpiDataToBuffer (FirmwareTableBase.NewBiosDirBase, BiosDirBuffer, MaxPspDirSize) != TRUE) {
+            return FALSE;
+          }
+          GetComboDir ((UINT32)(UINTN)BiosDirBuffer, PspChipId, &BiosDirBase);
+        }
+
+        //Get the BIOS Dir
+        if (MapSpiDataToBuffer (BiosDirBase, BiosDirBuffer, MaxPspDirSize) != TRUE) {
+          return FALSE;
+        }
+
+        BiosDirSigValid = FALSE;
+        BiosDirSigValid = ValidateBiosDir ((BIOS_DIRECTORY *) (UINTN)BiosDirBuffer, BIOS_DIRECTORY_HEADER_SIGNATURE);
+        ASSERT (BiosDirSigValid);
+        if (BiosDirSigValid) {
+          *BiosDir = (BIOS_DIRECTORY *)(UINTN)BiosDirBuffer;
+          return TRUE;
+        } else {
+          return FALSE;
+        }
+      }
+    }
+  }
+  return (FALSE);
+}
+
+/**
+  This function is to check if PSP AB recovery layout is supported or not
+
+  @param[in]   pointer to PSP directory base
+  @param[out]  pointer to PSP region A base
+  @param[out]  pointer to PSP region B base
+
+  @retval TRUE            PSP AB recovery is supported
+  @retval FALSE           PSP AB recovery is not supported
+
+**/
+BOOLEAN
+IsABrecovery (
+  IN         PSP_DIRECTORY               *PspDir,
+  IN OUT     UINT64                      *PspRegionAEntryAddress,
+  IN OUT     UINT64                      *PspRegionBEntryAddress
+)
+{
+  UINT64                  TempPspRegionAEntryAddress = 0;
+  UINT64                  TempPspRegionBEntryAddress = 0;
+  BOOLEAN                 PspRegionAEntryExist = FALSE;
+  BOOLEAN                 PspRegionBEntryExist = FALSE;
+  UINTN                   i;
+
+  if (PspDir == NULL) {
+    return FALSE;
+  }
+
+  //Check Entry 0x48, 0x4A
+  for (i = 0; i < PspDir->Header.TotalEntries; i++) {
+    if (PspDir->PspEntry[i].Type.Field.Type == PSP_REGION_A_DIR) {
+      TempPspRegionAEntryAddress = PspDir->PspEntry[i].Location;
+      PspRegionAEntryExist = TRUE;
+    } else if (PspDir->PspEntry[i].Type.Field.Type == PSP_REGION_B_DIR) {
+      TempPspRegionBEntryAddress = PspDir->PspEntry[i].Location;
+      PspRegionBEntryExist = TRUE;
+    }
+    //AB recovery must have both type PSP_REGION_A_DIR and PSP_REGION_B_DIR
+    if (PspRegionAEntryExist && PspRegionBEntryExist) {
+      *PspRegionAEntryAddress = TempPspRegionAEntryAddress;
+      *PspRegionBEntryAddress = TempPspRegionBEntryAddress;
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ *
+ *  Get PSP Directory Entry 's properties from Level 2
+ *
+ *  @param[in]     EntryType        BIOS Directory Entry type
+ *  @param[in]     PspLevel2BaseAddress  The PSP Level 2 Directory base address
+ *  @param[in,out] EntrySize        Size of entry
+ *  @param[in,out] EntryDest        Destination of entry
+ *
+ *  @retval TRUE   Success to get the Entry 's properties
+ *  @retval FALSE  Fail to get the Entry 's properties
+ *
+ **/
+BOOLEAN
+GetLevel2PSPEntryInfo (
+  IN       UINT32                      EntryType,
+  IN       UINT64                      PspLevel2BaseAddress,
+  IN OUT   UINT64                      *EntryAddress,
+  IN OUT   UINT32                      *EntrySize
+  )
+{
+  UINTN                    i;
+  PSP_DIRECTORY_ENTRY_TYPE EntryTypeValue;
+  PSP_DIRECTORY            *PspRegionDir;
+  UINT8                    *PspDirBuffer;
+
+  PspDirBuffer = NULL;
+  EntryTypeValue.Value = EntryType;
+
+  if (GetPspLv2DirBaseV2 (PspLevel2BaseAddress, &PspRegionDir) == TRUE) {
+  // Loop and compare the EntryType
+    for (i = 0; i < PspRegionDir->Header.TotalEntries; i++) {
+      if ((PspRegionDir->PspEntry[i].Type.Field.Type == EntryTypeValue.Field.Type) &&
+          (PspRegionDir->PspEntry[i].Type.Field.SubProgram == EntryTypeValue.Field.SubProgram)) {
+            *EntryAddress = TranslateEntryLocation (PspRegionDir->PspEntry[i].Location, PspLevel2BaseAddress, (UINT32)(PspLevel2BaseAddress & 0xFFFFFFFF));
+            *EntrySize = PspRegionDir->PspEntry[i].Size;
+            return (TRUE);
+      }
+    }
+  }
+  return (FALSE);
+}
+
+/**
+  This function is to get the PSP entry information for given PSP entry type.
+
+  @param[in]   value of given PSP entry type
+  @param[out]  pointer to PSP entry address
+  @param[out]  pointer to PSP entry size
+
+  @retval TRUE            The given entry type is found
+  @retval FALSE           The given entry type is not found
+
+**/
+BOOLEAN
+PSPEntryInfoV2 (
+  IN       UINT32                      EntryType,
+  IN OUT   UINT64                      *EntryAddress,
+  IN OUT   UINT32                      *EntrySize
+  )
+{
+  PSP_DIRECTORY               *PspDir;
+  UINT64                      PspLevel2BaseAddress;
+  UINTN                       i;
+  BOOLEAN                     Lv2DirExist;
+  BOOLEAN                     ABrecoveryEnable;
+  UINT64                      Level2EntryAddress;
+  UINT64                      PspRegionAEntryAddress;
+  UINT64                      PspRegionBEntryAddress;
+  UINT32                      IgnoredEntrySize;
+  PSP_DIRECTORY_ENTRY_TYPE    EntryTypeValue;
+
+  PspDir = NULL;
+  PspLevel2BaseAddress = 0;
+  Lv2DirExist = FALSE;
+  ABrecoveryEnable = FALSE;
+  Level2EntryAddress = 0;
+  PspRegionAEntryAddress = 0;
+  PspRegionBEntryAddress = 0;
+  EntryTypeValue.Value = EntryType;
+
+  if (GetPspDirBaseV2 (&PspDir) != TRUE) {
+    return FALSE;
+  }
+  if (PspDir == NULL) {
+    IDS_HDT_CONSOLE_PSP_TRACE (" PSPDir is NULL \n");
+    return FALSE;
+  }
+
+  // Check if A/B recovery schema 1st, as A/B has different search logic
+  if ((EntryType != PSP_REGION_A_DIR) && (EntryType != PSP_REGION_B_DIR)) {
+    ABrecoveryEnable = IsABrecovery (PspDir, &PspRegionAEntryAddress, &PspRegionBEntryAddress);
+  }
+
+  if (ABrecoveryEnable) {
+    // Check read from Partition A or B by reading recovery flag
+    if (CheckPspRecoveryFlagV2 () == FALSE) {
+      // Get L2A Dir
+      PspLevel2BaseAddress = PspRegionAEntryAddress;
+    } else {
+      // Get L2B Dir
+      PspLevel2BaseAddress = PspRegionBEntryAddress;
+    }
+  } else {
+    // Check the existence of Level 2 DIR for non-AB recovery mode
+    if (EntryType != PSP_DIR_LV2) {
+      Lv2DirExist = PSPEntryInfoV2 (PSP_DIR_LV2, &Level2EntryAddress, &IgnoredEntrySize);
+    }
+    // Try to load entry from level2 if exist
+    if (Lv2DirExist) {
+      PspLevel2BaseAddress = Level2EntryAddress;
+    }
+  }
+
+  if (PspLevel2BaseAddress != 0) {
+    if (GetLevel2PSPEntryInfo (EntryType, PspLevel2BaseAddress, EntryAddress, EntrySize) == TRUE) {
+      return (TRUE);
+    }
+  }
+
+  // If level 2 not exists, or can't find the entry in level 2, try in Level 1
+  if (PspDir != NULL) {
+    for (i = 0; i < PspDir->Header.TotalEntries; i++) {
+      if ((PspDir->PspEntry[i].Type.Field.Type == EntryTypeValue.Field.Type) &&
+          (PspDir->PspEntry[i].Type.Field.SubProgram == EntryTypeValue.Field.SubProgram)) {
+           *EntryAddress = TryToTranslateOffsetToPhysicalAddress (PspDir->PspEntry[i].Location);
+           *EntrySize = PspDir->PspEntry[i].Size;
+           return (TRUE);
+      }
+    }
+  }
   return (FALSE);
 }
 
@@ -399,10 +904,192 @@ GetPspEntryPspNvDataV2 (
   return PSPEntryInfoV2 (PSP_NV_DATA, EntryAddress, EntrySize);
 }
 
+/**
+ *
+ *  Get BIOS Directory Entry 's properties from Level 2
+ *
+ *  @param[in]     EntryType        BIOS Directory Entry type
+ *  @param[in]     EntryInstance    If input with INSTANCE_IGNORED, will return 1st Entry type matched
+ *                                  If input with Non INSTANCE_IGNORED, will return the entry which both Type & Instance matched
+ *  @param[in]     SubProgram       If input with SUBPROGRAM_IGNORED, will return 1st Entry type & Instance matched
+ *                                  If input with Non SUBPROGRAM_IGNORED, will return the entry which all Type & Instance & SubProgram matched
+ *  @param[in]     Level2BaseAddress  if DirectoryType=DIR_TYPE_PSP_LV2, please specify PSP L2 base address(only for VN/MR and beyond),
+ *                                    if DirectoryType=DIR_TYPE_BIOS_LV2, please specify BIOS L2 base address(for programs before VN, such as RN/CZN/MTS)
+ *  @param[in,out] TypeAttrib       TypeAttrib of entry
+ *  @param[in,out] EntryAddress     Address of entry
+ *  @param[in,out] EntrySize        Size of entry
+ *  @param[in,out] EntryDest        Destination of entry
+ *
+ *  @retval TRUE   Success to get the Entry 's properties
+ *  @retval FALSE  Fail to get the Entry 's properties
+ *
+ **/
+BOOLEAN
+GetLevel2BIOSEntryInfo (
+  IN       UINT32                      EntryType,
+  IN       UINT8                       EntryInstance,
+  IN       UINT8                       SubProgram,
+  IN       UINT64                      Level2BaseAddress,
+  IN OUT   TYPE_ATTRIB                 *TypeAttrib,
+  IN OUT   UINT64                      *EntryAddress,
+  IN OUT   UINT32                      *EntrySize,
+  IN OUT   UINT64                      *EntryDest
+  )
+{
+  UINTN                 i;
+  BOOLEAN               Found;
+  BIOS_DIRECTORY        *BiosLevel2Dir;
+  UINT8                 *BiosDirBuffer;
+  UINT64                BIOSLevel2BaseAddress;
+  UINT32                IgnoredEntrySize;
+
+  Found = FALSE;
+  BiosDirBuffer = NULL;
+  BIOSLevel2BaseAddress = 0;
+  IgnoredEntrySize = 0;
+
+  // Get BIOS L2 base address
+  BIOSLevel2BaseAddress = Level2BaseAddress;
+
+
+  if (GetBiosLv2DirBaseV2 (BIOSLevel2BaseAddress, &BiosLevel2Dir) == TRUE) {
+    for (i = 0; i < BiosLevel2Dir->Header.TotalEntries; i++) {
+      if (BiosLevel2Dir->BiosEntry[i].TypeAttrib.Type == EntryType) {
+        if (EntryInstance == INSTANCE_IGNORED) {
+           if ((SubProgram == SUBPROGRAM_IGNORED) || (SubProgram == BiosLevel2Dir->BiosEntry[i].TypeAttrib.SubProgram)) {
+               Found = TRUE;
+           }
+        } else if (BiosLevel2Dir->BiosEntry[i].TypeAttrib.Instance == EntryInstance) {
+           if ((SubProgram == SUBPROGRAM_IGNORED) || (SubProgram == BiosLevel2Dir->BiosEntry[i].TypeAttrib.SubProgram)) {
+               Found = TRUE;
+           }
+        }
+        if (Found == TRUE) {
+          *TypeAttrib = BiosLevel2Dir->BiosEntry[i].TypeAttrib;
+          *EntrySize = BiosLevel2Dir->BiosEntry[i].Size;
+          *EntryDest = BiosLevel2Dir->BiosEntry[i].Destination;
+          *EntryAddress = TranslateEntryLocation (BiosLevel2Dir->BiosEntry[i].Location, BIOSLevel2BaseAddress, 0);
+          return TRUE;
+        }
+      }
+    }
+  }
+  return FALSE;
+}
 
 /**
  *
- *  Get BIOS Directory Entry 's properties
+ *  Get BIOS Directory Entry 's properties by 3 Attributes: EntryType, EntryInstance, SubProgram.
+ *
+ *  @param[in]     EntryType        BIOS Directory Entry type
+ *  @param[in]     EntryInstance    If input with INSTANCE_IGNORED, will return 1st Entry type matched
+ *                                  If input with Non INSTANCE_IGNORED, will return the entry which both Type & Instance matched
+ *  @param[in]     SubProgram       If input with SUBPROGRAM_IGNORED, will return 1st Entry type & Instance matched
+ *                                  If input with Non SUBPROGRAM_IGNORED, will return the entry which all Type & Instance & SubProgram matched
+ *  @param[in,out] TypeAttrib       TypeAttrib of entry
+ *  @param[in,out] EntryAddress     Address of entry
+ *  @param[in,out] EntrySize        Size of entry
+ *  @param[in,out] EntryDest        Destination of entry
+ *
+ *  @retval TRUE   Success to get the Entry 's properties
+ *  @retval FALSE  Fail to get the Entry 's properties
+ *
+ **/
+BOOLEAN
+BIOSEntryInfoByAttributes (
+  IN       UINT8                       EntryType,
+  IN       UINT8                       EntryInstance,
+  IN       UINT8                       SubProgram,
+  IN OUT   TYPE_ATTRIB                 *TypeAttrib,
+  IN OUT   UINT64                      *EntryAddress,
+  IN OUT   UINT32                      *EntrySize,
+  IN OUT   UINT64                      *EntryDest
+  )
+{
+  BIOS_DIRECTORY          *BiosDir;
+  UINT64                  BiosLevel2BaseAddress;
+  PSP_DIRECTORY           *PspDir;
+  UINTN                   i;
+  BOOLEAN                 Found;
+  BOOLEAN                 ABrecoveryEnable;
+  UINT64                  Level2EntryAddress;
+  UINT64                  BiosRegionEntryAddress;
+  UINT64                  PspRegionAEntryAddress;
+  UINT64                  PspRegionBEntryAddress;
+  TYPE_ATTRIB             IgnoredTypeAttrib;
+  UINT32                  IgnoredEntrySize;
+  UINT64                  IgnoredEntryDest;
+
+  BiosDir = NULL;
+  BiosLevel2BaseAddress = 0;
+  PspDir = NULL;
+  ABrecoveryEnable = FALSE;
+  Level2EntryAddress = 0;
+  BiosRegionEntryAddress = 0;
+  PspRegionAEntryAddress = 0;
+  PspRegionBEntryAddress = 0;
+  Found = FALSE;
+
+
+  if (GetPspDirBaseV2 (&PspDir) != TRUE) {
+    return FALSE;
+  }
+  //Check if A/B recovery schema 1st, as A/B has different search logic
+  ABrecoveryEnable = IsABrecovery (PspDir, &PspRegionAEntryAddress, &PspRegionBEntryAddress);
+  if (ABrecoveryEnable) {
+    // For legacy AB recovery like RN/CZN, we still need to find BIOS entry from BIOS directory L2,
+    //and BIOS L2 base (0x49) is from Psp Directory instead of EFS (RomSig)
+    if (PSPEntryInfoV2 (BIOS_REGION_DIR, &BiosRegionEntryAddress, &IgnoredEntrySize) == TRUE) {
+      BiosLevel2BaseAddress = BiosRegionEntryAddress;
+    }
+  } else if (GetBiosDirBaseV2 (&BiosDir) == TRUE) {
+    //Check the existence of Level 2 DIR
+    if (EntryType != BIOS_DIR_LV2) {
+      if (BIOSEntryInfo (BIOS_DIR_LV2, INSTANCE_IGNORED, &IgnoredTypeAttrib, &Level2EntryAddress, &IgnoredEntrySize, &IgnoredEntryDest) == TRUE) {
+        BiosLevel2BaseAddress = Level2EntryAddress;
+      }
+    }
+  }
+
+  //find entry in level 2
+  if (BiosLevel2BaseAddress != 0) {
+    if (GetLevel2BIOSEntryInfo (EntryType, EntryInstance, SubProgram,
+        BiosLevel2BaseAddress,
+        TypeAttrib, EntryAddress, EntrySize, EntryDest) == TRUE) {
+        return (TRUE);
+    }
+  }
+
+  //If level 2 not exists, or can't find the entry in level 2, try in Level 1
+  if (BiosDir != NULL) {
+    for (i = 0; i < BiosDir->Header.TotalEntries; i++) {
+      if (BiosDir->BiosEntry[i].TypeAttrib.Type == EntryType) {
+        if (EntryInstance == INSTANCE_IGNORED) {
+            if ((SubProgram == SUBPROGRAM_IGNORED) || (SubProgram == BiosDir->BiosEntry[i].TypeAttrib.SubProgram)) {
+                Found = TRUE;
+            }
+        } else if (BiosDir->BiosEntry[i].TypeAttrib.Instance == EntryInstance) {
+            if ((SubProgram == SUBPROGRAM_IGNORED) || (SubProgram == BiosDir->BiosEntry[i].TypeAttrib.SubProgram)) {
+                Found = TRUE;
+            }
+        }
+        if (Found == TRUE) {
+          *TypeAttrib = BiosDir->BiosEntry[i].TypeAttrib;
+          *EntryAddress = TryToTranslateOffsetToPhysicalAddress (BiosDir->BiosEntry[i].Location);
+          *EntrySize = BiosDir->BiosEntry[i].Size;
+          *EntryDest = BiosDir->BiosEntry[i].Destination;
+          return (TRUE);
+        }
+      }
+    }
+  }
+  return (FALSE);
+}
+
+/**
+ *
+ *  Get BIOS Directory Entry 's properties by EntryType and EntryInstance
+ *  This function will ignore SubProgram, if you care about SubProgram, call BIOSEntryInfoByAttributes instead.
  *
  *  @param[in]     EntryType    BIOS Directory Entry type
  *  @param[in]     EntryInstance    If input with INSTANCE_IGNORED, will return 1st Entry type matched
@@ -426,79 +1113,132 @@ BIOSEntryInfo (
   IN OUT   UINT64                      *EntryDest
   )
 {
-  BIOS_DIRECTORY        *BiosDir;
-  BIOS_DIRECTORY        *BiosLv2Dir;
-  UINT32                Ignored;
-  UINTN                 i;
-  BOOLEAN               Found;
-  BOOLEAN               Lv2DirExist;
-  BOOLEAN               Lv2DirValid;
-  UINT64                Level2EntryAddress;
-  TYPE_ATTRIB           IgnoredTypeAttrib;
-  UINT32                IgnoredEntrySize;
-  UINT64                IgnoredEntryDest;
+  return BIOSEntryInfoByAttributes (EntryType, EntryInstance, SUBPROGRAM_IGNORED, TypeAttrib, EntryAddress, EntrySize, EntryDest);
+}
 
-  BiosDir = NULL;
-  BiosLv2Dir = NULL;
-  Lv2DirExist = FALSE;
-  Lv2DirValid = FALSE;
+BOOLEAN
+GetPspLv2BaseAddr (
+  IN OUT UINT64                      *PspLv2BaseAddress
+  )
+{
+  PSP_DIRECTORY               *PspDir;
+  BOOLEAN                     ABrecoveryEnable;
+  UINT64                      Level2EntryAddress;
+  UINT64                      PspRegionAEntryAddress;
+  UINT64                      PspRegionBEntryAddress;
+  UINT32                      IgnoredEntrySize;
+
+  PspDir = NULL;
+  ABrecoveryEnable = FALSE;
   Level2EntryAddress = 0;
-  Found = FALSE;
+  PspRegionAEntryAddress = 0;
+  PspRegionBEntryAddress = 0;
 
-  if (GetDirBase (&Ignored, (UINT32 *)&BiosDir) != TRUE) {
+
+  if (GetPspDirBaseV2 (&PspDir) != TRUE) {
+    IDS_HDT_CONSOLE_PSP_TRACE (" Cannot get PSPDir \n");
     return FALSE;
   }
-
-  //Check the existence of Level 2 DIR
-  if (EntryType != BIOS_DIR_LV2) {
-    Lv2DirExist = BIOSEntryInfo (BIOS_DIR_LV2, INSTANCE_IGNORED, &IgnoredTypeAttrib, &Level2EntryAddress, &IgnoredEntrySize, &IgnoredEntryDest);
+  if (PspDir == NULL) {
+    IDS_HDT_CONSOLE_PSP_TRACE (" PSPDir is NULL \n");
+    return FALSE;
   }
-
-  //Try to load entry from level2 if exist
-  if (Lv2DirExist) {
-    BiosLv2Dir = (BIOS_DIRECTORY *) (UINTN) Level2EntryAddress;
-    Lv2DirValid = ValidateBiosDir (BiosLv2Dir, BIOS_LV2_DIRECTORY_HEADER_SIGNATURE);
-    if (Lv2DirValid) {
-      for (i = 0; i < BiosLv2Dir->Header.TotalEntries; i++) {
-        if (BiosLv2Dir->BiosEntry[i].TypeAttrib.Type == EntryType) {
-          if (EntryInstance == INSTANCE_IGNORED) {
-            Found = TRUE;
-          } else if (BiosLv2Dir->BiosEntry[i].TypeAttrib.Instance == EntryInstance) {
-            Found = TRUE;
-          }
-          if (Found == TRUE) {
-            *TypeAttrib = BiosLv2Dir->BiosEntry[i].TypeAttrib;
-            *EntryAddress = FORCE_SPIADDR_BIT24 (BiosLv2Dir->BiosEntry[i].Location);
-            *EntrySize = BiosLv2Dir->BiosEntry[i].Size;
-            *EntryDest = BiosLv2Dir->BiosEntry[i].Destination;
-            return (TRUE);
-          }
-        }
-      }
+  // Check if A/B recovery schema 1st, as A/B has different search logic
+  ABrecoveryEnable = IsABrecovery (PspDir, &PspRegionAEntryAddress, &PspRegionBEntryAddress);
+  if (ABrecoveryEnable) {
+    // Check read from Partition A or B by reading recovery flag
+    if (CheckPspRecoveryFlagV2 () == FALSE) {
+      // Get L2A Dir
+      *PspLv2BaseAddress = PspRegionAEntryAddress;
+      return TRUE;
+    } else {
+      // Get L2B Dir
+      *PspLv2BaseAddress = PspRegionBEntryAddress;
+      return TRUE;
     }
-    Found = FALSE;
-  }
-  // If level 2 not exist, or can't find according entry in level 2, try in Level 1
-  Found = FALSE;
-  for (i = 0; i < BiosDir->Header.TotalEntries; i++) {
-    if (BiosDir->BiosEntry[i].TypeAttrib.Type == EntryType) {
-      if (EntryInstance == INSTANCE_IGNORED) {
-        Found = TRUE;
-      } else if (BiosDir->BiosEntry[i].TypeAttrib.Instance == EntryInstance) {
-        Found = TRUE;
-      }
-      if (Found == TRUE) {
-        *TypeAttrib = BiosDir->BiosEntry[i].TypeAttrib;
-        *EntryAddress = FORCE_SPIADDR_BIT24 (BiosDir->BiosEntry[i].Location);
-        *EntrySize = BiosDir->BiosEntry[i].Size;
-        *EntryDest = BiosDir->BiosEntry[i].Destination;
-        return (TRUE);
-      }
+  } else {
+    // Check the existence of Level 2 DIR for non-AB recovery mode
+    if (PSPEntryInfoV2 (PSP_DIR_LV2, &Level2EntryAddress, &IgnoredEntrySize) == TRUE) {
+      *PspLv2BaseAddress = Level2EntryAddress;
+      return TRUE;
     }
   }
-
-  return (FALSE);
+  return FALSE;
 }
+
+BOOLEAN
+GetPspBiosLv2BaseAddr (
+  IN OUT UINT64                      *PspLv2BaseAddress,
+  IN OUT UINT64                      *BiosLv2BaseAddress
+  )
+{
+  PSP_DIRECTORY               *PspDir;
+  BOOLEAN                     PspLv2BaseAddrFound;
+  BOOLEAN                     BiosLv2BaseAddrFound;
+  BOOLEAN                     ABrecoveryEnable;
+  UINT64                      Level2EntryAddress;
+  UINT64                      PspRegionAEntryAddress;
+  UINT64                      PspRegionBEntryAddress;
+  UINT32                      IgnoredEntrySize;
+
+  UINT64                       BiosRegionEntryAddress;
+  TYPE_ATTRIB                  IgnoredTypeAttrib;
+  UINT64                       IgnoredEntryDest;
+
+  PspDir = NULL;
+  PspLv2BaseAddrFound = FALSE;
+  BiosLv2BaseAddrFound = FALSE;
+  ABrecoveryEnable = FALSE;
+  Level2EntryAddress = 0;
+  PspRegionAEntryAddress = 0;
+  PspRegionBEntryAddress = 0;
+  BiosRegionEntryAddress = 0;
+
+  if (GetPspDirBaseV2 (&PspDir) != TRUE) {
+    IDS_HDT_CONSOLE_PSP_TRACE (" Cannot get PSPDir \n");
+    return FALSE;
+  }
+  if (PspDir == NULL) {
+    IDS_HDT_CONSOLE_PSP_TRACE (" PSPDir is NULL \n");
+    return FALSE;
+  }
+  // Check if A/B recovery schema 1st, as A/B has different search logic
+  ABrecoveryEnable = IsABrecovery (PspDir, &PspRegionAEntryAddress, &PspRegionBEntryAddress);
+  if (ABrecoveryEnable) {
+    // Check read from Partition A or B by reading recovery flag
+    if (CheckPspRecoveryFlagV2 () == FALSE) {
+      // Get L2A Dir
+      *PspLv2BaseAddress = PspRegionAEntryAddress;
+      PspLv2BaseAddrFound = TRUE;
+    } else {
+      // Get L2B Dir
+      *PspLv2BaseAddress = PspRegionBEntryAddress;
+      PspLv2BaseAddrFound = TRUE;
+    }
+
+    // For legacy AB recovery like RN/CZN, we still need to find BIOS entry from BIOS directory L2,
+    // and BIOS L2 base (0x49) is from Psp Directory
+    if (PSPEntryInfoV2 (BIOS_REGION_DIR, &BiosRegionEntryAddress, &IgnoredEntrySize) == TRUE) {
+      *BiosLv2BaseAddress = BiosRegionEntryAddress;
+      BiosLv2BaseAddrFound = TRUE;
+    }
+  } else {
+    // Check the existence of Level 2 DIR for non-AB recovery mode
+    if (PSPEntryInfoV2 (PSP_DIR_LV2, &Level2EntryAddress, &IgnoredEntrySize) == TRUE) {
+      *PspLv2BaseAddress = Level2EntryAddress;
+      PspLv2BaseAddrFound = TRUE;
+    }
+
+    // Check the existence of Level 2 DIR
+    if (BIOSEntryInfo (BIOS_DIR_LV2, INSTANCE_IGNORED, &IgnoredTypeAttrib, &Level2EntryAddress, &IgnoredEntrySize,
+                        &IgnoredEntryDest) == TRUE) {
+      *BiosLv2BaseAddress = Level2EntryAddress;
+      BiosLv2BaseAddrFound = TRUE;
+    }
+  }
+  return (PspLv2BaseAddrFound && BiosLv2BaseAddrFound);
+}
+
 /**
   Check if PSP device is present
 
@@ -510,7 +1250,6 @@ CheckPspDevicePresentV2 (
   VOID
   )
 {
-  ///@todo Add code to read SMU FUSE shadow register
   return (TRUE);
 }
 
@@ -580,19 +1319,42 @@ CheckPspRecoveryFlagV2 (
   return (BOOLEAN) (PspMbox->Cmd.Field.Recovery);
 }
 
+
+/**
+  Check PSP Recovery Flag using SMN to remove MMIO initial dependency
+  Target will set Recovery flag if some PSP entry point by PSP directory has been corrupted.
+
+  @retval BOOLEAN  0: Recovery Flag is cleared, 1: Recovery Flag has been set
+
+**/
+BOOLEAN
+CheckPspRecoveryFlagSmn (
+  VOID
+  )
+{
+  PSP_MBOX_V2_CMD PspMboxCmd;
+
+  SmnRegisterRead (0, MP0_C2PMSG_28_SMN_ADDR,  (VOID *) &PspMboxCmd.Value);
+  IDS_HDT_CONSOLE_PSP_TRACE ("RecoveryFlag %x\n", PspMboxCmd.Value);
+
+  return (BOOLEAN) (PspMboxCmd.Field.Recovery);
+}
+
 VOID
 PspBarInitEarlyV2 (
   VOID
   )
 {
-  UINT32 Value32;
-  UINT64 PspMmioBase;
-  UINTN  PciAddress;
-  UINT64 Length;
-  FABRIC_TARGET MmioTarget;
-  EFI_STATUS Status;
-  FABRIC_MMIO_ATTRIBUTE Attributes;
-  UINT32 SmnBase;
+  UINT32                 Value32;
+  UINT64                 PspMmioBase;
+  UINTN                  PciAddress;
+  UINT64                 Length;
+  FABRIC_TARGET          MmioTarget;
+  EFI_STATUS             Status;
+  FABRIC_MMIO_ATTRIBUTE  Attributes;
+  UINT32                 SmnBase;
+  //UINT8                  RbNumber;
+  //UINT64                 TempPspMmioBase;
 
   SmnBase = 0;
   if ((CcxIsBsp (NULL) == FALSE)) {
@@ -878,4 +1640,79 @@ GetPsbHstiStatus1 (
 
   CopyMem (PsbHstiStatus1, C2pReg38, sizeof (PSB_HSTI_STATUS_1));
   return TRUE;
+}
+
+/**
+  Return the PSP Entry Address of given PSP entry type and level
+
+  @param[in]        EntryType             Value of given PSP entry type
+  @param[in]        IsLevel2              The given entry is in PSP level 2 directory
+  @param[in, out]   EntryAddress          Pointer to PSP entry address
+
+  @retval TRUE      The given entry type is found
+  @retval FALSE     The given entry type is not found
+**/
+BOOLEAN
+GetPspEntryAddress (
+  IN      UINT8     EntryType,
+  IN      BOOLEAN   IsLevel2,
+  IN OUT  UINT64    *EntryAddress
+  )
+{
+  PSP_DIRECTORY               *PspDir = NULL;
+  UINTN                       i;
+  UINT64                      Level2EntryAddress = 0;
+  UINT32                      IgnoredEntrySize = 0;
+  UINT64                      PspLevel2BaseAddress = 0;
+  BOOLEAN                     Lv2DirExist = FALSE;
+  BOOLEAN                     ABrecoveryEnable = FALSE;
+  UINT64                      PspRegionAEntryAddress = 0;
+  UINT64                      PspRegionBEntryAddress = 0;
+
+  if (GetPspDirBaseV2 (&PspDir) != TRUE) {
+    return FALSE;
+  }
+
+  if (IsLevel2){
+    //Check if A/B recovery schema 1st, as A/B has different search logic
+    if ((EntryType != PSP_REGION_A_DIR) && (EntryType != PSP_REGION_B_DIR)) {
+      ABrecoveryEnable = IsABrecovery (PspDir, &PspRegionAEntryAddress, &PspRegionBEntryAddress);
+    }
+
+    if (ABrecoveryEnable) {
+      //Check read from Partition A or B by reading recovery flag
+      if (CheckPspRecoveryFlagV2 () == FALSE) {
+        //Get L2A Dir
+        PspLevel2BaseAddress = PspRegionAEntryAddress;
+      } else {
+        //Get L2B Dir
+        PspLevel2BaseAddress = PspRegionBEntryAddress;
+      }
+    } else {
+      //Check the existence of Level 2 DIR for non-AB recovery mode
+      if (EntryType != PSP_DIR_LV2) {
+        Lv2DirExist = PSPEntryInfoV2 (PSP_DIR_LV2, &Level2EntryAddress, &IgnoredEntrySize);
+      }
+      //Try to load entry from level2 if exist
+      if (Lv2DirExist) {
+        PspLevel2BaseAddress = Level2EntryAddress;
+      }
+    }
+
+    if (PspLevel2BaseAddress != 0) {
+      if (GetLevel2PSPEntryInfo (EntryType, PspLevel2BaseAddress, EntryAddress, &IgnoredEntrySize) == TRUE) {
+        return (TRUE);
+      }
+    }
+
+  } else {
+    for (i = 0; i < PspDir->Header.TotalEntries; i++) {
+      if (PspDir->PspEntry[i].Type.Field.Type == EntryType){
+        *EntryAddress = TryToTranslateOffsetToPhysicalAddress (PspDir->PspEntry[i].Location);
+        return TRUE;
+      }
+    }
+  }
+
+  return FALSE;
 }

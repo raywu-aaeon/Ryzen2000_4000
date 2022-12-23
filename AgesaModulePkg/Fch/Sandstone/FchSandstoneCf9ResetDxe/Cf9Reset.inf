@@ -84,6 +84,7 @@
 
 [Pcd]
   gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchFullHardReset
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchPmCtrlSlpIoWrWidth
 
 [Depex]
   gEfiCpuIo2ProtocolGuid  AND

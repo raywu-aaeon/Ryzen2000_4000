@@ -1,0 +1,36 @@
+
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchSpiAccessSmnLib
+  FILE_GUID                      = ff8a7a24-85f9-48ff-9d21-1cf160bd9aa5
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = FchSpiAccessLib|PEIM PEI_CORE SEC
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#
+# This instance for 32MB and smaller size SPI ROM READ on PEI phase.
+
+[Sources]
+  FchSpiAccessCommon.c
+  FchSpiAccessSmnLib.c
+
+[Packages]
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  IoLib
+  PciLib
+  FchBaseLib
+  BaseMemoryLib

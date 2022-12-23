@@ -351,7 +351,126 @@ CHAR16* CreateNameWithUefiOS( IN EFI_DEVICE_PATH_PROTOCOL *DevicePath, IN CHAR16
 
     return NULL;
 }
+/**
+    Create boot option name into format of "OS NAME(Px:CD-Rom Name), or 
+    "OS NAME(CD-Rom Name) if there is no disk, or "OS_NAME" if can't find
+    controller name.
 
+    @param  DevicePath  Use in getting complete device path of partition.
+    @param  BootOptionName  Original boot option name.
+
+    @retval CHAR16*  New boot option name string.
+*/
+CHAR16* CreateNameWithUefiOSForCDRom( IN EFI_DEVICE_PATH_PROTOCOL *DevicePath, IN CHAR16 *BootOptionName )
+{
+    EFI_DEVICE_PATH_PROTOCOL* Dp;
+    BOOLEAN IsCdrom = FALSE;
+    
+    for (Dp = DevicePath; !isEndNode(Dp); Dp = NEXT_NODE(Dp))
+    {
+        if ( Dp->Type == MEDIA_DEVICE_PATH
+                && Dp->SubType == MEDIA_CDROM_DP ){
+            IsCdrom = TRUE;
+            break;
+        }
+    }
+    // Make sure that handle associated with full
+    // device path supports Simple File System.
+    if(IsCdrom)
+    {
+        EFI_DEVICE_PATH_PROTOCOL* pTempDevicePath = DevicePath;
+        EFI_HANDLE TempHandle = NULL;
+        UINTN NewStringLength = 0;
+        CHAR16* NewString = NULL;
+        EFI_STATUS Status;
+        DEBUG((DEBUG_LOADFILE | DEBUG_ERROR, "CreateNameWithUefiOSForCDRom :: This is CD-ROM\n"));
+        Status = pBS->LocateDevicePath (
+                     &gEfiSimpleFileSystemProtocolGuid,
+                     &pTempDevicePath,
+                     &TempHandle );
+        DEBUG((DEBUG_LOADFILE | DEBUG_ERROR, "CreateNameWithUefiOSForCDRom :: LocateDevicePath: %r\n", Status));
+        if (EFI_ERROR(Status))
+        {
+            DEBUG((DEBUG_LOADFILE | DEBUG_ERROR, "CreateNameWithUefiOSForCDRom :: Does not support Simple File System.\n"));
+            NewStringLength = (Wcslen(L" (Drive not present)") + Wcslen(BootOptionName) + 1) * sizeof(CHAR16);
+
+            Status = pBS->AllocatePool ( EfiBootServicesData,
+                                         NewStringLength,
+                                         &NewString );
+            DEBUG((DEBUG_LOADFILE | DEBUG_ERROR, "CreateNameWithUefiOSForCDRom :: AllocatePool: %r\n", Status));
+            if (EFI_ERROR(Status))
+            {
+                
+                return NULL;
+            }
+
+            UnicodeSPrint ( NewString,
+                         NewStringLength,
+                         L"%S (Drive not present)",
+                         BootOptionName );
+
+        }
+        else
+        {
+            //EFI_HANDLE BlkIoPartitionHandle = NULL;
+            EFI_HANDLE ControllerHandle = NULL;
+            CHAR16 ControllerNameBuffer[CONTROLLER_NAME_BUFFER_LENGTH];
+            UINTN ControllerNameLength = 0;
+            UINT16 PortNumber = 0;
+
+            // Locate handle with above device path..
+            Status = pBS->LocateDevicePath (
+                         &gEfiSimpleFileSystemProtocolGuid,
+                         &DevicePath,
+                         &ControllerHandle );
+            DEBUG((DEBUG_LOADFILE | DEBUG_ERROR, "CreateNameWithUefiOSForCDRom :: LocateDevicePath: %r\n", Status));
+            if (EFI_ERROR(Status))
+            {
+                
+                return NULL;
+            }
+
+            ControllerNameLength = ConstructBootOptionNameByHandle (
+                                       ControllerHandle,
+                                       ControllerNameBuffer,
+                                       CONTROLLER_NAME_BUFFER_LENGTH );
+
+            // Allocate proper memory for new string and copy updated string to it.
+            NewStringLength = (Wcslen(ControllerNameBuffer) + Wcslen(BootOptionName) + 0xf) * sizeof(CHAR16); // 0xf for port number size
+
+            Status = pBS->AllocatePool (
+                         EfiBootServicesData,
+                         NewStringLength,
+                         &NewString );
+
+            if (EFI_ERROR(Status))
+            {
+                DEBUG((DEBUG_LOADFILE | DEBUG_ERROR, "CreateNameWithUefiOSForCDRom :: AllocatePool: %r\n", Status));
+                return NULL;
+            }
+            if ( ControllerNameLength == 0)
+            {
+                UnicodeSPrint ( NewString,
+                             NewStringLength,
+                             L"%S",
+                             BootOptionName );
+            }
+            else
+            {
+                UnicodeSPrint ( NewString,
+                             NewStringLength,
+                             L"%S (%S)",
+                             BootOptionName,
+                             ControllerNameBuffer );
+            }
+        }
+        DEBUG((DEBUG_LOADFILE | DEBUG_ERROR, "CreateNameWithUefiOSForCDRom :: NewString = %S\n",NewString));
+        return NewString;
+
+    }// if (FullDevicePath != NULL)
+    DEBUG((DEBUG_LOADFILE | DEBUG_ERROR, "CreateNameWithUefiOSForCDRom :: FullDevicePath == NULL)\n"));
+    return NULL;
+}
 /**
     Examines boot options and adds drive information string to them.
     This function is called at the ProcessEnterSetup hook provided by TSE.
@@ -385,6 +504,11 @@ VOID ChangeUefiBootNames(
             if ( Dp->Type == MEDIA_DEVICE_PATH
                     && Dp->SubType == MEDIA_HARDDRIVE_DP )
                 break;
+#if CDROM_SHOW_DEVIE_NAME
+            if ( Dp->Type == MEDIA_DEVICE_PATH
+                    && Dp->SubType == MEDIA_CDROM_DP )
+                break;
+#endif
         }
         if (isEndNode(Dp)) continue;
 
@@ -399,9 +523,14 @@ VOID ChangeUefiBootNames(
         NewBootOptionName = CreateNameWithUefiOS(Dp, BootOptionName);
 
         if (!NewBootOptionName) {
-            DEBUG((DEBUG_VERBOSE, "ChangeUefiBootNames :: Name is NULL\n"));
-            pBS->FreePool(LoadOption);
-            continue;
+#if CDROM_SHOW_DEVIE_NAME
+            NewBootOptionName = CreateNameWithUefiOSForCDRom(bootData->DevicePath, BootOptionName);
+#endif
+            if (!NewBootOptionName) {
+            	DEBUG((DEBUG_VERBOSE, "ChangeUefiBootNames :: Name is NULL\n"));
+                pBS->FreePool(LoadOption);
+                continue;
+            }
         }
 
         DEBUG((DEBUG_INFO | DEBUG_VERBOSE, "ChangeUefiBootNames :: %S\n", NewBootOptionName));

@@ -79,7 +79,8 @@
   AmdPspMboxLibV2
   AmdPspBaseLibV2
   AmdPspFlashAccLib
-  
+  SmmMemLib
+
 [Protocols]
   gFchSmmMiscDispatchProtocolGuid   #Consume
   gFchSmmSwDispatch2ProtocolGuid    #Consume

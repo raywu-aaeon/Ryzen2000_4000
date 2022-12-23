@@ -396,6 +396,8 @@ PspWriteApobS3Entry (
   UINT32                          EntrySize;
   UINT64                          EntryDest;
   APOBLIB_INFO                    *ApobInfo;
+  UINT8                           *Buffer;
+  Buffer = NULL;
   IDS_HDT_CONSOLE_PSP_TRACE ("PspWriteApobS3Entry\n");
 
   if (AmdPspGetApobInfo (&ApobInfo) != EFI_SUCCESS) {
@@ -416,10 +418,20 @@ PspWriteApobS3Entry (
     IDS_HDT_CONSOLE_PSP_TRACE ("APOB SPI Entry too small\n");
     return EFI_UNSUPPORTED;
   }
+  Buffer = AllocateZeroPool (ApobDramPtr->Header.Size);
+  ASSERT (Buffer != NULL);
+  if (Buffer == NULL) {
+    IDS_HDT_CONSOLE_PSP_TRACE ("Allocate temp buffer fail\n");
+    return EFI_OUT_OF_RESOURCES;
+  }
+  MapSpiDataToBuffer ((UINT32) (UINTN) EntryAddress, Buffer, ApobDramPtr->Header.Size);
   //Compare if any changes
-  if (CompareMem (ApobDramPtr, (VOID *) (UINTN) EntryAddress, ApobDramPtr->Header.Size)) {
+  if (CompareMem (ApobDramPtr, Buffer, ApobDramPtr->Header.Size)) {
     IDS_HDT_CONSOLE_PSP_TRACE ("Data difference between APOB DRAM copy & SPI copy\n");
     PspUpdateFlash ((UINT32) EntryAddress, ApobDramPtr->Header.Size, ApobDramPtr);
+  }
+  if (Buffer != NULL) {
+    FreePool (Buffer);
   }
   return EFI_SUCCESS;
 }
@@ -471,7 +483,7 @@ ApcbRecoveryByInstance (
     IDS_HDT_CONSOLE_PSP_TRACE ("Allocate temp buffer fail\n");
     return;
   }
-  CopyMem (Buffer, (VOID *) (UINTN) BackupApcbEntryAddress, BackUpApcbSize);
+  MapSpiDataToBuffer ((UINT32) (UINTN) BackupApcbEntryAddress, Buffer, BackUpApcbSize);
   //Restore APCB active instance SPI region
   IDS_HDT_CONSOLE_PSP_TRACE ("Restore APCB active instance SPI region [0x%x] with 0x%x bytes from Buffer [0x%x]\n", ActiveApcbEntryAddress, BackUpApcbSize, Buffer);
   PspUpdateFlash ((UINT32) ActiveApcbEntryAddress, BackUpApcbSize, Buffer);

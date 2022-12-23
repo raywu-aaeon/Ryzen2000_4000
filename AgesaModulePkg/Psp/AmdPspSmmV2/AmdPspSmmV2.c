@@ -60,6 +60,7 @@
 #include "AmdPspSmmV2.h"
 #include "AmdPspResumeServicesV2.h"
 #include <Library/BaseLib.h>
+#include <Protocol/SmmVariable.h>
 
 #define FILECODE PSP_AMDPSPSMMV2_AMDPSPSMMV2_FILECODE
 
@@ -178,6 +179,7 @@ AmdPspSmmV2Entry (
   EFI_MP_SERVICES_PROTOCOL        *MpServices;
   UINTN                           NumberOfCpus;
   UINTN                           NumberOfEnabledProcessors;
+  EFI_SMM_VARIABLE_PROTOCOL       *SmmVariable;
 
   AGESA_TESTPOINT (TpPspSmmV2Entry, NULL);
   //If PSP feature turn off, exit the driver
@@ -301,14 +303,23 @@ AmdPspSmmV2Entry (
   if (EFI_ERROR (Status)) {
     return Status;
   }
+     Status = gSmst->SmmLocateProtocol (
+                      &gEfiSmmVariableProtocolGuid,
+                      NULL,
+                      (VOID **)&SmmVariable
+                      );
+
+    if (EFI_ERROR (Status)) {
+      return Status;
+    }
+
   //Save the address to NV variable
-  Status = gRT->SetVariable(
-                  L"ApSyncFlagNv",
-                  &gApSyncFlagNvVariableGuid,
-                  EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
-                  AP_SYNC_BUFFER_SIZE,
-                  (VOID *) &mApSyncFlag
-                  );
+    Status = SmmVariable->SmmSetVariable (L"ApSyncFlagNv",
+          &gApSyncFlagNvVariableGuid,
+          EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
+          AP_SYNC_BUFFER_SIZE,
+          (VOID *) &mApSyncFlag);
+
   ASSERT_EFI_ERROR (Status);
   if (EFI_ERROR (Status)) {
     return Status;

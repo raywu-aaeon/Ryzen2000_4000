@@ -1,0 +1,25 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  BASE_NAME               = PeiPciEnumerationResourceLib
+  FILE_GUID               = ABFB257C-AA42-4471-98F5-2963908D3C57
+  MODULE_TYPE             = PEIM
+  VERSION_STRING          = 1.0
+  LIBRARY_CLASS           = PeiPciEnumerationResourceLib
+
+[Sources]
+  PeiPciEnumerationResourceLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+    
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress

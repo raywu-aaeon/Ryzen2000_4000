@@ -136,7 +136,8 @@ AmdCpmOemSmmEntryPoint (
     //
     // Initialize global variables
     //
-    Status = gBS->LocateProtocol ( &gAmdCpmTableSmmProtocolGuid,
+    Status = gSmst->SmmLocateProtocol (
+                                   &gAmdCpmTableSmmProtocolGuid,
                                    NULL,
                                    (VOID**)&gCpmTableSmmProtocol );
     if (EFI_ERROR (Status)) {

@@ -1,0 +1,1 @@
+#define PEI_PCI_CLASS_CODE_LIST @Elink(PEI_PCI_CLASSCODE_LIST, "@Child", " ", "%n")

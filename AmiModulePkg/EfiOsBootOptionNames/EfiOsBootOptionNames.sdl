@@ -144,6 +144,24 @@ TOKEN
 End
 
 TOKEN
+    Name  = "CDROM_SHOW_DEVIE_NAME"
+    Value  = "0"
+    Help  = "1 - show the devide name for the CDROM option 'OS NAME(CD-Rom Name)'. 0 - only show OS name ."
+    TokenType = Boolean
+    Token = "EOBON_SKIP_REMOVABLE_DEVICE" "=" "0"
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CREATE_EFI_OS_BOOT_OPTIONS_FOR_CDROM"
+    Value  = "0"
+    Help  = "1 - Yes to create UEFI OS for CDROM. 0 - Not to create UEFI OS for CDROM."
+    TokenType = Boolean
+    Token = "EOBON_SKIP_REMOVABLE_DEVICE" "=" "0"
+    TargetH = Yes
+End
+
+TOKEN
     Name  = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM"
     Value  = "1"
     Help  = "1 - Build up boot option for Linux system. 0 - Not to build."

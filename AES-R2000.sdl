@@ -85,7 +85,7 @@ End
 
 TOKEN
     Name  = "CRB_PROJECT_MINOR_VERSION"
-    Value  = "02"
+    Value  = "03"
     TokenType = Integer
     TargetEQU = Yes
     TargetMAK = Yes
@@ -102,7 +102,7 @@ End
 
 TOKEN
     Name  = "AMD_AGESA_PI_STR"
-    Value  = "EmbeddedPI-FP5_1.0.0.0RC2"
+    Value  = "EmbeddedPI-FP5_1.0.0.1RC3"
     Help  = "The string of current PI"
     TokenType = Expression
 End
@@ -1001,3 +1001,9 @@ TOKEN
     Token = "PCI_EXPRESS_SUPPORT" "=" "1"
 End
 
+#ELINK
+#    Name  = "SbSataHbaReset,"
+#    Parent  = "PcieSataControllerInitFuncList"
+#    Help  = "Portinf for Sandstone(Flavor 2) PCIE SATA Controller Specific Initialization"
+#    InvokeOrder = AfterParent
+#End

@@ -70,6 +70,7 @@ extern EFI_GUID gAmdPbsSystemConfigurationGuid;
 #define AMD_CPM_USED_PBS_SIZE ((UINT8) (OFFSET_OF (AMD_PBS_SETUP_OPTION,ReservedBuffer)))
 #define KEY_XGBE_PCIE         0x2019 // EMBSWDEV-6181: Question Id for XgbeVsPcieXn
 #define KEY_XGBE_PORT_PHY_SWITCH  0x2010 // Question ID for Xgbe PHY switch
+#define KEY_XGBE_PORT_RJ45_MODE 0x2011 // Question ID for Xgbe RJ45 port mode
 /// Structure for Variables to be used for CPM
 typedef struct {
   UINT16        PlatformId;                     ///< ((PcdGet16 (OriginalPlatformId) & BIT2)>>2)
@@ -126,33 +127,33 @@ typedef struct {
                                                 ///<  0: Disabled
                                                 ///<  1: Enabled
   UINT8         FchSdConfig;
-  
-  UINT8         XgbePortSpeedSwitch;			///  0 : SPEED_1G , 1 : SPEED_10G
-  												///  2 : SPEED_100M , 3 : SPEED_ALL
+
+  UINT8         XgbePortSpeedSwitch;          ///  0 : SPEED_1G , 1 : SPEED_10G
+                                               ///  2 : SPEED_100M , 3 : SPEED_ALL
   UINT8         XgbePortPhySwitch;              ///  0 : RJ45 , 1 : SFP+
-  UINT8         XgbePortRJ45Mode;				///  1 : 10_1_BACKPLANE
+  UINT8         XgbePortRJ45Mode;               ///  1 : 10_1_BACKPLANE
                                                 ///  2 : 2_5_BACKPLANE
-												///  3 : 1000BASET
-												///  4 : 1000BASEX
-												///  6 : 10GBASET
-												///  7 : 10GBASER
+                                                ///  3 : 1000BASET
+                                               ///  4 : 1000BASEX
+                                                ///  6 : 10GBASET
+                                               ///  7 : 10GBASER
   UINT8         NonEvalDgpuSupport;             ///< Non-Eval Discrete GPU Support
                                                 ///<  0: Disabled
                                                 ///<  1: Enabled
   UINT8         DisplaySelect1;                 ///< Display Type Selection
-  						                        ///< 0: HDMI
-						                        ///< 1: DP
+                                                ///< 0: HDMI
+                                               ///< 1: DP
   UINT8         DisplaySelect2;                 ///< Display Type Selection
-  						                        ///< 0: HDMI
-						                        ///< 1: DP												
+                                               ///< 0: HDMI
+                                              ///< 1: DP
   UINT8         XgbeVsPcieXn;                   ///< Xgbe Vs PCIe X2 Support
-  						                        ///< 0: Xgbe  
-  						                        ///< 1: PCIe X2
-												///< 2: PCIe X4  
-  UINT8         PxeBoot;                        ///< PXE Boot 
-  						                        ///< 0: Disabled  
-  						                        ///< 1: PORT 0
-												///< 2: PORT 1											
+                                              ///< 0: Xgbe
+                                              ///< 1: PCIe X2
+                                               ///< 2: PCIe X4
+  UINT8         PxeBoot;                        ///< PXE Boot
+                                               ///< 0: Disabled
+                                               ///< 1: PORT 0
+                                               ///< 2: PORT 1
   UINT8         VDDP;                           ///< VDDP voltage
                                                 ///<  0: VDDP voltage (0.9V)
                                                 ///<  1: VDDP voltage (+10mv)

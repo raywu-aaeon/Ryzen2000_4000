@@ -268,22 +268,6 @@ VOID AddedBootOptionToListCallback(EFI_HANDLE FileSystemHandle, BOOT_OPTION *Opt
         pBS->FreePool(NewEfiOsOptionDpList) ;
         NewEfiOsOptionDpList = (EFI_DEVICE_PATH_PROTOCOL**)ptr ;
     }
-
-    if ( !MemCmp( Option->Description, NAME_OF_UEFI_OS, StrSize(Option->Description)) )
-    {
-        if (NormalizeBootOptionName)
-        {
-            CHAR16 *OldDescription = Option->Description;
-            Option->Description = NULL;
-            Option->DeviceHandle = FileSystemHandle;
-            ConstructBootOptionName(Option);
-            Option->DeviceHandle = INVALID_HANDLE;
-            if (Option->Description == NULL)
-                Option->Description = OldDescription;
-            else if (OldDescription != NULL)
-                pBS->FreePool(OldDescription);
-        }
-    }
 }
 
 /**
@@ -413,9 +397,9 @@ UINT16 GetHDDPort( IN EFI_HANDLE Handle )
 
     if ( !EFI_ERROR( Status ))
     {
-        EFI_DEVICE_PATH_PROTOCOL *DevicePathNode;
-        EFI_DEVICE_PATH_PROTOCOL *MessagingDevicePath;
-        PCI_DEVICE_PATH *PciDevicePath;
+        EFI_DEVICE_PATH_PROTOCOL *DevicePathNode = NULL;
+        EFI_DEVICE_PATH_PROTOCOL *MessagingDevicePath = NULL;
+        PCI_DEVICE_PATH          *PciDevicePath = NULL;
 
         DevicePathNode = DevicePath;
         while (!isEndNode (DevicePathNode))
@@ -435,9 +419,9 @@ UINT16 GetHDDPort( IN EFI_HANDLE Handle )
             Status = DiskInfo->WhichIde ( DiskInfo, &IdeChannel, &IdeDevice );
             if ( !EFI_ERROR(Status) )
             {
-                if ( MessagingDevicePath->SubType == MSG_ATAPI_DP ) //IDE mode?
+                if (MessagingDevicePath && MessagingDevicePath->SubType == MSG_ATAPI_DP ) //IDE mode?
                 {
-                    if (PciDevicePath->Function == 5)
+                    if (PciDevicePath && PciDevicePath->Function == 5)
                         return gSATA[IdeDevice+2][IdeChannel];
                     else
                         return gSATA[IdeDevice][IdeChannel];
@@ -653,7 +637,15 @@ BOOLEAN CreateTargetEfiOsBootOption(EFI_HANDLE FileSystemHandle, NAME_MAP* NameM
     }
     OptionSize = GetDevicePathSize(DevicePath);
     gEobonHook.CreatedFilePathListCallback(FileSystemHandle, NameMap, DevicePath);
-
+    
+#if CREATE_EFI_OS_BOOT_OPTIONS_FOR_CDROM == 0 && EOBON_SKIP_REMOVABLE_DEVICE == 0
+    if (GetDevicePathNodeByTypeSubtype(DevicePath, MEDIA_DEVICE_PATH, MEDIA_CDROM_DP) != NULL ){
+        DEBUG((DEBUG_BM | DEBUG_VERBOSE,"CreateTargetEfiOsBootOption :: Don't Create EfiOsBootOption for CD-Rom\n"));
+        pBS->FreePool(DevicePath);
+        return TRUE;
+    }
+#endif
+    
     if ( CheckBootOptionMatch( DevicePath, CompareDpMethod ) == EFI_SUCCESS )
     {
         DEBUG((DEBUG_BM | DEBUG_VERBOSE,"CreateTargetEfiOsBootOption :: CheckBootOptionMatch Matched.....\n"));
@@ -905,6 +897,63 @@ BOOLEAN IsOsCreatedBootOption(UINT16 BootOptionNumber)
     }
 
     return Ret;
+}
+/**
+    Check whether the CD-Rom had os boot option without boot file.
+
+    @param   Option  BootOption
+
+    @retval  FALSE   With boot file or not CD-Rom
+    @retval  TRUE    Without boot file
+
+**/
+BOOLEAN IsCDRomWithoutBootFile(BOOT_OPTION *Option)
+{
+    
+    EFI_DEVICE_PATH_PROTOCOL *Dp = Option->FilePathList ;
+
+    if(GetDevicePathNodeByTypeSubtype(Dp, MEDIA_DEVICE_PATH, MEDIA_CDROM_DP))
+    {
+        EFI_STATUS Status;
+        EFI_SIMPLE_FILE_SYSTEM_PROTOCOL* SimpleFileSystem = NULL;
+        EFI_FILE_PROTOCOL *File= NULL;
+
+        Status = pBS->HandleProtocol (
+                Option->DeviceHandle,
+                &gEfiSimpleFileSystemProtocolGuid,
+                &SimpleFileSystem);
+
+        if(!EFI_ERROR(Status))
+        {
+            Status = SimpleFileSystem->OpenVolume (
+                        SimpleFileSystem,
+                        &File);
+
+            if(!EFI_ERROR(Status))
+            {
+                EFI_FILE_PROTOCOL* NewFile;
+
+                Status = File->Open (
+                          File,
+                          &NewFile,
+                          EFI_BOOT_FILE_NAME,
+                          EFI_FILE_MODE_READ,
+                          0);
+
+                if(!EFI_ERROR(Status))
+                {
+                    NewFile->Close(NewFile);
+                    return FALSE;
+                }
+                else if(Status == EFI_NOT_FOUND)
+                {
+                    return TRUE;
+                }
+            }
+        }else
+            return TRUE;
+    }
+    return TRUE;
 }
 
 /**
@@ -1550,7 +1599,10 @@ VOID EfiOsName_NormalizeBootOptions(){
         
         // Skip Uefi Hdd Os boot option
         if (IsSpecifiedUefiOsBootOption(Option)) continue ;
-        
+#if CREATE_EFI_OS_BOOT_OPTIONS_FOR_CDROM 
+        // If the CD Rom remove boot file we normalize it.
+        if (!IsCDRomWithoutBootFile(Option)) continue ;
+#endif
         if (NormalizeBootOptionDevicePath){
             EFI_DEVICE_PATH_PROTOCOL *OldFilePathList = Option->FilePathList;
             UINTN OldFilePathListLength = Option->FilePathListLength;

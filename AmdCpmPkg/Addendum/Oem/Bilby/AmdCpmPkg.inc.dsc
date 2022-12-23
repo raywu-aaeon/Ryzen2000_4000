@@ -116,7 +116,7 @@
   AmdCpmPkg/Addendum/Oem/Bilby/Pei/PlatformMemoryConfigurationPei/PlatformMemoryConfigurationPei.inf
   AmdCpmPkg/Addendum/Oem/Bilby/Pei/PlatformCustomizePei/PlatformCustomizePei.inf
   AmdCpmPkg/Addendum/Oem/Bilby/Pei/AmdXgbeAndDisplayConfigure/AmdXgbeAndDisplayConfigure.inf
-  AmdCpmPkg/Addendum/Oem/Bilby/Pei/AmdXgbeWorkaround/AmdXgbeWorkaround.inf
+#  AmdCpmPkg/Addendum/Oem/Bilby/Pei/AmdXgbeWorkaround/AmdXgbeWorkaround.inf
   
 [Components.X64]
   AmdCpmPkg/Kernel/Asl/AmdCpm3InitAsl.inf
@@ -153,7 +153,7 @@
   AmdCpmPkg/Addendum/Oem/Bilby/Dxe/PspPlatformDriver/PspPlatform.inf
   AmdCpmPkg/Addendum/Oem/Bilby/Dxe/AmdPbsSetupDxe/AmdPbsSetupDxe.inf
   AmdCpmPkg/Addendum/Oem/Bilby/Dxe/AmdCpmOemInitDxe/AmdCpmOemInitDxe.inf
-  AmdCpmPkg/Addendum/Oem/Bilby/Dxe/AmdXgbeWorkaround/AmdXgbeWorkaround.inf
+#  AmdCpmPkg/Addendum/Oem/Bilby/Dxe/AmdXgbeWorkaround/AmdXgbeWorkaround.inf
   AmdCpmPkg/Addendum/Oem/Bilby/Dxe/FanPolicyDxe/FanPolicyDxe.inf
   AmdCpmPkg/Addendum/Oem/Bilby/Smm/AmdCpmOemSmm.inf
 

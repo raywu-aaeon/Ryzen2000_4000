@@ -1,0 +1,28 @@
+==============
+ APU Related 
+==============
+security_policy_RV1_FP5_AM4.sbin	    RV1 FP5 & AM4
+security_policy_RV1_FP5.sbin            RV1 FP5 only
+security_policy_RV1_AM4.sbin            RV1 AM4 only
+
+security_policy_RV1_NPU_FP5_AM4.sbin	RV1 NPU FP5 & AM4
+
+security_policy_RV2_FP5_AM4.sbin      	RV2 FP5 & AM4
+security_policy_RV2_FP5.sbin            RV2 FP5 only
+security_policy_RV2_AM4.sbin            RV2 AM4 only
+security_policy_RV2_NPU_FP5_AM4.sbin    RV2 NPU FP5 & AM4
+
+security_policy_PCO_FP5_AM4.sbin      	PCO FP5 & AM4
+security_policy_PCO_FP5.sbin            PCO FP5 only
+security_policy_PCO_AM4.sbin            PCO AM4 only
+security_policy_PCO_NPU_FP5_AM4.sbin    PCO NPU FP5 & AM4
+
+===============
+ dGPU Related
+===============
+
+security_policy_combined_VG10.sbin      Combined policy (L0 + UMC + L1), VG 10 Virtualization only
+security_policy_L1_VG10.sbin            L1 policy, VG 10 Virtualization only
+
+security_policy_L0Minus_VG20.sbin	    VG20 L0/L0- only
+security_policy_L1_VG20.sbin            L1 policy, VG 20 Virtualization only

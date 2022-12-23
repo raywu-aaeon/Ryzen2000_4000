@@ -111,6 +111,7 @@
   gAmdPspCommonServiceProtocolGuid = { 0xa0bc6e92, 0xdb71, 0x4eb9, { 0x87, 0x88, 0x1a, 0x36, 0xe2, 0x70, 0x51, 0x63 } }
   gAmdPspFtpmProtocolGuid = { 0xac234e04, 0xb036, 0x476c, {0x91, 0x66, 0xbe, 0x47, 0x52, 0xa0, 0x95, 0x9}}
   gPspFlashAccSmmCommReadyProtocolGuid = { 0x9f373486, 0xda76, 0x4c9f, { 0x81, 0x55, 0x6c, 0xcd, 0xdb, 0xb, 0xb, 0x4 } }
+  gSmmFlashUpdateTempBufferAddressProtocolGuid = { 0xd36893c8, 0xeef4, 0x45c5, { 0xad, 0x61, 0xa7, 0xd2, 0x30, 0xe5, 0x51, 0xfb } }
   gSmmApcbRtShadowAddressProtocolGuid = { 0x33e0d0ac, 0x3ea, 0x41c2, { 0x87, 0x6e, 0x92, 0xed, 0x9c, 0x3a, 0xd8, 0xe5 } }
   gSmmApcb68RtShadowAddressProtocolGuid = { 0x66224a8d, 0xe340, 0x42c3, { 0xa3, 0xbd, 0xe4, 0x99, 0xa5, 0x95, 0xb4, 0x83 } }
   gSmmApcb60RtConfigShadowAddressProtocolGuid = { 0x30e72d04, 0x392c, 0x4572, { 0x81, 0xae, 0xac, 0x73, 0x37, 0x98, 0xe, 0x9b } }
@@ -158,7 +159,6 @@
   gAmdPspFtpmFactoryResetPpiGuid         = { 0x9c98130a, 0x8921, 0x45eb, { 0x86, 0xf3, 0x16, 0x4, 0x35, 0xc7, 0xc6, 0x40 } }
   gApobCommonServicePpiGuid              = { 0x7d725c4f, 0x2a1d, 0x4adc, { 0x8f, 0x21, 0x91, 0xe8, 0xab, 0x9d, 0x93, 0x60 } }
 
-
   # PSP Recovery Detect PPI GUID
   gAmdPspRecoveryDetectPpiGuid           = {0x2347c335, 0x6044, 0x48c2, {0x99, 0x8e, 0xad, 0x10, 0x83, 0x71, 0x2, 0x93}}
 
@@ -198,6 +198,12 @@
   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspAutoPsb|FALSE|BOOLEAN|0x00040014           #TRUE:  Enable
                                                                                           #FALSE: Disable
 
+#Switch to control if PSP directory is using 16M address, default value is TRUE
+  #
+  #     SBIOS must override this PCD to FALSE for flat 32M BIOS
+  #
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPspDirUsing16MAddress|TRUE|BOOLEAN|0x0004000B     #TRUE:  Yes
+                                                                                           #FALSE: No
 [PcdsDynamic]
   #Note: PcdAmdPspEnable switch to turn off all PSP driver execution, is for internal verification ONLY
   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspEnable|TRUE|BOOLEAN|0x00040000 #TRUE:  Enable
@@ -225,6 +231,7 @@
   #Note: switch to turn off PspKvm Feature
   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspKvmEnable|FALSE|BOOLEAN|0x0004000C #TRUE:  Enable
                                                                               #FALSE: Disable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFlashUpdateTempRuntimeBufferAddress|0|UINT64|0x00040016
   #Note: Switch between Absolute/Simple protocol for KVM
   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspKvmMouseProtocol|0x0|UINT8|0x0004000E #0x0:  Absolute
                                                                                      #0x1:  Simple

@@ -93,7 +93,7 @@ AmdCpmAdaptiveS4SmmEntryPoint (
     //
     // Initialize global variables
     //
-    Status = gBS->LocateProtocol (
+    Status = gSmst->SmmLocateProtocol (
                     &gAmdCpmTableSmmProtocolGuid,
                     NULL,
                     (VOID**)&gCpmTableSmmProtocol

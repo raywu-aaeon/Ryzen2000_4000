@@ -1,0 +1,46 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file PeiPciEnumeration.inf
+#   INF file for PeiPciEnumeration
+##
+[Defines]
+  INF_VERSION         = 0x00010015
+  VERSION_STRING      = 1.0
+  BASE_NAME           = PeiPciEnumeration
+  MODULE_TYPE         = PEIM
+  FILE_GUID           = 01FB5D53-4FF9-4ad9-ADF5-7DC63659A1B2
+  ENTRY_POINT         = PeiPciEnumerationEntry
+
+[Sources]
+  PeiPciEnumeration.c
+  PeiPciEnumeration.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  PeimEntryPoint
+  DebugLib
+  MemoryAllocationLib
+  HobLib
+  PciSegmentLib
+  PcdLib
+  PeiServicesLib
+  BaseMemoryLib
+  PeiPciEnumerationResourceLib
+
+[Ppis]
+  gAmiPeiPciEnumerationPpiGuid             ## Produces
+  gAmiPeiPciResetResourcesPpiGuid          ## Produces
+  gEfiEndOfPeiSignalPpiGuid
+
+[Depex]
+  gEfiPciCfg2PpiGuid AND
+  gEfiPeiMemoryDiscoveredPpiGuid

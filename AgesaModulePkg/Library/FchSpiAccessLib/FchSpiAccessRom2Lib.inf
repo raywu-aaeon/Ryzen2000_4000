@@ -1,0 +1,36 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchSpiAccessRom2Lib
+  FILE_GUID                      = 45807a1f-6ebe-43b9-98f8-a15129a1bf78
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = FchSpiAccessLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#
+#  This instance for 16MB and smaller size SPI ROM READ , do not support runtime yet.
+#  If need to access 32MB SPI ROM, please refer to instances as FchSpiAccessRom3Lib/FchSpiAccessSmnLib
+
+[Sources]
+  FchSpiAccessCommon.c
+  FchSpiAccessRom2Lib.c
+
+[Packages]
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  IoLib
+  PciLib
+  BaseMemoryLib
+
