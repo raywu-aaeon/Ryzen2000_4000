@@ -1,0 +1,60 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file SmmHddSecurity.inf
+#  Smm Module Part of the HddSecurity  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010015
+  BASE_NAME                      = SmmHddSecurity
+  FILE_GUID                      = 316B1230-0500-4592-8C09-EABA0FB6B07F
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = HddSecuritySmmInit
+
+[Sources]
+  SmmHddSecurity.c
+  SmmHddSecurity.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  S3BootScriptLib
+  DevicePathLib
+  SmmConfidentialMemLib
+  MemoryAllocationLib
+  LockBoxLib
+  TimerLib
+  AmiBufferValidationLib
+  AmiListLib
+  PciLib
+  
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEdkiiIoMmuProtocolGuid
+  gEfiSmmSwDispatch2ProtocolGuid
+  gEfiSmmBase2ProtocolGuid
+  gAmiHddSecurityProtocolGuid
+  gAmiAhciSmmProtocolGuid
+  gAmiSmmNvmePassThruProtocolGuid
+  gAmiSmmNvmeControllerProtocolGuid
+  gAmiNvmeControllerProtocolGuid
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+[Depex]
+  gEfiSmmSwDispatch2ProtocolGuid

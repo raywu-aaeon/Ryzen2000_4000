@@ -1,0 +1,13 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbFp5EcFirmware
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 1.0
+  FILE_GUID                      = 2F2F5B6D-D634-4845-9E04-C7A2FCA63F23
+
+[Packages]
+  MdePkg/MdePkg.dec 
+
+[Sources]
+  CrbFp5EcFirmware.cbin

@@ -1,0 +1,29 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Include\"
+	RefName = "AmiChipsetModulePkg.SbInclude"
+[files]
+"Sb.h"	
+"SbGpio.h"	
+"Library\SbCspLib.h" "Library\SbAmiCompatibility.h"
+"Library\SmBusCommon.h"
+"Library\SbPolicy.h"	
+"Library\AmiPirqRouterLib.h"
+"Library\AmiCspFlashLib.h"
+"Library\AmiGpioLib.h"
+"Library\AmiCmosLib.h"
+"Library\AmiSmmLib.h"
+"Library\AmiSmbiosLib.h"
+"Library\AmiSbMiscLib.h"
+"Library\RtcLib.h"	
+"Library\SbFchNcbUpdateLib.h"
+"Library\AmiFchIoAccessLib.h"	
+"Library\SbPspMutexSmiLib.h"
+"Library\AmiTimerIntLib.h"
+"Library\AmiCspSmmServicesLib.h"
+"Library\SbAhciRecoveryLib.h"
+[parts]
+"AmiChipsetModulePkg.SbPpi"
+"AmiChipsetModulePkg.SbProtocols"
+<endComponent>

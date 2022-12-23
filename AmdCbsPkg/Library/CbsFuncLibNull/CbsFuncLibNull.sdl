@@ -1,0 +1,36 @@
+TOKEN
+	Name  = "CbsFuncLibNull_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling CbsFuncLibNull support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "CbsFuncInstance"
+	File  = "CbsFuncLibDxe.inf"
+	Package  = "AmdCbsPkg"
+	Arch  = "X64"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CbsFuncInstance"
+	File  = "CbsFuncLibPei.inf"
+	Package  = "AmdCbsPkg"
+	Arch  = "IA32"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "CbsDxeFuncLib"
+	Instance  = "AmdCbsPkg.CbsFuncInstance"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "CbsPeiFuncLib"
+	Instance  = "AmdCbsPkg.CbsFuncInstance"
+	Arch  = "IA32"
+End
+

@@ -1,0 +1,10 @@
+<component>
+	name = "UEFI CPU Setup"
+	category = ModulePart
+	LocalRoot = "UefiCpuPkg\UefiCpuSetup\"
+	RefName = "UefiCpuPkg.UefiCpuSetup"
+[files]
+"UefiCpuSetup.sdl"
+"UefiCpuSetup.sd"
+"UefiCpuSetup.uni"
+<endComponent>

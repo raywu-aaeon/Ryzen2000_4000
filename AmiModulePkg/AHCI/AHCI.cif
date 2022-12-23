@@ -1,0 +1,24 @@
+<component>
+    name = "AHCI"
+    category = eModule
+    LocalRoot = "AmiModulePkg\AHCI\"
+    RefName = "AHCI"
+[INF]
+"Ahci.inf"
+[files]
+"Ahci.sdl"	
+"Ahci.chm"	
+[parts]
+"AhciSmm"
+"Aint13"
+"ACSP"
+"AhciIncludes"
+"AhciBusProtocol"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_35"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_13"
+[dependency.optional]
+AtaPassThru >= "SS: AptioV;$/AptioV/Source/Modules/AtaPassThru;AtaPassThru_06"
+OpalSecurity >= "SS: AptioV;$/AptioV/Source/Modules/OpalSecurity;OpalSecurity_05"
+HddSMART >= "SS: AptioV;$/AptioV/Source/Modules/HddSMART;HddSmart_07"
+<endComponent>

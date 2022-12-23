@@ -1,0 +1,51 @@
+## @file
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+##
+
+[Defines]
+DEC_SPECIFICATION              = 0x00010005
+PACKAGE_NAME                   = MandolinPkg
+PACKAGE_GUID                   = 1CF627F7-B186-4549-B354-93BA1F312EEF
+PACKAGE_VERSION                = 0.1
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Includes]
+  Include
+  Include/Library
+
+[LibraryClasses]
+
+[Guids]
+  gCrbPxeDriverLoaderGuid = {  0x89ff992f, 0x13a5, 0x4fb5, {0x9d, 0x9c, 0x81, 0x3c, 0xfb, 0x2e, 0xd3, 0x6b } }
+  gCrbSkippableEmptyFvGuid = {  0x34e280d7, 0x8b23, 0x40e9, {0x96, 0x47, 0xb3, 0xab, 0x8a, 0x20, 0xe5, 0x8a } }     #This Guid should match "FV_CRB_SKIPPABLE_EMPTY" under "CrbPostTime.sdl"
+  gCrbSkippableCsmFvFfsGuid = {  0x84366c9e, 0xcd61, 0x4b6e, {0x8b, 0xc7, 0x38, 0x45, 0x41, 0x38, 0x28, 0x42 } }    #This Guid should match "FV_CRB_SKIPPABLE_CSM" under "FvCrbSkippableFfsFdfFileStatement.txt"
+  gCrbSkippableNetworkFvFfsGuid = {  0xc0492c7f, 0x75e2, 0x487c, {0xb2, 0xdd, 0x0, 0xe, 0x6c, 0xf7, 0xb9, 0x5 } }   #This Guid should match "FV_CRB_SKIPPABLE_NETWORK" under "FvCrbSkippableFfsFdfFileStatement.txt"
+  gCrbSkippableTcgFvFfsGuid = {  0x1df36ff9, 0xc7ea, 0x47a3, {0xbd, 0x5b, 0x42, 0x6c, 0x25, 0xd, 0xb7, 0x76 } }     #This Guid should match "FV_CRB_SKIPPABLE_TCG" under "FvCrbSkippableFfsFdfFileStatement.txt"
+ 
+[Protocols]
+  gAmiEfiCrbInfoProtocolGuid   = { 0xe516acef, 0xfa3c, 0x4068, { 0x8c, 0xe4, 0x88, 0x8d, 0x62, 0xb0, 0xe4, 0x97 } }
+
+[Ppis]
+  gAmiPeiCrbInfoPpiGuid        = { 0x1b1924c3, 0x6321, 0x484f, { 0x83, 0xef, 0x88, 0x94, 0xb2, 0x1d, 0xe2, 0x58 } }
+
+[PcdsFixedAtBuild]
+
+
+

@@ -1,0 +1,20 @@
+TOKEN
+    Name  = "TCGSMM_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable TCGSMM support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    Master = Yes
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+End
+
+PATH
+    Name  = "TCGSmm_DIR"
+End
+
+INFComponent
+    Name  = "TcgSmm"
+    File  = "TcgSmm.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End

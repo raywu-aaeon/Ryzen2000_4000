@@ -1,0 +1,10 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Include\Protocol\"
+	RefName = "AmdCbsPkg.Include.Protocol"
+[files]
+"AmdCbsHookProtocol.h"
+"CbsBctSmmProtocol.h"	
+"AmdCbsSetupProtocol.h"
+<endComponent>

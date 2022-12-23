@@ -1,0 +1,469 @@
+#;*****************************************************************************
+#;
+#; Copyright 2016 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#;
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#;
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaFamily15Pkg
+  PACKAGE_GUID          = 6b78b541-a2cf-45f3-91aa-362760c95da1
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+  ## CCX Lib
+  ApCommunicationLib|Include/Library/ApCommunicationLib.h
+  
+  ## DF Lib
+
+  ## MEM Lib
+  AmdMemLib|Library/Mem/BaseLib/AmdMemBaseLib.h
+  AmdMemNbCzLib|Library/Mem/NbCzLib/AmdMemNbCzLib.h
+  AmdMemPsCzFp4Lib|Library/Mem/PsCzFp4Lib/AmdMemPsCzFp4Lib.h
+  AmdMemPsCzLib|Library/Mem/PsCzLib/AmdMemPsCzLib.h
+  AmdMemMainLib|Library/Mem/MainLib/AmdMemMainLib.h
+  AmdMemPsSocketLib|Include/Library/AmdMemPsSocketLib.h
+  AmdMemServicesLib|Include/Library/AmdMemServicesLib.h
+  AmdMemServicesCzLib|Library/Mem/ServicesCzLib/AmdMemServicesCzLib.h
+  AmdMemTechDdr4Lib|Library/Mem/TechDdr4Lib/AmdMemTechDdr4Lib.h
+  AmdMemReportInfoLib|Library/Mem/ReportInfoLib/AmdMemReportInfoLib.h
+  AmdMemFeatCratLib|Include/Library/AmdMemFeatCratLib.h
+  AmdMemFeatAmpLib|Include/Library/AmdMemFeatAmpLib.h
+  AmdMemFeatCsIntLvLib|Include/Library/AmdMemFeatCsIntLvLib.h
+  AmdMemFeatChIntLvLib|Include/Library/AmdMemFeatChIntLvLib.h
+  AmdMemFeatEccLib|Include/Library/AmdMemFeatEccLib.h
+  AmdMemFeatDmiLib|Include/Library/AmdMemFeatDmiLib.h
+  AmdMemDmiConstructLib|Include/Library/AmdMemDmiConstructLib.h
+  AmdMemFeatIdentifyDimmLib|Include/Library/AmdMemFeatIdentifyDimmLib.h
+  AmdMemFeatLvDdr3Lib|Include/Library/AmdMemFeatLvDdr3Lib.h
+  AmdMemFeatIntLvRgnLib|Include/Library/AmdMemFeatIntLvRgnLib.h
+  AmdMemFeatNodeIntLvLib|Include/Library/AmdMemFeatNodeIntLvLib.h
+  AmdMemFeatOLSpareLib|Include/Library/AmdMemFeatOLSpareLib.h
+  AmdMemFeatS3Lib|Include/Library/AmdMemFeatS3Lib.h
+  AmdMemFeatOnDimmThermalLib|Include/Library/AmdMemFeatOnDimmThermalLib.h
+  AmdMemFeatUmaLib|Include/Library/AmdMemFeatUmaLib.h
+
+  ## GNB Lib
+  
+  ## FCH Lib
+  
+[Guids]
+  ## AmdAgesa package token space guid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid = { 0x7788adf0, 0x9788, 0x4a3f, { 0x83, 0xfa, 0xcb, 0x51, 0x2e, 0x7c, 0xf8, 0xdd } }
+
+  ## PSP Recovery Detect HOB GUID
+  
+  ## PSP APOB Hob Guid
+
+  ## Memory
+  gAmdAgesaMemFeatAmpPpiGuid = { 0x4d26770, 0xd345, 0x4014, { 0xb7, 0x29, 0x14, 0x9a, 0x45, 0xa2, 0xdf, 0x63 } }
+  gAmdAgesaMemFeatDmiPpiGuid = { 0x148e38c1, 0x98a3, 0x4349, { 0x98, 0x37, 0xe2, 0x58, 0xa3, 0xc2, 0xd6, 0x66 } }
+  gAmdAgesaMemFeatEccPpiGuid = { 0x85ad21ff, 0x17a0, 0x4263, { 0xad, 0x19, 0x42, 0x2d, 0xd9, 0xe, 0x31, 0xdf } }
+  gAmdAgesaMemFeatExcludeDimmPpiGuid = { 0xedd97bd1, 0xcb5e, 0x428f, { 0x9f, 0x5b, 0x32, 0x74, 0x8b, 0xc4, 0x57, 0x4b } }
+  gAmdAgesaMemFeatIndentifyDimmPpiGuid = { 0x9cad5325, 0x68b1, 0x41cd, { 0x90, 0x6b, 0x5d, 0x31, 0xda, 0xdc, 0xe7, 0x17 } }
+  gAmdAgesaMemFeatLvDdr3PpiGuid = { 0x6169521f, 0x88dd, 0x498c, { 0x8a, 0x71, 0x5f, 0x7d, 0xb0, 0xff, 0xaf, 0xfa } }
+  gAmdAgesaMemFeatLvDdr4PpiGuid = { 0x8c672fc9, 0xacdd, 0x4f41, { 0x94, 0x89, 0x9c, 0xc, 0xe5, 0x4f, 0x21, 0xec } }
+  gAmdAgesaMemFeatMemClrPpiGuid = { 0xdb93800f, 0xb050, 0x4163, { 0xbf, 0x3d, 0xef, 0xcc, 0x9, 0xb3, 0xe9, 0x85 } }
+  gAmdAgesaMemFeatOdtThermalPpiGuid = { 0x4ad532ca, 0x8f20, 0x4972, { 0xa0, 0x9e, 0x27, 0x3f, 0xa7, 0xbf, 0x22, 0x4e } }
+  gAmdAgesaMemFeatS3PpiGuid = { 0x4883bcbe, 0x8815, 0x4f24, { 0x94, 0x5e, 0x75, 0x3c, 0x9e, 0x8f, 0xd4, 0xa } }
+  gAmdAgesaMemFeatTablePpiGuid = { 0xa48a96a9, 0x70ab, 0x433b, { 0x9d, 0x15, 0x7, 0x37, 0x60, 0x14, 0xcd, 0x5d } }
+  gEfiPublicMemoryServicesInitPpiGuid = { 0x17fdd6fa, 0x6493, 0x44fa, { 0xb8, 0xee, 0xf5, 0xb6, 0x58, 0xdf, 0xa2, 0x2 } }
+
+[Protocols]
+
+  ## Gnb Protocols
+  
+  ## Gnb Depex Protocols
+
+  ## Fch Protocols
+  
+  ## PSP Protocols
+  
+  ## Soc Depex Protocols List
+  
+  ## FCH
+  
+  ## PSP
+  
+  ## Memory
+  gAmdMemCzDepexProtocolGuid             = {0xb141ea54, 0x8652, 0x4f74, { 0xb4, 0x36, 0x6, 0x78, 0xee, 0x71, 0x1b, 0xac }}
+  
+  ## NBIO
+  
+  ## CCX
+  gAmdCcxDxeMidInitCompleteProtocolGuid    = {0x8181baf6, 0x62be, 0x4930, {0xbb, 0x67, 0x2e, 0x62, 0x1f, 0xb8, 0x86, 0x7e}}
+  gAmdCcxDxeLateInitCompleteProtocolGuid   = {0x620e011f, 0xc8c1, 0x4165, {0xb7, 0x6, 0x2, 0xaf, 0x2d, 0x8e, 0xc2, 0x48}}
+
+  gAmdCcxXvDepexProtocolGuid               = {0x7b41c2e2, 0xc653, 0x4b27, {0xac, 0xc4, 0x39, 0x12, 0xcb, 0xd, 0xe2, 0xb2}}
+  gAmdCcxXvDepexSmmProtocolGuid            = {0x5bdfc2ef, 0x6b, 0x4793, {0xae, 0x45, 0x9, 0x9b, 0xb4, 0x15, 0xad, 0x9c}}
+
+  ## DF
+  gAmdUnbXvDepexProtocolGuid               = {0x43815510, 0x433d, 0x48bb, {0xb2, 0x2b, 0x89, 0xee, 0xc6, 0xf5, 0xc9, 0x8b}}
+  
+  ## Error Log Protocols
+[Ppis]
+  ## SOC Depex Ppi list
+  
+  ## FCH
+  
+  ## PSP
+  
+  ## Memory
+  gAmdMemCzDepexPpiGuid                  = {0xcf9f89c0, 0xa9ea, 0x4e86, {0x80, 0x70, 0xfe, 0x6f, 0x0, 0x11, 0x33, 0x66}}
+  gAmdMemFeatCzDepexPpiGuid              = {0x156505bb, 0x8f35, 0x482e, {0x80, 0x9c, 0x3a, 0x7, 0x15, 0x4d, 0xe8, 0x7e}}
+  gAmdMemoryBeforeDramInitPpiGuid        = {0x59cfd4d0, 0x2415, 0x49ae, {0x85, 0x24, 0x52, 0x5e, 0xd, 0xa5, 0xa4, 0xc2}}
+  gAmdMemoryInitCompletePpiGuid          = {0xe54e6e84, 0x20b, 0x4081, {0x81, 0x56, 0x37, 0xe9, 0xc6, 0x2c, 0x1e, 0xd6}}
+  gAmdMemoryAfterDramInitPpiGuid         = {0xc24be927, 0xd8c4, 0x4786, {0x94, 0x2e, 0xbf, 0xe4, 0x1e, 0xd2, 0x95, 0xdf}}
+  gAmdMemoryInitializeAgesaMemoryPpiGuid = {0x1b48bf4, 0x3147, 0x4f89, {0xa8, 0xdc, 0x70, 0xf1, 0x76, 0xbd, 0x30, 0xea}}
+  gAmdMemoryInfoReadyPpiGuid             = {0x96241684, 0xfee8, 0x4ede, {0x92, 0x4c, 0xb3, 0xcd, 0x21, 0xb2, 0x8a, 0x2c}}
+  gAmdMemoryFamilyServicesPpiGuid        = {0x5c4be3df, 0xa967, 0x4e8f, {0xb2, 0x2d, 0xa5, 0xaf, 0x9a, 0x46, 0x4d, 0x56}}
+  gAmdMemoryPoolPointerTablePpiGuid      = {0x87c2f48a, 0xd7ef, 0x4216, {0xa2, 0x3a, 0xc0, 0x5e, 0x93, 0x15, 0xcc, 0x34}}
+  gAmdMemoryTechServicesPpiGuid          = {0xfd2d10fa, 0xd46, 0x499c, {0xbe, 0xef, 0x7, 0x86, 0xcb, 0x67, 0x51, 0x62}}
+  gAmdMemoryTecnologyPpiGuid             = {0x5f06ea9e, 0x4fcf, 0x4238, {0xb7, 0x6a, 0x7, 0xea, 0x66, 0xee, 0x3e, 0x8b}}
+  gAmdMemoryAgesaReadSpdPpiGuid          = {0x41a51028, 0x9d80, 0x4eca, {0xa6, 0x46, 0x81, 0xd8, 0xb2, 0x9c, 0xec, 0xb3}}
+  gAmdMemoryFeatInstallPpiGuid           = {0x60212b6, 0x101c, 0x43ba, {0xa0, 0x34, 0xc, 0x63, 0xe9, 0x4e, 0x73, 0xad}}
+  gAmdPlatformDimmSpdPpiGuid             = {0x5f02b45f, 0xa78e, 0x4462, {0xba, 0x8, 0xc0, 0xc9, 0x7, 0xfd, 0x65, 0x68}}
+  gAmdMemoryPlatformConfigurationPpiGuid = {0xb5c44b35, 0x2f12, 0x4956, {0x88, 0x99, 0x81, 0x22, 0xb1, 0x5e, 0xe, 0x46}}
+
+  ## NBIO
+  
+  ## CCX
+  gAmdCcxXvDepexPpiGuid                    = {0x3c0aa36f, 0xd9c3, 0x47d8, {0xa0, 0xc, 0xec, 0x8e, 0x4b, 0x9c, 0x9f, 0x99}}
+  gAmdCcxApLaunchedPpiGuid                 = {0x5c49532e, 0x6301, 0x4c8e, {0xb0, 0x0, 0x56, 0x4d, 0x18, 0x12, 0x4f, 0x51}}
+
+  ## DF
+  gAmdUnbXvDepexPpiGuid                    = {0x3064b7c4, 0x5983, 0x417f, {0xab, 0x58, 0x9a, 0x28, 0xdc, 0x9f, 0xcd, 0xf7}}
+
+  ## Error Log Ppis
+  
+  ## GNB Ppis
+  
+  ## GNB Depex Ppis
+  
+  ## Feature Guids
+
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+  ## Gnb Common Build Options
+
+  ## Gnb CZ Build Options
+  
+  ## Gnb Build time Options for Common System Options.
+  
+  ## PSP Fixed PCDs
+  
+  ## Fch Fixed PCDs
+
+  ## Ccx Fixed PCDs
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDisableCstateXv|0xED|UINT8|0x000CB100
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEnableCstateXv|0xEE|UINT8|0x000CB101
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEnablePstateMaxXv|0xA2|UINT8|0x000CB102
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDisablePstateMaxXv|0xA3|UINT8|0x000CB103
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmiCmdPortXv|0xB0|UINT8|0x000CB104
+
+[PcdsDynamic]
+  #Memory CZ Dynamic Options
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgBottomIo|0xE0|UINT16|0x00028001                                    # [IN] Bottom of 32-bit IO space (8-bits).
+                                                                                                               # [IN] NV_BOTTOM_IO[7:0]=Addr[31:24]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemHoleRemapping|TRUE|BOOLEAN|0x00028002                           # [IN] Memory Hole Remapping (1-bit).
+                                                                                                               #  FALSE = disable
+                                                                                                               #  TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgLimitMemoryToBelow1Tb|TRUE|BOOLEAN|0x00028003                      # [IN] Limit memory address space to below 1 TB
+                                                                                                               #  FALSE = disable
+                                                                                                               #  TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgUserTimingMode|0x0|UINT32|0x00028004                               # [IN] User Memclock Mode.
+                                                                                                               #  0 = TIMING_MODE_AUTO       - Use best rate possible
+                                                                                                               #  1 = TIMING_MODE_LIMITED    - Set user top limit
+                                                                                                               #  2 = TIMING_MODE_SPECIFIC   - Set user specified speed
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemClockValue|0x0|UINT32|0x00028005                                # [IN] Memory Clock Value.
+                                                                                                               #   200  = DDR400_FREQUENCY      - DDR 400
+                                                                                                               #   266  = DDR533_FREQUENCY      - DDR 533
+                                                                                                               #   333  = DDR667_FREQUENCY      - DDR 667
+                                                                                                               #   400  = DDR800_FREQUENCY      - DDR 800
+                                                                                                               #   533  = DDR1066_FREQUENCY     - DDR 1066
+                                                                                                               #   667  = DDR1333_FREQUENCY     - DDR 1333
+                                                                                                               #   800  = DDR1600_FREQUENCY     - DDR 1600
+                                                                                                               #   933  = DDR1866_FREQUENCY     - DDR 1866
+                                                                                                               #   1050 = DDR2100_FREQUENCY     - DDR 2100
+                                                                                                               #   1066 = DDR2133_FREQUENCY     - DDR 2133
+                                                                                                               #   1200 = DDR2400_FREQUENCY     - DDR 2400
+                                                                                                               #   UNSUPPORTED_DDR_FREQUENCY 1201 - Highest limit of DDR frequency
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgCustomVddioVoltage|0x0|UINT16|0x00028006                           # [IN] Custom VDDIO voltage
+                                                                                                               #   0    = VOLT_INITIAL,                     - Initial value for VDDIO
+                                                                                                               #   1    = VOLT1_5,                          - 1.5 Volt
+                                                                                                               #   2    = VOLT1_35,                         - 1.35 Volt
+                                                                                                               #   3    = VOLT1_25,                         - 1.25 Volt
+                                                                                                               #   4    = VOLT_DDR4_RANGE_START,            - Start of DDR4 Voltage Range
+                                                                                                               #   5    = VOLT1_2 = VOLT_DDR4_RANGE_START,  - 1.2 Volt
+                                                                                                               #   6    = VOLT_TBD1,                        - TBD1 Voltage
+                                                                                                               #   7    = VOLT_TBD2,                        - TBD2 Voltage
+                                                                                                               #   0xFF = VOLT_UNSUPPORTED                  - No common voltage found
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableBankSwapOnly|0x2|UINT32|0x00028007                           # [IN] Bank Swap Only
+                                                                                                               #   0 = disable
+                                                                                                               #   1 = enable
+                                                                                                               #   2 = auto
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableBankIntlv|FALSE|BOOLEAN|0x00028008                           # [IN] Dram Bank (chip-select) Interleaving (1-bit).
+                                                                                                               #   FALSE = disable
+                                                                                                               #   TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableNodeIntlv|FALSE|BOOLEAN|0x00028009                           # [IN] Node Memory Interleaving (1-bit).
+                                                                                                               #   FALSE = disable
+                                                                                                               #   TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableChannelIntlv|FALSE|BOOLEAN|0x0002800A                        # [IN] Channel Interleaving (1-bit).
+                                                                                                               #   FALSE = disable
+                                                                                                               #   TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableDllPDBypassMode|TRUE|BOOLEAN|0x0002800B                      # [IN] Enable low-power DDR phy operation. This feature is used
+                                                                                                               #  for low-power solder-down DRAM motherboard designs with route
+                                                                                                               #  matched CK/DQS/DQ signals. It limits maximim achieveable DDR
+                                                                                                               #  rates on the platform and should not be enabled for systems
+                                                                                                               #  requiring high DDR rate operation and/or DIMM-based systems.
+                                                                                                               #   FALSE = disable
+                                                                                                               #   TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableEccFeature|FALSE|BOOLEAN|0x0002800C                          # [IN] enable ECC error to go into MCE.
+                                                                                                               #   FALSE = disable
+                                                                                                               #   TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnablePowerDown|TRUE|BOOLEAN|0x0002800D                            # [IN] CKE based power down mode (1-bit).
+                                                                                                               #   FALSE = disable
+                                                                                                               #   TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgDramMacDefault|0x0|UINT8|0x0002800E                                # [IN] Default Maximum Activate Count
+                                                                                                               #   0 = MAC_UNTESTEDMAC,            - Assign 0 to Untested MAC
+                                                                                                               #   1 = MAC_700k,                   - Assign 1 to 700k
+                                                                                                               #   2 = MAC_600k,                   - Assign 2 to 600k
+                                                                                                               #   3 = MAC_500k,                   - Assign 3 to 500k
+                                                                                                               #   4 = MAC_400k,                   - Assign 4 to 400k
+                                                                                                               #   5 = MAC_300k,                   - Assign 5 to 300k
+                                                                                                               #   6 = MAC_200k,                   - Assign 6 to 200k
+                                                                                                               #   8 = MAC_UNRESTRICTEDMAC,        - Assign 8 to Unrestricted MAC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableExtendedTemperatureRange|FALSE|BOOLEAN|0x0002800F            # [IN] enable extended temperature support.
+                                                                                                               #   FALSE = disable
+                                                                                                               #   TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgDramTempControlledRefreshEn|FALSE|BOOLEAN|0x00028010               # [IN] Enable Temperature Controlled Refresh
+                                                                                                               #   FALSE = Disable
+                                                                                                               #   TRUE  = Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableOnLineSpareCtl|FALSE|BOOLEAN|0x00028011                      # [IN] Chip Select Spare Control bit 0.
+                                                                                                               #   FALSE = disable Spare
+                                                                                                               #   TRUE  = enable Spare
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableParity|FALSE|BOOLEAN|0x00028012                              # [IN] Parity control.
+                                                                                                               #   TRUE  = enable
+                                                                                                               #   FALSE = disable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableBankSwizzle|TRUE|BOOLEAN|0x00028013                          # [IN] BankSwizzle control.
+                                                                                                               #   FALSE = disable
+                                                                                                               #   TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableMemClr|FALSE|BOOLEAN|0x00028014                              # [IN] Memory Clear functionality control.
+                                                                                                               #   FALSE = disable
+                                                                                                               #   TRUE  = enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgUmaVersion|0x1|UINT8|0x00028015                                    # [IN] Uma Version
+                                                                                                               #   0 = Legacy Version
+                                                                                                               #   1 = Non-Legacy Version
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgUmaMode|0x2|UINT8|0x00028016                                       # [IN] Uma Mode
+                                                                                                               #   0 = None
+                                                                                                               #   1 = Specified
+                                                                                                               #   2 = Auto
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgUmaSize|0x0|UINT32|0x00028017                                      # [IN] The size of shared graphics dram (16-bits)
+                                                                                                               #  NV_UMA_Size[31:0]=Addr[47:16]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemRestoreCtl|FALSE|BOOLEAN|0x00028019                             # [IN] Memory context restore control
+                                                                                                               #   FALSE = perform memory init as normal (AMD default)
+                                                                                                               #   TRUE  = restore memory context and skip training. This requires
+                                                                                                               #           MemContext is valid before AmdInitPost
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgSaveMemContextCtl|FALSE|BOOLEAN|0x0002801A                         # [IN] Control switch to save memory context at the end of MemAuto
+                                                                                                               #   TRUE = AGESA will setup MemContext block before exit AmdInitPost
+                                                                                                               #   FALSE = AGESA will not setup MemContext block. Platform is
+                                                                                                               #           expected to call S3Save later in POST if it wants to
+                                                                                                               #           use memory context restore feature.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgIsCapsuleMode|FALSE|BOOLEAN|0x0002801B                             # [IN] Capsule reboot control
+                                                                                                               #   FALSE = This is not a capsule reboot.
+                                                                                                               #   TRUE  = This is a capsule reboot.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgExternalVrefCtl|FALSE|BOOLEAN|0x0002801C                           # [IN] Control the use of external Vref
+                                                                                                               #   TRUE = AGESA will use the function defined in
+                                                                                                               #     "AGESA_EXTERNAL_VREF_CHANGE" in function list
+                                                                                                               #     to change the vref
+                                                                                                               #   FALSE = AGESA will will use the internal vref control.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgForceTrainMode|2|UINT8|0x0002801D                                  # [IN] Training Mode
+                                                                                                               #   0 = Force 1D Training for all configurations
+                                                                                                               #   1 = Force 2D Training for all configurations
+                                                                                                               #   2 = Auto - AGESA will control 1D or 2D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgDimmTypeUsedInMixedConfig|0x1|UINT8|0x0002801E                     # [IN] Select the preferred technology type that AGESA will enable
+                                                                                                               # when it is mixed with other technology types.
+                                                                                                               #   0 = Use DDR2 DIMMs
+                                                                                                               #   1 = Use DDR3 DIMMs
+                                                                                                               #   2 = Use GDDR5 DIMMs
+                                                                                                               #   3 = Use DDR4 DIMMs
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgAmpEnable|FALSE|BOOLEAN|0x0002801F                                 # [IN] AMP functionality control
+                                                                                                               #   TRUE =  Enable, platform BIOS requests to enable memory
+                                                                                                               #           overclocking function, and AGESA detects if memory is
+                                                                                                               #           capable of it
+                                                                                                               #   FALSE = Disable, there is no request to enable memory
+                                                                                                               #           overclocking function
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgAmpWarningMsgEnable|FALSE|BOOLEAN|0x00028020                       # [IN] AMP warning messages control
+                                                                                                               #   TRUE = Enable to log the warning messages of AMP
+                                                                                                               #   FALSE = Disable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgDataEyeEn|TRUE|BOOLEAN|0x00028021                                  # [IN] Get 2D training data eye
+                                                                                                               #   TRUE  = Enable to get the 2D data eye
+                                                                                                               #   FALSE = The 2D data eye is not enabled
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgDramDoubleRefreshRateEn|FALSE|BOOLEAN|0x00028022                   # [IN] Specify the average time between refresh requests to all
+                                                                                                               # DRAM devices.
+                                                                                                               #   TRUE  = 2x refresh rate.
+                                                                                                               #   FALSE = 1x refresh rate.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgPmuTrainMode|0x3|UINT8|0x00028023                                  # [IN] PMU Training Mode
+                                                                                                               #   0 = PMU 1D Training only for all configurations
+                                                                                                               #   1 = PMU 1D and 2D Training read only for all configurations
+                                                                                                               #   2 = PMU 1D and 2D Training for all configurations
+                                                                                                               #   3 = AGESA control type of training depend on configurations
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEccRedirection|FALSE|BOOLEAN|0x00028024                            # [IN] ECC Redirection.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgScrubDramRate|0x0|UINT16|0x00028025                                # [IN] Scrub Dram Rate.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgScrubL2Rate|0x0|UINT16|0x00028026                                  # [IN] Scrub L2Rate.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgScrubL3Rate|0x0|UINT16|0x00028027                                  # [IN] Scrub L3Rate.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgScrubIcRate|0x0|UINT16|0x00028028                                  # [IN] Scrub Ic Rate.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgScrubDcRate|0x0|UINT16|0x00028029                                  # [IN] Scrub Dc Rate.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEccSyncFlood|TRUE|BOOLEAN|0x0002802A                               # [IN] ECC Sync Flood.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEccSymbolSize|0x0|UINT16|0x0002802B                                # [IN] ECC Symbol Size.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgDqsTrainingControl|TRUE|BOOLEAN|0x0002802C                         # [IN] Dqs Training Control.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgUmaAbove4G|FALSE|BOOLEAN|0x0002802D                                # [IN] Uma Above 4G Support
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgUmaAlignment|0x00FFFFFF|UINT32|0x0002802E                          # [IN] Uma alignment
+                                                                                                               #   0x00FFFFFF = NO_UMA_ALIGNED           - NO UMA aligned
+                                                                                                               #   0x00FFFFC0 = UMA_4MB_ALIGNED          - UMA 4MB aligned
+                                                                                                               #   0x00FFF800 = UMA_128MB_ALIGNED        - UMA 128MB aligned
+                                                                                                               #   0x00FFF000 = UMA_256MB_ALIGNED        - UMA 256MB aligned
+                                                                                                               #   0x00FFE000 = UMA_512MB_ALIGNED        - UMA 512MB aligned
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemoryAllClocksOn|FALSE|BOOLEAN|0x0002802F                         # [IN] Memory All Clocks On.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemoryBusFrequencyLimit|1066|UINT32|0x00028030                     # [IN] Memory Bus Frequency Limit.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgPowerDownMode|0x2|UINT8|0x00028031                                 # [IN] Power Down Mode.
+                                                                                                               #   0 = POWER_DOWN_BY_CHANNEL      - Channel power down mode
+                                                                                                               #   1 = POWER_DOWN_BY_CHIP_SELECT  - Chip select power down mode
+                                                                                                               #   2 = POWER_DOWN_MODE_AUTO       - AGESA to select power down mode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgIgnoreSpdChecksum|TRUE|BOOLEAN|0x00028032                         # [IN] Ignore Spd Checksum.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemoryModeUnganged|TRUE|BOOLEAN|0x00028033                         # [IN] Memory Mode Unganged.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemoryQuadRankCapable|FALSE|BOOLEAN|0x00028034                     # [IN] Memory Quad Rank Capable.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemoryRDimmCapable|FALSE|BOOLEAN|0x00028035                        # [IN] Memory RDIMM Capable.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemoryLRDimmCapable|FALSE|BOOLEAN|0x00028036                       # [IN] Memory LRDIMM Capable.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemoryUDimmCapable|FALSE|BOOLEAN|0x00028037                        # [IN] Memory UDIMM Capable.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemorySODimmCapable|FALSE|BOOLEAN|0x00028038                       # [IN] Memory SODimm Capable.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgDimmTypeDddr4Capable|TRUE|BOOLEAN|0x00028039                       # [IN] Indicates that the system is DDR4 Capable
+                                                                                                               #   TRUE  = Enable, platfrom BIOS requests support for DDR4
+                                                                                                               #   FALSE = Disable, platform BIOS requests no DDR4 support
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgDimmTypeDddr3Capable|TRUE|BOOLEAN|0x0002803A                       # [IN] Indicates that the system is DDR3 Capable
+                                                                                                               #   TRUE  = Enable, platfrom BIOS requests support for DDR3
+                                                                                                               #   FALSE = Disable, platform BIOS requests no DDR3 support
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgCustomVddioSupport|0x0|UINT8|0x0002803B                            # [IN] CustomVddioSupport
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgSignature|0x0|UINT32|0x0002803C                                    # [OUT] "ASTR" for AMD Suspend-To-RAM
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgVersion|0x0|UINT16|0x0002803D                                      # [OUT] S3 Params version number
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgFlags|0x0|UINT32|0x0002803E                                        # [IN/OUT] Indicates operation
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgNvStorage|0x0|UINT32|0x0002803F                                    # [IN/OUT] Pointer to memory critical save state data
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgNvStorageSize|0x0|UINT32|0x00028040                                # [IN/OUT] Size in bytes of the NvStorage region
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgVolatileStorage|0x0|UINT32|0x00028041                              # [IN/OUT] Pointer to remaining AMD save state data
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgVolatileStorageSize|0x0|UINT32|0x00028042                          # [IN/OUT] Size in bytes of the VolatileStorage region
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemoryPowerPolicy|0x0|UINT8|0x00028043                             # [IN] The memory's desired power policy
+                                                                                                               #   0 = Performance       - Optimize for performance.
+                                                                                                               #   1 = BatteryLife       - Optimize for battery life.
+                                                                                                               #   2 = Auto              - Auto
+                                                                                                               #   3 = MaxPowerPolicy    - Not a power policy mode, use for
+                                                                                                               #                           limit checking.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgAcpSize|0x0|UINT16|0x00028044                                      # [IN] ACP size [31:0]=Addr[47:16]
+                                                                                                               #   0x00 = NO_ACP_SIZE        - NO ACP
+                                                                                                               #   0x20 = ACP_SIZE_2MB       - UMA 4MB aligned
+                                                                                                               #   0x40 = ACP_SIZE_4MB       - UMA 128MB aligned
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgResolution|0x0|UINT8|0x00028045                                    # [IN] Display Resolution
+                                                                                                               #   0 = DISPLAY_1920x1080_And_Below        - 1920x1080 and below
+                                                                                                               #   1 = DISPLAY_2560x1600                  - 2560x1600
+                                                                                                               #   2 = DISPLAY_3840x2160                  - 3840x2160
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemS3NvStorageSize|0x0|UINT32|0x00028046                                 # [IN] NvStorageSize of the temp buffer provided by platform BIOS
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemS3NvStorage|0x0|UINT64|0x00028047                                     # [IN] Pointer to the temp buffer provided by platform BIOS
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgAmpVoltageValid|FALSE|BOOLEAN|0x00028048                           # [OUT] Indicates if Amp voltage is valid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgAmpSupportDetectedButNotEnabled|FALSE|BOOLEAN|0x00028049           # [OUT] Indicates if Amp support is detected but not enabled
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgAmpSelectedButNotEnabled|FALSE|BOOLEAN|0x0002804A                  # [OUT] Indicates if Amp is selected but not enabled
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgAmpVoltage|0|UINT8|0x0002804B                                      # [OUT] AMP voltage which will be sent back to platform BIOS, and
+                                                                                                               #  the value in AmpVoltage is valid only if AmpStatus is TRUE returned
+                                                                                                               #  See definition of AMP_DIMM_VOLTAGE
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgBootUpDisplayDevice|0x0|UINT16|0x0002804C                    # [IN] VBIOS boot up display ID
+                                                                                                               #      ATOM_DEVICE_LCD1_SUPPORT  0x0002
+                                                                                                               #      ATOM_DEVICE_CRT1_SUPPORT  0x0001
+                                                                                                               #      ATOM_DEVICE_DFP1_SUPPORT  0x0008
+                                                                                                               #      ATOM_DEVICE_DFP6_SUPPORT  0x0040
+                                                                                                               #      ATOM_DEVICE_DFP2_SUPPORT  0x0080
+                                                                                                               #      ATOM_DEVICE_DFP3_SUPPORT  0x0200
+                                                                                                               #      ATOM_DEVICE_DFP4_SUPPORT  0x0400
+                                                                                                               #      ATOM_DEVICE_DFP5_SUPPORT  0x0800
+
+  # Customized OEM build configurations for DP0-DP2 retimer redriver config
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP0ExtHDMIReDrvSlvAddr|0|UINT8|0x0002804D                    # DP0_EXT_HDMI_RE_DRIVE_SLAVE_ADDR  0xBA
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP0ExtHDMIReDrvRegNum|0|UINT8|0x0002804E                     # DP0_EXT_HDMI_RE_DRIVE_REG_NUM     0x06
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP0ExtHDMIRegSetting|{0x0}|VOID*|0x0002804F                    # DP0ExtHDMIRegSetting[] =
+                                                                                                               #  {
+                                                                                                               #  0x0A, 0x13,
+                                                                                                               #  0x0B, 0xD8,
+                                                                                                               #  0x0C, 0x91,
+                                                                                                               #  0xFF, 0x01,
+                                                                                                               #  0x00, 0x23,
+                                                                                                               #  0xFF, 0x00,
+                                                                                                               #  };
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP1ExtHDMIReDrvSlvAddr|0|UINT8|0x00028050
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP1ExtHDMIReDrvRegNum|0|UINT8|0x00028051
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP1ExtHDMIRegSetting|{0x0}|VOID*|0x00028052
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP2ExtHDMIReDrvSlvAddr|0|UINT8|0x00028053
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP2ExtHDMIReDrvRegNum|0|UINT8|0x00028054
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP2ExtHDMIRegSetting|{0x0}|VOID*|0x00028055
+
+  # Customized OEM build configurations for DP0-2 6GHz config
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP0ExtHDMI6GRegNum|0|UINT8|0x00028056                        # DP0_EXT_HDMI_6G_REG_NUM  0x03
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP0ExtHDMI6GhzRegSetting|{0x0}|VOID*|0x00028057                # DP0ExtHDMI6GhzRegSetting[] =
+                                                                                                               #  {
+                                                                                                               #  0x0A, 0x13,
+                                                                                                               #  0x0B, 0xDA,
+                                                                                                               #  0x0C, 0x6C,
+                                                                                                               #  };
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP1ExtHDMI6GRegNum|0|UINT8|0x00028058
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP1ExtHDMI6GhzRegSetting|{0x0}|VOID*|0x00028059
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP2ExtHDMI6GRegNum|0|UINT8|0x00028060
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGnbCfgDP2ExtHDMI6GhzRegSetting|{0x0}|VOID*|0x00028061
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgCustomCasLatency|0xFF|UINT8|0x00028062                       # 0xFF = Auto
+                                                                                                               # Other values to override Tcl
+

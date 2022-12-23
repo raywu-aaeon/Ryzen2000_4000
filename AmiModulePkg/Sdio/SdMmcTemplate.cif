@@ -1,0 +1,10 @@
+<component>
+	name = "SdMmc Chipset Template"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Sdio\"
+	RefName = "SdMmcTemplate"
+[INF]
+"SdMmcTemplate.inf"
+[files]
+"SdMmcTemplate.sdl"	
+<endComponent>

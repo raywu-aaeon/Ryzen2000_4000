@@ -1,0 +1,238 @@
+#;*****************************************************************************
+#;
+#; Copyright 2016 - 2021 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting You permission to use this software and documentation (if
+#; any) (collectively, the "Software") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Software. If You do not have
+#; a copy of the Software License Agreement, contact Your AMD representative for
+#; a copy.
+#;
+#; You agree that You will not reverse engineer or decompile the Software, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER: THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+#; KIND. AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING
+#; BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, QUALITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT AND WARRANTIES
+#; ARISING FROM CUSTOM OF TRADE OR COURSE OF USAGE WITH RESPECT TO THE SOFTWARE,
+#; INCLUDING WITHOUT LIMITATION, THAT THE SOFTWARE WILL RUN UNINTERRUPTED OR
+#; ERROR-FREE. THE ENTIRE RISK ASSOCIATED WITH THE USE OF THE SOFTWARE IS
+#; ASSUMED BY YOU. Some jurisdictions do not allow the exclusion of implied
+#; warranties, so the above exclusion may not apply to You, but only to the
+#; extent required by law.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION: TO THE EXTENT NOT PROHIBITED BY
+#; APPLICABLE LAW, AMD AND ITS LICENSORS WILL NOT, UNDER ANY CIRCUMSTANCES BE
+#; LIABLE TO YOU FOR ANY PUNITIVE, DIRECT, INCIDENTAL, INDIRECT, SPECIAL OR
+#; CONSEQUENTIAL DAMAGES ARISING FROM POSSESSION OR USE OF THE SOFTWARE OR
+#; OTHERWISE IN CONNECTION WITH ANY PROVISION OF THIS AGREEMENT EVEN IF AMD AND
+#; ITS LICENSORS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS
+#; INCLUDES, WITHOUT LIMITATION, DAMAGES DUE TO LOST OR MISAPPROPRIATED DATA,
+#; LOST PROFITS OR CONFIDENTIAL OR OTHER INFORMATION, FOR BUSINESS INTERRUPTION,
+#; FOR PERSONAL INJURY, FOR LOSS OF PRIVACY, FOR FAILURE TO MEET ANY DUTY
+#; INCLUDING OF GOOD FAITH OR REASONABLE CARE, FOR NEGLIGENCE AND FOR ANY OTHER
+#; PECUNIARY OR OTHER LOSS WHTSOEVER. In no event shall AMD's total liability to
+#; You for all damages, losses, and causes of action (whether in contract, tort
+#; (including negligence) or otherwise) exceed the amount of $50 USD. You agree
+#; to defend, indemnify and hold harmless AMD, its subsidiaries and affiliates
+#; and their respective licensors, directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your
+#; possession or use of the Software or violation of the terms and conditions of
+#; this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS: Notice to U.S. Government End Users. The
+#; Software and related documentation are "commercial items", as that term is
+#; defined at 48 C.F.R. Section 2.101, consisting of "commercial computer
+#; software" and "commercial computer software documentation", as such terms are
+#; used in 48 C.F.R. Section 12.212 and 48 C.F.R. Section 227.7202,
+#; respectively. Consistent with 48 C.F.R. Section 12.212 or 48 C.F.R. Sections
+#; 227.7202-1 through 227.7202-4, as applicable, the commercial computer
+#; software and commercial computer software documentation are being licensed to
+#; U.S. Government end users: (a) only as commercial items, and (b) with only
+#; those rights as are granted to all other end users pursuant to the terms and
+#; conditions set forth in this Agreement. Unpublished rights are reserved under
+#; the copyright laws of the United States.
+#;
+#; EXPORT RESTRICTIONS:  You shall adhere to all applicable U.S. import/export
+#; laws and regulations, as well as the import/export control laws and
+#; regulations of other countries as applicable. You further agree You will not
+#; export, re-export, or transfer, directly or indirectly, any product,
+#; technical data, software or source code received from AMD under this license,
+#; or the direct product of such technical data or software to any country for
+#; which the United States or any other applicable government requires an export
+#; license or other governmental approval without first obtaining such licenses
+#; or approvals, or in violation of any applicable laws or regulations of the
+#; United States or the country where the technical data or software was
+#; obtained. You acknowledges the technical data and software received will not,
+#; in the absence of authorization from U.S. or local law and regulations as
+#; applicable, be used by or exported, re-exported or transferred to: (i) any
+#; sanctioned or embargoed country, or to nationals or residents of such
+#; countries; (ii) any restricted end-user as identified on any applicable
+#; government end-user list; or (iii) any party where the end-use involves
+#; nuclear, chemical/biological weapons, rocket systems, or unmanned air
+#; vehicles.  For the most current Country Group listings, or for additional
+#; information about the EAR or Your obligations under those regulations, please
+#; refer to the website of the U.S. Bureau of Industry and Security at
+#; http://www.bis.doc.gov/.
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaPspPkg
+  PACKAGE_GUID          = 5c48f900-a98c-431f-8be5-19c09c65bb05
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Firmwares
+
+[LibraryClasses]
+  AmdPspBaseLibV1|Include/Library/AmdPspBaseLibV1.h
+  AmdPspBaseLibV2|Include/Library/AmdPspBaseLibV2.h
+  AmdPspMboxLibV2|Include/Library/AmdPspMboxLibV2.h
+  AmdPspMboxLibV1|Include/Library/AmdPspMboxLibV1.h
+  ApobZpRvLib|Include/Library/ApobZpRvLib.h
+  ApobZpMcmLib|Include/Library/ApobZpMcmLib.h
+  ApobSspLib|Include/Library/ApobSspLib.h
+
+[Guids]
+  # PSP APOB Hob Guid
+  gAmdPspApobHobGuid = { 0x30b174f3, 0x7712, 0x4cca, { 0xbd, 0x13, 0xd0, 0xb8, 0xa8, 0x80, 0x19, 0x97 } }
+
+  gPspSmmCommHandleGuid = {0xb2abccbf, 0x2e1, 0x436f, {0x98, 0xb0, 0x20, 0x59, 0x9c, 0x49, 0xe2, 0xa1}}
+
+
+  gApSyncFlagNvVariableGuid = { 0xad3f6761, 0xf0a3, 0x46c8, { 0xa4, 0xcb, 0x19, 0xb7, 0xf, 0xfd, 0xb3, 0x5 } }
+
+[Protocols]
+  #PSP Protocols
+  gAmdPspResumeServiceProtocolGuid = {0x6c5ae0f9, 0xaad3, 0x47f8, { 0x8f, 0x59, 0xa5, 0x3a, 0x54, 0xce, 0x5a, 0xe2 }}
+  gAmdPspCommonServiceProtocolGuid = { 0xa0bc6e92, 0xdb71, 0x4eb9, { 0x87, 0x88, 0x1a, 0x36, 0xe2, 0x70, 0x51, 0x63 } }
+  gAmdPspFtpmProtocolGuid = { 0xac234e04, 0xb036, 0x476c, {0x91, 0x66, 0xbe, 0x47, 0x52, 0xa0, 0x95, 0x9}}
+  gPspFlashAccSmmCommReadyProtocolGuid = { 0x9f373486, 0xda76, 0x4c9f, { 0x81, 0x55, 0x6c, 0xcd, 0xdb, 0xb, 0xb, 0x4 } }
+  gSmmApcbRtShadowAddressProtocolGuid = { 0x33e0d0ac, 0x3ea, 0x41c2, { 0x87, 0x6e, 0x92, 0xed, 0x9c, 0x3a, 0xd8, 0xe5 } }
+  gSmmApcb68RtShadowAddressProtocolGuid = { 0x66224a8d, 0xe340, 0x42c3, { 0xa3, 0xbd, 0xe4, 0x99, 0xa5, 0x95, 0xb4, 0x83 } }
+  gSmmApcb60RtConfigShadowAddressProtocolGuid = { 0x30e72d04, 0x392c, 0x4572, { 0x81, 0xae, 0xac, 0x73, 0x37, 0x98, 0xe, 0x9b } }
+  gSmmApcb60RtEvtLgShadowAddressProtocolGuid = {0x3afb23ce, 0x1068, 0x451a, { 0xa2, 0xd6, 0x13, 0x3a, 0x29, 0xd1, 0xd9, 0xfc } }
+
+  gAmdPspKvmServiceProtocolGuid = { 0xd93d7e36, 0xabdc, 0x473c, { 0xaf, 0xd5, 0x32, 0x33, 0x6c, 0x55, 0x9, 0x93 } }
+  gPspMboxSmmBufferAddressProtocolGuid = { 0x579cb2cb, 0x3403, 0x4b26, { 0x84, 0xcd, 0x72, 0x89, 0xfc, 0x91, 0x4d, 0x35 } }
+
+  #Depex
+  gAmdPspDxeV1DepexProtocolGuid          = {0x99d3244e, 0xd31a, 0x4839, {0xa5, 0x39, 0x78, 0x95, 0x4d, 0x2f, 0x8e, 0x61}}
+  gAmdPspDxeV2ZpDepexProtocolGuid        = {0x1be9e901, 0x3bba, 0x486d, {0x8b, 0xe7, 0x21, 0x6f, 0x2b, 0x00, 0xfc, 0xfa}}
+  gAmdPspDxeV2ZpMcmDepexProtocolGuid     = { 0x8c713187, 0x780e, 0x47c7, { 0xaf, 0xe3, 0x43, 0x76, 0x79, 0xba, 0x63, 0x4b } }
+
+  gAmdPspDxeV2RvDepexProtocolGuid        = {0x9cc4a362, 0x1f35, 0x4f8a, { 0xb8, 0xeb, 0x1, 0x1c, 0x4f, 0x78, 0x80, 0xaa}}
+  gAmdPspDxeV2SspDepexProtocolGuid       = { 0xd8b3d856, 0xb2ca, 0x4304, { 0xbe, 0x61, 0xd1, 0xce, 0x89, 0x42, 0x0, 0xd2 } }
+  gApobCommonServiceProtocolGuid         = { 0xde50221, 0xfaaa, 0x45ba, { 0x90, 0xb9, 0x7b, 0xcc, 0x26, 0xec, 0x60, 0xcf } }
+
+
+
+
+
+
+
+  gAmdPspP2CmboxV1DepexProtocolGuid      = {0x72f7c3e4, 0x2386, 0x4f8e, {0x9a, 0x49, 0xef, 0xe6, 0x25, 0x8f, 0x6a, 0x80}}
+  gAmdPspP2CmboxV2DepexProtocolGuid      = {0x25358f8b, 0xc684, 0x4f7c, {0x80, 0x4b, 0xa8, 0x13, 0xee, 0xb8, 0xc5, 0xee}}
+  gAmdPspP2CmboxV2SspDepexProtocolGuid      = { 0xc7e8cf4d, 0xfe0c, 0x4ebd, { 0xbe, 0xd5, 0x41, 0x96, 0x49, 0x24, 0xc2, 0xc9 } }
+
+  gAmdPspSmmV1DepexProtocolGuid          = {0x16a1277d, 0xd2fb, 0x4658, {0xaa, 0x2f, 0x6d, 0x65, 0x48, 0x70, 0x3, 0xa7}}
+  gAmdPspSmmV2DepexProtocolGuid          = {0x58d75b48, 0x5d7f, 0x4a21, {0xa8, 0x53, 0xe0, 0x1a, 0xd7, 0xa5, 0x18, 0xa7}}
+  gAmdPspSmmV2SspDepexProtocolGuid          = { 0x222e7e3a, 0x7d6b, 0x4d70, { 0xb6, 0xb7, 0x3f, 0x5, 0x81, 0xed, 0x95, 0x35 } }
+
+  gAmdPspHstiV1DepexProtocolGuid         = { 0x82b8fb35, 0x454e, 0x4936, { 0x85, 0x1a, 0x77, 0x90, 0x6, 0x68, 0x51, 0xb7 } }
+  gAmdPspHstiV2DepexProtocolGuid         = { 0xc0712692, 0xc25e, 0x4ebc, { 0x83, 0x1d, 0x50, 0xef, 0x2f, 0xc5, 0x60, 0xe6 } }
+
+  gApobZpRvDxeDepexProtocolGuid          = { 0x25824060, 0xfaff, 0x487a, { 0x8d, 0x9c, 0xd5, 0x5, 0xd7, 0x13, 0xf7, 0x9 } }
+  gApobZpMcmDxeDepexProtocolGuid         = { 0x158e2079, 0x23f3, 0x4e83, { 0x8a, 0x35, 0x65, 0x7a, 0x76, 0x40, 0x8c, 0xa } }
+  gApobSspDxeDepexProtocolGuid           = { 0xe2a1ffee, 0xcc2f, 0x43f9, { 0x97, 0x2f, 0x78, 0x0, 0x6c, 0x64, 0x43, 0x27 } }
+  gApobDummyDxeDepexProtocolGuid         = { 0x32f93c9e, 0x83a0, 0x4ee4, { 0xb6, 0x6b, 0xc7, 0x4, 0x61, 0x5d, 0x98, 0x95 } }
+
+
+
+[Ppis]
+  gAmdPspCommonServicePpiGuid            = {0x977f787b, 0xb3cd, 0x47b8, {0xb8, 0xe9, 0x76, 0x44, 0xd1, 0xcb, 0x6e, 0xf2}}
+  gAmdPspFtpmPpiGuid                     = {0x91774185, 0xf72d, 0x467e, {0x93, 0x39, 0xe0, 0x8, 0xdb, 0xae, 0xe, 0x14}}
+  gAmdPspFtpmFactoryResetPpiGuid         = { 0x9c98130a, 0x8921, 0x45eb, { 0x86, 0xf3, 0x16, 0x4, 0x35, 0xc7, 0xc6, 0x40 } }
+  gApobCommonServicePpiGuid              = { 0x7d725c4f, 0x2a1d, 0x4adc, { 0x8f, 0x21, 0x91, 0xe8, 0xab, 0x9d, 0x93, 0x60 } }
+
+
+  # PSP Recovery Detect PPI GUID
+  gAmdPspRecoveryDetectPpiGuid           = {0x2347c335, 0x6044, 0x48c2, {0x99, 0x8e, 0xad, 0x10, 0x83, 0x71, 0x2, 0x93}}
+
+  #Depex
+  gAmdPspPeiV1DepexPpiGuid               = {0x9a74f48, 0x752e, 0x44ff, {0x80, 0x43, 0x91, 0x6f, 0x83, 0x37, 0xc2, 0x41}}
+  gAmdPspPeiV2DepexPpiGuid               = {0x8a4629b7, 0x13fd, 0x42b5, {0x8c, 0x29, 0xb3, 0x9a, 0x4f, 0xc1, 0xca, 0x88}}
+  gAmdPspPeiV2SspDepexPpiGuid            = { 0x8daaac3, 0x6118, 0x4ee7, { 0x96, 0x43, 0xea, 0x31, 0x8a, 0x54, 0xf6, 0x75 } }
+  gApobZpRvPeiDepexPpiGuid               = { 0x5dda141, 0x2dfa, 0x48bb, { 0xb0, 0x9d, 0xd9, 0x22, 0x34, 0x49, 0x47, 0xfe } }
+  gApobZpMcmPeiDepexPpiGuid              = { 0x1e621ac1, 0x85a1, 0x41d1, { 0xa9, 0xe5, 0xf6, 0x2c, 0x49, 0x11, 0xcf, 0xe2 } }
+  gApobSspPeiDepexPpiGuid                = { 0x158e2079, 0x23f3, 0x4e83, { 0x8a, 0x35, 0x65, 0x7a, 0x76, 0x40, 0x8c, 0xa } }
+  gApobDummyPeiDepexPpiGuid         = { 0xb8293152, 0x380a, 0x4386, { 0xa7, 0x32, 0x72, 0x44, 0x44, 0xa, 0x85, 0x64 } }
+
+[PcdsFeatureFlag]
+
+
+[PcdsFixedAtBuild]
+
+  #Time out in uSec of TPM_CC_CreatePrimary & TPM_CC_Create, 0xFFFFFFFF identify wait infinitely
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdFtpmTimeout1|0xFFFFFFFF|UINT64|0x00040006
+
+  #Time out in uSec for reset of TPM command , 0xFFFFFFFF identify wait infinitely
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdFtpmTimeout2|0xFFFFFFFF|UINT64|0x00040007
+
+  #Switch to control PSP recovery flag detecting
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspRecoveryFlagDetectEnable|TRUE|BOOLEAN|0x00040009 #TRUE:  Enable
+                                                                                          #FALSE: Disable
+
+  #Switch to control if required to clear SMM lock on S3 exit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdS3SmmLockClearEnable|TRUE|BOOLEAN|0x0004000A #TRUE:  Enable
+                                                                                          #FALSE: Disable
+
+  #Switch to control the auto PSB feature
+  #
+  #     WARNING, When set to TRUE,AutoPSB feature will fuse the PSB related fuse, when BIOS is correctly signed
+  #     The Part with PSB fused, can NOT boot any unsigned BIOS
+  #
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspAutoPsb|FALSE|BOOLEAN|0x00040014           #TRUE:  Enable
+                                                                                          #FALSE: Disable
+
+[PcdsDynamic]
+  #Note: PcdAmdPspEnable switch to turn off all PSP driver execution, is for internal verification ONLY
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspEnable|TRUE|BOOLEAN|0x00040000 #TRUE:  Enable
+                                                                              #FALSE: Disable
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspNvramClearRequest|FALSE|BOOLEAN|0x00040001 #TRUE:  Enable
+                                                                              #FALSE: Disable
+
+  #Note: system TPM config, SBIOS needs to set the value in PEI phase
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig|0xFF|UINT8|0x00040002                      #0x0:  dTPM
+                                                                                                          #0x1:  PSP fTPM
+                                                                                                          #0x2:  HSP fTPM
+                                                                                                          #0xFF: no TPM
+  # Record  address of APCB shadow copy
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdApcbShadowAddress|0|UINT64|0x00040004
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdApcb68ShadowAddress|0|UINT64|0x00040010
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdApcb60ConfigShadowAddress|0|UINT64|0x00040011
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdApcb60EvtLgShadowAddress|0|UINT64|0x00040012
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdApcbMutexLocked|FALSE|BOOLEAN|0x00040013
+
+  #Switch to control AGESA APCB recovery mechanism
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspApcbRecoveryEnable|FALSE|BOOLEAN|0x00040008 #TRUE:  Enable
+                                                                                          #FALSE: Disable
+  #Note: switch to turn off PspKvm Feature
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspKvmEnable|FALSE|BOOLEAN|0x0004000C #TRUE:  Enable
+                                                                              #FALSE: Disable
+  #Note: Switch between Absolute/Simple protocol for KVM
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspKvmMouseProtocol|0x0|UINT8|0x0004000E #0x0:  Absolute
+                                                                                     #0x1:  Simple
+  #Note: Switch between Absolute/Simple protocol for KVM
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspKvmMbox|FALSE|BOOLEAN|0x0004000F #TRUE:  Enable
+                                                                          #FALSE: Disable
+
+  #Program RPMC counter (1 to 3) accordingly at manufacturing to provision RPMC Root Key on RPMC supported SPIROM.
+  # RPMC#0 is programmed with TestKey
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspRPMCAddress|0xFF|UINT8|0x00040019
+

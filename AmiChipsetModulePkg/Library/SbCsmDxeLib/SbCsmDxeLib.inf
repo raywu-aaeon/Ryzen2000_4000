@@ -1,0 +1,23 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbCsmDxeLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbCsmDxeLib|DXE_DRIVER
+
+[Sources]
+  SbCsmDxeLib.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec  
+  
+[LibraryClasses]
+  AmiDxeLib
+
+[Protocols]
+  gEfiTimerArchProtocolGuid

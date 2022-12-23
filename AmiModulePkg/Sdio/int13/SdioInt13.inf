@@ -1,0 +1,69 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file SdioInt13.inf
+#  Component description file for SdioInt13 module.
+#  This component supports SdioDriver in Legacy mode.
+##
+
+[Defines]
+    INF_VERSION    = 0x00010015
+    VERSION_STRING = 1.0
+    BASE_NAME      = SdioInt13
+    MODULE_TYPE    = DXE_DRIVER
+    FILE_GUID      = 10B7F979-741C-467e-8764-8DD50D8AD6C5
+    ENTRY_POINT    = SdioInt13EntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+    SdioInt13.c
+    SdioInt13.h
+
+[Packages]
+    MdePkg/MdePkg.dec
+    IntelFrameworkPkg/IntelFrameworkPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+    UefiDriverEntryPoint
+    UefiBootServicesTableLib
+    DebugLib
+    
+[Protocols]
+    gEfiLegacyBiosExtProtocolGuid  # PROTOCOL ALWAYS_CONSUMED
+    gEfiSdioProtocolGuid           # PROTOCOL ALWAYS_PRODUCED
+    gSdioBusInitProtocolGuid  
+
+[Depex]
+    gEfiLegacyBiosProtocolGuid AND
+    gEfiLegacyBiosExtProtocolGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

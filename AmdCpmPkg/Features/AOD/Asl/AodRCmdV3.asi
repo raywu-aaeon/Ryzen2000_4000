@@ -1,0 +1,200 @@
+/*****************************************************************************
+ *
+ * Copyright 2007 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+/*****************************************************************************
+ *
+ * This software package can be used to enable the Overclocking of certain
+ * AMD processors and its use is subject to the terms and conditions of the
+ * AMD Overclocking Waiver. Enabling overclocking through use of the low-level
+ * routines included in this package and operating an AMD processor outside of
+ * the applicable AMD product specifications will void any AMD warranty and can
+ * result in damage to the processor or the system into which the processor has
+ * been integrated. The user of this software assumes, and AMD disclaims, all
+ * risk, liability, costs and damages relating to or arising from the overclocking
+ * of AMD processors.
+ *
+ ******************************************************************************
+ */
+
+
+//This file used to support run command method
+
+        Name(CMDV,3)  //Run command version
+        Name(OBUF,buffer(48) {})  //Run command output buffer
+
+        #include "AOD.cfg"
+
+/******************************************************************
+
+typedef struct _AodMemoryBufferStruct {
+  UINT32     AodMemBufferSignature;
+  UINT32     Version;
+  UINT32     CommandBitMap;
+  UINT16     MemClkFreq;
+  UINT8      Tcl;
+  UINT8      Trcdrd;
+  UINT8      Trcdwr;
+  UINT8      Tras;
+  UINT8      Trp;
+  UINT16     VddioMV;
+  UINT16     VTTMV;
+  UINT8      Reserved[9];
+} AodMemoryBufferStruct;
+
+typedef struct _AodNvAreaStruct {
+  UINT16                    AodSmiCmd;
+  UINT32                    AodSmiStatus;
+  UINT16                    Reserved1;
+  AodMemoryBufferStruct     AodMemBuffer;
+  UINT8                     Reserved2[12];
+} AodNvAreaStruct;
+*******************************************************************
+*/
+
+       //This structure must be match with "AodNvAreaStruct" in Aod.h.
+        OperationRegion(AODT, SystemMemory, 0xffffff00, 0x30)   //AOD transfer buffer
+        Field(AODT, AnyAcc, NoLock, Preserve) {
+            offset(0),
+            ASCD,16,    // AOD SMI CMD
+            ASTS,32,    // AOD SMI status
+            RSD1,16,    // reserved 
+            MBSN,32,    // AOD MEM Buffer: AodMemBufferSignature
+            MBVS,32,    // AOD MEM Buffer: Version
+            MBCB,32,    // AOD MEM Buffer: CommandBitMap
+            MBMC,16,    // AOD MEM Buffer: MemClkFreq
+            TTCL,8,     // AOD MEM Buffer: Tcl
+            TRCR,8,     // AOD MEM Buffer: Trcdrd
+            TRCW,8,     // AOD MEM Buffer: Trcdwr
+            TRAS,8,     // AOD MEM Buffer: Tras
+            TTRP,8,     // AOD MEM Buffer: Trp
+            VDIO,16,    // AOD MEM Buffer: VddioMV
+            VMTT,16,    // AOD MEM Buffer: VTTMV
+        }
+
+
+        Method(R101,1) {   // Get memory info
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (AOD_CMD_GET_MEM_DATA_BUFFER, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R102,1) {   // Get memory info
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (AOD_CMD_GET_VDDIO, Local0)
+          Add (AOD_CMD_GET_VTT, Local0, Local0)
+          store (Local0, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_VOLTAGE)
+        }
+
+        Method(R201,1) {   // Set memory clock
+          createwordfield (arg0, 4, MCLK)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MCLK, MBMC)
+          store (AOD_CMD_SET_MEMORY_CLK, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R202,1) {   // Set memory Tcl
+          createbytefield (arg0, 4, MTCL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MTCL, TTCL)
+          store (AOD_CMD_SET_TCL, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R203,1) {   // Set memory Trcdrd
+          createbytefield (arg0, 4, MRDD)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MRDD, TRCR)
+          store (AOD_CMD_SET_TRCDRD, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R204,1) {   // Set memory Trcdwr
+          createbytefield (arg0, 4, MRDW)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MRDW, TRCW)
+          store (AOD_CMD_SET_TRCDWR, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R205,1) {   // Set memory Tras
+          createbytefield (arg0, 4, MTRS)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MTRS, TRAS)
+          store (AOD_CMD_SET_TRAS, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R206,1) {   // Set memory Trp
+          createbytefield (arg0, 4, MTRP)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MTRP, TTRP)
+          store (AOD_CMD_SET_TRP, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R301,1) {   // Set memory Vddio
+          createwordfield (arg0, 4, MVIO)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MVIO, VDIO)
+          store (AOD_CMD_SET_VDDIO, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_VOLTAGE)
+        }
+
+        Method(R302,1) {   // Set memory VTT
+          createwordfield (arg0, 4, MVTT)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MVTT, VMTT)
+          store (AOD_CMD_SET_VTT, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_VOLTAGE)
+        }
+
+        Method(R505,1) {   // Test function to loop back the input buffer to output buffer
+          store (AOD_MEMPROFILEVer, MBVS)
+        }
+//#endif

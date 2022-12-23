@@ -1,0 +1,13 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Library\Guid\"
+	RefName = "AmdCpmPkg.Library.Guid"
+[files]
+"AmdCpmBootTimeRecordHob\AmdCpmBootTimeRecordHob.h"	
+"AmdCpmBootTimeRecordHob\AmdCpmBootTimeRecordHob.c"
+"AmdCpmTableHob\AmdCpmTableHob.h"
+"AmdCpmTableHob\AmdCpmTableHob.c"
+"AmdMemoryInfoHob\AmdMemoryInfoHob.c"
+"AmdMemoryInfoHob\AmdMemoryInfoHob.h"	
+<endComponent>

@@ -1,0 +1,13 @@
+<component>
+	name = "CbsSetupLibNull"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Library\CbsSetupLibNull\"
+	RefName = "AmdCbsPkg.CbsSetupLibNull"
+[INF]
+"CbsSetupLib.inf"
+[files]
+"AmdCbsFormID.h"	
+"AmdCbsVariable.h"	
+"xmlparse.bat"	
+"CbsSetupLibNull.sdl"	
+<endComponent>

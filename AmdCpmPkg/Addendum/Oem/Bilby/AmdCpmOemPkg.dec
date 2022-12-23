@@ -1,0 +1,97 @@
+#;*****************************************************************************
+#;
+#; Copyright 2016 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#; 
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#; 
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#; 
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#; 
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#; 
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;*****************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = CpmOemPkg
+  PACKAGE_GUID          = DAACA63A-15BD-40A3-9F29-8A90B16D4804
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+  Features\I2cMaster
+  Features\xGbEI2cMaster
+  Library\AmdPbsConfigLib
+
+[LibraryClasses]
+
+[Guids]
+  # SOC Agesa configuration parameter group list Guid
+  gAmdConfigurationParameterListAm4BrGuid = {0xec74aa51, 0x6a7e, 0x42e5, {0x90, 0x47, 0xdd, 0xfe, 0xef, 0x7d, 0x4, 0xc3}}
+  gAmdConfigurationParameterListAm4SmGuid = {0xf6114fbc, 0x159f, 0x49bb, {0x84, 0x43, 0xe2, 0x91, 0x54, 0x19, 0xff, 0x84}}
+  gAmdConfigurationParameterListFp4BrGuid = {0xdf48ea48, 0x7a4c, 0x4e83, {0x9b, 0x18, 0xba, 0xbd, 0x36, 0x34, 0xee, 0xa1}}
+  gAmdDefaultFbAbove4GVarGuid = {0x9deb3ffe, 0x213b, 0x4c53, {0x86, 0xd7, 0x4f, 0x0a, 0x8e, 0xcc, 0xfd, 0x4d}}
+
+[Protocols]
+  gPca9545aProtocolGuid = {0x6308A414, 0x402A, 0xF1E2, {0xEE, 0xDD, 0x97, 0x97, 0xFB, 0x8D, 0x16, 0xA9}}
+  gPca9535aProtocolGuid = {0xB2452CEE, 0x4C4C, 0x9C68, {0xD1, 0xF3, 0x4B, 0x94, 0xCA, 0xA2, 0x34, 0xFE}}
+  gxGbEI2cMasterProtocolGuid = {0xF15E1432, 0x4B9B, 0x2521, {0xCA, 0x59, 0xE7, 0x98, 0x37, 0xCA, 0x0F, 0x0A}}
+
+[Ppis]
+  gM24Lc128PpiGuid = {0xca4f8926, 0xa5a4, 0x438d, {0xb6, 0xe7, 0x82, 0x9f, 0x10, 0xa5, 0x4c, 0xd3}}
+  gPca9545aPpiGuid = {0xB7613891, 0x4906, 0x6B13, {0x66, 0x77, 0xAB, 0x85, 0x10, 0xAE, 0x7E, 0x8D}}
+  gPca9535aPpiGuid = {0xDDE22D47, 0x47B2, 0xB355, {0x65, 0x7D, 0xA5, 0xA5, 0x35, 0xED, 0x50, 0xEE}}
+
+[PcdsFixedAtBuild]
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdXhciFwLocation|0xFF861000|UINT32|0x10000010
+  gAmdCpmPkgTokenSpaceGuid.PcdDefaultFbAbove4GVarName|L"AMD_DEFAULT_FB_ABOVE_4G"|VOID*|0x10000030
+  gAmdCpmPkgTokenSpaceGuid.PcdSerialIoDecode|FALSE|BOOLEAN|0x10000077     # Enable/Disable 0x3F8, 0x3E8, 0x2F8 & 0x2E8 IO decode when LegacyFreeMode is enabled
+  gAmdCpmPkgTokenSpaceGuid.PcdGopDriverFile|{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}|VOID*|0x10000078
+  
+[PcdsDynamic]
+  gAmdCpmPkgTokenSpaceGuid.PcdECFwVersion|0xFFFF|UINT32|0x20000001
+  gAmdCpmPkgTokenSpaceGuid.PcdUSBPDFwSection1Version|0xFF|UINT16|0x20000002
+  gAmdCpmPkgTokenSpaceGuid.PcdUSBPDFwSection2Version|0xFF|UINT16|0x20000003
+  gAmdCpmPkgTokenSpaceGuid.PmicVersion|0xFF|UINT8|0x20000004
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable|FALSE|BOOLEAN|0x20000005
+  gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareEnable|FALSE|BOOLEAN|0x20000006
+  gAmdCpmPkgTokenSpaceGuid.PcdSystemBootType|2|UINT8|0x20000007  #Default uefi boot type
+  gAmdCpmPkgTokenSpaceGuid.PcdBoardRevision|0|UINT8|0x20000008
+  gAmdCpmPkgTokenSpaceGuid.PcdConnectStandbyEnable|FALSE|BOOLEAN|0x20000009
+
+[PcdsFeatureFlag]
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbySupport|FALSE|BOOLEAN|0x30000000
+  gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareSupport|FALSE|BOOLEAN|0x30000001

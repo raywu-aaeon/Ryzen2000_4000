@@ -1,0 +1,159 @@
+TOKEN
+	Name  = "AMD_CCX_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Zen support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AMD_CCX_XV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCcxXvDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "1"
+End
+
+TOKEN
+	Name  = "AMD_CCX_XV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCcxXvPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "1"
+End
+
+TOKEN
+	Name  = "AMD_CCX_XV_SMM_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCcxXvSmm support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "1"
+End
+
+TOKEN
+	Name  = "AMD_CCX_ZEN_RV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCcxZenRvDxe support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_CCX_ZEN_RV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCcxZenRvPei support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_CCX_ZEN_RV_SMM_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCcxZenRvSmm support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_CCX_ZEN_ZP_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCcxZenZpDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_CCX_ZEN_ZP_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCcxZenZpPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_CCX_ZEN_ZP_SMM_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCcxZenZpSmm support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+INFComponent
+	Name  = "AmdCcxXvDxe"
+	File  = "Xv\CcxXvDxe\AmdCcxXvDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_CCX_XV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCcxXvPei"
+	File  = "Xv\CcxXvPei\AmdCcxXvPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_CCX_XV_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCcxXvSmm"
+	File  = "Xv\CcxXvSmm\AmdCcxXvSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_CCX_XV_SMM_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCcxZenRvDxe"
+	File  = "Zen\CcxZenRvDxe\AmdCcxZenRvDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_CCX_ZEN_RV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCcxZenRvPei"
+	File  = "Zen\CcxZenRvPei\AmdCcxZenRvPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_CCX_ZEN_RV_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCcxZenRvSmm"
+	File  = "Zen\CcxZenRvSmm\AmdCcxZenRvSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AMD_CCX_ZEN_RV_SMM_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCcxZenZpDxe"
+	File  = "Zen\CcxZenZpDxe\AmdCcxZenZpDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_CCX_ZEN_ZP_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCcxZenZpPei"
+	File  = "Zen\CcxZenZpPei\AmdCcxZenZpPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_CCX_ZEN_ZP_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCcxZenZpSmm"
+	File  = "Zen\CcxZenZpSmm\AmdCcxZenZpSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_CCX_ZEN_ZP_SMM_SUPPORT" "=" "1"
+End

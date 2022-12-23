@@ -1,0 +1,11 @@
+<component>
+	name = "Ipv6"
+	category = ModulePart
+	LocalRoot = "AmiNetworkPkg\"
+	RefName = "AmiNetworkPkg.Ipv6"
+[INF]
+"Dhcp6Dxe\Dhcp6Dxe.inf"
+"Ip6Dxe\Ip6Dxe.inf"
+"Mtftp6Dxe\Mtftp6Dxe.inf"
+"Udp6Dxe\Udp6Dxe.inf"
+<endComponent>

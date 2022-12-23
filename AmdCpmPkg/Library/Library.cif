@@ -1,0 +1,12 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Library\"
+	RefName = "AmdCpmPkg.Library"
+[parts]
+"AmdCpmPkg.Library.CommonLib"
+"AmdCpmPkg.Library.Guid"
+"AmdCpmPkg.Library.Ppi"
+"AmdCpmPkg.Library.Proc"
+"AmdCpmPkg.Library.Protocol"
+<endComponent>

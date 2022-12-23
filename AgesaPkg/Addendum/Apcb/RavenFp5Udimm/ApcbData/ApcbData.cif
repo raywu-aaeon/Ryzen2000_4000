@@ -1,0 +1,27 @@
+<component>
+	name = "ApcbData"
+	category = ModulePart
+	LocalRoot = "AgesaPkg\Addendum\Apcb\RavenFp5Udimm\ApcbData\"
+	RefName = "AgesaPkg.Addendum.Apcb.RavenFp5Udimm.ApcbData"
+[files]
+"ApcbData_RV_GID_0x1703_Type_ExtDefParams.c"
+"ApcbData_RV_GID_0x1703_Type_ExtParams.c"
+"ApcbData_RV_GID_0x1704_Type_BoardIdGettingMethod.c"
+"ApcbData_RV_GID_0x1704_Type_ConsoleOutControl.c"
+"ApcbData_RV_GID_0x1704_Type_DimmInfoSpd.c"
+"ApcbData_RV_GID_0x1704_Type_ErrorOutControl.c"
+"ApcbData_RV_GID_0x1704_Type_ExtDefParams.c"
+"ApcbData_RV_GID_0x1704_Type_ExtParams.c"
+"ApcbData_RV_GID_0x1704_Type_ExtVoltageControl.c"
+"ApcbData_RV_GID_0x1704_Type_PsCadBusUDIMMDdr4.c"
+"ApcbData_RV_GID_0x1704_Type_PsDataBusUDIMMDdr4.c"
+"ApcbData_RV_GID_0x1704_Type_PsMaxFreqUDIMMDdr4.c"
+"ApcbData_RV_GID_0x1704_Type_PsOdtPatUDIMMDdr4.c"
+"ApcbData_RV_GID_0x1704_Type_PsoOverride.c"
+"ApcbData_RV_GID_0x1704_Type_PsStretchFreqUDIMMDdr4.c"
+"ApcbData_RV_GID_0x1704_Type_SpdInfo.c"
+"ApcbData_RV_GID_0x1706_Type_ExtDefParams.c"
+"ApcbData_RV_GID_0x1706_Type_ExtParams.c"
+"ApcbData_RV_GID_0x1707_Type_IntDefParams.c"
+"ApcbData_RV_GID_0x1707_Type_IntParams.c"
+<endComponent>

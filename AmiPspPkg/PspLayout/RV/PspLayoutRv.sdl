@@ -1,0 +1,984 @@
+TOKEN
+    Name  = "RV_PSP_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to set psp support for Raven CPU."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+#****************************************************************# 
+#                                                                #
+#                       RomLayout Relate(AM4)                    #
+#                                                                #
+#****************************************************************#
+TOKEN
+    Name  = "PSP_LEVEL_1_SIZE_RV"
+    Value  = "0xB0000"
+    Help  = "The RV PSP level 1 size. This is the total size of PSP directory table(Fixed)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_1_OFFSET_RV"
+    Value  = "$(BLOCK_3_OFFSET)"
+    Help  = "The RV PSP directory level 1 offset behind psp nvram"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_LEVEL_1_SIZE_RV"
+    Value  = "0x20000"
+    Help  = "The RV BIOS level 1 size. This is the total size of BIOS directory table(Fixed)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_1_OFFSET_RV"
+    Value  = "$(BLOCK_4_OFFSET)"
+    Help  = "The RV BIOS directory level 1 offset after PSP RV L1 Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_LEVEL_2_SIZE_RV"
+    Value  = "$(PSP_DATA_SIZE_RV) - $(PSP_LEVEL_1_SIZE_RV) - $(BIOS_LEVEL_1_SIZE_RV) - $(BIOS_LEVEL_2_SIZE_RV)"
+    Help  = "The RV PSP level 2 size. This is the total size of PSP directory table(Updatable)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_2_OFFSET_RV"
+    Value  = "$(BLOCK_9_OFFSET)"
+    Help  = "The RV PSP directory level 2 offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_LEVEL_2_SIZE_RV"
+    Value  = "0x20000"
+    Help  = "The RV BIOS level 2 size. This is the total size of BIOS directory table(Updatable)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_2_OFFSET_RV"
+    Value  = "$(BLOCK_10_OFFSET)"
+    Help  = "The RV BIOS directory level 2 offset after PSP RV L2 Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+#*********************** Auto Counting **********************#
+TOKEN
+    Name  = "PSP_DATA_SIZE_RV"
+    Value  = "$(TOTAL_PSP_DATA_SIZE) - $(TOTAL_PSP_NVRAM_SIZE) - $(PSP_DATA_SIZE_BR) - $(PSP_DATA_SIZE_SM) - $(PSP_COMBO_DIRECTORY_SIZE) - $(PSP_APOB_SHARED_SIZE)"
+    Help  = "The PSP RV Data size(excludes PSP RV NVRAM size)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "POINT_TO_PSP_LEVEL_2_OFFSET_RV"
+    Value  = "$(PSP_DIRECTORY_LEVEL_2_OFFSET_RV) + 0x400"
+    Help  = "Point to PSP Boot Loader firmware in 2nd level DIR, This entry is used to satisfy PSP boot rom"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_L1_DIRECTORY_ADDRESS_RV"
+    Value  = "$(PSP_DIRECTORY_LEVEL_1_OFFSET_RV) + $(FLASH_BASE)"
+    Help  = "Physical address of the PSP RV level 1 directory table."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_L1_DIRECTORY_ADDRESS_RV"
+    Value  = "$(BIOS_DIRECTORY_LEVEL_1_OFFSET_RV) + $(FLASH_BASE)"
+    Help  = "Physical address of RV BIOS level 1 directory table"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_L2_DIRECTORY_ADDRESS_RV"
+    Value  = "$(PSP_DIRECTORY_LEVEL_2_OFFSET_RV) + $(FLASH_BASE)"
+    Help  = "Physical address of the PSP RV level 2 directory table."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_L2_DIRECTORY_ADDRESS_RV"
+    Value  = "$(BIOS_DIRECTORY_LEVEL_2_OFFSET_RV) + $(FLASH_BASE)"
+    Help  = "Physical address of RV BIOS level 2 directory table"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+#****************************************************************# 
+#                                                                #
+#                       RomLayout Relate(Fp5)                    #
+#                                                                #
+#****************************************************************#
+TOKEN
+    Name  = "PSP_LEVEL_1_SIZE_RV"
+    Value  = "0xC3000"
+    Help  = "The RV PSP level 1 size. This is the total size of PSP directory table(Fixed)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_1_OFFSET_RV"
+    Value  = "$(BLOCK_0_OFFSET)"
+    Help  = "The RV PSP directory level 1 offset behind psp nvram"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "BIOS_LEVEL_1_SIZE_RV"
+    Value  = "0x18000"
+    Help  = "The RV BIOS level 1 size. This is the total size of BIOS directory table(Fixed)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_1_OFFSET_RV"
+    Value  = "$(BLOCK_1_OFFSET)"
+    Help  = "The RV BIOS directory level 1 offset after PSP RV L1 Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_LEVEL_2_SIZE_RV"
+    Value  = "$(PSP_DATA_SIZE_RV) - $(PSP_LEVEL_1_SIZE_RV) - $(BIOS_LEVEL_1_SIZE_RV) - $(BIOS_LEVEL_2_SIZE_RV)"
+    Help  = "The RV PSP level 2 size. This is the total size of PSP directory table(Updatable)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_2_OFFSET_RV"
+    Value  = "$(BLOCK_2_OFFSET)"
+    Help  = "The RV PSP directory level 2 offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "BIOS_LEVEL_2_SIZE_RV"
+    Value  = "0x2B000"
+    Help  = "The RV BIOS level 2 size. This is the total size of BIOS directory table(Updatable)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_2_OFFSET_RV"
+    Value  = "$(BLOCK_3_OFFSET)"
+    Help  = "The RV BIOS directory level 2 offset after PSP RV L2 Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+#*********************** PSP_LAYOUT_STYLE==1(Pinnacle Style) **********************#
+TOKEN
+    Name  = "PSP_LEVEL_1_SIZE_RV"
+    Value  = "0xB0000"
+    Help  = "The RV PSP level 1 size. This is the total size of PSP directory table(Fixed)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_LAYOUT_STYLE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_1_OFFSET_RV"
+    Value  = "0xA2000"
+    Help  = "The RV PSP directory level 1 offset behind psp nvram"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_LAYOUT_STYLE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_LEVEL_1_SIZE_RV"
+    Value  = "0x1C000"
+    Help  = "The RV BIOS level 1 size. This is the total size of BIOS directory table(Fixed)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_LAYOUT_STYLE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_1_OFFSET_RV"
+    Value  = "0x121000"
+    Help  = "The RV BIOS directory level 1 offset after PSP RV L1 Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_LAYOUT_STYLE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_LEVEL_2_SIZE_RV"
+    Value  = "0x1AA000"
+    Help  = "The RV PSP level 2 size. This is the total size of PSP directory table(Updatable)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_LAYOUT_STYLE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_2_OFFSET_RV"
+    Value  = "0x133000"
+    Help  = "The RV PSP directory level 2 offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_LAYOUT_STYLE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_LEVEL_2_SIZE_RV"
+    Value  = "0x2E000"
+    Help  = "The RV BIOS level 2 size. This is the total size of BIOS directory table(Updatable)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_LAYOUT_STYLE" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_2_OFFSET_RV"
+    Value  = "0x2DD000"
+    Help  = "The RV BIOS directory level 2 offset after PSP RV L2 Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_LAYOUT_STYLE" "=" "1"
+End
+
+OUTPUTREGISTER
+    Name  = "AUTOGEN_PSP_RV_XML"
+    Path  = "Build"
+    File  = "PspDataRv.xml"
+    Template  = "BuildPspRv.txt"
+End
+
+#*********************** Auto Counting **********************#
+TOKEN
+    Name  = "PSP_DATA_SIZE_RV"
+    Value  = "$(TOTAL_PSP_DATA_SIZE) - $(TOTAL_PSP_NVRAM_SIZE) - $(PSP_COMBO_DIRECTORY_SIZE)"
+    Help  = "The PSP RV Data size(excludes PSP RV NVRAM size)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "POINT_TO_PSP_LEVEL_2_OFFSET_RV"
+    Value  = "$(PSP_DIRECTORY_LEVEL_2_OFFSET_RV) + 0x400"
+    Help  = "Point to PSP Boot Loader firmware in 2nd level DIR, This entry is used to satisfy PSP boot rom"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_L1_DIRECTORY_ADDRESS_RV"
+    Value  = "$(PSP_DIRECTORY_LEVEL_1_OFFSET_RV) + $(FLASH_BASE)"
+    Help  = "Physical address of the PSP RV level 1 directory table."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "BIOS_L1_DIRECTORY_ADDRESS_RV"
+    Value  = "$(BIOS_DIRECTORY_LEVEL_1_OFFSET_RV) + $(FLASH_BASE)"
+    Help  = "Physical address of RV BIOS level 1 directory table"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_L2_DIRECTORY_ADDRESS_RV"
+    Value  = "$(PSP_DIRECTORY_LEVEL_2_OFFSET_RV) + $(FLASH_BASE)"
+    Help  = "Physical address of the PSP RV level 2 directory table."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "BIOS_L2_DIRECTORY_ADDRESS_RV"
+    Value  = "$(BIOS_DIRECTORY_LEVEL_2_OFFSET_RV) + $(FLASH_BASE)"
+    Help  = "Physical address of RV BIOS level 2 directory table"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+#****************************************************************# 
+#                                                                #
+#                       Firmware file define                     #
+#                                                                #
+#****************************************************************#
+ELINK
+    Name  = "RV_APCB_BINARY_ELINK"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x60" File="$(PSP_APCB_FILENAME_RV_SODIMM)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 10
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MEMORY_DOWN" "=" "0"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x68" File="$(PSP_APCB_FILENAME_RV_SODIMM)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 20
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MEMORY_DOWN" "=" "0"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x60" Instance="0x01" File="$(PSP_APCB_FILENAME_RV_FP5_DRAMDOWN)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 30
+    Token = "MEMORY_DOWN" "=" "1"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x68" Instance="0x01" File="$(PSP_APCB_FILENAME_RV_FP5_DRAMDOWN)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 40
+    Token = "MEMORY_DOWN" "=" "1"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x60" Instance="0x00" File="$(PSP_APCB_FILENAME_RV_UDIMM)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 50
+    Token = "APCB_RV_AM4_UDIMM_BINARY_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x60" Instance="0x01" File="$(PSP_APCB_FILENAME_RV_SODIMM)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 60
+    Token = "APCB_RV_AM4_SODIMM_BINARY_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x68" Instance="0x00" File="$(PSP_APCB_FILENAME_RV_UDIMM)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 70
+    Token = "APCB_RV_AM4_UDIMM_BINARY_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x68" Instance="0x01" File="$(PSP_APCB_FILENAME_RV_SODIMM)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 80
+    Token = "APCB_RV_AM4_SODIMM_BINARY_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_MP2_I2C_SUPPORT"
+    Value  = "1"
+    Help  = "When this token is enabled, it means that the MP2 I2C firmware will be built into BIOS."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FIRMWARES_DIR_RV"
+    Value  = "AgesaModulePkg/Firmwares/RV"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSPTOOL"
+    Value = "AgesaModulePkg/AMDTools/NewPspKit/PspDirectoryTool/BuildPspDirectory.exe"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_SOFT_FUSE_CHAIN_RV"
+    Value  = "0x10000001"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "AMD_PUB_KEY_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/AmdPubKeyRV.bin"
+    Help = "AMD Public Key. Type 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_BOOT_LOADER_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/PspBootLoader_prod_RV.sbin"
+    Help = "PSP Boot Loader firmware. Type 0x1"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_RECOVERY_BOOT_LOADER_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/PspRecoveryBootLoader_prod_RV.sbin"
+    Help = "PSP recovery Boot Loader firmware. Type 0x3"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/SmuFirmwarePCO.csbin"
+    Help = "SMU offchip firmware. Type 0x8"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "RAVEN_SECURE_DEBUG_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/RavenSecureDebug_PublicKey.bin"
+    Help = "Type 0x9"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_TRUSTLETS_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/dr_ftpm_prod_RV.csbin"
+    Help = "PSP boot-loaded trustlet binaries. Type 0xC"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE2_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/SmuFirmware2PCO.csbin"
+    Help = "SMU offchip firmware 2. Type 0x12"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE_FILENAME_RV2"
+    Value  = "$(Firmwares_DIR_RV)/SmuFirmwareRV2.csbin"
+    Help = "RV2 SMU offchip firmware. Type 0x108"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE2_FILENAME_RV2"
+    Value  = "$(Firmwares_DIR_RV)/SmuFirmware2RV2.csbin"
+    Help = "RV2 SMU offchip firmware 2. Type 0x112"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "DEBUG_UNLOCK_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/secure_unlock_prod_RV.sbin"
+    Help = "PSP early secure unlock debug image. Type 0x13"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_IKEK_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/PspIkekRV.bin"
+    Help = "PSP iKEK binary. Type 0x21"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SECURE_EMPTY_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/SecureEmptyToken.bin"
+    Help = "Token unlock Data. Type 0x22"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SECURE_POLICY_PCO_FP5_AM4"
+    Value  = "$(Firmwares_DIR_RV)/security_policy_PCO_FP5_AM4.sbin"
+    Help = "PCO security Policy. Type 0x24"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SECURE_POLICY_RV2_FP5_AM4"
+    Value  = "$(Firmwares_DIR_RV)/security_policy_RV2_FP5_AM4.sbin"
+    Help = "RV2 security Policy. Type 0x124"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "DRV_SYS_PROD_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/drv_sys_prod_RV.sbin"
+    Help = "Token DRV sys prod Firmware. Type 0x28"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "KVM_ENGINE_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/KvmEngineDummy.csbin"
+    Help = "Token KVM engine Firmware. Type 0x29"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "TYPE_0X2D_ENTRY"
+    Value  = '<IMAGE_ENTRY Type="0x2D" File="$(DR_AGESA_PROD_FILENAME_RV)"/>'
+    Help = "Type 0x2D entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "TYPE_0X225_ENTRY"
+    Value  = '<IMAGE_ENTRY Type="0x225" File="$(MP2FW_TOKEN_FILENAME_RV)"/>'
+    Help = "Type 0x225 entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "TYPE_0X125_ENTRY"
+    Value  = '<IMAGE_ENTRY Type="0x125" File="$(MP2FW125_TOKEN_FILENAME_RV)"/>'
+    Help = "Type 0x125 entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "DR_AGESA_PROD_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/dr_agesa_prod_RV.sbin"
+    Help = "Token MP2 I2C Firmware. Type 0x2D"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "MP2FW_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/MP2I2CFWPCO.sbin"
+    Help = "Token MP2 I2C Firmware. Type 0x25"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "PSP_MP2_I2C_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MP2FW125_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/MP2I2CFWRV2.sbin"
+    Help = "Token MP2 I2C Firmware. Type 0x125"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "PSP_MP2_I2C_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MP2FW_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/MP2FWPCO.sbin"
+   Help = "Token MP2 SFI Firmware. Type 0x25"
+   TokenType = File
+    TargetMAK = Yes
+    Token = "PSP_MP2_I2C_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "MP2FW125_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/MP2FWRV2.sbin"
+    Help = "Token MP2 I2C Firmware. Type 0x125"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "PSP_MP2_I2C_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_OS_COMBINED_PROD_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/psp_os_combined_prod_RV.sbin"
+    Help = "Token OS combined prod Firmware. Type 0x2"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_0_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/AgesaBootloader0_prod_RV.csbin"
+    Help = "This is AgesaBootLoader0 binary. Type 0x30"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_1_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/AgesaBootloader1_prod_RV.csbin"
+    Help = "This is AgesaBootLoader1 binary. Type 0x31"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_2_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/AgesaBootloader2_prod_RV.csbin"
+    Help = "This is AgesaBootLoader2 binary. Type 0x32"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_3_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/AgesaBootloader3_prod_RV.csbin"
+    Help = "This is AgesaBootLoader3 binary. Type 0x33"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_4_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/AgesaBootloader4_prod_RV.csbin"
+    Help = "This is AgesaBootLoader4 binary. Type 0x34"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_5_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/AgesaBootloader5_prod_RV.csbin"
+    Help = "This is AgesaBootLoader5 binary. Type 0x35"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_6_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/AgesaBootloader6_prod_RV.csbin"
+    Help = "This is AgesaBootLoader6 binary. Type 0x36"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_7_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/AgesaBootloader7_prod_RV.csbin"
+    Help = "This is AgesaBootLoader6 binary. Type 0x37"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "BIOS_PSP_PUB_KEY_SIGNED_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/RtmPubSignedRV.key"
+    Help = "This is BIOS vendor public key, signed by AMD. BIOS type 0x5"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "BIOS_PSP_RTM_SIGNATURE"
+    Value  = "$(Firmwares_DIR_RV)/RTMSignature.bin"
+    Help = "This is BIOS vendor public key, signed by AMD. BIOS type 0x7"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "BIOS_PSP_RTM_SIGNATURE_L1L2"
+    Value  = "$(Firmwares_DIR_RV)/RTMSignatureL1L2.bin"
+    Help = "This is BIOS vendor public key, signed by AMD. BIOS type 0x7"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_APCB_FILENAME_RV"
+    Value  = "AmiPspPkg/APCB_RV_D4.bin"
+    Help = "Agesa PSP Customization Block (PSP Agesa variable) NVRAM (APCB). BIOS type 0x60/0x68"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "APCB_OEM_BINARY_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "TYPE_0X63_ENTRY"
+    Value  = '<IMAGE_ENTRY Type="0x63" File="$(PSP_APOB_FILENAME_RV)"/>"'
+    Help = "Type 0x63 entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "TYPE_0X63_ENTRY"
+    Value  = '<POINT_ENTRY Type="0x63" Address="$(PSP_APOB_SHARED_OFFSET)" Size="$(PSP_APOB_SHARED_SIZE)"/>'
+    Help = "Type 0x63 entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_APOB_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/APOB_NV_RV.bin"
+    Help = "AGESA PSP Output Block binary. BIOS type 0x63"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "APPB_1D_DDR4_UDIMM_IMEM_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/Appb_Rv_1D_Ddr4_Udimm_Imem.csbin"
+    Help = "APPB PMU Firmware. BIOS type 0x64, Instance 0x1, SubProgram 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "APPB_1D_DDR4_UDIMM_DMEM_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/Appb_Rv_1D_Ddr4_Udimm_Dmem.csbin"
+    Help = "APPB PMU Firmware. BIOS type 0x65, Instance 0x1, SubProgram 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "APPB_2D_DDR4_IMEM_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/Appb_Rv_2D_Ddr4_Imem.csbin"
+    Help = "APPB PMU Firmware. BIOS type 0x64, Instance 0x4, SubProgram 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "APPB_2D_DDR4_DMEM_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/Appb_Rv_2D_Ddr4_Dmem.csbin"
+    Help = "APPB PMU Firmware. BIOS type 0x65, Instance 0x4, SubProgram 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "APPB_1D_DDR4_UDIMM_IMEM_FILENAME_RV2"
+    Value  = "$(Firmwares_DIR_RV)/Appb_Rv2_1D_Ddr4_Udimm_Imem.csbin"
+    Help = "APPB PMU Firmware. BIOS type 0x64, Instance 0x1, SubProgram 0x1"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "APPB_1D_DDR4_UDIMM_DMEM_FILENAME_RV2"
+    Value  = "$(Firmwares_DIR_RV)/Appb_Rv2_1D_Ddr4_Udimm_Dmem.csbin"
+    Help = "APPB PMU Firmware. BIOS type 0x65, Instance 0x1, SubProgram 0x1"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "APPB_2D_DDR4_IMEM_FILENAME_RV2"
+    Value  = "$(Firmwares_DIR_RV)/Appb_Rv2_2D_Ddr4_Udimm_Imem.csbin"
+    Help = "APPB PMU Firmware. BIOS type 0x64, Instance 0x4, SubProgram 0x1"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "APPB_2D_DDR4_DMEM_FILENAME_RV2"
+    Value  = "$(Firmwares_DIR_RV)/Appb_Rv2_2D_Ddr4_Udimm_Dmem.csbin"
+    Help = "APPB PMU Firmware. BIOS type 0x65, Instance 0x4, SubProgram 0x1"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "UCODE_PATCH_PCO_B0"
+    Value  = "$(Firmwares_DIR_RV)/UcodePatch_PCO_B0.bin"
+    Help = "Ucode patch for rev. B0 CPUs. BIOS type 0x66, Instance 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "UCODE_PATCH_PCO_B1"
+    Value  = "$(Firmwares_DIR_RV)/UcodePatch_PCO_B1.bin"
+    Help = "Ucode patch for rev. B0 CPUs. BIOS type 0x66, Instance 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "UCODE_PATCH_RV2_A0"
+    Value  = "$(Firmwares_DIR_RV)/UcodePatch_RV2_A0.bin"
+    Help = "Ucode patch for rev. A0 CPUs. BIOS type 0x66, Instance 0x1"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+#TOKEN
+#    Name  = "UCODE_PATCH_RV_A0"
+#    Value  = "$(Firmwares_DIR_RV)/UcodePatch_RV_A0.bin"
+#    Help = "Ucode patch for rev. A0 CPUs. BIOS type 0x66, Instance 0x2"
+#    TokenType = File
+#    TargetMAK = Yes
+#End
+
+TOKEN
+    Name  = "TYPE_0X6A_ENTRY"
+    Value  = '<IMAGE_ENTRY Type="0x6A" File="$(MP2FW_CONFIG_TOKEN_FILENAME_RV)"/>'
+    Help = "Type 0x6A entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "MP2FW_CONFIG_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/MP2FWConfig.sbin"
+    Help = "Token MP2 Firmware Config. Type 0x6A"
+    TokenType = File
+    TargetMAK = Yes
+End

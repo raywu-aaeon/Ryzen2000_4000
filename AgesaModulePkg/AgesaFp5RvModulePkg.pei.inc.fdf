@@ -1,0 +1,39 @@
+    INF AgesaModulePkg/Debug/AmdIdsDebugPrintPei/AmdIdsDebugPrintPei.inf
+
+    INF AgesaModulePkg/Psp/AmdPspPeiV2/AmdPspPeiV2.inf
+    INF AgesaModulePkg/Psp/AmdPspFtpmPei/AmdPspFtpmPei.inf
+    INF AgesaModulePkg/Psp/ApobDrv/ApobZpRvPei/ApobZpRvPei.inf
+
+#   ## MEM Pei Drivers
+    INF AgesaModulePkg/Mem/AmdMemAm4ZpPei/AmdMemAm4ZpPei.inf
+
+#   ## SOC Pei Drivers
+    INF AgesaModulePkg/Soc/AmdSocFp5RvPei/AmdSocFp5RvPei.inf
+    INF AgesaModulePkg/Nbio/EarlyPhase/AmdNbioEarlyPhaseRVPei/AmdNbioEarlyPhaseRVPei.inf
+    INF AgesaModulePkg/ErrorLog/AmdErrorLogPei/AmdErrorLogPei.inf
+
+#   ## DF Pei Drivers
+    INF AgesaModulePkg/Fabric/RV/FabricRvPei/AmdFabricRvPei.inf
+
+#   ## Fch Pei Drivers
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstonePei/FchPei.inf
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstoneSmbusPei/Smbus.inf
+
+#   ## GNb Pei Drivers
+    INF AgesaModulePkg/Nbio/NbioBase/AmdNbioBaseRVPei/AmdNbioBaseRVPei.inf
+    INF AgesaModulePkg/Nbio/SMU/AmdNbioSmuV10Pei/AmdNbioSmuV10Pei.inf
+    INF AgesaModulePkg/Nbio/PCIe/AmdNbioPcieRVPei/AmdNbioPcieRVPei.inf
+    INF AgesaModulePkg/Nbio/GFX/AmdNbioGfxRVPei/AmdNbioGfxRVPei.inf
+    INF AgesaModulePkg/Nbio/IOMMU/AmdNbioIOMMUZPPei/AmdNbioIOMMUZPPei.inf
+
+#   ## Ccx Pei Drivers
+    INF AgesaModulePkg/Ccx/Zen/CcxZenRvPei/AmdCcxZenRvPei.inf
+
+#   ## Universal PEIM
+    INF AgesaModulePkg/Universal/Version/AmdVersionPei/AmdVersionPei.inf
+
+#   ## MEM PEIMs
+    INF AgesaModulePkg/Mem/AmdMemChanXLatZpPei/MemChanXLatZpPei.inf
+    INF AgesaModulePkg/Mem/AmdMemoryHobInfoPeimRv/AmdMemoryHobInfoPeim.inf
+    INF AgesaModulePkg/Mem/AmdMemSmbiosV2RvPei/MemSmbiosV2Pei.inf
+    INF AgesaModulePkg/Mem/AmdMemRestorePei/MemRestorePei.inf

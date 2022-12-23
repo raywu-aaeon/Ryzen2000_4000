@@ -1,0 +1,14 @@
+<component>
+    name = "Ntp"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\Ntp\"
+    RefName = "AmiNetworkPkg.Ntp"
+[files]
+    "Ntp.sdl"
+    "Ntp.sd"
+    "Ntp.uni"
+    "Ntp.c"
+    "Ntp.h"
+    "NtpImpl.c"
+    "NtpImpl.h"
+<endComponent>

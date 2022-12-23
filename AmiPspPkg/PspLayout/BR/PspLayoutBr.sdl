@@ -1,0 +1,369 @@
+#****************************************************************# 
+#                                                                #
+#                       RomLayout Relate                         #
+#                                                                #
+#****************************************************************#
+TOKEN
+    Name  = "BR_PSP_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to set PSP support for Bristol CPU."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "BR_PSP_FW_RS3_SUPPORT"
+    Value = "1"
+    Help  = "Enable/Disable PSP firmware RS3 support. Project that already shipped doesnt need to enable it"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_FIXED_FV_SIZE_BR"
+    Value  = "0x10000"
+    Help  = "The PSP BR FIX Data size"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_FIXED_FV_OFFSET_BR"
+    Value  = "$(BLOCK_0_OFFSET)"
+    Help  = "The PSP BR FIX Data Block offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_UPDATABLE_FV_SIZE_BR"
+    Value  = "0xE0000"
+    Help  = "The PSP BR UPDATABLE Data size"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_UPDATABLE_FV_OFFSET_BR"
+    Value  = "$(BLOCK_6_OFFSET)"
+    Help  = "The PSP BR UPDATABLE Data Block offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BR_ROM_FILE"
+    Value  = "Build/$(PLATFORM_NAME)/RELEASE_$(TOOL_CHAIN_TAG)/FV/AMIROM.fd"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BR_ROM_FILE"
+    Value  = "Build/$(PLATFORM_NAME)/DEBUG_$(TOOL_CHAIN_TAG)/FV/AMIROM.fd"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+OUTPUTREGISTER
+    Name  = "AUTOGEN_PSP_BR_TXT"
+    Path  = "Build"
+    File  = "PspDataBr.txt"
+    Template  = "BuildPspBr.txt"
+End
+
+#*********************** Auto Counting **********************#
+TOKEN
+    Name  = "PSP_DATA_SIZE_BR"
+    Value  = "$(PSP_FIXED_FV_SIZE_BR) + $(PSP_UPDATABLE_FV_SIZE_BR)"
+    Help  = "The PSP BR Data size FIX + UPDATABLE (excludes PSP BR NVRAM size)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_FIXED_FV_ADDRESS_BR"
+    Value  = "$(PSP_FIXED_FV_OFFSET_BR) + $(FLASH_BASE)"
+    Help  = "Physical address of PSP BR fixed Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_UPDATABLE_FV_ADDRESS_BR"
+    Value  = "$(PSP_UPDATABLE_FV_OFFSET_BR) + $(FLASH_BASE)"
+    Help  = "Physical address of PSP BR updatable Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+#****************************************************************# 
+#                                                                #
+#                       Firmware file define                     #
+#                                                                #
+#****************************************************************#
+TOKEN
+    Name = "Firmwares_DIR_BR"
+    Value  = "AgesaModulePkg/Firmwares/BR"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSPTOOL_BR"
+    Value  = "AgesaModulePkg/AMDTools/PspKit/PspDirectoryTool/BuildPspDirectory.exe"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_SOFT_FUSE_CHAIN_BR"
+    Value  = "0x00000001"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "AMD_PUB_KEY_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/AmdPubKeyBR.bin"
+    Help  = "The BR PSP data TYPE 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_BOOT_LOADER_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/TCG122/PspBootLoader_prod_BR.sbin"
+    Help  = "The BR PSP data TYPE 0x1"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_BOOT_LOADER_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/PspBootLoader_prod_BR.sbin"
+    Help  = "The BR PSP data TYPE 0x1"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE_FILENAME_CZ"
+    Value  = "$(Firmwares_DIR_BR)/SMUFirmwareCZ.sbin"
+    Help  = "The BR PSP data TYPE 0x8"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_RECOVERY_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/TCG122/PspRecoveryBootLoader_prod_BR.sbin"
+    Help  = "The BR PSP data TYPE 0x3"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_RECOVERY_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/PspRecoveryBootLoader_prod_BR.sbin"
+    Help  = "The BR PSP data TYPE 0x3"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_PSP_PUB_KEY_SIGNED_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/RtmPubSignedBR.key"
+    Help = "This is BIOS vendor public key, signed by AMD. The BR PSP data TYPE 0x5"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_SECURE_OS_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/TCG122/PspSecureOs_prod_BR.csbin"
+    Help  = "The BR PSP data TYPE 0x2"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_SECURE_OS_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/PspSecureOs_prod_BR.csbin"
+    Help  = "The BR PSP data TYPE 0x2"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "TYPE_0X4_ENTRY"
+    Value  = 'PSP_ENTRY Type=0x4, File=$(PSP_NVRAM_FILENAME_BR), Address=$(PSP_NVRAM_OFFSET_BR)'
+    Help = "Type 0x6A entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "ROMLAYOUT_SYNC_SUMMIT" "=" "1"
+End
+
+TOKEN
+    Name  = "TYPE_0X4_ENTRY"
+    Value  = 'PSP_ENTRY Type=0x4, File=$(PSP_NVRAM_FILENAME_BR), Address=$(PSP_NVRAM_OFFSET)'
+    Help = "Type 0x6A entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "ROMLAYOUT_SYNC_SUMMIT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_NVRAM_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/PspNvramBR.bin"
+    Help  = "TYPE 0x4"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE_FILENAME_AM4_BR"
+    Value  = "$(Firmwares_DIR_BR)/SMUFirmwareBR_AM4.sbin"
+    Help  = "The BR PSP data TYPE 0x0108"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_SECURE_DEB_KEY_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/PspSecureDebugBR.Key"
+    Help  = "The BR PSP data TYPE 0x9"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "TYPE_0XC_ENTRY"
+    Value  = 'PSP_ENTRY Type=0xC, File=$(PSP_TRUSTLETS_TPM_TYPE_C_FILENAME_BR), SIZE=0x1A000'
+    Help = "Type 0x6A entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_TRUSTLETS_TPM_TYPE_C_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/TCG122/PspTrustlets_TPMver096_prod_BR.cbin"
+    Help = "PSP secure OS system trustlets (type 0xC), not signed but compressed"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_TRUSTLET_TKN_CERT_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/TrustletKey_prod_BR.sbin"
+    Help = "This is Trustlets tkn cert binary. The BR PSP data TYPE 0xD"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_S3_RESUME_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/TCG122/PspAgesaS3Resume_prod_BR.csbin"
+    Help = "This is Agesa S3 resume for PSP. The BR PSP data TYPE 0x10"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_AGESA_S3_RESUME_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/PspAgesaS3Resume_prod_BR.csbin"
+    Help = "This is Agesa S3 resume for PSP. The BR PSP data TYPE 0x10"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE_2_FILENAME_CZ"
+    Value  = "$(Firmwares_DIR_BR)/SmuFirmware2_prod_CZ.sbin"
+    Help = "This is SmuFirmware2 binary for CZ. The BR PSP data TYPE 0x12"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_TRUSTLETS_TPM_TYPE_14_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/TCG122/PspTrustlets_TPMver122_prod_BR.cbin"
+    Help = "PSP secure OS system trustlets (type 0x14), not signed but compressed"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_TRUSTLETS_TPM_TYPE_14_FILENAME_BR"
+    Value  = "$(Firmwares_DIR_BR)/PspTrustlets_TPMVer137_prod_BRCZ.cbin"
+    Help = "PSP secure OS system trustlets (type 0x14), not signed but compressed"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "BR_PSP_FW_RS3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE_2_FILENAME_AM4_BR"
+    Value  = "$(Firmwares_DIR_BR)/SmuFirmware2_prod_BR_AM4.sbin"
+    Help = "This is SmuFirmware2 binary for BR AM4. The BR PSP data TYPE 0x112"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_SCS_FILENAME_CZ"
+    Value  = "$(Firmwares_DIR_BR)/SmuScsCZ.bin"
+    Help = "The BR PSP data TYPE 0x5F"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_SCS_FILENAME_AM4_BR"
+    Value  = "$(Firmwares_DIR_BR)/SmuScsBR_AM4.bin"
+    Help = "The BR PSP data TYPE 0x15F"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_NVRAM_S3_BR"
+    Value  = "$(Firmwares_DIR_BR)/PspNvramS3_BR.bin"
+    Help = "The BR PSP data TYPE 0x1A"
+    TokenType = File
+    TargetMAK = Yes
+End

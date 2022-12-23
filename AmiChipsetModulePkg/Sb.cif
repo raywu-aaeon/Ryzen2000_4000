@@ -1,0 +1,29 @@
+<component>
+	name = "AMD Picasso - SB"
+	category = eChipset
+	LocalRoot = "AmiChipsetModulePkg\"
+	RefName = "AmiChipsetModulePkg.SouthBridge"
+[files]
+"Sb.sdl"	
+"Sb.mak"
+"SB\SbCmos.ssp"
+"SB\GPIO.sdl"
+"SB\ReleaseNotes.chm"
+"Elink\SbElinks.txt"
+[INF]
+"SB\SbIde\SbSata.inf"
+"SB\AmdFchFirmware\AmdFchFirmware.inf"
+"SB\LegacyInterrupt\LegacyInterrupt.inf"
+"SB\PowerButton\PowerButton.inf"
+"SB\AmiHpetTimer\AmiHpetTimer.inf"
+[parts]
+"AmiChipsetModulePkg.SbInit"
+"AmiChipsetModulePkg.SmBus"
+"AmiChipsetModulePkg.SbSetup"
+"AmiChipsetModulePkg.AcpiModeEnable"
+"AmiChipsetModulePkg.SmmChildDispatcher2"
+"AmiChipsetModulePkg.SbAsl"
+"AmiChipsetModulePkg.SbLibrary"
+"AmiChipsetModulePkg.SbInclude"
+"AmiChipsetModulePkg.I2cHcOperation"
+<endComponent>

@@ -1,0 +1,98 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuPei
+  FILE_GUID                      = 2BB5AFA9-FF33-417b-8497-CB773C2B93BF
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CpuPeiEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  CpuPei.h
+  CpuPei.c
+  PeiCpuCache.c 
+  CpuMpPei.c
+
+[Sources.IA32]
+#  CpuDisableCar.asm
+  Amd32Mp.asm
+
+
+[Packages]
+  MdePkg/MdePkg.dec  
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec #include AmiCompatibilityPkg header first
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCpuPkg/AmiCpuPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiAgesaWrapperPkg/AmiAgesaWrapperPkg.dec
+  
+[LibraryClasses]
+  PeimEntryPoint
+  AmiCspLib
+  AmiPeiLib
+  GetCpuSetupData
+  PcdLib
+  CpuDisableCarLib
+  DebugLib
+  PciExpressLib
+
+[Guids]
+  gAmiDTomGuid
+  gAmiDTom2Guid
+  gCpuS3ResumeGuid
+  gAmiMtrrHobGuid
+ 
+[Ppis]
+  gEfiPeiMasterBootModePpiGuid  # PPI_NOTIFY SOMETIMES_CONSUMED
+  gEfiPeiStallPpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gEfiEndOfPeiSignalPpiGuid
+  gAmdAfterCpuPeiPpiGuid
+  gEfiPeiMemoryDiscoveredPpiGuid
+  
+[FixedPcd]
+  gAmiCpuTokenSpaceGuid.PcdCpuMaxCores  # CONSUMED
+
+[Depex]
+  TRUE
+
+[BuildOptions]                
+  *_*_*_CC_FLAGS = /D PEI_COMPILE 
+  *_*_*_ASM_FLAGS == /nologo /c /WX /W3 /coff /Cx
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

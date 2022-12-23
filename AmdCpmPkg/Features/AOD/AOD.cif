@@ -1,0 +1,30 @@
+<component>
+	name = "AOD"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\AOD\"
+	RefName = "AmdCpmPkg.Features.AOD"
+[INF]
+"Asl\AodSsdt.inf"
+"Dxe\AodDxe.inf"
+"Smm\AodSmmZp.inf"
+"Smm\AodSmmRv.inf"
+"Library\AodRuntimeLib\AodRuntimeLib.inf"
+"Library\AodCbsLib\AodCbsLibZp\AodCbsLibZp.inf"
+"Library\AodCbsLib\AodCbsLibRv\AodCbsLibRv.inf"
+[files]
+"AOD.sdl"	
+"Aod.h"	
+"Asl\Aod.asi"	
+"Asl\Aod.cfg"	
+"Asl\AodLib.asi"	
+"Asl\AodMof.asi"	
+"Asl\AodOem.asi"	
+"Asl\AodOem.cfg"	
+"Asl\AodRCmdV3.asi"	
+"Asl\AodRCmdV4.asi"	
+"Asl\WmiAcpi.asi"	
+"Asl\WmiDev.asi"	
+"Include\AodRuntimeLib.h"	
+"Include\SmbusLightSmm.h"	
+"Include\AodCbsLib.h"	
+<endComponent>

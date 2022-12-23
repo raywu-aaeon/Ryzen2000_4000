@@ -1,0 +1,10 @@
+<component>
+    name = "Include"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\Include\"
+    RefName = "AmiNetworkPkg.Include"
+[parts]
+"AmiNetworkPkg.Guid"
+"AmiNetworkPkg.Library"
+"AmiNetworkPkg.Protocol"
+<endComponent>

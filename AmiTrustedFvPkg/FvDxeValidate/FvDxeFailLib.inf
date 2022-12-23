@@ -1,0 +1,44 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file
+#   This driver installs ValidateFvDxe PPI
+##
+
+[Defines]
+  INF_VERSION                = 0x00010005
+  BASE_NAME                  = FvDxeFailLib
+  FILE_GUID                  = 6817ADFF-9913-41c2-88B5-FF726FCB3491
+  MODULE_TYPE                = PEIM
+  VERSION_STRING             = 1.0
+  LIBRARY_CLASS              = AmiFvDxeFailLib
+
+[Sources]
+ FvDxeFailLib.c
+
+[Packages]
+ AmiModulePkg/AmiModulePkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ MdePkg/MdePkg.dec
+ AmiTrustedFvPkg/AmiTrustedFvPkg.dec
+ 
+[LibraryClasses]
+ DebugLib
+ PostCodeLib
+
+[Guids]
+ gAmiRecoveryImageHobGuid
+
+[Ppis]
+ gEfiPeiBootInRecoveryModePpiGuid
+
+[Pcd]
+ gAmiTrustedFvPkgTokenSpaceGuid.AmiPcdTdxeFailedRecoveryPolicy
+ gAmiModulePkgTokenSpaceGuid.AmiPcdForceShutdownOnFailedRecovery
+ 
+ 

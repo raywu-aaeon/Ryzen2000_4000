@@ -1,0 +1,27 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbPeiDebugger
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DebugPortingLib
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AMIDebuggerPkg/AMIDebuggerPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PciLib
+  AmiChipsetIoLib
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiAMIDebugRxPkgTokenSpaceGuid.PcdUsbXhciMemorySpaceBase
+  gEfiAMIDebugRxPkgTokenSpaceGuid.PcdUsbXhciPciAddress
+
+[Sources]
+  SbPeiDebugger.c

@@ -1,0 +1,26 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = SpiFlashLib
+    FILE_GUID       = 963BB0A8-5A86-4F16-BC91-4FC204E9BEB5
+    MODULE_TYPE     = DXE_DRIVER
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = SpiFlashLib
+
+[Sources]
+    SpiFlash.h
+    SpiIdentify.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    BaseMemoryLib
+    CspSpiFlashLib

@@ -1,0 +1,18 @@
+<component>
+	name = "Asl"
+	category = ModulePart
+	LocalRoot = "MandolinPkg\Asl\"
+	RefName = "MandolinPkg.Asl"
+[files]
+"CrbSysMem.asl"
+"CrbFeature.asl"	
+"CrbLs.asl"	
+"CrbUsb.asl"	
+"CrbDev.asl"	
+"PS2Dev.asl"
+"CrbEc.asl"
+"CrbEcFeature.asl"
+"CrbCsDev.asl"
+"CrbCsFeature.asl"
+"CrbTimeAndAlarm.asl"
+<endComponent>

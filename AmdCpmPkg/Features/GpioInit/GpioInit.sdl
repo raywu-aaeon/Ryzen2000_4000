@@ -1,0 +1,61 @@
+TOKEN
+	Name  = "AmdCpmGpioInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling GpioInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmGpioInitDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmGpioInitDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmGpioInitPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmGpioInitPeim support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmGpioInitSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmGpioInitSmm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdCpmGpioInitDxe"
+	File  = "Dxe/AmdCpm3GpioInitDxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmGpioInitDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmGpioInitPeim"
+	File  = "Pei/AmdCpm3GpioInitPeim.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmGpioInitPeim_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmGpioInitSmm"
+	File  = "Smm/AmdCpm3GpioInitSmm.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AmdCpmGpioInitSmm_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "AmdCpmGpioInitPeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmdCpmPkg.AmdCpmGpioInitPeim"
+	Index  = '"AFTER" "AmdCpmInitPeim"'
+	Help  = "refer to (AmdCpmPkg.pei.inc.fdf)"
+End
+

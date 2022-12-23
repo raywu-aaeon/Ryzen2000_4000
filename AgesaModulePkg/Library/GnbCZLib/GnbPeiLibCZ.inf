@@ -1,0 +1,229 @@
+#;*****************************************************************************
+#;
+#; Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#;
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#;
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;******************************************************************************
+
+[Defines]
+  LIBRARY_CLASS = AgesaGnbPeiLib | PEIM
+  BASE_NAME             = AgesaGnbPeiLib
+  INF_VERSION           = 0x00010006
+  FILE_GUID             = 858FFD1B-EBC9-41f7-9072-A88899296BA1
+  MODULE_TYPE           = BASE
+  VERSION_STRING        = 1.0
+
+[Sources]
+   Common/Gnb.h
+   Common/GnbFamServices.h
+   Common/GnbFuseTable.h
+   Common/GnbGfx.h
+   Common/GnbGfxFamServices.h
+   Common/GnbIommu.h
+   Common/GnbPcie.h
+   Common/GnbPcieFamServices.h
+   Common/GnbRegistersCommon.h
+   Common/GnbRegistersCommonV2.h
+   Modules/GnbAzaliaLib/GnbAzalialib.c
+   Modules/GnbAzaliaLib/GnbAzalialib.h
+   Modules/GnbCommonLib/GnbCommonLib.h
+   Modules/GnbCommonLib/GnbLib.c
+   Modules/GnbCommonLib/GnbLib.h
+   Modules/GnbCommonLib/GnbLibCpuAcc.c
+   Modules/GnbCommonLib/GnbLibCpuAcc.h
+   Modules/GnbCommonLib/GnbLibHeap.h
+   Modules/GnbCommonLib/GnbLibIoAcc.c
+   Modules/GnbCommonLib/GnbLibIoAcc.h
+   Modules/GnbCommonLib/GnbLibMemAcc.c
+   Modules/GnbCommonLib/GnbLibMemAcc.h
+   Modules/GnbCommonLib/GnbLibPci.c
+   Modules/GnbCommonLib/GnbLibPci.h
+   Modules/GnbCommonLib/GnbLibPciAcc.c
+   Modules/GnbCommonLib/GnbLibPciAcc.h
+   Modules/GnbCommonLib/GnbTimerLib.c
+   Modules/GnbCommonLib/GnbTimerLib.h
+   Modules/GnbFamTranslation/GnbPcieTranslation.c
+   Modules/GnbFamTranslation/GnbTranslation.c
+   Modules/GnbGfxConfig/GfxConfigLib.c
+   Modules/GnbGfxConfig/GfxConfigLib.h
+   Modules/GnbGfxInitLib/GfxEnumConnectors.c
+   Modules/GnbGfxInitLib/GfxEnumConnectors.h
+   Modules/GnbGfxIntTableV5/GfxIntegratedInfoTableV5.c
+   Modules/GnbGfxIntTableV5/GfxIntegratedInfoTableV5.h
+   Modules/GnbGfxIntTableV5/GfxLibV5.c
+   Modules/GnbGfxIntTableV5/GfxLibV5.h
+   Modules/GnbGfxIntTableV5/GfxPwrPlayTableV5.c
+   Modules/GnbGfxIntTableV5/GfxPwrPlayTableV5.h
+   Modules/GnbInitCZ/AlibCZD.c
+   Modules/GnbInitCZ/AlibCZM.c
+   Modules/GnbInitCZ/AlibSsdtCZD.h
+   Modules/GnbInitCZ/AlibSsdtCZM.h
+   Modules/GnbInitCZ/GfxEnvInitCZ.c
+   Modules/GnbInitCZ/GfxGmcInitCZ.c
+   Modules/GnbInitCZ/GfxGmcInitCZ.h
+   Modules/GnbInitCZ/GfxIntegratedInfoTableCZ.c
+   Modules/GnbInitCZ/GfxLibCZ.c
+   Modules/GnbInitCZ/GfxLibCZ.h
+   Modules/GnbInitCZ/GfxMidInitCZ.c
+   Modules/GnbInitCZ/GfxPostInitCZ.c
+   Modules/GnbInitCZ/GfxTablesCZ.c
+   Modules/GnbInitCZ/GnbBootTimeCalCZ.c
+   Modules/GnbInitCZ/GnbEarlyInitCZ.c
+   Modules/GnbInitCZ/GnbEnvInitCZ.c
+   Modules/GnbInitCZ/GnbFuseTableCZ.c
+   Modules/GnbInitCZ/GnbFuseTableCZ.h
+   Modules/GnbInitCZ/GnbIommuIvrsCZ.c
+   Modules/GnbInitCZ/GnbIommuTablesCZ.c
+   Modules/GnbInitCZ/GnbMidInitCZ.c
+   Modules/GnbInitCZ/GnbPostInitCZ.c
+   Modules/GnbInitCZ/GnbPspCZ.c
+   Modules/GnbInitCZ/GnbPspCZ.h
+   Modules/GnbInitCZ/GnbRegisterAccCZ.c
+   Modules/GnbInitCZ/GnbRegisterAccCZ.h
+   Modules/GnbInitCZ/GnbServicesCZ.c
+   Modules/GnbInitCZ/GnbSmuInitCZ.c
+   Modules/GnbInitCZ/GnbTablesCZ.c
+   Modules/GnbInitCZ/OptionGnbInstallCZ.c
+   Modules/GnbInitCZ/PcieAriInitCZ.c
+   Modules/GnbInitCZ/PcieAriInitCZ.h
+   Modules/GnbInitCZ/PcieComplexDataCZ.c
+   Modules/GnbInitCZ/PcieComplexDataCZ.h
+   Modules/GnbInitCZ/PcieConfigCZ.c
+   Modules/GnbInitCZ/PcieEarlyInitCZ.c
+   Modules/GnbInitCZ/PcieEnvInitCZ.c
+   Modules/GnbInitCZ/PcieLibCZ.c
+   Modules/GnbInitCZ/PcieLibCZ.h
+   Modules/GnbInitCZ/PcieMidInitCZ.c
+   Modules/GnbInitCZ/PciePostInitCZ.c
+   Modules/GnbInitCZ/PciePowerGateCZ.c
+   Modules/GnbInitCZ/PciePowerGateCZ.h
+   Modules/GnbInitCZ/PcieTablesCZ.c
+   Modules/GnbIoapic/GnbIoapic.c
+   Modules/GnbIommuIvrs/GnbIommuIvrs.c
+   Modules/GnbIommuIvrs/GnbIommuIvrs.h
+   Modules/GnbIommuIvrs/GnbIommuScratch.c
+   Modules/GnbIommuIvrs/GnbIvrsLib.c
+   Modules/GnbIommuIvrs/GnbIvrsLib.h
+   Modules/GnbNbInitLib/GnbNbInitLib.c
+   Modules/GnbNbInitLib/GnbNbInitLib.h
+   Modules/GnbPcieAlibV2/PcieAlibV2.c
+   Modules/GnbPcieAlibV2/PcieAlibV2.h
+   Modules/GnbPcieMisc/PcieAspm.c
+   Modules/GnbPcieMisc/PcieAspm.h
+   Modules/GnbPcieMisc/PcieClkPm.c
+   Modules/GnbPcieMisc/PcieClkPm.h
+   Modules/GnbPcieMisc/PcieCommClkCfg.c
+   Modules/GnbPcieMisc/PcieCommClkCfg.h
+   Modules/GnbPcieConfig/GnbHandleLib.c
+   Modules/GnbPcieConfig/GnbHandleLib.h
+   Modules/GnbPcieConfig/GnbPcieConfig.h
+   Modules/GnbPcieConfig/PcieConfigData.c
+   Modules/GnbPcieConfig/PcieConfigData.h
+   Modules/GnbPcieConfig/PcieConfigLib.c
+   Modules/GnbPcieConfig/PcieConfigLib.h
+   Modules/GnbPcieConfig/PcieInputParser.c
+   Modules/GnbPcieConfig/PcieInputParser.h
+   Modules/GnbPcieConfig/PcieMapTopology.c
+   Modules/GnbPcieConfig/PcieMapTopology.h
+   Modules/GnbPcieInitLib/GnbPcieInitLib.h
+   Modules/GnbPcieMisc/PcieAspmBlackList.c
+   Modules/GnbPcieMisc/PcieAspmBlackList.h
+   Modules/GnbPcieInitLib/PciePortRegAcc.c
+   Modules/GnbPcieInitLib/PciePortRegAcc.h
+   Modules/GnbPcieInitLib/PciePortServices.c
+   Modules/GnbPcieInitLib/PciePortServices.h
+   Modules/GnbPcieInitLib/PcieUtilityLib.c
+   Modules/GnbPcieInitLib/PcieUtilityLib.h
+   Modules/GnbPcieInitLib/PcieWrapperRegAcc.c
+   Modules/GnbPcieInitLib/PcieWrapperRegAcc.h
+   Modules/GnbPcieInitLib/PcieAspmExitLatency.c
+   Modules/GnbPcieInitLib/PcieSiliconServices.c
+   Modules/GnbPcieMisc/PcieMaxPayload.c
+   Modules/GnbPcieMisc/PcieMaxPayload.h
+   Modules/GnbPcieTrainingV2/GnbPcieTrainingV2.h
+   Modules/GnbPcieTrainingV2/PcieTrainingV2.c
+   Modules/GnbPcieTrainingV2/PcieTrainingV2.h
+   Modules/GnbPcieTrainingV2/PcieWorkaroundsV2.c
+   Modules/GnbPcieTrainingV2/PcieWorkaroundsV2.h
+   Modules/GnbIommuIvrs/GnbSbIommuLib.c
+   Modules/GnbIommuIvrs/GnbSbIommuLib.h
+   Modules/GnbSbLib/GnbSbLib.c
+   Modules/GnbSbLib/GnbSbLib.h
+   Modules/GnbSbLib/GnbSbPcie.c
+   Modules/GnbSmuLibV8/GnbSmuInitLibV8.c
+   Modules/GnbSmuLibV8/GnbSmuInitLibV8.h
+   Modules/GnbSSocketLib/GnbSSocketLib.c
+   Modules/GnbSview/GnbSview.c
+   Modules/GnbTable/GnbTable.c
+   Modules/GnbTable/GnbTable.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaFamily15ModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  IdsLib
+  BaseMemoryLib
+  PcdLib
+  PrintLib
+  BaseLib
+  DebugPrintErrorLevelLib
+  GnbHeapLib
+  AmdPspBaseLibV1
+  AmdS3SaveLib
+  OemPcieResetControlLib
+  IoLib
+  PciLib
+  FchBaseLib
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCfgGnbPcieSSID
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCfgGnbIGPUSSID
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCfgGnbHDAudioSSID
+
+[BuildOptions]
+
+

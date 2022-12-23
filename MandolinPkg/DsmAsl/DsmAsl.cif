@@ -1,0 +1,12 @@
+<component>
+	name = "DsmAsl"
+	category = ModulePart
+	LocalRoot = "MandolinPkg\DsmAsl\"
+	RefName = "MandolinPkg.DsmAsl"
+[files]
+"DsmAsl.sdl"	
+"DsmAslElink.txt"
+"CrbDsmAslDxe.c"
+"CrbDsmAslDxe.inf"
+"CrbSsdtDriverFdfRule.txt"
+<endComponent>

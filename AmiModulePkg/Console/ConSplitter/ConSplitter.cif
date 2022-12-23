@@ -1,0 +1,11 @@
+<component>
+    name = "ConSplitter"
+    category = eCore
+    LocalRoot = "AmiModulePkg\Console\ConSplitter\"
+    RefName = "AmiModulePkg.ConSplitter"
+[INF]
+"ConSplitter.inf"
+[files]
+"ConSplitter.chm"	
+"ConSplitter.sdl"	
+<endComponent>

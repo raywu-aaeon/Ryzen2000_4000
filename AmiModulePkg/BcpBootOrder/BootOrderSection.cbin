@@ -1,0 +1,59 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+/** @file
+    This file contains the default BCP Boot Order as defined by the SDL tokens in this module
+*/
+
+#include <Token.h>
+#include "BcpBootOrder.h"
+#include <BcpBootOrderElinks.h>
+
+#if (BCP_ENABLE_CUSTOM_GROUPING_SUPPORT == 0)
+BCP_BOOT_ORDER_STRUC BcpBootOrder =
+#else
+BCP_BOOT_ORDER_PACKAGE BcpPackage = {
+#endif
+/// Structure that contains the default boot order defined by SDL tokens
+    {BCP_DEFAULT_BOOT_ORDER_LENGTH,
+    {BCP_DEFAULT_BOOT_ORDER}
+#if (BCP_ENABLE_CUSTOM_GROUPING_SUPPORT == 1)
+    },
+
+/// Structure that contains the custom strings for the new groupings
+  {  BCP_NUM_NEW_STRINGS,
+////    New Group #define       BBS Group   String to use
+    {
+    // example group definition.  Add Custom Groups here
+//    {BCP_UEFI_OTHER,            BCP_UEFI_OTHER,          L"Generic UEFI"},
+
+    }}
+#endif // (BCP_ENABLE_CUSTOM_GROUPING_SUPPORT == 1)
+
+};
+
+
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

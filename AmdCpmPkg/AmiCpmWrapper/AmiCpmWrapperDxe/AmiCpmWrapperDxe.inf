@@ -1,0 +1,33 @@
+
+[Defines]
+	INF_VERSION                     = 0x00010005
+	BASE_NAME                       = AmiCpmWrapperDxe
+    FILE_GUID                       = D60CF145-F97C-4085-A73D-8D399757DFE9
+    MODULE_TYPE                     = DXE_DRIVER
+	VERSION_STRING                  = 1.0
+	ENTRY_POINT                     = AmiCpmWrapperDxeEntry
+
+[Sources]
+    AmiCpmWrapperDxe.c
+    
+[Packages]
+    MdePkg/MdePkg.dec
+    AmdCpmPkg/AmdCpmPkg.dec
+    AmdCpmPkg/AmiCpmWrapper/AmiCpmWrapperPkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AgesaModulePkg/AgesaCommonModulePkg.dec
+    AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+    UefiDriverEntryPoint
+	UefiBootServicesTableLib
+	UefiLib
+	IoLib
+
+[Protocols]
+    gAmdCpmTableProtocolGuid
+    
+[Depex]
+    TRUE
+    
+[BuildOptions]

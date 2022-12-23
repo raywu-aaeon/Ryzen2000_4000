@@ -1,0 +1,43 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file
+# Produces the Ahci Smm Protocol
+##
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AhciSmm
+  FILE_GUID                      = BC3245BD-B982-4f55-9F79-056AD7E987C5
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = AhciSmmDriverEntryPoint
+
+[Sources]
+  AhciSmm.c
+  AhciSmm.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  AhciCspLib
+  PcdLib
+  
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+  gAmiAhciSmmProtocolGuid
+  
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  
+[Depex]
+  gEfiSmmBase2ProtocolGuid

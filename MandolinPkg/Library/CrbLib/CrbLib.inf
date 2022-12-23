@@ -1,0 +1,24 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CrbLib
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+  IntelFrameworkPkg/IntelFrameworkPkg.dec       # Optional. should use Mde Library instead.
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+
+[LibraryClasses]
+  BaseLib
+
+[Protocols]
+
+[Sources]
+  CrbLib.c

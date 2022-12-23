@@ -1,0 +1,193 @@
+#;*****************************************************************************
+#;
+#; Copyright 2016 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#;
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#;
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaCommonPkg
+  PACKAGE_GUID          = 1DB6EDBF-9646-4476-81B7-14FB9B872E88
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+  # Common library classes for all drivers
+  AmdBaseLib|Include/Library/AmdBaseLib.h
+  AmdS3SaveLib|Include/Library/AmdS3SaveLib.h
+  AmdIdsDebugPrintLib|Include/Library/AmdIdsDebugPrintLib.h
+  AmdIdsHookLib|Include/Library/AmdIdsHookLib.h
+  AmdIdsHookExtLib|Include/Library/AmdIdsHookExtLib.h
+  AmdTableLib|Include/Library/AmdTableLib.h
+  AmdErrorLogLib|Include/Library/AmdErrorLogLib.h
+  BaseCoreLogicalIdLib|Include/Library/BaseCoreLogicalIdLib.h
+  BaseSocketLogicalIdLib|Include/Library/BaseSocketLogicalIdLib.h
+  BaseSocLogicalIdXlatLib|Include/Library/BaseSocLogicalIdXlatLib.h
+  DxeSocLogicalIdServicesLib|Include/Library/DxeSocLogicalIdServicesLib.h
+  PeiSocLogicalIdServicesLib|Include/Library/PeiSocLogicalIdServicesLib.h
+  PeiSocBistLoggingLib|Include/Library/SocBistLoggingLib.h
+  PeiSocBistLib|Include/Library/PeiSocBistLib.h
+
+[Guids]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid      = {0x7788adf0, 0x9788, 0x4a3f, {0x83, 0xfa, 0xcb, 0x51, 0x2e, 0x7c, 0xf8, 0xdd}}
+  gAmdMemoryInfoHobGuid                    = {0x1bce3d14, 0xa5fe, 0x4a0b, {0x9a, 0x8d, 0x69, 0xca, 0x5d, 0x98, 0x38, 0xd3}}
+  gAmdMemCfgInfoHobGuid                    = {0x13f03f37, 0xaf63, 0x4398, {0x98, 0x4d, 0x54, 0xe2, 0xdf, 0xe7, 0x03, 0xa5}}
+  gErrorLogHobGuid                         = {0xace4c26a, 0x4a31, 0x4861, {0x8e, 0xf9, 0xda, 0xd0, 0x7c, 0xfd, 0x39, 0x1f}}
+  gAmdSmmCommunicationHandleGuid           = {0x5c4061f0, 0xd051, 0x4f43, {0xbc, 0x23, 0x5e, 0x5e, 0x89, 0xb3, 0xce, 0xc0}}
+  gAmdNvdimmInfoHobGuid                    = {0x6d069e32, 0x4498, 0xb64b, {0x25, 0x1b, 0x6d, 0x8e, 0xda, 0x4a, 0xcb, 0x3c}}
+  gAmdNvdimmSpdInfoHobGuid                 = {0x989ce0ba, 0x99f8, 0x48fd, {0xa8, 0x93, 0x95, 0xe0, 0x06, 0xc3, 0x18, 0x19}}
+  gAmdMemHolesInfoHobGuid                  = {0xbd5acf5, 0xf7c1, 0x4932, {0xb8, 0x1a, 0xed, 0xce, 0xa0, 0xe5, 0x4e, 0x1d}}
+  gEfiSmmPeiSmramMemoryReserveGuid         = {0x6dadf1d1, 0xd4cc, 0x4910, { 0xbb, 0x6e, 0x82, 0xb1, 0xfd, 0x80, 0xff, 0x3d}}
+
+[Protocols]
+  ## IDS Protocols
+  gAmdIdsDebugPrintProtocolGuid            = {0x669ed5b1, 0x49a3, 0x4c59, {0x9d, 0x2d, 0x4, 0x32, 0xad, 0x6c, 0xdb, 0x61}}
+
+  ## Gnb Protocols
+
+  ## Fch Protocols
+
+  ## PSP Protocols
+
+  ## Soc Depex Protocols List
+  gAmdErrorLogDepexProtocolGuid            = {0x6f8c98ef, 0x2d68, 0x4bb9, {0x93, 0x88, 0x84, 0xc2, 0xa5, 0xd9, 0x22, 0xd}}
+
+  ## Soc Protocols
+  gAmdSocLogicalIdProtocolGuid             = {0x72f8e409, 0x0d2a, 0x4b91, {0x88, 0x6f, 0xba, 0x13, 0x44, 0x9f, 0xd7, 0x78}}
+
+  ## FCH
+
+  ## PSP
+
+  ## Memory
+
+  ## NBIO
+
+  ## CCX
+
+  ## DF
+
+  ## APCB
+  gAmdApcbDxeServiceProtocolGuid           = {0x7189e04e, 0x6284, 0x4953, {0xa5, 0x43, 0xa3, 0x1f, 0x89, 0xa1, 0xa7, 0xbf}}
+  gAmdApcbSmmServiceProtocolGuid           = {0x8151730c, 0xe1d3, 0x4c8c, {0x91, 0x7b, 0xa3, 0x9b, 0x7e, 0xd4, 0x82, 0x65}}
+
+  ## Error Log Protocols
+  gAmdErrorLogReadyProtocolGuid            = {0x576732ae, 0xa8fd, 0x4ee2, {0xae, 0x42, 0x29, 0x8e, 0xcf, 0xd5, 0xad, 0x3a}}
+  gAmdErrorLogProtocolGuid                 = {0x79a128fb, 0xf8ea, 0x47c1, {0x86, 0x5, 0x30, 0xb5, 0xfd, 0xc2, 0x6a, 0xa1}}
+
+  ## Universal
+  gAmdSmbiosDxeInitCompleteProtocolGuid    = {0x607614f9, 0x3f1c, 0x45dd, {0x9c, 0x78, 0x1, 0x72, 0x3b, 0xc3, 0x85, 0xd9}}
+  gAmdAcpiDxeInitCompleteProtocolGuid      = {0x2148aa15, 0x700c, 0x4f75, {0x87, 0xaf, 0x10, 0xa4, 0xdd, 0xbb, 0xb9, 0xe1}}
+
+[Ppis]
+  gAmdPlatformDimmSpdPpiGuid             = {0x5f02b45f, 0xa78e, 0x4462, {0xba, 0x8, 0xc0, 0xc9, 0x7, 0xfd, 0x65, 0x68}}
+  gAmdIdsDebugPrintPpiGuid                 = {0x8663e771, 0x52f6, 0x49fb, {0xb3, 0x45, 0xdb, 0x93, 0x96, 0x5e, 0x6c, 0xab}}
+
+  ## SOC Depex Ppi list
+  gAmdErrorLogDepexPpiGuid                 = {0x1bee3339, 0x17e2, 0x4823, {0x93, 0x3b, 0x64, 0x4c, 0x3e, 0xc5, 0xaa, 0x62}}
+
+  ## Soc Ppis
+  gAmdSocLogicalIdPpiGuid                  = {0xb5e37753, 0x25e0, 0x48bf, {0xad, 0xd7, 0xbf, 0x8e, 0xf3, 0x75, 0x8, 0xa7}}
+
+  ## FCH
+
+  ## PSP
+
+  ## Memory
+  ## NBIO
+
+  ## CCX
+
+  ## DF
+
+  ## Error Log Ppis
+  gAmdErrorLogPpiGuid                      = {0x780bf289, 0x93d, 0x457f, {0x88, 0xf8, 0x8f, 0x58, 0xb7, 0x6, 0x32, 0x2e}}
+  gAmdErrorLogReadyPpiGuid                 = {0x80a63347, 0xe22f, 0x48e1, {0xb4, 0x50, 0x44, 0x7e, 0x2b, 0x6, 0x7, 0x96}}
+
+  ## GNB Ppis
+
+  ## GNB Depex Ppis
+
+  ## Feature Guids
+    gEfiPublicMemoryServicesInitPpiGuid    = {0x17fdd6fa, 0x6493, 0x44fa, {0xb8, 0xee, 0xf5, 0xb6, 0x58, 0xdf, 0xa2, 0x2}}
+
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+
+  #AGESA PI and version string
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPackageString|"AGESA!V9\0UnkownPI 0.0.0.0"|VOID*|0x00002001  # AMD AGESA PI Name & Version string
+
+  # For SSP or later
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxSocketSupportedV2|2|UINT8|0x00002002 # 2 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxDiePerSocketV2|1|UINT8|0x00002003       # 1 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxChannelPerDieV2|8|UINT8|0x00002004     # 8 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxDimmPerChannelV2|2|UINT8|0x00002005  # 2 by default
+  # For ZP
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxSocketSupportedV1|2|UINT8|0x00002006 # 2 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxDiePerSocketV1|4|UINT8|0x00002007       # 4 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxChannelPerDieV1|2|UINT8|0x00002008     # 2 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxDimmPerChannelV1|2|UINT8|0x00002009 # 2 by default
+
+[PcdsDynamic]
+  ## Common
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdS3LibPrivateDataAddress|0|UINT64|0x00027000                           # Record AMD_S3_LIB_PRIVATE_DATA Structure address
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSmmCommunicationAddress|0|UINT64|0x00027001                           # Record the address for SMM communication
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag|0|UINT32|0x00027004                                   # Record Environment Flag for internal usage only
+  ## Promontory PCD
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTTargetSpeed|0x03|UINT8|0x0100000E
+
+  ## Gnb Common Build Options
+
+  ## Gnb CZ Build Options
+
+  ## Gnb Build time Options for Common System Options.
+
+  ## PSP Fixed PCDs
+
+  ## Fch Fixed PCDs
+

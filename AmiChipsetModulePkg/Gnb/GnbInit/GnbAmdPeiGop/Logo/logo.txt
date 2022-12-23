@@ -1,0 +1,3 @@
+FILE FREEFORM = 7CE1ED80-F762-4218-8270-F7133706EB36 {
+  SECTION RAW = AmiChipsetModulePkg/Gnb/GnbInit/GnbAmdPeiGop/Logo/AmiLogo.bmp
+}

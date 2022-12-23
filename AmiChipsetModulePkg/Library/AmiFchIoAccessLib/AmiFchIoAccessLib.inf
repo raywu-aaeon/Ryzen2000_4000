@@ -1,0 +1,31 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiFchIoAccessLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiFchIoAccessLib
+  CONSTRUCTOR                    = AmiFchIoAccessLibConstructor
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  BaseLib
+  IoLib
+  PciLib
+  DebugLib
+  AmiChipsetIoLib
+
+[Protocols]
+
+[Ppis]
+
+[Sources]
+  AmiFchIoAccessLib.c
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdFchAcpiMmioBase

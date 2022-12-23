@@ -1,0 +1,252 @@
+TOKEN
+    Name  = "FvDxeValidate_SUPPORT"
+    Value  = "1"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "FVDXE_VERIFY_BEFORE_MRC"
+    Value  = "0"
+    Help  = "0 - Invoke FvDxeValidate from PublishFV.ReportFV2PeiAfterMem callback. Note: Check Porting Guide for the list of mandatory PEI services required to be loaded from FV_BB. Subject to FV_BB size restrictions\1 - Invoke FvDxeValidate at PEI entry point before Memory is discovered. Only SHA256_RSA2048 signatures are supported."
+    TokenType = Integer
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "FVDXE_SHADOW_FV"
+    Value  = "1"
+    Help  = "Perform FV relocation to RAM after memory is available. Improves BIOS boot time with non-nested(un-compressed) DXE FVs"
+    TokenType = Integer
+    Token = "FVDXE_VERIFY_BEFORE_MRC" "=" "0"
+    Token = "NESTED_FV_MAIN" "=" "0"
+End
+
+TOKEN
+    Name  = "FVDXE_VERIFY_FAILED_RECOVERY_LIB"
+    Value  = "0"
+    Help  = "0 - Link default Null-lib implementation of AmiFvDxeFailLib\1- Link an external implementation of AmiFvDxeFailLib.ExecuteActionOnFailureToValidateFv()"
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "FVDXE_VERIFY_FAILED_RECOVERY_POLICY"
+    Value  = "1"
+    Help  = "0 - Force BIOS Recovery on failed FvDxe verify(DxeIpl & Recovery PPIs must be loaded from trusted FV_BB)\1 - Show postcode and hang in CPU deadloop"
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "FVDXE_VERIFY_FAILED_POSTCODE"
+    Value  = "0xFBAD"
+    Help  = "This post code will be displayed if FV DXE (+FV_BB_AFTER MEMORY) failed to validate"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FVDXE_DEBUG_MESSAGES"
+    Value  = "0"
+    Help  = "0-No debug messages are enabled;1-All error messages are enabled\Make sure PcdDebugPrintErrorLevel is set to PcdsPatchableInModule. Search in all SDL files."
+    TokenType = Integer
+    Range = "0-1"
+End
+
+ELINK
+    Name  = "BeforeFvDxePublish"
+    Parent  = "PeiProcessFvBeforePublishing"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "FvDxeValidateOnPublish"
+    File  = "FvDxeValidateOnPublish.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+End
+
+INFComponent
+    Name  = "FvDxeValidatePpi"
+    File  = "FvDxeValidatePpi.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+    Token = "FVDXE_VERIFY_BEFORE_MRC" "=" "0"
+End
+
+INFComponent
+    Name  = "FvDxeValidatePpi"
+    File  = "FvDxeValidatePpi1.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+    Help  = "Only SHA256_RSA2048 signatures (FWCAPSULE_CERT_FORMAT=0, FVDXE_HASH=sha256) can be processed by FvDxeValidatePpi1"
+    Token = "FVDXE_VERIFY_BEFORE_MRC" "=" "1"
+    Token = "FWCAPSULE_CERT_FORMAT" "=" "0"
+    Token = "FVDXE_HASH" "=" "sha256"
+End
+
+INFComponent
+    Name  = "FvDxeFailLib"
+    File  = "FvDxeFailLib.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+    Token = "FVDXE_VERIFY_FAILED_RECOVERY_LIB" "=" "0"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.FvDxeValidateOnPublish"
+    Override  = "AmiModulePkg.RomLayoutPei"
+End
+
+LibraryMapping
+    Class  = "AmiFvDxeFailLib"
+    Instance  = "AmiModulePkg.FvDxeFailLib"
+    Token = "FVDXE_VERIFY_FAILED_RECOVERY_LIB" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000046"
+    Override  = "AmiModulePkg.FvDxeValidatePpi"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Display minimal debug messages"
+    TargetDSC = Yes
+    Token = "FVDXE_DEBUG_MESSAGES" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0xFFFFFFFF"
+    Override  = "AmiModulePkg.FvDxeValidatePpi"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Un-mask all debug messages"
+    TargetDSC = Yes
+    Token = "FVDXE_DEBUG_MESSAGES" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000046"
+    Override  = "AmiModulePkg.RomLayoutPei"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Display minimal debug messages"
+    TargetDSC = Yes
+    Token = "FVDXE_DEBUG_MESSAGES" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0xFFFFFFFF"
+    Override  = "AmiModulePkg.RomLayoutPei"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Un-mask all debug messages"
+    TargetDSC = Yes
+    Token = "FVDXE_DEBUG_MESSAGES" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdTdxeShadowFvBeforePublish"
+    GuidSpace  = "gAmiTrustedFvPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Override  = "AmiModulePkg.FvDxeValidatePpi"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "FVDXE_SHADOW_FV" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdTdxeShadowFvBeforePublish"
+    GuidSpace  = "gAmiTrustedFvPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Override  = "AmiModulePkg.RomLayoutPei"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "FVDXE_SHADOW_FV" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdTdxeShadowFvAlignSize"
+    GuidSpace  = "gAmiTrustedFvPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "4096"
+    Override  = "AmiModulePkg.FvDxeValidatePpi"
+    Offset  = 00h
+    Length  = 04h
+    Help  = "Align relocated FV to 4k page:4096"
+    TargetDSC = Yes
+    Token = "FVDXE_SHADOW_FV" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdTdxeFailedRecoveryPolicy"
+    GuidSpace  = "gAmiTrustedFvPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(FVDXE_VERIFY_FAILED_RECOVERY_POLICY)"
+    Override  = "AmiModulePkg.FvDxeValidatePpi"
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "AmiPcdForceShutdownOnFailedRecovery"
+    GuidSpace  = "gAmiModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "FVDXE_VERIFY_FAILED_RECOVERY_LIB" "=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdCpMaxHeapSize"
+    GuidSpace  = "gAmiCryptoPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "0x3000"
+    Override  = "AmiModulePkg.FvDxeValidatePpi"
+    Offset  = 00h
+    Length  = 04h
+    Help  = "Ami Tiny PeiCryptLib optimized mem manager.\Min 12kb for rsa2048 decrypt in Mode2 page aligned heap)"
+    TargetDSC = Yes
+    Token = "FVDXE_VERIFY_BEFORE_MRC" "=" "1"
+End
+
+FFS_FILE
+    Name  = "FvDxeValidatePpi"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiModulePkg.FvDxeValidatePpi"
+    Apriori_Index  = "2"
+    Token = "FVDXE_VERIFY_BEFORE_MRC" "=" "1"
+    Help  = "Only SHA256_RSA2048 signatures are supported.\Make sure ValidateDxe executed in preMem. E.g BEFORE PlatformInitPreMem"
+End
+
+FFS_FILE
+    Name  = "FvDxeValidatePpi"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiModulePkg.FvDxeValidatePpi"
+    Index  = "2"
+    Rule_Override  = "Compressed"
+    Token = "FVDXE_VERIFY_BEFORE_MRC" "=" "0"
+End
+

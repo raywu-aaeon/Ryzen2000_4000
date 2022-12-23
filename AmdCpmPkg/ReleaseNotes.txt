@@ -1,0 +1,917 @@
+#;*****************************************************************************
+#;*
+#;* Copyright 2012 - 2021 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;*
+#;* AMD is granting You permission to use this software and documentation (if
+#;* any) (collectively, the "Software") pursuant to the terms and conditions of
+#;* the Software License Agreement included with the Software. If You do not have
+#;* a copy of the Software License Agreement, contact Your AMD representative for
+#;* a copy.
+#;*
+#;* You agree that You will not reverse engineer or decompile the Software, in
+#;* whole or in part, except as allowed by applicable law.
+#;*
+#;* WARRANTY DISCLAIMER: THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+#;* KIND. AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING
+#;* BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, QUALITY,
+#;* FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT AND WARRANTIES
+#;* ARISING FROM CUSTOM OF TRADE OR COURSE OF USAGE WITH RESPECT TO THE SOFTWARE,
+#;* INCLUDING WITHOUT LIMITATION, THAT THE SOFTWARE WILL RUN UNINTERRUPTED OR
+#;* ERROR-FREE. THE ENTIRE RISK ASSOCIATED WITH THE USE OF THE SOFTWARE IS
+#;* ASSUMED BY YOU. Some jurisdictions do not allow the exclusion of implied
+#;* warranties, so the above exclusion may not apply to You, but only to the
+#;* extent required by law.
+#;*
+#;* LIMITATION OF LIABILITY AND INDEMNIFICATION: TO THE EXTENT NOT PROHIBITED BY
+#;* APPLICABLE LAW, AMD AND ITS LICENSORS WILL NOT, UNDER ANY CIRCUMSTANCES BE
+#;* LIABLE TO YOU FOR ANY PUNITIVE, DIRECT, INCIDENTAL, INDIRECT, SPECIAL OR
+#;* CONSEQUENTIAL DAMAGES ARISING FROM POSSESSION OR USE OF THE SOFTWARE OR
+#;* OTHERWISE IN CONNECTION WITH ANY PROVISION OF THIS AGREEMENT EVEN IF AMD AND
+#;* ITS LICENSORS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS
+#;* INCLUDES, WITHOUT LIMITATION, DAMAGES DUE TO LOST OR MISAPPROPRIATED DATA,
+#;* LOST PROFITS OR CONFIDENTIAL OR OTHER INFORMATION, FOR BUSINESS INTERRUPTION,
+#;* FOR PERSONAL INJURY, FOR LOSS OF PRIVACY, FOR FAILURE TO MEET ANY DUTY
+#;* INCLUDING OF GOOD FAITH OR REASONABLE CARE, FOR NEGLIGENCE AND FOR ANY OTHER
+#;* PECUNIARY OR OTHER LOSS WHTSOEVER. In no event shall AMD's total liability to
+#;* You for all damages, losses, and causes of action (whether in contract, tort
+#;* (including negligence) or otherwise) exceed the amount of $50 USD. You agree
+#;* to defend, indemnify and hold harmless AMD, its subsidiaries and affiliates
+#;* and their respective licensors, directors, officers, employees, affiliates or
+#;* agents from and against any and all loss, damage, liability and other
+#;* expenses (including reasonable attorneys' fees), resulting from Your
+#;* possession or use of the Software or violation of the terms and conditions of
+#;* this Agreement.
+#;*
+#;* U.S. GOVERNMENT RESTRICTED RIGHTS: Notice to U.S. Government End Users. The
+#;* Software and related documentation are "commercial items", as that term is
+#;* defined at 48 C.F.R. Section 2.101, consisting of "commercial computer
+#;* software" and "commercial computer software documentation", as such terms are
+#;* used in 48 C.F.R. Section 12.212 and 48 C.F.R. Section 227.7202,
+#;* respectively. Consistent with 48 C.F.R. Section 12.212 or 48 C.F.R. Sections
+#;* 227.7202-1 through 227.7202-4, as applicable, the commercial computer
+#;* software and commercial computer software documentation are being licensed to
+#;* U.S. Government end users: (a) only as commercial items, and (b) with only
+#;* those rights as are granted to all other end users pursuant to the terms and
+#;* conditions set forth in this Agreement. Unpublished rights are reserved under
+#;* the copyright laws of the United States.
+#;*
+#;* EXPORT RESTRICTIONS:  You shall adhere to all applicable U.S. import/export
+#;* laws and regulations, as well as the import/export control laws and
+#;* regulations of other countries as applicable. You further agree You will not
+#;* export, re-export, or transfer, directly or indirectly, any product,
+#;* technical data, software or source code received from AMD under this license,
+#;* or the direct product of such technical data or software to any country for
+#;* which the United States or any other applicable government requires an export
+#;* license or other governmental approval without first obtaining such licenses
+#;* or approvals, or in violation of any applicable laws or regulations of the
+#;* United States or the country where the technical data or software was
+#;* obtained. You acknowledges the technical data and software received will not,
+#;* in the absence of authorization from U.S. or local law and regulations as
+#;* applicable, be used by or exported, re-exported or transferred to: (i) any
+#;* sanctioned or embargoed country, or to nationals or residents of such
+#;* countries; (ii) any restricted end-user as identified on any applicable
+#;* government end-user list; or (iii) any party where the end-use involves
+#;* nuclear, chemical/biological weapons, rocket systems, or unmanned air
+#;* vehicles.  For the most current Country Group listings, or for additional
+#;* information about the EAR or Your obligations under those regulations, please
+#;* refer to the website of the U.S. Bureau of Industry and Security at
+#;* http://www.bis.doc.gov/.
+#;******************************************************************************
+
+
+                        Release Notes for
+                        -----------------
+                     Common Platform Module(CPM)
+
+
+=============================================================================
+
+Version: v065                                 Release Date:  04 January 2017
+
+=============================================================================
+
+Changes:
+ - PLAT-14812: [AOD] Setting MemVDDIO to 1.080V sets the voltage to 1.320V
+ - PLAT-14213: Enable CLKREQ# feature
+ - PLAT-14637: Add SMN register access routine
+ - PLAT-14633: Create CPU Core Topology Table
+ - PLAT-14186: Add ZPODD support for Raven
+ - PLAT-14510: Add Read/Write SMN registers ACPI Method
+ - PLAT-14320: [AOD] Enable APCB_TOKEN_CBS_CMN_MEM_OVERCLOCK_DDR4
+ - PLAT-14378: Enable DDI auto detect for Raven
+ - PLAT-14191: [AOD] SetMemCtrlTrdcrd, SetMemCtrlTrdcwr and SetMemCtrlTrp
+               returns invalid value if input value is 9
+
+=============================================================================
+
+Version: v064                                 Release Date:  09 December 2016
+
+=============================================================================
+
+Changes:
+ - PLAT-13774: [AOD] Setting MemVTT after calling SetMemVDDIO results MemVTT 
+               set to different value
+ - PLAT-13545: Add GPU Dynamic Power Limit Requests via ATIF Interface
+ - PLAT-13094: [AOD] Calling SetMemVTT results BSOD/system hang
+ - PLAT-12840: [AOD] Memory clock value reverts to default value after changing
+               BIOS setting
+ - PLAT-12973: Create BasePlatformHookLib for ITE8712 & SMSC1100 serial port
+ - PLAT-12632: [AOD] Get/SetMemVDDIO and Get/SetMemVTT function calls fail
+ - PLAT-12508: [AOD] Move SW SMI port definition to AodOem.cfg
+ - PLAT-12024: Update AS4 ACPI HID for RV
+ - PLAT-12384: Add error check when doing GetNextGuidHob
+ - PLAT-11929: Change CPM PostCode prefix from 0x0C00 to 0xB0000C00
+ - PLAT-11368: Add RV support
+ - PLAT-11223: Clean up Global Macro statement in INF Files
+ - PLAT-11213: Bypass ECRAM access when MainTablePtr->EcSupport = 0
+ - PLAT-9973:  [AOD] Implement function to modify VDDIO
+ - PLAT-9974:  [AOD] Implement the interface to modify VTT
+ - PLAT-9978:  [AOD] Implement AOD functions to modify memory timings
+ - PLAT-9967:  [AOD] Implement AOD function to modify memory clock
+ - PLAT-10457: [AOD] Update aodmof.asi and add the mof to asi build batch
+ - PLAT-10346: Separate ExpressCard, OtherHotplug and WirelessButton ASL code
+ - PLAT-10313: Get the wrong brightness transfer characteristics of display
+               output devices in ATIF Function 16
+ - PLAT-9972:  [AOD] Add initial AOD code and provide empty functions for
+               WMI-APCI interfaces
+ - PLAT-9624:  Global Macro statement is not supported in EDK II INF File
+ - PLAT-9463:  Add CPM_PKG_PATH and CPM_PKG_DEC define
+ - PLAT-9330:  Add ACPI SSDT table installation control for Display feature
+ - PLAT-9446:  Remove unused files part 2
+ - PLAT-9270:  Remove unused files
+ - PLAT-9220:  Remove unnecessary patch code
+ - PLAT-8526:  Add Promontory GPIO programming in CPM common function
+ - PLAT-8873:  Support ACPI complier iasl.exe rev:6.1
+ - PLAT-8720:  Support FCH UART serial debug print with MMIO
+ - PLAT-7928:  Add AMD_CPM_DXIO_TOPOLOGY_TABLE
+ - PLAT-7469:  Add ZP support
+ - PLAT-7665:  Modify AmdCpmGpioDeviceInitStage2 boot sequence
+ - PLAT-7659:  Update CpmCpuidRead function
+ - PLAT-7386:  Update CPM document to 1.19
+ - PLAT-7287:  Need to Provide Ppi definition to pass PCIe topology data
+ - PLAT-6776:  Get the wrong UmaSize from AMD_MEMORY_INFO_HOB
+
+=============================================================================
+
+Version: v063                                 Release Date:  11 May 2016
+
+=============================================================================
+
+Changes:
+- PLAT-7187: SmartSleep fails to wake from S4 under Win10
+- PLAT-7757: Check SATA presence before accessing SATA register in PS0 & PS3
+
+=============================================================================
+
+Version: v062                                 Release Date:  30 March 2016
+
+=============================================================================
+
+Changes:
+- PLAT-7024: Add SmbusBit define in AMD_CPM_PLATFORM_ID_TABLE2 structure
+
+=============================================================================
+
+Version: v061                                 Release Date:  27 January 2016
+
+=============================================================================
+
+Changes:
+ - PLAT-6659: Pack of NV data structure is not aligned between C and ASL
+ - PLAT-6643: Add build option to change OKEC name definition in ZPODD ACPI method
+ - PLAT-6621: Update "CpmAtifSupportedNotificationMask" for MxmOverTempEvent
+ - PLAT-6618: Static code analysis - loop limit is not matching
+ - PLAT-6428: Move CpmGeventInit from PEIM to S3 resume SMM
+ - PLAT-6391: Correct LPC0 name definition in ZPODD ACPI method
+ - PLAT-6427: INF files naming style
+ - PLAT-6264: Update CPM copyright year to 2016
+ - PLAT-6255: Separate INF files for AGESA V5 and V9
+ - PLAT-6254: Add BootMode override
+
+=============================================================================
+
+Version: v060                                 Release Date:  06 January 2016
+
+=============================================================================
+
+Changes:
+ - PLAT-6220: Install gPcieTopologyTablePpiGuid when PcieTopologyTable is completed
+ - PLAT-6164: Install gAmdCpmOverrideTablePpiGuid when CpmOverrideTable is completed
+ - PLAT-6037: Wrong define of CLK_REQGFX setting
+
+=============================================================================
+
+Version: v059                                 Release Date:  12 December 2015
+
+=============================================================================
+
+Changes:
+ - PLAT-5915: Add AGESA_V9 support
+ - PLAT-5732: GPP clock cannot be set correctly for PCIE device hotplug
+ - PLAT-5471: SATA toggles between D0 and D3 after S3 if no SATA device populated
+ - PLAT-5443: S3 resume failed when disabled ZPODD
+
+=============================================================================
+
+Version: v058                                 Release Date:  18 November 2015
+
+=============================================================================
+
+Changes:
+ - PLAT-5307: No display when S4 resume and ODD is plugged out in Windows 7
+ - PLAT-5313: Remove ZPODD ACPI SSDT table when ZPODD Setup Option is disabled
+ - PLAT-5311: Enable ODD auto detection
+ - PLAT-5233: ODD_DA# cannot wake up ZPODD in Windows 7
+ - PLAT-5017: Initialize and overwrite Promontory GPIO setting in CPM package
+
+=============================================================================
+
+Version: v057                                 Release Date:   3 November 2015
+
+=============================================================================
+
+Changes:
+ - PLAT-2850: Update ATPX Function 0 and 1 when Hybrid Graphics is enabled.
+ - PLAT-3001: [CPM] Static code analysis - prevent dead loop.
+ - PLAT-3039: [CPM] Check pointers for NULL before using them.
+ - PLAT-3040: [CPM] Update PCIE slot CLKREQ# algorithm.
+ - PLAT-4946: Customer platform will hang at "CpmPlatformIdInit" routine.
+ - PLAT-3159: ZPODD hot plug support during S3/S4/S5.
+
+=============================================================================
+
+Version: v056                                 Release Date: 21 September 2015
+
+=============================================================================
+
+Changes:
+ - PLAT-2644: [CPM] SciTrig didn't be set correctly with "SCITRIG_HI".
+ - PLAT-1808: ZPODD function don't work in Jadeite.
+ - PLAT-2641: Keep Hybrid Graphics disabled by default and have an option to enable it.
+
+=============================================================================
+
+Version: v055                                   Release Date: 21 August 2015
+
+=============================================================================
+
+Changes:
+ - PLAT-1896: Add Hybrid Graphics support
+
+
+=============================================================================
+
+Version: v054                                   Release Date: 3 August 2015
+
+=============================================================================
+
+Changes:
+ - BUG466575: "CPM_RESET_DELAY" mode is invalid in "AMD_CPM_GPIO_DEVICE_RESET"
+
+
+=============================================================================
+
+Version: v053                                   Release Date: 24 July 2015
+
+=============================================================================
+
+Changes:
+ - ENH466480: Keep the dGPU in D3 state during S3 sequence
+
+
+=============================================================================
+
+Version: v052                                   Release Date: 3 June 2015
+
+=============================================================================
+
+Changes:
+ - ENH465143: Implement ATCS functions under dGPU
+ - ENH465163: Add _PRW support for ZPODD device for OS
+ - ENH465624: Add Option to enable SMBus function for dGPU device
+
+
+=============================================================================
+
+Version: v051                                   Release Date: 20 March 2015
+
+=============================================================================
+
+Changes:
+ - BUG463887: Change Package GUID in AmdCpmPkg.dec
+
+
+=============================================================================
+
+Version: v050                                   Release Date: 27 January 2015
+
+=============================================================================
+
+Changes:
+ - OBS461779: BIOS logic of detecting AS4 flag is broken by this extra reset
+
+
+=============================================================================
+
+Version: v049                                   Release Date: 14 January 2015
+
+=============================================================================
+
+Changes:
+ - ENH459671: D3-Cold on single GPU
+ - ENH460008: Add Hybrid Graphics Support
+
+
+=============================================================================
+Version: v048                                    Release Date: 6 January 2015
+
+=============================================================================
+
+Changes:
+- ENH460942: Add interface to customize SVID in AMD_CPM_REBRAND_DUAL_GRAPHICS_SSID_TABLE
+
+
+=============================================================================
+
+Version: v047                                    Release Date: 26 November 2014
+
+=============================================================================
+
+Changes:
+- BUG459435: The parameter of ALIB function 0 is not initialized
+
+
+=============================================================================
+
+Version: v046                                    Release Date: 20 October 2014
+
+=============================================================================
+
+Changes:
+- BUG457504: BIOS build failed
+
+
+=============================================================================
+
+Version: v045                                    Release Date: 15 October 2014
+
+=============================================================================
+
+Changes:
+- ENH457394: Add PostCode.asi in AmdCpm2InitAsl.inf
+
+
+=============================================================================
+
+Version: v044                                    Release Date: 01 October 2014
+
+=============================================================================
+
+Changes:
+- ENH456173:  Add new ATI CS ACPI funtions
+
+
+=============================================================================
+
+Version: v043                                    Release Date: 19 September 2014
+
+=============================================================================
+
+Changes:
+- BUG456190: SSID of iGPU is not changed if RebrandDualGraphics is enabled
+
+
+=============================================================================
+
+Version: v042                                    Release Date: 16 September 2014
+
+=============================================================================
+
+Changes:
+- ENH455888: dGPU branding in dual graphics configuration
+
+
+=============================================================================
+
+Version: v041                                    Release Date: 11 September 2014
+
+=============================================================================
+
+Changes:
+- BUG455101: Power Xpress is not functional
+- ENH455702: Add EFI32 support for EDKII
+
+
+=============================================================================
+
+Version: v040                                    Release Date: 19 August 2014
+
+=============================================================================
+
+Changes:
+- BUG452814: GPP_CLK is disabled when S3 resuming
+- ENH453742: Add common function to get the raw data of CPUID register
+- ENH454057: Add new ATPX function for power control on resume
+- ENH454220: Optimize post code in CPM
+
+
+=============================================================================
+
+Version: v039                                    Release Date: 07 July 2014
+
+=============================================================================
+
+Changes:
+- ENH450263: Add build option to force platform ID
+- ENH450270: Add interface to set GPIO pins from S0 to S3/S4/S5
+- ENH450614: Add ECRAM GPIO Support
+
+
+=============================================================================
+
+Version: v038                                    Release Date: 24 June 2014
+
+=============================================================================
+
+Changes:
+- ENH449500: Add new FCH support in ASL code
+
+
+=============================================================================
+
+Version: v037                                    Release Date: 19 June 2014
+
+=============================================================================
+
+Changes:
+- ENH448258: Skip legacy VBIOS special post if legacy region protocol cannot
+  be located
+- ENH448824: Read CPU ID from PCI register
+- BUG449093: CPM prototype header inconsistency
+
+
+=============================================================================
+
+Version: v036                                    Release Date: 09 June 2014
+
+=============================================================================
+
+Changes:
+- ENH447932: Add new SATA Device ID to support
+
+
+=============================================================================
+
+Version: v035                                    Release Date: 30 May 2014
+
+=============================================================================
+
+Changes:
+- ENH446160: Add dependency in EDK2 SMM driver
+- ENH445664: Update PWREN timing
+- ENH446986: Get Platform ID information from EEPROM
+- ENH447261: Set IoMux after GPIO register is programmed
+
+
+=============================================================================
+
+Version: v034                                    Release Date: 01 May 2014
+
+=============================================================================
+
+Changes:
+- ENH444344: Add UEFI32 support
+
+
+=============================================================================
+
+Version: v033                                    Release Date: 11 April 2014
+
+=============================================================================
+
+Changes:
+- ENH442450: Add auto mode support for SciTrig
+
+
+=============================================================================
+
+Version: v032                                    Release Date: 18 March 2014
+
+=============================================================================
+
+Changes:
+- BUG438363: BIOS will not boot Windows 7 64bit
+- ENH439217: Add Legacy Region lock/unlock in VBIOS special post sequence
+
+
+=============================================================================
+
+Version: v031                                    Release Date: 6 March 2014
+
+=============================================================================
+
+Changes:
+- ENH436881: Add DT slot hotplug feature support
+
+
+=============================================================================
+
+Version: v030                                    Release Date: 18 February 2014
+
+=============================================================================
+
+Changes:
+- ENH433597: Modifying the SSID of a dGPU device
+- ENH433461: Optimize MxM slot power up sequence in PX 0W mode
+
+
+=============================================================================
+
+Version: v029                                    Release Date: 21 January 2014
+
+=============================================================================
+
+Changes:
+- BUG431348: ZPODD function still works in RAID mode after disabled ZPODD mode in BIOS
+
+
+=============================================================================
+
+Version: v028                                    Release Date: 10 January 2014
+
+=============================================================================
+
+Changes:
+- BUG431113: FCH GPIO interrupt register is not programmed 
+
+
+=============================================================================
+
+Version: v027                                    Release Date: 7 January 2014
+
+=============================================================================
+
+Changes:
+- ENH430130: Support workaround to set the link into 'disabled' state on
+  powerdown in PX mode
+- ENH427731: Error in AmdCpmCommon.h structure definition
+
+
+=============================================================================
+
+Version: v026                                    Release Date: 12 December 2013
+
+=============================================================================
+
+Changes:
+- BUG427146: CPM build error
+- BUG427350: WLAN device cannot be turn on after resuming from S3 or S4
+- BUG427609: System hungs when resuming from S3, POST code shows DEAD
+- BUG427689: Sometime system resume from S3 failed at 02cb via RTC
+
+
+=============================================================================
+
+Version: v025                                    Release Date: 24 November 2013
+
+=============================================================================
+
+Changes:
+- BUG400231: Most ExpressCards not detected after S3 resume
+
+
+=============================================================================
+
+Version: v024                                    Release Date: 5 November 2013
+
+=============================================================================
+
+Changes:
+- BUG422509: The issue to access AMD_CPM_DISPLAY_FEATURE_TABLE even if no table exists
+- ENH423432: Add Pulse Generator support for local display
+
+
+=============================================================================
+
+Version: v023                                    Release Date: 22 October 2013
+
+=============================================================================
+
+Changes:
+- ENH420806: Add workaround for some ASL compiler issue for constant 0xFFFFFFFF
+- ENH420462: Add CPM service for PCIE CLKREQ# feature
+
+
+=============================================================================
+
+Version: v022                                    Release Date: 17 September 2013
+
+=============================================================================
+
+Changes:
+- ENH415854: USBCLK/OSCOUT2 clock output not turned off
+- ENH416724: Holding training/cutting lanemux should be before MXM reset/dGPU
+  power removal
+- BUG418167: PCIe Lane is not turned off first when dGPU is off in PX mode
+
+
+=============================================================================
+
+Version: v021                                    Release Date: 3 September 2013
+
+=============================================================================
+
+Changes:
+- BUG410354: S4->S0->S3 transition doesnot happen while running Adaptive S4 test
+- BUG413861: IoMux of GPIO pin could not be set to 0 if default value is not 0
+- BUG415412: Build files out of sync
+
+
+=============================================================================
+
+Version: v020                                    Release Date: 16 August 2013
+
+=============================================================================
+
+Changes:
+- ENH408040: Update CPM code to support both of EDK and EDKII
+- ENH411741: Update GEVENT initialization sequence
+
+
+=============================================================================
+
+Version: v019                                    Release Date: 12 August 2013
+
+=============================================================================
+
+Changes:
+- ENH409071: Remove 1us delay after the smbus access failure
+- BUG409482: ZPODD cannot enter ZP mode when enabled AMD ODD Zero Power in BIOS
+
+
+=============================================================================
+
+Version: v018                                    Release Date: 10 July 2013
+
+=============================================================================
+
+Changes:
+- BUG406288: Win7 hang when pressed ODD eject button during installation
+- ENH408810: Set ZPODD port reset workaround to disable as the default
+
+
+=============================================================================
+
+Version: v017                                    Release Date: 11 June 2013
+
+=============================================================================
+
+Changes:
+- BUG401308: The graphics driver does not work when enable PX in BIOS setup
+- BUG401509: HPD doesn't work
+- DEV402224: Add GPIO Interrupt Initialization support
+- BUG402250: Prototype header issue in CPM
+- BUG399970: S4->S0->S3 transition does not happen as expected while running AS4 test
+- BUG403871: The delay in Stall method is longer than 100 micro seconds
+
+
+=============================================================================
+
+Version: v016                                    Release Date: 22 May 2013
+
+=============================================================================
+
+Changes:
+- BUG399775: GFX port is always disabled without MXM
+- ENH400023: Move iGPU special post in function GetPostedVbiosImage
+- ENH400196: Adding support of two level of VDDR/VDDP on some mobile OPN
+- ENH400725: Just disable IO access on GFX PCI space before boot up to OS
+- ENH401002: Invoke method AmdCpmGpioInitMid directly if AmdBufferManagerProtocol is installed
+
+
+=============================================================================
+
+Version: v015                                    Release Date: 08 May 2013
+
+=============================================================================
+
+Changes:
+- ENH397058: Add GPIO Pre-Init Table
+- ENH397447: Update ASL device name of PCIe bridge
+- ENH397564: Change AMD_TABLE_LIST_ITEM_SIZE from 0x20 to 0x40
+- BUG397710: The bridge to FCH is turned off in S3/resume
+- BUG395673: Fails Cross Link Capability - Yellow Bang in the Device Manager
+- BUG399562: GFX clock is not turned off properly when no MXM is populated
+- ENH400526: Update Doxygen to build a PDF
+
+
+=============================================================================
+
+Version: v014                                    Release Date: 25 March 2013
+
+=============================================================================
+
+Changes:
+- BUG380003: WLAN disabled in BIOS; is still seen active in OS
+- BUG392733: HobBuffer corruption issue
+
+
+=============================================================================
+
+Version: v013                                    Release Date: 14 March 2013
+
+=============================================================================
+
+Changes:
+- BUG386359: S3 resume fail after turn off the WLAN while WLAN on radio off
+- BUG388776: System hung up with E3 when resume from Hybrid sleep forced hdd
+- BUG391099: ATRM method error to install driver
+- BUG391100: CPM table revision parameters be corrupted during bios POST
+- ENH391113: Set SmiControl on AmdCpmGpioInitLate
+
+
+=============================================================================
+
+Version: v012                                    Release Date: 19 February 2013
+
+=============================================================================
+
+Changes:
+- ENH385626: Add method to force CPM table to be re-writable
+- ENH385633: Add BIOS support for ZPODD with DID 0x7805
+
+
+=============================================================================
+
+Version: v011                                    Release Date: 13 February 2013
+
+=============================================================================
+
+Changes:
+- ENH384035: Add PowerXpress 5.6 support
+- ENH384773: Move CPM rom tables to ACPI area
+- ENH385911: Add 1us delay after the smbus access failure
+- BUG385998: WLAN Radio Switch does not Turn Off/Power Down WLAN on the first attempt
+
+
+=============================================================================
+
+Version: v010                                    Release Date: 29 January 2013
+
+=============================================================================
+
+Changes:
+- ENH379642: Add Wireless Button Support
+- BUG380135: STATUS_ACPI_INVALID_OBJTYPE issue on Adaptive S4
+- ENH381510: Set ClkPmSupport in PCIe Topology Table when ClkReq is enabled
+- ENH381078: ATIF Function 16 implementation
+- ENH382551: Update ATCS function 0 according to the return value of ALIB function 0
+- ENH382857: Turn off AS4 in Non-WIn8 OS
+- ENH383104: Remove ASPM programming from CPM
+
+
+=============================================================================
+
+Version: v009                                    Release Date: 7 January 2013
+
+=============================================================================
+
+Changes:
+- BUG375670: The system hangs if dGPU driver is uninstalled in PX mode
+- ENH375686: Skip PCIe training on unused GPP port in S3 resume
+- BUG375941: CPM Style Issue
+- ENH377002: Set GeventInitTable just after AmdBufferManagerProtocol
+- ENH378521: Optimize ASL method CpmSetPcieAspm
+- ENH378363: Include _S0W method for ODD8 and ODDL
+
+
+=============================================================================
+
+Version: v008                                    Release Date: 12 December 2012
+
+=============================================================================
+
+Changes:
+- ENH371380: Turn off display in Adaptive S4 mode
+- ENH371628: Add the support to override the StartLane and EndLane of DDI
+- ENH371755: Add block access for smbus device
+- ENH371770: Add the function to support the access of Save Context
+- BUG372000: CPM style issues
+- ENH372148: Add the signature check for dGpu VBIOS rom image in PX mode
+- BUG372388: Load CPM Common SSDT Table one time only
+
+
+=============================================================================
+
+Version: v007                                    Release Date: 15 November 2012
+
+=============================================================================
+
+Changes:
+- DEV368726: Add GPIO Pin Detection for Express Card
+- ENH369691: Remove EJ0 if ODD hotplug is disabled
+- ENH370478: Initialize Platform Id before AmdCpmTablePpi is installed
+
+
+=============================================================================
+
+Version: v006                                    Release Date: 6 November 2012
+
+=============================================================================
+
+Changes:
+- DEV366035: Add interface to get posted vbios image
+- DEV367343: Add AFNX function when iGPU is disabled
+- BUG360617: ZPODD does not work
+- BUG368713: Illegal Parameter type use in ACPI Code
+
+
+=============================================================================
+
+Version: v005                                    Release Date: 04 October 2012
+
+=============================================================================
+
+Changes:
+- DEV358914: Set the SSID of Audio Device in GPU in Specific Ssid Table
+- BUG359502: Set Boot Time Record PEI data to 100
+- BUG360237: CPM style issue
+- DEV361138: Update output file name of DisplayConnectEvent SSDT table
+- DEV361310: Clear AdaptiveS4 data buffer in S0 post
+- DEV358917: Add Boot Time Record Test Points in CPM
+
+
+=============================================================================
+
+Version: v004                                    Release Date: 19 September 2012
+
+=============================================================================
+
+Changes:
+- DEV352751: Fix ZeroPowerOdd Hotplug Gevent trigger level
+- DEV354925: Add DualGraphicsNotSupported, DgpuPowerOnWithMoniter and MXM_OVERT# support
+- DEV355520: Add UnusedGppClkOff check before restore PCIe clock setting
+- DEV355703: Add the support for three GPIO pins to detect the device
+- DEV356312: Optimize BootTimeRecord code
+- DEV357454: Add build option for different CPU families
+- BUG357503: Remove $(AGESA_ROOT) in .inf files
+
+
+=============================================================================
+
+Version: v003                                    Release Date: 24 August 2012
+
+=============================================================================
+
+Changes:
+- DEV349943: Add Adaptive S4 Support
+- ENH331633: Add Doxygen support to CPM
+- BUG350395, BUG349890: Prototype issues
+- DEV351358: Load Pre Init Table in two stages
+- DEV352743: Fix build issue when AMD_BIOS_BOOT_TIME_RECORD is enabled
+
+
+=============================================================================
+
+Version: v002                                    Release Date: 6 August 2012
+
+=============================================================================
+
+Changes:
+- BUG329933: Zero Power ODD feature fail due to hardcode SCI status mapping
+- BUG329938: PI compatible issue related with FirmwareVolume
+- ENH329924: Add express card support on FCH
+- BUG330775: Long boot up time issue when ODD is attached
+- DEV332340: Switch VGA display when dGpu is primary
+- DEV332728: Adjust GEVENT programming sequence
+- ENH329917: Add EC GPIO control capability
+- DEV333017: Add GPIO Pull Up and Pull Down Disable in GPIO_DEFINITION
+- DEV333659: Update PowerXpress Feature
+- DEV333669: ZPODD does not work after ODD hotplug
+- DEV333693: Programming GEVENT pin in DXE stage
+- DEV334031: Optimized CPM ASL code for NV DATA
+- DEV335389: Optimize ACPI Thermal Fan module
+- BUG336008: Buffer size in ATRM is greater than 0xFF00
+- DEV337474: Add new common function to add and remove table
+- DEV338170: Add Combo Support in CPM
+- DEV338863: Add new MXM power on sequence support
+- DEV339534: Update the patch function for IGPU and DGPU SSDT table
+- DEV339563: Add new chip to support
+- DEV339849: Initialize GPIO after AmdInitResetPpi is installed
+- BUG340372: Configure Switch graphics page disappears
+- BUG341005: Wrong function call in CpmStall
+- DEV342854: Add two delay support on MXM power on sequence
+- DEV344279: Split GPIO Device Init Sequence from one stage to two stages
+- DEV345163: Add a dummy stage for GPIO Device Init in BIOS post
+- DEV347410: The SSID/SVID cannot be restored when MXM card power on
+- DEV348128: Add new build option CPM_ASL_COMPONENT_TYPE and CPM_ACPI_SECTIONS_SUPPORT
+- DEV348470: Restore GPU SSID in S3 resume
+
+
+=============================================================================
+
+Version: v001                                    Release Date: 09 May 2012
+
+=============================================================================
+
+- First version of Common Platform Module

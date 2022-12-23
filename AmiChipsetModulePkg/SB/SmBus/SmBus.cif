@@ -1,0 +1,12 @@
+<component>
+	name = "SmBus"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\SB\SmBus\"
+	RefName = "AmiChipsetModulePkg.SmBus"
+[INF]
+"SmBusDxe.inf"
+"SmBusPei.inf"
+"SmBusSmm.inf"
+[files]
+"SmBus.sdl"	
+<endComponent>

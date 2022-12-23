@@ -1,0 +1,10 @@
+<component>
+    name = "Protocol"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\Include\Protocol\"
+    RefName = "AmiNetworkPkg.Protocol"
+[files]
+"AmiIpAvail.h"	
+"Dpc.h"	
+"AmiTlsCertificate.h"	
+<endComponent>

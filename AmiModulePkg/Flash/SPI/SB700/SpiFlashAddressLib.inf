@@ -1,0 +1,13 @@
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = SpiFlashAddressLib
+    FILE_GUID       = 8FD6BB54-5DC0-4F97-9E6C-8C440E20D576
+    MODULE_TYPE     = BASE
+    LIBRARY_CLASS   = SpiFlashAddressLib | PEIM DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER SMM_CORE UEFI_APPLICATION UEFI_DRIVER
+
+[Sources]
+    SpiFlashAddressLib.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec

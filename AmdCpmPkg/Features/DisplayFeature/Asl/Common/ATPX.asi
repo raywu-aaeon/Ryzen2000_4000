@@ -1,0 +1,509 @@
+/*****************************************************************************
+ *
+ * Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+//***************************************************************************
+//
+//  ATPX.asi - ATI PowerXpress interface
+//
+//***************************************************************************
+
+    Name(CpmAtpxBuffer, Buffer(256){})                  // message buffer in Name Space
+
+    // AMD update for saving discrete device graphics subsystem id if that device is enabled
+    Name(CpmDgpuSubSystemVendorId, 0xFFFFFFFF)          // this will get filled in
+                                                        // when the ATPX function 0 (query)
+                                                        // is called by the display driver.
+
+    // AMD update for saving discrete device HD-AUdio subsystem id if that device is enabled
+    Name(CpmHdaudioSubSystemVendorId, 0xFFFFFFFF)       // this will get filled in
+                                                        // when the ATPX function 0 (query)
+                                                        // is called by the display driver.
+
+    Method(ATPX, 2, Serialized)
+    {
+        If(LEqual(Arg0, 0)) {
+            Return(PX00)
+        }
+        If(LEqual(Arg0, 1)) {
+            Return(PX01)
+        }
+        If(LEqual(Arg0, 2)) {
+            PX02(DerefOf(Index(Arg1, 2)))
+            Return(CpmAtpxBuffer)
+        }
+        If(LEqual(Arg0, 3)) {
+            PX03(DerefOf(Index(Arg1, 2)))
+            Return(CpmAtpxBuffer)
+        }
+        If(LEqual(Arg0, 4)) {
+            PX04(DerefOf(Index(Arg1, 2)))
+            Return(CpmAtpxBuffer)
+        }
+        If(LEqual(Arg0, 8)) {
+            Return(PX08)
+        }
+        If(LEqual(Arg0, 9)) {
+            Return(PX09)
+        }
+        If(LEqual(Arg0, 10)) {
+            PX10(DerefOf(Index(Arg1, 2)))
+            Return(CpmAtpxBuffer)
+        }
+        If(LEqual(Arg0, 11)) {
+            PX11(DerefOf(Index(Arg1, 2)))
+            Return(CpmAtpxBuffer)
+        }
+        // Return null structure as function not supported
+        CreateWordField(CpmAtpxBuffer, 0, CpmStructureSize)                 // Structure size
+        CreateWordField(CpmAtpxBuffer, 2, CpmInterfaceVersion)              // Interface version
+        CreateDWordField(CpmAtpxBuffer, 4, CpmSupportedFunctionsBitVector)  // Function numbers (bit n = Function(n+1))
+        Store(0, CpmStructureSize)
+        Store(0, CpmInterfaceVersion)
+        Store(0x00000000, CpmSupportedFunctionsBitVector)                   // none supported
+        Return(CpmAtpxBuffer)
+    }
+
+    Method(PX00)
+    {
+        CreateWordField(CpmAtpxBuffer, 0, CpmStructureSize)                 // Structure size = 8
+        CreateWordField(CpmAtpxBuffer, 2, CpmInterfaceVersion)              // Interface version 1
+        CreateDWordField(CpmAtpxBuffer, 4, CpmSupportedFunctionsBitVector)  // Supported functions
+
+        Store(8, CpmStructureSize)
+        Store(1, CpmInterfaceVersion)
+        Store(CpmAtpxSupportedFunctionMask, CpmSupportedFunctionsBitVector)
+        If (CpmAtpxSupportedFunctionMask)
+        {
+            Store(0x7FFFFFFF, Local5)
+            Or(Local5, 0x80000000, Local5)
+            // Read back PXP discrete graphics subsystem id
+            Store (CpmReadPci32 (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, CpmdGpuP2pDeviceFuncNum, 0x2C), Local0)
+            // Read back PXP discrete HD-Audio subsystem id
+            Store (CpmReadPci32 (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, Add(CpmdGpuP2pDeviceFuncNum, 1), 0x2C), Local1)
+            If(LNotEqual(Local0, Local5))
+            {
+                // Save VGA SVID in namespace
+                Store(Local0, CpmDgpuSubSystemVendorId)
+            }
+            If(LNotEqual(Local1, Local5))
+            {
+                // Save HD-Audio SVID in namespace
+                Store(Local1, CpmHdaudioSubSystemVendorId)
+            }
+        }
+        Return(CpmAtpxBuffer)
+    }
+
+    Method(PX01)
+    {
+        CreateWordField(CpmAtpxBuffer, 0, CpmStructureSize)                 // Structure Size
+        CreateDWordField(CpmAtpxBuffer, 2, CpmValidFlagsMask)               // Valid Fields Mask for Flags
+        CreateDWordField(CpmAtpxBuffer, 6, CpmFlags)                        // Flags
+
+        Store(10, CpmStructureSize)                                         // Structure Size fixed at 10 bytes
+        Store(0x0003FC80, CpmValidFlagsMask)                                // Bit[7,10:17] valid, ATPX rev 0.35
+        Store(CpmAtpxFlags, CpmFlags)
+
+        Return(CpmAtpxBuffer)
+    }
+
+    Method(PX02, 1)
+    {
+        // This is the Method to power the Discrete GPU down or up under control
+        // of the Ati Display driver.  The hardware to support this must have an
+        // independent GPIO pin to power down the Discrete GPU.
+        // It must also have an independent GPIO pin that this code
+        // can use to de-assert the reset signal to the Discrete GPU device
+        // in order to initiate it's PCIe training/re-training sequence.
+
+        // The power control pin for the Discrete GPU must also be enabled during very
+        // early POST and S3 resume sequence (prior to Pcie training).
+
+        CreateWordField(CpmAtpxBuffer, 0, CpmStructureSize)                 // Structure size = 3
+        CreateByteField(CpmAtpxBuffer, 2, CpmPowerState)                    // Power state
+
+        Store(3, CpmStructureSize)
+        And(Arg0, 0x01, CpmPowerState)
+
+        Store (Buffer (5) {}, Local7)
+        CreateWordField(Local7, 0, CpmStructureSize2)                       // Structure size field
+        CreateField(Local7, 16, 3, CpmFunctionNumber)                       // func field
+        CreateField(Local7, 19, 5, CpmDeviceNumber)                         // dev field
+        CreateByteField(Local7, 3, CpmBusNumber)                            // bus field
+        CreateByteField(Local7, 4, CpmHotplugStatus)                        // hotplug field
+        Store(5, CpmStructureSize2)                                         // size
+        Store(0, CpmBusNumber)                                              // bus 0
+        Store(CpmdGpuP2pBridgeDeviceNum, CpmDeviceNumber)                   // device
+        Store(CpmdGpuP2pBridgeFuncNum, CpmFunctionNumber)                   // func 0
+
+        Name(HPOK, 0)
+
+        Store(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureMxmDeviceId), Local0)
+        Store(CpmGetDeviceStatus(Local0), Local6)
+
+        CpmClearPresenceDetectChangeBit (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum)     // clear presence detect change bit
+
+        IF(LAnd(CpmPowerState, Local6))
+        {
+            CpmSetPostCode (CpmTpMxmPowerOnBegin)
+
+            // Power on discrete graphics
+            CpmSetDeviceReset(Local0, 0)                                    // Assert MXM Reset
+            CpmSetDevicePower(Local0, 1)                                    // Power on MXM
+            Sleep(32)                                                       // Delay
+            CpmSetDeviceReset(Local0, 2)                                    // Delay for MXM Reset
+            CpmSetDeviceReset(Local0, 1)                                    // De-assert MXM Reset
+
+            CpmSetPostCode (CpmTpMxmPowerOnBeforePcieTraining)
+
+            // Pcie link training-retraining check sequence
+            Store(0,HPOK)                                                   // Assume card not working
+
+            Sleep(20)                                                       // spec needs up to 20ms delay after lane power up
+                                                                            // allow for system interrupts by splitting the 200ms delay
+                                                                            // Wait for PCIE Bridge stability as per spec
+            // Enable training
+            Store(1, CpmHotplugStatus)                                      // plug in
+            Store(\_SB.ALIB(6, Local7), Local6)                             // notify plug event
+
+            Store(0,Local2)                                                 // master loop counter
+            While(LLess(Local2,15))
+            {
+                CpmClearPresenceDetectChangeBit (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum)     // clear presence detect change bit
+                Store(1, Local4)                                            // Check Training State == 0x10 for up to 1 second
+                Store(200, Local5)
+                While(LAnd(Local4,Local5))
+                {
+                    Store (CpmReadPcieRegister (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, 0xA5), Local0)
+                    And(Local0,0x7F,Local0)
+                    If(LAnd(LGreaterEqual(Local0,0x10), LNotEqual(Local0,0x7F)))
+                    {
+                        Store(0,Local4)
+                    }
+                    Else
+                    {
+                        Sleep(5)
+                        Decrement(Local5)
+                    }
+                }
+
+                If(LNot(Local4))                                            // Timeout checking Training State?
+                {
+                    // check if Data Link Negotiation is done(Bit1=0)
+                     Store (CpmCheckVirtualChannelNegotiationPending (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum),Local5)
+
+                    If(Local5)
+                    {
+                        CpmReconfigPcieLink (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum) // dGPU behind bridge 2
+                        Sleep(5)                                          // Delay 5ms after re-train
+                        Increment(Local2)                                 // Increment master loop counter
+                    }
+                    Else                                                  // Device training OK
+                    {
+                        Store(0, Local0)                                    // Do Common Clock re-train
+                        If (LEqual (CpmRetrainPcieLink (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum), Ones))
+                        {
+                            Store(1, Local0)
+                        }
+
+                        If(Local0)
+                        {
+//                          CpmSetPcieAspm (CpmdGpuP2pBridgeBusNum, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, CpmdGpuAspmLxEnable) // Set Aspm on Bridge
+//                          CpmSetPcieAspm (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, CpmdGpuP2pDeviceFuncNum, CpmdGpuAspmLxEnable) // Set Aspm on Device
+
+                            CpmSetDevicePower(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureDisplayMuxDeviceId), 1)
+                            CpmSetDevicePower(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureI2cMuxDeviceId), 1)
+
+                            Store(1,HPOK)
+                            Store(16,Local2)
+                        }
+                        Else
+                        {
+                            Store(0,HPOK)
+                            Store(16,Local2)
+                        }
+                    }
+                }
+                Else
+                {
+                    Store(16,Local2)
+                }
+            } // EndWhile(Local2 < 15)
+
+            If (LNot(HPOK))                                                 // Failure
+            {
+                CpmSetPostCode (CpmTpMxmPowerOnPcieTrainingFailed)
+
+                // Do dummy PCI CFG read of device behind bridge to get State machine back to detect mode
+                Store (CpmReadPci32 (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, CpmdGpuP2pDeviceFuncNum, 0), Local1)
+
+                Sleep(10)
+
+                Store(1, Local4)
+                Store(5, Local5)
+                While(LAnd(Local4, Local5))
+                {
+                    Store (CpmReadPcieRegister (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, 0xA5), Local0)
+                    And(Local0, 0x7F, Local0)
+                    If(LOr(LLessEqual(Local0, 0x04), LEqual(Local0, 0x1F)))
+                    {
+                        Store(0,Local4)
+                    }
+                    Else
+                    {
+                        Store (CpmReadPci32 (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, CpmdGpuP2pDeviceFuncNum, 0), Local0)
+                        Sleep(5)
+                        Decrement(Local5)
+                    }
+                }
+                Store(0, CpmHotplugStatus)                                  // plug out
+                \_SB.ALIB(6, Local7)                                        // notify plug event
+            }
+            If (LNotEqual (CpmdGpuAudioDisable, 0)) {                       // PX is enabled
+                Store (CpmReadPci32 (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, 0x54), Local0)
+                CpmWritePci32 (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, 0x54, And (Local0, 0xFFFF7FFC))   // Set to D0 state
+                CpmTriggerSmi (CpmdGpuAudioDisable, 0x00, 0x10)             // Trigger a SW SMI to Disable DGPU Audio
+                CpmWritePci32 (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, 0x54, And (Local0, 0xFFFF7FFF))   // Restore to original state
+            }
+            CpmSetPostCode (CpmTpMxmPowerOnEnd)
+        }
+        Else                                                                // Power Off dGPU
+        {
+            CpmSetPostCode (CpmTpMxmPowerOffBegin)
+
+            Store(0, CpmHotplugStatus)                                      // plug out
+            \_SB.ALIB(6, Local7)                                            // notify plug event
+
+            CpmSetPostCode (CpmTpMxmPowerOffBeforePowerOff)
+
+            CpmSetDevicePower(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureDisplayMuxDeviceId), 0)
+            CpmSetDevicePower(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureI2cMuxDeviceId), 0)
+
+            CpmSetDeviceReset(Local0, 0)                                    // Assert MXM Reset
+            Sleep(10)                                                       // Delay
+            CpmSetDevicePower(Local0, 0)                                    // Power off MXM
+
+            // The link training-retraining check sequence goes here
+            // Note: Powering down the discrete graphics will result in a change-detection
+            // of the Plug and Play resources and trigger an OS PNP Scan.  This scan
+            // may have adverse effects (eg system timing) from the Vista RTM OS and various
+            // hot-fixes (Vista SP1) or updated drivers may be needed.
+
+            CpmClearPresenceDetectChangeBit (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum)                   // clear presence detect change bit
+            // Do dummy PCI CFG read of device behind bridge
+            Store (CpmReadPci32 (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, CpmdGpuP2pDeviceFuncNum, 0), Local1)
+
+            Sleep(10)
+
+            Store(1, Local4)
+            Store(5, Local5)
+            While(LAnd(Local4,Local5))
+            {
+                Store (CpmReadPcieRegister (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, 0xA5), Local0)
+                And (Local0,0x7F,Local0)
+                If (LOr(LLessEqual(Local0, 0x04), LEqual(Local0, 0x1F)))
+                {
+                    Store(0,Local4)
+                }
+                Else
+                {
+                    Store (CpmReadPci32 (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, CpmdGpuP2pDeviceFuncNum, 0), Local1)
+                    Sleep(5)
+                    Decrement(Local5)
+                }
+            } // end of while
+            Store(2,HPOK)
+            CpmSetPostCode (CpmTpMxmPowerOffEnd)
+        }
+
+        If(HPOK)
+        {
+            Store(0x7FFFFFFF, Local5)
+            Or(Local5, 0x80000000, Local5)
+            Store (CpmReadPci32 (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, 0x54), Local1)
+            CpmWritePci32 (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, 0x54, And (Local1, 0xFFFF7FFC))   // Set to D0 state
+            Store (CpmReadPci32 (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, CpmdGpuP2pDeviceFuncNum, 0), Local0)
+            If(Land(LEqual(HPOK, 1), LNotEqual(Local0, Local5)))            // Power up of Discrete GPU?
+            {
+                // Each time we power up the Discrete Graphics again,
+                // we need to re-program the subsystem id if the
+                // device does not have an external ROM.  We assume
+                // that there is no ROM (ie. the dGPU video BIOS is
+                // embedded in the system BIOS binary) and this doesn't
+                // hurt if there is one in any case.
+                // AMD update for saving discrete device HD-AUdio subsystem id
+                // if that device is enabled
+
+                // Get saved dGPU subsystem vendor ID and subsystem ID and write it to the mirror register
+                CpmWritePci32 (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, CpmdGpuP2pDeviceFuncNum, 0x4C, CpmDgpuSubSystemVendorId)
+
+                Sleep(10)                                                   // some small delay after writing the SSIDs
+
+                If(LNotEqual(CpmHdaudioSubSystemVendorId, Local5))
+                {
+                    // Get saved dGPU HD_Audio subsystem vendor ID and subsystem ID and write it to the mirror register
+                    CpmWritePci32 (CpmdGpuP2pDeviceBusNum, CpmdGpuP2pDeviceDeviceNum, Add(CpmdGpuP2pDeviceFuncNum, 1), 0x4C, CpmHdaudioSubSystemVendorId)
+                }
+                Sleep(10)                                                   // some small delay after writing the SSIDs
+            }
+            CpmWritePci32 (0, CpmdGpuP2pBridgeDeviceNum, CpmdGpuP2pBridgeFuncNum, 0x54, And (Local1, 0xFFFF7FFF))   // Restore to original state
+//          Notify(\_SB.PCI0.PB2, 0)
+        }
+    }
+
+
+
+    Method(PX03, 1)
+    {
+        // This is the Method to set the PowerXpress Display MUX under control
+        // of the Ati Display driver
+
+        // Since Video BIOS must independently (without interaction with display driver
+        // or system BIOS) be able to revert the mux to the iGPU side
+        // when handling Windows blue screen errors (requires primary VGA enabled GPU)
+        // then the GPIO pin used must be controlled from the iGPU graphics registers
+
+        CreateWordField(CpmAtpxBuffer, 0, CpmStructureSize)          // Structure size = 3
+        CreateWordField(CpmAtpxBuffer, 2, CpmDisplaySwitch)          // Display switch
+
+        Store(4, CpmStructureSize)
+        And(Arg0, 0x01, CpmDisplaySwitch)
+
+        If (CpmDisplaySwitch)
+        {
+            CpmSetDevicePower(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureDisplayMuxDeviceId), 1)
+        }
+        Else
+        {
+            CpmSetDevicePower(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureDisplayMuxDeviceId), 0)
+        }
+    }
+
+
+    Method(PX04, 1)
+    {
+        CreateWordField(CpmAtpxBuffer, 0, CpmStructureSize)          // Structure size = 3
+        CreateWordField(CpmAtpxBuffer, 2, CpmI2cSwitch)
+
+        Store(4, CpmStructureSize)
+        And(Arg0, 0x01, CpmI2cSwitch)
+
+        If (CpmI2cSwitch)
+        {
+            CpmSetDevicePower(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureI2cMuxDeviceId), 1)
+        }
+        Else
+        {
+            CpmSetDevicePower(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureI2cMuxDeviceId), 0)
+        }
+    }
+
+    Method(PX08)
+    {
+        CreateWordField(CpmAtpxBuffer, 0, CpmDisplayConnectorNumber)        // Number of reported display connectors
+        CreateWordField(CpmAtpxBuffer, 2, CpmStructureSize)                 // Connector structure size
+        Store(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureAtpxConnector8Number), Local0)
+        Store(Local0, CpmDisplayConnectorNumber)                            // Support xx connector
+        Store(5, CpmStructureSize)                                          // Connector structure size fixed at 5 bytes
+        Multiply(Local0, CpmStructureSize, Local0)
+        Store(0, Local1)
+        While(LLess(Local1, Local0))
+        {
+            Store(CpmReadTable(CpmDisplayFeatureTable, Add(CpmDisplayFeatureAtpxConnector8, Local1)), Local2)
+            Store(Local2, Index(CpmAtpxBuffer, Add(4, Local1)))
+            Increment(Local1)
+        }
+        Return(CpmAtpxBuffer)
+    }
+
+    Method(PX09)
+    {
+        CreateWordField(CpmAtpxBuffer, 0, CpmDisplayConnectorNumber)        // Number of reported display connectors
+        CreateWordField(CpmAtpxBuffer, 2, CpmStructureSize)                 // Connector structure size
+        Store(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureAtpxConnector9Number), Local0)
+        Store(Local0, CpmDisplayConnectorNumber)                            // Support 2 connector, DFP1 DFP2
+        Store(3, CpmStructureSize)                                          // Connector structure size fixed at 3 bytes
+        Multiply(Local0, CpmStructureSize, Local0)
+        Store(0, Local1)
+        While(LLess(Local1, Local0))
+        {
+            Store(CpmReadTable(CpmDisplayFeatureTable, Add(CpmDisplayFeatureAtpxConnector9, Local1)), Local2)
+            Store(Local2, Index(CpmAtpxBuffer, Add(4, Local1)))
+            Increment(Local1)
+        }
+        Return(CpmAtpxBuffer)
+    }
+
+    Method(PX10, 1)
+    {
+        CreateWordField(CpmAtpxBuffer, 0, CpmStructureSize)                 // Structure size = 3
+        CreateByteField(CpmAtpxBuffer, 2, CpmPowerState)                    // Power state
+
+        Store(3, CpmStructureSize)
+        And(Arg0, 0x01, CpmPowerState)
+        And(Arg0, 0x01, \_SB.MACO)
+    }
+
+    Method(PX11, 1)
+    {
+        CreateWordField(CpmAtpxBuffer, 0, CpmStructureSize)                 // Structure size = 3
+        CreateByteField(CpmAtpxBuffer, 2, CpmFlags)                         // Flags
+
+        Store(3, CpmStructureSize)
+        And(Arg0, 0x01, CpmFlags)
+
+        Store(CpmFlags, Local2)
+        Store(CpmSaveContextTable, Local0)
+
+        If (Local0)
+        {
+            Store(CpmReadTable(CpmSaveContextTable, CpmSaveContextBufferType), Local0)
+            Store(CpmReadTable(CpmSaveContextTable, CpmSaveContextBufferOffset), Local1)
+            Add(CpmAcpiMmioBaseAddr, Add(Multiply(Local0, 0x100), Local1), Local1)
+            CpmWriteMem8(Local1, CpmdGpuStateOnResume, 0, 8, Local2)
+        }
+    }

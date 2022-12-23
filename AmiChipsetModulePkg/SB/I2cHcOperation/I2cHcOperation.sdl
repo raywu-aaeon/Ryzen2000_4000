@@ -1,0 +1,50 @@
+TOKEN
+	Name  = "I2cHcOperation_SUPPORT"
+	Value  = "1"
+	Help  = "I2C HC Operation Support."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "MAX_I2C_BUS"
+	Value  = "3"
+	Help  = "The maximum number of I2C Controllers."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+INFComponent
+	Name  = "I2cHcOperation"
+	File  = "I2cHcOperation.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+TOKEN
+	Name  = "I2C2_HANDLE_ENABLED"
+	Value  = "TRUE"
+	Help  = "Create a handle for the I2C2 controller."
+	TokenType = BOOLEAN
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "I2C3_HANDLE_ENABLED"
+	Value  = "TRUE"
+	Help  = "Create a handle for the I2C3 controller."
+	TokenType = BOOLEAN
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "I2C4_HANDLE_ENABLED"
+	Value  = "FALSE"
+	Help  = "Create a handle for the I2C4 controller."
+	TokenType = BOOLEAN
+	TargetH = Yes
+End
+

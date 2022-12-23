@@ -1,0 +1,98 @@
+#;*****************************************************************************
+#;
+#; Copyright 2016 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#;
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#;
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaDfPkg
+  PACKAGE_GUID          = 81e51ee3-c347-4563-92fe-790ba953bf0f
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+
+
+[LibraryClasses]
+  BaseFabricTopologyLib|Include/Library/BaseFabricTopologyLib.h
+  PeiFabricTopology2ServicesLib|Include/Library/PeiFabricTopology2ServicesLib.h
+  DxeFabricTopology2ServicesLib|Include/Library/DxeFabricTopology2ServicesLib.h
+  SmmFabricTopology2ServicesLib|Include/Library/SmmFabricTopology2ServicesLib.h
+  FabricPstatesLib|Include/Library/FabricPstatesLib.h
+  FabricRegisterAccLib|Include/Library/FabricRegisterAccLib.h
+  FabricResourceInitLib|Include/Library/FabricResourceInitLib.h
+  FabricResourceSizeForEachRbLib|Include/Library/FabricResourceSizeForEachRbLib.h
+  FabricResourceReportToGcdLib|Include/Library/FabricResourceReportToGcdLib.h
+  PeiFabricResourceManagerServicesLib|Include/Library/PeiFabricResourceManagerServicesLib.h
+  DxeFabricResourceManagerServicesLib|Include/Library/DxeFabricResourceManagerServicesLib.h
+  FabricWdtLib|Include/Library/FabricWdtLib.h
+
+[Guids]
+  gAmdTraceBufferBaseGuid                  = {0x2c91a47a, 0xc0b8, 0x46fb, {0x94, 0x4b, 0xd9, 0x8f, 0x57, 0xdb, 0xca, 0x35}}
+  gAmdResourceSizeForEachRbGuid            = {0x542b8f2f, 0xbd52, 0x4233, {0x8c, 0x3d, 0x66, 0x53, 0xd, 0xe8, 0xa3, 0x69}}
+  gAmdResourceDistributionGuid             = {0xce40a5f, 0x153a, 0x4462, {0xa4, 0x29, 0x40, 0x98, 0xe0, 0xe1, 0x3c, 0xac}}
+
+[Protocols]
+  gAmdFabricPstateServicesProtocolGuid     = {0xd72108db, 0xf0b3, 0x4c47, {0xb7, 0xbd, 0xaa, 0xd5, 0xea, 0xa, 0xbe, 0xea}}
+  gAmdFabricTopologyServices2ProtocolGuid  = {0x2adcd53f, 0x4c94, 0x40bb, {0xbb, 0xa5, 0x7d, 0xeb, 0xff, 0x8a, 0x13, 0xac}}
+  gAmdFabricTopologyServices2SmmProtocolGuid = {0x956a4d54, 0xfaab, 0x4916, {0xac, 0x99, 0x3d, 0x5d, 0x9a, 0xd0, 0xd7, 0xc0}}
+  gAmdFabricAcpiSlitServicesProtocolGuid   = {0x79eaaf81, 0xb2e1, 0x4ebe, {0xbc, 0xa4, 0x99, 0xc3, 0xe7, 0xa7, 0xcb, 0x59}}
+  gAmdFabricAcpiSratServicesProtocolGuid   = {0xd1e9241e, 0x6702, 0x43c3, {0x94, 0xda, 0x2b, 0x66, 0x22, 0xd8, 0x69, 0xcf}}
+  gAmdFabricAcpiCditServicesProtocolGuid   = {0x853964e3, 0x82e3, 0x4ead, {0xa2, 0x91, 0x1, 0xfd, 0x6b, 0x31, 0x59, 0x34}}
+  gAmdFabricAcpiCratServicesProtocolGuid   = {0x4097a25c, 0x1485, 0x4551, {0xb4, 0xfa, 0xed, 0x99, 0xc9, 0xf7, 0xef, 0x7d}}
+  gAmdFabricNumaServicesProtocolGuid       = {0xb750d611, 0x38ca, 0x4d38, {0x95, 0xf7, 0x9c, 0xe, 0x28, 0x1d, 0xf1, 0x9a}}
+  gAmdFabricNumaServices2ProtocolGuid      = {0xa8ff2e64, 0xf319, 0x4af1, {0x9e, 0xc8, 0x18, 0x89, 0x89, 0xc3, 0x1e, 0x4a}}
+  gAmdFabricAcpiMsctServicesProtocolGuid   = {0x21db0888, 0xaafc, 0x4d21, { 0xb8, 0xeb, 0xd9, 0xfe, 0x8d, 0xaa, 0x9c, 0x78}}
+
+[Ppis]
+  gAmdFabricPeiInitCompletePpiGuid         = {0xc5667d40, 0x3275, 0x402b, {0x84, 0x1f, 0x93, 0x27, 0x65, 0xa0, 0x7c, 0xe4}}
+  gAmdFabricPstateServicesPpiGuid          = {0x30524104, 0xabe6, 0x4335, {0x83, 0x16, 0x94, 0xb0, 0xaa, 0x65, 0xf5, 0x55}}
+  gAmdFabricTopologyServices2PpiGuid       = {0x5e133105, 0xe9b6, 0x4d52, {0x96, 0x94, 0x60, 0x54, 0xd5, 0xb4, 0x4a, 0xe6}}
+
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+
+[PcdsDynamic]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdFabricResourceDefaultSizePtr|0|UINT64|0x00DF0000  # This points to a structure of FABRIC_RESOURCE_FOR_EACH_RB
+

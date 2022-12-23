@@ -1,0 +1,32 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiCmosLib
+  FILE_GUID                      = 0F1D21F7-0927-467f-B8D1-CF4DC9F3A4EC  
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiCmosLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+#
+
+[Sources]
+  AmiCmosLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec ### RVA9-EIP310737 : required for CmosAccess.h.
+  
+[LibraryClasses]
+  BaseLib
+  IoLib
+  AmiSbMiscLib
+

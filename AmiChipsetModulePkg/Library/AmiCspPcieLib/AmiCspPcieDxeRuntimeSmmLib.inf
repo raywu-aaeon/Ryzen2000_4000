@@ -1,0 +1,28 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiCspPcieDxeRuntimeSmmLib
+  FILE_GUID                      = e55019a0-f0a4-4c47-84f5-afebbbd180eb  
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiCspPcieLib|DXE_RUNTIME_DRIVER DXE_SMM_DRIVER
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+#
+
+[Sources]
+  AmiCspPcieDxeRuntimeSmmLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  PciExpressLib
+
+

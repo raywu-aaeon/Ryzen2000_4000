@@ -1,0 +1,525 @@
+#****************************************************************# 
+#                                                                #
+#                       RomLayout Relate                         #
+#                                                                #
+#****************************************************************#
+TOKEN
+    Name  = "SM_PSP_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to set psp support for Summit CPU."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "SM_PSP_FW_RS3_SUPPORT"
+    Value = "1"
+    Help  = "Enable/Disable PSP firmware RS3 support. Project that already shipped doesnt need to enable it"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_LEVEL_1_SIZE_SM"
+    Value = "0xB0000"
+    Help  = "The SM PSP level 1 size. This is the total size of PSP directory table(Fixed)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_1_OFFSET_SM"
+    Value  = "$(BLOCK_1_OFFSET)"
+    Help  = "The SM PSP directory level 1 offset behind PSP BR fixed Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_LEVEL_1_SIZE_SM"
+    Value  = "0x20000"
+    Help  = "The SM BIOS level 1 size. This is the total size of BIOS directory table(Fixed)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_1_OFFSET_SM"
+    Value  = "$(BLOCK_2_OFFSET)"
+    Help  = "The SM BIOS directory level 1 offset after SM PSP directory level 1."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_LEVEL_2_SIZE_SM"
+    Value = "0x130000"
+    Help  = "The SM PSP level 2 size. This is the total size of PSP directory table(Updatable)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_2_OFFSET_SM"
+    Value  = "$(BLOCK_7_OFFSET)"
+    Help  = "The SM PSP directory level 2 offset after BR updatable data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_LEVEL_2_SIZE_SM"
+    Value = "0x20000"
+    Help  = "The SM BIOS level 2 size. This is the total size of BIOS directory table(Updatable)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_2_OFFSET_SM"
+    Value  = "$(BLOCK_8_OFFSET)"
+    Help  = "The SM BIOS directory level 2 offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+OUTPUTREGISTER
+    Name  = "AUTOGEN_PSP_SM_XML"
+    Path  = "Build"
+    File  = "PspDataSm.xml"
+    Template  = "BuildPspSm.txt"
+End
+
+#*********************** Auto Counting **********************#
+TOKEN
+    Name  = "PSP_DATA_SIZE_SM"
+    Value  = "$(PSP_LEVEL_1_SIZE_SM) + $(PSP_LEVEL_2_SIZE_SM) + $(BIOS_LEVEL_1_SIZE_SM) + $(BIOS_LEVEL_2_SIZE_SM)"
+    Help  = "The total SM PSP block size(PSP directory[level 1+ level 2] + BIOS directory[level 1 + level 2])"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_L1_DIRECTORY_ADDRESS_SM"
+    Value = "$(PSP_DIRECTORY_LEVEL_1_OFFSET_SM) + $(FLASH_BASE)"
+    Help  = "Physical address of the PSP SM level 1 directory table."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_L1_DIRECTORY_ADDRESS_SM"
+    Value  = "$(BIOS_DIRECTORY_LEVEL_1_OFFSET_SM) + $(FLASH_BASE)"
+    Help  = "Physical address of SM BIOS level 1 directory table"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_L2_DIRECTORY_ADDRESS_SM"
+    Value  = "$(PSP_DIRECTORY_LEVEL_2_OFFSET_SM) + $(FLASH_BASE)"
+    Help  = "Physical address of the PSP SM level 2 directory table."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_L2_DIRECTORY_ADDRESS_SM"
+    Value  = "$(BIOS_DIRECTORY_LEVEL_2_OFFSET_SM) + $(FLASH_BASE)"
+    Help  = "Physical address of SM BIOS level 2 directory table"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "POINT_TO_PSP_LEVEL_2_OFFSET_SM"
+    Value  = "$(PSP_DIRECTORY_LEVEL_2_OFFSET_SM) + 0x400"
+    Help  = "Point to PSP Boot Loader firmware in 2nd level DIR, This entry is used to satisfy PSP bootrom"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+
+
+
+#****************************************************************# 
+#                                                                #
+#                       Firmware file define                     #
+#                                                                #
+#****************************************************************#
+TOKEN
+    Name = "Firmwares_DIR_ZP"
+    Value  = "AgesaModulePkg/Firmwares/ZP"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "SM_APCB_BINARY_ELINK"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x60" Instance="0x00" File="$(PSP_APCB_FILENAME_SM_UDIMM)" Size="0x4000"/>'
+    Parent  = "SM_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 10
+    Token = "APCB_RV_AM4_UDIMM_BINARY_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x60" Instance="0x01" File="$(PSP_APCB_FILENAME_SM_SODIMM)" Size="0x4000"/>'
+    Parent  = "SM_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 20
+    Token = "APCB_RV_AM4_SODIMM_BINARY_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x68" Instance="0x00" File="$(PSP_APCB_FILENAME_SM_UDIMM)" Size="0x4000"/>'
+    Parent  = "SM_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 30
+    Token = "APCB_RV_AM4_UDIMM_BINARY_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x68" Instance="0x01" File="$(PSP_APCB_FILENAME_SM_SODIMM)" Size="0x4000"/>'
+    Parent  = "SM_APCB_BINARY_ELINK"
+    InvokeOrder = AfterParent
+    Priority  = 40
+    Token = "APCB_RV_AM4_SODIMM_BINARY_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSPTOOL"
+    Value = "AgesaModulePkg/AMDTools/NewPspKit/PspDirectoryTool/BuildPspDirectory.exe"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_SOFT_FUSE_CHAIN_SM"
+    Value  = "0x00000001"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "AMD_PUB_KEY_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/AmdPubKeyZP.bin"
+    Help = "AMD Public Key. Type 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_BOOT_LOADER_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/PspBootLoader_prod_SmAm4.sbin"
+    Help = "PSP Boot Loader firmware. Type 0x1"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_RECOVERY_BOOT_LOADER_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/PspRecoveryBootLoader_prod_ZP.sbin"
+    Help = "PSP recovery Boot Loader firmware. Type 0x3"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/SmuFirmwareZP.csbin"
+    Help = "SMU offchip firmware. Type 0x8"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "ZEPPELIN_OEM_ABL_FW_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/ZeppelinOemAblFw.tkn"
+    Help = "Signed OEM ABL Key. Type 0xA"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE2_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/SmuFirmware2ZP.csbin"
+    Help = "SMU offchip firmware 2. Type 0x12"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "DEBUG_UNLOCK_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/DebugUnlock_ZP.sbin"
+    Help = "PSP early secure unlock debug image. Type 0x13"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_SECURE_OS_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/PspSecureOs_prod_ZP.csbin"
+    Help = "PSP Secure OS firmware. Type 0x2"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SM_PSP_FW_RS3_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_SECURE_OS_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/PspSecureOs_prod_ZP_AM4_133.csbin"
+    Help = "PSP Secure OS firmware. Type 0x2"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SM_PSP_FW_RS3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_TRUSTLETS_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/PspTrustlets_prod_ZP.cbin"
+    Help = "PSP boot-loaded trustlet binaries. Type 0xC"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SM_PSP_FW_RS3_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_TRUSTLETS_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/PspTrustlets_prod_ZP_AM4_133.cbin"
+    Help = "PSP boot-loaded trustlet binaries. Type 0xC"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SM_PSP_FW_RS3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "ZEPPELIN_TRUSTLET_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/ZeppelinTrustlet.tkn"
+    Help = "Trustlet public key signed with AMD key. Type 0xD"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "BIOS_PSP_PUB_KEY_SIGNED_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/RtmPubSignedZP.key"
+    Help = "This is BIOS vendor public key, signed by AMD. BIOS type 0x5"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_IKEK_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/PspIkekZP.bin"
+    Help = "PSP iKEK binary. Type 0x21"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SECURE_EMPTY_TOKEN_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/SecureEmptyToken.bin"
+    Help = "Token unlock Data. Type 0x22"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_SECP_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/RsmuSecurityPolicy_ZP.sbin"
+    Help = "Entry to load security gasket binary. Type 0x24"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_0_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/AgesaBootLoader0_prod_ZP.csbin"
+    Help = "This is AgesaBootLoader0 binary. Type 0x30"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_1_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/AgesaBootLoader1_prod_ZP.csbin"
+    Help = "This is AgesaBootLoader1 binary. Type 0x31"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_2_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/AgesaBootLoader2_prod_ZP.csbin"
+    Help = "This is AgesaBootLoader2 binary. Type 0x32"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_3_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/AgesaBootLoader3_prod_ZP.csbin"
+    Help = "This is AgesaBootLoader3 binary. Type 0x33"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_4_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/AgesaBootLoader4_prod_ZP.csbin"
+    Help = "This is AgesaBootLoader4 binary. Type 0x34"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_5_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/AgesaBootLoader5_prod_ZP.csbin"
+    Help = "This is AgesaBootLoader5 binary. Type 0x35"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_AGESA_BOOT_LOADER_6_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/AgesaBootLoader6_prod_ZP.csbin"
+    Help = "This is AgesaBootLoader5 binary. Type 0x36"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "TYPE_0X63_ENTRY"
+    Value  = '<POINT_ENTRY Type="0x63" Address="$(PSP_APOB_SHARED_OFFSET)" Size="$(PSP_APOB_SHARED_SIZE)"/>'
+    Help = "Type 0x63 entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "PSP_APOB_SHARED_BLOCK_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_APOB_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/APOB_NV_ZP.bin"
+    Help = "AGESA PSP Output Block binary. BIOS type 0x63"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "UCODE_FILENAME_ZP_B2"
+    Value  = "$(Firmwares_DIR_ZP)/UcodePatch_ZP_B2.bin"
+    Help = "Microcode patch binary. BIOS type 0x66, instance 00"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "UCODE_FILENAME_ZP_B1"
+    Value  = "$(Firmwares_DIR_ZP)/UcodePatch_ZP_B1.bin"
+    Help = "Microcode patch binary. BIOS type 0x66, instance 01"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "UCODE_FILENAME_ZP_B0"
+    Value  = "$(Firmwares_DIR_ZP)/UcodePatch_ZP_B0.bin"
+    Help = "Microcode patch binary. BIOS type 0x66, instance 02"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "UCODE_FILENAME_ZP_A0"
+    Value  = "$(Firmwares_DIR_ZP)/UcodePatch_ZP_A0.bin"
+    Help = "Microcode patch binary. BIOS type 0x66, instance 03"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_APPB_1D_DDR4_UDIMM_IMEM_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/Appb_Zp_1D_Ddr4_Udimm_Imem.csbin"
+    Help = "AGESA PSP PMU Block binary. BIOS type 0x64"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_APPB_1D_DDR4_UDIMM_DMEM_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/Appb_Zp_1D_Ddr4_Udimm_Dmem.csbin"
+    Help = "AGESA PSP PMU Block binary. BIOS type 0x65"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_APPB_2D_DDR4_IMEM_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/Appb_Zp_2D_Ddr4_Imem.csbin"
+    Help = "AGESA PSP PMU Block binary. BIOS type 0x64"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_APPB_2D_DDR4_DMEM_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/Appb_Zp_2D_Ddr4_Dmem.csbin"
+    Help = "AGESA PSP PMU Block binary. BIOS type 0x65"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "CORE_MCE_EMPTY_DATA_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/CoreMceEmptyData.bin"
+    Help = "Type 0x67"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "ZEPPELIN_SECURE_DEBUG_FILENAME_ZP"
+    Value  = "$(Firmwares_DIR_ZP)/ZeppelinSecureDebug.tkn"
+    Help = "Type 0x9"
+    TokenType = File
+    TargetMAK = Yes
+End

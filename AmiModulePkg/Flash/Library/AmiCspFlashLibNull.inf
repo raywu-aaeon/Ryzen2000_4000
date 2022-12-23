@@ -1,0 +1,20 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = AmiCspFlashLibNull
+    FILE_GUID       = 47970A28-8F4A-4CB2-91DE-BF344153189A
+    MODULE_TYPE     = BASE
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = AmiCspFlashLib
+
+[Sources]
+    FlashLibNull.c
+
+[Packages]
+    MdePkg/MdePkg.dec

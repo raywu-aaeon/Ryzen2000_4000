@@ -1,0 +1,76 @@
+TOKEN
+	Name  = "AmdCpmKernel_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Kernel support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmInitAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmInitAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmInitDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmInitDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmInitPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmInitPeim support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmInitSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmInitSmm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdCpmInitAsl"
+	File  = "Asl/AmdCpm3InitAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmInitAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmInitDxe"
+	File  = "Dxe/AmdCpm3InitDxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmInitDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmInitPeim"
+	File  = "Pei/AmdCpm3InitPeim.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmInitPeim_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmInitSmm"
+	File  = "Smm/AmdCpm3InitSmm.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AmdCpmInitSmm_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "AmdCpmInitPeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmdCpmPkg.AmdCpmInitPeim"
+	Index  = '"AFTER" "SmBusPei"'
+	Help  = "refer to (AmdCpmPkg.pei.inc.fdf)"
+End
+

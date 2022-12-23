@@ -1,0 +1,19 @@
+[Defines]
+INF_VERSION     = 0x00010015
+BASE_NAME       = FvDxeSig
+MODULE_TYPE     = USER_DEFINED
+FILE_GUID       = 68D1FED0-143E-479c-BF39-456E98B4FAC5
+SECTION_GUID    = 72A45C4B-F348-408f-B913-F7839F247CE2
+
+# Rom Hole 05ca0208 - 0fc1 - 11dc - 9011 - 00173153eba8
+#0x68d1fed0, 0x143e, 0x479c, 0xbf, 0x39, 0x45, 0x6e, 0x98, 0xb4, 0xfa, 0xc5
+#0x72a45c4b, 0xf348, 0x408f, 0xb9, 0x13, 0xf7, 0x83, 0x9f, 0x24, 0x7c, 0xe2
+
+[Sources]
+ FvDxeSig.cbin
+
+[Packages]
+ MdePkg/MdePkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+ 

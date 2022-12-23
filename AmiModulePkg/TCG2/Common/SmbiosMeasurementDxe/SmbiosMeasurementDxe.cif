@@ -1,0 +1,10 @@
+<component>
+	name = "SmbiosMeasurementDxe"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\TCG2\Common\SmbiosMeasurementDxe\"
+	RefName = "SmbiosMeasurementDxe"
+[INF]
+"SmbiosMeasurementDxe.inf"
+[files]
+"SmbiosMeasurementDxe.sdl"	
+<endComponent>

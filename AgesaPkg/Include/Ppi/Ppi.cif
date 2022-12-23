@@ -1,0 +1,16 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "AgesaPkg\Include\Ppi\"
+	RefName = "AgesaPkg.Include.Ppi"
+[files]
+"AmdErrorLogServicePpi.h"
+"FabricResourceManagerServicesPpi.h"
+"AmdMemoryInfoHobPpi.h"
+"AmdSocPcdInitPpi.h"
+"AmdVerPpi.h"
+"NbioPcieComplexFm15Ppi.h"
+"NbioPcieComplexPpi.h"
+"NbioPcieTopologyPpi.h"
+"NbioPcieTrainingGen1CompleteFm15Ppi.h"
+<endComponent>

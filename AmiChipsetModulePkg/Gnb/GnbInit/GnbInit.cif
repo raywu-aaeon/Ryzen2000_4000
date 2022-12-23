@@ -1,0 +1,13 @@
+<component>
+	name = "Gnb Init"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Gnb\GnbInit\"
+	RefName = "AmiChipsetModulePkg.GnbInit"
+[INF]
+"GnbPei.inf"
+"GnbDxe.inf"
+"AmdGopPlatformToDriver.inf"
+"GnbEdidOverrideProtocol.inf"
+[parts]
+"AmiChipsetModulePkg.GnbAmdPeiGop"
+<endComponent>

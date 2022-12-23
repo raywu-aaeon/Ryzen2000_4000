@@ -1,0 +1,10 @@
+<component>
+	name = "AMD CPU Asl"
+	category = ModulePart
+	LocalRoot = "AmiCpuPkg\Cpu\Asl\"
+	RefName = "AMD_CPU_ASL"
+[files]
+"CpuAsl.sdl"	
+"Cpu1N.asl"	
+"CpuAsl.inc"	
+<endComponent>

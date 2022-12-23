@@ -1,0 +1,9 @@
+<component>
+	name = "RV"
+	category = ModulePart
+	LocalRoot = "AmiPspPkg\PspLayout\RV"
+	RefName = "AmiPspPkg.PspLayout.RV"
+[files]
+"BuildPspRv.txt"
+"PspLayoutRv.sdl"
+<endComponent>

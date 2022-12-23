@@ -1,0 +1,41 @@
+TOKEN
+	Name  = "AMD_SOC_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Soc support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AMD_SOC_FP5_RV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdSocFp5RvDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+	Name  = "AMD_SOC_FP5_RV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdSocFp5RvPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+INFComponent
+	Name  = "AmdSocFp5RvDxe"
+	File  = "AmdSocFp5RvDxe\AmdSocFp5RvDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_SOC_FP5_RV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdSocFp5RvPei"
+	File  = "AmdSocFp5RvPei\AmdSocFp5RvPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_SOC_FP5_RV_PEI_SUPPORT" "=" "1"
+End

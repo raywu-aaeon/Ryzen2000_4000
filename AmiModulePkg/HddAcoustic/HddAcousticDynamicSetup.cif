@@ -1,0 +1,11 @@
+<component>
+    name = "HddAcousticDynamicSetup"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\HddAcoustic\"
+    RefName = "HddAcousticDynamicSetup"
+[INF]
+"HddAcousticDynamicSetup.inf"
+[files]
+"HddAcousticDynamicSetup.sdl"   
+"HddAcousticDynamicSetup.sd"
+<endComponent>

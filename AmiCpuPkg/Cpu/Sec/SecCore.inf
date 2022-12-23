@@ -1,0 +1,86 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SecCore
+  FILE_GUID                      = 1BA0062E-C779-4582-8566-336AE8F78F09
+  MODULE_TYPE                    = SEC
+  VERSION_STRING                 = 1.0
+
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]  
+  ResetVector.asm16
+  Startup32.asm
+  $(SECCOREL_ASM)
+  CpuEarlyInit.asm
+  SecMain.c
+  SecMain.h
+  Stack.asm
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCpuPkg/AmiCpuPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmiPspPkg/AmiPspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  DebugLib
+  BaseLib
+  AmiCspLib
+  DebugAgentLib
+  UefiCpuLib
+  PeCoffGetEntryPointLib
+  PeCoffExtraActionLib
+  CpuExceptionHandlerLib
+  PeiServicesLib
+  PeiServicesTablePointerLib
+
+[Ppis]
+  gEfiTemporaryRamSupportPpiGuid        # PRODUCED
+  gCapsuleUpdateDetectedPpiGuid         # PRODUCED
+
+[Guids]
+  gAmiPspFvBbFirmwareVolumeGuid
+
+[BuildOptions]
+###  *_*_*_DLINK_FLAGS == /NOLOGO /OPT:REF /OUT:$@ /NODEFAULTLIB /DLL /ALIGN:32 /IGNORE:4108 /SUBSYSTEM:NATIVE
+###  *_*_*_DLINK_FLAGS == /NOLOGO /NODEFAULTLIB /IGNORE:4001 /OPT:REF /OPT:ICF=10 /MAP /ALIGN:32 /SECTION:.xdata,D /SECTION:.pdata,D /MACHINE:I386 /LTCG /DLL /SUBSYSTEM:NATIVE /SAFESEH:NO /BASE:0 /DRIVER /DEBUG /PDB:$(DEBUG_DIR)/$(BASE_NAME).pdb
+###  *_*_*_DLINK_FLAGS == /NOLOGO /NODEFAULTLIB /IGNORE:4001 /OPT:REF /OPT:ICF=10 /MAP /ALIGN:32 /SECTION:.xdata,D /SECTION:.pdata,D /MACHINE:I386 /LTCG /DLL /ENTRY:$(IMAGE_ENTRY_POINT) /SUBSYSTEM:EFI_BOOT_SERVICE_DRIVER /SAFESEH:NO /BASE:0
+###  *_*_*_DLINK_FLAGS == /NOLOGO /NODEFAULTLIB /IGNORE:4108 /OPT:REF /ALIGN:32 /DLL /ENTRY:$(IMAGE_ENTRY_POINT) /SUBSYSTEM:EFI_BOOT_SERVICE_DRIVER
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

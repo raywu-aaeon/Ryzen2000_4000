@@ -1,0 +1,53 @@
+TOKEN
+	Name  = "CpmSetup_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmiCpmWrapper SETUP support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AmiCpmWrapper_Setup_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdPbsSetupDxe support in Project"
+	TokenType = Boolean
+End
+
+PATH
+	Name  = "CPM_WRAPPER_SETUP_DIR"
+End
+
+ELINK
+	Name  = "$(CPM_WRAPPER_SETUP_DIR)/CpmAmiSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	Priority  = 20
+	Token = "AmiCpmWrapper_Setup_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(CPM_ADDENDUM_OEM_DIR)/AmdCpmPkg.dec"
+	Parent  = "AdditionalSetupPackages"
+	Token = "AmiCpmWrapper_Setup_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(CPM_ADDENDUM_OEM_DIR)/Dxe/AmdPbsSetupDxe/AmdPbsHii.uni"
+	Parent  = "SetupStringFiles"
+	Token = "AmiCpmWrapper_Setup_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "GetCpmSetupDataLib"
+	File  = "GetCpmSetupDataLib.inf"
+	Package  = "AmiCpmWrapper"
+	Path  = "CPM_WRAPPER_SETUP_DIR"
+End
+
+LibraryMapping
+	Class  = "GetCpmSetupDataLib"
+	Instance  = "AmiCpmWrapper.GetCpmSetupDataLib"
+End
+

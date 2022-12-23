@@ -1,0 +1,19 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Library\Protocol\"
+	RefName = "AmdCpmPkg.Library.Protocol"
+[files]
+"AmdCpmAllPciIoProtocolsInstalled\AmdCpmAllPciIoProtocolsInstalled.h"	
+"AmdCpmAllPciIoProtocolsInstalled\AmdCpmAllPciIoProtocolsInstalled.c"
+"AmdCpmBootTimeRecordProtocol\AmdCpmBootTimeRecordProtocol.h"	
+"AmdCpmBootTimeRecordProtocol\AmdCpmBootTimeRecordProtocol.c"
+"AmdCpmDisplayFeatureProtocol\AmdCpmDisplayFeatureProtocol.h"	
+"AmdCpmDisplayFeatureProtocol\AmdCpmDisplayFeatureProtocol.c"
+"AmdCpmNvDataProtocol\AmdCpmNvDataProtocol.h"
+"AmdCpmNvDataProtocol\AmdCpmNvDataProtocol.c"	
+"AmdCpmOemTableProtocol\AmdCpmOemTableProtocol.h"	
+"AmdCpmOemTableProtocol\AmdCpmOemTableProtocol.c"
+"AmdCpmTableProtocol\AmdCpmTableProtocol.h"
+"AmdCpmTableProtocol\AmdCpmTableProtocol.c"
+<endComponent>

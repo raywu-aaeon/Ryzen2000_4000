@@ -1,0 +1,10 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AgesaPkg\Addendum\Apcb\RavenFp5Dramdown\Include\"
+	RefName = "AgesaPkg.Addendum.Apcb.RavenFp5Dramdown.Include"
+[files]
+"ApcbAutoGen.h"
+"ApcbCustomizedDefinitions.h"
+"ApcbDefaults.h"
+<endComponent>

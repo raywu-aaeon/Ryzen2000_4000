@@ -1,0 +1,20 @@
+TOKEN
+	Name  = "CbsSetupLibNull_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling CbsSetupLibNull support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "CbsSetupLibInstance"
+	File  = "CbsSetupLib.inf"
+	Package  = "AmdCbsPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "CbsSetupLib"
+	Instance  = "AmdCbsPkg.CbsSetupLibInstance"
+End
+

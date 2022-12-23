@@ -1,0 +1,124 @@
+
+TOKEN
+    Name  = "SB_SETUP_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SBSetup support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+PATH
+    Name  = "SBSetup_DIR"
+End
+
+ELINK
+    Name  = "SbSetupCallbacks,"
+    Parent  = "SbConfigurationList"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "InitSBStrings,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SBSetup_DIR)/Sb.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SBSetup_DIR)/Sb.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    Priority  = 20
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SBSetup_DIR)/SbSetup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiLegacyBiosProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    Token = "CSM_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiDiskInfoProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiAmdCspVarstoreGuid gCbsSystemConfigurationGuid"
+    Parent  = "AdditionalSetupGuids"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiChipsetModulePkg/AmiChipsetModulePkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AgesaModulePkg/Fch/Sandstone/FchSandstone.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AgesaModulePkg/AgesaModuleFchPkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmdCbsPkg/AmdCbsPkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AgesaModulePkg/AgesaFamily17ModulePkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AgesaModulePkg/AgesaCommonModulePkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdSbFchTypeString"
+    Parent  = "AdditionalSetupPcds"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataClass"
+    Parent  = "AdditionalSetupPcds"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSata6AhciCap" ### AVA9 : 1. old name => SataIdeCombMdPriSecOpt. 2. AMD defined but no use??...
+    Parent  = "AdditionalSetupPcds"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPackageString"
+    Parent  = "AdditionalSetupPcds"
+    InvokeOrder = AfterParent
+End

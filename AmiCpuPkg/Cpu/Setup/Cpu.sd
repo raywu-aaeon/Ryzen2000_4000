@@ -1,0 +1,377 @@
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************
+
+//<AMI_FHDR_START>
+//----------------------------------------------------------------------------
+//
+// Name:    CPU.sd
+//
+// Description:
+//  Setup definition for CPU.
+//
+//----------------------------------------------------------------------------
+//<AMI_FHDR_END>
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example: UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+
+    UINT8   PNOW_ASL_MODE;
+    UINT8   PSTATE_CTRL;       // [Fam15 only]
+    UINT8   PPC_LIMIT;
+    UINT8   PPC_CTRL;
+    UINT8   SVM_MODE;
+    UINT8   NX_MODE;
+    UINT8   C6Mode;            // [Fam15 only]
+    UINT8   CpbMode;           // [Fam15 only]
+    UINT8   HideF15Op;         // [Fam15 only]
+    UINT8   HideStibp;
+    UINT8   StibpStatus;
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+
+
+    #define POWER_NOW_ASL\
+        oneof varid = SETUP_DATA.PNOW_ASL_MODE,\
+            prompt      = STRING_TOKEN(STR_PNOW_ASL),\
+            help        = STRING_TOKEN(STR_PNOW_ASL_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+    // [Fam15 only]
+    #define PSTATE_CONTROL\
+        oneof varid = SETUP_DATA.PSTATE_CTRL,\
+            prompt      = STRING_TOKEN(STR_PSTATE_CONTROL),\
+            help        = STRING_TOKEN(STR_PSTATE_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_PSTATE0), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE1), value = 1, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE2), value = 2, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE3), value = 3, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE4), value = 4, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE5), value = 5, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE6), value = 6, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE7), value = 7, flags =  RESET_REQUIRED;\
+        endoneof;
+
+    #define PPC0_CONTROL\
+        oneof varid = SETUP_DATA.PPC_CTRL,\
+            prompt      = STRING_TOKEN(STR_PPC_CONTROL),\
+            help        = STRING_TOKEN(STR_PPC_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_PSTATE0), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+
+    #define PPC1_CONTROL\
+        oneof varid = SETUP_DATA.PPC_CTRL,\
+            prompt      = STRING_TOKEN(STR_PPC_CONTROL),\
+            help        = STRING_TOKEN(STR_PPC_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_PSTATE0), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE1), value = 1, flags = RESET_REQUIRED;\
+        endoneof;
+
+    #define PPC2_CONTROL\
+        oneof varid = SETUP_DATA.PPC_CTRL,\
+            prompt      = STRING_TOKEN(STR_PPC_CONTROL),\
+            help        = STRING_TOKEN(STR_PPC_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_PSTATE0), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE1), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE2), value = 2, flags = RESET_REQUIRED;\
+        endoneof;
+
+    #define PPC3_CONTROL\
+        oneof varid = SETUP_DATA.PPC_CTRL,\
+            prompt      = STRING_TOKEN(STR_PPC_CONTROL),\
+            help        = STRING_TOKEN(STR_PPC_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_PSTATE0), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE1), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE2), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE3), value = 3, flags = RESET_REQUIRED;\
+        endoneof;
+
+    #define PPC4_CONTROL\
+        oneof varid = SETUP_DATA.PPC_CTRL,\
+            prompt      = STRING_TOKEN(STR_PPC_CONTROL),\
+            help        = STRING_TOKEN(STR_PPC_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_PSTATE0), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE1), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE2), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE3), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE4), value = 4, flags = RESET_REQUIRED;\
+        endoneof;
+
+    #define PPC5_CONTROL\
+        oneof varid = SETUP_DATA.PPC_CTRL,\
+            prompt      = STRING_TOKEN(STR_PPC_CONTROL),\
+            help        = STRING_TOKEN(STR_PPC_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_PSTATE0), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE1), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE2), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE3), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE4), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE5), value = 5, flags = RESET_REQUIRED;\
+        endoneof;
+
+    #define PPC6_CONTROL\
+        oneof varid = SETUP_DATA.PPC_CTRL,\
+            prompt      = STRING_TOKEN(STR_PPC_CONTROL),\
+            help        = STRING_TOKEN(STR_PPC_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_PSTATE0), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE1), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE2), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE3), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE4), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE5), value = 5, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE6), value = 6, flags = RESET_REQUIRED;\
+        endoneof;
+
+    #define PPC7_CONTROL\
+        oneof varid = SETUP_DATA.PPC_CTRL,\
+            prompt      = STRING_TOKEN(STR_PPC_CONTROL),\
+            help        = STRING_TOKEN(STR_PPC_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_PSTATE0), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE1), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE2), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE3), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE4), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE5), value = 5, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE6), value = 6, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PSTATE7), value = 7, flags = RESET_REQUIRED;\
+        endoneof;
+
+    #define CPU_NX_MODE\
+        oneof varid = SETUP_DATA.NX_MODE,\
+            prompt      = STRING_TOKEN(STR_NX_MODE),\
+            help        = STRING_TOKEN(STR_NX_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+
+    #define CPU_SVM_MODE\
+        oneof varid = SETUP_DATA.SVM_MODE,\
+            prompt      = STRING_TOKEN(STR_SVM_MODE),\
+            help        = STRING_TOKEN(STR_SVM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+    // [Fam15 only]
+    #define CPU_C6_MODE\
+        oneof varid = SETUP_DATA.C6Mode,\
+            prompt      = STRING_TOKEN(STR_C6_MODE),\
+            help        = STRING_TOKEN(STR_C6_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+    // [Fam15 only]
+    #define CPU_CPB_MODE\
+        oneof varid = SETUP_DATA.CpbMode,\
+            prompt      = STRING_TOKEN(STR_CPB_MODE),\
+            help        = STRING_TOKEN(STR_CPB_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+
+    #define STIBP_STATUS\
+        oneof varid = SETUP_DATA.StibpStatus,\
+            prompt      = STRING_TOKEN(STR_STIBP),\
+            help        = STRING_TOKEN(STR_STIBP_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED;\
+        endoneof;
+
+#endif // CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+
+    POWER_NOW_ASL
+    PSTATE_CONTROL // [Fam15 only]
+    PPC0_CONTROL
+    PPC1_CONTROL
+    PPC2_CONTROL
+    PPC3_CONTROL
+    PPC4_CONTROL
+    PPC5_CONTROL
+    PPC6_CONTROL
+    PPC7_CONTROL
+    CPU_NX_MODE
+    CPU_SVM_MODE
+    CPU_CPB_MODE  // [Fam15 only]
+    CPU_C6_MODE   // [Fam15 only]
+    STIBP_STATUS
+
+#endif // CONTROLS_WITH_DEFAULTS
+
+
+#ifdef FORM_SET_TYPEDEF
+    #include <CPU\Dxe\CpuDxe.h>
+#endif
+
+#ifdef ADVANCED_FORM_SET
+    #ifndef SUPPRESS_GRAYOUT_ENDIF
+        #define SUPPRESS_GRAYOUT_ENDIF endif;
+    #endif
+
+    #ifdef FORM_SET_VARSTORE
+        #ifndef VARSTORE_SETUP_CPU_FEATURES
+        #define VARSTORE_SETUP_CPU_FEATURES
+        varstore SETUP_CPU_FEATURES,
+            key   = AUTO_ID(CPU_FEATURES_ID),
+            name  = SetupCpuFeatures,
+            guid  = SETUP_GUID;
+        #endif
+    #endif
+
+    #ifdef FORM_SET_ITEM
+    //  Define controls to be added to the main page of the formset
+
+    #endif
+
+    #ifdef FORM_SET_GOTO
+    // Define goto commands for the forms defined in this file
+        goto CPU_FORM_ID,
+            prompt = STRING_TOKEN(STR_CPU_FORM),
+            help = STRING_TOKEN(STR_CPU_FORM_HELP);
+    #endif
+
+#ifdef FORM_SET_FORM
+// Define forms
+    form formid = AUTO_ID(CPU_FORM_ID),
+        title = STRING_TOKEN(STR_CPU_FORM);
+
+        SUBTITLE(STRING_TOKEN(STR_CPU_FORM))
+        SEPARATOR
+
+        SUBTITLE(STRING_TOKEN(STR_MODULE_VERSION))
+        SUBTITLE(STRING_TOKEN(STR_AGESA_VERSION))
+        SEPARATOR
+
+        POWER_NOW_ASL
+
+        suppressif  NOT ideqval SETUP_DATA.PPC_LIMIT == 0
+          OR ideqval SETUP_DATA.PNOW_ASL_MODE == 0;
+            PPC0_CONTROL
+        endif;
+        suppressif  NOT ideqval SETUP_DATA.PPC_LIMIT == 1
+          OR ideqval SETUP_DATA.PNOW_ASL_MODE == 0;
+            PPC1_CONTROL
+        endif;
+        suppressif  NOT ideqval SETUP_DATA.PPC_LIMIT == 2
+          OR ideqval SETUP_DATA.PNOW_ASL_MODE == 0;
+            PPC2_CONTROL
+        endif;
+        suppressif  NOT ideqval SETUP_DATA.PPC_LIMIT == 3
+          OR ideqval SETUP_DATA.PNOW_ASL_MODE == 0;
+            PPC3_CONTROL
+        endif;
+        suppressif  NOT ideqval SETUP_DATA.PPC_LIMIT == 4
+          OR ideqval SETUP_DATA.PNOW_ASL_MODE == 0;
+            PPC4_CONTROL
+        endif;
+        suppressif  NOT ideqval SETUP_DATA.PPC_LIMIT == 5
+          OR ideqval SETUP_DATA.PNOW_ASL_MODE == 0;
+            PPC5_CONTROL
+        endif;
+        suppressif  NOT ideqval SETUP_DATA.PPC_LIMIT == 6
+          OR ideqval SETUP_DATA.PNOW_ASL_MODE == 0;
+            PPC6_CONTROL
+        endif;
+        suppressif  NOT ideqval SETUP_DATA.PPC_LIMIT == 7
+          OR ideqval SETUP_DATA.PNOW_ASL_MODE == 0;
+            PPC7_CONTROL
+        endif;
+
+        CPU_NX_MODE
+        CPU_SVM_MODE
+        
+        suppressif ideqval SETUP_DATA.HideF15Op == 1; // [Fam15 only]
+            SUBTITLE(STRING_TOKEN(STR_CPU_FAM15_ONLY_TEXT))
+            PSTATE_CONTROL
+            CPU_CPB_MODE
+            CPU_C6_MODE
+        endif;
+
+
+        goto CPU_FORM_NODE0_ID,
+        prompt  = STRING_TOKEN(STR_NODE0_FORM),
+        help    = STRING_TOKEN(STR_NODE0_HELP);
+
+    endform;    // form id CPU_FORM_ID
+
+// ====================================================================
+// Node 0 Information
+// ====================================================================
+    form formid = AUTO_ID(CPU_FORM_NODE0_ID),
+        title = STRING_TOKEN(STR_NODE0_FORM);
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_VERSION_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_CORE_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_FAMILY_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_MODEL_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_ID_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_SPEED_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_SPEED_VALUE_MIN))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_MICROCODE_VALUE))
+        SEPARATOR
+#if CACHE_INFO_MODEL == 0
+        SUBTITLE(STRING_TOKEN(STR_CACHE_INFO_STRING))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_L1_ICACHE_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_L1_DCACHE_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_L2_CACHE_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_L3_CACHE_VALUE))
+#else
+        SUBTITLE(STRING_TOKEN(STR_CACHE_INFO_STRING_TOTAL))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_L1_DCACHE_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_L2_CACHE_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_PROCESSOR_L3_CACHE_VALUE))
+#endif  //#if CACHE_INFO_MODEL == 0
+
+    endform;
+#endif // #ifdef FORM_SET_FORM
+
+#endif // #ifdef ADVANCED_FORM_SET
+
+
+#ifdef SECURITY_FORM_SET
+    #ifndef SUPPRESS_GRAYOUT_ENDIF
+        #define SUPPRESS_GRAYOUT_ENDIF endif;
+    #endif
+
+    #ifdef FORM_SET_ITEM
+    //  Define controls to be added to the main page of the formset
+        suppressif ideqval SETUP_DATA.HideStibp == 1;
+            STIBP_STATUS
+        endif;
+    #endif
+    
+#endif // #ifdef SECURITY_FORM_SET
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************

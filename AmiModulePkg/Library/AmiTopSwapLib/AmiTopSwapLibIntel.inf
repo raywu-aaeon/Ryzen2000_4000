@@ -1,0 +1,36 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+
+## @file
+#  AMI TopSwap Null Lib
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiTopSwapLibIntel
+  FILE_GUID                      = 5483f7cf-ade1-4d18-8b78-0c3eb2e349af
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiTopSwapLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  AmiTopSwapLibIntel.c
+
+[LibraryClasses]
+  AmiCspFlashLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec

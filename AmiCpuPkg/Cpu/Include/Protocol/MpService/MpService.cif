@@ -1,0 +1,9 @@
+<component>
+	name = "AMD CPU MP Service"
+	category = ModulePart
+	LocalRoot = "AmiCpuPkg\Cpu\Include\Protocol\MpService\"
+	RefName = "AMD_CPU_MP"
+[files]
+"MpService.h"	
+"MpService.c"	
+<endComponent>

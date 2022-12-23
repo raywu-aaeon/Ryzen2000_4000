@@ -1,0 +1,172 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+TOKEN
+    Name  = "Flash_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable FLASH support in Project."
+    TokenType = Boolean
+    TargetMAK = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "FLASH_VERSION"
+    Value = "35"
+    Help  = "Flash module version.\Do not change."
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "FLASH_ERASE_POLARITY"
+    Value  = "1"
+    Help  = "Flash Device Erase Polarity"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "0 or 1"
+End
+
+TOKEN
+    Name  = "FLASH_RETRIES"
+    Value  = "3"
+    Help  = "Number of retries attempted for the failed flash update operation"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FLASH_PART_STRING_LENGTH"
+    Value  = "48"
+    Help  = "Number of bytes per Page"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "WRITE_BLOCK_BUFFER_SIZE"
+    Value  = "0x100"
+    Help  = "Buffer size for AmiFlashWrite() checking."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+MODULE
+    Help  = "Includes Flash.mak to Project"
+    File  = "Flash.mak"
+End
+
+ELINK
+    Name  = "FlashList"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "OemFlashWriteEnableList"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "OemFlashWriteDisableList"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "OemGetFlashWritStatusList"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "OemFlashValidTableList"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiFlashLibOemLibClasses"
+    InvokeOrder = ReplaceParent
+End
+
+INFComponent
+    Name  = "AmiFlashLibDxe"
+    File  = "AmiFlashLibDxe.inf"
+    Package  = "AmiModulePkg"
+    PreProcess = Yes
+End
+
+INFComponent
+    Name  = "AmiFlashLibPei"
+    File  = "AmiFlashLibPei.inf"
+    Package  = "AmiModulePkg"
+    PreProcess = Yes
+End
+
+INFComponent
+    Name  = "AmiFlashLibRuntime"
+    File  = "AmiFlashLibRuntime.inf"
+    Package  = "AmiModulePkg"
+    PreProcess = Yes
+End
+
+INFComponent
+    Name  = "AmiFlashPlatformLib"
+    File  = "AmiFlashPlatformLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "AmiFlashLib"
+    Instance  = "AmiModulePkg.AmiFlashLibDxe"
+    ModuleTypes  = "DXE_DRIVER UEFI_DRIVER DXE_SMM_DRIVER DXE_CORE SMM_CORE UEFI_APPLICATION"
+End
+
+LibraryMapping
+    Class  = "AmiFlashLib"
+    Instance  = "AmiModulePkg.AmiFlashLibPei"
+    ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+    Class  = "AmiFlashLib"
+    Instance  = "AmiModulePkg.AmiFlashLibRuntime"
+    ModuleTypes  = "DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+    Class  = "AmiFlashPlatformLib"
+    Instance  = "AmiModulePkg.AmiFlashPlatformLib"
+End
+
+# Components below are old FlashLib and will be retired in recent label
+
+INFComponent
+    Name  = "FlashLib"
+    File  = "FlashLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "FlashLib"
+    Instance  = "AmiModulePkg.FlashLib"
+    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER SMM_CORE UEFI_APPLICATION UEFI_DRIVER"
+End
+
+INFComponent
+    Name  = "FlashLibPei"
+    File  = "FlashLibPei.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "FlashLib"
+    Instance  = "AmiModulePkg.FlashLibPei"
+    ModuleTypes  = "PEIM"
+End

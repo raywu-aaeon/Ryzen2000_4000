@@ -1,0 +1,11 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "AmiChipsetPkg\Include\Ppi\"
+	RefName = "AmiChipsetPkg.Ppi"
+[files]
+"BaseMemoryTest.h"	
+"GnbPpi.h"
+"NbPpi.h"	
+"SbPpi.h"	
+<endComponent>

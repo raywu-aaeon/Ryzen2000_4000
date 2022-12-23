@@ -1,0 +1,34 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+TOKEN
+    Name  = "UEFI_CPU_SETUP_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable UEFI CPU Setup support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    Master = Yes
+    Token = "SMM_ISOLATION_SUPPORT" "=" "1"
+End
+
+PATH
+	Name  = "AMI_UEFI_CPU_SETUP"
+End
+
+ELINK
+	Name  = "$(AMI_UEFI_CPU_SETUP)/UefiCpuSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AMI_UEFI_CPU_SETUP)/UefiCpuSetup.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+

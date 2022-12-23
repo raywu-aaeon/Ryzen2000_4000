@@ -1,0 +1,69 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file PspS3Smm.inf
+#  Smm Module Part of the PspS3Smm
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010015
+  BASE_NAME                      = PspS3Smm
+  FILE_GUID                      = 5ea17abd-7b30-441d-83ae-3b73c1564b42
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = PspS3SmmInit
+
+[Sources]
+  PspS3Smm.c
+  PspS3Smm.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiPspPkg/AmiPspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  PcdLib
+  DebugLib
+  AmiBufferValidationLib
+  AmdPspFlashAccLib
+
+[Guids]
+  gAmiPspS3SmmCommunicationGuid
+
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+
+[Depex]
+  gEfiSmmBase2ProtocolGuid AND
+  gAmdPspDxeV1DepexProtocolGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

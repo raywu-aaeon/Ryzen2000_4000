@@ -1,0 +1,13 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Library\"
+	RefName = "AmiChipsetModulePkg.GnbLibrary"
+[INF]
+"GnbGetSetupData\GnbPeiGetSetupData.inf"
+"GnbGetSetupData\GnbGetSetupData.inf"
+"GnbPciBoardDxeInitLib\GnbPciBoardDxeInitLib.inf"
+"GnbHdaVerbTableLib\GnbHdaVerbTableLib.inf"
+"GnbAmiNbioLib\GnbAmiNbioDxeLib.inf"
+"GnbAmiNbioLib\GnbAmiNbioPeiLib.inf"
+<endComponent>

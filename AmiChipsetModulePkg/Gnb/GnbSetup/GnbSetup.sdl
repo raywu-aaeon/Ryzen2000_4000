@@ -1,0 +1,52 @@
+TOKEN
+	Name  = "GNB_SETUP_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable NBSetup support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "GNB_SHOW_FULL_VERSION"
+	Value  = "1"
+	Help  = "Show IGD VBIOS version \0 = show XXX(version) , \1 = show full version 113-XXXXXX(Board SKU)-XXX(version)"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+PATH
+	Name  = "GNB_SETUP_DIR"
+End
+
+ELINK
+	Name  = "$(GNB_SETUP_DIR)/Gnb.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(GNB_SETUP_DIR)/Gnb.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(GNB_SETUP_DIR)\GnbSetup.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "InitGnbStrings,"
+	Parent  = "SetupStringInit"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "gEfiLegacyBiosPlatformProtocolGuid"
+	Parent  = "AdditionalSetupProtocols"
+	Token = "CSM_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End

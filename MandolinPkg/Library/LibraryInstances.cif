@@ -1,0 +1,13 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "MandolinPkg\Library\"
+	RefName = "MandolinPkg.LibraryInstances"
+[INF]
+"CrbAcpiLib\CrbAcpiLib.inf"
+"CrbAmiPowerStateLib\CrbAmiPowerStateLib.inf"
+"CrbLib\CrbLib.inf"
+"CrbPciBoardDxeInitLib\CrbPciBoardDxeInitLib.inf"
+"CrbSecLib\CrbSecLib.inf"
+"CrbSmmLib\CrbSmmLib.inf"
+<endComponent>

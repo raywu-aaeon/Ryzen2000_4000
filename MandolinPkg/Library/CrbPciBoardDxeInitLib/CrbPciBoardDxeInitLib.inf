@@ -1,0 +1,33 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbPciBoardDxeInitLib
+  FILE_GUID                      = 92218605-109C-473c-9FC6-3EDE1D15886F
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CrbPciBoardDxeInitLib|DXE_DRIVER
+
+[Sources]
+  CrbPciBoardDxeInitLib.c
+
+[LibraryClasses]
+  AmiDxeLib
+  AmiSdlLib
+  AmiPciBusLib
+
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gAmiBoardPciInitProtocolGuid
+
+[Guids]
+  gEfiNetworkStackSetupGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiNetworkPkg/AmiNetworkPkg.dec

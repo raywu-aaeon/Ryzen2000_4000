@@ -1,0 +1,26 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = SpiFlashPeiLib
+    FILE_GUID       = D77699A7-9592-4950-AD5C-500B42CC2EA0
+    MODULE_TYPE     = PEIM
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = SpiFlashLib | PEIM
+
+[Sources]
+    SpiFlash.h
+    SpiIdentify.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    BaseMemoryLib
+    CspSpiFlashLib

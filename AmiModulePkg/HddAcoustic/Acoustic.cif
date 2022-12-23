@@ -1,0 +1,23 @@
+<component>
+    name = "HddAcoustic"
+    category = eModule
+    LocalRoot = "AmiModulePkg\HddAcoustic\"
+    RefName = "Acoustic"
+[INF]
+"Acoustic.inf"
+[files]
+"Acoustic.sdl"
+"Acoustic.sd"
+"Acoustic.chm"
+"Acoustic.uni"
+"AcousticSetup.c"
+"AcousticSetupVar.h"
+[parts]
+"AcousticProtocol"
+"HddAcousticDynamicSetup"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_28"
+[dependency.optional]
+AHCI >= "SS: AptioV;$/AptioV/Source/Modules/AHCI;AHCI_10"
+AmiModulePkg.IdeBusSrc >= "SS: AptioV;$/AptioV/Source/Modules/IdeBus;IdeBus_06"
+<endComponent>

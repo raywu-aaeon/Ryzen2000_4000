@@ -1,0 +1,21 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Include\"
+	RefName = "AmdCpmPkg.Include"
+[files]
+"EDKII\AmdCpmRevision.h"
+"OptionCpuInstall.h"
+"AmdCpmSmm.h"
+"AmdCpmRevision.h"
+"AmdCpmPreDefine.h"
+"AmdCpmPlatform.h"
+"AmdCpmPei.h"
+"AmdCpmFunction.h"
+"AmdCpmDxe.h"
+"AmdCpmDefine.h"
+"AmdCpmCommon.h"
+"AmdCpmBootTimeRecordDescription.h"
+"AmdCpmBase.h"
+"AmdCpmPostCode.h"
+<endComponent>

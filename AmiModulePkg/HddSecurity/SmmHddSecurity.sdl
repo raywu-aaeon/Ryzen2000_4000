@@ -1,0 +1,53 @@
+TOKEN
+    Name  = "SMMHDDSECURITY_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SmmHddSecurity support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+    Token = "SECURITY_SUPPORT" "=" "1"
+    Token = "SMM_SUPPORT" "=" "1"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SW_SMI_HDD_UNLOCK_PASSWORD"
+    Value  = "0D1h"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+INFComponent
+    Name  = "SmmHddSecurity"
+    File  = "SmmHddSecurity.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80400040"
+    Override  = "AmiModulePkg.SmmHddSecurity"
+    Offset  = 00h
+    Length  = 00h
+    Help = "Display all debug messages when HDD_SECURITY_VERBOSE_PRINT token value is enable"
+    TargetDSC = Yes
+    Token = "HDD_SECURITY_VERBOSE_PRINT" "=" "1"
+    Token = "SECURITY_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80400040"
+    Override  = "AmiModulePkg.SmmHddSecurity"
+    Offset  = 00h
+    Length  = 00h
+    Help = "Display all debug messages when HDD_SECURITY_VERBOSE_PRINT token value is enable"
+    TargetDSC = Yes
+    Token = "HDD_SECURITY_VERBOSE_PRINT" "=" "1"
+    Token = "SECURITY_SUPPORT" "=" "1"
+End

@@ -1,0 +1,1 @@
+#define AMI_HOOK_BEFORE_READ_SPD_LIST @Elink(OemReadSpdList, "@Child", " ", "%n")

@@ -1,0 +1,22 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbResetLibNull
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbResetLib
+
+[Packages]
+  MdePkg/MdePkg.dec 
+
+[LibraryClasses]
+  BaseLib
+
+[Protocols]
+
+[Ppis]
+
+[Sources]
+  SbResetLibNull.c
+
+[Pcd]

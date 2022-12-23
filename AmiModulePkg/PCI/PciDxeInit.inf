@@ -1,0 +1,51 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+
+## @file
+#  Pci Dxe Initialization
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  VERSION_STRING                 = 1.0
+  BASE_NAME                      = PciDxeInit
+  FILE_GUID                      = 502B04F3-71AB-47b4-BEAE-4736EA190AA4
+  MODULE_TYPE                    = DXE_DRIVER
+  ENTRY_POINT                    = PciDxeInitEntryPoint
+
+[Sources]
+  PciDxeInit.c
+  PciDxeInitPrivate.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  
+
+[Protocols]
+  gEfiComponentName2ProtocolGuid
+  gAmiBoardInfo2ProtocolGuid
+  gAmiBoardPciInitProtocolGuid
+  gEfiS3SaveStateProtocolGuid
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  AmiDxeLib
+  AmiPciBusLib
+  AmiSdlLib	
+  PcdLib
+  
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgPcieAriSupport
+
+[Depex]
+  TRUE

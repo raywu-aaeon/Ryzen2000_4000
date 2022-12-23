@@ -1,0 +1,56 @@
+TOKEN
+	Name  = "Fid_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable RomLayout support in Project"
+	TokenType = Boolean
+End
+
+MODULE
+        Help  = "Includes Fid.mak into Project"
+        File  = "Fid.mak"
+End
+
+TOKEN
+	Name  = "ILLEGAL_GUID"
+	Value  = "{0, 1, 2, {3, 4, 5, 6, 7, 8, 9, 0}}"
+	Help  = "Invalid guid value to catch OEM errors of not redefining it"
+	TokenType = Expression
+	TargetMAK = Yes
+	Range  = "GUID"
+        Lock = Yes
+End
+
+TOKEN
+	Name  = "FW_VERSION_GUID"
+	Value  = "$(ILLEGAL_GUID)"
+	Help  = "FW Version GUID inserted into Firmware ID structure.\FW version has to be overridden for every project."
+	TokenType = Expression
+	TargetH = Yes
+	TargetMAK = Yes
+	Range  = "GUID"
+End
+
+TOKEN
+	Name  = "OEM_ESRT_FIRMWARE_GUID"
+	Value  = "$(FW_VERSION_GUID)"
+	Help  = "GUID used as Main Firmware Class ID for ESRT-based firmware update capsules"
+	TokenType = Expression
+	TargetH = Yes
+	TargetMAK = Yes
+	Range  = "GUID"
+End
+
+INFComponent
+	Name  = "Fid"
+	File  = "Fid.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "USER_DEFINED"
+End
+
+FFS_FILE
+	Name  = "Fid"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmiModulePkg.Fid"
+	Rule_Override  = "SubtypeGuidUncompressed"
+End
+

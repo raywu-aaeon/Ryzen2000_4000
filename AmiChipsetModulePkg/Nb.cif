@@ -1,0 +1,18 @@
+<component>
+	name = "AMD Picasso - NB"
+	category = eChipset
+	LocalRoot = "AmiChipsetModulePkg\"
+	RefName = "AmiChipsetModulePkg.NorthBridge"
+[files]
+"Nb.sdl"
+"Nb.mak"
+"NB/Nb.chm"
+"Elink/NbElinks.txt"
+[parts]
+"AmiChipsetModulePkg.NbInit"
+"AmiChipsetModulePkg.NbSetup"
+"AmiChipsetModulePkg.NbAsl"
+"AmiChipsetModulePkg.NbLibrary"
+"AmiChipsetModulePkg.NbInclude"
+"LegacyRegion"
+<endComponent>

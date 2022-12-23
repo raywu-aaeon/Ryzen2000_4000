@@ -1,0 +1,110 @@
+#;*****************************************************************************
+#;
+#; Copyright 2016 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#;
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#;
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaCcxPkg
+  PACKAGE_GUID          = df325429-029e-40f0-82db-0e69be7f6560
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+
+
+[LibraryClasses]
+  CcxBaseX86Lib|Include/Library/CcxBaseX86Lib.h
+  CcxBistLib|Include/Library/CcxBistLib.h
+  CcxPspLib|Include/Library/CcxPspLib.h
+  CcxHaltLib|Include/Library/CcxHaltLib.h
+  CcxMicrocodePatchLib|Include/Library/CcxMicrocodePatchLib.h
+  CcxRolesLib|Include/Library/CcxRolesLib.h
+  CcxDownCoreLib|Include/Library/CcxDownCoreLib.h
+  CcxResetTablesLib|Include/Library/CcxResetTablesLib.h
+  CcxPstatesLib|Include/Library/CcxPstatesLib.h
+  CcxSmbiosLib|Include/Library/CcxSmbiosLib.h
+  CcxBtcLib|Include/Library/CcxBtcLib.h
+  CcxStallLib|Include/Library/CcxStallLib.h
+  CcxSetMcaLib|Include/Library/CcxSetMcaLib.h
+  CcxMpServicesLib|Include/Library/CcxMpServicesLib.h
+  CcxIdsCustomPstateLib|Include/Library/CcxIdsCustomPstatesLib.h
+  CcxSmmAccess2Lib|Include/Library/CcxSmmAccess2Lib.h
+  CcxSetMmioCfgBaseLib|Include/Library/CcxSetMmioCfgBaseLib.h
+
+[Guids]
+
+[Protocols]
+  gAmdCcxDxeInitCompleteProtocolGuid       = {0xaddf9be3, 0x1eb8, 0x4472, {0x95, 0xd1, 0xf8, 0xcd, 0xde, 0x58, 0xe5, 0xbb}}
+  gAmdCcxSmbiosServicesProtocolGuid        = {0x2575123e, 0x2878, 0x4a72, {0xb9, 0xd5, 0xa, 0xa3, 0x48, 0x53, 0x91, 0x66}}
+  gAmdCcxAcpiCratServicesProtocolGuid      = {0x6e773b37, 0xf799, 0x4355, {0x9f, 0xe8, 0x60, 0xe, 0x7, 0x34, 0xe5, 0xf}}
+  gAmdCcxAcpiSratServicesProtocolGuid      = {0x9b6cdfc1, 0xe996, 0x4f52, { 0x8e, 0x63, 0xe3, 0xff, 0xe5, 0x72, 0x45, 0xc}}
+  gAmdAcpiCpuSsdtServicesProtocolGuid      = {0x42de07da, 0x21d4, 0x4132, {0x9d, 0xbf, 0x4e, 0xfd, 0xd7, 0x8b, 0x7b, 0x86}}
+  gAmdCcxOcCompleteProtocolGuid            = {0x1fbe6f3d, 0x6dbb, 0x47df, {0x82, 0xb8, 0x22, 0x5, 0x6, 0x99, 0xe4, 0xb7}}
+  gAmdCcxBaseServicesProtocolGuid          = {0xf6f234ea, 0xc633, 0x41fc, {0xae, 0x1f, 0xd8, 0x89, 0x52, 0x1b, 0x57, 0x6f}}
+
+[Ppis]
+  gAmdCcxPeiInitCompletePpiGuid            = {0xa1192fdd, 0xbf51, 0x49cb, {0x97, 0x67, 0x87, 0x81, 0xdf, 0x7a, 0xbb, 0x8c}}
+
+[PcdsFeatureFlag]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxStallEnable|TRUE|BOOLEAN|0x000CC0E1
+
+[PcdsFixedAtBuild]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxS3SaveSmi|0xEE|UINT8|0x000CC0A1
+
+[PcdsDynamic]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxCfgApmEnable|TRUE|BOOLEAN|0x000CC001
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxCfgCFOHEnable|TRUE|BOOLEAN|0x000CC002
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxCfgPFEHEnable|FALSE|BOOLEAN|0x000CC003
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiPstateObjEnable|TRUE|BOOLEAN|0x000CC004
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCpuWdtSeverity|0xFF|UINT8|0x000CC005         # For VH, Control MSRC001_0074[CpuWdTmrCfgSeverity], 0xFF means leave it at reset value
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdX2ApicMode|FALSE|BOOLEAN|0x000CC006          # For VH, x2Apic should be enabled or not. If threads count is great or equal to 255, x2APIC is forced to enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdRedirectForReturnDis|0xFF|UINT8|0x000CC007   # MSR_C001_1029[14]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdOpcacheCtrl|0xFF|UINT8|0x000CC008            # MSR_C001_1021[5]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdStreamingStoresCtrl|0xFF|UINT8|0x000CC009    # MSR_C001_1020[28]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Setting|0x2|UINT8|0x000CC00A            # 1- Custom; 2- Auto  NOTE: from SSP, please update both of this PCD and APCB_TOKEN_UID_CCX_P0_SETTING
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Fid|0xF|UINT8|0x000CC00B                # FID  NOTE: from SSP, please update both of this PCD and APCB_TOKEN_UID_CCX_P0_FID
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Did|0x8|UINT8|0x000CC00C                # DID  NOTE: from SSP, please update both of this PCD and APCB_TOKEN_UID_CCX_P0_DID
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Vid|0xFF|UINT8|0x000CC00D               # VID  NOTE: from SSP, please update both of this PCD and APCB_TOKEN_UID_CCX_P0_VID
+
+

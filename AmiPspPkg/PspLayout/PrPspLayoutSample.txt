@@ -1,0 +1,122 @@
+TOKEN
+    Name  = "MULTI_CPU_SUPPORT"
+    Value  = "0x2"
+    Help  = "The CPU supported. Bristol = 1, Summit/Pinnacle = 2, Raven = 4."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_FIRST_UPDATABLE_BLOCK_OFFSET"
+    Value  = "0x178000"
+    Help  = "First PSP updatable Data block offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TOTAL_PSP_DATA_SIZE"
+    Value  = "0x251000"
+    Help  = "The total size of PSP firmware. It's 5.5M as AMD provided for BR/SM/RV combined."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "0, PSP_COMBO_DIRECTORY_ADDRESS, BIOS_L1_DIRECTORY_ADDRESS_SM, 0"
+    Parent  = "AmdPspFirmwareDirectoryList"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "PSP_APOB_SHARED_OFFSET"
+    Value = "0x178000"
+    Help  = "PSP shared APOB reserved area offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_1_OFFSET_SM"
+    Value  = "0xA8000"
+    Help  = "The SM PSP directory level 1 offset behind PSP BR fixed Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_1_OFFSET_SM"
+    Value  = "0x158000"
+    Help  = "The SM BIOS directory level 1 offset after SM PSP directory level 1."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_2_OFFSET_SM"
+    Value  = "0x188000"
+    Help  = "The SM PSP directory level 2 offset after BR updatable data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_2_OFFSET_SM"
+    Value  = "0x2B8000"
+    Help  = "The SM BIOS directory level 2 offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PINNACLE_FW_SUPPORT"
+    Value = "1"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SM_PSP_FW_RS3_SUPPORT"
+    Value = "0"
+    Help  = "Enable/Disable PSP firmware RS3 support. Project that upgrades from RV should disable it. Project that starts from PR should enable it."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BR_PSP_SUPPORT"
+    Value  = "0"
+    Help  = "Switch to set PSP support for Bristol CPU."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "RV_PSP_SUPPORT"
+    Value  = "0"
+    Help  = "Switch to set psp support for Raven CPU."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End

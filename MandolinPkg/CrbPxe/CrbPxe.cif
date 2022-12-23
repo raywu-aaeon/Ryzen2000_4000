@@ -1,0 +1,12 @@
+<component>
+	name = "Customer Reference Board - BCM5762 LAN"
+	category = ModulePart
+	LocalRoot = "MandolinPkg\CrbPxe\"
+	RefName = "MandolinPkg.Pxe"
+[INF]
+"CrbPxeLoader.inf"
+"CrbPxeUefiDriver.inf"
+[files]
+"CrbPxe.sdl"
+"b57pxee.lom"
+<endComponent>

@@ -1,0 +1,55 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file NVLockSetupReentryHook.inf
+#   INF file for NVLockSetupReentryHook
+##
+
+[Defines]
+  INF_VERSION       = 0x00010005
+  VERSION_STRING    = 1.0
+  BASE_NAME         = NvLockSetupReEntryHook
+  MODULE_TYPE       = DXE_DRIVER
+  LIBRARY_CLASS     = NvLockSetupReEntryLib
+
+[Sources]
+  NvLockSetupReEntryHook.c
+
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  LibAmiSetupNvLock
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  
+[Guids]
+  gAmiSetupVariableGuid
+ 
+#****************************************************************************
+#****************************************************************************
+#**                                                                        **
+#**             (C)Copyright 1985-2019, American Megatrends, Inc.          **
+#**                                                                        **
+#**                          All Rights Reserved.                          **
+#**                                                                        **
+#**             5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093          **
+#**                                                                        **
+#**                          Phone (770)-246-8600                          **
+#**                                                                        **
+#****************************************************************************
+#****************************************************************************

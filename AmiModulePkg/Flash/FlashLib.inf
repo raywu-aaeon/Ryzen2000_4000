@@ -1,0 +1,27 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = FlashLib
+    FILE_GUID       = 95FBAF1B-3EC4-44F9-AE35-EB769D9320C7
+    MODULE_TYPE     = DXE_RUNTIME_DRIVER
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = FlashLib | DXE_DRIVER DXE_CORE DXE_RUNTIME_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER
+
+[Sources]
+    FlashLibWrapper.c
+    FlashLibWrapper.h
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    AmiDxeLib
+    AmiFlashLib

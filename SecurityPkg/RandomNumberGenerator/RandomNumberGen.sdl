@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "RandomNumberGen_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling RandomNumberGen support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "RngDxe"
+	File  = "RngDxe\RngDxe.inf"
+	Package  = "SecurityPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+

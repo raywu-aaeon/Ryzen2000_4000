@@ -1,0 +1,11 @@
+<component>
+	name = "SensorFusion"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\SensorFusion\"
+	RefName = "AmdCpmPkg.Features.SensorFusion"
+[INF]
+"Asl\AmdCpm3SensorFusionAsl.inf"
+"Dxe\AmdCpm3SensorFusionDxe.inf"
+[files]
+"SensorFusion.sdl"	
+<endComponent>

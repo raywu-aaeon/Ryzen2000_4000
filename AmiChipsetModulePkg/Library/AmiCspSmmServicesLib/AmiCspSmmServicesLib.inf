@@ -1,0 +1,45 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+## @file
+#
+##
+[Defines]
+  INF_VERSION               = 0x00010005
+  VERSION_STRING            = 1.0
+  BASE_NAME                 = AmiCspSmmServicesLib
+  MODULE_TYPE               = DXE_SMM_DRIVER
+  FILE_GUID                 = fe23e9dc-e60c-4882-8500-1a5ce532885d
+  PI_SPECIFICATION_VERSION  = 0x0001000A
+  LIBRARY_CLASS             = AmiCspSmmServicesLib | DXE_SMM_DRIVER
+  CONSTRUCTOR               = AmiCspSmmServicesLibConstructor
+  
+[Sources]
+  AmiCspSmmServicesLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+
+[LibraryClasses]
+  SmmServicesTableLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  DebugLib
+  BaseMemoryLib
+               
+[Guids]
+  gAmiSmmRsTableGuid
+
+[Depex]
+  gAmiSmmRsTableGuid ## SmmRsTableGuid

@@ -1,0 +1,26 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = ExtSpiFlashDxeLib
+    FILE_GUID       = DAC942D6-3C17-4D36-8B29-641CB7C516BD
+    MODULE_TYPE     = DXE_DRIVER
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = ExtSpiFlashLib
+
+[Sources]
+    ExtSpiFlash.h
+    ExtSpiFlash.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    CspSpiFlashLib
+    AmiFlashLib

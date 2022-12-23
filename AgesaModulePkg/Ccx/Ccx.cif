@@ -1,0 +1,15 @@
+<component>
+	name = "Ccx"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Ccx\"
+	RefName = "AgesaModulePkg.Ccx"
+[INF]
+"Zen\CcxZenRvDxe\AmdCcxZenRvDxe.inf"
+"Zen\CcxZenRvPei\AmdCcxZenRvPei.inf"
+"Zen\CcxZenRvSmm\AmdCcxZenRvSmm.inf"
+"Zen\CcxZenZpDxe\AmdCcxZenZpDxe.inf"
+"Zen\CcxZenZpPei\AmdCcxZenZpPei.inf"
+"Zen\CcxZenZpSmm\AmdCcxZenZpSmm.inf"
+[files]
+"Ccx.sdl"
+<endComponent>

@@ -1,0 +1,61 @@
+TOKEN
+	Name  = "AmdCpmEcInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdCpmEcInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmEcInitAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmEcInitAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmEcInitDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmEcInitDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmEcInitPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmEcInitPeim support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdCpmEcInitAsl"
+	File  = "Asl/AmdCpm3EcInitAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmEcInitAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmEcInitDxe"
+	File  = "Dxe/AmdCpm3EcInitDxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmEcInitDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmEcInitPeim"
+	File  = "Pei/AmdCpm3EcInitPeim.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmEcInitPeim_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "AmdCpmEcInitPeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmdCpmPkg.AmdCpmEcInitPeim"
+	Index  = '"AFTER" "AmdCpmInitPeim"'
+	Help  = "AmdProcessorInitPeim is no any dependence on AmdCpmInitPeim but actually AmdCpmInitPeim needed prior to AmdProcessorInitPeim"
+End
+

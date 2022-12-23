@@ -1,0 +1,65 @@
+## @file
+#  Stack Check Library
+#
+#  Stack Check Library
+#
+#  Copyright (c) 2014, ARM Ltd. All rights reserved.<BR>
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BaseStackCheckLib
+  MODULE_UNI_FILE                = BaseStackCheckLib.uni
+  FILE_GUID                      = 5f6579f7-b648-4fdb-9f19-4c17e27e8eff
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+##  ****************  AMI PORTING BEGIN  ***************
+##  LIBRARY_CLASS                  = NULL
+  LIBRARY_CLASS                  = NULL|PEI_CORE PEIM DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER SMM_CORE UEFI_DRIVER UEFI_APPLICATION
+  CONSTRUCTOR                    = StackCheckLibConstructor
+##  ****************  AMI PORTING END ***************
+
+##  ****************  AMI PORTING BEGIN  ***************
+###  VALID_ARCHITECTURES           = ARM AARCH64
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+##  ****************  AMI PORTING END  ***************
+
+[Sources]
+  BaseStackCheckGcc.c  | GCC
+  BaseStackCheckGcc.c  | RVCT
+##  ****************  AMI PORTING BEGIN  ***************
+##  BaseStackCheckNull.c | MSFT
+  BaseStackCheckMs.c | MSFT
+
+[Sources.IA32]
+  MsStackCheck32.nasm | MSFT
+
+[Sources.X64]
+  MsStackCheck64.nasm | MSFT
+##  ****************  AMI PORTING END ***************
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+##  ****************  AMI PORTING BEGIN  ***************
+  RngLib
+##  ****************  AMI PORTING END   ***************
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask  ## CONSUMES
+
+##  ****************  AMI PORTING BEGIN  ***************
+[BuildOptions]
+GCC:*_*_*_CC_FLAGS = -fno-lto
+MSFT:*_*_*_CC_FLAGS = /GL-
+##  ****************  AMI PORTING END   ***************
+

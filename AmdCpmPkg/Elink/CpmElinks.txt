@@ -1,0 +1,6 @@
+#ifndef  _AMI_CPM_ELINKS_H   //To Avoid this header get compiled twice
+#define  _AMI_CPM_ELINKS_H
+
+#define CPM_OEM_SETUP_CALLBACK_LIST @Elink(CpmConfigurationList, "@Child", " ", "%n")
+
+#endif  // #ifndef  _AMI_CPM_ELINKS_H

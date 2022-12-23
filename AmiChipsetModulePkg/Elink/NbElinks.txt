@@ -1,0 +1,7 @@
+#ifndef  _NB_ELINKS_H   //To Avoid this header get compiled twice
+#define  _NB_ELINKS_H
+
+#define NB_OEM_SETUP_CALLBACK_LIST @Elink(NbConfigurationList, "@Child", " ", "%n")
+#define AMI_HOOK_BEFORE_READ_SPD_LIST @Elink(OemReadSpdList, "@Child", " ", "%n")
+
+#endif  // #ifndef  _NB_ELINKS_H_

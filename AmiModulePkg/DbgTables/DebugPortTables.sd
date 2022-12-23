@@ -1,0 +1,81 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+/** @file DebugPortTables.sd
+    This is the setup page 'Debug Port Tables Configuration.'
+    The link to the page is in the setup 'Advanced' tab. 
+
+**/
+
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+    UINT8   DBGPEnable;
+    UINT8   DBG2Enable;
+#endif
+
+#ifdef ADVANCED_FORM_SET
+
+    #ifdef FORM_SET_GOTO
+        //
+        // Define goto commands for the forms defined in this file.
+        //
+        goto DBG_PORT_TABLE_FORM_ID,
+            prompt  = STRING_TOKEN(STR_DEBUG_PORT_TABLE_PROMPT),
+            help    = STRING_TOKEN(STR_DEBUG_PORT_TABLE_HELP),
+            flags   = INTERACTIVE, key = AUTO_ID(DBG_PORT_TABLE_MENU_REFRESH);
+    #endif
+
+    #ifdef FORM_SET_FORM
+
+        //
+        // Define forms
+        //
+        form formid = AUTO_ID(DBG_PORT_TABLE_FORM_ID),
+        title = STRING_TOKEN(STR_DBGP_ENABLE_PROMPT);
+
+        SUBTITLE(STRING_TOKEN (STR_DBGP_ENABLE_PROMPT))
+        SEPARATOR
+
+        //
+        // DBGP table enable/disable item.
+        //
+        oneof varid  = SETUP_DATA.DBGPEnable,
+            prompt = STRING_TOKEN(STR_DBGP_ENABLE_PROMPT),
+            help = STRING_TOKEN(STR_DBGP_ENABLE_HELP),
+            default = 0,
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = MANUFACTURING | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+
+        //
+        // DBG2 table enable/disable item.
+        //
+        oneof varid  = SETUP_DATA.DBG2Enable,
+            prompt = STRING_TOKEN(STR_DBG2_ENABLE_PROMPT),
+            help = STRING_TOKEN(STR_DBG2_ENABLE_HELP),
+            default = 0,
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = MANUFACTURING | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+
+        endform;
+    #endif // FORM_SET_FORM
+#endif // ADVANCED_FORM_SET
+
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************

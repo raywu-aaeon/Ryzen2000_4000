@@ -1,0 +1,92 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+## @file
+##
+# AMI instance of the IBV HSTI Library.
+
+
+[Defines]
+    INF_VERSION = 0x00010005
+    VERSION_STRING = 1.0
+    BASE_NAME = AmiHsti
+    MODULE_TYPE = DXE_DRIVER
+    FILE_GUID = CCA91175-03E3-442a-B3B8-2E4A335C1DEA
+    ENTRY_POINT = HstiEntryPoint
+    UEFI_HII_RESOURCE_SECTION = TRUE
+
+[Sources]
+    AmiHsti.c
+    AmiHsti.h
+    AmiHsti.uni
+    CryptoStrength.c
+    ExternalDeviceDMA.c
+    MorSupport.c
+    RollBackProtection.c
+    SecureBootBypass.c
+    VerifyNoTestKey.c
+    SignedFirmwareUpdate.c
+    ManufacturingMode.c
+    HstiAip.c
+    HstiDxe.c
+    HstiDxe.h
+
+[LibraryClasses]
+    UefiBootServicesTableLib
+    UefiDriverEntryPoint
+    BaseLib
+    BaseMemoryLib
+    MemoryAllocationLib
+    DebugLib
+    HiiLib
+    UefiLib
+    AmiDxeLib
+    PcdLib
+    AmiCryptLib
+    PrintLib
+
+[Protocols]
+    gEfiAdapterInformationProtocolGuid
+    gAmiDigitalSignatureProtocolGuid
+    gAmiLegacyBootProtocolGuid
+
+[Guids]
+    gAmiHstiPkgTokenSpaceGuid
+    gEfiGlobalVariableGuid
+    gEfiEndOfDxeEventGroupGuid
+    gEfiMemoryOverwriteControlDataGuid
+    gEfiCertX509Guid 
+    gEfiCertSha256Guid 
+    gEfiCertRsa2048Guid 
+    gEfiHashAlgorithmSha256Guid
+    
+[Packages]
+    AmiHstiPkg/AmiHstiPkg.dec
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AmiCryptoPkg/AmiCryptoPkg.dec
+
+[Pcd]
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiNumSecurityBytes
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiImplementedTestBitmap
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiCryptoStrengthImplementationBit
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiFirmwareRollbackImplementationBit
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiSecureBootBypassImplementationBit
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiNoTestKeyImplementationBit
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiExternalDeviceDmaImplementationBit
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiMorSupportImplementationBit
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdFirmwareRollbackProtection
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdSecureBootBypass
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiSecureBootCsmDisableImplementationBit
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiManufacturingModeImplementationBit
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiSignedFirmwareUpdateImplementationBit
+    gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiSecureUpdateWithDefaultKeyImplementationBit
+
+[Depex]
+TRUE

@@ -1,0 +1,62 @@
+TOKEN
+    Name  = "PerformanceMeasurement_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling PerformanceMeasurement support in the project"
+    TokenType = Boolean
+    Master = Yes
+    Token = "PERFORMANCE_MEASUREMENTS_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PM_SMM_DATA"
+    Value  = "0"
+    Help  = "Dump Smm performance data."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+INFComponent
+    Name  = "PerformanceMeasurement"
+    File  = "PerformanceMeasurement.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"    
+    Token = "PerformanceMeasurement_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "PerformanceMeasurementSmm"
+    File  = "PerformanceMeasurementSmm.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"    
+    Token = "PerformanceMeasurement_SUPPORT" "=" "1"
+    Token = "PM_SMM_DATA" "=" "1"
+End
+
+TOKEN
+    Name  = "SYSTEM_SCOPE_TOOL_FORMAT"
+    Value  = "0"
+    Help  = "Data save will follow system scope tool format style"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "RECORD_VERSION"
+    Value  = "3"
+    Help  = "Performance record version"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "RELATIVE_TIME"
+    Value  = "0"
+    Help  = "Use PEI start time to 0 to calculate relative time"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+PATH
+    Name  = "PM_DIR"
+    Path  = "AmiModulePkg\PerformanceMeasurement"
+End

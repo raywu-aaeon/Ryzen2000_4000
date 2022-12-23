@@ -1,0 +1,1 @@
+#define TCG_SKIP_FFS_GUID_LIST @elink(TCGFfsMeasureSkipList, "@Child"," " ,"" )

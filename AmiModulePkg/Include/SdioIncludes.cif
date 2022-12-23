@@ -1,0 +1,9 @@
+<component>
+    name = "SdioIncludes"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg/Include/"
+    RefName = "SdioIncludes"
+[files]
+"SdioDef.h"
+"SdioController.h"
+<endComponent>

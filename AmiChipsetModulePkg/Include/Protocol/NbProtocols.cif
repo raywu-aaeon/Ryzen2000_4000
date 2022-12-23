@@ -1,0 +1,8 @@
+<component>
+	name = "NB Protocols"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Include\Protocol\"
+	RefName = "AmiChipsetModulePkg.NbProtocols"
+[files]
+
+<endComponent>

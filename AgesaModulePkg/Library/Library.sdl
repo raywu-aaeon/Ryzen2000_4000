@@ -1,0 +1,3537 @@
+TOKEN
+	Name  = "AMD_LIBRARY_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AMD Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AmdBaseLib"
+	File  = "AmdBaseLib\AmdBaseLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdCalloutLib"
+	File  = "AmdCalloutLib\AmdCalloutLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdCapsuleLibDxe"
+	File  = "AmdCapsuleLibDxe\AmdCapsuleLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdCapsuleLibPei"
+	File  = "AmdCapsuleLibPei\AmdCapsuleLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdErrorLogLib"
+	File  = "AmdErrorLogLib\AmdErrorLogLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdHeapDxeLib"
+	File  = "AmdHeapDxeLib\AmdHeapDxeLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AmdHeapLibNull"
+	File  = "AmdHeapLibNull\AmdHeapLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "AmdHeapPeiLib"
+	File  = "AmdHeapPeiLib\AmdHeapPeiLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+    Name  = "AmdIdsDebugPrintLib"
+	File  = "AmdIdsDebugPrintLib\AmdIdsDebugPrintLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdIdsHookExtLib"
+	File  = "AmdIdsExtLibNull\AmdIdsHookExtLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdIdsHookLibDxe"
+	File  = "AmdIdsHookLibDxe\AmdIdsHookLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdIdsHookLibPei"
+	File  = "AmdIdsHookLibPei\AmdIdsHookLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdIdsHookLibNull"
+	File  = "AmdIdsHookLibNull\AmdIdsHookLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspApobLib"
+	File  = "AmdPspApobLib\AmdPspApobLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspBaseLibV1"
+	File  = "AmdPspBaseLibV1\AmdPspBaseLibV1.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspBaseLibV2"
+	File  = "AmdPspBaseLibV2\AmdPspBaseLibV2.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspCommonLibDxe"
+	File  = "AmdPspCommonLibDxe\AmdPspCommonLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "ApobCommonServiceLibDxe"
+	File  = "ApobCommonServiceLibDxe\ApobCommonServiceLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspCommonLibPei"
+	File  = "AmdPspCommonLibPei\AmdPspCommonLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspFlashAccLibDxe"
+	File  = "AmdPspFlashAccLibDxe\AmdPspFlashAccLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AmdPspFlashAccLibNull"
+	File  = "AmdPspFlashAccLibNull\AmdPspFlashAccLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspFlashUpdateLib"
+	File  = "AmdPspFlashUpdateLib\AmdPspFlashUpdateLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspFtpmLib"
+	File  = "AmdPspFtpmLib\AmdPspFtpmLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspMboxLibV1"
+	File  = "AmdPspMboxLibV1\AmdPspMboxLibV1.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdPspMboxLibV2"
+	File  = "AmdPspMboxLibV2\AmdPspMboxLibV2.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdS3SaveLib"
+	File  = "AmdS3SaveLib\S3Save\AmdS3SaveLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AmdWOS3SaveLib"
+	File  = "AmdS3SaveLib\WOS3Save\AmdWOS3SaveLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdSocBaseLib"
+	File  = "AmdSocBaseLib\AmdSocBaseLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdTableLib"
+	File  = "AmdTableLib\AmdTableLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "ApcbLibV3"
+	File  = "ApcbLibV3\ApcbLibV3.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AmdTableSmnDxeLib"
+	File  = "AmdTableLib\Dxe\AmdTableSmnDxeLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdTableSmnNullLib"
+	File  = "AmdTableLib\Null\AmdTableSmnNullLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdTableSmnPeiLib"
+	File  = "AmdTableLib\Pei\AmdTableSmnPeiLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+    Name  = "ApcbRvLib"
+    File  = "ApcbRvLib\ApcbLib.inf"
+    Package  = "AgesaModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+    Name  = "ApcbZpLib"
+    File  = "ApcbZpLib\ApcbLib.inf"
+    Package  = "AgesaModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "ApCommunicationXvLib"
+	File  = "ApCommunicationXvLib\ApCommunicationXvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "ApobCommonServiceLibPei"
+	File  = "ApobCommonServiceLibPei\ApobCommonServiceLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "BaseCoreLogicalIdX86Lib"
+	File  = "BaseCoreLogicalIdX86Lib\BaseCoreLogicalIdX86Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#INFComponent
+#	Name  = "BaseFabricTopologyRvLib"
+#	File  = "BaseFabricTopologyRvLib\BaseFabricTopologyRvLib.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+INFComponent
+	Name  = "BaseFabricTopologyUnbLib"
+	File  = "BaseFabricTopologyUnbLib\BaseFabricTopologyUnbLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "BaseFabricTopologyZpLib"
+	File  = "BaseFabricTopologyZpLib\BaseFabricTopologyZpLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "BaseSocketLogicalIdRvDieLib"
+	File  = "BaseSocketLogicalIdRvDieLib\BaseSocketLogicalIdRvDieLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "BaseSocketLogicalIdUnbLib"
+	File  = "BaseSocketLogicalIdUnbLib\BaseSocketLogicalIdUnbLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "BaseSocketLogicalIdZpDieLib"
+	File  = "BaseSocketLogicalIdZpDieLib\BaseSocketLogicalIdZpDieLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "BaseSocLogicalIdXlatBrLib"
+	File  = "BaseSocLogicalIdXlatBrLib\BaseSocLogicalIdXlatBrLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "BaseSocLogicalIdXlatRvDieLib"
+	File  = "BaseSocLogicalIdXlatRvDieLib\BaseSocLogicalIdXlatRvDieLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "BaseSocLogicalIdXlatZpDieLib"
+	File  = "BaseSocLogicalIdXlatZpDieLib\BaseSocLogicalIdXlatZpDieLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "CcxBaseX86Lib"
+	File  = "CcxBaseX86Lib\CcxBaseX86Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxBistLib"
+	File  = "CcxBistLib\CcxBistLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxBtcLib"
+	File  = "CcxBtcLib\CcxXvBtcLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "CcxDownCoreXvLib"
+	File  = "CcxDownCoreXvLib\CcxDownCoreXvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "CcxHaltLib"
+	File  = "CcxHaltLib\CcxHaltLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxIdsCustomPstateZenLib"
+	File  = "CcxIdsCustomPstateZenLib\CcxIdsCustomPstatesZenLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxMicrocodePatchLib"
+	File  = "CcxMicrocodePatchLib\CcxMicrocodePatchLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxMpServicesDxeLib"
+	File  = "CcxMpServicesDxeLib\CcxMpServicesDxeLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxMpServicesSmmLib"
+	File  = "CcxMpServicesSmmLib\CcxMpServicesSmmLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxPspLib"
+	File  = "CcxPspLib\CcxPspLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#INFComponent
+#	Name  = "CcxPstatesXvLib"
+#	File  = "CcxPstatesXvLib\CcxPstatesXvLib.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+INFComponent
+	Name  = "CcxPstatesZenZpLib"
+	File  = "CcxPstatesZenZpLib\CcxPstatesZenZpLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxResetTablesRvLib"
+	File  = "CcxResetTablesRvLib\CcxResetTablesRvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxResetTablesZpLib"
+	File  = "CcxResetTablesZpLib\CcxResetTablesZpLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "CcxRolesX86Lib"
+	File  = "CcxRolesX86Lib\CcxRolesX86Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxSetMcaRvLib"
+	File  = "CcxSetMcaRvLib\CcxSetMcaRvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxSetMcaZpLib"
+	File  = "CcxSetMcaZpLib\CcxSetMcaZpLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "CcxSetMmioCfgBaseLib"
+	File  = "CcxSetMmioCfgBaseLib\CcxSetMmioCfgBaseLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxSmbiosXvLib"
+	File  = "CcxSmbiosXvLib\CcxSmbiosXvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "CcxSmbiosZenZpLib"
+	File  = "CcxSmbiosZenZpLib\CcxSmbiosZenZpLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "CcxSmbiosZenRvLib"
+	File  = "CcxSmbiosZenRvLib\CcxSmbiosZenRvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxStallZenLib"
+	File  = "CcxStallZenLib\CcxStallZenLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxXvIdsHookLibDxe"
+	File  = "CcxXvIdsHookLib\Dxe\CcxXvIdsHookLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "CcxXvIdsHookLibPei"
+	File  = "CcxXvIdsHookLib\Pei\CcxXvIdsHookLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "CcxZenRvIdsHookLibDxe"
+	File  = "CcxZenRvIdsHookLib\Dxe\CcxZenRvIdsHookLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxZenRvIdsHookLibPei"
+	File  = "CcxZenRvIdsHookLib\Pei\CcxZenRvIdsHookLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxZenRvIdsHookLibSmm"
+	File  = "CcxZenRvIdsHookLib\Smm\CcxZenRvIdsHookLibSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxZenZpIdsHookLibDxe"
+	File  = "CcxZenZpIdsHookLib\Dxe\CcxZenZpIdsHookLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxZenZpIdsHookLibPei"
+	File  = "CcxZenZpIdsHookLib\Pei\CcxZenZpIdsHookLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CcxZenZpIdsHookLibSmm"
+	File  = "CcxZenZpIdsHookLib\Smm\CcxZenZpIdsHookLibSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#INFComponent
+#	Name  = "DebugLibIdsDp"
+#	File  = "DebugLibIdsDp\DebugLibIdsDp.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+INFComponent
+	Name  = "DxeCcxBaseX86ServicesLib"
+	File  = "DxeCcxBaseX86ServicesLib\DxeCcxBaseX86ServicesLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "DxeCcxSmmAccess2Lib"
+	File  = "DxeCcxSmmAccess2Lib\DxeCcxSmmAccess2Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#INFComponent
+#	Name  = "DxeFabricResourceSizeForEachDieLib"
+#	File  = "DxeFabricResourceSizeForEachDieLib\DxeFabricResourceSizeForEachDieLib.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+INFComponent
+	Name  = "DxeFabricResourceSizeForEachRbLib"
+	File  = "DxeFabricResourceSizeForEachRbLib\DxeFabricResourceSizeForEachRbLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "DxeFabricTopologyServices2Lib"
+	File  = "DxeFabricTopologyServices2Lib\DxeFabricTopologyServices2Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "DxeSocLogicalIdServicesLib"
+	File  = "DxeSocLogicalIdServicesLib\DxeSocLogicalIdServicesLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "DxioLibV1"
+	File  = "DxioLibV1\DxioLibV1.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FabricIdsHookRvLibDxe"
+	File  = "FabricIdsHookRvLib\Dxe\FabricIdsHookRvLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "FabricIdsHookRvLibPei"
+	File  = "FabricIdsHookRvLib\Pei\FabricIdsHookRvLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "FabricIdsHookUnbLibDxe"
+	File  = "FabricIdsHookUnbLib\Dxe\FabricIdsHookUnbLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "FabricIdsHookUnbLibPei"
+	File  = "FabricIdsHookUnbLib\Pei\FabricIdsHookUnbLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "FabricIdsHookZpLibDxe"
+	File  = "FabricIdsHookZpLib\Dxe\FabricIdsHookZpLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "FabricIdsHookZpLibPei"
+	File  = "FabricIdsHookZpLib\Pei\FabricIdsHookZpLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "FabricPstatesZpLib"
+	File  = "FabricPstatesZpLib\FabricPstatesZpLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#INFComponent
+#	Name  = "FabricPstatesRvLib"
+#	File  = "FabricPstatesRvLib\FabricPstatesRvLib.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+INFComponent
+	Name  = "FabricPstatesUnbLib"
+	File  = "FabricPstatesUnbLib\FabricPstatesUnbLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "FabricRegisterAccSoc15Lib"
+	File  = "FabricRegisterAccSoc15Lib\FabricRegisterAccSoc15Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FabricResourceManagerUnbLib"
+	File  = "FabricResourceManagerUnbLib\FabricResourceManagerUnbLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FabricResourceInit1Lib"
+	File  = "FabricResourceManagerDf1Lib/FabricResourceInit1Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FabricResourceManager1Lib"
+	File  = "FabricResourceManagerDf1Lib/FabricResourceManager1Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiFabricResourceManagerServicesLib"
+	File  = "PeiFabricResourceManagerServicesLib/PeiFabricResourceManagerServicesLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "DxeFabricResourceManagerServicesLib"
+	File  = "DxeFabricResourceManagerServicesLib/DxeFabricResourceManagerServicesLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "FabricResourceReportToGcdLib"
+	File  = "FabricResourceReportToGcdLib\FabricResourceReportToGcdLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FabricResourceReportToGcdNullLib"
+	File  = "FabricResourceReportToGcdNullLib\FabricResourceReportToGcdNullLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FabricWdtZpLib"
+	File  = "FabricWdtZpLib\FabricWdtZpLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FchBaseLib"
+	File  = "FchBaseLib\FchBaseLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FchBaseResetSystemLib"
+	File  = "FchBaseResetSystemLib\FchBaseResetSystemLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FchDxeLibV9"
+	File  = "FchDxeLib\FchDxeLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "FchIdsHookLib"
+	File  = "FchIdsHookLib\FchIdsHookLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#These are porting driver. CPM will handle it.
+#INFComponent
+#	Name  = "FchInitHookLibDxe"
+#	File  = "FchInitHookLib\FchInitHookLibDxe.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "DXE_DRIVER"
+#End
+
+#INFComponent
+#	Name  = "FchInitHookLibPei"
+#	File  = "FchInitHookLib\FchInitHookLibPei.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "PEIM"
+#End
+
+INFComponent
+	Name  = "FchPeiLibV9"
+	File  = "FchPeiLib\FchPeiLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FchSmmLibV9"
+	File  = "FchSmmLib\FchSmmLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GnbCommonLib"
+	File  = "GnbCommonLib\GnbCommonLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GnbCpuAccLib"
+	File  = "GnbCpuAccLib\GnbCpuAccLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AgesaGnbDxeLib"
+	File  = "GnbCZLib\GnbDxeLibCZ.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AgesaGnbPeiLib"
+	File  = "GnbCZLib\GnbPeiLibCZ.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GnbHeapDxeLib"
+	File  = "GnbHeapDxeLib\GnbHeapDxeLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "GnbHeapPeiLib"
+	File  = "GnbHeapPeiLib\GnbHeapPeiLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "GnbIoAccLib"
+	File  = "GnbIoAccLib\GnbIoAccLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GnbLib"
+	File  = "GnbLib\GnbLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GnbMemAccLib"
+	File  = "GnbMemAccLib\GnbMemAccLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GnbPciAccLib"
+	File  = "GnbPciAccLib\GnbPciAccLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GnbPciLib"
+	File  = "GnbPciLib\GnbPciLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GnbRegisterAccZpLib"
+	File  = "GnbRegisterAccZpLib\GnbRegisterAccZpLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "GnbSSocketLib"
+	File  = "GnbSSocketLib\GnbSSocketLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "HardCodedMemCommonServiceLib"
+	File  = "HardCodedMemCommonServiceLib\HardCodedMemCommonServiceLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "IdsDxeLib"
+	File  = "IdsDxeLib\IdsDxeLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes = "BASE"
+
+End
+
+#INFComponent
+#	Name  = "IdsLibNull"
+#	File  = "IdsLibNull\IdsLibNull.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+INFComponent
+	Name  = "IdsMiscLib"
+	File  = "IdsMiscLib\IdsMiscLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "IdsNonUefiLib"
+	File  = "IdsNonUefiLib\IdsNonUefiLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "IdsPeiLib"
+	File  = "IdsPeiLib\IdsPeiLib.inf"
+	Package  = "AgesaModulePkg"
+	Arch  = "IA32 X64"
+    ModuleTypes  = "PEIM PEI_CORE SEC"
+End
+
+INFComponent
+	Name  = "AmdMemArdkLib"
+	File  = "Mem\ArdkLib\AmdMemArdkLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemBaseLib"
+	File  = "Mem\BaseLib\AmdMemBaseLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemErrorLogLib"
+	File  = "Mem\ErrorLogLib\AmdMemErrorLogLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatChIntLvLib"
+	File  = "Mem\FeatChIntLvLib\AmdMemFeatChIntLvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatCratLib"
+	File  = "Mem\FeatCratLib\AmdMemFeatCratLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatCsIntLvLib"
+	File  = "Mem\FeatCsIntLvLib\AmdMemFeatCsIntLvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatDmiCollectLib"
+	File  = "Mem\FeatDmiCollectLib\AmdMemFeatDmiCollectLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatDmiConstructLib"
+	File  = "Mem\FeatDmiConstructLib\MemFeatDmiConstructLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatEccLib"
+	File  = "Mem\FeatEccLib\AmdMemFeatEccLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatExcludeDimmLib"
+	File  = "Mem\FeatExcludeDimmLib\AmdMemFeatExcludeDimmLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatIdentifyDimmLib"
+	File  = "Mem\FeatIdentifyDimmLib\AmdMemFeatIdentifyDimmLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatLvDdr3Lib"
+	File  = "Mem\FeatLvDdr3Lib\AmdMemFeatLvDdr3Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatMemClrLib"
+	File  = "Mem\FeatMemClrLib\AmdMemFeatMemClrLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatOnDimmThermalLib"
+	File  = "Mem\FeatOnDimmThermalLib\AmdMemFeatOnDimmThermalLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatS3Lib"
+	File  = "Mem\FeatS3Lib\AmdMemFeatS3Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatTableLib"
+	File  = "Mem\FeatTableLib\AmdMemFeatTableLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatUmaLib"
+	File  = "Mem\FeatUmaLib\AmdMemFeatUmaLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemMainCzLib"
+	File  = "Mem\MainCzLib\AmdMemMainCzLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemMainLib"
+	File  = "Mem\MainLib\AmdMemMainLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "MemIdsHookCzLib"
+	File  = "Mem\MemIdsHookCzLib\MemIdsHookCzLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemNbCzLib"
+	File  = "Mem\NbCzLib\AmdMemNbCzLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemNbLib"
+	File  = "Mem\NbLib\AmdMemNbLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemArdkLibNull"
+	File  = "Mem\Null\ArdkLibNull\AmdMemArdkLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatAmpLibNull"
+	File  = "Mem\Null\FeatAmpLibNull\AmdMemFeatAmpLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatCratLibNull"
+	File  = "Mem\Null\FeatCratLibNull\AmdMemFeatCratLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatDmiCollectLibNull"
+	File  = "Mem\Null\FeatDmiCollectLibNull\AmdMemFeatDmiCollectLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatIdentifyDimmLibNull"
+	File  = "Mem\Null\FeatIdentifyDimmLibNull\AmdMemFeatIdentifyDimmLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatIntLvRgnLibNull"
+	File  = "Mem\Null\FeatIntLvRgnLibNull\AmdMemFeatIntLvRgnLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatMemClrLibNull"
+	File  = "Mem\Null\FeatMemClrLibNull\AmdMemFeatMemClrLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatNodeIntLvLibNull"
+	File  = "Mem\Null\FeatNodeIntLvLibNull\AmdMemFeatNodeIntLvLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatOLSpareLibNull"
+	File  = "Mem\Null\FeatOLSpareLibNull\AmdMemFeatOLSpareLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemFeatTableLibNull"
+	File  = "Mem\Null\FeatTableLibNull\AmdMemFeatTableLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemMainLibNull"
+	File  = "Mem\Null\MainCzLibNull\AmdMemMainCzLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemPsCzAm4LibNull"
+	File  = "Mem\Null\PsCzAm4LibNull\AmdMemPsCzAm4LibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemPsCzFp4LibNull"
+	File  = "Mem\Null\PsCzFp4LibNull\AmdMemPsCzFp4LibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemPsCzLibNull"
+	File  = "Mem\Null\PsCzLibNull\AmdMemPsCzLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemPsLibNull"
+	File  = "Mem\Null\PsLibNull\AmdMemPsLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemTechDdr3LibNull"
+	File  = "Mem\Null\TechDdr3LibNull\AmdMemTechDdr3LibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemTechDdr4LibNull"
+	File  = "Mem\Null\TechDdr4LibNull\AmdMemTechDdr4LibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemTechLibNull"
+	File  = "Mem\Null\TechLibNull\AmdMemTechLibNull.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemPsCzAm4Lib"
+	File  = "Mem\PsCzAm4Lib\AmdMemPsCzAm4Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemPsCzFp4Lib"
+	File  = "Mem\PsCzFp4Lib\AmdMemPsCzFp4Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemPsCzLib"
+	File  = "Mem\PsCzLib\AmdMemPsCzLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemPsLib"
+	File  = "Mem\PsLib\AmdMemPsLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#INFComponent
+#	Name  = "AmdMemReportInfoLib"
+#	File  = "Mem\ReportInfoLib\AmdMemReportInfoLib.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+INFComponent
+	Name  = "AmdMemS3InitLib"
+	File  = "Mem\S3InitLib\S3InitLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemServicesCzLib"
+	File  = "Mem\ServicesCzLib\AmdMemServicesCzLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemServicesLib"
+	File  = "Mem\ServicesLib\AmdMemServicesLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#INFComponent
+#	Name  = "AmdMemServicesSmLib"
+#	File  = "Mem\ServicesSmLib\AmdMemServicesSmLib.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+INFComponent
+	Name  = "AmdMemTechDdr3Lib"
+	File  = "Mem\TechDdr3Lib\AmdMemTechDdr3Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemTechDdr4Lib"
+	File  = "Mem\TechDdr4Lib\AmdMemTechDdr4Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemTechLib"
+	File  = "Mem\TechLib\AmdMemTechLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "MemRestoreLib"
+	File  = "MemRestoreLib\MemRestoreLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "MemSmbiosV2SspLib"
+	File  = "MemSmbiosV2SspLib\MemSmbiosV2Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdMemSmbiosV2RvLib"
+	File  = "MemSmbiosV2RvLib\MemSmbiosV2Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioAzaliaLib"
+	File  = "NbioAzaliaLib\NbioAzaliaLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioHandleLib"
+	File  = "NbioHandleLib\NbioHandleLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioIdsHookCZLib"
+	File  = "NbioIdsHookCZLib\NbioIdsHookCZLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioIdsHookZPLib"
+	File  = "NbioIdsHookZPLib\NbioIdsHookZPLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioIdsHookRVLib"
+	File  = "NbioIdsHookRVLib\NbioIdsHookRVLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioIommuIvrsLib"
+	File  = "NbioIommuIvrsLib\NbioIommuIvrsLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioSmuV12Lib"
+	File  = "NbioSmuV12Lib\NbioSmuV12Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioUtilLib"
+	File  = "NbioUtilLib\NbioUtilLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioRegisterAccLib"
+	File  = "NbioRegisterAccLib\NbioRegisterAcc.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioSmuV9Lib"
+	File  = "NbioSmuV9Lib\NbioSmuV9Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "NbioSmuV10Lib"
+	File  = "NbioSmuV10Lib\NbioSmuV10Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "OptionMemoryInstallCzLib"
+	File  = "OptionMemoryInstallCzLib\OptionMemoryInstallCzLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PcieConfigLib"
+	File  = "PcieConfigLib\PcieConfigLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PcieMiscCommLib"
+	File  = "PcieMiscCommLib\PcieMiscCommLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#INFComponent
+#	Name  = "PeiFabricResourceSizeForEachDieLib"
+#	File  = "PeiFabricResourceSizeForEachDieLib\PeiFabricResourceSizeForEachDieLib.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+INFComponent
+	Name  = "PeiFabricResourceSizeForEachRbLib"
+	File  = "PeiFabricResourceSizeForEachRbLib\PeiFabricResourceSizeForEachRbLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiFabricTopologyServices2Lib"
+	File  = "PeiFabricTopologyServices2Lib\PeiFabricTopologyServices2Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PeiSocBistLoggingLib"
+	File  = "PeiSocBistLoggingLib\PeiSocBistLoggingLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiSocBistRvLib"
+	File  = "PeiSocBistRvLib\PeiSocBistRvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PeiSocBistZpLib"
+	File  = "PeiSocBistZpLib\PeiSocBistZpLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "PeiSocLogicalIdServicesLib"
+	File  = "PeiSocLogicalIdServicesLib\PeiSocLogicalIdServicesLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PspIdsHookLibDxe"
+	File  = "PspIdsHookLib\Dxe\PspIdsHookLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "ApobZpRvLib"
+	File  = "ApobZpRvLib\ApobZpRvLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "ApobZpMcmLib"
+	File  = "ApobZpMcmLib\ApobZpMcmLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "ApobSspLib"
+	File  = "ApobSspLib\ApobSspLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "ApobDummyLib"
+	File  = "ApobDummyLib\ApobDummyLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "RasRvBaseLib"
+	File  = "RasRvBaseLib\RasRvBaseLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "RasRvSmmLib"
+	File  = "RasRvSmmLib\RasRvSmmLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+	Name  = "SmmFabricTopologyServices2Lib"
+	File  = "SmmFabricTopologyServices2Lib\SmmFabricTopologyServices2Lib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+	Name  = "SmnAccessLib"
+	File  = "SmnAccessLib\SmnAccessLib.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "SocCmnIdsHookRvLibDxe"
+	File  = "SocCmnIdsHookRvLib\Dxe\SocCmnIdsHookRvLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "SocCmnIdsHookRvLibPei"
+	File  = "SocCmnIdsHookRvLib\Pei\SocCmnIdsHookRvLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+#INFComponent
+#	Name  = "SocCmnIdsHookZpLibDxe"
+#	File  = "SocCmnIdsHookZpLib\Dxe\SocCmnIdsHookZpLibDxe.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+#INFComponent
+#	Name  = "SocCmnIdsHookZpLibPei"
+#	File  = "SocCmnIdsHookZpLib\Pei\SocCmnIdsHookZpLibPei.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "BASE"
+#End
+
+LibraryMapping
+	Class  = "AmdBaseLib"
+	Instance  = "AgesaModulePkg.AmdBaseLib"
+End
+
+LibraryMapping
+	Class  = "AmdCalloutLib"
+	Instance  = "AgesaModulePkg.AmdCalloutLib"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmdCapsuleLib"
+	Instance  = "AgesaModulePkg.AmdCapsuleLibPei"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmdCapsuleLib"
+	Instance  = "AgesaModulePkg.AmdCapsuleLibDxe"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdCapsuleLib"
+	Instance  = "AgesaModulePkg.AmdCapsuleLibDxe"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdErrorLogLib"
+	Instance  = "AgesaModulePkg.AmdErrorLogLib"
+End
+
+LibraryMapping
+	Class  = "AmdHeapLib"
+	Instance  = "AgesaModulePkg.AmdHeapDxeLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdHeapLib"
+	Instance  = "AgesaModulePkg.AmdHeapDxeLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdHeapLib"
+	Instance  = "AgesaModulePkg.AmdHeapLibNull"
+End
+
+LibraryMapping
+	Class  = "AmdHeapLib"
+	Instance  = "AgesaModulePkg.AmdHeapPeiLib"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmdHeapLib"
+	Instance  = "AgesaModulePkg.AmdHeapPeiLib"
+	ModuleTypes  = "PEI_CORE"
+End
+
+LibraryMapping
+	Class  = "AmdIdsDebugPrintLib"
+	Instance  = "AgesaModulePkg.AmdIdsDebugPrintLib"
+End
+
+LibraryMapping
+	Class  = "AmdIdsHookExtLib"
+	Instance  = "AgesaModulePkg.AmdIdsHookExtLib"
+End
+
+LibraryMapping
+	Class  = "AmdIdsHookExtLib"
+	Instance  = "AgesaModulePkg.AmdIdsHookExtLib"
+	Override = "AgesaModulePkg.AmdSocFp5RvDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+LibraryMapping
+	Class  = "AmdIdsHookExtLib"
+	Instance  = "AgesaModulePkg.AmdIdsHookExtLib"
+	Override = "AgesaModulePkg.AmdSocAm4RvDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdIdsHookExtLib"
+	Instance  = "AgesaModulePkg.AmdIdsHookExtLib"
+	Override = "AgesaModulePkg.AmdSocAm4SmDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdIdsHookLib"
+	Instance  = "AgesaModulePkg.AmdIdsHookLibDxe"
+	ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdIdsHookLib"
+	Instance  = "AgesaModulePkg.AmdIdsHookLibPei"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmdIdsHookLib"
+	Instance  = "AgesaModulePkg.AmdIdsHookLibNull"
+End
+
+LibraryMapping
+	Class  = "AmdPspApobLib"
+	Instance  = "AgesaModulePkg.AmdPspApobLib"
+End
+
+LibraryMapping
+    Class  = "AmdPspBaseLibV1"
+    Instance  = "AgesaModulePkg.AmdPspBaseLibV1"
+End
+
+LibraryMapping
+	Class  = "AmdPspBaseLibV2"
+	Instance  = "AgesaModulePkg.AmdPspBaseLibV2"
+End
+
+LibraryMapping
+	Class  = "AmdPspCommonLib"
+	Instance  = "AgesaModulePkg.AmdPspCommonLibDxe"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdPspCommonLib"
+	Instance  = "AgesaModulePkg.AmdPspCommonLibDxe"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "ApobCommonServiceLib"
+	Instance  = "AgesaModulePkg.ApobCommonServiceLibDxe"
+	ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdPspCommonLib"
+	Instance  = "AgesaModulePkg.AmdPspCommonLibPei"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmdPspCommonLib"
+	Instance  = "AgesaModulePkg.AmdPspCommonLibDxe"
+End
+
+LibraryMapping
+	Class  = "AmdPspFlashAccLib"
+	Instance  = "AgesaModulePkg.AmdPspFlashAccLibDxe"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdPspFlashAccLib"
+	Instance  = "AgesaModulePkg.AmdPspFlashAccLibNull"
+End
+
+LibraryMapping
+	Class  = "AmdPspFlashUpdateLib"
+	Instance  = "AgesaModulePkg.AmdPspFlashUpdateLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdPspFlashUpdateLib"
+	Instance  = "AgesaModulePkg.AmdPspFlashUpdateLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdPspFtpmLib"
+	Instance  = "AgesaModulePkg.AmdPspFtpmLib"
+End
+
+LibraryMapping
+	Class  = "AmdPspMboxLibV1"
+	Instance  = "AgesaModulePkg.AmdPspMboxLibV1"
+End
+
+LibraryMapping
+	Class  = "AmdPspMboxLibV2"
+	Instance  = "AgesaModulePkg.AmdPspMboxLibV2"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdS3SaveLib"
+	ModuleTypes = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdS3SaveLib"
+	ModuleTypes = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdWOS3SaveLib"
+	Override = "AgesaModulePkg.AmdSocAm4SmDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdWOS3SaveLib"
+	Override = "AgesaModulePkg.AmdSocAm4BrDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdWOS3SaveLib"
+	Override = "AgesaModulePkg.AmdSocAm4RvDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdWOS3SaveLib"
+	Override = "AgesaModulePkg.AmdSocFp5RvDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdWOS3SaveLib"
+	ModuleTypes = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdWOS3SaveLib"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdWOS3SaveLib"
+	Override = "AgesaModulePkg.AmdFabricZpSmm"
+	Arch  = "X64"
+        Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdS3SaveLib"
+	Instance  = "AgesaModulePkg.AmdWOS3SaveLib"
+	Override = "AgesaModulePkg.AmdFabricRvSmm"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "AmdSocBaseLib"
+	Instance  = "AgesaModulePkg.AmdSocBaseLib"
+End
+
+LibraryMapping
+	Class  = "AmdTableLib"
+	Instance  = "AgesaModulePkg.AmdTableLib"
+End
+
+LibraryMapping
+	Class = "ApcbLibV3"
+	Instance  = "AgesaModulePkg.ApcbLibV3"
+	ModuleTypes = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdTableSmnLib"
+	Instance  = "AgesaModulePkg.AmdTableSmnDxeLib"
+	ModuleTypes = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdTableSmnLib"
+	Instance  = "AgesaModulePkg.AmdTableSmnDxeLib"
+	ModuleTypes = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdTableSmnLib"
+	Instance  = "AgesaModulePkg.AmdTableSmnPeiLib"
+	ModuleTypes = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmdTableSmnLib"
+	Instance  = "AgesaModulePkg.AmdTableSmnPeiLib"
+	ModuleTypes = "PEI_CORE"
+End
+
+LibraryMapping
+    Class  = "AmdTableSmnLib"
+    Instance  = "AgesaModulePkg.AmdTableSmnNullLib"
+    Override = "AgesaModulePkg.AmdUnbXvPei"
+    Arch  = "IA32"
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+LibraryMapping
+    Class  = "AmdTableSmnLib"
+    Instance  = "AgesaModulePkg.AmdTableSmnNullLib"
+    Override = "AgesaModulePkg.AmdCcxXvPei"
+    Arch  = "IA32"
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+    Class  = "AmdTableSmnLib"
+    Instance  = "AgesaModulePkg.AmdTableSmnNullLib"
+    Override = "AgesaModulePkg.AmdCcxXvDxe"
+    Arch  = "X64"
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+    Class  = "AmdTableSmnLib"
+    Instance  = "AgesaModulePkg.AmdTableSmnNullLib"
+    Override = "AgesaModulePkg.AmdUnbXvDxe"
+    Arch  = "X64"
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+    Class  = "AmdTableSmnLib"
+    Instance  = "AgesaModulePkg.AmdTableSmnNullLib"
+    Override = "AgesaModulePkg.AmdCcxXvSmm"
+    Arch  = "X64"
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+    Class  = "ApcbRvLib"
+    Instance  = "AgesaModulePkg.ApcbRvLib"
+    ModuleTypes = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "ApcbRvLib"
+    Instance  = "AgesaModulePkg.ApcbRvLib"
+    ModuleTypes = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+    Class  = "ApcbZpLib"
+    Instance  = "AgesaModulePkg.ApcbZpLib"
+    ModuleTypes = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+    Class  = "ApcbZpLib"
+    Instance  = "AgesaModulePkg.ApcbZpLib"
+    ModuleTypes = "DXE_SMM_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+    Class  = "ApcbRvLib"
+    Instance  = "AgesaModulePkg.ApcbRvLib"
+	Override = "AgesaModulePkg.AmdApcbRvDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+    Class  = "ApcbRvLib"
+    Instance  = "AgesaModulePkg.ApcbRvLib"
+	Override = "AgesaModulePkg.AmdApcbRvSmm"
+	Arch  = "X64"
+End
+
+LibraryMapping
+    Class  = "ApcbZpLib"
+    Instance  = "AgesaModulePkg.ApcbZpLib"
+	Override = "AgesaModulePkg.AmdApcbZpDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+    Class  = "ApcbZpLib"
+    Instance  = "AgesaModulePkg.ApcbZpLib"
+	Override = "AgesaModulePkg.AmdApcbZpSmm"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "ApCommunicationLib"
+	Instance  = "AgesaModulePkg.ApCommunicationXvLib"
+	Override = "AgesaModulePkg.AmdCcxXvPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+	Class  = "ApobCommonServiceLib"
+	Instance  = "AgesaModulePkg.ApobCommonServiceLibPei"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+    Class  = "BaseCoreLogicalIdLib"
+    Instance  = "AgesaModulePkg.BaseCoreLogicalIdX86Lib"
+End
+
+LibraryMapping
+	Class  = "BaseFabricTopologyLib"
+	Instance  = "AgesaModulePkg.BaseFabricTopologyZpLib"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+LibraryMapping
+	Class  = "BaseFabricTopologyLib"
+	Instance  = "AgesaModulePkg.BaseFabricTopologyZpLib"
+	Override = "AgesaModulePkg.AmdFabricRvPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+	Class  = "BaseFabricTopologyLib"
+	Instance  = "AgesaModulePkg.BaseFabricTopologyZpLib"
+	Override = "AgesaModulePkg.AmdSocFp5RvPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+	Class  = "BaseFabricTopologyLib"
+	Instance  = "AgesaModulePkg.BaseFabricTopologyZpLib"
+	Override = "AgesaModulePkg.AmdFabricRvDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "BaseFabricTopologyLib"
+	Instance  = "AgesaModulePkg.BaseFabricTopologyZpLib"
+	Override = "AgesaModulePkg.AmdSocFp5RvDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "BaseFabricTopologyLib"
+	Instance  = "AgesaModulePkg.BaseFabricTopologyZpLib"
+	Override = "AgesaModulePkg.AmdNbioBaseRVDxe"
+	Arch  = "X64"
+End
+
+#LibraryMapping
+#	Class  = "BaseFabricTopologyLib"
+#	Instance  = "AgesaModulePkg.BaseFabricTopologyRvLib"
+#End
+
+LibraryMapping
+	Class  = "BaseFabricTopologyLib"
+	Instance  = "AgesaModulePkg.BaseFabricTopologyUnbLib"
+	Override = "AgesaModulePkg.AmdSocAm4BrPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseFabricTopologyLib"
+	Instance  = "AgesaModulePkg.BaseFabricTopologyUnbLib"
+	Override = "AgesaModulePkg.AmdSocAm4BrDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocketLogicalIdLib"
+	Instance  = "AgesaModulePkg.BaseSocketLogicalIdRvDieLib"
+	Override = "AgesaModulePkg.AmdSocAm4RvPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+	Class  = "BaseSocketLogicalIdLib"
+	Instance  = "AgesaModulePkg.BaseSocketLogicalIdRvDieLib"
+	Override = "AgesaModulePkg.AmdSocAm4RvDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "BaseSocketLogicalIdLib"
+	Instance  = "AgesaModulePkg.BaseSocketLogicalIdZpDieLib"
+	Override = "AgesaModulePkg.AmdSocAm4SmPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocketLogicalIdLib"
+	Instance  = "AgesaModulePkg.BaseSocketLogicalIdZpDieLib"
+	Override = "AgesaModulePkg.AmdSocAm4SmDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocketLogicalIdLib"
+	Instance  = "AgesaModulePkg.BaseSocketLogicalIdUnbLib"
+	Override = "AgesaModulePkg.AmdSocAm4BrPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocketLogicalIdLib"
+	Instance  = "AgesaModulePkg.BaseSocketLogicalIdUnbLib"
+	Override = "AgesaModulePkg.AmdSocAm4BrDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocketLogicalIdLib"
+	Instance  = "AgesaModulePkg.BaseSocketLogicalIdRvDieLib"
+	Override = "AgesaModulePkg.AmdSocFp5RvPei"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+LibraryMapping
+	Class  = "BaseSocketLogicalIdLib"
+	Instance  = "AgesaModulePkg.BaseSocketLogicalIdRvDieLib"
+	Override = "AgesaModulePkg.AmdSocFp5RvDxe"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+#LibraryMapping
+#	Class  = "BaseSocketLogicalIdLib"
+#	Instance  = "AgesaModulePkg.BaseSocketLogicalIdUnbLib"
+#End
+
+#LibraryMapping
+#	Class  = "BaseSocketLogicalIdLib"
+#	Instance  = "AgesaModulePkg.BaseSocketLogicalIdZpDieLib"
+#End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatBrLib"
+	Override = "AgesaModulePkg.AmdCcxXvPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatBrLib"
+	Override = "AgesaModulePkg.AmdUnbXvPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatBrLib"
+	Override = "AgesaModulePkg.AmdSocAm4BrPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatBrLib"
+	Override = "AgesaModulePkg.AmdSocAm4BrDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatZpDieLib"
+	Override = "AgesaModulePkg.AmdSocAm4SmDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatZpDieLib"
+	Override = "AgesaModulePkg.AmdSocAm4SmPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatBrLib"
+	Override = "AgesaModulePkg.AmdCcxXvDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatBrLib"
+	Override = "AgesaModulePkg.AmdUnbXvDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatRvDieLib"
+	Override = "AgesaModulePkg.AmdCcxZenRvPei"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatRvDieLib"
+	Override = "AgesaModulePkg.AmdCcxZenRvDxe"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatRvDieLib"
+	Override = "AgesaModulePkg.AmdCcxZenRvSmm"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatRvDieLib"
+	Override = "AgesaModulePkg.AmdSocAm4RvPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatRvDieLib"
+	Override = "AgesaModulePkg.AmdSocAm4RvDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatRvDieLib"
+	Override = "AgesaModulePkg.AmdSocFp5RvPei"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatRvDieLib"
+	Override = "AgesaModulePkg.AmdSocFp5RvDxe"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatZpDieLib"
+	Override = "AgesaModulePkg.AmdCcxZenZpPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatZpDieLib"
+	Override = "AgesaModulePkg.AmdCcxZenZpDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatZpDieLib"
+	Override = "AgesaModulePkg.AmdCcxZenZpSmm"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "BaseSocLogicalIdXlatLib"
+	Instance  = "AgesaModulePkg.BaseSocLogicalIdXlatRvDieLib"
+	Override = "AgesaModulePkg.AmdFabricRvDxe"
+End
+
+LibraryMapping
+	Class  = "CcxBaseX86Lib"
+	Instance  = "AgesaModulePkg.CcxBaseX86Lib"
+End
+
+LibraryMapping
+	Class  = "CcxBistLib"
+	Instance  = "AgesaModulePkg.CcxBistLib"
+End
+
+LibraryMapping
+	Class  = "CcxBtcLib"
+	Instance  = "AgesaModulePkg.CcxBtcLib"
+	Override = "AgesaModulePkg.AmdNbioBaseCZDxe"
+	Token = "AMD_NBIO_BASE_CZ_DXE_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxDownCoreLib"
+	Instance  = "AgesaModulePkg.CcxDownCoreXvLib"
+	Override = "AgesaModulePkg.AmdCcxXvPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+	Class  = "CcxHaltLib"
+	Instance  = "AgesaModulePkg.CcxHaltLib"
+End
+
+LibraryMapping
+	Class  = "CcxIdsCustomPstatesLib"
+	Instance  = "AgesaModulePkg.CcxIdsCustomPstateZenLib"
+    Override = "AgesaModulePkg.AmdCcxZenRvDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "CcxIdsCustomPstatesLib"
+	Instance  = "AgesaModulePkg.CcxIdsCustomPstateZenLib"
+    Override = "AgesaModulePkg.AmdCcxZenZpDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxMicrocodePatchLib"
+	Instance  = "AgesaModulePkg.CcxMicrocodePatchLib"
+End
+
+LibraryMapping
+	Class  = "CcxMpServicesLib"
+	Instance  = "AgesaModulePkg.CcxMpServicesDxeLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "CcxMpServicesLib"
+	Instance  = "AgesaModulePkg.CcxMpServicesSmmLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "CcxPspLib"
+	Instance  = "AgesaModulePkg.CcxPspLib"
+End
+
+#LibraryMapping
+#	Class  = "CcxPstatesLib"
+#	Instance  = "AgesaModulePkg.CcxPstatesXvLib"
+#	Override = "AgesaModulePkg.AmdCcxXvPei"
+#	Arch  = "IA32"
+#End
+
+#LibraryMapping
+#	Class  = "CcxPstatesLib"
+#	Instance  = "AgesaModulePkg.CcxPstatesXvLib"
+#	Override = "AgesaModulePkg.AmdMemCzPei"
+#	Arch  = "IA32"
+#	Token = "SOLUTION_TYPE" "=" "1"
+#End
+
+#LibraryMapping
+#	Class  = "CcxPstatesLib"
+#	Instance  = "AgesaModulePkg.CcxPstatesXvLib"
+#	Override = "AgesaModulePkg.AmdCcxXvDxe"
+#	Arch  = "X64"
+#End
+
+LibraryMapping
+	Class  = "CcxPstatesLib"
+	Instance  = "AgesaModulePkg.CcxPstatesZenZpLib"
+End
+
+#LibraryMapping
+#    Class  = "CcxPstatesLib"
+#    Instance  = "AgesaModulePkg.CcxPstatesXvLib"
+#    Override = "AgesaModulePkg.AmdMemS3CzDxe"
+#    Arch  = "X64"
+#    Token = "SOLUTION_TYPE" "=" "1"
+#End
+
+LibraryMapping
+	Class  = "CcxResetTablesLib"
+	Instance  = "AgesaModulePkg.CcxResetTablesZpLib"
+	Override = "AgesaModulePkg.AmdCcxZenZpPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxResetTablesLib"
+	Instance  = "AgesaModulePkg.CcxResetTablesZpLib"
+	Override = "AgesaModulePkg.AmdCcxZenZpDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxResetTablesLib"
+	Instance  = "AgesaModulePkg.CcxResetTablesRvLib"
+End
+
+LibraryMapping
+	Class  = "CcxResetTablesLib"
+	Instance  = "AgesaModulePkg.CcxResetTablesRvLib"
+	Arch  = "IA32"
+	Override = "AgesaModulePkg.AmdCcxZenRvPei"
+End
+
+LibraryMapping
+	Class  = "CcxResetTablesLib"
+	Instance  = "AgesaModulePkg.CcxResetTablesRvLib"
+	Override = "AgesaModulePkg.AmdCcxZenRvDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "CcxRolesLib"
+	Instance  = "AgesaModulePkg.CcxRolesX86Lib"
+End
+
+LibraryMapping
+	Class  = "CcxSetMcaLib"
+	Instance  = "AgesaModulePkg.CcxSetMcaRvLib"
+	Override = "AgesaModulePkg.AmdCcxZenRvDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "CcxSetMcaLib"
+	Instance  = "AgesaModulePkg.CcxSetMcaRvLib"
+	Override = "AgesaModulePkg.AmdCcxZenRvSmm"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "CcxSetMcaLib"
+	Instance  = "AgesaModulePkg.CcxSetMcaZpLib"
+	Override = "AgesaModulePkg.AmdCcxZenZpDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxSetMcaLib"
+	Instance  = "AgesaModulePkg.CcxSetMcaZpLib"
+	Override = "AgesaModulePkg.AmdCcxZenZpSmm"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxSetMmioCfgBaseLib"
+	Instance  = "AgesaModulePkg.CcxSetMmioCfgBaseLib"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "CcxSmbiosLib"
+	Instance  = "AgesaModulePkg.CcxSmbiosXvLib"
+	Override = "AgesaModulePkg.AmdCcxXvPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxSmbiosLib"
+	Instance  = "AgesaModulePkg.CcxSmbiosXvLib"
+	Override = "AgesaModulePkg.AmdCcxXvDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxSmbiosLib"
+	Instance  = "AgesaModulePkg.CcxSmbiosZenZpLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxSmbiosLib"
+	Instance  = "AgesaModulePkg.CcxSmbiosZenRvLib"
+	Override = "AgesaModulePkg.AmdCcxZenRvDxe"
+End
+
+LibraryMapping
+	Class  = "CcxStallLib"
+	Instance  = "AgesaModulePkg.CcxStallZenLib"
+End
+
+LibraryMapping
+	Class  = "CcxXvIdsHookLibDxe"
+	Instance  = "AgesaModulePkg.CcxXvIdsHookLibDxe"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxXvIdsHookLibPei"
+	Instance  = "AgesaModulePkg.CcxXvIdsHookLibPei"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxZenIdsHookLibDxe"
+	Instance  = "AgesaModulePkg.CcxZenZpIdsHookLibDxe"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxZenRvIdsHookLibDxe"
+	Instance  = "AgesaModulePkg.CcxZenRvIdsHookLibDxe"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "CcxZenIdsHookLibPei"
+	Instance  = "AgesaModulePkg.CcxZenZpIdsHookLibPei"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxZenRvIdsHookLibPei"
+	Instance  = "AgesaModulePkg.CcxZenRvIdsHookLibPei"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "CcxZenIdsHookLibSmm"
+	Instance  = "AgesaModulePkg.CcxZenZpIdsHookLibSmm"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CcxZenRvIdsHookLibSmm"
+	Instance  = "AgesaModulePkg.CcxZenRvIdsHookLibSmm"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+#LibraryMapping
+#	Class  = "DebugLibIdsDp"
+#	Instance  = "AgesaModulePkg.DebugLibIdsDp"
+#End
+
+LibraryMapping
+	Class  = "DxeCcxBaseX86ServicesLib"
+	Instance  = "AgesaModulePkg.DxeCcxBaseX86ServicesLib"
+#	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "CcxSmmAccess2Lib"
+	Instance  = "AgesaModulePkg.DxeCcxSmmAccess2Lib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "FabricResourceSizeForEachRbLib"
+	Instance  = "AgesaModulePkg.DxeFabricResourceSizeForEachRbLib"
+End
+
+LibraryMapping
+	Class  = "FabricResourceSizeForEachRbLib"
+	Instance  = "AgesaModulePkg.DxeFabricResourceSizeForEachRbLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "FabricResourceSizeForEachRbLib"
+	Instance  = "AgesaModulePkg.DxeFabricResourceSizeForEachRbLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "FabricResourceSizeForEachRbLib"
+	Instance  = "AgesaModulePkg.PeiFabricResourceSizeForEachRbLib"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "DxeFabricTopologyServices2Lib"
+	Instance  = "AgesaModulePkg.DxeFabricTopologyServices2Lib"
+End
+
+LibraryMapping
+	Class  = "SmmFabricTopologyServices2Lib"
+	Instance  = "AgesaModulePkg.SmmFabricTopologyServices2Lib"
+End
+
+LibraryMapping
+	Class  = "DxeSocLogicalIdServicesLib"
+	Instance  = "AgesaModulePkg.DxeSocLogicalIdServicesLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "DxioLibV1"
+	Instance  = "AgesaModulePkg.DxioLibV1"
+End
+
+LibraryMapping
+	Class  = "FabricIdsHookRvLibDxe"
+	Instance  = "AgesaModulePkg.FabricIdsHookRvLibDxe"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "FabricIdsHookRvLibPei"
+	Instance  = "AgesaModulePkg.FabricIdsHookRvLibPei"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "FabricIdsHookUnbLibDxe"
+	Instance  = "AgesaModulePkg.FabricIdsHookUnbLibDxe"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "FabricIdsHookUnbLibPei"
+	Instance  = "AgesaModulePkg.FabricIdsHookUnbLibPei"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "FabricIdsHookZpLibDxe"
+	Instance  = "AgesaModulePkg.FabricIdsHookZpLibDxe"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "FabricIdsHookZpLibPei"
+	Instance  = "AgesaModulePkg.FabricIdsHookZpLibPei"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "FabricPstatesLib"
+	Instance  = "AgesaModulePkg.FabricPstatesUnbLib"
+	Override = "AgesaModulePkg.AmdUnbXvPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "FabricPstatesLib"
+	Instance  = "AgesaModulePkg.FabricPstatesUnbLib"
+	Override = "AgesaModulePkg.AmdMemCzPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "FabricPstatesLib"
+	Instance  = "AgesaModulePkg.FabricPstatesZpLib"
+#	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+#LibraryMapping
+#	Class  = "FabricPstatesLib"
+#	Instance  = "AgesaModulePkg.FabricPstatesRvLib"
+#End
+
+LibraryMapping
+    Class  = "FabricPstatesLib"
+    Instance  = "AgesaModulePkg.FabricPstatesUnbLib"
+    Override = "AgesaModulePkg.AmdMemS3CzDxe"
+    Arch  = "X64"
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "FabricRegisterAccLib"
+	Instance  = "AgesaModulePkg.FabricRegisterAccSoc15Lib"
+End
+
+LibraryMapping
+	Class  = "FabricRegisterAccLib"
+	Instance  = "AgesaModulePkg.FabricRegisterAccSoc15Lib"
+	Override = "AgesaModulePkg.AmdFabricRvPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+	Class  = "FabricRegisterAccLib"
+	Instance  = "AgesaModulePkg.FabricRegisterAccSoc15Lib"
+	Override = "AgesaModulePkg.AmdSocFp5RvPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+	Class  = "FabricRegisterAccLib"
+	Instance  = "AgesaModulePkg.FabricRegisterAccSoc15Lib"
+	Override = "AgesaModulePkg.AmdFabricRvDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "FabricRegisterAccLib"
+	Instance  = "AgesaModulePkg.FabricRegisterAccSoc15Lib"
+	Override = "AgesaModulePkg.AmdSocFp5RvDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "FabricRegisterAccLib"
+	Instance  = "AgesaModulePkg.FabricRegisterAccSoc15Lib"
+	Override = "AgesaModulePkg.AmdNbioBaseRVDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "FabricResourceInitLib"
+	Instance  = "AgesaModulePkg.FabricResourceInitZenZpLib"
+    Override = "AgesaModulePkg.AmdSocFp5RvPei"
+    Arch  = "IA32"
+End
+#FabricResourceManagerLib does not exist in FP5 dsc but causes build error
+LibraryMapping
+	Class  = "FabricResourceManagerLib"
+	Instance  = "AgesaModulePkg.FabricResourceManager1Lib"
+End
+
+LibraryMapping
+	Class  = "DxeFabricResourceManagerServicesLib"
+	Instance  = "AgesaModulePkg.DxeFabricResourceManagerServicesLib"
+End
+
+LibraryMapping
+	Class  = "PeiFabricResourceManagerServicesLib"
+	Instance  = "AgesaModulePkg.PeiFabricResourceManagerServicesLib"
+End
+
+LibraryMapping
+    Class  = "FabricResourceManagerLib"
+    Instance  = "AgesaModulePkg.FabricResourceManager1Lib"
+    Override  = "AgesaModulePkg.AmdNbioPcieRVPei"
+    Arch  = "IA32"
+End
+
+LibraryMapping
+    Class  = "FabricResourceManagerLib"
+    Instance  = "AgesaModulePkg.FabricResourceManager1Lib"
+    Override  = "AgesaModulePkg.AmdNbioIOMMUZPPei"
+    Arch  = "IA32"
+End
+
+LibraryMapping
+    Class  = "FabricResourceInitLib"
+    Instance  = "AgesaModulePkg.FabricResourceInit1Lib"
+    Override  = "AgesaModulePkg.AmdSocFp5RvPei"
+    Arch  = "IA32"
+End
+
+LibraryMapping
+    Class  = "FabricResourceManagerLib"
+    Instance  = "AgesaModulePkg.FabricResourceManager1Lib"
+    Override  = "AgesaModulePkg.AmdSocFp5RvPei"
+    Arch  = "IA32"
+End
+
+LibraryMapping
+    Class  = "FabricResourceManagerLib"
+    Instance  = "AgesaModulePkg.FabricResourceManager1Lib"
+    Override  = "AgesaModulePkg.AmdSocFp5RvPei"
+    Arch  = "IA32"
+End
+
+LibraryMapping
+    Class  = "FabricResourceManagerLib"
+    Instance  = "AgesaModulePkg.FabricResourceManager1Lib"
+    Override  = "AgesaModulePkg.AmdFabricRvPei"
+    Arch  = "X64"
+End
+
+LibraryMapping
+    Class  = "FabricResourceManagerLib"
+    Instance  = "AgesaModulePkg.FabricResourceManager1Lib"
+    Override  = "AgesaModulePkg.AmdNbioBaseRVDxe"
+    Arch  = "X64"
+End
+
+LibraryMapping
+    Class  = "FabricResourceManagerLib"
+    Instance  = "AgesaModulePkg.FabricResourceManager1Lib"
+    Override  = "AgesaModulePkg.AmdNbioIOMMURVDxe"
+    Arch  = "X64"
+End
+
+LibraryMapping
+	Class  = "FabricResourceReportToGcdLib"
+	Instance  = "AgesaModulePkg.FabricResourceReportToGcdNullLib"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+    Class  = "FabricResourceReportToGcdLib"
+    Instance  = "AgesaModulePkg.FabricResourceReportToGcdNullLib"
+    ModuleTypes  = "DXE_CORE"
+End
+
+LibraryMapping
+    Class  = "FabricResourceReportToGcdLib"
+    Instance  = "AgesaModulePkg.FabricResourceReportToGcdLib"
+End
+
+LibraryMapping
+	Class  = "FabricWdtLib"
+	Instance  = "AgesaModulePkg.FabricWdtZpLib"
+	Override = "AgesaModulePkg.AmdCcxZenZpDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "FabricWdtLib"
+	Instance  = "AgesaModulePkg.FabricWdtZpLib"
+	Override = "AgesaModulePkg.AmdCcxZenZpDxe"
+	Arch  = "X64"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "FchBaseLib"
+	Instance  = "AgesaModulePkg.FchBaseLib"
+End
+
+LibraryMapping
+	Class  = "FchBaseResetSystemLib"
+	Instance  = "AgesaModulePkg.FchBaseResetSystemLib"
+End
+
+LibraryMapping
+	Class  = "FchDxeLibV9"
+	Instance  = "AgesaModulePkg.FchDxeLibV9"
+End
+
+LibraryMapping
+	Class  = "FchIdsHookLib"
+	Instance  = "AgesaModulePkg.FchIdsHookLib"
+End
+
+#LibraryMapping
+#	Class  = "FchInitHookLibDxe"
+#	Instance  = "AgesaModulePkg.FchInitHookLibDxe"
+#	ModuleTypes  = "DXE_DRIVER"
+#End
+
+#LibraryMapping
+#	Class  = "FchInitHookLibPei"
+#	Instance  = "AgesaModulePkg.FchInitHookLibPei"
+#	ModuleTypes  = "PEIM"
+#End
+
+LibraryMapping
+	Class  = "FchPeiLibV9"
+	Instance  = "AgesaModulePkg.FchPeiLibV9"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "FchSmmLibV9"
+	Instance  = "AgesaModulePkg.FchSmmLibV9"
+End
+
+LibraryMapping
+	Class  = "GnbCommonLib"
+	Instance  = "AgesaModulePkg.GnbCommonLib"
+End
+
+LibraryMapping
+	Class  = "GnbCpuAccLib"
+	Instance  = "AgesaModulePkg.GnbCpuAccLib"
+End
+
+LibraryMapping
+	Class  = "AgesaGnbDxeLib"
+	Instance  = "AgesaModulePkg.AgesaGnbDxeLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AgesaGnbPeiLib"
+	Instance  = "AgesaModulePkg.AgesaGnbPeiLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "GnbHeapLib"
+	Instance  = "AgesaModulePkg.GnbHeapDxeLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "GnbHeapLib"
+	Instance  = "AgesaModulePkg.GnbHeapPeiLib"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "GnbIoAccLib"
+	Instance  = "AgesaModulePkg.GnbIoAccLib"
+End
+
+LibraryMapping
+	Class  = "GnbLib"
+	Instance  = "AgesaModulePkg.GnbLib"
+End
+
+LibraryMapping
+	Class  = "GnbMemAccLib"
+	Instance  = "AgesaModulePkg.GnbMemAccLib"
+End
+
+LibraryMapping
+	Class  = "GnbPciAccLib"
+	Instance  = "AgesaModulePkg.GnbPciAccLib"
+End
+
+LibraryMapping
+	Class  = "GnbPciLib"
+	Instance  = "AgesaModulePkg.GnbPciLib"
+End
+
+LibraryMapping
+	Class  = "GnbRegisterAccZpLib"
+	Instance  = "AgesaModulePkg.GnbRegisterAccZpLib"
+End
+
+LibraryMapping
+	Class  = "GnbSSocketLib"
+	Instance  = "AgesaModulePkg.GnbSSocketLib"
+End
+
+LibraryMapping
+	Class  = "HardCodedMemCommonServiceLib"
+	Instance  = "AgesaModulePkg.HardCodedMemCommonServiceLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "IdsLib"
+	Instance  = "AgesaModulePkg.IdsDxeLib"
+    ModuleTypes = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "IdsLib"
+	Instance  = "AgesaModulePkg.IdsNonUefiLib"
+End
+
+LibraryMapping
+	Class  = "IdsMiscLib"
+	Instance  = "AgesaModulePkg.IdsMiscLib"
+End
+
+LibraryMapping
+	Class  = "IdsLib"
+	Instance  = "AgesaModulePkg.IdsNonUefiLib"
+	ModuleTypes = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+    Class  = "IdsLib"
+    Instance  = "AgesaModulePkg.IdsNonUefiLib"
+    Override  = "AgesaModulePkg.AmdCcxZenZpPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+    Class  = "IdsLib"
+    Instance  = "AgesaModulePkg.IdsNonUefiLib"
+    Override  = "AgesaModulePkg.AmdCcxZenZpDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+    Class  = "IdsLib"
+    Instance  = "AgesaModulePkg.IdsNonUefiLib"
+    Override  = "AgesaModulePkg.AmdCcxXvPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+    Class  = "IdsLib"
+    Instance  = "AgesaModulePkg.IdsNonUefiLib"
+    Override  = "AgesaModulePkg.AmdFabricZpPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+    Class  = "IdsLib"
+    Instance  = "AgesaModulePkg.IdsNonUefiLib"
+    Override  = "AgesaModulePkg.AmdFabricZpDxe"
+	Arch  = "X64"
+End
+
+LibraryMapping
+    Class  = "IdsLib"
+    Instance  = "AgesaModulePkg.IdsNonUefiLib"
+    Override = "AgesaModulePkg.AmdMemCzPei"
+End
+
+LibraryMapping
+    Class  = "IdsLib"
+    Instance  = "AgesaModulePkg.IdsPeiLib"
+    ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmdMemArdkLib"
+	Instance  = "AgesaModulePkg.AmdMemArdkLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemBaseLib"
+	Instance  = "AgesaModulePkg.AmdMemBaseLib"
+End
+
+LibraryMapping
+	Class  = "AmdMemErrorLogLib"
+	Instance  = "AgesaModulePkg.AmdMemErrorLogLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatChIntLvLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatChIntLvLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatCratLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatCratLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatCsIntLvLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatCsIntLvLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatDmiCollectLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatDmiCollectLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatDmiConstructLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatDmiConstructLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatEccLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatEccLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatExcludeDimmLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatExcludeDimmLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatIdentifyDimmLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatIdentifyDimmLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatLvDdr3Lib"
+	Instance  = "AgesaModulePkg.AmdMemFeatLvDdr3Lib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatMemClrLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatMemClrLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatOnDimmThermalLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatOnDimmThermalLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatS3Lib"
+	Instance  = "AgesaModulePkg.AmdMemFeatS3Lib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatTableLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatTableLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatUmaLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatUmaLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemMainCzLib"
+	Instance  = "AgesaModulePkg.AmdMemMainCzLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemMainLib"
+	Instance  = "AgesaModulePkg.AmdMemMainLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "MemIdsHookLib"
+	Instance  = "AgesaModulePkg.MemIdsHookCzLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemNbCzLib"
+	Instance  = "AgesaModulePkg.AmdMemNbCzLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemNbLib"
+	Instance  = "AgesaModulePkg.AmdMemNbLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemArdkLib"
+	Instance  = "AgesaModulePkg.AmdMemArdkLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatAmpLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatAmpLibNull"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatCratLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatCratLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatDmiCollectLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatDmiCollectLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatIdentifyDimmLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatIdentifyDimmLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatIntLvRgnLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatIntLvRgnLibNull"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatMemClrLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatMemClrLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatNodeIntLvLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatNodeIntLvLibNull"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatOLSpareLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatOLSpareLibNull"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemFeatTableLib"
+	Instance  = "AgesaModulePkg.AmdMemFeatTableLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemMainCzLib"
+	Instance  = "AgesaModulePkg.AmdMemMainLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemPsCzAm4Lib"
+	Instance  = "AgesaModulePkg.AmdMemPsCzAm4LibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemPsCzFp4Lib"
+	Instance  = "AgesaModulePkg.AmdMemPsCzFp4LibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemPsCzLib"
+	Instance  = "AgesaModulePkg.AmdMemPsCzLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemPsLib"
+	Instance  = "AgesaModulePkg.AmdMemPsLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemTechDdr3Lib"
+	Instance  = "AgesaModulePkg.AmdMemTechDdr3LibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemTechDdr4Lib"
+	Instance  = "AgesaModulePkg.AmdMemTechDdr4LibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemTechLib"
+	Instance  = "AgesaModulePkg.AmdMemTechLibNull"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemPsCzAm4Lib"
+	Instance  = "AgesaModulePkg.AmdMemPsCzAm4Lib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemPsCzFp4Lib"
+	Instance  = "AgesaModulePkg.AmdMemPsCzFp4Lib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemPsCzLib"
+	Instance  = "AgesaModulePkg.AmdMemPsCzLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemPsLib"
+	Instance  = "AgesaModulePkg.AmdMemPsLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+
+#LibraryMapping
+#	Class  = "AmdMemReportInfoLib"
+#	Instance  = "AgesaModulePkg.AmdMemReportInfoLib"
+#	ModuleTypes  = "PEIM"
+#End
+
+LibraryMapping
+	Class  = "AmdMemS3InitLib"
+	Instance  = "AgesaModulePkg.AmdMemS3InitLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemServicesCzLib"
+	Instance  = "AgesaModulePkg.AmdMemServicesCzLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+#LibraryMapping
+#	Class  = "AmdMemServicesLib"
+#	Instance  = "AgesaModulePkg.AmdMemServicesLib"
+#End
+
+#LibraryMapping
+#	Class  = "AmdMemServicesSmLib"
+#	Instance  = "AgesaModulePkg.AmdMemServicesSmLib"
+#End
+
+LibraryMapping
+	Class  = "AmdMemTechDdr3Lib"
+	Instance  = "AgesaModulePkg.AmdMemTechDdr3Lib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemTechDdr4Lib"
+	Instance  = "AgesaModulePkg.AmdMemTechDdr4Lib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdMemTechLib"
+	Instance  = "AgesaModulePkg.AmdMemTechLib"
+	ModuleTypes  = "PEIM"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "MemRestoreLib"
+	Instance  = "AgesaModulePkg.MemRestoreLib"
+End
+
+LibraryMapping
+	Class  = "MemSmbiosV2SspLib"
+	Instance  = "AgesaModulePkg.MemSmbiosV2SspLib"
+End
+
+LibraryMapping
+    Class  = "AmdMemSmbiosV2Lib"
+    Instance  = "AgesaModulePkg.AmdMemSmbiosV2RvLib"
+    ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmdMemSmbiosV2Lib"
+	Instance  = "AgesaModulePkg.AmdMemSmbiosV2RvLib"
+	Override = "AgesaModulePkg.AmdMemSmbiosV2RvPei"
+	Arch  = "IA32"
+End
+
+LibraryMapping
+	Class  = "NbioAzaliaLib"
+	Instance  = "AgesaModulePkg.NbioAzaliaLib"
+End
+
+LibraryMapping
+	Class  = "NbioHandleLib"
+	Instance  = "AgesaModulePkg.NbioHandleLib"
+End
+
+LibraryMapping
+	Class  = "NbioIdsHookCZLib"
+	Instance  = "AgesaModulePkg.NbioIdsHookCZLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NbioIdsHookZPLib"
+	Instance  = "AgesaModulePkg.NbioIdsHookZPLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NbioIdsHookRVLib"
+	Instance  = "AgesaModulePkg.NbioIdsHookRVLib"
+End
+
+LibraryMapping
+	Class  = "NbioIommuIvrsLib"
+	Instance  = "AgesaModulePkg.NbioIommuIvrsLib"
+End
+
+LibraryMapping
+	Class  = "NbioSmuV12Lib"
+	Instance  = "AgesaModulePkg.NbioSmuV12Lib"
+End
+
+LibraryMapping
+	Class  = "NbioUtilLib"
+	Instance  = "AgesaModulePkg.NbioUtilLib"
+End
+
+LibraryMapping
+	Class  = "NbioRegisterAccLib"
+	Instance  = "AgesaModulePkg.NbioRegisterAccLib"
+End
+
+LibraryMapping
+	Class  = "NbioSmuV9Lib"
+	Instance  = "AgesaModulePkg.NbioSmuV9Lib"
+End
+
+LibraryMapping
+	Class  = "NbioSmuV10Lib"
+	Instance  = "AgesaModulePkg.NbioSmuV10Lib"
+End
+
+LibraryMapping
+	Class  = "OptionMemoryInstallCzLib"
+	Instance  = "AgesaModulePkg.OptionMemoryInstallCzLib"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcieConfigLib"
+	Instance  = "AgesaModulePkg.PcieConfigLib"
+End
+
+LibraryMapping
+	Class  = "PcieMiscCommLib"
+	Instance  = "AgesaModulePkg.PcieMiscCommLib"
+End
+
+LibraryMapping
+	Class  = "PeiFabricTopologyServices2Lib"
+	Instance  = "AgesaModulePkg.PeiFabricTopologyServices2Lib"
+End
+
+LibraryMapping
+	Class  = "PeiSocBistLoggingLib"
+	Instance  = "AgesaModulePkg.PeiSocBistLoggingLib"
+    ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PeiSocBistLib"
+	Instance  = "AgesaModulePkg.PeiSocBistRvLib"
+	Override = "AgesaModulePkg.AmdSocFp5RvPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+LibraryMapping
+	Class  = "PeiSocBistLib"
+	Instance  = "AgesaModulePkg.PeiSocBistRvLib"
+	Override = "AgesaModulePkg.AmdSocAm4RvPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PeiSocBistLib"
+	Instance  = "AgesaModulePkg.PeiSocBistZpLib"
+	Override = "AgesaModulePkg.AmdSocAm4SmPei"
+	Arch  = "IA32"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PeiSocLogicalIdServicesLib"
+	Instance  = "AgesaModulePkg.PeiSocLogicalIdServicesLib"
+    ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "PspIdsHookLibDxe"
+	Instance  = "AgesaModulePkg.PspIdsHookLibDxe"
+End
+
+LibraryMapping
+	Class  = "ApobZpRvLib"
+	Instance  = "AgesaModulePkg.ApobZpRvLib"
+End
+
+LibraryMapping
+	Class  = "ApobZpMcmLib"
+	Instance  = "AgesaModulePkg.ApobZpMcmLib"
+End
+
+LibraryMapping
+	Class  = "ApobSspLib"
+	Instance  = "AgesaModulePkg.ApobSspLib"
+End
+
+LibraryMapping
+	Class  = "ApobDummyLib"
+	Instance  = "AgesaModulePkg.ApobDummyLib"
+End
+
+LibraryMapping
+	Class  = "RasRvBaseLib"
+	Instance  = "AgesaModulePkg.RasRvBaseLib"
+End
+
+LibraryMapping
+	Class  = "RasRvSmmLib"
+	Instance  = "AgesaModulePkg.RasRvSmmLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "SmnAccessLib"
+	Instance  = "AgesaModulePkg.SmnAccessLib"
+End
+
+LibraryMapping
+	Class  = "SocCmnIdsHookRvLibDxe"
+	Instance  = "AgesaModulePkg.SocCmnIdsHookRvLibDxe"
+End
+
+LibraryMapping
+	Class  = "SocCmnIdsHookRvLibPei"
+	Instance  = "AgesaModulePkg.SocCmnIdsHookRvLibPei"
+End
+
+#LibraryMapping
+#	Class  = "SocCmnIdsHookLibDxe"
+#	Instance  = "AgesaModulePkg.SocCmnIdsHookZpLibDxe"
+#End
+
+#LibraryMapping
+#	Class  = "SocCmnIdsHookLibPei"
+#	Instance  = "AgesaModulePkg.SocCmnIdsHookZpLibPei"
+#End

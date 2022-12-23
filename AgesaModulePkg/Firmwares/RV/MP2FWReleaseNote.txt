@@ -1,0 +1,364 @@
++-----------------------------------------+
+| MP2 SFI Firmware Release Notes - RAVEN1X
++-----------------------------------------+
+| Version 0.1
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           14/07/16
+|   * Features enabled
+|              - N/A
+|   * Change Log
+|         Read BMP 280 chip id from slave address BMP280_SLAVEADDR 0x76
+|
+|         Acknowlege GPIO 0 Interrupts and write 0xFF00 to MP2_MP_GPIO_SCRATCH2_DATA
+|         Acknowlege GPIO 1 Interrupts and write 0xFF01 to MP2_MP_GPIO_SCRATCH2_DATA
+|
+|         Acknowlege C2PMSG 0 Interrupts and write 0xAA00 to MP2_MP_GPIO_SCRATCH2_DATA
+|         Acknowlege C2PMSG 1 Interrupts and write 0xAA01 to MP2_MP_GPIO_SCRATCH2_DATA
+|         Acknowlege C2PMSG 2 Interrupts and write 0xAA02 to MP2_MP_GPIO_SCRATCH2_DATA
+|         Acknowlege C2PMSG 3 Interrupts and write 0xAA03 to MP2_MP_GPIO_SCRATCH2_DATA
+|
++----------------------------------------------------------------------------------------------
++-----------------------------------------+
+| Version 1.0.0
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           11/11/16
+|   * Features enabled
+|              - Accel, Gyro and Mag sensor enabled 
+|   * Change Log
+|               - Tested on simnow with mandolin_rv_fp5_family17h_mp2.bsd
+|               - Accel, Gyro, Mag output produced
+|   * Limitation
+|               - Currently support 32 C2P Msg register. In practice it should be 16
++---------------------------------------------------------------------------------------------
+| Version 1.0.1
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           14/11/16
+|   * Features enabled
+|              - Accel, Gyro and Mag sensor enabled
+|   * Change Log
+|               - Tested on simnow with 20161111_BringUp_PSP-0.8.0.10_ABL-RABLRV16111000_SMU-30.4.2_VBIOS-009.FD
+|               - Accel, Gyro, Mag output produced
+|               - C2P Message Register changed to 16 from currently 32
+|               - Add error handling for wrong host command
+|   * Limitation
+|               - It seems when system is completely booted MP2 stops responding
++---------------------------------------------------------------------------------------------
+| Version 1.1.0
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           09/01/17
+|   * Features enabled
+|              - Accel, Gyro and Mag sensor enabled, Tested Working on Raven Mandolin Platform with WMD6C29N.FD
+|   * Change Log
+|               - Accel, Gyro (BMI160) use GPIO 0 instead of GPIO1 as designed earlier
+|               - Mag (LIS3MDL) use AGPIO24 instead of AGPIO14
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - S3 Entry/Exit has not been tested yet
++----------------------------------------------------------------------------------------------
+| Version 1.2.0
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           20/01/17
+|   * Features enabled
+|              - Accel, Gyro and Mag sensor enabled with DRAM. Working on Raven Mandolin Platform with WMD7112N.FD
+|   * Change Log
+|               - DRAM Support enabled
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - S3 Entry/Exit has not been tested yet
++----------------------------------------------------------------------------------------------
+| Version 1.2.1
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           31/01/17
+|   * Features enabled
+|              - Accel, Gyro and Mag sensor enabled with DRAM. Working on Raven Mandolin Platform with WMD7112N.FD
+|   * Change Log
+|               - Fix DRAM Write issue with 4 byte aligned access.
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - S3 Entry/Exit has not been tested yet
++----------------------------------------------------------------------------------------------
+| Version 1.2.2
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           15/02/17
+|   * Features enabled
+|              - Accel, Gyro and Mag sensor enabled with DRAM. Working on Raven Mandolin Platform with WMD7112N.FD
+|   * Change Log
+|               - Use bit operation to save sensor index
+|               - GPIO 24 poll fixed with Active High and Level Trig
+|
+|          If Active Level is High and Level Trig is Edge sometime randomly
+|          GPIO24 doesn't generate interrupt.
+|
+|          The problem is fixed with Active Level-High and LevelTrig as Level(900).
+|
+|          If Active level is Level Low with Level Trig (Edge/Level) gpio doesn't
+|          generate interrupt at all. So gpio doesn't work with A00 or B00.
+|
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - S3 Entry/Exit has not been tested yet
++----------------------------------------------------------------------------------------------
+| Version 1.2.3
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           21/04/17
+|   * Features enabled
+|              - Accel, Gyro and Mag sensor enabled with DRAM. Working on Raven Mandolin Platform.
+|   * Change Log
+|               - Enable S3 Entry and S3 Exit
+|               - Code Optimized
+|
+|          If Active Level is High and Level Trig is Edge sometime randomly
+|          GPIO24 doesn't generate interrupt.
+|
+|          The problem is fixed with Active Level-High and LevelTrig as Level(900).
+|
+|          If Active level is Level Low with Level Trig (Edge/Level) gpio doesn't
+|          generate interrupt at all. So gpio doesn't work with A00 or B00.
+|
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - On S4 resume MP2 firmware doesn't work. PLAT-18270
++----------------------------------------------------------------------------------------------
+| Version 1.2.5
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           14/05/17
+|   * Features enabled
+|              - Only Accelerometer and Operating Mode Supported.
+|   * Change Log
+|              - AMD Reference Sensors has been disabled for now
+|
+|     Code base commit id:
+|          commit: 243f2176303dfde879548b67b53125101c36ebd6
+|          Change Id: I424b774c604e0fc3974da83498b01820b046d05f
+|
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - Sensors should be disabled before S4 entry otherwise MP2 stop working on reset
++----------------------------------------------------------------------------------------------
+| Version 1.2.6
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           15/05/17
+|   * Features enabled
+|              - Only Accelerometer and Operating Mode Supported.
+|              - On switching between Clamshell and Tablet more GPIO line goes Low to High
+|   * Change Log
+|              - Add GPIO Keypad support
+|
+|     Code base commit id:
+|          commit: 476f557c694978fa31c8ac4430fd472988f5d3cc
+|          Change Id: I552e6e29992cb38e7c36abc22a5229260a138fde
+|
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - Sensors should be disabled before S4 entry otherwise MP2 stop working on reset
++----------------------------------------------------------------------------------------------
+| Version 1.2.7
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           18/05/17
+|   * Features enabled
+|              - Only Accelerometer and Operating Mode Supported.
+|              - On switching between Clamshell and Tablet more GPIO line goes Low to High
+|              - Add GPIO Keypad support
+|   * Change Log
+|              [PLAT-19404]-ACC/MAG/Gyro Sensor will not function after resuming from S4/S5 
+|
+|     Code base commit id:
+|          commit: 2f5e1b7a25251141f0cdf42aa3b5377e8e983cfc
+|          Change Id: I5f0180c74b805f2ae82ca3873b75fa689d33d16d
+|
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - Sensors should be disabled before S4 entry otherwise MP2 stop working on reset
+|               - Enabling Gyro sensor corrupt Accelerometer output(ThirdParty library issue)
++----------------------------------------------------------------------------------------------
+| Version 1.2.8
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           19/06/17
+|   * Features enabled
+|              - Only Accelerometer and Operating Mode Supported.
+|              - On switching between Clamshell and Tablet more GPIO line goes Low to High
+|              - Add GPIO Keypad support
+|   * Change Log
+|              [PLAT-21420] MP2 Clock Gating DS Enable Causes I2C/SFI Devices to not be detected 
+|
+|     Code base commit id:
+|          Change Id: Ic4437bc83734e0b27930cfafad6b074953b3473f
+|          Gerrit Id: 92820
+|
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - Sensors should be disabled before S4 entry otherwise MP2 stop working on reset
+|               - Enabling Gyro sensor corrupt Accelerometer output(ThirdParty library issue)
++----------------------------------------------------------------------------------------------
+| Version 1.2.9
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           05/07/17
+|   * Features enabled
+|              - Only Accelerometer and Operating Mode Supported.
+|              - On switching between Clamshell and Tablet more GPIO line goes Low to High
+|              - Add GPIO Keypad support
+|   * Change Log
+|              [PLAT-22612] Enabling Gyro corrupt Acclerometer output
+|              MP2 Deep Sleep disabled, needs SMU changes
+|
+|     Code base commit id:
+|          Change Id: Ic4437bc83734e0b27930cfafad6b074953b3473f 
+|          Gerrit Id: 95280
+|
+|   * Limitation
+|               - I2C burse read works upto 7 bytes and then it's in loop of 7bytes
+|               - Sensors should be disabled before S4 entry otherwise MP2 stop working on reset
++----------------------------------------------------------------------------------------------
+| Version 1.2.10
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           08/08/17
+|   * Features enabled
+|              - Only Accelerometer and Operating Mode Supported.
+|              - On switching between Clamshell and Tablet more GPIO line goes Low to High
+|              - Add GPIO Keypad support
+|   * Change Log
+|              [PLAT-24034] Add Support for S0i2 and Deep Sleep
+|              MP2 Deep Sleep enabled, DRAM access disabled on S0i2
+|              eCompass Support Added
+|
+|     Code base commit id:
+|          Change Id: I87edb587dee3762b2e57c1b440af21d5b9fa373d
+|          Gerrit Id: 102658
+|
+|   * Limitation
+|               - I2C Read works on poll
+|               - Sensors should be disabled before S4 entry
++----------------------------------------------------------------------------------------------
++----------------------------------------------------------------------------------------------
+| Version 1.2.11
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           02/10/17
+|   * Features enabled
+|              - Only Accelerometer and Operating Mode Supported.
+|              - On switching between Clamshell and Tablet more GPIO line goes Low to High
+|              - Add GPIO Keypad support
+|   * Change Log
+|              Add support for Dynamic Calibration
+|              Fix Mag Zero issue
+|              Fix eCompass issue(DCD)
+|
+|     Code base commit id:
+|          Change Id: Ibb7f2b84af2632f463be8ea1340341d9ff398a6a
+|          Gerrit Id: 113604
+|
+|   * Limitation
+|               - I2C Read works on poll
+|               - Sensors should be disabled before S4 entry
++----------------------------------------------------------------------------------------------
+| Version 1.2.15
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           26/12/17
+|   * Features enabled
+|              - Accelerometer, Gyrometer, Magnetometer, Compass and Operating Mode Supported.
+|              - On Tablet mode Keyboard disable is supported
+|              - Dynamic Calibration supported
+|   * Change Log
+|              - LP(25Mhz) support disabled as all sensors can't work at 25Mhz
+|              - Sensors data is read after device discovery make gpio line low (if was high)
+|              - MH sdIntGet use GPIO1 input value instead of interrupt status
+|   * Issue resolved
+|              - Sensors not working after S3/S4/Restart/Crash
+|
+|     Code base commit id:
+|          Change Id: I18ee41e6be949e017553f889765b24a755a391d9
+|          Commit Id: 85e82532c0e5a71f60762d77f89320382fa5e3c3
+|          Gerrit Id: 123388
+|
+|     Jira ID : [SWDEV-141411] Few of the sensors will not work after resuming from sleep mode
+|
+|   * Limitation
+|               - I2C Read works on poll
+|               - Sensors should be disabled before S4 entry
+|
+|   * Note:    There is skip in mp2 firmware version 12,13,14 as these were used for test purpose
++----------------------------------------------------------------------------------------------
+| Version 1.2.19
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           12/03/18
+|   * Features enabled
+|              - Accelerometer, Gyrometer, Magnetometer, Compass and Operating Mode Supported.
+|              - On Tablet mode Keyboard disable is supported
+|              - Dynamic Calibration supported
+|   * Change Log
+|              - LP(25Mhz) support disabled as all sensors can't work at 25Mhz
+|              - Sensors data is read after device discovery make gpio line low (if was high)
+|              - MH sdIntGet use GPIO1 input value instead of interrupt status
+|   * Issue resolved
+|              - Sensors not working after S3/S4/Restart/Crash
+|
+|     Code base commit id:
+|          Change Id: I359cb1c6553f34c3f43441606114b4f66e9644c9
+|          Commit Id: 7cd99b3cf595849b95ebb4886d6147e7b26a6def
+|          Gerrit Id: 140078
+|
+|     Jira ID : [PLAT-29742] If Lid is closed very slowly then Tablet Mode Switch Window Pop-up
+|
+|   * Limitation
+|               - I2C Read works on poll
+|               - Sensors should be disabled before S4 entry
+|
+|   * Note:    There is skip in mp2 firmware version 12,13,14 as these were used for test purpose
++----------------------------------------------------------------------------------------------
+| Version 1.2.21
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           28/05/18
+|   * Features enabled
+|              - Accelerometer, Gyrometer, Magnetometer, Compass and Operating Mode Supported.
+|              - On Tablet mode Keyboard disable is supported
+|              - Dynamic Calibration supported
+|              - LP(25Mhz) support disabled as all sensors can't work at 25Mhz
+|              - Sensors data is read after device discovery make gpio line low (if was high)
+|              - MH sdIntGet use GPIO1 input value instead of interrupt status
+|   * Change Log
+|              - SFH Produce Operating Mode angle always even if mode doesn't change
+|              - Set GPIO39 to low as part of Init
+|
+|   * Issue resolved
+|              -
+|
+|     Code base commit id:
+|          Change Id: Iaca84816a986159a48bf363372407fb839cc5ace
+|          Commit Id: faca8a61d7fb9ac7b5c9e2bf9e036d8d09165429
+|          Gerrit Id: 151840
+|
+|     Jira ID : [PLAT-29742] If Lid is closed very slowly then Tablet Mode Switch Window Pop-up
+|
+|   * Limitation
+|               - I2C Read works on poll
+|               - Sensors should be disabled before S4 entry
+|
+|   * Note:    There is skip in mp2 firmware version 12,13,14 as these were used for test purpose
++----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

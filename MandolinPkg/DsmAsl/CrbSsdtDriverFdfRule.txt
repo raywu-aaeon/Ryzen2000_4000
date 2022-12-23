@@ -1,0 +1,10 @@
+[Rule.Common.DXE_DRIVER.CrbSsdtDriver]
+  FILE DRIVER = $(NAMED_GUID) $(FFS_FILE_CHECKSUM_KEYWORD) {
+    DXE_DEPEX   DXE_DEPEX Optional      |.depex
+    $(DXE_COMPRESSION_SECTION) {
+        PE32      PE32                  |.efi
+        UI        STRING="$(MODULE_NAME)" Optional
+        VERSION   STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+        RAW ASL  Optional                |.aml
+    }
+  }

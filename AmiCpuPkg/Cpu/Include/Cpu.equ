@@ -1,0 +1,219 @@
+;*************************************************************************
+;*************************************************************************
+;**                                                                     **
+;**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+;**                                                                     **
+;**                       All Rights Reserved.                          **
+;**                                                                     **
+;**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+;**                                                                     **
+;**                       Phone: (770)-246-8600                         **
+;**                                                                     **
+;*************************************************************************
+;*************************************************************************
+
+;<AMI_FHDR_START>
+;---------------------------------------------------------------------------
+;
+; Name:		Cpu.equ
+;
+; Description:  This file declares constants used in SEC phase and other
+;               assembly files.
+;
+;---------------------------------------------------------------------------
+;<AMI_FHDR_END>
+
+        INCLUDE	token.equ
+
+; Equates for code caching 
+;512K code caching...This is equivalent to maximum L2 available in which 64K 
+ ; wont be used before memory detection and shadowing.
+FW_CODE_AREA_SIZE       EQU      MKF_CODE_CACHE_SIZE
+FW_CODE_AREA_START      EQU     (0FFFFFFFFh - FW_CODE_AREA_SIZE + 1)
+FW_CODE_AREA_SIZE_MASK  EQU     (NOT (FW_CODE_AREA_SIZE - 1))
+
+CAPSULE_UPDATE_SIGNATURE EQU    0CA9501EFh
+
+WriteProtect            EQU     5
+WriteBack               EQU     6
+ValidMask               EQU     1 SHL 11
+
+
+MTRR_VAR_TOP_MASK_VALUE EQU     0FFFFh        ; For Fam15 - 48 bits
+MKF_BOOT_BLOCK_SIZE     EQU     (MKF_FV_BB_BLOCKS * MKF_FLASH_BLOCK_SIZE)
+BOOT_BLOCK_OFFSET       = (0FFFFFFFFh - MKF_BOOT_BLOCK_SIZE + 1) SHR 16
+
+;-----------------------------------------------------------------------------
+;            CPUID Equates
+;-----------------------------------------------------------------------------
+AMD_CPUID_FMF           EQU 80000001h
+
+CPUID_STEPPING_MASK     EQU 0000000Fh
+CPUID_BASE_MODEL_MASK   EQU 000000F0h
+CPUID_BASE_FAMILY_MASK  EQU 00000F00h
+CPUID_EXT_MODEL_MASK    EQU 000F0000h
+CPUID_EXT_FAMILY_MASK   EQU 0FF00000h
+
+RAW_FAMILY_ID_MASK      EQU (CPUID_EXT_FAMILY_MASK + CPUID_EXT_MODEL_MASK + CPUID_BASE_FAMILY_MASK)
+
+F15_BR_RAW_ID           EQU 00660F00h
+
+;-----------------------------------------------------------------------------
+;            APIC Base Register Equates
+;-----------------------------------------------------------------------------
+MSR_XAPIC_BASE          EQU     01Bh
+XAPIC_BASE_ENABLE_BIT   EQU     011d
+XAPIC_BASE_BSP_BIT      EQU     008d
+XAPIC_ENABLE_BIT        EQU     8d      ; SVR SW APIC Enable/Disable Bit
+APIC_PRESENT_BIT        EQU     9d      ; APIC Present bit in Feature Flags
+
+;-----------------------------------------------------------------------------
+;            Interrupt Command Register Low & High Equates
+;-----------------------------------------------------------------------------
+LOCAL_APIC_ICR_LO           EQU 0300h
+MASK_ICR_CLEAR              EQU 0FFF33000h ; AND mask off reserved bits
+OR_MASK_INIT_IPI            EQU (5 SHL 8) ; msg = INIT IPI
+OR_MASK_SIPI_IPI            EQU (6 SHL 8) ; msg = Startup IPI
+OR_MASK_SELF                EQU (1 SHL 18) ; dest = SELF
+OR_MASK_ALL_EXCLUDING_SELF  EQU (3 SHL 18) ; dest = to all excluding SELF
+OR_MASK_USE_DEST_FIELD      EQU (0 SHL 18) ; dest = dest field
+OR_MASK_TM_EDGE             EQU (0 SHL 15) ; trigger mode = edge
+OR_MASK_TM_LEVEL            EQU (1 SHL 15) ; trigger mode = level
+OR_MASK_LEVEL_DEASSERT      EQU (0 SHL 14) ; level = deasserted
+OR_MASK_LEVEL_ASSERT        EQU (1 SHL 14) ; level = asserted
+
+LOCAL_APIC_ICR_HI           EQU 0310h
+;-----------------------------------------------------------------------------
+;              Local APIC Register Equates
+;-----------------------------------------------------------------------------
+LOCAL_APIC_ID_REG        EQU     0020h
+LOCAL_APIC_VERSION       EQU     0030h
+LOCAL_APIC_TASK_PRI      EQU     0080h
+LOCAL_APIC_ARB_PRI       EQU     0090h
+LOCAL_APIC_PROC_PRI      EQU     00A0h
+LOCAL_APIC_EOI           EQU     00B0h
+LOCAL_APIC_LDR           EQU     00D0h
+LOCAL_APIC_DEST_FORMAT   EQU     00E0h
+LOCAL_APIC_SVR           EQU     00F0h
+LOCAL_APIC_ISR0          EQU     0100h
+LOCAL_APIC_TMR0          EQU     0180h
+LOCAL_APIC_IRR0          EQU     0200h
+LOCAL_APIC_ERR_STAT      EQU     0280h
+LOCAL_APIC_LVT           EQU     0320h
+LOCAL_APIC_PERF          EQU     0340h
+LOCAL_APIC_LVT_LINT0     EQU     0350h
+LOCAL_APIC_LVT_LINT1     EQU     0360h
+LOCAL_APIC_LVT_ERR       EQU     0370h
+LOCAL_APIC_ITC           EQU     0380h
+LOCAL_APIC_TIMER         EQU     0390h
+LOCAL_APIC_TMR_DIV       EQU     03E0h
+
+
+
+; Generic MTRR equates
+MTRR_PHYS_BASE_0        EQU     0200h
+MTRR_PHYS_MASK_0        EQU     0201h
+MTRR_PHYS_BASE_1        EQU     0202h
+MTRR_PHYS_MASK_1        EQU     0203h
+MTRR_PHYS_BASE_2        EQU     0204h
+MTRR_PHYS_MASK_2        EQU     0205h
+MTRR_PHYS_BASE_3        EQU     0206h
+MTRR_PHYS_MASK_3        EQU     0207h
+MTRR_PHYS_BASE_4        EQU     0208h
+MTRR_PHYS_MASK_4        EQU     0209h
+MTRR_PHYS_BASE_5        EQU     020Ah
+MTRR_PHYS_MASK_5        EQU     020Bh
+MTRR_PHYS_BASE_6        EQU     020Ch
+MTRR_PHYS_MASK_6        EQU     020Dh
+MTRR_PHYS_BASE_7        EQU     020Eh
+MTRR_PHYS_MASK_7        EQU     020Fh
+MTRR_FIX_64K_00000      EQU     0250h
+MTRR_FIX_16K_80000      EQU     0258h
+MTRR_FIX_16K_A0000      EQU     0259h
+MTRR_FIX_4K_C0000       EQU     0268h
+MTRR_FIX_4K_C8000       EQU     0269h
+MTRR_FIX_4K_D0000       EQU     026Ah
+MTRR_FIX_4K_D8000       EQU     026Bh
+MTRR_FIX_4K_E0000       EQU     026Ch
+MTRR_FIX_4K_E8000       EQU     026Dh
+MTRR_FIX_4K_F0000       EQU     026Eh
+MTRR_FIX_4K_F8000       EQU     026Fh
+MTRR_DEF_TYPE           EQU     02FFh
+
+; AMD model specific MSR
+MSR_SYS_CFG         EQU 0C0010010h
+SetDirtyEnE         EQU 8d
+; Set Dirty Bit on Cache Block Transition to E
+SetDirtyEnS         EQU 9d
+; Set Dirty Bit on Cache Block Transition to S
+SetDirtyEnO         EQU 10d
+; Set Dirty Bit on Cache Block Transition to O
+SysECCEnable        EQU 15d
+; Controls S2K Bus (FSB) ECC
+MTRRFixDRAMEnBit    EQU 18d
+; Enables AMD Fixed MTRR extensions
+MTRRFixDRAMModEnBit     EQU     19d
+; Controls visibilty of Fixed MTRR Mode bits
+MTRRVarDRAMEnBit        EQU     20d
+; Enables Top of Mem registers and IORRs
+AMD_MSR_HWCR            EQU     0C0010015h
+AMD_MSR_IORR_BASE0      EQU     0C0010016h
+AMD_MSR_IORR_MASK0      EQU     0C0010017h
+AMD_MSR_IORR_BASE1      EQU     0C0010018h
+AMD_MSR_IORR_MASK1      EQU     0C0010019h
+AMD_MSR_TOP_MEM         EQU     0C001001Ah
+AMD_MSR_TOP_MEM2        EQU     0C001001Dh
+
+AMD_MSR_SMM_MASK_HL     EQU     0C0010113h
+BIT_SMM_AValid          EQU     0d              ; Enable SMRAM access to the A000 Segment
+
+
+; Define MSR
+AMD_MSR_MC4_CTL         EQU     0C0010048h
+AMD_MSR_NB_CFG          EQU     0C001001Fh
+
+AMD_PP_MSR_NB_CFG       EQU     0C001101Fh
+AMD_MSR_IC_CFG          EQU     0C0011021h
+AMD_MSR_DC_CFG          EQU     0C0011022h
+AMD_MSR_BU_CFG          EQU     0C0011023h
+
+MTRR_SetWriteBack       EQU     6
+MTRR_ValidMask          EQU     (1 SHL 11)
+
+ChkPnt  MACRO   Value
+        mov     al, Value
+        out     80h, al
+ENDM
+
+EFI_SEC_PEI_HAND_OFF STRUCT
+    DataSize                dw ? ; Size of the data structure
+    Reserved1               dw ? ; Reserved to match allignment of C code
+    BootFirmwareVolumeBase  dd ? ; Base Address of the boot firmware volume
+    BootFirmwareVolumeSize  dd ? ; Size of the boot firmware volume
+    TemporaryRamBase        dd ? ; Base Address CAR
+    TemporaryRamSize        dd ? ; Size of CAR
+    PeiTemporaryRamBase     dd ? ; Base Address of CAR for PEI
+    PeiTemporaryRamSize     dd ? ; Size of CAR for PEI
+    StackBase               dd ? ; Base Address of CAR Stack
+    StackSize               dd ? ; Size of CAR Stack
+EFI_SEC_PEI_HAND_OFF ENDS
+
+EFI_PEI_SERVICES_DOUBLE_POINTER_SIZE EQU 4
+
+IDTR32 STRUCT
+    Limit                   dw ?
+    BaseAddress             dd ?
+IDTR32 ENDS
+;*************************************************************************
+;*************************************************************************
+;**                                                                     **
+;**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+;**                                                                     **
+;**                       All Rights Reserved.                          **
+;**                                                                     **
+;**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+;**                                                                     **
+;**                       Phone: (770)-246-8600                         **
+;**                                                                     **
+;*************************************************************************
+;*************************************************************************

@@ -1,0 +1,60 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+#
+# This file contains code for SmBus initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmBusDxe
+  FILE_GUID                      = BA28936B-4051-48cf-A5CD-B63D7BFCA84A
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A 
+  ENTRY_POINT                    = SmBusDxeEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+
+[Sources]  
+SmBusDxe.c
+SmBusDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  IoLib
+  AmiSmBusLib
+  AmiDxeLib
+  AmiChipsetIoLib
+  
+[Protocols]
+  gEfiSmbusHcProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+
+[Depex]
+  gEfiPciRootBridgeIoProtocolGuid

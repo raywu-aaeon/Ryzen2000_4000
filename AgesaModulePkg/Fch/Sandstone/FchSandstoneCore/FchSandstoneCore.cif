@@ -1,0 +1,16 @@
+<component>
+	name = "FchSandstoneCore"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Fch\Sandstone\FchSandstoneCore\"
+	RefName = "AgesaModulePkg.FchSandstoneCore"
+[INF]
+"FchSandstoneLibDxe.inf"
+"FchSandstoneLibPei.inf"
+[files]
+"Sandstone\SSEspi\SSEspiEnv.c"
+"Sandstone\SSEspi\SSEspiLate.c"
+"Sandstone\SSEspi\SSEspiMid.c"
+"Sandstone\SSXgbe\SSXgbeReset.c"
+"Sandstone\FchRaven.asi"
+"FchSandstoneCore.sdl"
+<endComponent>

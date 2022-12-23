@@ -1,0 +1,560 @@
+/*****************************************************************************
+ *
+ * Copyright 2007 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+/*****************************************************************************
+ *
+ * This software package can be used to enable the Overclocking of certain
+ * AMD processors and its use is subject to the terms and conditions of the
+ * AMD Overclocking Waiver. Enabling overclocking through use of the low-level
+ * routines included in this package and operating an AMD processor outside of
+ * the applicable AMD product specifications will void any AMD warranty and can
+ * result in damage to the processor or the system into which the processor has
+ * been integrated. The user of this software assumes, and AMD disclaims, all
+ * risk, liability, costs and damages relating to or arising from the overclocking
+ * of AMD processors.
+ *
+ ******************************************************************************
+ */
+
+        Name(DBG,0)          //Master token
+        Name(GDBG,0)         //support general debug
+        Name(CDBG,0)         //support Clock module debug
+        Name(VDBG,0)         //support Voltage module debug
+        Name(RDBG,0)         //support CMD run module debug
+
+    //
+    // Create an opregion for PM IO Registers
+    //
+    OperationRegion (PMRG, SystemIO, 0xCD6, 0x2)
+    Field (PMRG, ByteAcc, NoLock, Preserve)
+    {
+        PMRI, 8,
+        PMRD, 8
+    }
+
+    //
+    // SMI_CMD Port
+    //
+    OperationRegion (PSMI, SystemIO, SW_SMI_PORT, 0x2)
+    Field (PSMI, ByteAcc, NoLock, Preserve)
+    {
+      APMC, 8,
+      APMD, 8
+    }
+
+    Method(ASMI, 1)
+    {
+      Store(ARG0, APMC)
+      Sleep(10)
+    }
+
+        Name(OBID,package()
+        {
+            0x40,            // 64 command IDs
+//          Object ID
+            0x00010001,     // Get APCB Config
+//            0x00010002,     // Get memory voltages
+            0x00020001,     // Set memory clock frequency
+            0x00020002,     // Set Tcl
+            0x00020003,     // Set Trcdrd
+            0x00020004,     // Set Trcdwr
+            0x00020005,     // Set Tras
+            0x00020006,     // Set Trp
+            0x00020007,     // Set ProcODT
+            0x00020008,     // Set TRCPAGE
+            0x00020009,     // Set TRC
+            0x0002000A,     // Set TRFC
+            0x0002000B,     // Set TRFC2
+            0x0002000C,     // Set TRFC4
+            0x0002000D,     // Set TFAW
+            0x0002000E,     // Set TRRDS
+            0x0002000F,     // Set TRRDL
+            0x00020010,     // Set TWR
+            0x00020011,     // Set TWTRS
+            0x00020012,     // Set TWTRL
+            0x00020013,     // Set TCKE
+            0x00020014,     // Set TCWL
+            0x00020015,     // Set TRTP
+            0x00020016,     // Set TRDRDSC
+            0x00020017,     // Set TRDRDSCL
+            0x00020018,     // Set TRDRDSD
+            0x00020019,     // Set TRDRDDD
+            0x0002001A,     // Set TWRWRSC
+            0x0002001B,     // Set TWRWRSCL
+            0x0002001C,     // Set TWRWRSD
+            0x0002001D,     // Set TWRWRDD
+            0x0002001E,     // Set TRDWR
+            0x0002001F,     // Set TWRRD
+            0x00020020,     // Set GEAR_DOWN_EN
+            0x00020021,     // Set CMD2T
+            0x00020022,     // Set RTTNOM
+            0x00020023,     // Set RTTWR
+            0x00020024,     // Set RTTPARK
+            0x00020025,     // Set PowerDwonEn
+            0x00020026,     // Set SMTEn
+            0x00020027,     // Software Downcore Config
+            0x00020028,     // Set EDC Throttler Control
+            0x00020029,     // Set AddrCmdSetup
+            0x0002002A,     // Set CsOdtSetup
+            0x0002002B,     // Set CkeSetup
+            0x0002002C,     // Set CadBusClkDrvStren
+            0x0002002D,     // Set CadBusAddrCmdDrvStren
+            0x0002002E,     // Set CadBusCsOdtCmdDrvStren
+            0x0002002F,     // Set CadBusCkeDrvStren
+            0x00020030,     // Set CLDO_VDDP
+            0x00020031,     // Set MemInterleavingMode
+            0x00020032,     // Set MemInterleavingSize
+            0x00020033,     // Set FCLK OC Mode
+            0x00020034,     // Set SOC VID
+
+//            0x00030001,     // Set VDDIO
+//            0x00030002,     // Set VTT
+            0x00040001,     // Command Buffer Start
+            0x00040002,     // Command Buffer End
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+//*****************************************************************************
+//          Property
+            1,              //Linear
+//            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+//            1,              //Linear
+//            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            1,              //Linear
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+//*****************************************************************************
+//          Object string
+            "Get APCB Config",
+//            "Get memory voltages",
+            "Set memory clock frequency",
+            "Set Tcl",
+            "Set Trcdrd",
+            "Set Trcdwr",
+            "Set Tras",
+            "Set Trp",
+            "Set ProcODT",
+            "Set Trcpage",
+            "Set Trc",
+            "Set Trfc",
+            "Set Trfc2",
+            "Set Trfc4",
+            "Set Tfaw",
+            "Set TrrdS",
+            "Set TrrdL",
+            "Set Twr",
+            "Set TwtrS",
+            "Set TwtrL",
+            "Set TCke",
+            "Set Tcwl",
+            "Set Trtp",
+            "Set TrdrdSc",
+            "Set TrdrdScL",
+            "Set TrdrdSd",
+            "Set TrdrdDd",
+            "Set TwrwrSc",
+            "Set TwrwrScL",
+            "Set TwrwrSd",
+            "Set TwrwrDd",
+            "Set Trdwr",
+            "Set Twrrd",
+            "Set GearDownEn",
+            "Set Cmd2t",
+            "Set RttNom",
+            "Set RttWR",
+            "Set RttPark",
+            "Set PowerDownEn",
+            "Set SMT EN",
+            "Software Downcore Config",
+            "Set EDC Throttler Control",
+//            "Set VDDIO",
+//            "Set VTT",
+            "Set AddrCmdSetup",
+            "Set CsOdtSetup",
+            "Set CkeSetup",
+            "Set CadBusClkDrvStren",
+            "Set CadBusAddrCmdDrvStren",
+            "Set CadBusCsOdtCmdDrvStren",
+            "Set CadBusCkeDrvStren",
+            "Set CLDO_VDDP",
+            "Set Interleave Mode",
+            "Set Interleave Size",
+            "Set FCLK OC Mode",
+            "Set SOC VID",
+            "Command Buffer Start",
+            "Command Buffer End",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+//*****************************************************************************		
+	})
+//NOTE:This table is now only used for the linear value object.	
+        Name(OBIT,package() {
+//          Method ID       Min         Max         Setp
+            0x00020001,     333,        2200,       33,       //Memory Clock
+            0x00020002,     8,          33,         1,        //Tcl
+            0x00020003,     8,          27,         1,        //Trcdrd
+            0x00020004,     8,          27,         1,        //Trcdwr
+            0x00020005,     21,         58,         1,        //Tras
+            0x00020006,     8,          27,         1,        //Trp
+
+            0x00020007,     0,          63,         1,        // Set ProcODT
+            0x00020008,     0,          1023,       1,        // Set TRCPAGE
+            0x00020009,     29,         135,        1,        // Set TRC
+            0x0002000A,     60,         990,        1,        // Set TRFC
+            0x0002000B,     60,         990,        1,        // Set TRFC2
+            0x0002000C,     60,         990,        1,        // Set TRFC4
+            0x0002000D,     6,          54,         1,        // Set TFAW
+            0x0002000E,     4,          12,         1,        // Set TRRDS
+            0x0002000F,     4,          12,         1,        // Set TRRDL
+            0x00020010,     10,         81,         1,        // Set TWR
+            0x00020011,     2,          14,         1,        // Set TWTRS
+            0x00020012,     2,          14,         1,        // Set TWTRL
+            0x00020013,     1,          31,         1,        // Set TCKE
+            0x00020014,     9,          22,         1,        // Set TCWL
+            0x00020015,     5,          14,         1,        // Set TRTP
+            0x00020016,     1,          15,         1,        // Set TRDRDSC
+            0x00020017,     1,          15,         1,        // Set TRDRDSCL
+            0x00020018,     1,          15,         1,        // Set TRDRDSD
+            0x00020019,     1,          15,         1,        // Set TRDRDDD
+            0x0002001A,     1,          15,         1,        // Set TWRWRSC
+            0x0002001B,     1,          63,         1,        // Set TWRWRSCL
+            0x0002001C,     1,          15,         1,        // Set TWRWRSD
+            0x0002001D,     1,          15,         1,        // Set TWRWRDD
+            0x0002001E,     1,          31,         1,        // Set TRDWR
+            0x0002001F,     1,          15,         1,        // Set TWRRD
+            0x00020020,     0,          1,          1,        // Set GEAR_DOWN_EN
+            0x00020021,     0,          1,          1,        // Set CMD2T
+            0x00020022,     0,          7,          1,        // Set RTTNOM
+            0x00020023,     0,          4,          1,        // Set RTTWR
+            0x00020024,     0,          7,          1,        // Set RTTPARK
+            0x00020025,     0,          1,          1,        // Set PowerDownEn
+            0x00020026,     0,          1,          1,        // Set SmtEn
+            0x00020027,     0,          4294967295, 1,        // Software Downcore Config
+            0x00020028,     0,          15,         1,        // Set EDC Throttler Control
+            0x00020029,     0,          63,         1,        // Set AddrCmdSetup
+            0x0002002A,     0,          63,         1,        // Set CsOdtSetup
+            0x0002002B,     0,          63,         1,        // Set CkeSetup
+            0x0002002C,     0,          31,         1,        // Set CadBusClkDrvStren
+            0x0002002D,     0,          31,         1,        // Set CadBusAddrCmdDrvStren
+            0x0002002E,     0,          31,         1,        // Set CadBusCsOdtCmdDrvStren
+            0x0002002F,     0,          31,         1,        // Set CadBusCkeDrvStren
+            0x00020030,     0,          1500,       1,        // Set CLDO_VDDP
+            0x00020031,     0,          4294967295, 1,        // Set Interleave Mode
+            0x00020032,     0,          7,          1,        // Set Interleave Size
+            0x00020033,     0,          1,          1,        // Set FCLK OC Mode
+            0x00020034,     0,          255,          1,      // Set SOC VID
+
+//            0x00030001,     1080,       1320,         4     //Memory VDDIO
+//            0x00030002,     540,        660,          4,    //Memory VTT
+            0,    //END
+        })
+
+//Object discrete buffer table
+//struct OBDT
+//		{
+//			uint32 		object ID
+//			uint		discretevalue length
+//			uint32		discretevalue[xx]
+//		}
+
+        Name(OBD1,package() {
+            0x00020001,
+            35,
+            333, 400, 533, 667, 800, 933, 1067, 1200, 1333, 1367,
+            1400, 1433, 1467, 1500, 1533, 1567, 1600, 1633, 1667, 1700,
+            1733, 1767, 1800, 1833, 1867, 1900, 1933, 1967, 2000, 2033,
+            2067, 2100, 2133, 2167, 2200,
+
+            0x00020002,
+            26,
+            8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+            18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+            28, 29, 30, 31, 32, 33,
+
+            0x00020003,
+            20,
+            8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+            18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+
+            0x00020004,
+            20,
+            8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+            18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+
+            0x00020005,
+            38,
+            21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+            31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+            41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+            51, 52, 53, 54, 55, 56, 57, 58,
+
+            0x00020006,
+            20,
+            8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+            18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+
+            0x00020007,
+            18,
+            0, 1, 2, 3, 8, 9, 10, 11, 24, 25, 
+            26, 27, 56, 57, 58, 59, 62, 63,
+
+            0x00020014,
+            8,
+            9, 10, 11, 12, 14, 16, 18, 20,
+
+            0x0002002C,
+            6,
+            0, 1, 3, 7, 15, 31,
+
+            0x0002002D,
+            6,
+            0, 1, 3, 7, 15, 31,
+
+            0x0002002E,
+            6,
+            0, 1, 3, 7, 15, 31,
+
+            0x0002002F,
+            6,
+            0, 1, 3, 7, 15, 31,
+            0, //end of the table
+        })
+
+        Name(OBD2,package() {
+
+            0, //end of the table
+        })
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName: BM01
+//Description: Before every init block 
+//Input: Null
+//Output:Null
+//Note:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(BM01,0)
+        {
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:XINI
+//Description:Other block init
+//Input: Null
+//Output:Null
+//Note:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(XINI,0)
+        {
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:EM01
+//Description:End of init Hook
+//Input: Null
+//Output: Null
+//Note:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(EM01,0)
+        {
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:BM05
+//Description:Before M05 Hook
+//Input: Null
+//Output: Null
+//Note:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(BM05,1)
+        {
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:EM05
+//Description:Before M05 Hook
+//Input: Null
+//Output: Null
+//Note:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(EM05,1)
+        {
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:HM06
+//Description: M06 Hook
+//Input: Null
+//Output: Null
+//Note:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(HM06,0)
+        {
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:HM07
+//Description: M07 Hook
+//Input: Null
+//Output: Null
+//Note:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(HM07,1)
+        {
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:SBSL
+//Input: SMBUS port num
+//Output: Null
+//Note:SMBUS port selection for SB800
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(SBSL,1)
+        {
+            IndexField (PMRI, PMRD, ByteAcc, NoLock, Preserve)	//R07
+            {
+                Offset(0x2E),		//SMBUS select 
+                SBSL, 8,
+            }               
+            Or(arg0,1,local0)
+            store(local0,SBSL)
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:Setv
+//Input: SMBUS port num
+//Output: Null
+//Note:Add the judgement for the special voltage control from DS440X
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(Setv,2)
+        {
+//            WSet(arg0,arg1)
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:Getv
+//Input: SMBUS port num
+//Output: voltage value return
+//Note:Add the judgement for the special voltage control from DS440X
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(Getv,1)
+        {
+//            return(WGet(arg0))
+        }
+

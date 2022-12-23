@@ -1,0 +1,40 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file
+#  Package for AMI Trusted PEI to DXE phase hand off.
+#
+#  This Package provides cryptographic-related PPI to be used to
+#  verify FV integrity before dispatching any code form it
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiTrustedFvPkg
+  PACKAGE_GUID                   = 5F5F0031-5186-4e90-8272-AA35A5BE709A
+  PACKAGE_VERSION                = 1.0
+[Includes]
+  Include
+  Include/Ppi
+ 
+[Guids]
+# {7A1B9F81-04E0-444a-A8CA-5B3374AB38E9}
+  gAmiTrustedFvPkgTokenSpaceGuid = { 0x7a1b9f81, 0x4e0, 0x444a, { 0xa8, 0xca, 0x5b, 0x33, 0x74, 0xab, 0x38, 0xe9 }}
+
+[Ppis]
+# Trusted FV PPIs 
+  gAmiFvDxeValidatePpiGuid    = { 0x3771aec7, 0xeac0, 0x4caa, { 0xaf, 0x73, 0x4b, 0xf4, 0xc7, 0x6a, 0xd2, 0x29 }}
+  gAmiFvDigestPpiGuid         = { 0x565dbcbc, 0x814d, 0x4d68, { 0xaa, 0x43, 0x9f, 0x83, 0x8e, 0xbf, 0x5d, 0xd3 }}
+  #{56232A64-E0A4-4289-925F-B474EED6D034}
+  gAmiPublishFvDxeValidatePpiGuid = { 0x56232a64, 0xe0a4, 0x4289, { 0x92, 0x5f, 0xb4, 0x74, 0xee, 0xd6, 0xd0, 0x34 }}
+
+[PcdsFixedAtBuild, PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+  gAmiTrustedFvPkgTokenSpaceGuid.AmiPcdTdxeShadowFvBeforePublish|FALSE|BOOLEAN|0x00000001
+  gAmiTrustedFvPkgTokenSpaceGuid.AmiPcdTdxeShadowFvAlignSize|0x00000000|UINT32|0x00000002
+  # 0- invoke recovery
+  # 1- hang in CPU dead loop
+  gAmiTrustedFvPkgTokenSpaceGuid.AmiPcdTdxeFailedRecoveryPolicy|0x00000000|UINT32|0x00000003

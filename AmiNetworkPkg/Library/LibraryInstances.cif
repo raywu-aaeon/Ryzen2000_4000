@@ -1,0 +1,16 @@
+<component>
+    name = "LibraryInstances"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\Library"
+    RefName = "AmiNetworkPkg.LibraryInstances"
+[INF]
+"DxeDpcLib\DxeDpcLib.inf"
+"DxeHttpLib\DxeHttpLib.inf"
+"DxeIpIoLib\DxeIpIoLib.inf"
+"DxeNetLib\DxeNetLib.inf"
+"DxeTcpIoLib\DxeTcpIoLib.inf"
+"DxeUdpIoLib\DxeUdpIoLib.inf"
+"DxeHttpIoLib\DxeHttpIoLib.inf"
+"AmiNetworkPostManagerLib\AmiNetworkPostManagerLib.inf"
+"AmiNetworkCommonLib\AmiNetworkCommonLib.inf"
+<endComponent>

@@ -1,0 +1,35 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiCpmTableConstructorLib
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiCpmTableConstructorLib|PEIM
+  CONSTRUCTOR                    = AmiCpmTableConstructor
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmdCpmPkg/AmdCpmPkg.dec
+    AmdCpmPkg/AmiCpmWrapper/AmiCpmWrapperPkg.dec
+    AgesaPkg/AgesaPkg.dec
+    AgesaModulePkg/AgesaCommonModulePkg.dec
+    AmiChipsetPkg/AmiChipsetPkg.dec
+    AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  DebugLib
+
+[Protocols]
+
+[Ppis]
+    gAmdFchAmiPolicyPpiGuid
+    gAmdCpmTablePpiGuid
+
+[Pcd]
+  gAmiCpmWrapperPkgTokenSpaceGuid.PcdAmiCpmTableOverride
+
+[Sources]
+  AmiCpmTableConstructorLib.c

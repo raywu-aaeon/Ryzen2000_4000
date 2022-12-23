@@ -1,0 +1,182 @@
+/*****************************************************************************
+ *
+ * Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+//***************************************************************************
+//
+//  ATCS.asi - AMD Chipset ACPI Control Method
+//
+//***************************************************************************
+
+    Name(CpmAtcsBuffer0, Buffer(255){})
+    Name(CpmAtcsBuffer1, Buffer(3){})
+    Name(CpmDockingStatus, 1)
+
+    Method (ATCS, 2 ,Serialized)
+    {
+        If(LEqual(Arg0, 0))
+        {
+            ATC0()
+        }
+        If(LEqual(Arg0, 1))
+        {
+            ATC1()
+        }
+        If(LEqual(Arg0, 2))
+        {
+            ATC2(Arg1)
+        }
+        If(LEqual(Arg0, 3))
+        {
+            ATC3()
+        }
+        If(LEqual(Arg0, 4))
+        {
+            ATC4(Arg1)
+        }
+        If(LEqual(Arg0, 6))
+        {
+            ATC6(Arg1)
+        }
+        If(LEqual(Arg0, 7))
+        {
+            ATC7(Arg1)
+        }
+        Return (CpmAtcsBuffer0)
+    }
+
+    // Verify Interface
+    Method (ATC0)
+    {
+        CreateWordField(CpmAtcsBuffer0, 0, CpmStructureSize)                          // Structure size field
+        CreateWordField(CpmAtcsBuffer0, 2, CpmInterfaceVersion)                       // Interface field
+        CreateDWordField(CpmAtcsBuffer0, 4, CpmSupportedFunctionsBitVector)           // Supported field
+        Store(8, CpmStructureSize)                                          // Size
+        Store(1, CpmInterfaceVersion)                                       // Interface version
+        Store(0x6F, CpmSupportedFunctionsBitVector)                         // Func 1, 2, 3, 4, 6, 7 supported
+        Store(\_SB.ALIB(0, CpmAtcsBuffer0), CpmAtcsBuffer0)
+    }
+
+    // Get External State
+    Method (ATC1, 0, Serialized)
+    {
+        CreateWordField(CpmAtcsBuffer0, 0, CpmStructureSize)                          // Structure size field
+        CreateDWordField(CpmAtcsBuffer0, 2, CpmValidFlagsMask)                        // Valid Flags Mask field
+        CreateDWordField(CpmAtcsBuffer0, 6, CpmFlags)                                 // Flags field
+        CreateField(CpmAtcsBuffer0, 48, 1, CpmDockingFlag)                            // Docking status
+
+        Store(10, CpmStructureSize)                                         // size
+        Store(1, CpmValidFlagsMask)                                         // Valid Flags Mask
+        Store(CpmAtcsSupportedFunctionMask, CpmFlags)                       // Clean up
+
+        Store(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureDockingDeviceId), Local0)
+
+        If(And(Local0, 0x80))
+        {
+            Store(And(Local0, 0x01), CpmDockingStatus)
+        } Else
+        {
+            If(And(Local0, 0x7F))
+            {
+                Store(CpmGetDeviceStatus(Local0), CpmDockingStatus)
+            }
+        }
+        Store(CpmDockingStatus, CpmDockingFlag)
+    }
+
+    // PCIe Performace Request
+    Method (ATC2, 1, Serialized)
+    {
+        CreateWordField(CpmAtcsBuffer0, 0, CpmStructureSize)          // Structure size field
+        CreateByteField(CpmAtcsBuffer0, 2, CpmReturnValue)            // Return Values
+
+        Store(3, CpmStructureSize)                          // prepare return default:size
+        Store(1, CpmReturnValue)                            // assume Request refused
+        Store(\_SB.ALIB(2, Arg0), CpmAtcsBuffer0)                     // ALIB's PCIe Performance Request
+    }
+
+    // PCIE Device Ready Nodification
+    Method (ATC3, 0, Serialized)
+    {
+        CreateWordField(CpmAtcsBuffer0, 0, CpmStructureSize)          // Structure size field
+        CreateByteField(CpmAtcsBuffer0, 2, CpmReturnValue)            // Return Values
+
+        CreateWordField(CpmAtcsBuffer1, 0, CpmStructureSize2)         // Structure size field
+        CreateByteField(CpmAtcsBuffer1, 2, CpmPsppPolicy)             // PSPP Policy
+
+        Store(3, CpmStructureSize)                          // prepare return default:size
+        Store(1, CpmReturnValue)                            // assume Request refused
+        Store(3, CpmStructureSize2)                         // size
+        Store(1, CpmPsppPolicy)                             // start PSPP
+        Store(\_SB.ALIB(3, CpmAtcsBuffer1), CpmAtcsBuffer0)                     // ALIB's PCIe Performance Request
+    }
+
+   // Set PCIe Bus Width
+    Method (ATC4, 1, Serialized)
+    {
+        CreateWordField(CpmAtcsBuffer0, 0, CpmStructureSize)          // Structure size field
+        CreateByteField(CpmAtcsBuffer0, 2, CpmActiveLaneNumber)       // Number of active lanes
+
+        Store(3, CpmStructureSize)                          // prepare return default: size
+        Store(1, CpmActiveLaneNumber)                       // prepare return default: Num Lanes
+        Store(\_SB.ALIB(4, Arg0), CpmAtcsBuffer0)           // ALIB's Set PCIe Bus width
+    }
+
+   // Get UMA Size
+    Method (ATC6, 1, Serialized)
+    {
+        CreateWordField(CpmAtcsBuffer0, 0, CpmStructureSize)          // Structure size field
+        CreateDwordField(CpmAtcsBuffer0, 2, CpmCurrentUmaSize)        // Uma Size
+
+        Store(6, CpmStructureSize)                          // prepare return default: size
+        Store(CpmUmaSize, CpmCurrentUmaSize)                // prepare return default: uma size
+    }
+
+   // Set Auto UMA Allocation
+    Method (ATC7, 1, Serialized)
+    {
+        CpmTriggerSmi(CpmSwSmiCmdSetAutoUmaMode, 0, 1)      // Trigger a SW SMI to set auto UMA allocation mode
+    }

@@ -1,0 +1,69 @@
+//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************
+
+/** @file HddAcousticDynamicSetup.vfr
+    Hdd Acoustic Setup Page. Dynamic IFR implementation.
+
+**/
+
+#include "AcousticSetupVar.h"
+#include "HddAcousticDynamicSetup.h"
+
+formset guid = ACOUSTIC_FORM_SET_GUID,
+    title = STRING_TOKEN(STR_ACOUSTIC_SUBTITLE),
+    help = STRING_TOKEN(STR_ACOUSTIC_SUBTITLE_HELP),
+    class = ACOUSTIC_FORM_SET_CLASS, subclass = 0,
+    
+    varstore HDD_ACOUSTIC_DEVICE_DATA,
+    varid = HDD_ACOUSTIC_DYNAMIC_VARIABLE_ID,
+    name = AcousticVarName,
+    guid = HDD_ACOUSTIC_DEVICE_GUID;
+ 
+    form
+        formid = ACOUSTIC_MAIN_FORM_ID,
+        title = STRING_TOKEN(STR_ACOUSTIC_OPTIONS_FORM_TITLE);
+
+        label ACOUSTIC_MAIN_FORM_LABEL_START;
+        // dynamic content here
+        ///.....
+        label ACOUSTIC_MAIN_FORM_LABEL_END;
+
+    endform;
+
+    form
+        formid = ACOUSTIC_SUB_FORM_ID,
+        title =  STRING_TOKEN(STR_ACOUSTIC_OPTIONS_FORM_TITLE);
+
+        label ACOUSTIC_SUB_FORM_LABEL_START;
+        // dynamic content here
+        
+        label ACOUSTIC_SUB_FORM_LABEL_END;
+
+    endform;
+
+endformset;
+
+//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************

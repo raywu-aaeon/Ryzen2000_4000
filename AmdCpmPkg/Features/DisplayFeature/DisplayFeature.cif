@@ -1,0 +1,14 @@
+<component>
+	name = "DisplayFeature"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\DisplayFeature\"
+	RefName = "AmdCpmPkg.Features.DisplayFeature"
+[INF]
+"Dxe\AmdCpm3DisplayFeatureDxe.inf"
+"Pei\AmdCpm3DisplayFeaturePeim.inf"
+"Smm\AmdCpm3DisplayFeatureSmm.inf"
+[files]
+"DisplayFeature.sdl"	
+[parts]
+"AmdCpmPkg.Features.DisplayFeature.Asl"
+<endComponent>

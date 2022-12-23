@@ -1,0 +1,8 @@
+<component>
+	name = "RV"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Library\Family\0x17\RV\"
+	RefName = "AmdCbsPkg.Library.Family.0x17.RV"
+[parts]
+"AmdCbsPkg.RV.External"
+<endComponent>

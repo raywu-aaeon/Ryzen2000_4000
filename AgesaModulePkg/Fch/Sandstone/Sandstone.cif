@@ -1,0 +1,27 @@
+<component>
+	name = "Sandstone"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Fch\Sandstone\"
+	RefName = "AgesaModulePkg.Fch.Sandstone"
+[INF]
+"FchSandstoneCf9ResetDxe\Cf9Reset.inf"
+"FchSandstoneComplement\FchSSSataD3Cold\FchSSSataD3ColdSmm.inf"
+"FchSandstoneDxe\FchDxe.inf"
+"FchSandstoneI2cDxe\Mp2I2cLibDxe.inf"
+"FchSandstoneI2cPei\Mp2I2cLibPei.inf"
+"FchSandstoneLegacyInterruptDxe\LegacyInterrupt.inf"
+"FchSandstonePei\FchPei.inf"
+"FchSandstoneSmbusDxe\SmbusLight.inf"
+"FchSandstoneSmbusPei\Smbus.inf"
+"FchSandstoneSmm\FchSmm.inf"
+"FchSandstoneSmmControlDxe\SmmControl.inf"
+[files]
+"FchSandstoneDxe\FchSSDevices.asi"
+"FchSandstone.dec"
+"Sandstone.sdl"
+"Include/Mp2I2cLib.h"
+"Include/Mp2I2cRegs.h"
+[parts]
+"AgesaModulePkg.FchSandstoneCore"
+"AgesaModulePkg.FchSandstoneSmmDispatcher"
+<endComponent>

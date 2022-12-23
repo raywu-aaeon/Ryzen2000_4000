@@ -1,0 +1,148 @@
+/*****************************************************************************
+ *
+ * Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+/*****************************************************************************
+ *
+ * This software package can be used to enable the Overclocking of certain
+ * AMD processors and its use is subject to the terms and conditions of the
+ * AMD Overclocking Waiver. Enabling overclocking through use of the low-level
+ * routines included in this package and operating an AMD processor outside of
+ * the applicable AMD product specifications will void any AMD warranty and can
+ * result in damage to the processor or the system into which the processor has
+ * been integrated. The user of this software assumes, and AMD disclaims, all
+ * risk, liability, costs and damages relating to or arising from the overclocking
+ * of AMD processors.
+ *
+ ******************************************************************************
+ */
+
+// This file used to establish the interface between the common BIOS ASL code and OS
+// WMI interface.
+
+// NOTE:This Device _HID must be PNP0C14 as Microsoft defined.
+
+// code for WMI Overclock function
+
+// pnp0c14 is pnp id assigned to WMI mapper
+    Name(_HID, EISAID("PNP0C14"))
+    Name(_UID, "AOD")
+
+//The Data Block GUID Mapping control method named _WDG evaluates to a buffer 
+//that has the GUID mapping information for data blocks, events, and WMI methods. 
+    Name(_WDG, Buffer() {
+
+        //
+        // Method Execute Guids.
+        //
+        // {ABBC0F6a-8EA1-11d1-00A0-C90629100000}
+        // Method Execute Guid
+        0x6a, 0x0f, 0xBC, 0xAB, 0xa1, 0x8e, 0xd1, 0x11, 0x00, 0xa0, 0xc9, 0x06, 0x29, 0x10, 0, 0,
+        65, 65,          // Object Id (AA)
+        1,               // Instance Count
+
+        // Set this flag if the GUID represents a set of WMI method calls and not a data block
+        //#define WMIACPI_REGFLAG_METHOD      0x2
+        0x02,           // Flags
+                        //
+        // This GUID for returning the MOF data
+        0x21, 0x12, 0x90, 0x05, 0x66, 0xd5, 0xd1, 0x11, 0xb2, 0xf0, 0x00, 0xa0, 0xc9, 0x06, 0x29, 0x10,
+        66, 65,        // Object ID (BA)
+        1,             // Instance Count
+        0x00,          // Flags
+    })//_WDG
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName:WMAA
+//Description: The Method Used to dispatch all the ASU function call.
+//Input: 	Arg0 The instance being queried, In this Module only one instance been defined, so this // Value Always be 0 
+//		Arg1 Method id ,also written in MOF file.
+//		Arg2 The input package according to Method id also defined in MOF file. 
+//Output:	The Output Package according to Method id also defined in MOF file.
+//Note: Method ID
+//1	Init before the Module.
+//2	Get Object ID & Name	(AP can get ID, Then it can use these ID to Get detail information)
+//3	Get The Object Value
+//4 	Set the Object Value
+//5	Get the object information in details(ID,MIN,MAX,CUR,STP,PRO)
+//6	Uninit after the AP complete
+//7	The Module Request, for the ASL can't get every register value such as MSR.(Called first)
+//The Method Sequence:
+// 7 1 2 5 (3 4 5) 6 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Method(WMAA,3)
+    {
+        if(Lequal(Arg0,0))
+        {
+            if(LOR(LOR(LNOTequal(arg1,1),lnotequal(arg1,2)),Lnotequal(arg1,6)))
+            {
+                CreateDwordfield(Arg2,0,WIID)
+            }
+
+            if (lequal(arg1,1))
+            { //Method ID 1
+                Return(AM01())
+            } elseif (lequal(arg1,2))
+            { //Method ID 2
+                Return(AM02())
+            } elseif (lequal(arg1,3))
+            { //Method ID 3
+                Return(AM03())
+            } elseif (lequal(arg1,4))
+            { //Method ID 4
+                Return(AM04(WIID))
+            } elseif (lequal(arg1,5))
+            { //Method ID 5 
+                Return(AM05(arg2))
+            } elseif (lequal(arg1,6))
+            { //Method ID 6
+                Return(AM06(WIID))
+            } else {
+                return(Zero)
+            }
+        } //IF(Lequal(arg0,0)
+    } //Method(WMAA,3)

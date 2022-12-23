@@ -1,0 +1,40 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file HddSecurityPei.inf
+
+[Defines]
+  INF_VERSION     = 0x00010015
+  VERSION_STRING  = 1.0
+  BASE_NAME       = TcgStorageSecurityPei
+  MODULE_TYPE     = PEIM
+  FILE_GUID       = 8ED25ADD-7C2D-4326-9186-85CCF74C79F6
+  ENTRY_POINT     = TcgStorageSecurityPeiEntry
+    
+[Sources]
+  TcgStorageSecurityPei.c
+    
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  DebugLib
+  LockBoxLib
+  MemoryAllocationLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec # Needed for HddSecurity.h
+  
+[Ppis]
+  gEfiPeiSmmCommunicationPpiGuid
+  gEdkiiIoMmuPpiGuid
+  
+[Depex]
+  gEfiPeiMemoryDiscoveredPpiGuid AND
+  gEdkiiIoMmuPpiGuid

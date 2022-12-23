@@ -1,0 +1,1411 @@
+PCIDEVICE
+	Title  = "GNB IOMMU Function (B0, D0, F2) (ASL)"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 02h
+	SleepNum  = 01h
+	ASLfile  = "'AmiChipsetModulePkg/ASL/GnbIommu.asl'"
+	ASLdeviceName  = "IOMA"
+	Token = "GNB_IOMMU_SUPPORT" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+	Title  = "Gnb PciRoot (ASL)"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 00h
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	ASL_WAK  = "Method;If(LOr(LEqual(Arg0, 0x03), LEqual(Arg0, 0x04))) { If(LNotEqual(PICM, Zero)) { \_SB.PCI0.NAPE() } }"
+End
+
+PCIDEVICE
+	Title  = "NBIO Br0"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 01h
+	Fun  = 01h
+	BridgeBusNum  = "$(NBIO_FIXED_BUS_BRIDGE0)"
+	GPEbit  = 08h
+	SleepNum  = 04h
+	ASLdeviceName  = "GPP0"
+	ASLfile  = "'AmiChipsetModulePkg/Asl/Pce2CpmGpp0.asl','AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	IntA = 	LNKA; 40
+	IntB = 	LNKB; 41
+	IntC = 	LNKC; 42
+	IntD = 	LNKD; 43
+	Token = "NBIO_RV_BRIDGE0_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	WakeEnabled = Yes
+	PWRBnotify = Yes
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+End
+
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F1) Slot"
+	Parent  = "NBIO Br0"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Slot  = 030h
+	Fun  = 0ffh
+	IntA = 	LNKA; 24
+	IntB = 	LNKB; 25
+	IntC = 	LNKC; 26
+	IntD = 	LNKD; 27
+	Token = "NBIO_RV_BRIDGE0_SLOT_EXISTS" "=" "1"
+	DeviceType = Slot
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+	Title  = "NBIO Br1"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 01h
+	Fun  = 02h
+	BridgeBusNum  = "$(NBIO_FIXED_BUS_BRIDGE1)"
+	GPEbit  = 08h
+	SleepNum  = 04h
+	ASLdeviceName  = "GPP1"
+	ASLfile  = "'AmiChipsetModulePkg/Asl/Pce2CpmGpp1.asl','AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	Token = "NBIO_RV_BRIDGE1_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	WakeEnabled = Yes
+	PWRBnotify = Yes
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+End
+
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F2) Slot"
+	Parent  = "NBIO Br1"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Slot  = 031h
+	Fun  = 0ffh
+	IntA = 	LNKE; 28
+	IntB = 	LNKF; 29
+	IntC = 	LNKG; 30
+	IntD = 	LNKH; 31
+	Token = "NBIO_RV_BRIDGE1_SLOT_EXISTS" "=" "1"
+	DeviceType = Slot
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+	Title  = "NBIO Br2"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 01h
+	Fun  = 03h
+	BridgeBusNum  = "$(NBIO_FIXED_BUS_BRIDGE2)"
+	GPEbit  = 08h
+	SleepNum  = 04h
+	ASLdeviceName  = "GPP2"
+	ASLfile  = "'AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	Token = "NBIO_RV_BRIDGE2_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	WakeEnabled = Yes
+	PWRBnotify = Yes
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+End
+
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F3) Slot"
+	Parent  = "NBIO Br2"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Slot  = 032h
+	Fun  = 0ffh
+	IntA = 	LNKA; 32
+	IntB = 	LNKB; 33
+	IntC = 	LNKC; 34
+	IntD = 	LNKD; 35
+	Token = "NBIO_RV_BRIDGE2_SLOT_EXISTS" "=" "1"
+	DeviceType = Slot
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+	Title  = "NBIO Br3"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 01h
+	Fun  = 04h
+	BridgeBusNum  = "$(NBIO_FIXED_BUS_BRIDGE3)"
+	GPEbit  = 08h
+#       GPEbit  = 13h    
+	SleepNum  = 04h
+	ASLdeviceName  = "GPP3"
+	ASLfile  = "'AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	Token = "NBIO_RV_BRIDGE3_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	WakeEnabled = Yes
+	PWRBnotify = Yes
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+End
+
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F4) Slot"
+	Parent  = "NBIO Br3"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Slot  = 033h
+	Fun  = 0ffh
+	IntA = 	LNKE; 36
+	IntB = 	LNKF; 37
+	IntC = 	LNKG; 38
+	IntD = 	LNKH; 39
+	Token = "NBIO_RV_BRIDGE3_SLOT_EXISTS" "=" "1"
+	DeviceType = Slot
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+	Title  = "NBIO Br4"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 01h
+	Fun  = 05h
+	BridgeBusNum  = "$(NBIO_FIXED_BUS_BRIDGE4)"
+	GPEbit  = 08h
+	SleepNum  = 04h
+	ASLdeviceName  = "GPP4"
+	ASLfile  = "'AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	Token = "NBIO_RV_BRIDGE4_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	WakeEnabled = Yes
+	PWRBnotify = Yes
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+End
+
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F5) Slot"
+	Parent  = "NBIO Br4"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Slot  = 034h
+	Fun  = 0ffh
+	IntA = 	LNKA; 40
+	IntB = 	LNKB; 41
+	IntC = 	LNKC; 42
+	IntD = 	LNKD; 43
+	Token = "NBIO_RV_BRIDGE4_SLOT_EXISTS" "=" "1"
+	DeviceType = Slot
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+	Title  = "NBIO Br5"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 01h
+	Fun  = 06h
+	BridgeBusNum  = "$(NBIO_FIXED_BUS_BRIDGE5)"
+	GPEbit  = 08h
+	SleepNum  = 04h
+	ASLdeviceName  = "GPP5"
+	ASLfile  = "'AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	Token = "NBIO_RV_BRIDGE5_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	WakeEnabled = Yes
+	PWRBnotify = Yes
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+End
+
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F6) Slot"
+	Parent  = "NBIO Br5"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Slot  = 035h
+	Fun  = 0ffh
+	IntA = 	LNKE; 44
+	IntB = 	LNKF; 45
+	IntC = 	LNKG; 46
+	IntD = 	LNKH; 47
+	Token = "NBIO_RV_BRIDGE5_SLOT_EXISTS" "=" "1"
+	DeviceType = Slot
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+	Title  = "NBIO Br6"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 01h
+	Fun  = 07h
+	BridgeBusNum  = "$(NBIO_FIXED_BUS_BRIDGE6)"
+	GPEbit  = 08h
+	SleepNum  = 04h
+	ASLdeviceName  = "GPP6"
+	ASLfile  = "'AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	Token = "NBIO_RV_BRIDGE6_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	WakeEnabled = Yes
+	PWRBnotify = Yes
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+End
+
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F7) Slot"
+	Parent  = "NBIO Br6"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Slot  = 036h
+	Fun  = 0ffh
+	IntA = 	LNKA; 48
+	IntB = 	LNKB; 49
+	IntC = 	LNKC; 50
+	IntD = 	LNKD; 51
+	Token = "NBIO_RV_BRIDGE6_SLOT_EXISTS" "=" "1"
+	DeviceType = Slot
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+	Title  = "NBIO Internal Br0"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 08h
+	Fun  = 01h
+	BridgeBusNum  = "$(NBIO_FIXED_ONCHIP_BUS_A)"
+	GPEbit  = 019h
+	SleepNum  = 04h
+	ASLdeviceName  = "GP17"
+	ASLfile  = "'AmiChipsetModulePkg/ASL/Gprw19.asl'"
+	IntA = 	LNKE; 52
+	IntB = 	LNKF; 53
+	IntC = 	LNKG; 54
+	IntD = 	LNKH; 55
+	Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	WakeEnabled = Yes
+	PWRBnotify = Yes
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+	Help  = "AmdCpmPkg will sync this device ASL name object. if PcdGet32 (PcieGp17AslName) = 0. (default)"
+End
+
+PCIDEVICE
+	Title  = "NBIO Picasso IGD"
+	Parent  = "NBIO Internal Br0"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 00h
+	ASLdeviceName  = "VGA_"
+	ASLfile  = "'AmiChipsetModulePkg\Asl\IgpCpm.asl'"
+	IntA = 	LNKE; 52
+	IntB = 	LNKF; 53
+	IntC = 	LNKG; 54
+	IntD = 	LNKH; 55
+	Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+    Title  = "NBIO Picasso IGD VBIOS Container"
+    Parent  = "NBIO Internal Br0"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ROMFile  = "AmiChipsetModulePkg/LegacyRom/Vbios/PicassoGenericVbios.bin"
+    IntA =  LNKE; 52
+    IntB =  LNKF; 53
+    IntC =  LNKG; 54
+    IntD =  LNKH; 55
+    Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    OptionROM = Yes
+    ROMMain = No
+    Virtual = Yes
+    SuppressDeviceGeneration = Yes
+    LegacyRom = Yes
+    FFSFileName  = "ROM Storage"
+    ROMSectionGuid  = "430a34b2-65f8-4c0a-b765-e02adec8dd63"
+End
+
+PCIDEVICE
+    Title  = "NBIO Raven2 IGD VBIOS Container"
+    Parent  = "NBIO Internal Br0"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ROMFile  = "AmiChipsetModulePkg/LegacyRom/Vbios/Raven2GenericVbios.bin"
+    IntA =  LNKE; 52
+    IntB =  LNKF; 53
+    IntC =  LNKG; 54
+    IntD =  LNKH; 55
+    Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    OptionROM = Yes
+    ROMMain = No
+    Virtual = Yes
+    SuppressDeviceGeneration = Yes
+    LegacyRom = Yes
+    FFSFileName  = "ROM Storage"
+    ROMSectionGuid  = "2eeb6b7e-f112-4350-ab72-adec3840255c"
+End
+
+PCIDEVICE
+	Title  = "NBIO Picasso IGD UEFI GOP Container"
+	Parent  = "NBIO Internal Br0"
+	Attribute  = "0x0"
+	Dev_type  = "Container"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ROMFile  = "AmiChipsetModulePkg/Gnb/Gop/AMDGenericGop.efi"
+	IntA = 	LNKE; 52
+	IntB = 	LNKF; 53
+	IntC = 	LNKG; 54
+	IntD = 	LNKH; 55
+	Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	OptionROM = Yes
+	ROMMain = No
+	Virtual = Yes
+	SuppressDeviceGeneration = Yes
+	UefiRom = Yes
+	FFSFileName  = "ROM Storage"
+	ROMSectionGuid  = "dfd5316f-e5c0-4e61-8bc6-3876ec6c2083"
+End
+
+PCIDEVICE
+	Title  = "NBIO Picasso IGD UEFI GOP Container"
+	Parent  = "NBIO Internal Br0"
+	Attribute  = "0x0"
+	Dev_type  = "Container"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ROMFile  = "AmiChipsetModulePkg/Gnb/Gop/AmdIa32GenericGop.efi"
+	IntA = 	LNKE; 52
+	IntB = 	LNKF; 53
+	IntC = 	LNKG; 54
+	IntD = 	LNKH; 55
+	Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+	Token = "x64_BUILD" "=" "0"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	OptionROM = Yes
+	ROMMain = No
+	Virtual = Yes
+	SuppressDeviceGeneration = Yes
+	UefiRom = Yes
+	FFSFileName  = "ROM Storage"
+	ROMSectionGuid  = "dfd5316f-e5c0-4e61-8bc6-3876ec6c2083"
+End
+
+PCIDEVICE
+	Title  = "HD Audio Controller"
+	Parent  = "NBIO Internal Br0"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 01h
+	ASLdeviceName  = "HDAU"
+	IntA = 	LNKE; 52
+	IntB = 	LNKF; 53
+	IntC = 	LNKG; 54
+	IntD = 	LNKH; 55
+	Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+End
+
+PCIDEVICE
+	Title  = "Audio Processor"
+	Parent  = "NBIO Internal Br0"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 05h
+	ASLdeviceName  = "ACP_"
+	IntA = 	LNKE; 52
+	IntB = 	LNKF; 53
+	IntC = 	LNKG; 54
+	IntD = 	LNKH; 55
+	Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+End
+
+PCIDEVICE
+	Title  = "Audio Processor - HD Audio Controller"
+	Parent  = "NBIO Internal Br0"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 06h
+	ASLdeviceName  = "AZAL"
+	IntA =  LNKE; 52
+	IntB =  LNKF; 53
+	IntC =  LNKG; 54
+	IntD =  LNKH; 55
+	Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+End
+
+PCIDEVICE
+	Title  = "Sensor Fusion Hub"
+	Parent  = "NBIO Internal Br0"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 07h
+	IntA = 	LNKE; 52
+	IntB = 	LNKF; 53
+	IntC = 	LNKG; 54
+	IntD = 	LNKH; 55
+    ASLdeviceName  = "MP2C"
+	Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+End
+
+PCIDEVICE
+	Title  = "NBIO Internal Br1"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 08h
+	Fun  = 02h
+	BridgeBusNum  = "$(NBIO_FIXED_ONCHIP_BUS_B)"
+	GPEbit  = 08h
+	SleepNum  = 04h
+	ASLdeviceName  = "GP18"
+	ASLfile  = "'AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	Token = "NBIO_RV_BRIDGE8_EXISTS" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	WakeEnabled = Yes
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+	Help  = "AmdCpmPkg will sync this device ASL name object. if PcdGet32 (PcieGp18AslName) = 0. (default)"
+End
+
+IOAPIC
+	Title  = "GNB_IOAPIC"
+	APICID  = 02h
+	VectorBase  = 018h
+	VectorRange  = 020h
+	AddressBase  = 0fec01000h
+	Token = "GNB_IOAPIC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "GNB_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AMD AGESA Llano NorthBridge support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PICASSO_ROUTING_CONTROL"
+	Value  = "1"
+	Help  = "Control AMISDL to produce PICASSO's routing table. "
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "RAVEN_ROUTING_CONTROL"
+	Value  = "1"
+	Help  = "Control AMISDL to produce RAVEN's routing table. (Sync AM4 new design for PI110x)"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PCIEX_BASE_ADDRESS"
+	Value  = "0xF8000000"
+	Help  = "Contains the base address programmed for PCI Express. \Set this value to 0 if PCI Express support is not present. \Enables/disables PCI configuration access through memory. \Make sure PCIEX_BASE_ADDRESS is set appropriately. \If PCI is accessed through PCI \config mechanism then the maximum register offset that can be accessed is 256."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEBS"
+	Value  = "$(PCIEX_BASE_ADDRESS)"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "PCIEX_LENGTH"
+	Value  = "0x4000000"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEBL"
+	Value  = "$(PCIEX_LENGTH)"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+#TOKEN
+#	Name  = "PCI_REGISTER_MAX"
+#	Value  = "4096"
+#	Help  = "Contains the maximum value of PCI register that can be accessed. \ Enabled only when PCI config memory access is enabled"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetH = Yes
+#	Token = "PCIEX_BASE_ADDRESS" "!=" "0"
+#End
+
+#TOKEN
+#	Name  = "PCI_REGISTER_MAX"
+#	Value  = "256"
+#	Help  = "Contains the maximum value of PCI register that can be accessed. \ Enabled only when PCI config memory access is disabled"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetH = Yes
+#	Token = "PCIEX_BASE_ADDRESS" "=" "0"
+#End
+
+TOKEN
+	Name  = "NB_NUMBER_OF_HOST_BRG"
+	Value  = "1"
+	Help  = "Provides Number of virtual HOST Bridges within the System.\If System covers more than one PCI segment it will need more than one HOST bridge; "
+	TokenType = Integer
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "GNB_VBIOS_POST_TEMP_SEGMENT"
+#	Value  = "0xD0000"
+#	Help  = "Provides temp segment to get GNB VBIOS "
+#	TokenType = Integer
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "GNB_IOMMU_SUPPORT"
+	Value  = "1"
+	Help  = "IOMMU switch Temp Disable the IOMMU, it will check in next label"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BLDCFG_IOMMU_SUPPORT"
+	Value  = "$(GNB_IOMMU_SUPPORT)"
+	Help  = "This indicates whether to enable/disable IOMMU."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "GNB_IOMMU_BASE_ADDRESS"
+	Value  = "0xFEB80000"
+	Help  = "Explicit IOMMU Base, typically used for single NB systems"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "GNB_IOMMU_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "GNB_IOMMU_LENGTH"
+	Value  = "0x80000"
+	Help  = "Explicit IOMMU Length, typically used for single NB systems"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "GNB_IOMMU_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "GNB_IOAPIC_SUPPORT"
+	Value  = "1"
+	Help  = "Enables GNB APIC Support."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "GNB_IOAPIC_BASE_ADDRESS"
+	Value  = "0"
+	Help  = "Explicit IOAPIC Base, typically used for single NB systems"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "GNB_IOAPIC_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name  = "GNB_IOAPIC_BASE_ADDRESS"
+	Value  = "0xFEC01000"
+	Help  = "Explicit IOAPIC Base, typically used for single NB systems"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "GNB_IOAPIC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "GNB_IOAPIC_LENGTH"
+	Value  = "0x1000"
+	Help  = "Explicit IOAPIC Length, typically used for single NB systems"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "GNB_IOAPIC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_BUS_BRIDGE0"
+	Value  = "0x10"
+	Help  = "The fixed bus for bridge.\Due to some limitations(MSRC001_0058[MMIO Configuration Base Address], bus bridge only could support 0x00~0x3F in PEI phase."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0x00 - 0x3F"
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_BUS_BRIDGE1"
+	Value  = "0x15"
+	Help  = "The fixed bus for bridge.\Due to some limitations(MSRC001_0058[MMIO Configuration Base Address], bus bridge only could support 0x00~0x3F in PEI phase."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_BUS_BRIDGE2"
+	Value  = "0x1F"
+	Help  = "The fixed bus for bridge.\Due to some limitations(MSRC001_0058[MMIO Configuration Base Address], bus bridge only could support 0x00~0x3F in PEI phase."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_BUS_BRIDGE3"
+	Value  = "0x24"
+	Help  = "The fixed bus for bridge.\Due to some limitations(MSRC001_0058[MMIO Configuration Base Address], bus bridge only could support 0x00~0x3F in PEI phase."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_BUS_BRIDGE4"
+	Value  = "0x29"
+	Help  = "The fixed bus for bridge.\Due to some limitations(MSRC001_0058[MMIO Configuration Base Address], bus bridge only could support 0x00~0x3F in PEI phase."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_BUS_BRIDGE5"
+	Value  = "0x2E"
+	Help  = "The fixed bus for bridge.\Due to some limitations(MSRC001_0058[MMIO Configuration Base Address], bus bridge only could support 0x00~0x3F in PEI phase."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_BUS_BRIDGE6"
+	Value  = "0x33"
+	Help  = "The fixed bus for bridge.\Due to some limitations(MSRC001_0058[MMIO Configuration Base Address], bus bridge only could support 0x00~0x3F in PEI phase."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_ONCHIP_BUS_A"
+	Value  = "0x38"
+	Help  = "To define the fixed bus of on-chip devices./  Raven Soc devices:/ Internal GPU/Display HD Audio Controller/Cryptographic Coprocessor/USB 3.1/USB 3.1/Audio Processor/Audio Processor !V HD Audio Controller/Sensor Fusion Hub.\Due to some limitations(MSRC001_0058[MMIO Configuration Base Address], bus bridge only could support 0x00~0x3F in PEI phase."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_ONCHIP_BUS_B"
+	Value  = "0x39"
+	Help  = "To define the fixed bus of on-chip devices./  Raven Soc devices:/ SATA/  GbE Controller Port 0/  GbE Controller Port 1.\Due to some limitations(MSRC001_0058[MMIO Configuration Base Address], bus bridge only could support 0x00~0x3F in PEI phase."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_ONCHIP_BUS_A"
+	Value  = "0x1"
+	Help  = "To define the fixed bus of on-chip devices./  Raven Soc devices:/ Internal GPU/Display HD Audio Controller/Cryptographic Coprocessor/USB 3.1/USB 3.1/Audio Processor/Audio Processor !V HD Audio Controller/Sensor Fusion Hub"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "PCI_DEV_REVERSE_SCAN_ORDER" "!=" "0"
+End
+
+TOKEN
+	Name  = "NBIO_FIXED_ONCHIP_BUS_B"
+	Value  = "0x2"
+	Help  = "To define the fixed bus of on-chip devices./  Raven Soc devices:/ SATA/  GbE Controller Port 0/  GbE Controller Port 1"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "PCI_DEV_REVERSE_SCAN_ORDER" "!=" "0"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE0_EXISTS"
+	Value  = "1"
+	Help  = "PCI-Express NBIO Bridge 0 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE0_SLOT_EXISTS"
+	Value  = "1"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 0(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NBIO_RV_BRIDGE0_EXISTS" "=" "1"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE1_EXISTS"
+	Value  = "1"
+	Help  = "PCI-Express NBIO Bridge 1 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE1_SLOT_EXISTS"
+	Value  = "1"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 1(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NBIO_RV_BRIDGE1_EXISTS" "=" "1"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE2_EXISTS"
+	Value  = "1"
+	Help  = "PCI-Express NBIO Bridge 2 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE2_SLOT_EXISTS"
+	Value  = "1"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 2(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NBIO_RV_BRIDGE2_EXISTS" "=" "1"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE3_EXISTS"
+	Value  = "1"
+	Help  = "PCI-Express NBIO Bridge 3 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE3_SLOT_EXISTS"
+	Value  = "1"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 3(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NBIO_RV_BRIDGE3_EXISTS" "=" "1"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE4_EXISTS"
+	Value  = "1"
+	Help  = "PCI-Express NBIO Bridge 4 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE4_SLOT_EXISTS"
+	Value  = "1"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 4(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NBIO_RV_BRIDGE4_EXISTS" "=" "1"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE5_EXISTS"
+	Value  = "1"
+	Help  = "PCI-Express NBIO Bridge 5 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE5_SLOT_EXISTS"
+	Value  = "1"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 5(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NBIO_RV_BRIDGE5_EXISTS" "=" "1"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE6_EXISTS"
+	Value  = "1"
+	Help  = "PCI-Express NBIO Bridge 6 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE6_SLOT_EXISTS"
+	Value  = "1"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 6(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NBIO_RV_BRIDGE6_EXISTS" "=" "1"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE7_EXISTS"
+	Value  = "1"
+	Help  = "PCI-Express NBIO Bridge 7 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE7_SLOT_EXISTS"
+	Value  = "0"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 7(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE8_EXISTS"
+	Value  = "1"
+	Help  = "PCI-Express NBIO Bridge 8 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE8_SLOT_EXISTS"
+	Value  = "0"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 8(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NBIO_RV_BRIDGE8_EXISTS" "=" "1"
+End
+
+TOKEN
+	Name  = "IGNORE_CPM_IGD_SSID_PROGRAM"
+	Value  = "0"
+	Help  = "Enabled to fill GNB SSID through GNB for OEM"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "GNB_PCI_DEVICES_SSID_TABLE"
+	Value  = "{GNB_DEV_PCIEBRIDGEx, -1},{GNB_DEV_ACG, -1},{GNB_DEV_DGPU, -1},{GNB_DEV_DGPU_AUDIO, -1},{-1, -1}"
+	Help  = "Please ignore this token define first, use PCD to define SSID. List of PCI device's Sub-System ID in the following format:\{Device#1 GNB_DEV_LIST emun type, Device#1 Sub-ID}, {Device#2 GNB_DEV_LIST emun type, Device#2 Sub-ID}...\Please refer to Gnb.h for the format of GNB_DEV_LIST emun type.\If the value of Sub-ID is -1, that means BIOS will use PCI Vendor-ID and Device-ID instead.\The last structure {-1, -1} is end of the table, don't remove it!"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "EXTERNAL_VGA_CONTROL"
+	Value  = "0"
+	Help  = "Provided for external VGA control, it is not allowed to enable if AmdCpmDisplayFeature_SUPPORT is enabled"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMD_GOP_PLATFORMTODRIVER_SUPPORT"
+	Value  = "0"
+	Help  = "Please turn on if you need GOP platform to drivers"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "GNBCSPLib"
+	Value  = "$$(LIB_BUILD_DIR)\AmiGNbCSPLib.lib"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+#TOKEN
+#	Name  = "GNB_UMA_SYSTEM"
+#	Value  = "1"
+#	Help  = "Enable this SDL Token for UMA systems"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "BLDCFG_GNB_AZ_SSID"
+	Value  = "0xD0011022"
+	Help  = "Agesa program the SSID of ACG port, this defined SSID can be override by token GNB_PCI_DEVICES_SSID_TABLE"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "BLDCFG_GNB_AZ_I2SBUS_SELECT"
+#	Value  = "1"
+#	Help  = "0:GnbAcpI2sBus,1:GnbAcpAzalia"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "ACPM"
+#	Value  = "$(BLDCFG_GNB_AZ_I2SBUS_SELECT)"
+#	Help  = "0:GnbAcpI2sBus,1:GnbAcpAzalia"
+#	TokenType = Integer
+#	TargetASL = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "GNB_HDA_VERBTABLE"
+	Value  = "1"
+	Help  = "Enable this SDL Token for HD VerbTable"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "GNB_ASSIGN_TEMP_EDID"
+	Value  = "1"
+	Help  = "Assign a EDID if no monitor connect"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+PATH
+	Name  = "GNB_DIR"
+End
+
+PATH
+	Name  = "GNB_LIBRARY_DIR"
+	Path  = "AmiChipsetModulePkg\Library"
+End
+
+PATH
+	Name  = "GNB_INCLUDE_DIR"
+	Path  = "AmiChipsetModulePkg\Include"
+End
+
+PATH
+	Name  = "GNB_ASL_DIR"
+	Path  = "AmiChipsetModulePkg\ASL"
+End
+
+#PATH
+#	Name  = "GNB_BUILDBR_DIR"
+#	Path  = "BuildBr"
+#End
+
+MODULE
+	Help  = "Master is Raven.\Enable mak file if SM or BR (BIT0+BIT1)."
+	File  = "Gnb\Gnb.mak"
+	Token = "CSP_MULIT_SUPPORT" "&" "3"
+End
+
+ELINK
+	Name  = "$(GNB_INCLUDE_DIR)"
+	Parent  = "PLATFORM_DSC_INCLUDE_PATHS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(GNB_LIBRARY_DIR)"
+	Parent  = "PLATFORM_DSC_INCLUDE_PATHS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "GnbConfigurationList"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "OEM_HDA_VERB_TABLE"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "OEM_HDA_VERB_TABLE_CONTENT"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "GnbEdidOverrideGetEdid,"
+	Parent  = "OemGopEdidOverrideGetEdidList"
+	Token = "OEM_EDID_OVERRIDE_PROTOCOL_SUPPORT" "=" "1"
+	Token = "GNB_ASSIGN_TEMP_EDID" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+OUTPUTREGISTER
+	Name  = "GnbElinkList"
+	Path  = "Build"
+	File  = "GnbElinks.h"
+	Template  = "Elink/GnbElinks.txt"
+End
+
+INFComponent
+	Name  = "GnbPei"
+	File  = "Gnb/GnbInit/GnbPei.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "GnbDxe"
+	File  = "Gnb/GnbInit/GnbDxe.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AmdGopPlatformToDriver"
+	File  = "Gnb/GnbInit/AmdGopPlatformToDriver.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_GOP_PLATFORMTODRIVER_SUPPORT" "=" "1"
+	Token = "PlatformToDriver_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "GnbGetSetupData"
+	File  = "GnbGetSetupData/GnbGetSetupData.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "GNB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "GnbPciBoardDxeInitLib"
+	File  = "GnbPciBoardDxeInitLib/GnbPciBoardDxeInitLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "GNB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "GnbPeiGetSetupData"
+	File  = "GnbGetSetupData/GnbPeiGetSetupData.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "GNB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "GnbHdaVerbTableLib"
+	File  = "GnbHdaVerbTableLib/GnbHdaVerbTableLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "GNB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "GnbAmiNbioDxeLib"
+	File  = "GnbAmiNbioLib/GnbAmiNbioDxeLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "GNB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "GnbEdidOverrideProtocol"
+	File  = "Gnb/GnbInit/GnbEdidOverrideProtocol.inf"
+	Package  = "AmiModulePkg"
+	Token = "GNB_ASSIGN_TEMP_EDID" "=" "1"
+End
+
+INFComponent
+	Name  = "GnbAmiNbioPeiLib"
+	File  = "GnbAmiNbioLib/GnbAmiNbioPeiLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "GNB_LIBRARY_DIR"
+End
+
+LibraryMapping
+	Class  = "GnbGetSetupData"
+	Instance  = "AmiChipsetModulePkg.GnbGetSetupData"
+	ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "GnbGetSetupData"
+	Instance  = "AmiChipsetModulePkg.GnbPeiGetSetupData"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.GnbPciBoardDxeInitLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Override  = "AmiModulePkg.PciDxeInit"
+End
+
+LibraryMapping
+	Class  = "GnbHdaVerbTableLib"
+	Instance  = "AmiChipsetModulePkg.GnbHdaVerbTableLib"
+End
+
+
+###Override  = "AgesaModulePkg.AmdNbioBaseCZDxe"
+###Override  = "AgesaModulePkg.AmdSocAm4BrDxe"
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.GnbAmiNbioDxeLib"
+	Override  = "AgesaModulePkg.AmdSocAm4RvDxe"
+End
+
+
+###Override  = "AgesaModulePkg.AmdNbioBaseZPDxe"
+###Override  = "AgesaModulePkg.AmdSocAm4SmDxe"
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.GnbAmiNbioDxeLib"
+	Override  = "AgesaModulePkg.AmdSocFp5RvDxe"
+End
+
+
+###Override  = "AgesaModulePkg.AmdNbioBaseCZPei"
+###Override  = "AgesaModulePkg.AmdSocAm4BrPei"
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.GnbAmiNbioPeiLib"
+	Override  = "AgesaModulePkg.AmdSocAm4RvPei"
+End
+
+
+###Override  = "AgesaModulePkg.AmdNbioBaseZPPei"
+###Override  = "AgesaModulePkg.AmdSocAm4SmPei"
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.GnbAmiNbioPeiLib"
+	Override  = "AgesaModulePkg.AmdSocFp5RvPei"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiModulePkg.GnbEdidOverrideProtocol"
+	Override  = "AmiModulePkg.Bds"
+	Token = "GNB_ASSIGN_TEMP_EDID" "=" "1"
+End
+
+PcdMapping
+	Name  = "PcdCfgGnbIoapicAddress"
+	GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint64"
+	Value  = "$(GNB_IOAPIC_BASE_ADDRESS)"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdCfgAzaliaSsid"
+	GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint32"
+	Value  = "$(BLDCFG_GNB_AZ_SSID)"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+End
+
+#PcdMapping
+#	Name  = "PcdCfgGnbAzI2sBusSelect"
+#	GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+#	PcdType  = "PcdsDynamicDefault"
+#	DataType  = "Uint32"
+#	Value  = "$(BLDCFG_GNB_AZ_I2SBUS_SELECT)"
+#	Offset  = 00h
+#	Length  = 00h
+#	TargetDSC = Yes
+#End
+
+PcdMapping
+	Name  = "PcdPciExpressBaseAddress"
+	GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint64"
+	Value  = "$(PCIEX_BASE_ADDRESS)"
+	Offset  = 00h
+	Length  = 08h
+	TargetDSC = Yes
+End
+
+#PcdMapping
+#	Name  = "PcdCfgBTCEnable"
+#	GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+#	PcdType  = "PcdsDynamicDefault"
+#	DataType  = "Boolean"
+#	Value  = "FALSE"
+#	Offset  = 00h
+#	Length  = 01h
+#	TargetDSC = Yes
+#End
+
+
+#RSVCHIPSET
+#	Name  = "PCI express MMIO resource"
+#	BASEADDR  = "$(PCIEX_BASE_ADDRESS)"
+#	LENGTH  = "$(PCIEX_LENGTH)"
+#	TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+#	ATTRIBUTES  = "0x8000000000000001"
+#End
+RSVCHIPSET
+	Name  = "AMD GNB IOMMU resource"
+	BASEADDR  = "$(GNB_IOMMU_BASE_ADDRESS)"
+	LENGTH  = "$(GNB_IOMMU_LENGTH)"
+	TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+	ATTRIBUTES  = "0x8000000000000001"
+	Token = "GNB_IOMMU_SUPPORT" "=" "1"
+End
+
+RSVCHIPSET
+	Name  = "AMD GNB IOAPIC resource"
+	BASEADDR  = "$(GNB_IOAPIC_BASE_ADDRESS)"
+	LENGTH  = "$(GNB_IOAPIC_LENGTH)"
+	TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+	ATTRIBUTES  = "0x8000000000000001"
+	Token = "GNB_IOAPIC_SUPPORT" "=" "1"
+End
+

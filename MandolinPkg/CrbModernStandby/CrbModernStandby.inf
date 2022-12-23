@@ -1,0 +1,63 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbModernStandby
+  FILE_GUID                      = 11af0d83-0784-4c1e-9a1b-9cf43127555e
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CrbMsInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  CrbModernStandby.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  MandolinPkg/MandolinPkg.dec
+
+  IntelFrameworkPkg/IntelFrameworkPkg.dec       # Optional. should use Mde Library instead.
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/MandolinPco/AmdCpmOemPkg.dec
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  MemoryAllocationLib
+  DebugLib
+  UefiLib
+  AmiCspLib
+  BaseLib
+  AmdPbsConfigLib
+  PcdLib
+  AmiFchIoAccessLib
+  
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+  gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareEnable
+  
+[Guids]  
+  gEfiEndOfDxeEventGroupGuid
+  gAmdPbsSystemConfigurationGuid
+
+[Protocols]
+  gEfiAcpiSdtProtocolGuid
+  gEfiAcpiTableProtocolGuid
+[Depex]
+  TRUE
+

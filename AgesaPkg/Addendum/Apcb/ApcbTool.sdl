@@ -1,0 +1,43 @@
+
+TOKEN
+    Name  = "APCB_OEM_BINARY_SUPPORT"
+    Value  = "1"
+    Help  = "The master token for Apcb OEM binary. When this token is on, the APCB_D4_XX.bin will be replaced by APCB_V2.bin."
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+End
+
+PATH
+	Name  = "APCBTOOL_DIR"
+End
+
+TOKEN
+    Name = "APCB_IN_BUILD_DIR"
+    Value = "Apcb"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+PATH
+    Name = "APCB_WORK_DIR"
+    path = "$(WORKSPACE)$(PATH_SLASH)$(BUILD_DIR)$(PATH_SLASH)$(APCB_IN_BUILD_DIR)"
+End
+
+PATH
+    Name = "CBS_APCB_AUTO_GEN_ZP_DIR"
+    path = "AmdCbsPkg\Library\Family\0x17\ZP\External\Resource$(CBS_SOLUTION_TYPE)"
+End
+
+PATH
+    Name = "CBS_APCB_AUTO_GEN_RV_DIR"
+    path = "AmdCbsPkg\Library\Family\0x17\RV\External\Resource$(CBS_SOLUTION_TYPE)"
+End
+
+TOKEN
+    Name  = "APCB_CREATE_SCRIPT"
+    Value  = "ApcbCreate"
+    Help  = "Script to generate External APCB"
+    TokenType = File
+    TargetMAK = Yes
+End

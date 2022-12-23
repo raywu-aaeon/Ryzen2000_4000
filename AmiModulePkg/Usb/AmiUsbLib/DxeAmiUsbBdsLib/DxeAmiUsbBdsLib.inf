@@ -1,0 +1,61 @@
+#************************************************************************
+#**                                                                     *
+#**   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#**                                                                     *
+#**      All rights reserved. Subject to AMI licensing agreement.       *
+#**                                                                     *
+#************************************************************************
+
+
+## @file
+#   DXE instance of the DxeAmiUsbBdsLib library class
+##
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DxeAmiUsbBdsLib
+  FILE_GUID                      = D2A312C4-FBBD-4451-8465-A34B5B003ABF
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NULL
+
+[Sources]
+  DxeAmiUsbBdsLib.c
+  ../../UsbMemMisc.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  Build/AmiUsbPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  PcdLib
+  AmiDxeUsbHcdLib
+  DevicePathLib
+  
+[Protocols]
+  gEfiUsbProtocolGuid
+  gEfiSmmControl2ProtocolGuid
+  gEdkiiIoMmuProtocolGuid
+  gEfiUsb2HcProtocolGuid
+  
+[Guids]
+  gAmiUsbPkgTokenSpaceGuid
+  gUsbAddHcEventGroupGuid
+
+[PcdEx]
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxHidDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxHubDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxMassDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxCcidDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbDxeEdkiiIommuProtocolSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbUseMemoryFixedSize
+#************************************************************************
+#**                                                                     *
+#**   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#**                                                                     *
+#**      All rights reserved. Subject to AMI licensing agreement.       *
+#**                                                                     *
+#************************************************************************

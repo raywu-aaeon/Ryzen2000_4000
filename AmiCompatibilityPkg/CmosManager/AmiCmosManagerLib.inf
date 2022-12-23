@@ -1,0 +1,27 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = AmiCmosManagerLib
+  FILE_GUID      = A86CFE67-2D84-4E41-83B3-A9C246646119
+  MODULE_TYPE    = BASE
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = AmiCmosManagerLib
+
+[Sources]
+  AmiCmosManagerLib.c
+  AmiCmosManagerLib.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ 
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid 

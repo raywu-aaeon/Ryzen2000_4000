@@ -1,0 +1,79 @@
+TOKEN
+	Name  = "GNB_AMD_PEI_GOP_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AMD PEI GOP support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "GNB_AMD_PEI_GOP_DIR"
+End
+
+TOKEN
+    Name  = "PEI_BRIDGE_MMIO_MIN"
+    Value  = "0xFE50"
+    Help  = "Bridge MMIO resource"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PEI_BRIDGE_MMIO_MAX"
+    Value  = "0xFE90"
+    Help  = "Bridge MMIO resource"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+INFComponent
+	Name  = "AmdGfxInitPei"
+	File  = "AmdGfxInitPei.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "AmdPeiGopDriver"
+	File  = "AMDGopDriver.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes = "PEIM"
+End
+
+FFS_FILE
+	Name  = "AmdPeiGopDriver"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmiChipsetModulePkg.AmdPeiGopDriver"
+#    Rule_Override  = "BINARY"	
+End
+
+FFS_FILE
+	Name  = "GnbPeiLogo"
+	FD_AREA  = "FV_BB"
+	FILE_Stmt  = "AmiChipsetModulePkg/Gnb/GnbInit/GnbAmdPeiGop/Logo/logo.txt"
+End
+#Picasso VBIOS
+FFS_FILE
+	Name  = "GnbPeiVBios"
+	FD_AREA  = "FV_BB"
+	FILE_Stmt  = "AmiChipsetModulePkg/LegacyRom/Vbios/PeiLegacyVbios.txt"
+End
+
+FFS_FILE
+    Name  = "GnbPeiVBiosRv2"
+    FD_AREA  = "FV_BB"
+    FILE_Stmt  = "AmiChipsetModulePkg/LegacyRom/Vbios/PeiLegacyVbiosRv2.txt"
+End
+
+PcdMapping
+	Name  = "PcdPeiGopEnable"
+	GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Boolean"
+	Value  = "TRUE"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+End

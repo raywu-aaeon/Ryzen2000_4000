@@ -1,0 +1,33 @@
+TOKEN
+	Name  = "FCH_SANDSTONE_CORE_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling FchSandstoneCore support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "FchSandstoneDxeLib"
+	File  = "FchSandstoneLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "FchSandstonePeiLib"
+	File  = "FchSandstoneLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "FchSandstoneDxeLib"
+	Instance  = "AgesaModulePkg.FchSandstoneDxeLib"
+End
+
+LibraryMapping
+	Class  = "FchSandstonePeiLib"
+	Instance  = "AgesaModulePkg.FchSandstonePeiLib"
+	ModuleTypes  = "PEIM"
+End
+

@@ -1,0 +1,58 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+## @file
+[Defines]
+    INF_VERSION     = 0x00010005
+    VERSION_STRING  = 1.0
+    BASE_NAME       = TcgCoreFvOverride
+    MODULE_TYPE     = DXE_DRIVER
+    LIBRARY_CLASS   = NULL
+    FILE_GUID       = C9426A02-6FD7-468b-9BA9-03F4B8C9467B
+
+[Sources]
+    TcgCoreFvOverride.c
+    TcgCoreFvOverride.h
+
+[LibraryClasses]
+    BaseLib
+    ShaLib
+    BaseCrbLibDxe
+    MemoryAllocationLib
+    UefiLib
+
+[Protocols]
+    gEfiFirmwareVolume2ProtocolGuid
+    gEfiFirmwareVolumeBlockProtocolGuid
+    gEfiDiskIoProtocolGuid
+    gEfiTcgProtocolGuid
+    gEfiTrEEProtocolGuid
+
+[Packages]
+    MdePkg/MdePkg.dec
+    UefiCpuPkg/UefiCpuPkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

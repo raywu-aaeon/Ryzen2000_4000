@@ -1,0 +1,37 @@
+TOKEN
+    Name  = "SmmChildDispatcher2_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SmmChildDispatcher II support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    Master = Yes
+End
+
+TOKEN
+	Name  = "EXTENDED_SMI"
+	Value  = "0xF0"
+	Help  = "SMI number for DWORD SMI value handlers"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "00-FF"
+End
+
+TOKEN
+    Name  = "GPI_DISPATCH_BY_BITMAP"
+    Value  = "1"
+    Help  = "ON = The registered parameter of SMM GPI dispatcher is using bitmapped.\OFF = The registered parameter of SMM GPI dispatcher is using index based"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+PATH
+    Name  = "SMM_CHILD_DISP_DIR"
+End
+
+INFComponent
+    Name  = "SmmChildDispatcher2"
+    File  = "SmmChildDispatcher2.inf"
+    Package  = "AmiChipsetModulePkg"
+	ModuleTypes = "DXE_SMM_DRIVER"
+    Token = "SMM_SUPPORT" "=" "1"
+End

@@ -1,0 +1,34 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GnbGetSetupData
+  FILE_GUID                      = 6f28f9da-27b1-40c5-8957-469b18af015a
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = GnbGetSetupData|DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+#
+
+[Sources]
+  GetSetupData.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  AmiCspLib
+  
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid
+
+[Pcd]
+

@@ -1,0 +1,8 @@
+<component>
+    name = "HardwareChangeProtocol"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\Include\"
+    RefName = "AmiModulePkg.HardwareChangeProtocol"
+[files]
+    "HardwareChangeProtocol.h"	
+<endComponent>

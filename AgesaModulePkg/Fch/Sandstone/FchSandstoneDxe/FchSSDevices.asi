@@ -1,0 +1,314 @@
+
+Scope(\_SB) {
+OperationRegion(ECMC, SystemIo, 0x72, 0x02)
+Field(ECMC, AnyAcc, NoLock, Preserve)
+{
+  ECMI, 8,
+  ECMD, 8,      
+}
+IndexField(ECMI, ECMD, ByteAcc, NoLock, Preserve) {
+  Offset (0x08),
+  FRTB, 32,
+}
+OperationRegion(FRTP, SystemMemory, FRTB, 0x100)
+Field(FRTP, AnyAcc, NoLock, Preserve)
+{
+  PEBA, 32,
+  Offset (0x04),
+  , 5,
+  IC0E, 1,   //I2C0, 5
+  IC1E, 1,   //I2C1, 6
+  IC2E, 1,   //I2C2, 7
+  IC3E, 1,   //I2C3, 8
+  IC4E, 1,   //I2C3, 9
+  IC5E, 1,   //I2C3, 10
+  UT0E, 1,   //UART0, 11
+  UT1E, 1,   //UART1, 12
+  UT2E, 1,   //UART1, 13
+  UT3E, 1,   //UART1, 14
+  ST_E, 1,   //SATA, 15
+  , 2,
+  EHCE, 1,   //EHCI, 18
+  , 4,
+  XHCE, 1,   //XCHI, 23
+  SD_E, 1,   //SD,   24
+  , 2,
+  ESPI, 1,   //ESPI  27
+  Offset (0x08),
+  PCEF, 1,   // Post Code Enable Flag
+  , 4,
+  IC0D, 1,   //I2C0, 5
+  IC1D, 1,
+  IC2D, 1,
+  IC3D, 1,   //I2C3, 8
+  IC4D, 1,   //I2C3, 9
+  IC5D, 1,   //I2C3, 10
+  UT0D, 1,   //UART0, 11
+  UT1D, 1,   //UART1, 12
+  UT2D, 1,   //UART1, 13
+  UT3D, 1,   //UART1, 14
+  ST_D, 1,   //SATA, 15
+  , 2,
+  EHCD, 1,   //EHCI, 18
+  , 4,
+  XHCD, 1,   //XCHI, 23
+  SD_D, 1,   //SD,   24
+  , 6,
+  S03D, 1,   //S0I3 flag, 31   
+  Offset (0x0C),
+  FW00, 16, 
+  FW01, 32, 
+  FW02, 16, 
+  FW03, 32, 
+  SDS0, 8, //SataDevSlpPort0S5Pin
+  SDS1, 8, //SataDevSlpPort1S5Pin
+  CZFG, 1, //Carrizo Serials 
+  Offset (0x20),
+  SD10, 32,
+  EH10, 32,
+  XH10, 32,
+  STBA, 32,
+}
+
+  Device(GPIO) {
+    Name (_HID, "AMDI0030")
+    Name (_CID, "AMDI0030")
+    Name(_UID, 0)
+
+    Method (_CRS, 0x0, NotSerialized) {
+      Name (RBUF, ResourceTemplate () {
+        //
+        // Interrupt resource. In this example, banks 0 & 1 share the same
+        // interrupt to the parent controller and similarly banks 2 & 3.
+        //
+        // N.B. The definition below is chosen for an arbitrary
+        //      test platform. It needs to be changed to reflect the hardware
+        //      configuration of the actual platform
+        //
+        Interrupt(ResourceConsumer, Level, ActiveLow, Shared, , , ) {7}
+
+        //
+        // Memory resource. The definition below is chosen for an arbitrary
+        // test platform. It needs to be changed to reflect the hardware
+        // configuration of the actual platform.
+        //
+        Memory32Fixed(ReadWrite, 0xFED81500, 0x300)
+      })
+
+      Return (RBUF)
+    }
+
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          Return (0x0F)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device GPIO
+  
+   
+  Device(FUR0) {
+    Name(_HID,"AMDI0020")            // UART Hardware Device ID
+    Name(_UID,0x0)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {3}
+      Memory32Fixed(ReadWrite, 0xFEDC9000, 0x1000)
+      Memory32Fixed(ReadWrite, 0xFEDC7000, 0x1000)
+    })
+
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(UT0E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device FUR0 
+ 
+  Device(FUR1) {
+    Name(_HID,"AMDI0020")            // UART Hardware Device ID
+    Name(_UID,0x1)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {4}
+      Memory32Fixed(ReadWrite, 0xFEDCA000, 0x1000)
+      Memory32Fixed(ReadWrite, 0xFEDC8000, 0x1000)
+    })
+
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(UT1E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device FUR1 
+  
+  Device(FUR2) {
+    Name(_HID,"AMDI0020")            // UART Hardware Device ID
+    Name(_UID,0x2)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {3}
+      Memory32Fixed(ReadWrite, 0xFEDCE000, 0x1000)
+      Memory32Fixed(ReadWrite, 0xFEDCC000, 0x1000)
+    })
+
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(UT2E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device FUR2
+  
+  Device(FUR3) {
+    Name(_HID,"AMDI0020")            // UART Hardware Device ID
+    Name(_UID,0x3)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {4}
+      Memory32Fixed(ReadWrite, 0xFEDCF000, 0x1000)
+      Memory32Fixed(ReadWrite, 0xFEDCD000, 0x1000)
+    })
+
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(UT3E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device FUR3  
+
+  Device(I2CA) {
+    Name(_HID,"AMDI0010")            // Hardware Device ID
+    Name(_UID,0x0)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {10}
+      Memory32Fixed(ReadWrite, 0xFEDC2000, 0x1000)
+    })
+
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(IC0E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device I2CA
+  
+  Device(I2CB)
+  {
+    Name(_HID,"AMDI0010")            // Hardware Device ID
+    Name(_UID,0x1)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {11}
+      Memory32Fixed(ReadWrite, 0xFEDC3000, 0x1000)
+    })
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(IC1E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device I2CB  
+ 
+  Device(I2CC) {
+    Name(_HID,"AMDI0010")            // Hardware Device ID
+    Name(_UID,0x2)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {4}
+      Memory32Fixed(ReadWrite, 0xFEDC4000, 0x1000)
+    })
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(IC2E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device I2CC   
+ 
+  Device(I2CD) {
+    Name(_HID,"AMDI0010")            // Hardware Device ID
+    Name(_UID,0x3)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {6}
+      Memory32Fixed(ReadWrite, 0xFEDC5000, 0x1000)
+    })
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(IC3E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device I2CD 
+ 
+  Device(I2CE) {
+    Name(_HID,"AMDI0010")            // Hardware Device ID
+    Name(_UID,0x4)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {14}
+      Memory32Fixed(ReadWrite, 0xFEDC6000, 0x1000)
+    })
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(IC4E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device I2CE 
+
+  Device(I2CF) {
+    Name(_HID,"AMDI0010")            // Hardware Device ID
+    Name(_UID,0x5)
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Edge, ActiveHigh, Exclusive) {15}
+      Memory32Fixed(ReadWrite, 0xFEDCB000, 0x1000)
+    })
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          if (LEqual(IC5E, one)) { Return (0x0F)}
+          Return (0x00)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device I2CF 
+
+  Device(EMMC) {
+    Name(_HID,"AMDI0040")            // Hardware Device ID
+    Name(_UID,0x0)
+//    Name(_HID,EISAID ("PNP0D40"))  //SD device
+//    Name(_CID,"PCI\CC_080501")            //
+    Name(_CRS, ResourceTemplate() {
+      IRQ(Level, ActiveLow, Shared) {5}
+      Memory32Fixed(ReadWrite, 0xFEDD5000, 0x1000)
+    })
+    Method(_STA, 0, NotSerialized) {
+        If (LGreaterEqual(TSOS, 0x70)) {
+          Return (0x00)
+//          Return (0x0F)
+        } Else {
+          Return (0x00)
+        }
+    }
+  } // End Device EMMC 
+ 
+ 
+ 
+ 
+} // Scope SB
+

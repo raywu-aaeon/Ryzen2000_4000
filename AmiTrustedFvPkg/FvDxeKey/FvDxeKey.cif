@@ -1,0 +1,9 @@
+<component>
+	name = "FvDxeKey"
+	category = ModulePart
+	LocalRoot = "AmiTrustedFvPkg\FvDxeKey"
+	RefName = "FvDxeKey"
+[files]
+"FvDxeKey.sdl"	
+"FvDxeKey.mak"	
+<endComponent>

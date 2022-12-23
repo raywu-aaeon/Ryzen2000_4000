@@ -1,0 +1,15 @@
+<component>
+	name = "AMD CPU Include"
+	category = ModulePart
+	LocalRoot = "AmiCpuPkg\Cpu\Include\"
+	RefName = "AMD_CPU_INCLUDE"
+[files]
+"Cpu.h"	
+"CpuInterfaces.h"	
+"CpuSetupData.h"	
+"CpuCspLib.h"	
+"Cpu.equ"	
+"MbiosMac.mac"	
+"Hob\CpuHobs.h"	
+"MbiosEqu.equ"	
+<endComponent>

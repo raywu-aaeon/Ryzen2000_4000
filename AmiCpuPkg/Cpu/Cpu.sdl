@@ -1,0 +1,897 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+#****************************************************************************
+#<AMI_FHDR_START>
+#
+# Name: cpu.sdl
+#
+# Description:
+#  AMI SDL file for AgesaV5 CPU module.
+#
+#<AMI_FHDR_END>
+TOKEN
+	Name  = "CPU_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable CPU support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "USE_AP_HLT"
+	Value  = "1"
+	Help  = "Put APs into HLT"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "CPU_SET_MEMORY_ATTRIBUTES_SWITCH_BACK"
+    Value  = "1"
+    Help  = "Switch to use old EfiCpuSetMemoryAttributes(). !!!NOTE!!! This token will be removed in future project."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F17_LOCAL_APIC_MASK_WORKROUND_SUPPORT"
+    Value  = "0"
+    Help  = "Patch for fix the local APIC mask bit isn't set to 1 when APICx0F[APICSWEn] = 0."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "SECCOREL_ASM"
+    Value  = "SECCoreL.ASM"
+    TokenType = Expression
+End
+
+TOKEN
+	Name = "CPU_Name"
+	Value  = "NPT"
+	Help  = "CPU Name"
+	TokenType = Expression
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "NCPU"
+	Value  = "16"
+	Help  = "NOTE: This should be equal to Number of Cores in the System\"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "1- number of cpu in the system "
+End
+
+TOKEN
+	Name  = "NSOCKETS"
+	Value  = "1"
+	Help  = "Number of CPU sockets in the system."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	TargetMAK = Yes
+	Range  = "1-8"
+End
+
+TOKEN
+	Name  = "NNODE"
+	Value  = "$(NSOCKETS)"
+	Help  = "Number of nodes in the system."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	TargetMAK = Yes
+	Range  = "1-8"
+End
+
+TOKEN
+	Name  = "AMD_SYSTEM_BOARD"
+	Value  = "1"
+	Help  = "This token can be used to determine whether or not this is an AMD system board"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+#Duplicate with one in PciBus.sdl.
+#TOKEN
+#	Name  = "CPU_MAX_IO_SIZE"
+#	Value  = "0x10000"
+#	Help  = "Maximum I/O size addressable by the CPU"
+#	TokenType = Integer
+#	TargetH = Yes
+#End
+
+TOKEN
+    Name  = "CPU_SWSMI"
+    Value  = "0x56"
+    Help  = "Value to write into SMI command register to generate software SMI for CPU"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0x55 - 0x58"
+End
+
+
+TOKEN
+	Name  = "SW_SMI_PSTATE_CNT"
+	Value  = "0"
+	Help  = "VALUE to write into SMI CMD register to enter\CPU performance state control mode (if any)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-0xff 0 = not supported"
+	Token = "ACPI_BUILD_TABLES_2_0" "=" "1"
+End
+
+TOKEN
+	Name  = "SW_SMI_CST_CNT"
+	Value  = "0"
+	Help  = "Value to write in SMI_CMD reg to support _CST object and change state notification"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-0xff"
+	Token = "ACPI_BUILD_TABLES_2_0" "=" "1"
+End
+
+TOKEN
+	Name  = "APIC_BASE"
+	Value  = "0xfee00000"
+	Help  = "Local APIC Base Address. Generally no porting required."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "LOCAL_APIC_BASE"
+	Value  = "$(APIC_BASE)"
+	Help  = "Local APIC Base Address. Generally no porting required."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "PEIE_SEARCH_START_LOC"
+#	Value  = "0xFFFFFF00"
+#	Help  = "Starting offset in the ROM from where the signature PEIE, PEI Entry Point, will be searched. \ Note: The signature should be in para boundary"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#End
+
+#TOKEN
+#	Name  = "PEIE_SEARCH_END_LOC"
+#	Value  = "0xFFFFFFE0"
+#	Help  = "End offset in the ROM till where the signature PEIE, PEI Entry Point, will be searched. \ Note: The signature should be in para boundary"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#End
+
+#TOKEN
+#	Name  = "MP_STARTUP_ADDRESS"
+#	Value  = "0xFFFFFFFC"
+#	Help  = "Starting address for APs waiting for a command. This must be at least 0x1000"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "MP_JUMP_FUNCTION_ADDRESS"
+	Value  = "0x1000"
+	Help  = "Starting address for APs waiting for a command. This must be at least 0x1000"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "MP_ZERO_DATA_ADDRESS"
+	Value  = "0x0"
+	Help  = "Starting address for ZERO_DATA AP data structure."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMM_BASE_SAVE_STATE_OFFSET"
+	Value  = "0ff00h"
+	Help  = "Offset in the CPU SMM save state area where the SMM Base value is stored. \This offset is used to change the SMM Base location during next SMI."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "APIC_ID_REGISTER"
+	Value  = "0x20"
+	Help  = "APIC Identification Register Index"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "APIC_VERSION_REGISTER"
+	Value  = "0x30"
+	Help  = "APIC Version Register Index"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "APIC_SPURIOUS_VECTOR_REGISTER"
+	Value  = "0xf0"
+	Help  = "APIC Spurious Interrupt Vector Register Index"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "APIC_ICR_LOW_REGISTER"
+	Value  = "0x300"
+	Help  = "APIC Interrupt Control Register Low Index"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "APIC_ICR_HIGH_REGISTER"
+	Value  = "0x310"
+	Help  = "APIC Interrupt Control Register High Index"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "APIC_LVT_LINT0_REGISTER"
+	Value  = "0x350"
+	Help  = "APIC LVT LINT0 Register Index"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "APIC_LVT_LINT1_REGISTER"
+	Value  = "0x360"
+	Help  = "APIC LVT LINT1 Register Index"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "CPU_MAJOR_VER"
+#	Value  = "01"
+#	Help  = "CPU Module Major Version Number.\ DO NOT CHANGE THIS VALUE"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Lock = Yes
+#End
+
+#TOKEN
+#	Name  = "CPU_MINOR_VER"
+#	Value  = "08"
+#	Help  = "CPU Module Minor Version Number.\ DO NOT CHANGE THIS VALUE"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Lock = Yes
+#End
+
+TOKEN
+	Name  = "CODE_CACHE_SIZE"
+	Value  = "$(FLASH_SIZE)"
+	Help  = "Code caching size, during Pre-Memory. For Trinity, it's able to cache while FLASH size"
+	TokenType = Integer
+	TargetEQU = Yes
+End
+
+TOKEN
+	Name  = "NUMBER_OF_CACHES"
+	Value  = "04"
+	Help  = "The total number of caches (L1, L2, L3) supported.\ This count includes instruction and data caches."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "MAX_SMM_SAVE_STATE_SIZE"
+	Value  = "0x800"
+	Help  = "Largest SMM save state size of any CPU that can be placed on the board.\Currently, Intel 64-bit CPUs use 0x300 for its save state size.\"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMM_BSP_BASE"
+	Value  = "2"
+	Help  = "0 - Lowest SMM Base\1 - 0xa0000\2 - TSEG\Note: The lowest SMM Base is usally 0x98000, \but it could be higher if legacy regions, such as\A-segment is excluded."
+	TokenType = Integer
+	TargetH = Yes
+	Lock = Yes
+	Range  = "0-2"
+End
+
+#TOKEN
+#	Name  = "SIP1_LOC"
+#	Value  = "0"
+#	Help  = "SIP location in Bootblock\0000h = not used"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "SIP1_DATA"
+#	Value  = "0FFFFFD00h"
+#	Help  = "SIP data set defined as DWORD in BBEND.ASM\Could be data or pointers. Only available when SIP1_LOC!=0\Example:Value = '12345678h,00abcdefh,4a5b2eh'"
+#	TokenType = Expression
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "SIP1_FILE_SIZE"
+#	Value  = "0"
+#	Help  = "SIP file size set defined as Decimal.\Only available when SIP1_LOC!=0\Example:Value = '512,1024'"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "SIP1_SOURCE_FILE"
+#	Value  = "Board/Cpu/ROMSIPS.ASM"
+#	Help  = "SIP File to be used for SIP1 pointer.Only available when SIP1_LOC!=0"
+#	TokenType = File
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "SIP2_LOC"
+#	Value  = "0"
+#	Help  = "SIP location in Bootblock\0000h = not used"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "SIP2_DATA"
+#	Value  = "0FFFFFD00h"
+#	Help  = "SIP data set defined as DWORD in BBEND.ASM\Could be data or pointers. Only available when SIP2_LOC!=0\Example:Value = '12345678h,00abcdefh,4a5b2eh'"
+#	TokenType = Expression
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "SIP2_FILE_SIZE"
+#	Value  = "0"
+#	Help  = "SIP file size set defined as Decimal.\Only available when SIP2_LOC!=0\Example:Value = '512,1024'"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "SIP2_SOURCE_FILE"
+#	Help  = "SIP File to be used for SIP2 pointer.Only available when SIP2_LOC!=0"
+#	TokenType = File
+#	TargetMAK = Yes
+#End
+
+TOKEN
+	Name  = "SMBIOS_PROCESSOR_FAMILY"
+	Value  = "0x87"
+	Help  = "Duron = 0x18\Athlon = 0x1D\Athlon64 = 0x83\Opteron = 0x84\Sempron = 0x85\Turion 64 = 0x86\Opteron Dual Core = 0x87\Athlon 64 Dual Core = 0x88"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_PROCESSOR_UPGRADE"
+	Value  = "0x11"
+	Help  = "Socket940=0x11 \Socket939=0x12 \Other=0x01"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CAR_BASE_ADDRESS"
+	Value  = "30000h"
+	###Value  = "BSP_STACK_BASE_ADDR" ## sync with AMD reference code
+	Help  = "DO NOT CHANGE THIS VALUE.\Cache-as-RAM physical base location. This token is needed for AmiDebugRx Module.\sync with AMD reference code"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CAR_TOTAL_SIZE"
+	Value  = "0x40000"
+	###Value  = "BSP_STACK_SIZE_64K" ## sync with AMD reference code(PcdBspStackSize)
+	Help  = "Total Cache-as-RAM size available (in bytes). Do not increase the CAR Size as some TAGs to be left for DQS Training. This token is needed for AmiDebugRx Module.\sync with AMD reference code"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "AP_STACK_SIZE"
+    Value  = "0x4000"
+    Help  = "Must be Multiples of Page size. Sync with AMD reference code(PcdApStackSize)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "NO_PI_MP_SERVICES_SUPPORT"
+	Value  = "1"
+	Help  = "Temporarily added to avoid collision with CPU module"
+	TokenType = Boolean
+End
+
+#TOKEN
+#    Name  = "CP_OPTS"
+#    Value  = " /b"
+#    Help  = "Tool chain tag"
+#    TokenType = Expression
+#    TargetMAK = Yes
+#End
+
+TOKEN
+	Name  = "CPU_TIMER_LIB_SUPPORT"
+	Value  = "1"
+	Help  = "!!!If you enable this token, then you MUST disable SbAcpiTimerLib in SB"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "=============== ESeg/Fseg SHADOW RAM SETTING WHEN CSM IS OFF=============="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "CPU_E000_DEFAULT"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0 - 2"
+    Help  = "0: Read Only(WP). 1: R/W RAM(WT). 2: R/W ROM(UC)."
+End
+
+TOKEN
+    Name  = "CPU_E800_DEFAULT"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0 - 2"
+    Help  = "0: Read Only(WP). 1: R/W RAM(WT). 2: R/W ROM(UC)."
+End
+
+TOKEN
+    Name  = "CPU_F000_DEFAULT"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0 - 2"
+    Help  = "0: Read Only(WP). 1: R/W RAM(WT). 2: R/W ROM(UC)."
+End
+
+PATH
+	Name  = "CPU_DIR"
+End
+
+PATH
+	Name  = "CPU_INC_DIR"
+	Path  = "$(CPU_DIR)/Include"
+End
+
+PATH
+    Name  = "CPU_LIB_DIR"
+    Path  = "$(CPU_DIR)/Library"
+End
+
+MODULE
+	Help  = "Includes CPU.mak to Project"
+	File  = "Cpu.mak"
+End
+
+ELINK
+	Name  = "InitializeCpu,"
+	Parent  = "PeiDebuggerInitialize"
+	Token = "PeiDebugger_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SECCoreAtPowerOn"
+    Segment  = "STARTUP_SEG"
+    Help  = "SEC Core Init after power-on and before memory detection."
+    mSTART  = "mSTART_PROC_NEAR32"
+    mBODY  = "mBODY_JMP_PROC_NEAR32"
+    mEND  = "mEND_PROC_WITH_JMP_NEAR32"
+    mEXTERN  = "mEXTERN_NEAR32"
+#   SrcFile  = "$(BUILD_DIR)/SECCore.ASM"
+    InvokeOrder = TableFunction
+    OutBOOT = Yes
+End
+
+ELINK
+    Name  = "SECCoreAPinit"
+    Segment  = "STARTUP_SEG"
+    Help  = "AP SEC Core Init after power-on and before memory detection."
+    mSTART  = "mSTART_PROC_NEAR32"
+    mBODY  = "mBODY_JMP_PROC_NEAR32"
+    mEND  = "mEND_PROC_WITH_JMP_NEAR32"
+    mEXTERN  = "mEXTERN_NEAR32"
+#   SrcFile  = "$(BUILD_DIR)/SECCore.ASM"
+    InvokeOrder = TableFunction
+    OutBOOT = Yes
+End
+
+ELINK
+    Name  = "BeforeSECEntry"
+    Segment  = "STARTUP_SEG"
+    Help  = "Provide an opportunity for OEM to adjust the FV_BB_BASE, stack is available."
+    mSTART  = "mSTART_PROC_NEAR32"
+    mBODY  = "mBODY_JMP_PROC_NEAR32"
+    mEND  = "mEND_PROC_WITH_JMP_NEAR32"
+    mEXTERN  = "mEXTERN_NEAR32"
+#   SrcFile  = "$(BUILD_DIR)/SECCore.ASM"
+    InvokeOrder = TableFunction
+    OutBOOT = Yes
+End
+
+ELINK
+    Name  = "BeforeSEC_S3Entry"
+    Segment  = "STARTUP_SEG"
+    Help  = "Provide an opportunity for OEM to adjust the FV_BB_BASE in S3 path, stack is available."
+    mSTART  = "mSTART_PROC_NEAR32"
+    mBODY  = "mBODY_JMP_PROC_NEAR32"
+    mEND  = "mEND_PROC_WITH_JMP_NEAR32"
+    mEXTERN  = "mEXTERN_NEAR32"
+#   SrcFile  = "$(BUILD_DIR)/SECCore.ASM"
+    InvokeOrder = TableFunction
+    OutBOOT = Yes
+End
+
+OUTPUTREGISTER
+	Name  = "EKERNEL_BOOT"
+	Path  = "Build/"
+	File  = "SECCore.ASM"
+End
+
+ELINK
+	Name  = "SECCPU_EarlyInit"
+	Parent  = "SECCoreAtPowerOn"
+	Help  = "CPU Early Init in SEC (before Cache as memory enabling)"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "GetApInitVector"
+	Parent  = "SECCoreAPinit"
+	Help  = "AP wakeup vector in SEC (before Cache as memory enabling)"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CpuRuntimeShadowRamWrite,"
+	Parent  = "RuntimeShadowRamWrite"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CpuConfigurationList"
+	InvokeOrder = ReplaceParent
+End
+
+SEGMENT
+	Name  = "STARTUP_SEG"
+	Format  = "SEGMENT PARA PUBLIC 'CODE' USE32"
+End
+
+ELINK
+    Name = "$(CPU_INC_DIR)"
+    Parent = "PLATFORM_DSC_INCLUDE_PATHS"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "SecCore"
+    File  = "Sec/SecCore.inf"
+    Package  = "AmiCpuPkg"
+    ModuleTypes = "PEIM"
+    PreProcess = Yes
+End
+
+INFComponent
+    Name  = "CpuPei"
+    File  = "Pei/CpuPei.inf"
+    Package  = "AmiCpuPkg"
+    ModuleTypes = "PEIM"
+End
+
+INFComponent
+    Name  = "CpuSetAgesaPcd"
+    File  = "Pei/CpuSetAgesaPcd.inf"
+    Package  = "AmiCpuPkg"
+    ModuleTypes = "PEIM"
+End
+
+INFComponent
+   Name  = "CpuDxe"
+   File  = "Dxe/CpuDxe.inf"
+   Package  = "AmiCpuPkg"
+  ModuleTypes = "DXE_DRIVER"
+End
+
+INFComponent
+    Name  = "CpuIoDxe"
+    File  = "Dxe/CpuIoDxe.inf"
+    Package  = "AmiCpuPkg"
+    ModuleTypes = "DXE_RUNTIME_DRIVER"
+End
+
+INFComponent
+    Name  = "CpuSmm"
+    File  = "Dxe/CpuSmm.inf"
+    Package  = "AmiCpuPkg"
+    ModuleTypes = "DXE_SMM_DRIVER"
+End
+
+#INFComponent
+#    Name  = "AmdSsdtPpcvOverride"
+#    File  = "Dxe\AmdSsdtPpcvOverride.inf"
+#    Package  = "AmiCpuPkg"
+#    ModuleTypes  = "DXE_DRIVER"    
+#End
+
+INFComponent
+    Name  = "Stibp"
+    File  = "Dxe/Stibp.inf"
+    Package  = "AmiCpuPkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+OUTPUTREGISTER
+    Name  = "CpuElinkList"
+    Path  = "Build/"
+    File  = "CpuElinks.h"
+    Template  = "Library/CpuElinks.txt"
+End
+
+INFComponent
+    Name  = "GetCpuSetupData"
+    File  = "Library/GetCpuSetupData.inf"
+    Package  = "AmiCpuPkg"
+End
+
+INFComponent
+    Name  = "GetPeiCpuSetupData"
+    File  = "Library/GetPeiCpuSetupData.inf"
+    Package  = "AmiCpuPkg"
+End
+
+INFComponent
+    Name  = "DxeInitializeMtrrLib"
+    File  = "Library/DxeInitializeMtrrLib.inf"
+    Package  = "AmiCpuPkg"
+End
+
+INFComponent
+    Name  = "PeiInitializeMtrrLib"
+    File  = "Library/PeiInitializeMtrrLib.inf"
+    Package  = "AmiCpuPkg"
+End
+
+INFComponent
+    Name  = "SmmCpuPlatformHookLib"
+    File  = "Library/SmmCpuPlatformHookLib.inf"
+    Package  = "AmiCpuPkg"
+End
+
+LibraryMapping
+    Class  = "GetCpuSetupData"
+    Instance  = "AmiCpuPkg.GetCpuSetupData"
+  	ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "GetCpuSetupData"
+	Instance  = "AmiCpuPkg.GetPeiCpuSetupData"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+    Name  = "CpuCspLib"
+    File  = "Library/CpuCspLib.inf"
+    Package  = "AmiCpuPkg"
+End
+
+LibraryMapping
+    Class  = "CpuCspLib"
+    Instance  = "AmiCpuPkg.CpuCspLib"
+End
+
+INFComponent
+    Name  = "CpuDisableCarLib"
+    File  = "Library/CpuDisableCar.inf"
+    Package  = "AmiCpuPkg"
+End
+
+LibraryMapping
+    Class  = "CpuDisableCarLib"
+    Instance  = "AmiCpuPkg.CpuDisableCarLib"
+End
+
+INFComponent
+    Name  = "TscTimerLib"
+    File  = "Library/TscTimerLib.inf"
+    Package  = "AmiCpuPkg"
+    Token = "CPU_TIMER_LIB_SUPPORT" "=" "1"    
+End
+
+LibraryMapping
+    Class  = "TimerLib"
+    Instance  = "AmiCpuPkg.TscTimerLib"
+    Token = "CPU_TIMER_LIB_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AgesaModulePkg.CcxPstatesXvLib"
+    Override = "AmiCpuPkg.CpuSetAgesaPcd"
+End
+
+LibraryMapping
+    Class  = "InitializeMtrrLib"
+    Instance  = "AmiCpuPkg.DxeInitializeMtrrLib"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "InitializeMtrrLib"
+    Instance  = "AmiCpuPkg.PeiInitializeMtrrLib"
+    ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+    Class  = "SmmCpuPlatformHookLib"
+    Instance  = "AmiCpuPkg.SmmCpuPlatformHookLib"
+    ModuleTypes = "DXE_SMM_DRIVER"
+End
+
+ELINK
+    Name  = "CpuCspLib"
+    Parent  = "AMI_CSP_LIBRARIES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CpuCspLib"
+    Parent  = "ADDITIONAL_AMITSE_LibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SetupQuestionChanged,"
+    Parent  = "PreSystemResetHookHook,"
+  	Priority  = 254
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "AMI_CPU_DEBUG_MESSAGES"
+    Value  = "1"
+    Help  = "Enables/disables debug messages of drivers in AmiCpuPkg."
+    TokenType = Boolean
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiCpuPkg.CpuPei"
+    Help  = "Disables all debug messages based on AMI_CPU_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "AMI_CPU_DEBUG_MESSAGES" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiCpuPkg.CpuDxe"
+    Help  = "Disables all debug messages based on AMI_CPU_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "AMI_CPU_DEBUG_MESSAGES" "=" "0"
+End
+
+#PcdMapping
+#    Name  = "PcdFixedDebugPrintErrorLevel"
+#    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+#    PcdType  = "PcdsFixedAtBuild"
+#    Value  = "0"
+#    Override  = "AmiCpuPkg.AmdSsdtPpcvOverride"
+#    Help  = "Disables all debug messages based on AMI_CPU_DEBUG_MESSAGES token value"
+#    TargetDSC = Yes
+#    Token = "AMI_CPU_DEBUG_MESSAGES" "=" "0"
+#End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiCpuPkg.CpuSmm"
+    Help  = "Disables all debug messages based on AMI_CPU_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "AMI_CPU_DEBUG_MESSAGES" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiCpuPkg.Stibp"
+    Help  = "Disables all debug messages based on AMI_CPU_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "AMI_CPU_DEBUG_MESSAGES" "=" "0"
+End
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

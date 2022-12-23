@@ -1,0 +1,66 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Smbios
+  FILE_GUID                      = B13EDD38-684C-41ed-A305-D7B7E32497DF
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SmbiosDriverEntryPoint
+
+[Sources]  
+  Smbios.c
+
+[Packages]
+  AmiModulePkg/AmiModulePkg.dec
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  $(SMBIOS_LIB_CLASSES_LIST)
+  AmiDxeLib
+  UefiDriverEntryPoint
+  AmiFlashLib
+  PrintLib
+  LockBoxLib
+  AmiRomLayoutLib
+  BaseMemoryLib
+
+[Guids]
+  gAmiSmbiosStaticDataGuid
+  gAmiSmbiosNvramGuid
+  gAmiSmbiosDynamicDataGuid
+  gAmiSmbrunGuid
+  gEfiGlobalVariableGuid
+  gEfiEndOfDxeEventGroupGuid
+  
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gEfiLegacyRegion2ProtocolGuid
+  gEfiLegacyBiosProtocolGuid
+  gEfiLegacyBiosExtProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+  gEfiSmbiosProtocolGuid
+  gAmiSmbiosBoardProtocolGuid
+  gAmiSmbiosProtocolGuid
+  gEdkiiVariableLockProtocolGuid
+
+[Depex]
+  gAmiSmbiosBoardProtocolGuid AND
+  gEfiFirmwareVolume2ProtocolGuid AND
+  gEfiVariableArchProtocolGuid AND
+  gEfiVariableWriteArchProtocolGuid
+
+[BuildOptions.X64] 
+  MSFT:*_*_*_CC_FLAGS = /D _SMBIOS_
+  GCC:*_*_*_CC_FLAGS = -D _SMBIOS_
+  

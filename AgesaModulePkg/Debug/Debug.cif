@@ -1,0 +1,11 @@
+<component>
+	name = "Debug"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Debug\"
+	RefName = "AgesaModulePkg.Debug"
+[INF]
+"AmdIdsDebugPrintDxe\AmdIdsDebugPrintDxe.inf"
+"AmdIdsDebugPrintPei\AmdIdsDebugPrintPei.inf"
+[files]
+"Debug.sdl"	
+<endComponent>

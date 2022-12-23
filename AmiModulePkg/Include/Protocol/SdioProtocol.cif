@@ -1,0 +1,9 @@
+<component>
+	name = "SdioProtocols"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Include\Protocol\"
+	RefName = "SdioProtocols"
+[files]
+"SdioBus.h"	
+"AmiSdEmmcControllerInitProtocol.h"	
+<endComponent>

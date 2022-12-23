@@ -1,0 +1,17 @@
+<component>
+	name = "NewPspDirectoryTool"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\AMDTools\NewPspKit\PspDirectoryTool\"
+	RefName = "AgesaModulePkg.AMDTools.PspKit.NewPspDirectoryTool"
+[files]
+"_hashlib.pyd"
+"_socket.pyd"
+"_ssl.pyd"
+"BuildPspDirectory.exe"
+"BuildPspDirectory.py"
+"bz2.pyd"
+"Convert2Exe.bat"
+"pyexpat.pyd"
+"python27.dll"
+"unicodedata.pyd"
+<endComponent>

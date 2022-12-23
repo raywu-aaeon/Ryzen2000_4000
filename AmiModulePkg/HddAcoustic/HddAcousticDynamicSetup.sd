@@ -1,0 +1,46 @@
+//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************
+
+/** @file HddAcousticDynamicSetup.sd
+    Adds goto link to Acoustic Setup Page under Advanced page
+**/
+
+#ifdef FORM_SET_TYPEDEF
+#include "HddAcousticDynamicSetup.h"
+#endif 
+    
+#ifdef ADVANCED_FORM_SET
+    #ifdef FORM_SET_GOTO
+        goto
+            formsetguid = ACOUSTIC_FORM_SET_GUID,
+            formid = ACOUSTIC_MAIN_FORM_ID,
+            question = 0,
+            prompt = STRING_TOKEN(STR_ACOUSTIC_SUBTITLE),
+            help = STRING_TOKEN(STR_AUTO_ACOUSTIC_HELP);
+    #endif
+#endif
+
+//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************

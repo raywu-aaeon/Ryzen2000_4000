@@ -1,0 +1,24 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbRtcLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbRtcLib
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  BaseLib
+  IoLib
+
+[Protocols]
+
+[Ppis]
+
+[Sources]
+  SbRtcLib.c

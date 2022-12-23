@@ -1,0 +1,58 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file HddSecurity.inf
+#  Hdd Security Protocol Implementation  
+##
+
+[Defines]
+  INF_VERSION                   = 0x00010015
+  BASE_NAME                     = HddSecurity
+  FILE_GUID                     = A9B700CF-019E-4d8b-A3A7-88E1EA01699E
+  MODULE_TYPE                   = DXE_DRIVER
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = HddSecurityEntryPoint
+
+[Sources]
+  HddSecurity.c
+  HddSecurity.h
+  SecurityCommon.c
+  SecurityCommon.h
+  NvmeSat3Security.c   
+  AhciSat3Security.c  
+  IdeSat3Security.c
+  HddSecuritySmmCommunicate.c  
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+     
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  DevicePathLib
+  PrintLib
+  UefiLib
+  
+[Protocols]
+  gEfiBlockIoProtocolGuid                 ## CONSUMES
+  gEfiS3SaveStateProtocolGuid             ## CONSUMES
+  gEfiPciIoProtocolGuid                   ## CONSUMES
+  gEfiDevicePathProtocolGuid              ## CONSUMES
+  gEfiSmmCommunicationProtocolGuid        ## CONSUMES
+  gAmiNvmeControllerProtocolGuid          ## CONSUMES
+  gAmiHddSecurityProtocolGuid             ## CONSUMES
+  gAmiKeepDeviceLockedProtocolGuid        ## CONSUMES
+  gAmiHddSecurityInitProtocolGuid         ## PRODUCES
+
+[Depex]
+  gEfiVariableArchProtocolGuid      AND
+  gEfiVariableWriteArchProtocolGuid

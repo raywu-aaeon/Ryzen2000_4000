@@ -1,0 +1,90 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+## @file
+#   
+##
+[Defines]
+  INF_VERSION                 = 0x00010015
+  VERSION_STRING              = 1.0
+  BASE_NAME                   = SmmChildDispatcher2
+  MODULE_TYPE                 = DXE_SMM_DRIVER
+  FILE_GUID                   = E53734A3-E594-4c25-B1A2-081445650F7F
+  PI_SPECIFICATION_VERSION    = 0x0001000A
+  ENTRY_POINT                 = SmmChildDispatch2EntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  SmmChildDispatchMain.c
+  SmiHandlerPorting.c
+  SmmChildDispatchProtocol.c
+  SmmChildDispatchProtocol.h
+  SmmChildDispatch.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  AmiDxeLib
+  AmiCspLib
+  
+[Protocols]
+  gEfiSmmStandbyButtonDispatch2ProtocolGuid
+  gEfiSmmGpiDispatch2ProtocolGuid
+  gEfiSmmIoTrapDispatch2ProtocolGuid
+  gEfiSmmPeriodicTimerDispatch2ProtocolGuid
+  gEfiSmmPowerButtonDispatch2ProtocolGuid
+  gEfiSmmUsbDispatch2ProtocolGuid
+  gEfiSmmSxDispatch2ProtocolGuid
+  gEfiSmmSwDispatch2ProtocolGuid
+  gEfiSmmCpuProtocolGuid
+  gEfiStatusCodeRuntimeProtocolGuid
+  ## AMD Fch
+  gFchSmmPeriodicalDispatch2ProtocolGuid
+  gFchSmmIoTrapDispatch2ProtocolGuid
+  gFchSmmPwrBtnDispatch2ProtocolGuid
+  gFchSmmGpiDispatch2ProtocolGuid
+  gFchSmmSxDispatch2ProtocolGuid
+  gFchSmmSwDispatch2ProtocolGuid
+  gFchSmmUsbDispatch2ProtocolGuid
+
+[Depex.common.DXE_SMM_DRIVER]
+#	BEFORE gEfiAmdFchSmmDispatcherFileGuid 
+TRUE
+	
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

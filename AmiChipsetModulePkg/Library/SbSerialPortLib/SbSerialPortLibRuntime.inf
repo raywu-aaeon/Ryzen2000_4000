@@ -1,0 +1,35 @@
+[Defines]
+INF_VERSION = 0x00010005
+VERSION_STRING = 1.0
+BASE_NAME = SbSerialPortLibRuntime
+MODULE_TYPE = DXE_DRIVER
+LIBRARY_CLASS = SerialPortLib | DXE_RUNTIME_DRIVER
+CONSTRUCTOR                    = SBSerialPortRuntimeLibConstructor
+  
+[Sources]
+SbSerialPortLib.c
+
+[LibraryClasses]
+BaseLib
+PcdLib
+IoLib
+PciLib
+TimerLib
+  AmiChipsetIoLib
+  AmiIoDecodeLib
+UefiRuntimeServicesTableLib
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /D SB_SERIALPORT_RUNTIME
+  GCC:*_*_*_CC_FLAGS = -D SB_SERIALPORT_RUNTIME
+  
+  
+[Packages]
+MdePkg/MdePkg.dec
+MdeModulePkg/MdeModulePkg.dec
+AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+AmiChipsetPkg/AmiChipsetPkg.dec
+AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdSbFchTypeString

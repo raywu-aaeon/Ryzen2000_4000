@@ -1,0 +1,13 @@
+<component>
+	name = "ZeroPowerOdd"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\ZeroPowerOdd\"
+	RefName = "AmdCpmPkg.Features.ZeroPowerOdd"
+[INF]
+"Asl\Fm15\AmdCpm3ZeroPowerOddFm15Asl.inf"
+"Asl\Fm17\AmdCpm3ZeroPowerOddFm17Asl.inf"
+"Dxe\AmdCpm3ZeroPowerOddDxe.inf"
+"Pei\AmdCpm3ZeroPowerOddPeim.inf"
+[files]
+"ZeroPowerOdd.sdl"	
+<endComponent>

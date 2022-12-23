@@ -1,0 +1,8 @@
+<component>
+	name = "PSP Tools"
+	category = ModulePart
+	LocalRoot = "AmiPspPkg/Tools"
+	RefName = "AmiPspPkg.PspTools"
+[files]
+"PsbTool.exe"
+<endComponent>

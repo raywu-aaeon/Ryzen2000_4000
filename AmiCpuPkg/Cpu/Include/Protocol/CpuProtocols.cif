@@ -1,0 +1,8 @@
+<component>
+	name = "AMD CPU Protocol"
+	category = ModulePart
+	LocalRoot = "AmiCpuPkg\Cpu\Include\Protocol\"
+	RefName = "AMD_CPU_PROTOCOL"
+[parts]
+"AMD_CPU_MP"
+<endComponent>

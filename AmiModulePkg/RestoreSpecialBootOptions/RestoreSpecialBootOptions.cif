@@ -1,0 +1,12 @@
+<component>
+	name = "RestoreSpecialBootOptions"
+	category = eModule
+	LocalRoot = "AmiModulePkg\RestoreSpecialBootOptions\"
+	RefName = "AmiModulePkg.RestoreSpecialBootOptions"
+[INF]
+"RestoreSpecialBootOptions.inf"
+[files]
+"RestoreSpecialBootOptions.sdl"	
+"RestoreSpecialBootOptions.mak"	
+"RestoreSpecialBootOptions.chm"
+<endComponent>

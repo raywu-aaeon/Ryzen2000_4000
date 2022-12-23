@@ -1,0 +1,18 @@
+TOKEN
+	Name  = "IntelFrameworkModulePkg_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable IntelFrameworkModulePkg support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "INTEL_FRAMEWORK_MODULE_PKG_VERSION"
+	Value  = "13"
+	Help  = "IntelFrameworkModulePkg version.\Do not change."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End

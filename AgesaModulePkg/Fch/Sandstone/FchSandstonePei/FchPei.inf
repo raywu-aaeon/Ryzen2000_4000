@@ -1,0 +1,260 @@
+#;*****************************************************************************
+#;
+#; Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#;
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#;
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;******************************************************************************
+
+[defines]
+
+  INF_VERSION                   = 0x00010005
+  BASE_NAME                     = FchSandstonePei
+  FILE_GUID                     = 5c536a02-bdfe-4f47-bf72-18ff5deaf8e9
+  MODULE_TYPE                   = PEIM
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = FchPeiInit
+
+[sources.common]
+  FchPei.c
+  FchPei.h
+  FchReset.c
+  FchReset.h
+  FchReset2.c
+  FchReset2.h
+  FchStall.c
+  FchStall.h
+
+
+[sources.IA32]
+
+[sources.X64]
+
+[LibraryClasses.IA32]
+
+[LibraryClasses]
+  PeimEntryPoint
+  BaseLib
+  DebugLib
+  IoLib
+  PeiServicesLib
+  HobLib
+
+  FchSandstonePeiLib
+  FchPeiLibV9
+  FchInitHookLibPei
+  AmdIdsHookLib
+  FchIdsHookLib
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmbus0BaseAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSioPmeBaseAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPm1EvtBlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPm1CntBlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPmTmrBlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgCpuControlBlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiGpe0BlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmiCmdPortAddr
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLegacyFree
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEcKbd
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchOscout1ClkContinous
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSetMaxGen2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataClkMode
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci1Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClockDriveStrength
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClockDriveStrengthRiseTime
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClockDriveStrengthFallTime
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciECCDedErrRptEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSpiSpeed
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetFastSpeed
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClk0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClk1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClkRunEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiEc0Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiIo80Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiKbc6064Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchWdtEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSerialDebugBusEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciECCDedErrRptEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0ForceGen1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci1Disable31Port
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbOemConfigurationTable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb3PortDisable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb2PortDisable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciOcPinSelect
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbSparseModeEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdToggleAllPwrGoodOnCf9
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcEnable
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEspiOperatingFreq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEspiIoMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEspiIoMmioDecode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcBoot
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcAdma2Support
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcAdmaSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcSdmaSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcA64bSupport
+ #
+ # Promontory
+ #
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTXhciGen1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTXhciGen2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTAOAC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTHW_LPM
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTDbC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTXHC_PME
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggresiveDevSlpP0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggresiveDevSlpP1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggrLinkPmCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPscCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataSscCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataMsiCapability
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPortMdPort0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPortMdPort1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataHotPlug
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsbEqualization4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsbRedriver
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb31P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb31P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb31P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb31P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb30P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb30P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb31P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb31P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb30P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort0Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort1Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort2Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort3Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort4Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort5Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort6Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort7Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort0Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort1Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort2Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort3Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort4Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort5Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort6Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort7Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk0ForceOn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk1ForceOn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk2ForceOn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk3ForceOn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk4ForceOn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk5ForceOn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk6ForceOn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk7ForceOn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb31P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb31P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb30P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb30P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb30P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb30P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTLock
+
+[Guids]
+  gFchResetDataHobGuid
+
+[Protocols]
+
+[Ppis]
+  gEfiPeiStallPpiGuid           #PRODUCED
+  gEfiPeiResetPpiGuid           #PRODUCED
+  gEfiPeiReset2PpiGuid          #PRODUCED
+  gAmdFchInitPpiGuid            #PRODUCED
+  gEfiPeiMemoryDiscoveredPpiGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Sandstone/FchSandstone.dec
+
+
+
+[Depex]
+  gEfiPeiCpuIoPpiInstalledGuid AND
+  gAmdFchSandstoneDepexPpiGuid
+
+[BuildOptions]
+
+
+

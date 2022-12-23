@@ -1,0 +1,578 @@
+/*****************************************************************************
+ *
+ * Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+/*****************************************************************************
+ *
+ * This software package can be used to enable the Overclocking of certain
+ * AMD processors and its use is subject to the terms and conditions of the
+ * AMD Overclocking Waiver. Enabling overclocking through use of the low-level
+ * routines included in this package and operating an AMD processor outside of
+ * the applicable AMD product specifications will void any AMD warranty and can
+ * result in damage to the processor or the system into which the processor has
+ * been integrated. The user of this software assumes, and AMD disclaims, all
+ * risk, liability, costs and damages relating to or arising from the overclocking
+ * of AMD processors.
+ *
+ ******************************************************************************
+ */
+
+//This file used to establish the interface between the common BIOS ASL code and OS
+//WMI interface.
+
+//Global value
+        Name(GF01,0)  //Global Flag 01 used for identify if The init method has been called
+                      //    0 Not called yet
+                      //    1 has been called
+
+        //GET value package
+        Name(GVBF,Buffer(5) {0,0,0,0,0})	
+        CreateDwordfield(GVBF,0,GVB1)
+        CreateBytefield(GVBF,4,GVB2)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName: AM01
+//Description: This method is used to get the version of command list. If the version number is different, the command list has different content.
+//Input:    None
+//Output: UINT32
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Method(AM01,0)
+        {
+            return (CMDV)
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName: AM02
+//Description: Init before the Module.
+//Input: None
+//Output: Status(No zero may have some error in it)
+//Note: Use Goble value GF01
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(AM02,0)
+        {
+            if(Lnot(GF01))
+            {
+                BM01()	//1.	Before every init block
+                XINI()	//Other block init
+                EM01()	//End of init hook
+                store(1,GF01)
+            }//if(Lnot(infg))
+            return	(0x0)
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName: AM03
+//Description: Get Object ID & Name	(AP can get ID, Then it can use these ID to Get detail 
+//Output: Object ID table  
+//Note: 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Method(AM03,0)
+        {
+            return(OBID)
+        }
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName: AM04
+//Description: The method is used for AOD to get the discrete buffer of a buffer, the object 's linear or discrete property is report in method AM02
+//Input: object ID
+//Output: 
+//Note: 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Method(AM04,1)
+        {
+            name(LODT,package(102){
+                0,
+                0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,})
+
+            //scan the id  in OBD1.
+            store(0,Local0)
+            while(1)
+            {
+                if(lequal(derefof(index(obd1,Local0)),arg0))
+                {
+                    store(0,Local4)
+                    break
+                }
+                if(lequal(derefof(index(obd1,Local0)),0))
+                {
+                    store(4,local4)
+                    break
+                }
+                add(Local0,derefof(index(obd1,add(Local0,1))),local0)
+                add(Local0,2,Local0)	//add ID,length
+//                increment(Local0)		//search 1 by 1, for some may made some mistake in the length of the discrete value
+            }
+            if(lequal(Local4, 0))
+            {
+                store(derefof(index(obd1,add(Local0,1))),Local1)
+                add(local1,2,Local1)
+                //Local1 point to the length of the discrement data
+
+                //Local0 point to the first discrete data
+                store(0,Local2)
+                while(Local1)
+                {
+                    store(derefof(index(obd1,Local0)),index(LODT,local2))
+                    decrement(Local1)
+                    increment(Local0)
+                    increment(Local2)
+                }
+
+                return(LODT)
+            }
+
+	    //scan the id  in OBD2.
+            store(0,Local0)
+            while(1)
+            {
+                if(lequal(derefof(index(obd2,Local0)),arg0))
+                {
+                    store(0,Local4)
+                    break
+                }
+                if(lequal(derefof(index(obd2,Local0)),0))
+                {
+                    store(4,local4)
+                    break
+                }
+                add(Local0,derefof(index(obd2,add(Local0,1))),local0)
+                add(Local0,2,Local0)	//add ID,length
+//                increment(Local0)		//search 1 by 1, for some may made some mistake in the length of the discrete value
+            }
+            if(lequal(Local4, 0))
+            {
+                store(derefof(index(obd2,add(Local0,1))),Local1)
+                add(local1,2,Local1)
+                //Local1 point to the length of the discrement data
+
+                //Local0 point to the first discrete data
+                store(0,Local2)
+                while(Local1)
+                {
+                    store(derefof(index(obd2,Local0)),index(LODT,local2))
+                    decrement(Local1)
+                    increment(Local0)
+                    increment(Local2)
+                }
+                return(LODT)
+            }
+
+	    return(LODT)  // return empty table if not found
+        }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName: AM05
+//Description: Run Command, dispatch task via command id
+//Input: 	arg0	CMD ID
+//		arg1	byte inputbuffer[256]
+//Output: dword cmd status + byte outputbuffer[256]
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Method(AM05,1) {
+            createdwordfield(arg0,0,ACMD)
+            //clear output buffer 1st
+            createfield(OBUF,0,multiply(sizeof(OBUF),8),temp)
+            store(0,temp)
+
+            createwordfield (OBUF, 0, BSCD)
+            createdwordfield (OBUF, 2, BSTS)
+            createwordfield (OBUF, 6, BSD1)
+            createdwordfield (OBUF, 8, BBSN)
+            createdwordfield (OBUF, 12, BBVS)
+            createdwordfield (OBUF, 16, BBCB)
+            createwordfield (OBUF, 20, BBMC)
+            createbytefield (OBUF, 22, BTCL)
+            createbytefield (OBUF, 23, BTRR)
+            createbytefield (OBUF, 24, BTRW)
+            createbytefield (OBUF, 25, BRAS)
+            createbytefield (OBUF, 26, BTRP)
+            createwordfield (OBUF, 27, BVIO)
+            createwordfield (OBUF, 29, BVTT)
+            createwordfield (OBUF, 31, BVPP)
+            createwordfield (OBUF, 33, BODT)
+            createwordfield (OBUF, 35, BRPG)
+            createbytefield (OBUF, 37, BTRC)
+            createwordfield (OBUF, 38, BRFC)
+            createwordfield (OBUF, 40, BRF2)
+            createwordfield (OBUF, 42, BRF4)
+            createbytefield (OBUF, 44, BFAW)
+            createbytefield (OBUF, 45, BRRS)
+            createbytefield (OBUF, 46, BRRL)
+            createbytefield (OBUF, 47, BTWR)
+            createbytefield (OBUF, 48, BWTS)
+            createbytefield (OBUF, 49, BWTL)
+            createbytefield (OBUF, 50, BCKE)
+            createbytefield (OBUF, 51, BCWL)
+            createbytefield (OBUF, 52, BRTP)
+            createbytefield (OBUF, 53, BRSC)
+            createbytefield (OBUF, 54, BRSL)
+            createbytefield (OBUF, 55, BRSD)
+            createbytefield (OBUF, 56, BRDD)
+            createbytefield (OBUF, 57, BWSC)
+            createbytefield (OBUF, 58, BWSL)
+            createbytefield (OBUF, 59, BWSD)
+            createbytefield (OBUF, 60, BWDD)
+            createbytefield (OBUF, 61, BRWR)
+            createbytefield (OBUF, 62, BWRD)
+            createbytefield (OBUF, 63, BRDN)
+            createbytefield (OBUF, 64, BM2T)
+            createbytefield (OBUF, 65, RBNM)
+            createbytefield (OBUF, 66, RBWR)
+            createbytefield (OBUF, 67, RBPK)
+            createbytefield (OBUF, 68, BPWD)
+            createbytefield (OBUF, 69, BOCD)
+            createdwordfield (OBUF, 70, BOCV)
+            createdwordfield (OBUF, 74, BOCF)
+            createbytefield (OBUF, 78, BSMT)
+            createdwordfield (OBUF, 79, BTOF)
+            createbytefield (OBUF, 83, BEDC)
+            createwordfield (OBUF, 84, BCNT)
+            createbytefield (OBUF, 86, BACS)
+            createbytefield (OBUF, 87, BCOS)
+            createbytefield (OBUF, 88, BCES)
+            createbytefield (OBUF, 89, BCBC)
+            createbytefield (OBUF, 90, BCBA)
+            createbytefield (OBUF, 91, BCBO)
+            createbytefield (OBUF, 92, BCBE)
+            createdwordfield (OBUF, 93, BCVP)
+            createbytefield (OBUF, 95, BEDO)
+            createdwordfield (OBUF, 96, BNLC)
+            createdwordfield (OBUF, 100, BNLM)
+            createdwordfield (OBUF, 104, BNLS)
+            createdwordfield (OBUF, 108, BPPL)
+            createdwordfield (OBUF, 112, BTDL)
+            createdwordfield (OBUF, 116, BEDL)
+            createbytefield (OBUF, 120, BFOC)
+            createbytefield (OBUF, 121, BSVD)
+
+            if(lequal(ACMD,0x00010001)){// Get current system memory info
+                    R101(arg0)
+            }
+            elseif(lequal(ACMD, 0x00010002)) { // Get VDDIO/VTT
+                    R102(arg0)
+            }
+            elseif(lequal(ACMD,0x00020001)){// Set memory clock
+                    R201(arg0)
+            }
+            elseif(lequal(ACMD,0x00020002)){// Set Tcl
+                    R202(arg0)
+            }
+            elseif(lequal(ACMD,0x00020003)){// Set Trcdrd
+                    R203(arg0)
+            }
+            elseif(lequal(ACMD,0x00020004)){// Set Trcdwr
+                    R204(arg0)
+            }
+            elseif(lequal(ACMD,0x00020005)){// Set Tras
+                    R205(arg0)
+            }
+            elseif(lequal(ACMD,0x00020006)){// Set Trp
+                    R206(arg0)
+            }
+            elseif(lequal(ACMD,0x00020007)){// Set ProcODT
+                    R207(arg0)
+            }
+            elseif(lequal(ACMD,0x00020008)){// Set TRCPAGE
+                    R208(arg0)
+            }
+            elseif(lequal(ACMD,0x00020009)){// Set TRC
+                    R209(arg0)
+            }
+            elseif(lequal(ACMD,0x0002000A)){// Set TRFC
+                    R20A(arg0)
+            }
+            elseif(lequal(ACMD,0x0002000B)){// Set TRFC2
+                    R20B(arg0)
+            }
+            elseif(lequal(ACMD,0x0002000C)){// Set TRFC4
+                    R20C(arg0)
+            }
+            elseif(lequal(ACMD,0x0002000D)){// Set TFAW
+                    R20D(arg0)
+            }
+            elseif(lequal(ACMD,0x0002000E)){// Set TRRDS
+                    R20E(arg0)
+            }
+            elseif(lequal(ACMD,0x0002000F)){// Set TRRDL
+                    R20F(arg0)
+            }
+            elseif(lequal(ACMD,0x00020010)){// Set TWR
+                    R210(arg0)
+            }
+            elseif(lequal(ACMD,0x00020011)){// Set TWTRS
+                    R211(arg0)
+            }
+            elseif(lequal(ACMD,0x00020012)){// Set TWTRL
+                    R212(arg0)
+            }
+            elseif(lequal(ACMD,0x00020013)){// Set TCKE
+                    R213(arg0)
+            }
+            elseif(lequal(ACMD,0x00020014)){// Set TCWL
+                    R214(arg0)
+            }
+            elseif(lequal(ACMD,0x00020015)){// Set TRTP
+                    R215(arg0)
+            }
+            elseif(lequal(ACMD,0x00020016)){// Set TRDRDSC
+                    R216(arg0)
+            }
+            elseif(lequal(ACMD,0x00020017)){// Set TRDRDSCL
+                    R217(arg0)
+            }
+            elseif(lequal(ACMD,0x00020018)){// Set TRDRDSD
+                    R218(arg0)
+            }
+            elseif(lequal(ACMD,0x00020019)){// Set TRDRDDD
+                    R219(arg0)
+            }
+            elseif(lequal(ACMD,0x0002001A)){// Set TWRWRSC
+                    R21A(arg0)
+            }
+            elseif(lequal(ACMD,0x0002001B)){// Set TWRWRSCL
+                    R21B(arg0)
+            }
+            elseif(lequal(ACMD,0x0002001C)){// Set TWRWRSD
+                    R21C(arg0)
+            }
+            elseif(lequal(ACMD,0x0002001D)){// Set TWRWRDD
+                    R21D(arg0)
+            }
+            elseif(lequal(ACMD,0x0002001E)){// Set TRDWR
+                    R21E(arg0)
+            }
+            elseif(lequal(ACMD,0x0002001F)){// Set TWRRD
+                    R21F(arg0)
+            }
+            elseif(lequal(ACMD,0x00020020)){// Set GEAR_DOWN_EN
+                    R220(arg0)
+            }
+            elseif(lequal(ACMD,0x00020021)){// Set CMD2T
+                    R221(arg0)
+            }
+            elseif(lequal(ACMD,0x00020022)){// Set RTTNOM
+                    R222(arg0)
+            }
+            elseif(lequal(ACMD,0x00020023)){// Set RTTWR
+                    R223(arg0)
+            }
+            elseif(lequal(ACMD,0x00020024)){// Set RTTPARK
+                    R224(arg0)
+            }
+            elseif(lequal(ACMD,0x00020025)){// Set PowerDownEn
+                    R225(arg0)
+            }
+            elseif(lequal(ACMD,0x00020026)){// Set SmtEn
+                    R226(arg0)
+            }
+            elseif(lequal(ACMD,0x00020027)){// Software Downcore Config
+                    R227(arg0)
+            }
+            elseif(lequal(ACMD,0x00020028)){// Set EDC Throttler Control
+                    R228(arg0)
+            }
+            elseif(lequal(ACMD,0x00020029)){// Set AddrCmdSetup
+                    R229(arg0)
+            }
+            elseif(lequal(ACMD,0x0002002A)){// Set CsOdtSetup
+                    R22A(arg0)
+            }
+            elseif(lequal(ACMD,0x0002002B)){// Set CkeSetup
+                    R22B(arg0)
+            }
+            elseif(lequal(ACMD,0x0002002C)){// Set CadBusClkDrvStren
+                    R22C(arg0)
+            }
+            elseif(lequal(ACMD,0x0002002D)){// Set CadBusAddrCmdDrvStren
+                    R22D(arg0)
+            }
+            elseif(lequal(ACMD,0x0002002E)){// Set CadBusCsOdtCmdDrvStren
+                    R22E(arg0)
+            }
+            elseif(lequal(ACMD,0x0002002F)){// Set CadBusCkeDrvStren
+                    R22F(arg0)
+            }
+            elseif(lequal(ACMD,0x00020030)){// Set CLDO_VDDP
+                    R230(arg0)
+            }
+            elseif(lequal(ACMD,0x00020031)){// Set Interleave Mode
+                    R231(arg0)
+            }
+            elseif(lequal(ACMD,0x00020032)){// Set Interleave Size
+                    R232(arg0)
+            }
+            elseif(lequal(ACMD,0x00020033)){// Set FCLK OC Mode
+                    R233(arg0)
+            }
+            elseif(lequal(ACMD,0x00020034)){// Set SOC VID
+                    R234(arg0)
+            }
+
+            elseif(lequal(ACMD,0x00030001)){// Set VDDIO
+                    R301(arg0)
+            }
+            elseif(lequal(ACMD,0x00030002)){// Set VTT
+                    R302(arg0)
+            }
+            elseif(lequal(ACMD,0x00030003)){// Set VPP
+                    R303(arg0)
+            }
+            elseif(lequal(ACMD,0x00040001)){// Command Buffer Start
+                    R401(arg0)
+            }
+            elseif(lequal(ACMD,0x00040002)){// Command Buffer End
+                    R402(arg0)
+            }
+            else{
+             //   store(briUnsupportedCmd,CMDS)     //unsupported command
+            }
+
+            store (ASCD, BSCD)
+            store (ASTS, BSTS)
+            store (RSD1, BSD1)
+            store (MBSN, BBSN)
+            store (MBVS, BBVS)
+            store (MBCB, BBCB)
+            store (MBMC, BBMC)
+
+            store (TTCL, BTCL)
+            store (TRCR, BTRR)
+            store (TRCW, BTRW)
+            store (TRAS, BRAS)
+            store (TTRP, BTRP)
+            store (VDIO, BVIO)
+            store (VMTT, BVTT)
+
+
+            store (VMPP, BVPP)
+            store (PODT, BODT)
+            store (TRPG, BRPG)
+            store (TTRC, BTRC)
+            store (TRFC, BRFC)
+            store (TRF2, BRF2)
+            store (TRF4, BRF4)
+            store (TFAW, BFAW)
+            store (TRRS, BRRS)
+            store (TRRL, BRRL)
+            store (TTWR, BTWR)
+            store (TWTS, BWTS)
+            store (TWTL, BWTL)
+            store (TCKE, BCKE)
+            store (TCWL, BCWL)
+            store (TRTP, BRTP)
+            store (TRSC, BRSC)
+            store (TRSL, BRSL)
+            store (TRSD, BRSD)
+            store (TRDD, BRDD)
+            store (TWSC, BWSC)
+            store (TWSL, BWSL)
+            store (TWSD, BWSD)
+            store (TWDD, BWDD)
+            store (TRWR, BRWR)
+            store (TWRD, BWRD)
+            store (GRDN, BRDN)
+            store (CM2T, BM2T)
+            store (RTNM, RBNM)
+            store (RTWR, RBWR)
+            store (RTPK, RBPK)
+            store (PWDE, BPWD)
+            store (OCDS, BOCD)
+            store (OCVM, BOCV)
+            store (OCFM, BOCF)
+            store (SMTE, BSMT)
+            store (TOFF, BTOF)
+            store (EDCT, BEDC)
+            store (ACNT, BCNT)
+
+            store (ACSP, BACS)
+            store (COSP, BCOS)
+            store (CESP, BCES)
+            store (CBCK, BCBC)
+            store (CBAC, BCBA)
+            store (CBCO, BCBO)
+            store (CBCE, BCBE)
+            store (CDVP, BCVP)
+            store (EDCO, BEDO)
+            store (INLC, BNLC)
+            store (INLM, BNLM)
+            store (INLS, BNLS)
+            store (PPTL, BPPL)
+            store (TDCL, BTDL)
+            store (EDCL, BEDL)
+            store (FCOC, BFOC)
+            store (SVID, BSVD)
+
+            return(OBUF)
+        }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MethodName: AM06
+//Description:  Get the linear object information in details(ID,MIN,MAX,STP)
+//Input: Object ID
+//Output: OIFT
+//Note: 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Method(AM06,1)
+        {
+            Name(info,buffer(16){0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0})
+
+            CPTB(arg0,info)
+
+            return(info)
+        }

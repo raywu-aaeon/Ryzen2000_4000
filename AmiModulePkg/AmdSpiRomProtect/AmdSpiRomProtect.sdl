@@ -1,0 +1,226 @@
+TOKEN
+	Name  = "AMD_SPI_ROM_PROTECT"
+	Value  = "1"
+	Help  = "Main switch to enable AMD SPI Rom Protect support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "ROM_PROTECT_PHASE"
+	Value  = "2"
+  Help  = "0:ROM Protect after BdsConnectDriversProtocolGuid .1:ROM Protect after gBdsAllDriversConnectedProtocolGuid.2:ROM Protect  Before Boot"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CPUIOTRAP_FLAG"
+	Value  = "0"
+  Help  = "Flag for AmdSpiRomProtect module.FALSE:Non include AmdCpuIoTap.TRUE:include AmdCpuIoTap"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "LPC50_5C_ROM_PROTECT"
+	Value  = "0"
+	Help  = "Enable for Program LPC REG50-5C. Note: This Token Not Support SB700,SB800,Bolton, Kabini AMD product.must set Disable if use."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "LPCREG50_PROTECT_VALUE"
+    Value  = "0x0"
+    Help  = "Please refer to BKDG/PPR about LPC register 0x50 fill this token."
+    TokenType = Integer
+    TargetH = Yes
+     Token = "LPC50_5C_ROM_PROTECT" "=" "1"
+End
+
+TOKEN
+    Name  = "LPCREG54_PROTECT_VALUE"
+    Value  = "0x0"
+    Help  = "Please refer to BKDG/PPR about LPC register 0x54 fill this token."
+    TokenType = Integer
+    TargetH = Yes
+     Token = "LPC50_5C_ROM_PROTECT" "=" "1"
+End
+
+TOKEN
+    Name  = "LPCREG58_PROTECT_VALUE"
+    Value  = "0x0"
+    Help  = "Please refer to BKDG/PPR about LPC register 0x58 fill this token"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "LPC50_5C_ROM_PROTECT" "=" "1"
+End
+
+TOKEN
+    Name  = "LPCREG5C_PROTECT_VALUE"
+    Value  = "0x0"
+    Help  = "Please refer to BKDG/PPR about LPC register 0x5C fill this token"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "LPC50_5C_ROM_PROTECT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmiHstiAmdFwProtectSpiImplementationBit"
+    Value  = "8"
+    Help  = "Hsti Amd SPI ROM Protect SpiImplementation Bit"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "HSTI_REVISION" "=" "0"
+End
+
+PATH
+	Name  = "AMDSPIROMPROTECT_PKG_DIR"
+	Path  = "AmiModulePkg\AmdSpiRomProtect"
+End
+
+INFComponent
+    Name  = "AmdSpiRomProtectLib"
+    File  = "AmdSpiRomProtectLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "CspFlashLib"
+    Instance  = "AmiModulePkg.AmdSpiRomProtectLib"
+    ModuleTypes  = "PEIM DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER SMM_CORE UEFI_APPLICATION UEFI_DRIVER"
+End
+
+ELINK
+    Name  = "CspFlashLib"
+    Parent  = "AMI_CSP_DXE_LIBRARIES"
+    InvokeOrder = AfterParent
+    Token = "FLASH_VERSION" "<" "32"
+End
+
+ELINK
+    Name  = "CspFlashLib"
+    Parent  = "AmiFlashLibOemLibClasses"
+    InvokeOrder = AfterParent
+    Token = "FLASH_VERSION" ">=" "32"
+End
+
+INFComponent
+	Name  = "AmdSpiRomProtectPei"
+	File  = "AmdSpiRomProtectPei.inf"
+	Package  = "$(AMDSPIROMPROTECT_PKG_DIR)"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "AmdSpiRomProtectDxe"
+	File  = "AmdSpiRomProtectDxe.inf"
+	Package  = "$(AMDSPIROMPROTECT_PKG_DIR)"
+	ModuleTypes  = "DXE_DRIVER"
+	PreProcess = Yes
+End
+
+INFComponent
+	Name  = "AmdSpiRomProtectSmi"
+	File  = "AmdSpiRomProtectSmi.inf"
+	Package  = "AmiModulePkg"
+    ModuleTypes = "DXE_SMM_DRIVER"
+    Token = "SMM_SUPPORT" "=" "1"
+    Token = "CPUIOTRAP_FLAG" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdSpiProtectHstiLib"
+    File  = "AmdSpiProtectHstiLib.inf"
+    Package  = "AmiModulePkg"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+    PreProcess = Yes
+End
+
+ELINK
+	Name  = "AmdSpiRomProtectWriteEnable,"
+	Parent  = "OemFlashWriteEnableList"
+	Priority = 99
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AmdSpiRomProtectWriteDisable,"
+	Parent  = "OemFlashWriteDisableList"
+	Priority = -100
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AmdSpiRomProtectWriteEnable,"
+	Parent  = "SMIFlashPreUpdateList"
+	Priority = 99
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AmdSpiRomProtectWriteDisable,"
+	Parent  = "SMIFlashEndUpdateList"
+	Priority = -100
+	InvokeOrder = AfterParent
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.AmdSpiProtectHstiLib"
+    Override  = "AmiHstiPkg.Hsti - AMI" 
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End  
+
+ELINK
+    Name = "SbFchSpiProtectTest,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "Hsti spi protect test elink"
+    InvokeOrder = AfterParent
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "SPIPROTECT_AGESAPackages_List" 
+    Help  = "List of all necessary Agesa Packages for RA2 "
+    InvokeOrder = ReplaceParent
+    Token = "AMD_PSP_ROM_ARMOR2_SMM_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "SPIPROTECT_AGESAPcd_List" 
+    Help  = "List of all necessary Agesa Pcd for RA2 "
+    InvokeOrder = ReplaceParent
+    Token = "AMD_PSP_ROM_ARMOR2_SMM_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "AgesaModulePkg/AgesaCommonModulePkg.dec"   
+    Parent  = "SPIPROTECT_AGESAPackages_List"
+    InvokeOrder = AfterParent
+    Token = "AMD_PSP_ROM_ARMOR2_SMM_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "AgesaModulePkg/AgesaModulePspPkg.dec"   
+    Parent  = "SPIPROTECT_AGESAPackages_List"
+    InvokeOrder = AfterParent
+    Token = "AMD_PSP_ROM_ARMOR2_SMM_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "AgesaPkg/AgesaPkg.dec"   
+    Parent  = "SPIPROTECT_AGESAPackages_List"
+    InvokeOrder = AfterParent
+    Token = "AMD_PSP_ROM_ARMOR2_SMM_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspRomArmor2Enabled" 
+    Parent  = "SPIPROTECT_AGESAPcd_List"
+    InvokeOrder = AfterParent
+    Token = "AMD_PSP_ROM_ARMOR2_SMM_SUPPORT" "=" "1"
+End

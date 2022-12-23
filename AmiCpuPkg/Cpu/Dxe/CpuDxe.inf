@@ -1,0 +1,115 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuDxe
+  FILE_GUID                      = E03ABADF-E536-4e88-B3A0-B77F78EB34FE
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = DxeInitializeCpu
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#
+
+[Sources]
+  CpuDxe.c
+  CpuDxe.h
+  CpuBoard.c
+  CpuBoard.h
+  CpuCache.c  
+  CpuMpDxe.c
+  Amd64Mp.asm
+  CpuSupport.asm
+     
+ 
+[Packages]
+  MdePkg/MdePkg.dec  
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCpuPkg/AmiCpuPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiAgesaWrapperPkg/AmiAgesaWrapperPkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  GetCpuSetupData
+  AmiDxeLib
+  AmiCspLib
+  PcdLib
+  MtrrLib
+  CcxPstatesLib
+  DebugLib
+  SbPspMutexSmiLib
+  UefiCpuLib
+  AmiShadowLib
+  
+[Guids]
+  gResetTypeGuid
+  gCpuS3ResumeGuid
+  gEfiHobListGuid
+
+[Protocols]
+  gAmiCpuInfoProtocolGuid
+  gEfiCpuArchProtocolGuid #PRODUCED
+  gEfiSmmBaseProtocolGuid
+  gEfiMpServiceProtocolGuid         # CONSUMED
+  gAmiLegacyBootProtocolGuid
+  
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid
+
+[FixedPcd]
+  gAmiCpuTokenSpaceGuid.PcdCpuMaxCores  # CONSUMED
+  gAmiAgesaWrapperTokenSpaceGuid.PcdCmosAgesaSpecified  # CONSUMED
+  gAmiAgesaWrapperTokenSpaceGuid.PcdSmmTsegWbSupport
+  gAmiCpuTokenSpaceGuid.AmiPcdMtrrNonUcWbEnabled # CONSUMED
+  gAmiCpuTokenSpaceGuid.AmiPcdTsegMtrrAttribute # CONSUMED
+  
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuPerfPresentCap
+
+[Depex]
+  gAmdMpServicesPreReqProtocolGuid AND #AgesaPkg.dec
+  gEfiMetronomeArchProtocolGuid AND #MdePkg.dec
+  gEfiVariableArchProtocolGuid  AND #MdePkg.dec
+  gEfiVariableWriteArchProtocolGuid #MdePkg.dec
+
+[BuildOptions.X64]
+*_*_X64_CC_FLAGS = /D EFIx64 /D x64_BUILD=1
+*_*_X64_ASM_FLAGS =   /D EFIx64
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

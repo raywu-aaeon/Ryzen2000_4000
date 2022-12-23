@@ -1,0 +1,14 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Library\"
+	RefName = "AmdCbsPkg.Library"
+[files]
+"CbsInstanceNull\CbsInstanceNull.dxe.inc.fdf"
+"CbsInstanceNull\CbsInstanceNull.inc.dsc"
+"CbsInstanceNull\CbsInstanceNull.pei.inc.fdf"
+[parts]
+"AmdCbsPkg.Library.Family"
+"AmdCbsPkg.CbsFuncLibNull"
+"AmdCbsPkg.CbsSetupLibNull"
+<endComponent>

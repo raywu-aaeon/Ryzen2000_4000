@@ -1,0 +1,71 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file PauseKey.inf
+#   This driver implements the pause key support
+##
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = PauseKey
+  FILE_GUID                 = 0a845224-8675-4241-8ae9-4d94c93deb90
+  MODULE_TYPE               = DXE_DRIVER
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = PauseKeyDriverEntryPoint
+  UEFI_HII_RESOURCE_SECTION = TRUE
+  
+
+[Sources]
+  PauseKey.c
+  PauseKey.uni
+  $(PAUSEKEY_PRESSED_MSG_TRANSLATIONS)
+
+[Protocols]
+  gEfiSimpleTextInputExProtocolGuid       # MdePkg.dec        - Consumed
+  gAmiPostManagerProtocolGuid             # AmiTsePkg.dec     - Consumed
+  gAmiPauseProtocolGuid                # AmiModulePkg.dec  - Produced
+  
+[Guids]
+  
+  
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+    
+[LibraryClasses]
+  AmiDxeLib
+  HiiLib
+  UefiDriverEntryPoint
+  UefiLib
+  
+  
+[Depex]
+  gEfiHiiStringProtocolGuid AND
+  gEfiHiiDatabaseProtocolGuid
+    
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

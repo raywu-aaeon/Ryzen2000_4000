@@ -1,0 +1,8 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "AmiPspPkg\Include\Guid\"
+	RefName = "AmiPspPkg.Guid"
+[files]
+"AmiPsp.h"
+<endComponent>

@@ -1,0 +1,14 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "UefiCpuPkg\Include\"
+	RefName = "UefiCpuPkg.Include"
+[files]
+"AcpiCpuData.h"	
+"CpuHotPlugData.h"	
+[parts]
+"UefiCpuPkg.Guid"
+"UefiCpuPkg.Library"
+"UefiCpuPkg.Register"
+"UefiCpuPkg.Protocol"
+<endComponent>

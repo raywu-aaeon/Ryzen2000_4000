@@ -1,0 +1,8 @@
+<component>
+	name = "EXT SPI FLASH LIB - Include"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg/Include/Library"
+	RefName = "EXT_SPI_FLASH_LIB_INCLUDE"
+[files]
+"ExtSpiFlashLib.h"
+<endComponent>

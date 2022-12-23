@@ -1,0 +1,191 @@
+PCIDEVICE
+	Title  = "CrbFp5Ec - PCI0 - ASL Container"
+	Parent  = "PciHost (Virtual)"
+	Attribute  = "0x0"
+	Dev_type  = "Container"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ASLfile  = "'MandolinPkg/Asl/CrbEcFeature.asl;After Pci Tree','MandolinPkg/Asl/CrbEc.asl;After Pci Tree'"
+	Token = "CrbFp5EcFirmware_SUPPORT" "=" "1"
+	Token = "CRB_FP5_EC_PCI0_ASL_SUPPORT" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	Virtual = Yes
+End
+
+PCIDEVICE
+    Title  = "CRB EC Container - ASL_PTS/ASL_WAK - PciHost (Virtual)"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    ASL_WAK  = "Method; If(LNot(Acquire(\_SB.PCI0.SBRG.EC0.Z009, 0x012C))) { Store(\_SB.PCI0.SBRG.EC0.STAS, Local0)  Or(Local0, 0x04, Local1)  Store(Local1, \_SB.PCI0.SBRG.EC0.STAS)  Release(\_SB.PCI0.SBRG.EC0.Z009) }"
+    Token = "CrbFp5EcFirmware_SUPPORT" "=" "1"
+    Token = "CRB_FP5_EC_PCI0_ASL_SUPPORT" "=" "1"
+End
+
+PCIDEVICE
+    Title  = "PS2MS Container"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/EcPs2Kbd/EcPs2Ms.asl';After Pci Tree'"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    Disable = Yes
+	Token = "CRB_FP5_EC_PCI0_ASL_SUPPORT" "=" "1"
+    Token = "EcPs2Kbd_SUPPORT" "=" "1" 
+End
+
+PCIDEVICE
+    Title  = "PS2KB Container"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/EcPs2Kbd/EcPs2Kb.asl';After Pci Tree'"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    Disable = Yes
+	Token = "CRB_FP5_EC_PCI0_ASL_SUPPORT" "=" "1"
+    Token = "EcPs2Kbd_SUPPORT" "=" "1" 
+End
+
+PCIDEVICE
+    Title  = "PS2KB/MS Container"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'MandolinPkg/Asl/PS2Dev.asl';After Pci Tree'"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+	Token = "CRB_FP5_EC_PCI0_ASL_SUPPORT" "=" "1"
+    Token = "EcPs2Kbd_SUPPORT" "=" "1" 
+End
+
+TOKEN
+	Name  = "CrbFp5EcFirmware_SUPPORT"
+	Value  = "1"
+	Help  = "AMD FP5 CRB EC Binary Support."
+	TokenType = Boolean
+	Master = Yes
+	Token = "EC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CRB_FP5_EC_PCI0_ASL_SUPPORT"
+	Value  = "1"
+	Help  = "Enable Light sensor related ASL porting code for CRB board."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "CRB_FEATURE_ASL_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "GenericSio_SUPPORT"
+	Value  = "1"
+	Help  = "<For Raven-FP5/Picasso-FP5 CRB : It is EC component. turn on GenericSio to update correct ASL>\Main switch to enable AMI Generic SIO support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SioBdsPlugin_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable SioBdsPlugin support in Project"
+	TokenType = Boolean
+	Token = "SIO_SUPPORT" "=" "0"
+	Token = "GenericSio_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "ECPS2_DEVICE_NAME"
+	Value  = "\_SB.PCI0.SBRG"
+	Help  = "PLATFORM PORTING!!! Update ASL device names of PCI root Bridge as defined in NB.sdl"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "CRB_FP5_EC_PCI0_ASL_SUPPORT" "=" "1"
+	Token = "EcPs2Kbd_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CRB_FP5_EC_FIRMWARE_SIZE"
+	Value  = "0x20000"
+	Help  = "The size of CRB FP5 EC firmware"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "CrbFp5EcFirmware_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CRB_FP5_EC_FIRMWARE_HEADER_SIZE"
+	Value  = "0x20000"
+	Help  = "The size of CRB FP5 EC firmware header"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "CrbFp5EcFirmware_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CRB_FP5_EC_DYNMIC_LOCATION"
+	Value  = "0"
+	Help  = "To support the EC firmware location change. Require to porting cbin file"
+	TokenType = Boolean
+	Token = "CrbFp5EcFirmware_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CrbFp5EcFirmware"
+	File  = "CrbFp5EcFirmware.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "USER_DEFINED"
+	Path  = "CRB_DIR"
+	Token = "CRB_FP5_EC_DYNMIC_LOCATION" "=" "1"
+	Skip_Packaging = Yes
+End
+
+FD_AREA
+	Name  = "CrbFp5EcFirmwareHeader"
+	TYPE  = "File"
+	FD_INFO  = "AMIROM"
+	Offset  = "0"
+	Size  = "$(CRB_FP5_EC_FIRMWARE_HEADER_SIZE)"
+	File  = "$(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/$(DXE_ARCHITECTURE)/$(PLATFORM_PKG_NAME)/CrbFp5Ec/CrbFp5EcFirmware/OUTPUT/CrbFp5EcFirmware.bin"
+	Token = "CRB_FP5_EC_DYNMIC_LOCATION" "=" "1"
+	Help  = "AMD FP5 EC TAG Header"
+End
+
+FD_AREA
+	Name  = "CrbFp5EcFirmware"
+	TYPE  = "RAW"
+	FD_INFO  = "AMIROM"
+	Offset  = "0"
+	Size  = "$(CRB_FP5_EC_FIRMWARE_SIZE)"
+	File  = "$(PLATFORM_PKG_NAME)/CrbFp5Ec/MandolinEC.bin"
+	Help  = "CRB FP5 EC firmware"
+End
+

@@ -1,0 +1,206 @@
+/*****************************************************************************
+ *
+ * Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+#ifndef CPM_DISPLAY_FEATURE_NV_STORE_ASI
+#define CPM_DISPLAY_FEATURE_NV_STORE_ASI
+
+/*
+    typedef struct {
+        UINT32                          CpmVersion;                 // CPM Revision
+        UINT32                          CpmPcieMmioBaseAddr;        // PcieMmioBaseAddress
+        UINT32                          CpmAcpiMmioBaseAddr;        // AcpiMmioBaseAddress
+        UINT8                           CpmSbChipId;                // SbChipId
+        UINT8                           CpmSbStrap;                 // SbStrap
+        UINT8                           CpmChipId[2];               // ChipId
+        UINT8                           CpmEcRamGpioBaseOffset;     // EcRamGpioBaseOffset
+        UINT16                          CpmSwSmiPort;               // SwSmiPort
+        UINT8                           CpmSwSmiCmdSetAutoUmaMode;  // SwSmiCmd to set Auto UMA Allocation
+        UINT32                          CpmUmaSize;                 // UMA Size
+        UINT32                          CpmDisplayFeatureConfig;    // DisplayFeatureConfig
+        UINT16                          CpmiGpuP2pBridgePfa;        // iGpuP2pBridgePfa
+        UINT16                          CpmiGpuP2pDevicePfa;        // iGpuP2pDevicePfa
+        UINT16                          CpmdGpuP2pBridgePfa;        // dGpuP2pBridgePfa
+        UINT16                          CpmdGpuP2pDevicePfa;        // dGpuP2pDevicePfa
+        UINT8                           CpmdGpuAspmLxEnable;        // dGpuAspmLxEnable
+        UINT8                           CpmdGpuAudioDisable;        // dGpuAudioDisable
+
+        UINT32                          CpmAtpxSupportedFunctionMask;     // AtpxSupportedFunctionMask
+        UINT32                          CpmAtpxFlags;                     // AtpxFlags
+        UINT32                          CpmAtcsSupportedFunctionMask;     // AtcsSupportedFunctionMask;
+        UINT32                          CpmAtifSupportedNotificationMask; // AtifSupportedNotificationMask
+        UINT32                          CpmAtifFunctionBitVector;         // AtifFunctionBitVector
+        UINT32                          CpmAtifFlags;                     // AtifFlags
+        UINT8                           CpmAtifDeviceListBuffer[28];      // AtifDeviceListBuffer
+        UINT32                          CpmAtrmRomSize;                   // AtrmRomSize
+        UINT8                           CpmAtrmRomImage[1024*64];         // AtrmRomImage
+
+        UINT64                          CpmSmiCheckCheckToolData;   // Smi Check Tool Data Pointer
+
+        UINT32                          CpmUcsiOPMData;             // UCSI OPM Data Structures Memory Location
+        UINT32                          CpmUcsiEcUcsiLocation;      // UCSI EC UCSI Location. // 0: EmbeddedControl. others: System Memory Address
+        UINT32                          CpmUcsiEcVersionLocation;   // UCSI EC UCSI USB Type-C Interface Version Number Offset
+        UINT32                          CpmUcsiEcCciLocation;       // UCSI EC UCSI USB Type-C Command Status & Connector Change Indication Offset
+        UINT32                          CpmUcsiEcCtlLocation;       // UCSI EC UCSI USB Type-C Control Offset
+        UINT32                          CpmUcsiEcMgiLocation;       // UCSI EC UCSI USB Type-C Message In Offset
+        UINT32                          CpmUcsiEcMgoLocation;       // UCSI EC UCSI USB Type-C Message Out Offset
+        UINT16                          CpmUcsiEcCommandIo;         // UCSI EC Command IO Port
+        UINT8                           CpmUcsiEcUcsiCommand;       // UCSI EC UCSI Command
+
+        UINT32                          CpmMainTable;               // Offset of AMD_CPM_MAIN_TABLE
+        UINT32                          CpmDeviceDetectionTable;    // Offset of AMD_CPM_GPIO_DEVICE_DETECTION_TABLE
+        UINT32                          CpmDeviceResetTable;        // Offset of AMD_CPM_GPIO_DEVICE_RESET_TABLE
+        UINT32                          CpmDevicePowerTable;        // Offset of AMD_CPM_GPIO_DEVICE_POWER_TABLE
+        UINT32                          CpmWirelessButtonTable;     // Offset of AMD_CPM_WIRELESS_BUTTON_TABLE
+        UINT32                          CpmSaveContextTable;        // Offset of AMD_CPM_SAVE_CONTEXT_TABLE
+        UINT32                          CpmExpressCardTable;        // Offset of AMD_CPM_EXPRESS_CARD_TABLE
+        UINT32                          CpmDisplayFeatureTable;     // Offset of AMD_CPM_DISPLAY_FEATURE_TABLE
+        UINT32                          CpmZeroPowerOddTable;       // Offset of AMD_CPM_ZERO_POWER_ODD_TABLE
+        UINT32                          CpmAdaptiveS4Table;         // Offset of AMD_CPM_ADAPTIVE_S4_TABLE
+        UINT32                          CpmAcpiThermalFanTable;     // Offset of AMD_CPM_ACPI_THERMAL_FAN_TABLE
+        UINT32                          CpmPcieClockTable;          // offset of AMD_CPM_PCIE_CLOCK_TABLE
+        UINT32                          CpmOtherHotplugCardTable;   // offset of AMD_CPM_OTHER_HOTPLUG_CARD_TABLE
+        UINT32                          CpmCoreTopologyTable;       // offset of AMD_CPM_CORE_TOPOLOGY_TABLE
+        UINT32                          CpmUcsiTable;               // Offset of AMD_CPM_UCSI_TABLE
+        UINT32                          CpmLowPowerEthernetTable;   // offset of AMD_CPM_LOW_POWER_ETHERNET_TABLE
+        UINT32                          CpmWirelessLanRecoveryTable;///< offset of AMD_CPM_WIRELESS_LAN_RECOVERY_TABLE
+    } AMD_CPM_NV_DATA_STRUCT;
+*/
+
+    OperationRegion(CPNV, SystemMemory, 0x55AA55AA, 0x55AA55AA)
+    Field(CPNV, AnyAcc, Lock, Preserve)
+    {
+        CpmVersion,                     32,                         // CPM Revision
+        CpmPcieMmioBaseAddr,            32,                         // PcieMmioBaseAddress
+        CpmAcpiMmioBaseAddr,            32,                         // AcpiMmioBaseAddress
+        CpmSbChipId,                    8,                          // SbChipId
+        CpmSbStrap,                     8,                          // SbStrap
+        CpmChipId,                      16,                         // ChipId
+        CpmEcRamGpioBaseOffset,         8,                          // EcRamGpioBaseOffset
+        CpmSwSmiPort,                   16,                         // SwSmiPort
+        CpmSwSmiCmdSetAutoUmaMode,      8,                          // SwSmiCmd to set Auto UMA Allocation
+        CpmUmaSize,                     32,                         // UMA Size
+
+//      CpmDisplayFeatureConfig,        32,                         // DisplayFeatureConfig
+        ,                               1,                              // BIT0: PowerXpress Fixed Mode
+        ,                               2,                              // BIT1-2: PowerXpress Dynamic Mode
+        ,                               1,                              // BIT3: HyperCrossFire
+        ,                               1,                              // BIT4: SurroundView
+        ,                               1,                              // BIT5: CrossFire
+        ,                               1,                              // BIT6: IsGOPEnable
+        ,                               1,                              // BIT7: Is eDP Panel
+        CpmIsDgpuPrimary,               1,                              // BIT8: IsDgpuPrimary
+        ,                               1,                              // BIT9: Brightness Control by Driver
+        ,                               22,                             // Reserved
+        CpmiGpuP2pBridgePfa,            16,                         // iGpuP2pBridgePfa
+        CpmiGpuP2pDevicePfa,            16,                         // iGpuP2pDevicePfa
+//      CpmdGpuP2pBridgePfa,            16,                         // dGpuP2pBridgePfa
+        CpmdGpuP2pBridgeFuncNum,        3,                              // dGpuP2pBridgeFunctionNumber
+        CpmdGpuP2pBridgeDeviceNum,      5,                              // dGpuP2pBridgeDeviceNumber
+        CpmdGpuP2pBridgeBusNum,         8,                              // dGpuP2pBridgeBusNumber
+//      CpmdGpuP2pDevicePfa,            16,                         // dGpuP2pDevicePfa
+        CpmdGpuP2pDeviceFuncNum,        3,                              // dGpuDeviceFunctionNumber
+        CpmdGpuP2pDeviceDeviceNum,      5,                              // dGpuDeviceDeviceNumber
+        CpmdGpuP2pDeviceBusNum,         8,                              // dGpuDeviceBusNumber
+        CpmdGpuAspmLxEnable,            8,                          // dGpuAspmLxEnable
+        CpmdGpuAudioDisable,            8,                          // dGpuAudioDisable
+
+        CpmAtpxSupportedFunctionMask,   32,                         // AtpxSupportedFunctionMask
+        CpmAtpxFlags,                   32,                         // AtpxFlags
+        CpmAtcsSupportedFunctionMask,   32,                         // AtcsSupportedFunctionMask
+        CpmAtifSupportedNotificationMask, 32,                       // AtifSupportedNotificationMask
+        CpmAtifFunctionBitVector,       32,                         // AtifFunctionBitVector
+        CpmAtifFlags,                   32,                         // AtifFlags
+        CpmAtifDeviceListBuffer,        224,                        // AtifDeviceListBuffer
+        CpmAtrmRomSize,                 32,                         // AtrmRomSize
+        CpmAtrmRomImage,                32768,                      // AtrmRomImage
+        CpmAtrmRomImage1,               32768,                      // AtrmRomImage1
+        CpmAtrmRomImage2,               32768,                      // AtrmRomImage2
+        CpmAtrmRomImage3,               32768,                      // AtrmRomImage3
+        CpmAtrmRomImage4,               32768,                      // AtrmRomImage4
+        CpmAtrmRomImage5,               32768,                      // AtrmRomImage5
+        CpmAtrmRomImage6,               32768,                      // AtrmRomImage6
+        CpmAtrmRomImage7,               32768,                      // AtrmRomImage7
+        CpmAtrmRomImage8,               32768,                      // AtrmRomImage8
+        CpmAtrmRomImage9,               32768,                      // AtrmRomImage9
+        CpmAtrmRomImageA,               32768,                      // AtrmRomImageA
+        CpmAtrmRomImageB,               32768,                      // AtrmRomImageB
+        CpmAtrmRomImageC,               32768,                      // AtrmRomImageC
+        CpmAtrmRomImageD,               32768,                      // AtrmRomImageD
+        CpmAtrmRomImageE,               32768,                      // AtrmRomImageE
+        CpmAtrmRomImageF,               32768,                      // AtrmRomImageF
+        CpmSmiCheckCheckToolData,       64,                         // Smi Check Tool Data Pointer
+
+        CpmUcsiOPMData,                 32,                         // UCSI OPM Data Structures Memory Location
+        CpmUcsiEcUcsiLocation,          32,                         // UCSI EC UCSI Location. // 0: EmbeddedControl. others: System Memory Address
+        CpmUcsiEcVersionLocation,       32,                         // UCSI EC UCSI USB Type-C Interface Version Number Offset
+        CpmUcsiEcCciLocation,           32,                         // UCSI EC UCSI USB Type-C Command Status & Connector Change Indication Offset
+        CpmUcsiEcCtlLocation,           32,                         // UCSI EC UCSI USB Type-C Control Offset
+        CpmUcsiEcMgiLocation,           32,                         // UCSI EC UCSI USB Type-C Message In Offset
+        CpmUcsiEcMgoLocation,           32,                         // UCSI EC UCSI USB Type-C Message Out Offset
+        CpmUcsiEcCommandIo,             16,                         // UCSI EC Command IO Port
+        CpmUcsiEcUcsiCommand,           8,                          // UCSI EC UCSI Command
+
+        CpmMainTable,                   32,                         // Offset of AMD_CPM_MAIN_TABLE
+        CpmDeviceDetectionTable,        32,                         // Offset of AMD_CPM_GPIO_DEVICE_DETECTION_TABLE
+        CpmDeviceResetTable,            32,                         // Offset of AMD_CPM_GPIO_DEVICE_RESET_TABLE
+        CpmDevicePowerTable,            32,                         // Offset of AMD_CPM_GPIO_DEVICE_POWER_TABLE
+        CpmWirelessButtonTable,         32,                         // Offset of AMD_CPM_WIRELESS_BUTTON_TABLE
+        CpmSaveContextTable,            32,                         // Offset of AMD_CPM_SAVE_CONTEXT_TABLE
+        CpmExpressCardTable,            32,                         // Offset of AMD_CPM_EXPRESS_CARD_TABLE
+        CpmDisplayFeatureTable,         32,                         // Offset of AMD_CPM_DISPLAY_FEATURE_TABLE
+        CpmZeroPowerOddTable,           32,                         // Offset of AMD_CPM_ZERO_POWER_ODD_TABLE
+        CpmAdaptiveS4Table,             32,                         // Offset of AMD_CPM_ADAPTIVE_S4_TABLE
+        CpmAcpiThermalFanTable,         32,                         // Offset of AMD_CPM_ACPI_THERMAL_FAN_TABLE
+        CpmPcieClockTable,              32,                         // offset of AMD_CPM_PCIE_CLOCK_TABLE
+        CpmOtherHotplugCardTable,       32,                         // offset of AMD_CPM_OTHER_HOTPLUG_CARD_TABLE
+        CpmCoreTopologyTable,           32,                         // offset of AMD_CPM_CORE_TOPOLOGY_TABLE
+        CpmUcsiTable,                   32,                         // Offset of AMD_CPM_UCSI_TABLE
+        CpmLowPowerEthernetTable,       32,                         // offset of AMD_CPM_LOW_POWER_ETHERNET_TABLE
+        CpmWirelessLanRecoveryTable,    32,                         // offset of AMD_CPM_WIRELESS_LAN_RECOVERY_TABLE
+    }
+
+#endif

@@ -1,0 +1,116 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+#
+# This file contains code for AGESA initialization in the Pei stage.
+#
+
+[Defines]
+    INF_VERSION    = 0x00010005
+    VERSION_STRING = 1.0
+    BASE_NAME      = AmiAgesaPei
+    FILE_GUID      = 586032e3-1386-4ecc-b547-eb285e21066d
+    MODULE_TYPE    = PEIM
+    ENTRY_POINT    = AmiAgesaPeiEntry
+
+[Sources]
+    AmiAgesaPei.c
+    AmiAgesaPei.h
+
+[Packages]
+    MdePkg/MdePkg.dec
+    IntelFrameworkPkg/IntelFrameworkPkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+    AgesaPkg/AgesaPkg.dec
+    AgesaModulePkg/AgesaCommonModulePkg.dec
+    AgesaModulePkg/AgesaFamily15ModulePkg.dec
+    AgesaModulePkg/AgesaFamily17ModulePkg.dec
+    AgesaModulePkg/AgesaModuleMemPkg.dec
+    AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+    AmiAgesaWrapperPkg/AmiAgesaWrapperPkg.dec
+
+[LibraryClasses]
+    PeimEntryPoint
+    DebugLib
+    BaseLib
+    IoLib
+    PcdLib
+    HobLib
+    AmdSocBaseLib
+    AmdCapsuleLib
+    NbGetSetupData
+
+[Guids]
+    gAmiAgesaMemRestoreGuid
+    gAmiAgesaSpdByPassHobGuid
+    gAmiAgesaMemRestoreSerialHobGuid
+    gAmiAgesaS3NonvolatileDataGuid
+    gAmiGlobalVariableGuid
+
+[Ppis]
+    gAmdMemoryPlatformConfigurationPpiGuid      #Produced
+    gEfiPeiSmbus2PpiGuid						#Consumed
+    gAmdPlatformDimmSpdPpiGuid   				#Produced
+    gEfiPeiReadOnlyVariable2PpiGuid				#Consumed
+    gAmiAgesaMemRestorePpiGuid					#Produced
+    gAmdMemoryInfoHobPpiGuid                    #Consumed
+    gAmdMemoryInitCompletePpiGuid               #CONSUME
+
+[Pcd]
+    gAmiAgesaWrapperTokenSpaceGuid.PcdCmosAgesaSpecified        # CONSUMED
+    gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaByPassSpdControl     # CONSUMED
+    gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaMemoryDownSupport    # CONSUMED
+    gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaMemrestoreSupport    # CONSUMED
+    gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaCapsuleSupport       # CONSUMED
+
+#AGESA PCD for memory function
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgUserTimingMode          # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemClockValue|800       # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableBankIntlv         # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableChannelIntlv      # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgEnableMemClr            # CONSUMED
+
+#AGESA PCD for memory restore
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgSignature               # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgVersion                 # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgFlags                   # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgNvStorage               # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgNvStorageSize           # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgVolatileStorage         # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgVolatileStorageSize     # CONSUMED
+
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMemRestoreCtl           # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgSaveMemContextCtl       # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgIsCapsuleMode           # CONSUMED
+
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgBottomIo                # CONSUMED
+
+[Depex]
+    gEfiPeiReadOnlyVariable2PpiGuid AND
+    gEfiPeiSmbus2PpiGuid
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

@@ -1,0 +1,16 @@
+<component>
+    name = "Hardware Signature Management"
+    category = eModule
+    LocalRoot = "AmiModulePkg\HardwareSignature\"
+    RefName = "AmiModulePkg.HardwareSignatureManagement"
+[INF]
+"HardwareSignatureEntry.inf"
+"DxeAmiHardwareSignatureLib.inf"
+[files]
+"HardwareSignatureManagement.chm"	
+"HardwareSignatureManagement.sdl"	
+[parts]
+"AmiModulePkg.HardwareChangeProtocol"
+[dependency]
+AmiModulePkg.ACPI >= "SS: AptioV;$/AptioV/Source/Modules/ACPI;5.004_ACPI_02"
+<endComponent>

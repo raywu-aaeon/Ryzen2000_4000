@@ -1,0 +1,213 @@
+TOKEN
+    Name  = "AmiGopPolicy"
+    Value  = "1"
+    Help  = "Main Switch to Enable AmiGopPolicy in Platform"
+    TokenType = Boolean
+    TargetMAK = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "AMIGOPPOLICY_VER"
+    Value  = "14"
+    Help  = "AmiGopPolicy Version Number.\ DO NOT CHANGE THIS VALUE"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "OEM_EDID_OVERRIDE_PROTOCOL_SUPPORT"
+    Value  = "1"
+    Help  = "If set, Include EDID Override Protocol support in Project."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+PATH
+    Name  = "AMIGOPPOLICY_DIR"
+End
+
+ELINK
+    Name  = "$(AMIGOPPOLICY_DIR)/AmiGopPolicy.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AMIGOPPOLICY_DIR)/AmiGopPolicy.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AMIGOPPOLICY_DIR)/AmiGopPolicySetup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "InitAmiGopPolicyStrings,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+   Name  = "HookGopDriverBinding,"
+   Parent  = "ConnectVgaConOut,"
+   Token = "FAST_BOOT_SUPPORT" "=" "0"
+   InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "HookGopDriverBinding,"
+    Parent  = "FastBootHook,"
+    Token = "FAST_BOOT_SUPPORT" "=" "1"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "ConnectAmiGopPolicyConOut,"
+    Parent  = "HookGopDriverBinding,"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "AmiGopPolicyProtocolInsatll,"
+    Parent  = "SignalConnectDriversEvent,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiDefaultGopDeviceCheck,"
+    Parent  = "OemGopDeviceCheckList"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiDefaultGopSwitchFunction,"
+    Parent  = "OemGopSwitchHookList"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiDefaultGopEdidOverrideGetEdid,"
+    Parent  = "OemGopEdidOverrideGetEdidList"
+    Token  = "OEM_EDID_OVERRIDE_PROTOCOL_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AGP_KEY_0,AmiGopSwitchCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AGP_KEY_1,AmiGopSwitchCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AGP_KEY_2,AmiGopSwitchCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AGP_KEY_3,AmiGopSwitchCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AGP_KEY_4,AmiGopSwitchCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AGP_KEY_5,AmiGopSwitchCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AGP_KEY_6,AmiGopSwitchCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AGP_KEY_7,AmiGopSwitchCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "OemGopDeviceCheckList"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "OemGopSwitchHookList"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "gEfiGraphicsOutputProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiComponentNameProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiComponentName2ProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiDriverBindingProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiEdidDiscoveredProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiPciIoProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "AmiGopPolicy"
+    File  = "AmiGopPolicy.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.AmiGopPolicy"
+    Override  = "AmiModulePkg.Bds"
+End
+
+Outputregister
+    Name = "AmiGopLinksList"
+    Path = "Build"
+    File = "AmiGopPolicyLinks.h"
+    Template = "AmiGopPolicyLinks.tmp"
+End

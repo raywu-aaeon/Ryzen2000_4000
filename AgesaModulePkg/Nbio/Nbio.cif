@@ -1,0 +1,22 @@
+<component>
+	name = "Nbio"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Nbio\"
+	RefName = "AgesaModulePkg.Nbio"
+[INF]
+"EarlyPhase\AmdNbioEarlyPhaseRVPei\AmdNbioEarlyPhaseRVPei.inf"
+"GFX\AmdNbioGfxRVDxe\AmdNbioGfxRVDxe.inf"
+"GFX\AmdNbioGfxRVPei\AmdNbioGfxRVPei.inf"
+"IOMMU\AmdNbioIOMMURVDxe\AmdNbioIOMMURVDxe.inf"
+"IOMMU\AmdNbioIOMMUZPPei\AmdNbioIOMMUZPPei.inf"
+"NbioALib\AmdNbioAlibRVDxe\AmdNbioAlibRVDxe.inf"
+"NbioBase\AmdNbioBaseRVDxe\AmdNbioBaseRVDxe.inf"
+"NbioBase\AmdNbioBaseRVPei\AmdNbioBaseRVPei.inf"
+"PCIe\AmdNbioPcieRVDxe\AmdNbioPcieRVDxe.inf"
+"PCIe\AmdNbioPcieRVPei\AmdNbioPcieRVPei.inf"
+"SMU\AmdNbioSmuV10Dxe\AmdNbioSmuV10Dxe.inf"
+"SMU\AmdNbioSmuV10Pei\AmdNbioSmuV10Pei.inf"
+[files]
+"Nbio.sdl"
+"SMU\AmdNbioSmuV10Dxe\Smu10FeaturesEnable.h"
+<endComponent>

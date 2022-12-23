@@ -1,0 +1,18 @@
+TOKEN
+	Name  = "PlatformEmmcController_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformEmmcController support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+INFComponent
+    Name  = "PlatformEmmcController"
+    File  = "PlatformEmmcController.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "PlatformEmmcController_SUPPORT" "=" "1"
+End
+

@@ -1,0 +1,48 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiNetworkPostManagerLib
+  FILE_GUID                      = c9235330-d28e-11e1-9b23-0800200c9a66
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiNetworkPostManagerLib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  AmiNetworkPostManagerLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiNetworkPkg/AmiNetworkPkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  BaseMemoryLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiLib
+  MemoryAllocationLib
+  DevicePathLib
+  HiiLib
+  PrintLib
+
+[Protocols]
+  gEfiGraphicsOutputProtocolGuid    ## CONSUMES
+              
+[Guids]
+  gReadyToPxeBootGuid 
+    

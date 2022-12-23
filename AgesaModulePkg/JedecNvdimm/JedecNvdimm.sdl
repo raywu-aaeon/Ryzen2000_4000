@@ -1,0 +1,18 @@
+TOKEN
+	Name  = "JedecNvdimm_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable JedecNvdimm support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+INFComponent
+	Name  = "JedecNvdimm"
+	File  = "JedecNvdimm.inf"
+	Package  = "JedecNvdimm"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "JedecNvdimm_SUPPORT" "=" "1"
+End
+

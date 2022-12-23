@@ -1,0 +1,55 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbSmbios
+  FILE_GUID                      = a838cbb5-59ef-4493-89d0-133c8968905d
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CrbSmbiosInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  CrbSmbios.h
+  CrbSmbios.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  MandolinPkg/MandolinPkg.dec
+
+  IntelFrameworkPkg/IntelFrameworkPkg.dec       # Optional. should use Mde Library instead.
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  DebugLib
+  AmiDxeLib
+  BaseLib
+  PciLib
+  AmdSocBaseLib
+  DevicePathLib
+
+[Guids]  
+  gEfiEndOfDxeEventGroupGuid
+  
+[Protocols]
+  gEfiSmbiosProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiPciIoProtocolGuid
+  
+[Depex]
+  TRUE

@@ -1,0 +1,8 @@
+<component>
+    name = "SDIO INT13 16-bit Binary"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\Sdio\int13\"
+    RefName = "SDIO_I13_BINARY"
+[files]
+"SdioI13.bin"	
+<endComponent>

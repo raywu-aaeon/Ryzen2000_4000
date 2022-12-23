@@ -1,0 +1,9 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmiHstiPkg\Include\"
+	RefName = "AmiHstiPkg.Include"
+[parts]
+"AmiHstiPkg.IndustryStandard"
+"AmiHstiPkg.Guid"
+<endComponent>

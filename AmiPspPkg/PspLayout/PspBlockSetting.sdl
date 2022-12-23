@@ -1,0 +1,492 @@
+TOKEN
+    Name  = "PSP_BLOCK_CRB_SUPPORT"
+    Value  = "1"
+    Help  = "CRB PSP block layout. This token should be disabled if OEM has his own PSP layout"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TOTAL_PSP_BLOCK_SUPPORT"
+    Value  = "11"
+    Help  = "The total block support."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "TOTAL_PSP_BLOCK_SUPPORT"
+    Value  = "4"
+    Help  = "The total block support."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+#*******************************************************************#
+#		                     Blocks Size                            #
+#*******************************************************************#
+TOKEN
+    Name  = "BLOCK_0_SIZE"
+    Value  = "$(PSP_FIXED_FV_SIZE_BR)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "0"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+#Raven-Fp5 setting
+TOKEN
+    Name  = "BLOCK_0_SIZE"
+    Value  = "$(PSP_LEVEL_1_SIZE_RV)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "0"
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_1_SIZE"
+    Value  = "$(PSP_LEVEL_1_SIZE_SM)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "1"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+#Raven-Fp5 setting
+TOKEN
+    Name  = "BLOCK_1_SIZE"
+    Value  = "$(BIOS_LEVEL_1_SIZE_RV)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "1"
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_2_SIZE"
+    Value  = "$(BIOS_LEVEL_1_SIZE_SM)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "2"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+#Raven-Fp5 setting
+TOKEN
+    Name  = "BLOCK_2_SIZE"
+    Value  = "$(PSP_LEVEL_2_SIZE_RV)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "2"
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_3_SIZE"
+    Value  = "$(PSP_LEVEL_1_SIZE_RV)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "3"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+#Raven-Fp5 setting
+TOKEN
+    Name  = "BLOCK_3_SIZE"
+    Value  = "$(BIOS_LEVEL_2_SIZE_RV)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "3"
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_4_SIZE"
+    Value  = "$(BIOS_LEVEL_1_SIZE_RV)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "4"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_5_SIZE"
+    Value  = "$(PSP_APOB_SHARED_SIZE)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "5"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_6_SIZE"
+    Value  = "$(PSP_UPDATABLE_FV_SIZE_BR)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "6"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_7_SIZE"
+    Value  = "$(PSP_LEVEL_2_SIZE_SM)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "7"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_8_SIZE"
+    Value  = "$(BIOS_LEVEL_2_SIZE_SM)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "8"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_9_SIZE"
+    Value  = "$(PSP_LEVEL_2_SIZE_RV)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "9"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_10_SIZE"
+    Value  = "$(BIOS_LEVEL_2_SIZE_RV)"
+    Help  = "Size of block."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "10"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+#*******************************************************************#
+#                          Blocks Layout                            #
+#*******************************************************************#
+TOKEN
+    Name   = "BLOCK_0_OFFSET"
+    Value  = "$(PSP_COMBO_DIRECTORY_OFFSET) + $(PSP_COMBO_DIRECTORY_SIZE)"
+    Help  = "Psp block 0 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "0"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_0_ADDRESS"
+    Value  = "$(BLOCK_0_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 0 address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "0"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_1_OFFSET"
+    Value  = "$(BLOCK_0_OFFSET) + $(BLOCK_0_SIZE)"
+    Help  = "Psp block 1 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "1"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_1_ADDRESS"
+    Value  = "$(BLOCK_1_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 1 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "1"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_2_OFFSET"
+    Value  = "$(BLOCK_1_OFFSET) + $(BLOCK_1_SIZE)"
+    Help  = "Psp block 2 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "2"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_2_ADDRESS"
+    Value  = "$(BLOCK_2_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 2 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "2"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_3_OFFSET"
+    Value  = "$(BLOCK_2_OFFSET) + $(BLOCK_2_SIZE)"
+    Help  = "Psp block 3 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "3"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_3_ADDRESS"
+    Value  = "$(BLOCK_3_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 3 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "3"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_4_OFFSET"
+    Value  = "$(BLOCK_3_OFFSET) + $(BLOCK_3_SIZE)"
+    Help  = "Psp block 4 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "4"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_4_ADDRESS"
+    Value  = "$(BLOCK_4_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 4 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "4"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_5_OFFSET"
+    Value  = "$(BLOCK_4_OFFSET) + $(BLOCK_4_SIZE)"
+    Help  = "Psp block 5 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "5"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_5_ADDRESS"
+    Value  = "$(BLOCK_5_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 5 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "5"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_6_OFFSET"
+    Value  = "$(BLOCK_5_OFFSET) + $(BLOCK_5_SIZE)"
+    Help  = "Psp block 6 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "6"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_6_ADDRESS"
+    Value  = "$(BLOCK_6_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 6 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "6"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_7_OFFSET"
+    Value  = "$(BLOCK_6_OFFSET) + $(BLOCK_6_SIZE)"
+    Help  = "Psp block 7 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "7"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_7_ADDRESS"
+    Value  = "$(BLOCK_7_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 7 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "7"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_8_OFFSET"
+    Value  = "$(BLOCK_7_OFFSET) + $(BLOCK_7_SIZE)"
+    Help  = "Psp block 8 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "8"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_8_ADDRESS"
+    Value  = "$(BLOCK_8_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 8 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "8"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_9_OFFSET"
+    Value  = "$(BLOCK_8_OFFSET) + $(BLOCK_8_SIZE)"
+    Help  = "Psp block 9 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "9"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_9_ADDRESS"
+    Value  = "$(BLOCK_9_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 9 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "9"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_10_OFFSET"
+    Value  = "$(BLOCK_9_OFFSET) + $(BLOCK_9_SIZE)"
+    Help  = "Psp block 10 offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "10"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name   = "BLOCK_10_ADDRESS"
+    Value  = "$(BLOCK_10_OFFSET) + $(FLASH_BASE)"
+    Help  = "Psp block 10 physical address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "TOTAL_PSP_BLOCK_SUPPORT" ">" "10"
+    Token = "PSP_BLOCK_CRB_SUPPORT" "=" "1"
+End
+

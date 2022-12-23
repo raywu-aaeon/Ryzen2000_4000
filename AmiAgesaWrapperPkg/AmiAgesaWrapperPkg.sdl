@@ -1,0 +1,481 @@
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+TOKEN
+	Name  = "AGESA_WRAPPER_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AMD AGESA wrapper support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+    Name  = "RAVEN_PI_VERSION"
+    Value  = "100A"
+    Help  = "Current AGESA Version in this module."
+    TokenType = Expression
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AGESA_MODULE_REVISION"
+    Value  = "15"
+    Help  = "The current module version for version check. Should be updated on each official Release of this module."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MULTI_CPU_SUPPORT"
+    Value  = "0x7"
+    Help  = "The CPU supported. Bristol = 1, Summit = 2, Raven = 4."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "MULTI_CPU_SUPPORT"
+    Value  = "0x4"
+    Help  = "The CPU supported. Bristol = 1, Summit = 2, Raven = 4."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "AGESA_AP_INIT_BY_CMOS"
+    Value  = "1"
+    Help  = "!!!If you disable this token, then you MUST have a method to save the APinit Address, otherwise the system will hang at AP!!!"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AGESA_AP_INIT_CMOS_LOCATION_OFFSET"
+    Value  = "0x80"
+    Help  = "The CMOS location for saving AP init address"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BY_PASS_SPD_CONTROL"
+    Value  = "1"
+    Help  = "Provided for speed up boot time by use one set of SPD data for all provide Dimm, By pass reading from hardware SPD if Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+PcdMapping
+    Name  = "PcdAgesaByPassSpdControl"
+    GuidSpace  = "gAmiAgesaWrapperTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(BY_PASS_SPD_CONTROL)"
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "MEMORY_DOWN"
+    Value  = "0"
+    Help  = "Provided for memory down design."
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+PcdMapping
+    Name  = "PcdAgesaMemoryDownSupport"
+    GuidSpace  = "gAmiAgesaWrapperTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(MEMORY_DOWN)"
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "CMOS_AGESA_SPECIFIED"
+    Value  = "0x84"
+    Help  = "CMOS address for AGESA specified. \BIT0->Warm boot flag.\BIT1->Safety memory training flag.\BIT2->Date time flag.\BIT6->Capsule flag"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+PcdMapping
+    Name  = "PcdCmosAgesaSpecified"
+    GuidSpace  = "gAmiAgesaWrapperTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(CMOS_AGESA_SPECIFIED)"
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "AGESA_MEMRESTORE_SUPPORT"
+    Value  = "1"
+    Help  = "Enable Memory configuration restore from NVRAM to skip memory training"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+PcdMapping
+    Name  = "PcdAgesaMemrestoreSupport"
+    GuidSpace  = "gAmiAgesaWrapperTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(AGESA_MEMRESTORE_SUPPORT)"
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "AGESA_CAPSULE_SUPPORT"
+    Value  = "1"
+    Help  = "Enable Capsule boot"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "AGESA_MEMRESTORE_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdAgesaCapsuleSupport"
+    GuidSpace  = "gAmiAgesaWrapperTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(AGESA_CAPSULE_SUPPORT)"
+    TargetDSC = Yes
+    Token = "AGESA_MEMRESTORE_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SMM_TSEG_WB_SUPPORT"
+    Value  = "TRUE"
+    Help  = "Set memory type of SMM Tseg to write back."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+PcdMapping
+    Name  = "PcdSmmTsegWbSupport"
+    GuidSpace  = "gAmiAgesaWrapperTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(SMM_TSEG_WB_SUPPORT)"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdMemCfgBottomIo"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT16"
+    Value  = "$(MCT_BOTTOM_IO_VALUE)"
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "BRISTOL_MEMORY_CONFIGURATION_TABLE_CRB"
+    Value  = "1"
+    Help  = "CRB memory configuration table support. OEM should disable this token and use OEM's memory configuration table."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "MULTI_CPU_SUPPORT" "&" "1"
+End
+
+TOKEN
+    Name  = "AMI_AGESA_WRAPPER_DEBUG_MESSAGES"
+    Value  = "1"
+    Help  = "Enables/disables debug messages of drivers in AmiAgesaWrapperPkg."
+    TokenType = Boolean
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiAgesaWrapperPkg.AmiAgesaDxe"
+    Help  = "Disables all debug messages based on AMI_AGESA_WRAPPER_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "AMI_AGESA_WRAPPER_DEBUG_MESSAGES" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiAgesaWrapperPkg.AmiAgesaPei"
+    Help  = "Disables all debug messages based on AMI_AGESA_WRAPPER_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "AMI_AGESA_WRAPPER_DEBUG_MESSAGES" "=" "0"
+End
+
+TOKEN
+    Name  = "AMD_CCX_S3_SAVE_SMI_ID"
+    Value  = "0x55"
+    Help  = "Assign ID for AMD Ccx S3 Save SMI"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdCcxS3SaveSmi"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT8"
+    Value  = "$(AMD_CCX_S3_SAVE_SMI_ID)"
+    TargetDSC = Yes
+End
+
+PATH
+    Name  = "OEM_APCB_CUSTOMIZED_DIR"
+End
+
+ELINK
+    Name  = "OemReadSpdList"
+    InvokeOrder = ReplaceParent
+End
+
+OUTPUTREGISTER
+    Name  = "OemAgesaElinkList"
+    Path  = "Build/"
+    File  = "OemAgesaElinks.h"
+    Template  = "Elink/OemAgesaElinks.txt"
+End
+
+ELINK
+    Name = "AmiAgesaWrapperPkg/AmiAgesaCmosTokens.ssp"
+    Parent  = "ADDON_SSP_FILES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+   Name  = "ZpPeiProcessFvBeforePublishing"
+   Parent  = "PeiProcessFvBeforePublishing"
+   Help  = "Called before publishing FVs in the Pei phase. Enteries should not be comma terminated."
+   InvokeOrder = AfterParent
+End
+
+# [Fam15 only] - OemAgesaCcxPlatformLib INFComponent
+INFComponent
+	Name  = "OemAgesaCcxPlatformLib"
+	File  = "Ccx/OemAgesaCcxPlatformLib.inf"
+	Package  = "AmiAgesaWrapperPkg"
+End
+
+INFComponent
+    Name  = "AmdCalloutDxeLib"
+    File  = "Library/AmdCalloutLib/AmdCalloutDxeLib.inf"
+    Package  = "AmiAgesaWrapperPkg"
+End
+
+INFComponent
+    Name  = "AmdCalloutPeiLib"
+    File  = "Library/AmdCalloutLib/AmdCalloutPeiLib.inf"
+    Package  = "AmiAgesaWrapperPkg"
+End
+
+# [Fam15 only] - HardCodedMemCommonServiceDxeLib INFComponent
+INFComponent
+    Name  = "HardCodedMemCommonServiceDxeLib"
+    File  = "Library/HardCodedMemCommonServiceLib/HardCodedMemCommonServiceDxeLib.inf"
+    Package  = "AmiAgesaWrapperPkg"
+End
+
+# [Fam15 only] - HardCodedMemCommonServicePeiLib INFComponent
+INFComponent
+    Name  = "HardCodedMemCommonServicePeiLib"
+    File  = "Library/HardCodedMemCommonServiceLib/HardCodedMemCommonServicePeiLib.inf"
+    Package  = "AmiAgesaWrapperPkg"
+End
+
+INFComponent
+    Name  = "ZpRomLayout"
+    File  = "Library/ZpRomLayout/ZpRomLayout.inf"
+    Package  = "AmiAgesaWrapperPkg"
+End
+
+INFComponent
+	Name  = "AgesaPlatformLibDxe"
+	File  = "Library/AgesaPlatformLibDxe.inf"
+	Package  = "AmiAgesaWrapperPkg"
+End
+
+INFComponent
+	Name  = "AmiAgesaPei"
+	File  = "Pei/AmiAgesaPei.inf"
+	Package  = "AmiAgesaWrapperPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+    Name  = "AmdPspFlashAccLibSmm"
+    File  = "Psp/AmdPspFlashAccLibSmm/AmdPspFlashAccLibSmm.inf"
+    Package  = "AmiAgesaWrapperPkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+	Name  = "AmiAgesaDxe"
+	File  = "Dxe/AmiAgesaDxe.inf"
+	Package  = "AmiAgesaWrapperPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "SampleCodeForBrMemoryConfiguration"
+	File  = "SampleCodeForBrMemoryConfiguration.inf"
+	Package  = "AmiAgesaWrapperPkg"
+	ModuleTypes  = "PEIM"
+	Disable = Yes
+End
+
+# [Fam15 only] - OemAgesaCcxPlatformLib LibraryMapping
+LibraryMapping
+	Class  = "OemAgesaCcxPlatformLib"
+	Instance  = "AmiAgesaWrapperPkg.OemAgesaCcxPlatformLib"
+End
+
+LibraryMapping
+    Class  = "AmdCalloutLib"
+    Instance  = "AmiAgesaWrapperPkg.AmdCalloutDxeLib"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "AmdCalloutLib"
+    Instance  = "AmiAgesaWrapperPkg.AmdCalloutPeiLib"
+    ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiAgesaWrapperPkg.ZpRomLayout"
+    Override  = "AmiModulePkg.RomLayoutPei"
+End
+
+# [Fam15 only] - HardCodedMemCommonServiceLib LibraryMapping DXE_DRIVER
+LibraryMapping
+    Class  = "HardCodedMemCommonServiceLib"
+    Instance  = "AmiAgesaWrapperPkg.HardCodedMemCommonServiceDxeLib"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+# [Fam15 only] - HardCodedMemCommonServiceLib LibraryMapping PEIM
+LibraryMapping
+    Class  = "HardCodedMemCommonServiceLib"
+    Instance  = "AmiAgesaWrapperPkg.HardCodedMemCommonServicePeiLib"
+    ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+    Class  = "AmdPspFlashAccLib"
+    Instance  = "AmiAgesaWrapperPkg.AmdPspFlashAccLibSmm"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+PcdMapping
+    Name  = "PcdIommuL1ClockGatingEnable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    TargetDSC = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdIommuL2ClockGatingEnable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    TargetDSC = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdAmdSmbiosT16MaximumCapacity"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT32"
+    Value  = "0x04000000"
+    Help  = "Maximum memory size."
+    TargetDSC = Yes
+End
+
+
+PcdMapping
+    Name  = "PcdBspStackSize"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT32"
+    Value  = "$(CAR_TOTAL_SIZE)"
+    TargetDSC = Yes
+    Help  = "Sync with AMD PCD with AMI TOKEN value."
+    Token = "AmdCpmPkg_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdApStackSize"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT32"
+    Value  = "$(AP_STACK_SIZE)"
+    TargetDSC = Yes
+    Help  = "Sync with AMD PCD with AMI TOKEN value."
+    Token = "AmdCpmPkg_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSwSmiCmdtoBuildContext"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT8"
+    Value  = "$(PSP_NOTIFY_SMM_SW_SMI)"
+    TargetDSC = Yes
+    Help  = "Sync with AMD PCD with AMI TOKEN value."
+    Token = "AmdCpmPkg_SUPPORT" "=" "1"
+End
+
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+

@@ -1,0 +1,71 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LegacyRegion
+  FILE_GUID                      = 59242DD8-E7CF-4979-B60E-A6067E2A185F
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = InitializeLegacyRegion
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  LegacyRegion.c
+
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec 
+
+[LibraryClasses]
+  AmiDxeLib
+  AmiCspLib
+  NbGetSetupData
+  PciLib
+  DebugLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+
+[Protocols]
+  gEfiLegacyRegion2ProtocolGuid		#PRODUCED
+  gEfiLegacyRegionProtocolGuid		#
+  gEfiPciRootBridgeIoProtocolGuid   #CONSUMED
+  gEfiBootScriptSaveProtocolGuid
+  gEfiCpuArchProtocolGuid
+
+[Depex]
+  gEfiPciRootBridgeIoProtocolGuid AND
+  gEfiCpuArchProtocolGuid
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

@@ -1,0 +1,121 @@
+TOKEN
+	Name  = "AmdCpmPcieInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PcieInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmExpressCardAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmExpressCardAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmLowPowerEthernetAsl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpmLowPowerEthernetAsl support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmWirelessLanRecoveryAsl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpmWirelessLanRecoveryAsl support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmOtherHotplugAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmOtherHotplugAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmWirelessButtonAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmWirelessButtonAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPcieInitDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmPcieInitDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPcieInitPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmPcieInitPeim support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdCpmExpressCardAsl"
+	File  = "Asl/ExpressCard/AmdCpmExpressCardAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmExpressCardAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdCpmLowPowerEthernetAsl"
+    File  = "Asl/LowPowerEthernet/AmdCpmLowPowerEthernetAsl.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "AmdCpmLowPowerEthernetAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdCpmWirelessLanRecoveryAsl"
+    File  = "Asl/WirelessLanRecovery/AmdCpmWirelessLanRecoveryAsl.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "AmdCpmWirelessLanRecoveryAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmOtherHotplugAsl"
+	File  = "Asl/OtherHotplug/AmdCpmOtherHotplugAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmOtherHotplugAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmWirelessButtonAsl"
+	File  = "Asl/WirelessButton/AmdCpmWirelessButtonAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmWirelessButtonAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmPcieInitDxe"
+	File  = "Dxe/AmdCpm3PcieInitDxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmPcieInitDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmPcieInitPeim"
+	File  = "Pei/AmdCpm3PcieInitPeim.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmPcieInitPeim_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "AmdCpmPcieInitPeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmdCpmPkg.AmdCpmPcieInitPeim"
+	Index  = '"AFTER" "AmdCpmInitPeim"'
+	Help  = "refer to (AmdCpmPkg.pei.inc.fdf)"
+End
+

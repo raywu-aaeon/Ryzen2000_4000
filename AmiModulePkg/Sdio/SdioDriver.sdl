@@ -1,0 +1,223 @@
+TOKEN
+    Name  = "SDIO_DRIVER_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SdioDriver support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes    
+    Master = Yes
+End
+
+PATH
+    Name  = "SDIO_DRIVER_DIR"
+    Path  = "AmiModulePkg/Sdio"
+End
+
+PATH
+    Name  = "SDIO_SMM_DIR"
+    Path  = "$(SDIO_DRIVER_DIR)/SdioSmm"
+End
+
+PATH
+    Name  = "SDIO_SETUP_DIR"
+    Path  = "$(SDIO_DRIVER_DIR)/setup"
+End
+
+TOKEN
+    Name  = "SDIO_DRIVER_VERSION"
+    Value  = "21"
+    Help  = "SDIO driver version is used to avoid compatibility problems during SDIO driver Label update"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SDIO_Transfer_Buffer"
+    Value  = "0"
+    Help  = "0 - 4Kbytes (Detects A11 carry out)\1 - 8Kbytes (Detects A12 carry out)\2 - 16Kbytes (Detects A13 carry out)\3 - 32Kbytes (Detects A14 carry out)\4 - 64Kbytes (Detects A15 carry out)\5 - 128Kbytes (Detects A16 carry out)\6 - 256Kbytes (Detects A17 carry out)\7 - 512Kbytes (Detects A18 carry out)"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+
+TOKEN
+    Name  = "SDIO_WriteProtect"
+    Value  = "1"
+    Help  = "On:Check Mechanical write protect switch before writing data .\Off:Ignore write protect"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SDIO_SWSMI"
+    Value  = "0x40"
+    Help  = "Data to be written to SW SMI port to invoke SDIO SW SMI handler."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SDMMC_VERBOSE_PRINT"
+    Value  = "0"
+    Help  = "Make sure PcdDebugPrintErrorLevel is set to PcdsPatchableInModule. Search in all SDL files."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "UHS_SD_SUPPORT"
+    Value  = "0"
+    Help  = "This token is to enable the UHS support for the MMC device in the project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BUS_TEST_SUPPORT"
+    Value  = "0"
+    Help  = "This token is to enable bus test procedure for the MMC device in the project"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECK_ENHANCED_STROBE_SUPPORT"
+    Value  = "0"
+    Help  = "Enable to check for Enhanced strobe support during HS400 mode selection"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "REALTEK_VENDOR_NAME"
+    Value  = '"RTL 8189ES"'
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+End
+#Cloned to make PcdDebugPrintErrorLevel PatchableInModule in sDIO module.
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80400044"
+    Override  = "AmiModulePkg.SdioDriver"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Help  = "Display all debug messages when SDMMC_VERBOSE_PRINT token value is enabled.Make sure project Pcd mapping for PcdDebugPrintErrorLevel should be same as this value in order to print all debug messages."
+    Token = "SDMMC_VERBOSE_PRINT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80400044"
+    Override  = "AmiModulePkg.SdioSmm"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Help  = "Display all debug messages when SDMMC_VERBOSE_PRINT token value is enabled.Make sure project Pcd mapping for PcdDebugPrintErrorLevel should be same as this value in order to print all debug messages."
+    Token = "SDMMC_VERBOSE_PRINT" "=" "1"
+End
+
+ELINK
+    Name  = "$(SDIO_SETUP_DIR)/SdioSetup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SDIO_SETUP_DIR)/SdioSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SDIO_SETUP_DIR)/SdioSetup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gSdioBusInitProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "InitSdioStrings,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SdIoManufactureDeviceList"
+    InvokeOrder = ReplaceParent
+    Help  = "SD IO device manufacture device list in the format of(Manufacture ID, ManufactureCode, Vendor Name),"
+End
+
+ELINK
+    Name  = "{0x24C, 0x8179,REALTEK_VENDOR_NAME},"
+    Parent  = "SdIoManufactureDeviceList"
+    InvokeOrder = AfterParent
+End
+
+OUTPUTREGISTER
+    Name = "SdioDriverElinkFile"
+    File = "SdioElink.h"
+    Path = "Build"
+    Template = "SdioDriverElink.txt"
+End
+
+INFComponent
+    Name  = "SdioDriver"
+    File  = "SdioDriver.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "UEFI_DRIVER"
+End
+
+INFComponent
+    Name  = "SdioSmm"
+    File  = "SdioSmm/SdioSmm.inf"
+    Package  = "AmiModulePkg"
+    PreProcess = Yes
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "SMM_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "SdioControllerPeiLib"
+    File  = "SdioControllerPeiLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "SdioControllerPeiLib"
+    Instance  = "AmiModulePkg.SdioControllerPeiLib"
+End
+
+INFComponent
+    Name  = "SdioControllerDxeLib"
+    File  = "SdioControllerDxeLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "SdioControllerDxeLib"
+    Instance  = "AmiModulePkg.SdioControllerDxeLib"
+End
+
+ELINK
+    Name  = "PrintLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "HiiLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+

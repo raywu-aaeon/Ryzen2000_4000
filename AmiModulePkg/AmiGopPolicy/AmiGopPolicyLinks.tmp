@@ -1,0 +1,3 @@
+#define OEM_GOP_DEVICE_CHECK_LIST @Elink(OemGopDeviceCheckList, "@Child", " ", "%n")
+#define OEM_GOP_SWITCH_HOOK_LIST @Elink(OemGopSwitchHookList, "@Child", " ", "%n")
+#define OEM_GOP_EDID_OVERRIDE_GET_EDID_LIST @Elink(OemGopEdidOverrideGetEdidList, "@Child", " ", "%n")

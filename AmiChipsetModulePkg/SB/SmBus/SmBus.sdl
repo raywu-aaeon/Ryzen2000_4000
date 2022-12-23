@@ -1,0 +1,97 @@
+TOKEN
+	Name  = "SmBus_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SmBus support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SMBUS_BLINDING_PROTOCOL_SUPPORT"
+	Value  = "1"
+	Help  = "On - SMBus EFI 1.1 driver support."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+PATH
+	Name  = "SmBus_DIR"
+End
+
+PATH
+	Name  = "SmBusLib_DIR"
+	Path  = "AmiChipsetModulePkg/Library/SmBusLib"
+End
+
+INFComponent
+	Name  = "SmBusPei"
+	File  = "SmBusPei.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "PEIM"
+	Path  = "SmBus_DIR"
+End
+
+INFComponent
+	Name  = "SmBusDxe"
+	File  = "SmBusDxe.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Path  = "SmBus_DIR"
+End
+
+INFComponent
+	Name  = "SmBusSmm"
+	File  = "SmBusSmm.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Path  = "SmBus_DIR"
+	Token = "SMM_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "SmBusLib"
+	File  = "SmBusLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "SmBusLib_DIR"
+End
+
+LibraryMapping
+	Class  = "AmiSmBusLib"
+	Instance  = "AmiChipsetModulePkg.SmBusLib"
+End
+
+
+#FFS_FILE
+#    Name  = "AmdProcessorInitPeim"
+#    FD_AREA  = "FV_BB"
+#    INFComponent  = "AmdAgesaPkg.AmdProcessorInitPeim"
+#    Help  = "AmdProcessorInitPeim is no any dependence on SmBus but actually smbus is needed for agesa call out"
+#End
+
+FFS_FILE
+    Name  = "SmBusPei"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiChipsetModulePkg.SmBusPei"
+#    Index  = '"BEFORE" "AmdProcessorInitPeim"'
+    Help  = "AmdProcessorInitPeim is no any dependence on SmBus but actually smbus is needed for agesa call out"
+End
+
+
+FFS_FILE
+    Name  = "Smbios"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "AmiModulePkg.Smbios"
+    Help  = "SmBios.c is no any dependence on SmBus but actually smbus is needed for SmBios type-17"
+End
+
+FFS_FILE
+	Name  = "SmBusDxe"
+	FD_AREA  = "FV_MAIN"
+	INFComponent  = "AmiChipsetModulePkg.SmBusDxe"
+	Index  = '"BEFORE" "Smbios"'
+	Help  = "SmBios.c is no any dependence on SmBus but actually smbus is needed for SmBios type-17"
+End
+

@@ -1,0 +1,33 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiFchIoAccessRuntimeLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiFchIoAccessLib | DXE_RUNTIME_DRIVER
+  CONSTRUCTOR                    = AmiFchIoAccessRuntimeLibConstructor
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiRuntimeLib
+  BaseLib
+  IoLib
+  PciLib
+  DebugLib
+  AmiChipsetIoLib
+
+[Guids]
+  gEfiEventVirtualAddressChangeGuid
+
+[Sources]
+  AmiFchIoAccessRuntimeLib.c
+  AmiFchIoAccessLib.c
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdFchAcpiMmioBase

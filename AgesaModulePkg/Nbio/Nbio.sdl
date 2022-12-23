@@ -1,0 +1,412 @@
+TOKEN
+	Name  = "AMD_NBIO_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling NBIO support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AMD_NBIO_EARLY_PHASE_RV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioEarlyPhaseRVPei support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_GFX_RV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioGfxRVDxe support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_GFX_RV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioGfxRVPei support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_IOMMU_RV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioIOMMURVDxe support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_IOMMU_ZP_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioIOMMUZPDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_IOMMU_ZP_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioIOMMUZPPei support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "6"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_ALIB_RV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioAlibRVDxe support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_ALIB_ZP_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioAlibZPDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_BASE_CZ_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioBaseCZDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "1"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_BASE_CZ_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioBaseCZPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "1"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_BASE_ZP_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioBaseZPDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_BASE_ZP_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioBaseZPPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_BASE_RV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioBaseRVDxe support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_BASE_RV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioBaseRVPei support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_PCIE_RV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioPcieRVDxe support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_PCIE_RV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioPcieRVPei support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_PCIE_ZP_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioPcieZPDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_PCIE_ZP_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioPcieZPPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_SMUV8_DXE_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdNbioSmuV8Dxe support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "1"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_SMUV8_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioSmuV8Pei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "1"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_SMUV9_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioSmuV9Dxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_SMUV9_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioSmuV9Pei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+	Token = "MULTI_CPU_SUPPORT" "&" "2"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_SMUV10_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioSmuV10Dxe support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "AMD_NBIO_SMUV10_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdNbioSmuV10Pei support in Project"
+	TokenType = Boolean
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+INFComponent
+	Name  = "AmdNbioEarlyPhaseRVPei"
+	File  = "EarlyPhase\AmdNbioEarlyPhaseRVPei\AmdNbioEarlyPhaseRVPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_NBIO_EARLY_PHASE_RV_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioGfxRVPei"
+	File  = "GFX\AmdNbioGfxRVPei\AmdNbioGfxRVPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_NBIO_GFX_RV_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioAlibRVDxe"
+	File  = "NbioALib\AmdNbioAlibRVDxe\AmdNbioAlibRVDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_NBIO_ALIB_RV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioAlibZPDxe"
+	File  = "NbioALib\AmdNbioAlibZPDxe\AmdNbioAlibZPDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_NBIO_ALIB_ZP_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioBaseCZDxe"
+	File  = "NbioBase\AmdNbioBaseCZDxe\AmdNbioBaseCZDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_NBIO_BASE_CZ_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioBaseCZPei"
+	File  = "NbioBase\AmdNbioBaseCZPei\AmdNbioBaseCZPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_NBIO_BASE_CZ_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioBaseZPDxe"
+	File  = "NbioBase\AmdNbioBaseZPDxe\AmdNbioBaseZPDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_NBIO_BASE_ZP_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioBaseZPPei"
+	File  = "NbioBase\AmdNbioBaseZPPei\AmdNbioBaseZPPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_NBIO_BASE_ZP_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioBaseRVDxe"
+	File  = "NbioBase\AmdNbioBaseRVDxe\AmdNbioBaseRVDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_NBIO_BASE_RV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioBaseRVPei"
+	File  = "NbioBase\AmdNbioBaseRVPei\AmdNbioBaseRVPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_NBIO_BASE_RV_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioGfxRVDxe"
+	File  = "GFX\AmdNbioGfxRVDxe\AmdNbioGfxRVDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_NBIO_GFX_RV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioPcieRVDxe"
+	File  = "PCIe\AmdNbioPcieRVDxe\AmdNbioPcieRVDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_NBIO_PCIE_RV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioPcieRVPei"
+	File  = "PCIe\AmdNbioPcieRVPei\AmdNbioPcieRVPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_NBIO_PCIE_RV_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioPcieZPDxe"
+	File  = "PCIe\AmdNbioPcieZPDxe\AmdNbioPcieZPDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_NBIO_PCIE_ZP_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioPcieZPPei"
+	File  = "PCIe\AmdNbioPcieZPPei\AmdNbioPcieZPPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_NBIO_PCIE_ZP_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioIOMMURVDxe"
+	File  = "IOMMU\AmdNbioIOMMURVDxe\AmdNbioIOMMURVDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_NBIO_IOMMU_RV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioIOMMUZPDxe"
+	File  = "IOMMU\AmdNbioIOMMUZPDxe\AmdNbioIOMMUZPDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_NBIO_IOMMU_ZP_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioIOMMUZPPei"
+	File  = "IOMMU\AmdNbioIOMMUZPPei\AmdNbioIOMMUZPPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_NBIO_IOMMU_ZP_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioSmuV8Dxe"
+	File  = "SMU\AmdNbioSmuV8Dxe\AmdNbioSmuV8Dxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_NBIO_SMUV8_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioSmuV8Pei"
+	File  = "SMU\AmdNbioSmuV8Pei\AmdNbioSmuV8Pei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_NBIO_SMUV8_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioSmuV9Dxe"
+	File  = "SMU\AmdNbioSmuV9Dxe\AmdNbioSmuV9Dxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_NBIO_SMUV9_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioSmuV9Pei"
+	File  = "SMU\AmdNbioSmuV9Pei\AmdNbioSmuV9Pei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_NBIO_SMUV9_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioSmuV10Dxe"
+	File  = "SMU\AmdNbioSmuV10Dxe\AmdNbioSmuV10Dxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_NBIO_SMUV10_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdNbioSmuV10Pei"
+	File  = "SMU\AmdNbioSmuV10Pei\AmdNbioSmuV10Pei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_NBIO_SMUV10_PEI_SUPPORT" "=" "1"
+End

@@ -1,0 +1,57 @@
+
+################################################################################
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+################################################################################
+[Defines]
+INF_VERSION 				   = 0x00010005
+BASE_NAME					   = AmiCpuPeiPreMem
+FILE_GUID					   = b12bf2d5-05a7-4cac-8210-0fed4b3cd67d
+MODULE_TYPE 				   = PEIM
+VERSION_STRING				   = 1.0
+ENTRY_POINT 				   = AmiCpuPeiPreMemEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32
+#
+
+################################################################################
+#
+# Sources Section - list of files that are required for the build to succeed.
+#
+################################################################################
+
+[sources]
+  AmiCpuPeiPreMem.c
+
+################################################################################
+#
+# Package Dependency Section - list of Package files that are required for
+#                              this module.
+#
+################################################################################
+
+[Packages]
+  AmiModulePkg/AmiModulePkg.dec
+  MdePkg/MdePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  BaseLib
+  HobLib
+  PeiServicesLib
+  CpuLib
+  DebugLib
+  BaseMemoryLib
+  
+[Pcd]
+  gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchAddress            ## CONSUMES
+  gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize         ## CONSUMES
+
+[Depex]
+  TRUE
+

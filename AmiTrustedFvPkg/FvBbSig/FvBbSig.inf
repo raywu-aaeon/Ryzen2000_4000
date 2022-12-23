@@ -1,0 +1,19 @@
+[Defines]
+INF_VERSION     = 0x00010015
+BASE_NAME       = FvBbSig
+MODULE_TYPE     = USER_DEFINED
+FILE_GUID       = 0b86ee06-0b4b-4136-b714-074cf1b8d605
+SECTION_GUID    = 05a22385-5b44-42bb-ad7d-e7045003ac36
+
+# Rom Hole 05ca0208 - 0fc1 - 11dc - 9011 - 00173153eba8
+#0x0b86ee06, 0x0b4b, 0x4136, 0xb7, 0x14, 0x7, 0x4c, 0xf1, 0xb8, 0xd6, 0x5 
+#0x05a22385, 0x5b44, 0x42bb, 0xad, 0x7d, 0xe7, 0x4, 0x50, 0x3, 0xac, 0x36
+
+[Sources]
+ FvBbSig.cbin
+
+[Packages]
+ MdePkg/MdePkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+ 

@@ -1,0 +1,10 @@
+<component>
+	name = "PlatformEmmcController"
+	category = eModule
+	LocalRoot = "AmiModulePkg\PlatformEmmcController\"
+	RefName = "PlatformEmmcController"
+[INF]
+"PlatformEmmcController.inf"
+[files]
+"PlatformEmmcController.sdl"
+<endComponent>

@@ -1,0 +1,31 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiGpioLib
+  FILE_GUID                      = A2D1EE1D-3D69-4a30-84EB-D1B76F5183EF  
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiGpioLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+#
+
+[Sources]
+  AmiGpioLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  AmiFchIoAccessLib
+
+[Pcd] 
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdGpioPortBaseAddress
+

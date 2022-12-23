@@ -1,0 +1,83 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+#
+# This file contains code for AGESA initialization in the Pei stage.
+#
+
+[Defines]
+    INF_VERSION    = 0x00010005
+    VERSION_STRING = 1.0
+    BASE_NAME      = CpuSetAgesaPcd
+    FILE_GUID      = 4df75915-6c88-4ef4-995d-834d866dbd20
+    MODULE_TYPE    = PEIM
+    ENTRY_POINT    = CpuSetAgesaPcdEntry
+
+[Sources]
+    CpuSetAgesaPcd.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    IntelFrameworkPkg/IntelFrameworkPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AgesaPkg/AgesaPkg.dec
+    AgesaModulePkg/AgesaCommonModulePkg.dec
+    AgesaModulePkg/AgesaFamily15ModulePkg.dec
+    AgesaModulePkg/AgesaFamily17ModulePkg.dec
+    AgesaModulePkg/AgesaModuleMemPkg.dec
+    AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+    AmiAgesaWrapperPkg/AmiAgesaWrapperPkg.dec
+    AmiCpuPkg/AmiCpuPkg.dec
+
+[LibraryClasses]
+    PeimEntryPoint
+    DebugLib
+    BaseLib
+    IoLib
+    PcdLib
+    HobLib
+    AmdSocBaseLib
+    GetCpuSetupData
+
+[Guids]
+
+
+[Ppis]
+    gAmdPcdInitReadyPpiGuid
+
+[Pcd]
+#AGESA PCD for Setup option
+    gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateMode                          # CONSUMED
+    gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCpbMode                             # CONSUMED
+    gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateIoBaseAddress                 # CONSUMED
+    gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdt                         # CONSUMED
+    gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPowerCeiling                        # CONSUMED
+
+[Depex]
+	TRUE
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

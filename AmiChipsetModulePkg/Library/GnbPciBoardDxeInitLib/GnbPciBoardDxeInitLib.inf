@@ -1,0 +1,38 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GnbPciBoardDxeInitLib
+  FILE_GUID                      = 7E0CD9DD-9A55-4b9a-AC5F-B1A1D9EA1A26
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = GnbPciBoardDxeInitLib|DXE_DRIVER
+
+[Sources]
+  GnbPciBoardDxeInitLib.c
+
+[LibraryClasses]
+  UefiLib
+  AmiDxeLib
+  AmiSdlLib
+  AmiPciBusLib
+  AmdSocBaseLib
+
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gAmiBoardPciInitProtocolGuid
+  gAmiOpromPolicyProtocolGuid
+
+[Guids]
+  gRavenVbiosRomSectionGuid
+  gRaven2VbiosRomSectionGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec 
+  AgesaPkg/AgesaPkg.dec

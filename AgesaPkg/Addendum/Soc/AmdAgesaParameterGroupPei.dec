@@ -1,0 +1,71 @@
+#;*****************************************************************************
+#;
+#; Copyright 2015 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#;
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#;
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;******************************************************************************
+
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AmdAgesaParameterGroupPkg
+  PACKAGE_GUID          = F8EA2FAB-4F31-6B58-CCDF-30A53462157E
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+
+# Configuration Parameter Group list defined by platform BIOS, the number of the list can be vary depends on platform design.
+[Guids]
+  #SOC Agesa configuration parameter group list Guid
+  gAmdConfigurationParameterListAGuid = {0xec74aa51, 0x6a7e, 0x42e5, {0x90, 0x47, 0xdd, 0xfe, 0xef, 0x7d, 0x4, 0xc3}}
+  gAmdConfigurationParameterListBGuid = {0xf6114fbc, 0x159f, 0x49bb, {0x84, 0x43, 0xe2, 0x91, 0x54, 0x19, 0xff, 0x84}}
+  gAmdConfigurationParameterListCGuid = {0xdf48ea48, 0x7a4c, 0x4e83, {0x9b, 0x18, 0xba, 0xbd, 0x36, 0x34, 0xee, 0xa1}}
+
+# the PCDs list here are simple for the reference code. platform BIOS need to replace with the cofiguration PCD provide by IP driver.
+[PcdsDynamicEx]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAgesaConfigParameter1|TRUE|BOOLEAN|0x0003001A
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAgesaConfigParameter2|0x55|UINT8|0x0003001B
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAgesaConfigParameter3|0x1234|UINT16|0x0003001C
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAgesaConfigParameter4|0x76543210|UINT32|0x0003001D
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAgesaConfigParameter5|0x5678567856785678|UINT64|0x0003001E
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAgesaConfigParameter6|{ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }|VOID*|0x0003001F
+

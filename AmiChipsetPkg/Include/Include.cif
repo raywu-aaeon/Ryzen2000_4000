@@ -1,0 +1,11 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmiChipsetPkg\Include\"
+	RefName = "AmiChipsetPkg.Include"
+[parts]
+"AmiChipsetPkg.Guid"
+"AmiChipsetPkg.Ppi"
+"AmiChipsetPkg.Protocol"
+"AmiChipsetPkg.Library"
+<endComponent>

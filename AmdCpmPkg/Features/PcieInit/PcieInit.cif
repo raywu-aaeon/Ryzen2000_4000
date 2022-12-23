@@ -1,0 +1,16 @@
+<component>
+	name = "PcieInit"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\PcieInit\"
+	RefName = "AmdCpmPkg.Features.PcieInit"
+[INF]
+"Dxe\AmdCpm3PcieInitDxe.inf"
+"Pei\AmdCpm3PcieInitPeim.inf"
+"Asl\ExpressCard\AmdCpmExpressCardAsl.inf"
+"Asl\LowPowerEthernet\AmdCpmLowPowerEthernetAsl.inf"
+"Asl\OtherHotplug\AmdCpmOtherHotplugAsl.inf"
+"Asl\WirelessButton\AmdCpmWirelessButtonAsl.inf"
+"Asl\WirelessLanRecovery\AmdCpmWirelessLanRecoveryAsl.inf"
+[files]
+"PcieInit.sdl"
+<endComponent>

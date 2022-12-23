@@ -1,0 +1,14 @@
+<component>
+	name = "AmiCspLib"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\"
+	RefName = "AmiChipsetModulePkg.AmiCspLib"
+[INF]
+"Library\AmiCspLib\PciTableInit.inf"
+"Library\AmiCspPcieLib\AmiCspPcieBaseLib.inf"
+"Library\AmiCspPcieLib\AmiCspPcieDxeRuntimeSmmLib.inf"
+[files]
+"AmiCspLib.sdl"	
+"AmiCspLib.mak"	
+"Include\AmiCspLib.txt"
+<endComponent>

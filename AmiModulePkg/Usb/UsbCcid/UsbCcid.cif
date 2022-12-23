@@ -1,0 +1,12 @@
+<component>
+    name = "UsbCcid"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\Usb\UsbCcid"
+    RefName = "UsbCcid"
+[INF]
+"UsbCcid.inf"
+[files]
+"UsbCcid.sdl"
+"AmiUsbSmartCardReader.h"
+"AmiUsbRtCcid.h"
+<endComponent>

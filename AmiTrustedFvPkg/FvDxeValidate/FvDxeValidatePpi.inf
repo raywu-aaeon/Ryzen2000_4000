@@ -1,0 +1,75 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file
+#   This driver installs ValidateFvDxe PPI. 
+#   After Mem, Compressed. Uses CryptoPPI
+##
+
+[Defines]
+  INF_VERSION                = 0x00010005
+  BASE_NAME                  = FvDxeValidatePpi
+  FILE_GUID                  = 7352AECD-AAA2-4d3b-8759-C32458B7E8FF
+  MODULE_TYPE                = PEIM
+  VERSION_STRING             = 1.0
+  ENTRY_POINT                = ValidateFvDxeEntry
+
+[Sources]
+ FvDxeValidatePpi.c
+
+[Packages]
+ MdePkg/MdePkg.dec
+ AmiModulePkg/AmiModulePkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+ AmiTrustedFvPkg/AmiTrustedFvPkg.dec
+
+[LibraryClasses]
+ PeimEntryPoint
+ PeiServicesLib
+ MemoryAllocationLib
+ AmiPeiLib
+ AmiRomLayoutLib
+ AmiFvDxeFailLib 
+# DBG
+ DebugLib
+ PerformanceLib
+
+[Guids]
+ gEfiCertSha256Guid
+ gEfiCertRsa2048Guid
+ gEfiCertTypeRsa2048Sha256Guid
+ gEfiCertPkcs7Guid
+ gEfiCertX509Guid
+ gEfiHashAlgorithmSha256Guid
+ gEfiHashAlgorithmSha384Guid
+ gEfiHashAlgorithmSha512Guid
+ gPRKeyGuid
+ gFWCapsuleGuid
+
+[Ppis]
+#produce
+ gAmiFvDxeValidatePpiGuid
+ gAmiFvDigestPpiGuid
+#consume 
+ gAmiDigitalSignaturePPIGuid
+ gEfiPeiBootInRecoveryModePpiGuid
+#notify
+ gAmiInstallCryptoPpiGuid
+ gAmiPublishFvDxeValidatePpiGuid
+ gEfiPeiMemoryDiscoveredPpiGuid
+ #
+ gAmiReadyToLoadDxeCorePpiGuid
+
+[Pcd]
+ gAmiTrustedFvPkgTokenSpaceGuid.AmiPcdTdxeShadowFvBeforePublish
+ gAmiTrustedFvPkgTokenSpaceGuid.AmiPcdTdxeShadowFvAlignSize
+ gAmiTrustedFvPkgTokenSpaceGuid.AmiPcdTdxeFailedRecoveryPolicy
+ 
+[Depex]
+ gEfiPeiLoadFilePpiGuid AND gEfiPeiDecompressPpiGuid

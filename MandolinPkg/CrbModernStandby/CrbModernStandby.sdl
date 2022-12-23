@@ -1,0 +1,279 @@
+TOKEN
+	Name  = "===================== Modern Standby ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "CRB_MODERN_STANDBY_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Modern Standby function support in the project"
+	TokenType = Boolean
+	TargetH = Yes
+	Master = Yes
+	Token = "CrbFp5EcFirmware_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "MODERN_STANDBY_SUPPORT"
+	Value  = "1"
+	Help  = "PI1000-RC3: AMD defined token for the modern standby main switch in build time. be used in C/FDF/DSC. AMD ifdef in C"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "CRB_MODERN_STANDBY_SUPPORT" "=" "1"
+End
+
+PCIDEVICE
+	Title  = "CRB Container - Crb Modern Standby"
+	Parent  = "PciHost (Virtual)"
+	Attribute  = "0x0"
+	Dev_type  = "Container"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ASLfile  = "MandolinPkg/Asl/CrbCsFeature.asl;After Pci Tree',MandolinPkg/Asl/CrbCsDev.asl;After Pci Tree'"
+	Token = "CRB_FEATURE_ASL_SUPPORT" "=" "1"
+	Token = "CRB_FEATURE_MS_ASL_SUPPORT" "=" "1"
+	Token = "CRB_MODERN_STANDBY_SUPPORT" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	Virtual = Yes
+	ASL_PTS  = "Method;If(LEqual(CNSB, One)) { If(LNot(Acquire(\_SB.PCI0.SBRG.EC0.Z009, 0x012C))) {  Store(Zero, \_SB.PCI0.SBRG.EC0.STAS)   Release(\_SB.PCI0.SBRG.EC0.Z009) } } "
+	ASL_WAK  = "Method;Store(0xFF, \_SB.ACAD.ACDC)"
+End
+
+#TOKEN
+#    Name  = "NBIO_RV_BRIDGE3_SLOT_EXISTS"
+#    Value  = "0"
+#    Help  = "Slot Exists on PCI-Express NBIO Bridge 3(Slot # and name may need modification)"
+#    TokenType = Boolean
+#    TargetH = Yes
+#End
+
+#Add WWAN asl device name 
+#PCIDEVICE
+#    Title  = "NBIO Pci2PciBridge(D1, F4) Slot"
+#    Parent  = "NBIO Br3"
+#    Attribute  = "0x0"
+#    Dev_type  = "PciDevice"
+#    Dev  = 00h
+#    Slot  = 033h
+#    Fun  = 000h
+#    IntA =  LNKE; 36
+#    IntB =  LNKF; 37
+#    IntC =  LNKG; 38
+#    IntD =  LNKH; 39
+#    ASLdeviceName  = "WWAN"
+#    Token = "NBIO_RV_BRIDGE3_SLOT_EXISTS" "=" "0"
+#    DeviceType = Slot
+#    PCIBusSize = 32bit
+#    ROMMain = No
+#    PCIExpress = Yes
+#    InitRoutine  = "CspGnbPciInitRoutine"
+#End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE6_EXISTS"
+	Value  = "0"
+	Help  = "PCI-Express NBIO Bridge 6 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE6_SLOT_EXISTS"
+	Value  = "0"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 6(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+
+# Remove wake event for GPP6(NVME) PCO
+#    WakeEnabled = Yes
+#    PWRBnotify = Yes
+PCIDEVICE
+	Title  = "NBIO Br6"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 01h
+	Fun  = 07h
+	BridgeBusNum  = "$(NBIO_FIXED_BUS_BRIDGE6)"
+	GPEbit  = 08h
+	SleepNum  = 04h
+	ASLfile  = "'AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	ASLdeviceName  = "GPP6"
+	Token = "NBIO_RV_BRIDGE6_EXISTS" "=" "0"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+End
+
+
+#Add NVME asl device name 
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F7) Slot"
+	Parent  = "NBIO Br6"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ASLdeviceName  = "NVME"
+	IntA = 	LNKA; 48
+	IntB = 	LNKB; 49
+	IntC = 	LNKC; 50
+	IntD = 	LNKD; 51
+	Token = "NBIO_RV_BRIDGE6_SLOT_EXISTS" "=" "0"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE4_EXISTS"
+	Value  = "0"
+	Help  = "PCI-Express NBIO Bridge 4 Exists"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NBIO_RV_BRIDGE4_SLOT_EXISTS"
+	Value  = "0"
+	Help  = "Slot Exists on PCI-Express NBIO Bridge 4(Slot # and name may need modification)"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+
+# Remove wake event for GPP4(NVME)
+#    WakeEnabled = Yes
+#    PWRBnotify = Yes
+PCIDEVICE
+	Title  = "NBIO Br4"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Pci2PciBridge"
+	Bus  = 00h
+	Dev  = 01h
+	Fun  = 05h
+	BridgeBusNum  = "$(NBIO_FIXED_BUS_BRIDGE4)"
+	GPEbit  = 08h
+	SleepNum  = 04h
+	ASLfile  = "'AmiChipsetModulePkg/ASL/Gprw08.asl'"
+	ASLdeviceName  = "GPP4"
+	Token = "NBIO_RV_BRIDGE4_EXISTS" "=" "0"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	FixedBus = Yes
+	PCIExpress = Yes
+	GpeEnabled = Yes
+End
+
+
+#Add NVME asl device name 
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F5) Slot"
+	Parent  = "NBIO Br4"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ASLdeviceName  = "NVME"
+	IntA =  LNKA; 40
+	IntB =  LNKB; 41
+	IntC =  LNKC; 42
+	IntD =  LNKD; 43
+	Token = "NBIO_RV_BRIDGE4_SLOT_EXISTS" "=" "0"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PcdMapping
+	Name  = "PcdModernStandbySupport"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFeatureFlag"
+	DataType  = "Boolean"
+	Value  = "$(MODERN_STANDBY_SUPPORT)"
+	Offset  = 00h
+	Length  = 01h
+	Help  = "Enabled Modern Standby"
+	TargetDSC = Yes
+	Token = "CRB_MODERN_STANDBY_SUPPORT" "=" "1"
+End
+
+PcdMapping
+	Name  = "PcdReduceHardwareSupport"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFeatureFlag"
+	DataType  = "Boolean"
+	Value  = "TRUE"
+	Offset  = 00h
+	Length  = 01h
+	Help  = "Enabled Reduce - Hardware system"
+	TargetDSC = Yes
+	Token = "CRB_MODERN_STANDBY_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CRB_FEATURE_MS_ASL_SUPPORT"
+	Value  = "1"
+	Help  = "Enable Modern Standby related ASL porting code for CRB board."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "CRB_MODERN_STANDBY_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "HW_REDUCE_ACDCTIMER_SUPPORT"
+	Value  = "1"
+	Help  = "Capsule mode support ACDC timer to wake up system"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+ELINK
+	Name  = "gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareEnable"
+	Parent  = "SbResetLibPcdList"
+	InvokeOrder = AfterParent
+	Token = "HW_REDUCE_ACDCTIMER_SUPPORT" "=" "1"
+End
+
+ELINK
+	Name  = "AmdCpmPkg/Addendum/Oem/MandolinPco/AmdCpmOemPkg.dec"
+	Parent  = "SbResetLibPackagesList"
+	InvokeOrder = AfterParent
+	Token = "HW_REDUCE_ACDCTIMER_SUPPORT" "=" "1"	
+End
+
+INFComponent
+	Name  = "CrbModernStandby"
+	File  = "CrbModernStandby.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "CRB_MODERN_STANDBY_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "CrbModernStandby"
+	FD_AREA  = "FV_MAIN"
+	INFComponent  = "$(PLATFORM_PKG_NAME).CrbModernStandby"
+	Token = "CRB_MODERN_STANDBY_SUPPORT" "=" "1"
+End
+

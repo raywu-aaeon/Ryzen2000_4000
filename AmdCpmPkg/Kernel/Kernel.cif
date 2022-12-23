@@ -1,0 +1,13 @@
+<component>
+	name = "Kernel"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Kernel\"
+	RefName = "AmdCpmPkg.Kernel"
+[INF]
+"Asl\AmdCpm3InitAsl.inf"
+"Dxe\AmdCpm3InitDxe.inf"
+"Pei\AmdCpm3InitPeim.inf"
+"Smm\AmdCpm3InitSmm.inf"
+[files]
+"Kernel.sdl"	
+<endComponent>

@@ -1,0 +1,18 @@
+<component>
+	name = "AmiChipsetModulePkg"
+	category = eChipset
+	LocalRoot = "AmiChipsetModulePkg\"
+	RefName = "AmiChipsetModulePkg"
+[INF]
+"Library\AmiCspSmmBootScriptLib\AmiCspSmmBootScriptLib.inf"
+"Library\AmiCspSmmBootScriptLib\AmiCspSmmBootScriptSmmLib.inf"
+"Library\AmiS3BootScriptLib\AmiS3BootScriptLib.inf"
+[files]
+"AmiChipsetModulePkg.sdl"	
+"AmiChipsetModulePkg.dec"	
+[parts]
+"AmiChipsetModulePkg.AmiCspLib"
+"AmiChipsetModulePkg.GraphicNorthBridge"
+"AmiChipsetModulePkg.NorthBridge"
+"AmiChipsetModulePkg.SouthBridge"
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "Gnb Setup"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Gnb\GnbSetup\"
+	RefName = "AmiChipsetModulePkg.GnbSetup"
+[files]
+"Gnb.sd"
+"Gnb.uni"
+"GnbSetup.sdl"
+"GnbSetup.c"
+<endComponent>

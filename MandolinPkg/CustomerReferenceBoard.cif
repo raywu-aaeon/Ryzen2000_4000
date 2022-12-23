@@ -1,0 +1,32 @@
+<component>
+    name = "Customer Reference Board - MandolinPkg"
+    category = eBoard
+    Rank = 59
+    LocalRoot = "MandolinPkg\"
+    RefName = "MandolinPkg"
+[INF]
+"Dxe\CrbDxe.inf"
+"Pei\CrbPei.inf"
+"Smm\CrbSmi.inf"
+"CrbPcie\CrbPciePei.inf"
+"CrbSmbios\CrbSmbios.inf"
+[files]
+"CustomerReferenceBoard.chm"	
+"MandolinPkg.dec"	
+"Crb.mak"	
+"Csp.sdl"	
+"Crb.sdl"	
+"Patch_0202.zip"	
+"CrbAmiTpmInterruptPlatformResourceTemplate.txt"	
+[parts]
+"MandolinPkg.Asl"
+"MandolinPkg.Setup"
+"MandolinPkg.Pxe"
+"MandolinPkg.Include"
+"MandolinPkg.LibraryInstances"
+"MandolinPkg.CrbFp5Ec"
+"MandolinPkg.CrbAmdCpmOemTableOverride"
+"MandolinPkg.CrbPostTime"
+"MandolinPkg.CrbModernStandby"
+"MandolinPkg.DsmAsl"
+<endComponent>

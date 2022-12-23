@@ -1,0 +1,8 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "MandolinPkg\Include\Protocol\"
+	RefName = "MandolinPkg.Include.Protocol"
+[files]
+"CrbInfo.h"
+<endComponent>

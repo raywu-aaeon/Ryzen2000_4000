@@ -1,0 +1,18 @@
+TOKEN
+	Name  = "SDMMC_TEMPLATE_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Kbc Emulation SB module part in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "SdMmcTemplate"
+	File  = "SdMmcTemplate.inf"
+	Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+	Class  = "SdMmcTemplateLib"
+	Instance  = "AmiModulePkg.SdMmcTemplate"
+End

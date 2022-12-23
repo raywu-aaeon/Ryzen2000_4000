@@ -1,0 +1,11 @@
+<component>
+	name = "AmiUsbLibInclude"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Include\Library\"
+	RefName = "AmiUsbLibInclude"
+[files]
+"AmiUsbSmmGlobalDataValidationLib.h"	
+"DxeSmmUsbSbLib.h"	
+"AmiUsbHcdLib.h"	
+"DxeAmiUsbBdsLib.h"	
+<endComponent>

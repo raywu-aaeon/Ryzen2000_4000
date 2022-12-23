@@ -1,0 +1,53 @@
+TOKEN
+	Name  = "AmdCpmPkg_Features_Ucsi_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdCpmUcsi support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "AmdCpmOemInitMandolin_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AmdCpmUcsiAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmUcsiAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmUcsiDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmUcsiDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmUcsiPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmUcsiPei support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdCpmUcsiAsl"
+	File  = "Asl/AmdCpm3UcsiAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmUcsiAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmUcsiDxe"
+	File  = "Dxe/AmdCpm3UcsiDxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmUcsiDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmUcsiDxe"
+	File  = "Pei/AmdCpm3UcsiPeim.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmUcsiPei_SUPPORT" "=" "1"
+End

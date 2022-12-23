@@ -1,0 +1,17 @@
+<component>
+    name = "SnpDxe"
+    category = ModulePart
+    LocalRoot = "AgesaModulePkg\SnpDxe\"
+    RefName = "AgesaModulePkg.SnpDxe"
+[INF]
+"SnpDxePort.inf"
+[files]
+"AmdXgbe.c"
+"SnpDxe.c"
+"SnpDxe.h"
+"SnpDxeConfig.h"
+"SnpDxeImplement.c"
+"SnpDxeXgbe.c"
+"SnpDxeXgbe.h"
+"SnpDxe.sdl"
+<endComponent>

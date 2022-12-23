@@ -1,0 +1,5 @@
+#define GNB_OEM_SETUP_CALLBACK_LIST @Elink(GnbConfigurationList, "@Child", " ", "%n")
+
+#define OEM_HDA_VERB_TABLE_CONTENT @Elink(OEM_HDA_VERB_TABLE_CONTENT, "@Child", " ", "%n")
+#define OEM_HDA_VERB_TABLE @Elink(OEM_HDA_VERB_TABLE, "@Child", " ", "%n")
+

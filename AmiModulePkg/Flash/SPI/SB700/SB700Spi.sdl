@@ -1,0 +1,92 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+TOKEN
+    Name  = "SB700_SPI_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SB700 SPI support in Project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+PATH
+    Name  = "SPI_CSP_DIR"
+End
+
+TOKEN
+    Name  = "YANGTZE_SPI"
+    Value  = "0"
+    Help  = "Switch to SPI support for YangTze."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "REG80_FIFO_SUPPORT"
+    Value  = "0"
+    Help  = "Switch to use 64 bytes FIFO at register 0x80"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ENABLE_ROM_CACHE_IN_DXE"
+    Value  = "0"
+    Help  = "Switch to enable ROM cache in DXE"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+INFComponent
+    Name  = "SB700CspSpiFlashLib"
+    File  = "SB700CspSpiFlashLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+INFComponent
+    Name  = "SB700CspSpiFlashPeiLib"
+    File  = "SB700CspSpiFlashPeiLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "CspSpiFlashLib"
+    Instance  = "AmiModulePkg.SB700CspSpiFlashLib"
+    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER SMM_CORE UEFI_APPLICATION UEFI_DRIVER"
+End
+
+LibraryMapping
+    Class  = "CspSpiFlashLib"
+    Instance  = "AmiModulePkg.SB700CspSpiFlashPeiLib"
+    ModuleTypes  = "PEIM"
+End
+
+INFComponent
+    Name  = "SpiFlashAddressLib"
+    File  = "SpiFlashAddressLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "SpiFlashAddressLib"
+    Instance  = "AmiModulePkg.SpiFlashAddressLib"
+End
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2012, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

@@ -1,0 +1,52 @@
+#**********************************************************************
+#*                                                                    *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.  *
+#*                                                                    *
+#*      All rights reserved. Subject to AMI licensing agreement.      *
+#*                                                                    *
+#**********************************************************************
+## @file
+# AmiImageTypeLib instance
+##
+[Defines]
+  INF_VERSION     = 0x00010005
+  BASE_NAME       = DxeAmiImageTypeLib
+  FILE_GUID       = 995A438A-1331-480C-A0FE-FD129A902496
+  MODULE_TYPE     = DXE_DRIVER
+  VERSION_STRING  = 1.0
+  LIBRARY_CLASS   = AmiImageTypeLib|DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_DRIVER UEFI_APPLICATION
+  CONSTRUCTOR     = AmiImageTypeLibConstructor
+  DESTRUCTOR      = AmiImageTypeLibDestructor
+
+[Sources]
+  DxeAmiImageTypeLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DevicePathLib
+  DebugLib
+  PcdLib
+  UefiLib
+  MemoryAllocationLib
+  AmiRomLayoutLib
+  HobLib
+  AmiItemListLib
+
+[Protocols]
+  gEfiFirmwareVolume2ProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiBlockIo2ProtocolGuid
+  gEfiLoadFileProtocolGuid
+  gEfiFirmwareVolumeBlockProtocolGuid
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Pcd]
+  gAmiModulePkgTokenSpaceGuid.AmiPcdLoadUnsignedEmbeddedApplications

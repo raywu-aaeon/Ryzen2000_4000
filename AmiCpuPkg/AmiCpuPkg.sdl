@@ -1,0 +1,52 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+PATH
+    Name  = "WRAPPER_PKG_ROOT"
+End
+
+ELINK
+    Name  = "AmiCpuPkg/AmiCpuPkg.dec"
+	Parent  = "AdditionalSetupPackages"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "PICASSO_CPU_VERSION"
+    Value  = "10"
+    Help  = "Current CPU label version"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+#TOKEN
+#    Name  = "AMI_CPU_PKG_VERSION"
+#    Value  = "08"
+#    Help  = "The current module version for version check. Should be updated on each Release of AmiCpuPkg."
+#    TokenType = Integer
+#    TargetH = Yes
+#End
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

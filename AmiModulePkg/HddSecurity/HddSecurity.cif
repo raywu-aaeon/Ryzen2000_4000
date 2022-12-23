@@ -1,0 +1,29 @@
+<component>
+	name = "HddSecurity"
+	category = eModule
+	LocalRoot = "AmiModulePkg\HddSecurity\"
+	RefName = "HddSecurity"
+[INF]
+"HddSecurity.inf"
+"HddSecurityBdsCall.inf"
+"HddSecurityPei.inf"
+[files]
+"HddSecurity.sdl"	
+"HddSecurity.chm"	
+[parts]
+"SmmHddSecurity"
+"AmiTseHddSecurity"
+"HddSecurityIncludes"
+"HddSecDynamicSetup"
+"HddSecStaticSetup"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_53"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_21"
+SmmConfidentialMemModule >= "SS: AptioV;$/AptioV/Source/Modules/SmmConfidentialMemModule;SmmConfidentialMemModule_01"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_10"
+[dependency.optional]
+AmiModulePkg.IdeBusSrc >= "SS: AptioV;$/AptioV/Source/Modules/IdeBus;IdeBus_08"
+NVMe >= "SS: AptioV;$/AptioV/Source/Modules/NVMe;Nvme_28"
+AHCI >= "SS: AptioV;$/AptioV/Source/Modules/AHCI;AHCI_28"
+NvmeRstPassword >= "SS: AptioV;$/AptioV/Source/Hardware/Chipset/Intel/NvmeRstPassword;NvmeRstPassword_05"
+<endComponent>

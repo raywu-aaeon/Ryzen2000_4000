@@ -1,0 +1,8 @@
+<component>
+	name = "DebugPortTablesLibHeaders"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Include\Library\"
+	RefName = "AmiModulePkg.DebugPortTablesLibHeaders"
+[files]
+"AmiDebugPortTablesLib.h"	
+<endComponent>

@@ -1,0 +1,66 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+//*****************************************************************************
+/** @file 
+    This file contains the Firmware Version Data Structure definition.  This structure
+    is filled out a build time token definitions that give information about the current 
+    BIOS code.
+*/
+
+// Module specific Includes
+#include <Token.h>
+#include <TimeStamp.h>
+#include <AmiLib.h>
+#include <Fid.h>
+#if ACPI_SUPPORT
+    #include <AcpiOemElinks.h>
+#else
+// Added for compatibility when ACPI is removed from the project.
+#ifndef ACPI_OEM_ID_MAK
+    #define ACPI_OEM_ID_MAK "AMIAMI"
+#endif
+
+#ifndef ACPI_OEM_TBL_ID_MAK
+    #define ACPI_OEM_TBL_ID_MAK  "A M I "
+#endif
+#endif
+
+
+/// macro defined to convert a integer value to a string
+#define THREE_CHAR_ARRAY(x) {(x)/10+'0',(x)%10+'0',0}
+
+/// This data structure is completed at build time and stored in a binary file in the ROM image.
+FW_VERSION  FwVersionData = {
+    "$FID",                                     //$FID signature of the FW VERSION STRUCTURE
+    0x04,                                       //Version 4
+    sizeof(FW_VERSION),                         //Size of this structure
+    CONVERT_TO_STRING(BIOS_TAG),                //8 character BIOS Tag, Plus NULL Cahracter at the end
+    FW_VERSION_GUID,                            //FW Version GUID
+    THREE_CHAR_ARRAY(CORE_MAJOR_VERSION),       //Core Major Version from BIOS Parameters
+    THREE_CHAR_ARRAY(CORE_BUILD_NUMBER),        //Core Build Number from BIOS Parameters
+    THREE_CHAR_ARRAY(PROJECT_MAJOR_VERSION),    //Project Major Version from BIOS Parameters
+    THREE_CHAR_ARRAY(PROJECT_MINOR_VERSION),    //Project Minor Version from BIOS Parameters
+    THIS_YEAR,
+    THIS_MONTH,
+    THIS_DAY,
+    THIS_HOUR,
+    THIS_MINUTE,
+    THIS_SECOND,
+    0xffff,
+    ACPI_OEM_ID_MAK,
+    ACPI_OEM_TBL_ID_MAK,
+    49,
+    { 
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff
+    }
+};

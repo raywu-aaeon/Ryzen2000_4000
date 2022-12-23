@@ -1,0 +1,15 @@
+<component>
+    name = "AmiNetworkPkg"
+    category = eModule
+    LocalRoot = "AmiNetworkPkg\"
+    RefName = "AmiNetworkPkg"
+[files]
+"AmiNetworkPkg.sdl"	
+"AmiNetworkPkg.dec"	
+[parts]
+"AmiNetworkPkg.Include"
+"AmiNetworkPkg.LibraryInstances"
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_27"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_22"
+<endComponent>

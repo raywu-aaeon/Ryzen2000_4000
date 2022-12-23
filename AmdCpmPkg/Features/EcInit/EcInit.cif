@@ -1,0 +1,12 @@
+<component>
+	name = "EcInit"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\EcInit\"
+	RefName = "AmdCpmPkg.Features.EcInit"
+[INF]
+"Asl\AmdCpm3EcInitAsl.inf"
+"Dxe\AmdCpm3EcInitDxe.inf"
+"Pei\AmdCpm3EcInitPeim.inf"
+[files]
+"EcInit.sdl"	
+<endComponent>

@@ -1,0 +1,8 @@
+<component>
+	name = "IndustryStandard"
+	category = ModulePart
+	LocalRoot = "AmiHstiPkg\Include\IndustryStandard\"
+	RefName = "AmiHstiPkg.IndustryStandard"
+[files]
+  "Hsti.h"	
+<endComponent>

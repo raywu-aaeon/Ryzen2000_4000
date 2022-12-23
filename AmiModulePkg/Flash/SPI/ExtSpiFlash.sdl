@@ -1,0 +1,41 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+TOKEN
+    Name  = "ExtSpiFlashLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable extended SPI Flash library support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+INFComponent
+    Name  = "ExtSpiFlashDxeLib"
+    File  = "ExtSpiFlashDxeLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "ExtSpiFlashLib"
+    Instance  = "AmiModulePkg.ExtSpiFlashDxeLib"
+    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER SMM_CORE UEFI_APPLICATION UEFI_DRIVER"
+End
+
+INFComponent
+    Name  = "ExtSpiFlashPeiLib"
+    File  = "ExtSpiFlashPeiLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "ExtSpiFlashLib"
+    Instance  = "AmiModulePkg.ExtSpiFlashPeiLib"
+    ModuleTypes  = "PEIM"
+End

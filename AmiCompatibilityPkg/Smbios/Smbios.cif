@@ -1,0 +1,26 @@
+<component>
+    name = "Smbios"
+    category = eModule
+    LocalRoot = "AmiCompatibilityPkg\Smbios\"
+    RefName = "Smbios"
+[INF]
+"Smbios.inf"
+[files]
+"Smbios.sdl"	
+"Smbios.chm"	
+[parts]
+"AmiSmbiosProtocols"
+"SmbiosBoard"
+"SmbiosDmiEdit"
+"SmbiosGetFlashData"
+"SmbiosFlashData"
+"SmbiosPeim"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_58"
+AmiModulePkg.FlashDriver >= "SS: AptioV;$/AptioV/Source/Modules/FlashDriver;FlashDriver_04"
+SmiFlash >= "SS: AptioV;$/AptioV/Source/Modules/SmiFlash;SmiFlash_16"
+[dependency.optional]
+CSM >= "SS: AptioV;$/AptioV/Source/Modules/Csm;Csm_7.76_06.00"
+CmosManager >= "SS: AptioV;$/AptioV/Source/Modules/CmosManager;CmosManager_08.01"
+AmiModulePkg.AFRI >= "SS: AptioV;$/AptioV/Source/Modules/AFRI;AFRI_02"
+<endComponent>

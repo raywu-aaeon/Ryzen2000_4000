@@ -1,0 +1,11 @@
+<component>
+	name = "SB Setup"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\SB\SbSetup"
+	RefName = "AmiChipsetModulePkg.SbSetup"
+  [files]
+  "SbSetup.sdl"	
+  "Sb.sd"
+  "Sb.uni"
+  "SbSetup.c"
+  <endComponent>

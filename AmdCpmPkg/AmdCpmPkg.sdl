@@ -1,0 +1,511 @@
+TOKEN
+	Name  = "AmdCpmPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdCpmPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "Build_AmdCpmPkg"
+	Value  = "0"
+	Help  = "Switch for building AmdCpmPkg Package"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PLATFORM_NAME"
+	Value  = "AmdCpmPkg"
+	TokenType = Expression
+	TargetDSC = Yes
+	Token = "Build_AmdCpmPkg" "=" "1"
+End
+
+TOKEN
+	Name  = "AMI_CPM_FIXED_PLATFORM_ID"
+	Value  = "1"
+	Help  = "Turn on fixed platform ID for CPM.\On : use table2 for OEM (AVA9 Rev.B)\Off : read ID from EC for CRB."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+
+#####TOKEN
+#####	Name  = "AGESA_PKG_PATH"
+#####	Value  = "AgesaModulePkg"
+#####	TokenType = Expression
+#####	TargetDSC = Yes
+#####End
+#####
+#####TOKEN
+#####	Name  = "AGESA_PKG_DEC"
+#####	Value  = "AgesaAm4SmBrModulePkg"
+#####	TokenType = Expression
+#####	TargetDSC = Yes
+#####End
+#####
+#####TOKEN
+#####	Name  = "FCH_PKG_PATH"
+#####	Value  = "AgesaModulePkg/Fch/Kern"
+#####	TokenType = Expression
+#####	TargetDSC = Yes
+#####End
+#####
+#####TOKEN
+#####	Name  = "FCH_PKG_DEC"
+#####	Value  = "FchKern"
+#####	TokenType = Expression
+#####	TargetDSC = Yes
+#####End
+#####
+#####TOKEN
+#####	Name  = "FCH_PKG_PATH_2"
+#####	Value  = "$(AGESA_PKG_PATH)/Fch/Taishan"
+#####	TokenType = Expression
+#####	TargetDSC = Yes
+#####End
+#####
+#####TOKEN
+#####	Name  = "FCH_PKG_DEC_2"
+#####	Value  = "FchTaishan"
+#####	TokenType = Expression
+#####	TargetDSC = Yes
+#####End
+TOKEN
+	Name  = "AMD_CPM_PKG_ADDENDUM_PLATFORM_PATH"
+	Value  = "$(AMD_CPM_PKG_ADDENDUM_PLATFORM_DIR)"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+
+####TOKEN
+####	Name  = "CPM_PKG_DEC"
+####	Value  = "AmdCpmPkg"
+####	TokenType = Expression
+####	TargetDSC = Yes
+####End
+####
+####TOKEN
+####	Name  = "PROJECT_PKG_PATH"
+####	Value  = "AmdCpmPkg/AmiCpmWrapper"
+####	TokenType = Expression
+####	TargetDSC = Yes
+####End
+####
+####TOKEN
+####	Name  = "PROJECT_PKG_DEC"
+####	Value  = "AmiCpmWrapperPkg"
+####	TokenType = Expression
+####	TargetDSC = Yes
+####End
+OUTPUTREGISTER
+	Name  = "CpmElinkList"
+	Path  = "Build"
+	File  = "CpmElinks.h"
+	Template  = "Elink/CpmElinks.txt"
+End
+
+PcdMapping
+	Name  = "Cpu0AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "EcAslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "EcMutexAslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0x3930305A"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : use the CPM default.\Ex. '900Z' Z009 ASCII 0x3930305A"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "LpcAslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0x47524253"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : use the CPM default.\Ex. 'GRBS' ASCII 0x47524253"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "OkEcAslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0x43454B4F"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : use the CPM default.\Ex. 'CEKO' ASCII 0x43454B4F"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "OemCallBackAslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "ApuSupportMask"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0xFFFFFFFF"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "OemMLibAslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : AMD_CPM_ASL_OEM_MLIB = MLIB"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGfx0AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : use the CPM default.\Ex. '_XFG' ASCII 0x1E584647"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGfx1AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGfx2AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGfx3AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGfx4AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGpp0AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : use the CPM default.\Ex. '0PPG' ASCII 0x30505047"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGpp1AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : use the CPM default.\Ex. '1PPG' ASCII 0x31505047"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGpp2AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : use the CPM default.\Ex. '2PPG' ASCII 0x32505047"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGpp3AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : use the CPM default.\Ex. '3PPG' ASCII 0x33505047"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcieGpp4AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	Help  = "0 : use the CPM default."
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "FchPcieGpp0AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "FchPcieGpp1AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "FchPcieGpp2AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "FchPcieGpp3AslName"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "AcpiRestoreSwSmi"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "0xBC"
+	Offset  = 00h
+	Length  = 01h
+	Help  = "AMD default is 0xE3.\For AMI - CSP/CRB use 0xBC instead."
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "AcpiEnableSwSmi"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "$(SW_SMI_ACPI_ENABLE)"
+	Offset  = 00h
+	Length  = 01h
+	Help  = "Sync AMI-SB definition SW_SMI_ACPI_ENABLE."
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PlatformIdOverride"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint16"
+	Value  = "0xFFFF"
+	Offset  = 00h
+	Length  = 02h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdSimpleSltSupport"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "0x0"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "EcRamBaseAddr"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint16"
+	Value  = "0x062"
+	Offset  = 00h
+	Length  = 02h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "EcRamGpioOffset"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "0xAB"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "X86IoRemapBase"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint64"
+	Value  = "0x000000FDFC000000"
+	Offset  = 00h
+	Length  = 08h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PciMmioBase"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint64"
+	Value  = "$(PCIEX_BASE_ADDRESS)"
+	Offset  = 00h
+	Length  = 08h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "SwSmiCmdSetAutoUmaMode"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "0xBD"
+	Offset  = 00h
+	Length  = 01h
+	Help  = "AMD default is 0xDF.\For AMI - CSP/CRB use 0xBD instead."
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "AcpiDisableDgpuAudioSwSmi"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "0xBA"
+	Offset  = 00h
+	Length  = 01h
+	Help  = "AMD default is 0xE3.\For AMI - CSP/CRB use 0xBA instead."
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "CurrentPlatformId"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint16"
+	Value  = "0x0000"
+	Offset  = 00h
+	Length  = 02h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "OriginalPlatformId"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint16"
+	Value  = "0x0000"
+	Offset  = 00h
+	Length  = 02h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdSwSmiCmdtoBuildContext"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "$(PSP_NOTIFY_SMM_SW_SMI)"
+	Offset  = 00h
+	Length  = 01h
+	Help  = "AMD default is 0xDD.\For AMI - Sync AmiPspPkg."
+	TargetDSC = Yes
+	Token = "PSP_NOTIFY_SMM_SW_SMI" "!=" "0"
+	Token = "PSP_NOTIFY_SMM_SW_SMI" ">=" "0x80"
+	Token = "PSP_NOTIFY_SMM_SW_SMI" "<=" "0x90"
+End
+

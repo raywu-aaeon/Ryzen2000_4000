@@ -1,0 +1,22 @@
+TOKEN
+    Name  = "SmbiosMeasurementDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Measures SMBIOS data"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+PATH
+    Name  = "TCG_MEASURE_SMIBIOS_DIR"
+End
+
+
+INFComponent
+    Name  = "SmbiosMeasurementDxe"
+    File  = "SmbiosMeasurementDxe.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+

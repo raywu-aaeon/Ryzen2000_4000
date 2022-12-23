@@ -1,0 +1,7 @@
+TOKEN
+	Name  = "AmdCbsPkg_F17_RV_ResourceRVFP5_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling ResourceRVFP5 support in the project"
+	TokenType = Boolean
+	Master = Yes
+End

@@ -1,0 +1,252 @@
+TOKEN
+    Name  = "===================== GPIO Definition ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "===================== AMD GPIO Define ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "GPIO_Sticky"
+    Value  = "0x0004"
+    Help = "If set, bits 6:3 are sticky. If cleared, bits 6:3 are reset back to\default values whenever a reset occurs. This will allow every\GPIO to be sticky or non-sticky"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPIO_PullUpB"
+    Value  = "0x0008"
+    Help = "0: Pull-up enable\1: Pull-up disabled"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPIO_PullDown"
+    Value  = "0x0010"
+    Help = "0: Pull down disabled\1: Pull down enabled"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPIO_GpioOutEnB"
+    Value  = "0x0020"
+    Help = "0: Output enable\1: Output disable"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPIO_GpioOut"
+    Value  = "0x0040"
+    Help = "Output state when GpioOutEnableB is enabled"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "AMDMUF0"
+    Value  = "0x0000"
+    Help = "Multi-function IO pin function select for pin GPIO<X> \00: function-0\==== The detail definition is 'GPIO_Pins_Descriptions_Table' in SB.H ===="
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "AMDMUF1"
+    Value  = "0x0100"
+    Help = "Multi-function IO pin function select for pin GPIO<X> \01: function-1\==== The detail definition is 'GPIO_Pins_Descriptions_Table' in SB.H ===="
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "AMDMUF2"
+    Value  = "0x0200"
+    Help = "Multi-function IO pin function select for pin GPIO<X> \02: function-2\==== The detail definition is 'GPIO_Pins_Descriptions_Table' in SB.H ===="
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "AMDMUF3"
+    Value  = "0x0300"
+    Help = "Multi-function IO pin function select for pin GPIO<X> \03: function-3\==== The detail definition is 'GPIO_Pins_Descriptions_Table' in SB.H ===="
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPIO_PullUpSel1"
+    Value  = "0x0800"
+    Help = "0: 4 K pull-up is selected\1: 8 K pull-up is selected."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPIO_DrvStrengthSel0"
+    Value  = "0x0000"
+    Help = "0: 4 mA."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPIO_DrvStrengthSel1"
+    Value  = "0x1000"
+    Help = "0: 8 mA."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPIO_DrvStrengthSel2"
+    Value  = "0x2000"
+    Help = "0: 12 mA."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPIO_DrvStrengthSel3"
+    Value  = "0x3000"
+    Help = "0: 16 mA."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "===================== AMI GPIO Define ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+
+TOKEN
+    Name  = "IS_GPIO"
+    Value  = "0x8000"
+    Help  = "It is a GPIO, the pin will be used as a GPIO."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "IS_NOT_GPIO"
+    Value  = "0x0000"
+    Help  = "It is not a GPIO, the pin will be used as native function."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "IS_GPO"
+    Value  = "$(IS_GPIO)+0x0000"
+    Help  = "It is a GPIO and is an output."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "IS_GPI"
+    Value  = "$(IS_GPIO)+$(GPIO_GpioOutEnB)"
+    Help  = "It is a GPIO and is an input. 0x002"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "OUTPUT_HIGH"
+    Value  = "$(GPIO_GpioOut)"
+    Help = "0x0048"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "OUTPUT_LOW"
+    Value  = "0x000"
+    Help = "0x0008"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPO_HIGH"
+    Value  = "$(IS_GPO)+$(OUTPUT_HIGH)"
+    Help  = "It is a GP output and driving a high level on the pin.\(Output high, Non Sticky, Pullup Disable, Pulldown Disable)"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "GPO_LOW"
+    Value  = "$(IS_GPO)+$(OUTPUT_LOW)"
+    Help  = "It is a GP output and driving a low level on the pin.\(Output low, Non Sticky, Pullup Disable, Pulldown Disable)"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "===================== GPIO Define ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+#### The basic three tokens "IS_GPI"," GPO_HIGH"," GPO_LOW" has plus "IS_GPIO".
+#### So customer can use the three tokens for general GPIO porting directly.
+#### If customer wants to use non-GPIO function, please select the correct token from "AMDMUF0" ~ "AMDMUF3".
+#### They also can refer the table "GPIO_Pins_Descriptions_Table" in GPIO.h to know all functions of pin.
+
+#### Set GPIO_192 to PS2M_CLK function.
+#### Refer to "GPIO_Pins_Descriptions_Table" in GPIO.h, we can find out the "PS2M_CLK" is function-0
+####TOKEN
+####    Name  = "GPIO_192"  #(0xC0)
+####    Value  = "$(IS_NOT_GPIO)+$(AMDMUF0)"
+####    TokenType = Integer
+####    TargetH = Yes
+####End
+
+#### Set GPIO_193 to GPIO and OUTPUT-HIGH
+####TOKEN
+####    Name  = "GPIO_193"  #(0xC1)
+####    Value  = "$(GPO_HIGH)"
+####    TokenType = Integer
+####    TargetH = Yes
+####End
+
+####  Set GPIO_194 as GPI
+####TOKEN
+####    Name  = "GPIO_194"  #(0xC2)
+####    Value  = "$(IS_GPI)"
+####    TokenType = Integer
+####    TargetH = Yes
+####End

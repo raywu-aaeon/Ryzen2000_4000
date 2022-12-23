@@ -1,0 +1,75 @@
+TOKEN
+    Name  = "TpmNvme_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable TpmSmbios support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+    Token = "AMI_MODULE_PKG_VERSION" ">=" "39"
+End
+
+PATH
+    Name = "TpmNvme_DIR"
+End
+
+ELINK
+    Name  = "$(TpmNvme_DIR)"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "TpmNvmeSupport"
+    File  = "TpmNvmeSupport.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+ELINK
+    Name  = "gEdkiiVariableLockProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent    
+End
+
+ELINK
+    Name  = "gSetupVariableGuid"
+    Parent  = "AdditionalSetupGuids"
+    InvokeOrder = AfterParent    
+End
+
+
+ELINK
+    Name  = "gEfiNvmExpressPassThruProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent    
+End
+
+ELINK
+        Name  = "MdePkg/MdePkg.dec"
+        Parent  = "AdditionalSetupPackages"
+        InvokeOrder = AfterParent
+End
+
+ELINK
+        Name  = "AmiTcgPkg/AmiTcgPkg.dec"
+        Parent  = "AdditionalSetupPackages"
+        InvokeOrder = AfterParent
+End
+
+ELINK
+        Name  = "MdeModulePkg/MdeModulePkg.dec"
+        Parent  = "AdditionalSetupPackages"
+        InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "$(TpmNvme_DIR)/TpmNvmeSetupSupport.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "InitTcgNvme,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+End

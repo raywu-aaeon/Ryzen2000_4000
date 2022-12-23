@@ -1,0 +1,79 @@
+
+[Defines]
+	INF_VERSION                     = 0x00010005
+	BASE_NAME                       = GnbAmiNbioDxeLib
+    FILE_GUID                       = CBD8BB62-3462-420c-98E7-CF5E6DF736B5
+    MODULE_TYPE                     = DXE_DRIVER
+	LIBRARY_CLASS                   = GnbAmiNbioDxeLib
+	CONSTRUCTOR                     = GnbAmiNbioDxeConstructor
+
+[Sources]
+    GnbAmiNbioDxeLib.c
+    
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiChipsetPkg/AmiChipsetPkg.dec
+    AmiChipsetModulePkg/AmiChipsetModulePkg.dec  
+    AgesaPkg/AgesaPkg.dec
+    AgesaModulePkg/AgesaModuleNbioPkg.dec
+    AgesaModulePkg/AgesaFamily15ModulePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+    
+[LibraryClasses]
+    UefiLib
+    UefiBootServicesTableLib
+    UefiRuntimeServicesTableLib
+    GnbGetSetupData
+    PciLib
+    HobLib
+    DebugLib
+    IoLib
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdGnbIoApicId
+  ### AVA9 : Refer to AmdNbioBaseCZDxe.inf
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnb3dStereoPinIndex
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGpuFrequencyLimit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsSpreadSpectrum
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsSpreadSpectrumRate
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqDigonToDe
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqDeToVaryBl
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqDeToDigon
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqVaryBlToDe
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqOnToOffDelay
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqVaryBlToBlon
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqBlonToVaryBl
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsMaxPixelClockFreq
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLcdBitDepthControlValue
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvds24bbpPanelMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsMiscControlValue
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieRefClkSpreadSpectrum
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbRemoteDisplaySupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsMiscVoltAdjustment
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDisplayMiscControlValue
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDpFixedVoltSwingType
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgEDPv14VSMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgExtHDMIReDrvSlvAddr
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgExtHDMIReDrvRegNum
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgExtHDMIRegSetting
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbIoapicAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgMaxNumAudioEndpoints
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgiGpuVgaMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieAcsCapability
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbIoapicId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgFchIoapicId
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateIoBaseAddress
+  
+[Guids]
+  gEfiHobListGuid
+
+[Protocols]
+  gAmiBoardInfo2ProtocolGuid
+    
+[Depex]
+    
+[BuildOptions]

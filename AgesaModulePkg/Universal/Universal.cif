@@ -1,0 +1,15 @@
+<component>
+	name = "Universal"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Universal\"
+	RefName = "AgesaModulePkg.Universal"
+[INF]
+"Acpi\AmdAcpiDxe.inf"
+"AmdiGpuVgaControlDxe\AmdiGpuVgaControlDxe.inf"
+"AmdSmmCommunication\AmdSmmCommunication.inf"
+"Smbios\AmdSmbiosDxe.inf"
+"Version\AmdVersionDxe\AmdVersionDxe.inf"
+"Version\AmdVersionPei\AmdVersionPei.inf"
+[files]
+"Universal.sdl"
+<endComponent>

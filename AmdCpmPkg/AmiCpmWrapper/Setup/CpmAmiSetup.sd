@@ -1,0 +1,49 @@
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************
+
+/** @file CpmAmiSetup.sd
+    AMI CPM wrapper setup page definition.
+	AMD CPM provides their own PBS Setup definition since AGESA
+	V9. We won't provide CPM setup item anymore. This is just page layout.
+
+**/
+
+#ifdef FORM_SET_TYPEDEF
+#include <Dxe/AmdPbsSetupDxe/AmdPbsConfig.h>
+#endif 
+    
+#ifdef ADVANCED_FORM_SET
+    #ifdef FORM_SET_GOTO
+        goto
+            formsetguid = AMD_PBS_SETUP_FORMSET_GUID,
+            formid = AMD_PBS_SETUP_FORM_ID,
+            question = 0,
+            prompt = STRING_TOKEN(STR_AMD_PBS_SETUP_TITLE),
+            help = STRING_TOKEN(STR_AMD_PBS_SETUP_TITLE_HELP);
+    #endif
+#endif
+
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************

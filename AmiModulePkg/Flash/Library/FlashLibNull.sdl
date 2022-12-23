@@ -1,0 +1,26 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+TOKEN
+    Name  = "FlashNullLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable FlashNullLib support in Project."
+    TokenType = Boolean
+    Master = Yes
+End
+
+INFComponent
+    Name  = "AmiCspFlashLibNull"
+    File  = "AmiCspFlashLibNull.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "AmiCspFlashLib"
+    Instance  = "AmiModulePkg.AmiCspFlashLibNull"
+End

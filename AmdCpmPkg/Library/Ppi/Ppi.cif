@@ -1,0 +1,21 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Library\Ppi\"
+	RefName = "AmdCpmPkg.Library.Ppi"
+[files]
+"AmdCpmBootTimeRecordPpi\AmdCpmBootTimeRecordPpi.h"	
+"AmdCpmBootTimeRecordPpi\AmdCpmBootTimeRecordPpi.c"
+"AmdCpmGpioInitFinishedPpi\AmdCpmGpioInitFinishedPpi.h"	
+"AmdCpmGpioInitFinishedPpi\AmdCpmGpioInitFinishedPpi.c"
+"AmdCpmOemTablePpi\AmdCpmOemTablePpi.h"
+"AmdCpmOemTablePpi\AmdCpmOemTablePpi.c"	
+"AmdCpmTableHobPpi\AmdCpmTableHobPpi.h"
+"AmdCpmTableHobPpi\AmdCpmTableHobPpi.c"	
+"AmdCpmTablePpi\AmdCpmTablePpi.h"
+"AmdCpmTablePpi\AmdCpmTablePpi.c"
+"AmdCpmOverrideTablePpi\AmdCpmOverrideTablePpi.h"
+"AmdCpmOverrideTablePpi\AmdCpmOverrideTablePpi.c"
+"PcieTopologyTablePpi\PcieTopologyTablePpi.h"
+"PcieTopologyTablePpi\PcieTopologyTablePpi.c"
+<endComponent>

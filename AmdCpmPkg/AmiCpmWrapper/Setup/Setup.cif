@@ -1,0 +1,11 @@
+<component>
+	name = "AmiCpmWrapper Setup"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\AmiCpmWrapper\Setup\"
+	RefName = "AmdCpmPkg.AmiCpmWrapper.Setup"
+[INF]
+"GetCpmSetupDataLib.inf"
+[files]
+"CpmSetup.sdl"
+"CpmAmiSetup.sd"
+<endComponent>

@@ -1,0 +1,10 @@
+<component>
+	name = "AcpiModeEnable"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\SB\AcpiModeEnable\"
+	RefName = "AmiChipsetModulePkg.AcpiModeEnable"
+[INF]
+"AcpiModeEnable.inf"
+[files]
+"AcpiModeEnable.sdl"	
+<endComponent>

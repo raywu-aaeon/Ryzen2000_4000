@@ -1,0 +1,269 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file PspSetup.sd
+    Psp setup item
+**/
+
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+ #if AMI_PSP_FTPM_WRAPPER_LIB_SUPPORT
+	UINT8 fTPMSwitch;  // The AMD fTPM switch variable
+	UINT8 EraseFtpmNv; // An option to control if need to erase the fTPM NV when fTPM factory reset flag set
+ #endif
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+//----------------------------------------------------------------------------
+//		PSP fTPM SETUP item
+//----------------------------------------------------------------------------
+ #if AMI_PSP_FTPM_WRAPPER_LIB_SUPPORT
+#define PSP_ONEOF_AMD_FTPM_SWITCH\
+            oneof varid = SETUP_DATA.fTPMSwitch,\
+                prompt = STRING_TOKEN(STR_FTPM_SWITCH),\
+                help = STRING_TOKEN(STR_FTPM_SWITCH_HELP),\
+                option text = STRING_TOKEN(STR_TPM_AMDFTPM), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;\
+                option text = STRING_TOKEN(STR_FTPM_DISABLED),  value = 1, flags = RESET_REQUIRED;\
+            endoneof;
+
+  #if 1
+#define PSP_ONEOF_AMD_ERASE_FTPM_NV\
+            oneof varid = SETUP_DATA.EraseFtpmNv,\
+                prompt = STRING_TOKEN(STR_PSP_ERASE_FTPM_NV),\
+                help = STRING_TOKEN(STR_ERASE_FTPM_NV_HELP),\
+                option text = STRING_TOKEN(STR_PSP_FTPM_DISABLED), value = 0, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_PSP_FTPM_ENABLED),  value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;\
+            endoneof;
+  #endif
+ #endif
+#endif //CONTROL_DEFINITION
+//----------------------------------------------------------------------------
+//                CONTROLS_WITH_DEFAULTS
+//----------------------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+ #if AMI_PSP_FTPM_WRAPPER_LIB_SUPPORT
+	PSP_ONEOF_AMD_FTPM_SWITCH
+  #if 1
+	PSP_ONEOF_AMD_ERASE_FTPM_NV
+  #endif
+ #endif
+#endif // CONTROLS_WITH_DEFAULTS
+
+//----------------------------------------------------------------------------
+//                ADVANCED - PSP Configuration Form
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+    #ifdef FORM_SET_ITEM
+    // Define controls to be added to the main page of the formset
+    #endif
+
+    #ifdef FORM_SET_GOTO
+    // Define goto commands for the forms defined in this file
+ #if AMI_PSP_FTPM_WRAPPER_LIB_SUPPORT
+        goto AMI_PSP_FTPM_FORM_ID,
+            prompt = STRING_TOKEN(STR_AMI_PSP_FTPM_FORM),
+            help = STRING_TOKEN(STR_AMI_PSP_FTPM_HELP);
+ #endif
+
+//        goto PSP_FORM_ID,
+//            prompt  = STRING_TOKEN(STR_PSP_FWVERSION_FORM),
+//            help    = STRING_TOKEN(STR_PSP_FWVERSION_FORM_HELP);
+    #endif
+
+    // Define forms
+    #ifdef FORM_SET_FORM
+ #if AMI_PSP_FTPM_WRAPPER_LIB_SUPPORT
+        form formid = AUTO_ID(AMI_PSP_FTPM_FORM_ID),
+            title = STRING_TOKEN(STR_AMI_PSP_FTPM_FORM);
+
+        PSP_ONEOF_AMD_FTPM_SWITCH
+  #if 1
+        PSP_ONEOF_AMD_ERASE_FTPM_NV
+  #endif
+
+       endform;    // form id AMI_PSP_FTPM_FORM_ID
+ #endif
+
+//    form formid = AUTO_ID(PSP_FORM_ID),
+//        title     = STRING_TOKEN(STR_PSP_FWVERSION_FORM);
+//        text
+//            help   = STRING_TOKEN(STR_PSP_BOT_VER_HELP),
+//            text   = STRING_TOKEN(STR_PSP_FWVERSION_FORM),
+//            flags  = 0,
+//            key    = 0;
+//        SEPARATOR
+//
+//        suppressif ideqval SETUP_DATA.HideF15Op == 0;
+//        // Display Family 17 Raven PSP firmware
+//
+//            SUBTITLE(STRING_TOKEN(STR_PSP_FIXED_REGION))
+//
+//            text
+//                help   = STRING_TOKEN(STR_SMU_FW_VER_HELP),
+//                text   = STRING_TOKEN(STR_SMU_FW_VER_STRING),
+//                text   = STRING_TOKEN(STR_SMU_FW_VER_VALUE_L1),
+//                flags  = 0,
+//                key    = 0;
+//
+//        	text
+//        	    help   = STRING_TOKEN(STR_ABL_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_ABL_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_ABL_VER_VALUE_L1),
+//        	    flags  = 0,
+//        	    key    = 0;
+//        	    //SEPARATOR
+//
+//        	text
+//        	    help   = STRING_TOKEN(STR_PSP_BOT_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_PSP_BOT_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_PSP_BOT_VER_VALUE_L1),
+//        	    flags  = 0,
+//        	    key    = 0;
+//        	    //SEPARATOR
+//
+//        	text
+//        	    help   = STRING_TOKEN(STR_APCB_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_APCB_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_APCB_VER_VALUE_L1),
+//        	    flags  = 0,
+//        	    key    = 0;
+//        	    //SEPARATOR
+//
+//        	text
+//        	    help   = STRING_TOKEN(STR_APOB_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_APOB_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_APOB_VER_VALUE_L1),
+//        	    flags  = 0,
+//        	    key    = 0;
+//        	    //SEPARATOR
+//
+//        	text
+//        	    help   = STRING_TOKEN(STR_APPB_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_APPB_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_APPB_VER_VALUE_L1),
+//        	    flags  = 0,
+//        	    key    = 0;
+//        	SEPARATOR
+//
+//        	SUBTITLE(STRING_TOKEN(STR_PSP_UPDATABLE_REGION))
+//
+//        	text
+//        	    help   = STRING_TOKEN(STR_PSP_BOT_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_PSP_BOT_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_PSP_BOT_VER_VALUE_L2),
+//        	    flags  = 0,
+//        	    key    = 0;
+//			    //SEPARATOR
+//        	text
+//        	    help   = STRING_TOKEN(STR_PSP_SEC_OS_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_PSP_SEC_OS_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_PSP_SEC_OS_VER_VALUE),
+//        	    flags  = 0,
+//        	    key    = 0;
+//			    //SEPARATOR
+//
+//    		text
+//        	    help   = STRING_TOKEN(STR_SMU_FW_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_SMU_FW_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_SMU_FW_VER_VALUE_L2),
+//        	    flags  = 0,
+//        	    key    = 0;
+//	    	    //SEPARATOR
+//
+//	    	text
+//        	    help   = STRING_TOKEN(STR_ABL_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_ABL_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_ABL_VER_VALUE_L2),
+//        	    flags  = 0,
+//        	    key    = 0;
+//	    	    //SEPARATOR
+//
+//    		text
+//        	    help   = STRING_TOKEN(STR_APCB_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_APCB_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_APCB_VER_VALUE_L2),
+//        	    flags  = 0,
+//        	    key    = 0;
+//        		//SEPARATOR
+//
+//    		text
+//        	    help   = STRING_TOKEN(STR_APOB_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_APOB_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_APOB_VER_VALUE_L2),
+//        	    flags  = 0,
+//        	    key    = 0;
+//        	    //SEPARATOR
+//
+//    		text
+//        	    help   = STRING_TOKEN(STR_APPB_VER_HELP),
+//        	    text   = STRING_TOKEN(STR_APPB_VER_STRING),
+//        	    text   = STRING_TOKEN(STR_APPB_VER_VALUE_L2),
+//        	    flags  = 0,
+//        	    key    = 0;
+//	endif;
+//
+//        suppressif ideqval SETUP_DATA.HideF15Op == 1;
+//        // Display Family 15 Bristol PSP firmware
+//            text
+//                help   = STRING_TOKEN(STR_PSP_BOT_VER_HELP),
+//                text   = STRING_TOKEN(STR_PSP_BOT_VER_STRING),
+//                text   = STRING_TOKEN(STR_PSP_BOT_VER_VALUE_L1),
+//                flags  = 0,
+//                key    = 0;
+//                //SEPARATOR
+//            text
+//                help   = STRING_TOKEN(STR_PSP_SEC_OS_VER_HELP),
+//                text   = STRING_TOKEN(STR_PSP_SEC_OS_VER_STRING),
+//                text   = STRING_TOKEN(STR_PSP_SEC_OS_VER_VALUE),
+//                flags  = 0,
+//                key    = 0;
+//                //SEPARATOR
+//
+//            text
+//                help   = STRING_TOKEN(STR_SMU_FW_VER_HELP),
+//                text   = STRING_TOKEN(STR_SMU_FW_VER_STRING),
+//                text   = STRING_TOKEN(STR_SMU_FW_VER_VALUE),
+//                flags  = 0,
+//                key    = 0;
+//                //SEPARATOR
+//        endif;
+//
+//     endform;
+    #endif  // FORM_SET_FORM
+
+#endif  // ADVANCED_FORM_SET
+
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

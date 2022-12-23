@@ -1,0 +1,13 @@
+<component>
+	name = "ApcbRavenFp5Dramdown"
+	category = ModulePart
+	LocalRoot = "AgesaPkg\Addendum\Apcb\RavenFp5Dramdown\"
+	RefName = "AgesaPkg.Addendum.Apcb.RavenFp5Dramdown"
+[files]
+"ApcbCreate.bat"
+"ApcbRvFp5Dramdown.mak"
+"ApcbRvFp5Dramdown.sdl"
+[parts]
+"AgesaPkg.Addendum.Apcb.RavenFp5Dramdown.ApcbData"
+"AgesaPkg.Addendum.Apcb.RavenFp5Dramdown.Include"
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "Common"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\DisplayFeature\Asl\Common\"
+	RefName = "AmdCpmPkg.Features.DisplayFeature.Asl.Common"
+[files]
+"ATCS.asi"	
+"ATIF.asi"	
+"ATPX.asi"	
+"ATRM.asi"	
+<endComponent>

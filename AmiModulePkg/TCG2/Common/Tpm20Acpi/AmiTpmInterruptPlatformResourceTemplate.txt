@@ -1,0 +1,8 @@
+      Name(CREI,ResourceTemplate()
+      {
+            Memory32Fixed (ReadWrite, 0xFED40000, 0x5000,PCRI)
+             GpioInt (Level, ActiveLow, ExclusiveAndWake, PullNone, 0x0000, "\\_SB.GPIO", 0x00, ResourceConsumer,INTR,)
+              {0}    // Int_TPM_SPI_LPC
+      })
+
+     

@@ -1,0 +1,128 @@
+TOKEN
+    Name  = "FvBbSig_SUPPORT"
+    Value  = "0"
+    TokenType = Boolean
+    Master = Yes
+    TargetMAK = Yes
+#    Token = "INTEL_FIT_SUPPORT" "=" "0"
+#    Token = "INTEL_BOOT_GUARD_SUPPORT" "=" "0"
+#    Token = "AmiPspPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "FvBbSig_SectionGUID"
+    Value  = "05a22385-5b44-42bb-ad7d-e7045003ac36"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FVBB_BUILD_TARGET"
+    Value  = "End"
+    Help  = "Name of the make target to link FvBb sign build rules with"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FVBB_FWCAPSULE_MAX_HDR_SIZE"
+    Value  = "$(FWCAPSULE_MAX_HDR_SIZE)"
+    Help  = "The size in bytes of an embedded FvSig Header buffer"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "2kb < size < 16kb"
+End
+
+TOKEN
+    Name  = "FVBB_CERT_FORMAT"
+    Value  = "$(FWCAPSULE_CERT_FORMAT)"
+    Help  = "This token defines the format of Certificate inside the FvSig Header.\0- RSA2048_SHA256(PKCS#1, PSS)/1- PKCS#7. Values >2 are not supported"
+    TokenType = Integer
+    TargetMAK = Yes
+    Range = "0-1"
+End
+
+TOKEN
+    Name  = "FVBB_ROOTCAKEY"
+    Value  = "$(FUSS_ROOTCAKEY)"
+    Help  = "Override for a default Platform RootCA certificate"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FVBB_PUBKEY"
+    Value  = "$(FUSS_PUBKEY)"
+    Help  = "Override for a default Signer Certificate identifier: Public key file, Certificate Subject Name"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FVBB_PRIVKEY"
+    Value  = "$(FUSS_PRIVKEY)"
+    Help  = "Override for a default Signer key identifier:Private Key file(PEM, pfx) or Key Container Name, Key ID, Key Hash etc."
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FVBB_KEY_PSWD"
+    Value  = "$(FUSS_KEY_PSWD)"
+    Help  = "Specifies password to unlock PKCS#12 Private Key container file. Empty Value string translates to no password"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FVBB_HASH"
+    Value  = "sha256"
+    Help  = "Signed digest hash algorithm: string options supported: sha256, sha384, sha512"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FVBB_SIG_PSS"
+    Value  = "0"
+    Help  = "RSA Signature scheme.0-RSASSA-PKCS1v1.5, 1-RSASSA-PSS, 2-xx reserved"
+    TokenType = Integer
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "ROM_LAYOUT_FVBB"
+    Value  = "$(BUILD_DIR)$(PATH_SLASH)RomLayoutBb.bin"
+    Help  = "Name of the Bb rom map file. Used by a Cryptocon utility to select the BB sections of the BIOS to be signed"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FV_BB_CRYPTOCON_CMDLINE"
+    Value  = "-y -g $(FvBbSig_SectionGUID)"
+    Help  = "Specific FvBb sign Cryptocon command options"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+MODULE
+    Help  = "Includes FvBbSig.mak to Project"
+    File  = "FvBbSig.mak"
+End
+
+INFComponent
+    Name  = "FvBbSig"
+    File  = "FvBbSig.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "USER_DEFINED"
+End
+
+FFS_FILE
+    Name  = "FvBbSig"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiModulePkg.FvBbSig"
+    Rule_Override  = "SubtypeGuidUncompressedNoChecksum"
+    Index  = "0"
+    Help  = "Place the FvBb signature outside of Intel's BootGuard signed IBB region"
+End

@@ -1,0 +1,4 @@
+#define AMI_TCG2_ACPI_OEM_ID "@Token(T_ACPI_OEM_ID)"
+#define AMI_TCG2_ACPI_OEM_TBL_ID "@Token(T_ACPI_OEM_TBL_ID)"
+#define AMI_TCG2_LOG_BIOS_NAME "@Token(TcgLog_BiosName)"
+#define AMI_TCG2_LOG_VENDOR_NAME "@Token(TcgLog_VendorName)"

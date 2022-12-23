@@ -1,0 +1,28 @@
+<component>
+    name = "FastBoot"
+    category = eModule
+    LocalRoot = "AmiModulePkg\FastBoot\"
+    RefName = "AmiModulePkg.FastBoot"
+[INF]
+"FastBootTseHook.inf"
+"FastBootRuntime.inf"
+[files]
+"FastBoot.c"	
+"FastBoot.sdl"	
+"FastBoot.sd"	
+"FastBoot.uni"	
+"FastBoot.mak"	
+"FastBoot.chm"	
+[parts]
+"AmiModulePkg.FastBootSmi"
+"AmiModulePkg.FastBootOption"
+"AmiCompatibilityPkg.FastBootIncludes"
+"AmiCompatibilityPkg.FastBootProtocol"
+[dependency]
+AHCI >= "SS: AptioV;$/AptioV/Source/Modules/AHCI;AHCI_06"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;5.004_AmiModulePkg_15"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;5.004_AmiCompatibilityPkg_13"
+AmiModulePkg.Usb >= "SS: AptioV;$/AptioV/Source/Modules/Usb;AmiUsb_22"
+[dependency.optional]
+AmiModulePkg.IdeBusSrc >= "SS: AptioV;$/AptioV/Source/Modules/IdeBus;IdeBus_05"
+<endComponent>

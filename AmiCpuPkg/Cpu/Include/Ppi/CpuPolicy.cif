@@ -1,0 +1,8 @@
+<component>
+	name = "AMD CPU PPI"
+	category = ModulePart
+	LocalRoot = "AmiCpuPkg\Cpu\Include\Ppi\"
+	RefName = "AMD_CPU_PPI"
+[files]
+"CpuPolicy.h"	
+<endComponent>

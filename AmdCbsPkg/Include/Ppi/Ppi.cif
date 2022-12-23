@@ -1,0 +1,8 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Include\Ppi\"
+	RefName = "AmdCbsPkg.Include.Ppi"
+[files]
+"AmdCbsHookPpi.h"	
+<endComponent>

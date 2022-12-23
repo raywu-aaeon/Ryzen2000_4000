@@ -1,0 +1,3153 @@
++---------------------------------------+
+| SMU Firmware Release Notes - RAVEN1X  |
+
++---------------------------------------+
+| Version 30.95.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                29/01/21
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.291
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.95.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.95.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------------------+
+| Version 30.94.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                08/01/21
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.290
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.94.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.94.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------------------+
+| Version 30.93.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                23/09/20
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.289
+|                - [PMFW-5291] [IMP] Log error if a new message is sent to a busy message port
+|                - [PLAT-65972] [IMP] Set OC_ROLARITY_CONTROL will cause other registers change in PORT_CONTROL_CNTR0
+|                - [PMFW-5507] [IMP] GPU usage up to very high(50%-100%) in AMD Radeon Software control panel
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.93.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.93.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------------------+
+| Version 30.92.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                28/04/20
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.289
+|                - [PMFW-4208] [NEW] Embedded support to use PCO wafer with RV1 FW
+|                - [PMFW-4178] [IMP] Initialize negative peak temperature after AGM clear table
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.92.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.92.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.91.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                07/02/20
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.289
+|                - [PMFW-3607] [IVB] Initialize peak temp as negative value
+|                - [PLAT-58458] [WKA] Avoid syncflood failure on embedded platform when run in warmreset
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.91.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.91.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.90.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                12/12/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.289
+|                - [PMFW-3299] [WKA] RV1-AM4 Ryzen-3 PRO 2100GE workaround
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.90.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.90.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.89.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                15/11/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.289
+|                - [PMFW-3062] [IMP] V1000 itemp bugfixes
+|                - [PMFW-3061] [IMP] Integrate DXIO V30.289 to RV1 SMU release
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.89.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.89.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.88.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                04/09/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.288
+|                - [PMFW-2259] [ETB] Enable MP0 to clock at 800 MHz operation
+|                - [WSNPLAT-252] [IMP] TDR during PST S4 test
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.88.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.88.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.87.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                24/07/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.288
+|                - [PMFW-2181] [WKA] Disable VOTFC when CBS option WaitVidCompDis is set
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.87.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.87.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.86.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                21/06/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.288
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.86.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.86.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.85.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                17/06/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.287
+|                - [PMFW-1513][NEW] itemp support for RV embedded
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.85.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.85.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.84.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                06/06/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.287
+|                - [PMFW-1330] [NEW] update ppsmc header for consistency across RV1/2x products, used on PCO/RV2
+|                - [PMFW-1330] [IMP] Rv1x GetGfxBusy message port, and move C2P msgs to EXT_section
+|                - [PMFW-1760] [NEW] Add DXIO Test Message to PSP MSG Port
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.84.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.84.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.83.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                11/04/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.287
+|                - [PMFW-1414] [NEW] Add new PPSMC messages to notify AC/DC switch
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.83.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.83.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.82.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                29/03/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.286
+|                - [PMFW-958] [IMP] System hang up when ping AP address for overnight
+|                - [PMFW-1301] [NEW] BIOS-SMU message for writing into SBTSIx07 registers
+|                - [PMFW-1324] [IMP] Update the RM Value for RV1 B0
+|                - [PMFW-1230] [NEW] Add a PCD option to change AclkDpm0 from 200MHz to 400MHz
+|                - [PMFW-1397] [IMP] Move StartDramLogging MSG to EXT_SECTION to make TEXT space
+|                - [PMFW-1390] [ETB] Release CstateBoost resource in PC6 exit when warm reset is triggered
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.82.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.82.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.81.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                11/01/19
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.286
+|                - [PMFW-493] [NEW] Need confirmation to show PWM parameter in PM log to external customer
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.81.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.81.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.80.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                07/12/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.285
+|                - [PLAT-37950][IMP]RS5-S4 stress test BSOD0X116
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.80.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.80.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.79.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                07/11/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.285
+|                - [PMFW-369] [IMP] Resource issue with GfxOff Entry during Gfx Dpm Clk Change
+|                - [PLAT-31975] [WKA] Add MsgId handshake between RLC-MP1 to avoid mismatch in response register
+|                - [PMFW-404] [IMP] Port PSI0 changes from PCO to RV1
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.79.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.79.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.78.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                07/09/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.285
+|                - [PMFW-152] [IMP] Add a Driver Message to Force GFX Content Save for GFXOFF
+|                - [PLAT-32828] [ETB] Force GFX power down sequence for iGPU disabled case
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.78.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.78.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.77.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                13/08/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.285
+|                - [PMFW-115] [NEW] Add BIOS message 0x51
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.77.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.77.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.76.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                30/07/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.284
+|                - [PLAT-33417] [NEW] Smu support for SB-TSI in alert comparator mode
+|                - [SMURVN-820] [IMP] GFXOFF exit optimization
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.76.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.76.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.75.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                04/07/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.284
+|                - [SMURVN-813] [ETB] DispClk entering/exiting the bypass mode
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.75.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.75.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.74.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                04/06/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.284
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.74.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.74.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.73.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                01/06/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.281
+|                - [PLAT-31052] [WKA] RV FP5 High Temperature failure (v2)
+|                - [SMURVN-774] [UTB] Fix for GetSustainedPowerAndThmLimit message
+|                - [SMURVN-749] [WKA] Adding USB adaptation delay for Force Gen 1 RV AM4 and FF platforms
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.73.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.73.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.72.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                17/04/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.281
+|                - [PLAT-30129] [ETB] SOC voltage not updating immediately
+|                - [SMURVN-725] [WKA] Add Epyc/ZP Reset Bug Workaround to RV1x (PLAT-24972)
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.72.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.72.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 30.71.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                05/04/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.280
+|                - [SMURVN-724] [OPT] Apply SMURVN-715 and SMURVN-708 to new OPNs
+|                - [PLAT-27176] [IMP] updates to FP5 FIT limits and new CONFIG OPN - Part 2
+|                - [SMURVN-727] [BUG] Block BIOS DisableSmuFeature Message on secure parts
+|                - [SMURVN-726] [IMP] Remove DfCstateExitDisable from S0i2
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.71.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.71.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 30.70.0.v2        |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                03/04/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.278
+|                - [SMURVN-709] [IMP] Set VDDP_DDR voltage to 0.7v during S0i2
+|                - [PLAT-29580] [IMP] Enable FCH RSMU Clock Gating
+|                - [SMURVN-715] [IMP] FP5 45W - Remove GFX Throttling by FIT Controller
+|                - [SMURVN-699] [ETB] SOFTMIN/SOFTMAX CLK message
+|                - [SMURVN-723] [IMP] Report 100% CState Boost Residency when NumEnabledCores <= CStateBoostActiveCoreThresh
+|                - [PLAT-27176] [IMP] updates to FP5 FIT limits and new CONFIG OPN
+|                - [PLAT-30383] [IMP] New SizeFWSigned needed for SMU FW
+|                - [PLAT-30296] [IMP] New FWType needed for SMU FW
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.70.0.v2.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.70.0.v2.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 30.70.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                29/03/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.278
+|                - [SMURVN-709] [IMP] Set VDDP_DDR voltage to 0.7v during S0i2
+|                - [PLAT-29580] [IMP] Enable FCH RSMU Clock Gating
+|                - [SMURVN-715] [IMP] FP5 45W - Remove GFX Throttling by FIT Controller
+|                - [SMURVN-699] [ETB] SOFTMIN/SOFTMAX CLK message
+|                - [SMURVN-723] [IMP] Report 100% CState Boost Residency when NumEnabledCores <= CStateBoostActiveCoreThresh
+|                - [PLAT-27176] [IMP] updates to FP5 FIT limits and new CONFIG OPN
+|          
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.70.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.70.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 30.69.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                09/03/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.278
+|                - [PLAT-26011] [WKA] Sound doesn't output from HDMI monitor if boot into OS with DC mode
+|                - [PLAT-27197] [WKA] Passing ZERO as VID to message TESTSMC_MSG_SetGfxclkOverdriveByFreqVid results in machine shutdown
+|                - [SMURVN-706] [IMP] Add message response to ACP's Dram access messages
+|                - [PLAT-28712] [ETB] System hangs when tried to OC by 25Mhz
+|                - [SMURVN-707] [OPT] Handle PROCHOT disable within LN2 message if already in OC
+|                - [PLAT-29703] [IMP] Need to use read-modify-write for USB core register updates
+|                - [SMURVN-708] [OPT] FP5 FIT Throttler Floor frequency
+|                - [TIC-31001] [ETB] RR OCCT Black Screen - PSI0_L asserted when heavy loading which make single phase OCP
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.69.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.69.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.68.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                23/02/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.275
+|                - [PLAT-28597] [ETB] GFX OC doesn't work when GFX clock set below 666MHz
+|                - [SMURVN-704] [UTB] Resource protect DispClk change
+|                - [SMURVN-702] [OPT] AM4 CCLK DPM VIDEO Mode BUSY_SETPOINT
+|                - [SMURVN-701] [OPT] Raven AM4 CCLK DPM Optimization (Full Screen 3D & VR)
+|                - [SMURVN-700] [OPT] AM4 GFX FIT throttler is active on VDD rail
+|                - [SMURVN-703] [OPT] FIT throttler operating range
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.68.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.68.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.67.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                07/02/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.275
+|                - [PLAT-28352] [WKA] Add delays in U0-in-D3 routine to avoid device hang during shutdown process
+|                - [SMURVN-695] [OPT] RV AM4 CCLK DPM Busy Setpoint optimization AC/FS3D/VR
+|                - [SMURVN-696] [OPT] RV AM4 CCLK DPM P-Gain optimization AC/FS3D/VR
+|                - [SMURVN-697] [OPT] RV AM4 FIT Controller error coefficient optimization
+|                - [SMURVN-698] [IMP] Remove SVI2_CONTROL resource from RegisterSvi2Voltage()
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.67.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.67.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.66.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                28/01/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.275
+|                - [PLAT-28317] [IMP] Fixed issue GPU0 PLL not powered down after S3 resume
+|                - [SMURVN-694] [WKA] Ensure any writes to 'USB Assist Power Control' register is complete before handling a trap
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.66.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.66.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.65.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                17/01/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.275
+|                - [PLAT-24632] [IMP] Fix system hang issue when OS tries to boot with PLL_POWER_DOWN disabled
+|                - [SMURVN-690] [IMP] Update AM4 65W system config limits
+|                - [SMURVN-691] [IMP] Increase precision for voltages in AGM
+|                - [PLAT-26640] [UTB] Fix system will auto wake up from S3 with USB 3.0 HUB
+|                - [SMURVN-692] [OPT] RV AM4 LCLK DPM optimization
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.65.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.65.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.64.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                05/01/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.275
+|                - [SMURVN-688] [UTB] ODPR temperature cap
+|                - [SMURVN-685] [OPT] FCLK DPM Busy setpoint update for AM4
+|                - [SMURVN-689] [NEW] CC6 Filter for AM4 + BIOS message support
+|                - [PLAT-27909] [NEW] Need BIOS to SMU communication to identify RV APU wattage
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.64.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.64.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.63.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                03/01/18
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.275
+|                - [SMURVN-687] [WKA] Promote IOHC trap interrupts to RSMU P1
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.63.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.63.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.62.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                29/12/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.275
+|                - [SMURVN-686] [IMP] Create test message to read telemetry settings back
+|                - [PLAT-24653] [UTB] C0 residency mismatch between AGM and OS
+|                - [PLAT-26643] [UTB] C0/C1 residencies appear incorrect when c6 disabled
+|                - [SMURVN-680] [UTB] revert patial & code cleanup
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.62.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.62.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.61.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                20/12/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.274
+|                - [PLAT-27680] [BUG] Fix SMU 30.60 causing USB devices to stop working on customer system
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.61.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.61.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.60.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                13/12/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.274
+|                - [PLAT-27038] [NEW] SPI ROM protection - Trap writes to D14hF3xA0 (Moved to IOHC Trap2)
+|                - [PLAT-26317] [ETB] Fixed Few USB register values based on v0.8
+|                - [PLAT-27134] [WKA] Add ULV to WM pre-req
+|                - [SMURVN-678] [WKA] USB update based on v0.82 
+|                - [SMURVN-679] [ETB] FIT throttlers not reset after disable
+|                - [SMURVN-680] [ETB] OS PState Rounding
+|                - [SMURVN-681] [NEW] PROCHOT disable message via LN2 Call
+|                - [SMURVN-682] [ETB] Core stuck in P1/P2 after OC enabled
+|                - [SMURVN-683] [ETB] GFX/CPU OC will undo each other when entering OC mode
+|                - [PLAT-25699] [UTB] WLB could be enabled when core is above WLB Threshold during SMURVN-371 workaround
+|                - [SMURVN-684] [UTB] Disable NBIO PG Interlock
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.60.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.60.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.59.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                04/12/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.274
+|                - [PLAT-27038] [NEW] SPI ROM protection with small range
+|                - [PLAT-26925] [ETB] Core overclock voltage is not same as user set value
+|                - [PLAT-26733] [IMP] Add command saving MP1 SMU FW version to register MP1_R0_CRU_TDR:J2P_MBX1 so it may be read in HDT
+|                - [PLAT-26375] [BUG] Add MMHUB Power Gating sequence in SMU FW
+|                - [SMURVN-675] [UTB] GFXCLK OC fixes
+|                - [PLAT-26708] [NEW] Fix AM4 DDR OC fails to boot with one FCLK DPM state
+|                - [SMURVN-603] [IMP] Avoid GFXOFF entry abort after NakRlcPwrUp flag is set
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.59.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.59.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.58.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                24/11/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.274
+|                - [SMURVN-670] [IMP] Resource protect CLDO reg write in SetVddpVoltage
+|                - [SMURVN-671] [UTB] Program Core DLDOs to bypass when entering precise and direct OC mode
+|                - [PLAT-26804] [ETB] Fix core frequency fluctuation in Precise and Drirect OC mode
+|                - [SMURVN-672] [IMP] Remove print macros in paging debug routine
+|                - [SMURVN-673] [BUG] Clock structure memory doesn't align
+|                - [PLAT-26834] [NEW] TESTSMC message required to get the current FITScalar value
+|                - [PLAT-25931] [NEW] OEM OC lockout capabilities
+|                - [PLAT-25934] [UTB] Fix incorrect voltage reported in Driver DPM table for FCLK/MEMCLK
+|                - [SMURVN-674] [IMP] Rounding issue - Add 0.001F to Cclk and GfxClk Vmin, Fmin, and Fmax when read from fuses
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.58.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.58.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.57.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                17/11/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.272
+|                - [PLAT-26215] [UTB] RV AM4 CCLK OC doesn't go above FMAX
+|                - [PLAT-25187] [NEW] Add PSP message to control VDDCR_SOC for RV AM4 memory overclocking
+|                - [SMURVN-662] [IMP] Add VCN deep sleep as an indicator for VCN_OFF for idle power features
+|                - [SMURVN-663] [IMP] S0i2 and WhisperMode Sequence Update
+|                - [PLAT-25580] [NEW] Add DDR rate support upto 2000MHz @ 33MHz steps
+|                - [PLAT-25580] [IMP] Limit AM4 DDR OC Pstates to one state
+|                - [SMURVN-668] [BUG] Fix bug for Usb Container Register-Device Removable
+|                - [PLAT-26349] [UTB] 'TDC value' for VDDCR_VDD and VDDCR_SOC getting stuck
+|                - [PLAT-25433] [NEW] AM4 BIOS GPU Overclocking Features
+|                - [PLAT-26708] [NEW] SMU FW interface for ABL to indicate memory OC mode
+|                - [PLAT-17961] [NEW] Fusing off XGBE causes power increase - XGBE needs to be Power Gated
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.57.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.57.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.56.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                13/11/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.272
+|                - [SMURVN-664] [NEW] AM4 GFXOFF support for SMS repaired parts
+|                - [SMURVN-603] [IMP] RLC handshake updates during GFXOFF Entry/Exit
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.56.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.56.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.55.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                06/11/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.270
+|                - [SMURVN-657] [BUG] Fix fused Pstate rounding to ensure we get the correct frequency
+|                - [SMURVN-621] [IMP] Implememt Softmax and Hardmin messages for stable Pstate support
+|                - [SMURVN-658] [IMP] USB Registers Update for v0.76
+|                - [SMURVN-659] [BUG] Remove FCLK SOC voltage index reference in AGM table
+|                - [SMURVN-660] [UTB] Restore Gfx Dldo Ref Current before Calibrate Gfx Dldo Mafdd Errors
+|                - [SMURVN-661] [WKA] Reset Telemetry if the current is reporting identical values
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.55.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.55.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.54.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                27/10/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.270
+|                - [SMURVN-652] [UTB] Clear rsmu_pgfsm_sw_control bit in PgfsmPwrCommand() to enable dynamic PG
+|                - [SMURVN-654] [IMP] Restructure SMU FW Sections
+|                - [PLAT-26042] [OPT] Update RV AM4 Core AC settings to match RV FP5
+|                - [SMURVN-655] [UTB] Fix GFXOFF exit hang after forcing GFXOFF entry
+|                - [SMURVN-656] [ETB] AM4 SOC plane voltage offset is incorrectly set
+|                - [PLAT-25821] [ETB] SMU race condition programming the RM
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.54.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.54.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.53.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                24/10/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.264
+|                - [SMURVN-641] [NEW] (Reverting) Adjust OS Pstate to match Vmin Frequency set by BIOS
+|                - [SMURVN-650] [BUG] Update SOCCLK DPM7 to 800MHZ if was 960MHZ
+|                - [PLAT-25286] [WKA] Use Dentist interface to change DISPCLK to synchronize clock change with display
+|                - [SMURVN-651] [UTB] Enable Telemetry before InitGfxDLDO
+|                - [PLAT-25934] [BUG] Fix Driver DPM table bug for emptry FCLK entries
+|                - [SMURVN-641] [BUG] Revert Vmin frequency set by BIOS restriction in the arbitor
+|                - [SMURVN-653] [NEW] Add Driver message to set GFX CGPG
+|                - [SMURVN-637] [OPT] (Reverting) Update CPUOFF Entry Hysteresis Timer
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.53.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.53.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.51.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                18/10/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.264
+|                - [PLAT-19590] [IMP] BIOS to SMU USB Regsiter Change
+|                - [SMURVN-631] [UTB] SMU Workaround for DLDO RVDD+CPUOFF Bug Needs Enhancement
+|                - [SMURVN-649] [OPT] Update FDD_CONFIG_dsmRampSlope to 120
+|                - [PLAT-25667] [IMP] Add 1 year reliability FIT definitions to AM4 OPNs
+|                - [SMURVN-648] [IMP] Disable DfCstate Exit during S0i2
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.51.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.51.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.50.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                18/10/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.264
+|                - [SMURVN-639] [IMP] Update AM4 DC BTC Values
+|                - [SMURVN-641] [NEW] Adjust OS Pstate to match Vmin Frequency set by BIOS
+|                - [SMURVN-644] [NEW] Add BIOS messge to set Core Fmax
+|                - [SMURVN-645] [NEW] Update Idle Power Features
+|                - [SMURVN-646] [WKA] Add 50 mV when Increasing SOC voltage and revert it after changing the clock
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.50.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.50.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.49.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                06/10/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.264
+|                - [SMURVN-636] [IMP] WaterMark Settings Improvement
+|                - [SMURVN-637] [OPT] Update CPUOFF Entry Hysteresis Timer
+|                - [PLAT-23002] [IMP] Resubmission with code correction
+|                - [PLAT-25546] [BUG] Fix CBS option for SOC voltage margin not working on FP5
+|                - [SMURVN-640] [NEW] Add two messages so PSP can suspend and unsuspend MP1
+|                - [PLAT-24689] [UTB] Higher VDDSOC Voltage/Power with Whisper Mode enabled
+|                - [SMURVN-641] [NEW] Add a BIOS message to set Vmin Frequency
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.49.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.49.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.48.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                23/09/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.264
+|                - [PLAT-24275] [ETB] Restore GFX DLDO reference current and clock on WR
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.48.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.48.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.47.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                08/09/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.264
+|                - [PLAT-24101] [WKA] Few USB3.1 Controller SNPS chicken bits getting back to default values w/ HCRST (Improved)
+|                - [SMURVN-386] [BUG] Add pre-condition to force dpm test message 
+|                - [PLAT-24023] [ETB] Fix Pc6DmaStartTransferToSmn hang when running reboot/3DMark (4-way deadlock MP1/RLC/SDMA/CPU) (re-submission)
+|                - [SMURVN-630] [OPT] IddMax calculations are above EDC limit with default EDC coefficients
+|                - [SMURVN-633] [OPT] CFOH (CC6) Update for Video Workload
+|                - [SMURVN-632] [ETB] R+R PeAPM workaround for BOCO failing to call StopGpuLink
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.47.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.47.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.46.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                01/09/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.263
+|                - [PLAT-19843] [IMP] Add ResetPCS function in warm reset sequence
+|                - [PLAT-24265] [OPT] RV AM4 Fan Controller
+|                - [PLAT-23591] [IMP] Disable USB3.1 port in USB host 1
+|                - [SMURVN-234] [IMP] Add Makefile release in release folder
+|                - [PLAT-18620] [IMP] BIOS option to enable/disable Fuse PG
+|                - [PLAT-24647] [IMP] Update AC settings for Core
+|                - [SMURVN-627] [NEW] Add IP Soft Reset driver message
+|                - [SMURVN-611] [NEW] PSP-to-SMU MSG I/F for DF CSteate disable/enable
+|                - [SMURVN-628] [ETB] VDDOFF SYNC with GFXOFF
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.46.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.46.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.45.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                26/08/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.261
+|                - [SMURVN-620] [OPT] FCKL DPM Tuning - DC Mode MinActiveFreq (GFX)
+|                - [PLAT-24449] [ETB] DPM buffer override causing invalud Cx Residency data
+|                - [SMURVN-622] [NEW] Enable chopper recovery in the DLDO
+|                - [SMURVN-623] [OPT] Modify CTF delay setting to 10ms
+|                - [SMURVN-624] [NEW] Temperature Slew Filter 
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.45.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.45.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.44.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                24/08/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.261
+|                - [SMURVN-567] [ETB] Fix GFXOFF exit sequences to support 0V VDDOFF
+|                - [SMURVN-551] [IMP] Add AGM momentary data support
+|                - [SMURVN-551] [IMP] Add STAPM data to momentary log
+|                - [SMURVN-610] [IMP] Support EnablePc6Entry Test Message
+|                - [PLAT-24248] [NEW] [RV FP5] TMON power down is not enabled during whisper mode
+|                - [SMURVN-612] [ETB] ChangeDPMLevel not being protected causing invalid reg access when in CPUOFF
+|                - [PLAT-24101] [NEW] Few USB3.1 Controller SNPS chicken bits getting back to default values w/ HCRST
+|                - [SMURVN-613] [NEW] Create a BIOS message to set VDDOFF VID
+|                - [SMURVN-614] [NEW] Save DPM Timer ID in MP1_EXT_SCRATCH2[31:28]
+|                - [SMURVN-616] [ETB] PC6Enable shouldn't gate exit
+|                - [SMURVN-617] [WKA] Force PSI0 during VDDOFF
+|                - [SMURVN-618] [UTB] Don't read NBIO registers in CalculateBusy during PG Interlock
+|                - [SMURVN-615] [OPT] FCKL DPM Tuning - DC Mode MinActiveFreq
+|                - [SMURVN-619] [UTB] Change the scalar for SUSTAINED_POWER_LIMIT to 0.001F 
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.44.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.44.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.43.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                20/08/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.259
+|                - [PLAT-22413] [DOC] Program Core DLDO InitRef to workaround RVDD issue
+|                - [PLAT-24023] [WKA] PC6DMA failures workaround (reduce deadlock window) 
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.43.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.43.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.42.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                18/08/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.259
+|                - [SMURVN-604] [NEW] Remove Sata Off from S0i2 requirements
+|                - [SMURVN-601] [ETB] Fix power reporting issue with R+R PeAPM and BOCO
+|                - [SMURVN-605] [ETB] Fix memory misalignment in odpr structure
+|                - [SMURVN-606] [ETB] Fix CalculateGfxPowerStatus hang during GFXOFF
+|                - [SMURVN-234] [IMP] PCIE Latency Tolerance Reporting (LTR)
+|                - [PLAT-24024] [ETB] System hard locks with SMU stuck at ChangeCoreDID when running 3D benchmarks
+|                - [PLAT-23521] [IMP] Add USB controller 0 downgrade support for customer platform
+|                - [SMURVN-607] [OPT] CFOH (CC6) Update for Video mode
+|                - [PLAT-23521] [IMP] Remove bogus code and add error check for msg
+|                - [SMURVN-434] [IMP] Add Gfx and Fclk frequency messages for PPLib
+|                - [SMURVN-556] [IMP] DC BTC: Change in DC_BTC_PTOV_OFFSET_FP5
+|                - [SMURVN-608] [WKA] Force Fclk to 1200 before WarmReset (WKA for PLAT-22258 E015)
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.42.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.42.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.41.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                11/08/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.259
+|                - [SMURVN-556] [IMP] DC BTC: Change in DC_BTC_PTOV_OFFSET_FP5
+|                - [PLAT-23599] [EXT] Fix RLC handshake 3-way deadlock with GFX apps
+|                - [SMURVN-597] [UTB] Idle Power ReEvalauteORConditions() gets over written
+|                - [SMURVN-595] [OPT] Updated ROC Power and Power Per PCIe Gen2/3
+|                - [SMURVN-598] [ETB] Initial AM4 AVFS Coefficients
+|                - [SMURVN-599] [IMP] Save DPM Handler index in ext_scratch2[27:20]
+|                - [SMURVN-600] [UTB] Fix for SetCoreDid and Double Exception
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.41.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.41.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.40.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                06/08/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.259
+|                - [SMURVN-582] [WKA] Make nBif PG Interlock optional and disabled by default (Improved)
+|                - [SMURVN-585] [NEW] Add BIOS, TEST, and PPLIB messages to enable PostCode
+|                - [SMURVN-584] [OPT] Add CPU and GFX firmware V2V Correction Equations
+|                - [SMURVN-586] [OPT] Update L3 CKS stretch threshold to 4
+|                - [SMURVN-587] [OPT] Update core DLDO slow loop and CI settings
+|                - [SMURVN-588] [OPT] GFX DLDO tuning update
+|                - [SMURVN-589] [ETB] GFX MAFDD calibration fixes
+|                - [SMURVN-590] [ETB] Remove PSM margin added to GFX when disabling CKS after clock change
+|                - [SMURVN-591] [UTB] Unforce CCLK/GFXCLK if DC BTC fails the PSM range check
+|                - [PLAT-23782] [WKA] Pll lock time needs to be 8us - override fuse
+|                - [SMURVN-592] [IMP] Only Abort GfxOff in RLC cases
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.40.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.40.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.39.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                03/08/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.259
+|                - [PLAT-22948] [IMP] FW updates request per USB spec v0.66
+|                - [SMURVN-540] [ETB] Update GFXOFF retention register list
+|                - [SMURVN-575] [OPT] Clean-up GFX wake-up sequence and SDMA GFX wake-up message additional checks
+|                - [SMURVN-562] [UTB] Raven FCLK Bandwidth Calculation Correction (CS_TO_BW_SCALAR)
+|                - [SMURVN-570] [IMP] FCLK DPM Tuning Values Update
+|                - [PLAT-23524] [NEW] Update S0i2 entry / exit flow in SMU FW
+|                - [SMURVN-578] [IMP] Remove USB D3 state as a condition for S0i2
+|                - [SMURVN-579] [NEW] Add ChipSetAuthenticated message
+|                - [PLAT-20309] [IMP] Turn off DFS for clocks running on bypass clocks
+|                - [SMURVN-581] [ETB] SDMA GFX wake-up message gets missed when GFXOFF event is queued
+|                - [SMURVN-582] [WKA] Make nBif PG Interlock optional and disabled by default
+|                - [SMURVN-583] [WKA] Workaround in CalculateCoreData for SetCoreLdo issue
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.39.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.39.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.38.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                30/07/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.259
+|                - [PLAT-23438] [WKA] RV AM4 unable to enter PDM for B6 OPN
+|                - [PLAT-22417] [NEW] SMU needs to set DCHUBBUB_ARB_WATERMARK_CHANGE_SELECT for the clock range used
+|                - [PLAT-23179] [ETB] Fix missing startup DfPstate for S3 test 
+|                - [SMURVN-495] [UTB] (Partial REVERT)
+|                - [SMURVN-566] [IMP] Save ReadWriteSmnReg address and CalculateBusy index in FwStatus structure for debug purposes (Improved)
+|                - [PLAT-23183] [ETB] Increase timeout delay for DPM CMD IN workaround
+|                - [PLAT-23169] [ETB] Fix PSM calculation bug when Core frequencies are mismatched
+|                - [SMURVN-569] [ETB] Fix bug in local SE CAC enablement during gfxoff
+|                - [SMURVN-571] [IMP] Modify section_checker script to calculate the correct % used
+|                - [SMURVN-560] [IMP] Skip programming CKS and checking DLDO status when GFX is in CGPG
+|                - [SMURVN-572] [ETB] ISRDCWATERMARK* handlers need to be in non-pageable section
+|                - [SMURVN-573] [NEW] Add PSI1 disable support
+|                - [SMURVN-574] [ETB] NBIOPG Race condition and SDMA msg return
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.38.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.38.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.36.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                26/07/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.259
+|                - [SMURVN-564] [IMP] (Reverted)
+|                - [PLAT-23179] [ETB] DFPSTATE switch hang fix
+|                - 
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.36.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.36.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.35.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                26/07/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.259
+|                - [SMURVN-563] [OPT] Update core CAC IddMax scalar to reflect POR throttling setting
+|                - [PLAT-23409] [UTB] SMU hung at PC 24CF (DmaWaitForCompleteByChannel) with GFXOFF enabled when running reboot
+|                - [PLAT-23002] [IMP] Exit DS mode as long as VCN power up
+|                - [SMURVN-565] [IMP] DPM controller PID should use freuqency range above Vmin since this is the range of its control
+|                - [SMURVN-566] [IMP] Save ReadWriteSmnReg address and CalculateBusy index in ISR_DATA for debug purposes
+|                - [SMURVN-564] [IMP] Raven1 L3 CKS stretch threshold update.
+|                - [SMURVN-495] [UTB] GFX DLDO MAFDD Offset Programming Incomplete Sometime
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.35.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.35.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.34.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                21/07/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v30.259
+|                - [SMURVN-523] [NEW] Allow PSP to enable Mp0ClkDpm early in the boot
+|                - [SMURVN-555] [WKA] Set GfxOff exit doorbell to level triggered interrupt
+|                - [SMURVN-480] [NEW] Enable Paging for Raven
+|                - [SMURVN-552] [NEW] RV ULV offset to be set in SMU FW instead of fuses
+|                - [SMURVN-558] [IMP] freq_delta-FtoX fix
+|                - [SMURVN-559] [WKA] Clear RSMU_SMS_FUSE_CFG_GC register after GC SMS repair to fix GFX CGPG exit hang
+|                - [SMURVN-520] [IMP] Add a counter to monitor RLC and BIF aborts occurring simultaneously
+|                - [SMURVN-554] [IMP] Create VDD VID offset in SMU FW
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.34.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.34.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.33.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                14/07/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.258
+|                - [SMURVN-543] [IMP] Set VDCI2 to ASYNC mode for L3CLK >= 6*FCLK
+|                - [SMURVN-544] [IMP] Program DISPCK to nearest BYPASS or DFS
+|                - [SMURVN-522] [OPT] CFOH (CC6) Success Monitor Update
+|                - [SMURVN-545] [IMP] Set VCN block in DS mode only when Vcn FW, Driver and Hardmin send MSG with argument zero
+|                - [PLAT-21675] [WKA] nBif doesn't send interrupt to SMU when it's out of idle
+|                - [PLAT-22639] [WKA] Enable MP2 DS only when idle/busy messages are called
+|                - [SMURVN-535] [IMP] Change in DC BTC operating point
+|                - [SMURVN-546] [IMP] Add total CPUOFF exit time to include VDDOFF, ULV and whisper mode
+|                - [SMURVN-547] [IMP] Set PSI0 for VDDCR_SOC on FP5 so that PSI1 will work properly
+|                - [SMURVN-548] [IMP] Update smuMp1_dxio_getTimestamp_160ns() to return 160ns per tick. Jira: SMURVN-548.
+|                - [SMURVN-549] [ETB] -Fix DFpstate change busy polling and interrupt waiting
+|                                     -Re-enable FCLK=400 since S3 is working again
+|                - [SMURVN-550] [IMP] Add NBIO PG to ULV
+|                - [SMURVN-488] [OPT] Update Core & VDDM CAC Weights and Increase ROC Power to 0.850W
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.33.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.33.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.32.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                07/07/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.252
+|                - [SMURVN-527] [ETB] Fix bug in dgpu_link when calling messages when GPU isn't ready
+|                - [SMURVN-528] [UTB] ULV and whisper mode updates/fixes
+|                - [SMURVN-529] [Bug] fix Fclk Freq lowest state is zero in AGM when DDR rate <2400
+|                - [SMURVN-530] [OPT] Update OPN settings for AM4
+|                - [SMURVN-531] [UTB] Don't include IO_ATHUB DF CAC counter in available BW calculations
+|                - [SMURVN-532] [UTB] Set FCLK to lowest state and GFXCLK to VminFreq when DPM is disabled
+|                - [PLAT-22597] [IMP] Add Driver MSG to set VCN softmin
+|                - [SMURVN-536] [ETB] Fix ALPHA calculation when time_constant is less than PM_TIMER
+|                - [SMURVN-537] [IMP] Wrap DpmCoeff array in larger structure so they are included in the variables
+|                - [SMURVN-538] [IMP] Increase the priority on SDMA's GfxOffExit message
+|                - [PLAT-21520] [NEW] System hangs when enable DCEFCLK DS - Divider not programmed correctly
+|                - [SMURVN-534] [OPT] GFX DLDO Gets Stuck in GFX_DLDO_EXIT on ChangeGfxDldoPlaneStateFromBypassToOff
+|                - [SMURVN-533] [UTB] SaveAndTurnOffGfxDldoClk Saves Wrong Clock Setting
+|                - [SMURVN-539] [UTB] Don't use IO_ATHUB FCLK DPM policy when on DC
+|                - [SMURVN-541] [UTB] Test message should monly be for UNSECURE parts only
+|                - [SMURVN-479] [IMP] Update DLDO Settings and Program Gfx DLDO Registers
+|                - [SMURVN-542] [IMP] Add test message to set ULV VID offset
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.32.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.32.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.31.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                01/07/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.252
+|                - [SMURVN-520] [UTB] Ignore delayed BIF interrupt calls after BIF fence is cleared
+|                - [PLAT-22312] [Bug] fix black screen when enable 8K on raven
+|                - [PLAT-21843] [Bug] Fix DPM level rounding issue if have two same DPM states
+|                - [SMURVN-524] [OPT] Core DLDO slow loop setting update
+|                - [SMURVN-525] [WKA] Poll OS pstate requests instead of using the interrupts
+|                - [SMURVN-526] [IMP] Update RestoreGfxContext: Restore Retention Registers first and then uCode
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.31.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.31.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.30.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                23/06/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.252
+|                - [SMURVN-487] [IMP] Update AVFS Coefficients
+|                - [SMURVN-505] [IMP] Show PSI0 residency in % in the AGM log
+|                - [PLAT-21555] [WKA] MMHUB power-gating bug work-around: SMN multicast of MARC, IOMMU registers
+|                - [SMURVN-506] [UTB] Data.IO.Power not assigned the value of total PSA power
+|                - [SMURVN-507] [IMP] Update TDC time constant to 1sec
+|                - [SMURVN-509] [IMP] AGM PM log update -add VDDCR_SOC voltages, VDDIO_MEM power, DISPCLK and DPREFCLK freq and additional DPM states
+|                - [SMURVN-508] [IMP] Show VDDM at 0V when we turn it off
+|                - [SMURVN-350] [IMP] REVERT - RV FW workaround for DERVXRTL-1838 DF power gating VDCI2 SetupMargin corruption bug
+|                - [SMURVN-509] [UTB] Set GFXOFF entry callback RTOS P3 so the RLC messages have higher priority
+|                - [SMURVN-510] [IMP] Update BIOS CBS table to reflect AC droop coefficients
+|                - [SMURVN-508] [IMP] Correctly update VDDM variable
+|                - [SMURVN-511] [OPT] Update FCLK DPM DPM coeff for DC
+|                - [SMURVN-512] [ETB] Read Model/Stepping early in boot sequence
+|                - [SMURVN-513] [WKA] Exit CPUOFF with CCLK at VminFreq
+|                - [SMURVN-515] [WKA] Add GFX CAC scalar for IddMax calculations
+|                - [SMURVN-514] [IMP] Add support for VidDerate for LL droop voltage calculation
+|                - [SMURVN-516] [IMP] Add 3rd order term to PtoV curves
+|                - [SMURVN-517] [ETB] Check dGPU message response to prevent hang on new message 
+|                - [SMURVN-513] [IMP] Exit CPUOFF with CCLK at VminFreq - also reset EDC calculations to account for all cores
+|                - [SMURVN-518] [UTB] Don't add VoltageToVid offset for SOC rail uless GFX is the highest
+|                - [SMURVN-519] [IMP] Don't run at higher DPM states if the frequencies are the same
+|                - [SMURVN-520] [UTB] GFXOFF RLC and BIF aborts are cleared incorrectly
+|                - [PLAT-21052] [IMP] Enable SMU Fuse CG and ODPR CG
+|                - [PLAT-21930] [IMP] Update USB sequence to 0.65
+|                - [SMURVN-521] [WKA] Disable low FCLK DPM state so that s-states pass
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.30.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.30.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.29.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                16/06/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.252
+|                - [PLAT-18772] [WKA] Driver Reset Support (GC reset workaround)
+|                - [SMURVN-482] [UTB] FCLK DPM switches to/from bypass in 1 step
+|                - [SMURVN-484] [UTB] Fix FCLK frequency ordering on SetVideoFclkMinFreq
+|                - [SMURVN-485] [ETB] Fix CPUOFF restore DMA invalidate cache setting
+|                - [SMURVN-481] [WKA] Re-enable the CPUOFF success monitor
+|                - [PLAT-20051] [ETB] Reduce Raven SMU/DXIO delays
+|                - [SMURVN-486] [ETB] Set correct Mstates when max MEMCLK is 800
+|                - [SMURVN-489] [UTB] Add critical section around DMA HW register programming
+|                - [SMURVN-490] [IMP] Move DmaWaitForCompleteByChannel to prevent DMA corruption
+|                - [SMURVN-492] [IMP] Add 2 Dpm() tasks to be actives
+|                - [SMURVN-494] [IMP] Update GFX FDD Voltage Margin
+|                - [PLAT-19831] [IMP] Enable DCLK/VCLK deep sleep before VCN FW is loaded
+|                - [PLAT-20911] [IMP] Turn off ISPCLK when ISP is fused off
+|                - [SMURVN-497] [EXT] Protect GFX CKS calculations with GFXCLK resource
+|                - [SMURVN-498] [ETB] Don't turn off VDDM on CPUOFF since it breaks things
+|                - [SMURVN-499] [IMP] Disable GFXOFF success monitor until full SDMA handshake is implemented
+|                - [SMURVN-499] [IMP] Change GFXOFF entry RTOS priority to 2 so that it is higher priority than DPM
+|                - [SMURVN-499] [IMP] Add message support for VBIOS and driver to call GFXOFF entry/exit
+|                - [SMURVN-499] [IMP] Only enable GFXOFF_EXIT flow when GFXOFF is enabled (otherwise keep COLD_BOOT_FLOW)
+|                - [SMURVN-499] [IMP] Add silicon version check to run CGPG ISO programming on Bx silicon only
+|                - [SMURVN-493] [IMP] Update GFX CKS settings
+|                - [PLAT-21924] [IMP] Updated DLDO SLow Loop Settings
+|                - [PLAT-21923] [IMP] SMU needs to set RM value of 0 for B0 silicon and 25 for A0 silcon
+|                - [SMURVN-500] [IMP] Move 4k from dataTables section to text
+|                - [SMURVN-498] [ETB] Enable VDDM turn off on CPUOFF and include VDDM programming update for dldo_vdddac_off
+|                - [SMURVN-501] [OPT] Set VDDOFF hyst to 0 to reduce idle power
+|                - [SMURVN-502] [IMP] Use pseudo-byapss for CPUOFF workaround for PSM_PARAM
+|                - [SMURVN-503] [IMP] Add filter to throttling priority values
+|                - [SMURVN-504] [IMP] Add threshold based SHUBCLK DPM policy for USB2 and USB3
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.29.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.29.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.28.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                09/06/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - [SMURVN-456] [UTB] Fix GPIO toggle to be after AGM sample is logged instead of before
+|                - [SMURVN-467] [ETB] Program PMREG_DDCTL2 on CPUOFF exit
+|                - [SMURVN-468] [ETB] Correctly program the wakeX and pwr_wakeX fields for GFX DLDO
+|                - [SMURVN-469] [IMP] Adding more clock fusing states (including display related clocks)
+|                - [SMURVN-470] [IMP] Remove NUL character from PM logging power source field
+|                - [SMURVN-444] [DOC-UTB] NBIO Idle Window and PG Status
+|                - [SMURVN-430] [NEW] Add a Way to Adjust FDD_VOLTAGE_OFFSET via SMU Test Message
+|                - [SMURVN-435] [OPT] Add 31.25mV to the lowest SOC DPM State (Ax parts only)
+|                - [SMURVN-471] [IMP] Add PriorityDeltaGainto EDC Controller
+|                - [SMURVN-471] [IMP] Use 1.14 scalar for fused CAC to throttled virus CAC
+|                - [SMURVN-472] [UTB] Fix CAC_WINDOW and DF CAC to BW calculation
+|                - [SMURVN-473] [IMP] Cleanup AVFS coefficient calculations and add NumCores and GfxActive
+|                - [IMP] Add self refresh percentage calculation
+|                - [PLAT-21004] [ETB] Fix USB PHY programming issue due to incorrect register offset
+|                - [PLAT-21398] [OPT] Update RV FP5 fan settings
+|                - [PLAT-21520] [ETB] Underflow caused by DCEFCLK DS divider not programmed correctly
+|                - [SMURVN-474] [UTB] Add "break" to FCLK DS sideband enable case statements
+|                - [SMURVN-475] [WKA] Set DPREFCLK to 600MHz bypass by default
+|                - [SMURVN-476] [UTB] Run ChangeClock function to recalculate EDC limited freq on CstateBoost exit
+|                - [SMURVN-477] [IMP] Add event counters for NBIO PG interlock
+|                - [PLAT-21524] [IMP] Update USB sequence to 0.59
+|                - [PLAT-20604] [NEW] RSMU Settings need to be changed for UMC
+|                - [PLAT-19271] [IMP] Fix high VCLK/DCLK when VCN is idle after boot-up
+|                - [SMURVN-478] [IMP] Add Test Message to Enable AGM GPIO Toggling and Initialize GPIO to Zero
+|                - [SMURVN-474] [UTB] Fix DS slice mapping "break" for FCLK DS sideband enable case statements
+|                - [SMURVN-481] [WKA] Disable CPUOFF success monitor to prevent hangs
+|                - [SMURVN-481] [WKA] Program PSM/FDD value in PSR to 0 on CPUOFF restore
+|                - [SMURVN-443] [UTB] Add nBif Interlock to NBIO Idle
+|                - [PLAT-19106] [WKA] [Raven GFX Val] Black screen hang during driver load in Windows 10 - Calculate Busy
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.28.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.28.0.tar.gz
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.27.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                03/06/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.244
+|                - [PLAT-17951] [WKA] Revert MP2CLK Deep Sleep support
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.27.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.27.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.26.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                01/06/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.244
+|                - [SMURVN-457] [UTB] Fix core thermal throttling
+|                - [PLAT-21161] [ETB] Fix DF SMU interrupt request while DF in Cstate
+|                - [SMURVN-458] [IMP] Link SOCCLK DPM to FCLK DPM when GFX is active
+|                - [PLAT-19861] [UTB] Fix SMN DS instability
+|                - [SMURVN-460] [IMP] Save CPU ID Family Model and Stepping
+|                - [SMURVN-411] [OPT] Add a message to notify PSP of GfxOff Exit
+|                - [PLAT-21208] [IMP] Set 1:1 ratio between fclk and uclk for B0 silicon  
+|                - [SMURVN-462] [IMP] Force GFXOFF driver message to power down GFX in sleep states and driver unload
+|                - [PLAT-21004] [IMP] Update USB sequence to 0.55 (RV B0 USB support)
+|                - [SMURVN-464] [IMP] Set CLDO to simple mirror mode on VDDP lower power mode and when set to 0V
+|                - [SMURVN-465] [IMP] Use DXIO FW messages to request SOC VID for PCIe GEN3
+|                - [SMURVN-459] [IMP] FIT controller limit update
+|                - [SMURVN-459] [IMP] FIT controller coefficient update (to match latest sheet)
+|                - [SMURVN-459] [IMP] FIT controller filter/response coeff update (to match ZEP)
+|                - [SMURVN-460] [IMP] Save CPU ID Family Model and Stepping (Adding #define for Models)
+|                - [PLAT-21004] [IMP] Update USB sequence to 0.57
+|                - [SMURVN-453] [IMP] Support negative PSM and voltage margin with test messages
+|                - [SMURVN-453] [IMP] Support negative PSM and voltage margin with test messages (typecast fix)
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.26.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.26.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.25.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                26/05/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.244
+|                - [PLAT-16884] [BUG] Fix system goes to boost state even enable CPBDIS
+|                - Modify makefile to add header to both ucode0 and ucode1
+|                - [PLAT-19326] [IMP] Implement PPSMC_MSG_SetAllowFclkSwitch function
+|                - [SMURVN-455] [WKA] L3 DID programming workaround for CC6 exit mismatch
+|                - [PLAT-18085] [UTB] Set the requested dispclk and dprefclk frequency to closest bypass frequency
+|                - [PLAT-17951] [IMP] Add MP2CLK Deep Sleep support
+|                - [SMURVN-454] [UTB] DC BTC leaves VDDCR_CPU to 1V during abort
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.26.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.26.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.24.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                19/05/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.244
+|                - [SMURVN-351] [WKA] SDMA port message for GFXPwrUp and reset GFXOFF entry hysteresis timer on wake-up call
+|                - [SMURVN-433] [OPT] RSMU MGCG code clean-up
+|                - [PLAT-20591] [WKA] Fix hang when entering/exiting out of PLL bypass while DFS unused slice clockgating enabled
+|                - [SMURVN-377] [ETB] Deep sleep Hystersis as a clock count
+|                - [SMURVN-440] [UTB] Prevent VDDOFF entry when exiting CPUOFF
+|                - [SMURVN-442] [WKA] Need to assert cold reset for FCH on warm reset
+|                - [PLAT-20367] [UTB] Fix RM programming on GFXOFF entry/exit
+|                - [PLAT-20739] [OPT] Change settings for USB non-posted writes
+|                - [PLAT-18085] [UTB] Convert DISPCLK and DPREFCLK to GHz in vbios set calls
+|                - [SMURVN-445] [IMP] Integrate DXIO ver 0.244
+|                - [SMURVN-446] [ETB] Remove CCLK/GFXCLK AC droop dependency and correctly handle VminFreq
+|                - [SMURVN-447] [EBT] Move DFCstate allow until after DF_PIE_PG register transactions in cclk change
+|                - [SMURVN-448] [ETB] Don't power down VDDM CLDO bandgap when VDDM is turned off
+|                - [SMURVN-449] [IMP] Update PM_TIMER period to 1.5ms
+|                - [SMURVN-450] [ETB] Adjust idenessFactor calculation
+|                - [SMURVN-450] [ETB] Fix bug in EDC frequency scalar that resulted in negative value
+|                - [SMURVN-450] [ETB] Allow EDC controller to reduce GFXCLK frequency below VminFreq
+|                - [SMURVN-450] [ETB] Increase EDC controller max iteration allowed value 
+|                - [SMURVN-451] [ETB] Don't clear GFX DLDO FDD calibration values when PSM is programmed
+|                - [SMURVN-452] [WKA] Increase VDDOFF voltage to 0.4V so GFXOFF will work
+|                - [PLAT-20367] [UTB] Fix RM programming on GFXOFF entry/exit (rev2)
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.24.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.24.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.23.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                11/05/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.241
+|                - [SMURVN-312] [NEW] Continued development of A+A
+|                - [SMURVN-436] [WKA] Protect IsrCCXPstateReq in CPUOFF
+|                - [SMURVN-437] [UTB] Telemetry offset term from BIOS is in mV
+|                - [PLAT-20367] [UTB] Warm Reset hang with RM enabled
+|                - [SMURVN-414] [OPT] RV Change the CFOH (CC6) timer
+|                - [SMURVN-438] [NEW] Integrate DXIO 0.241 and add back CL 2741533
+|                - [SMURVN-439] [OPT] Remove clearing the RSMU generic register during FW initialization
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.23.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.23.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.22.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                09/05/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.219
+|                - [PLAT-18199] [UTB] Disable DFS and Clock Gate unused clock slices
+|                - [SMURVN-435] [OPT] Add 31.25mV to the lowest SOC DPM State
+|                - Temporarily Reverting [SMURVN-414] RV Change the CFOH (CC6) timer AC/DC
+|                - [SMURVN-433] [UTB] Add MP0 CG notification
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.22.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.22.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.21.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                05/05/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.219
+|                - [SMURVN-416] [ETB] CPBDIS and OSPstate must use correct function call to update arbiter freq
+|                - [PLAT-19321] [OPT] RV Core CKS parameter update.
+|                - [PLAT-19564] [ETB] TESTSMC_MSG_SetProchotDeassertionRampTime not working
+|                - [SMURVN-420] [UTB] Add dGPU controller to feature enable mask
+|                - [SMURVN-419] [BUG] Fix FCLK and DCEF DS shared same FcState Mask
+|                - [SMURVN-412] [UTB] Need to set CHANGED bit in dGPU arbiter when updating SoftMax
+|                - [SMURVN-422] [UTB] Pass frequency target to dGPU message
+|                - [SMURVN-423] [UTB] Incorrect DF_CAC_ACC being used for CAC Data Collection
+|                - [PLAT-19453] [OPT] Update AC settings for Core and GFX on RV SMU
+|                - [SMURVN-424] [UTB] Missing flags in Idle Power Masks
+|                - [SMURVN-417] [OPT] Negative value being reported on UMC_CAC_ACC_7
+|                - [PLAT-19267] [OPT] RV GFX CKS programming sequence and parameter update.
+|                - [SMURVN-427] [UTB] Add dGPU.Power to the APU socket power
+|                - [SMURVN-414] [OPT] RV Change the CFOH (CC6) timer AC/DC
+|                - [SMURVN-402] [OPT] Update DLDO Settings With Naples OptionA DLDO Setting AND Fix DLDO INIT Code
+|                - [SMURVN-428] [Bug] Fix SendMessageToPsp needs 2 DWORD argument
+|                - [PLAT-19857] [BUG] Thermal throttling limit needs to be set to 100
+|                - [SMURVN-429] [UTB] Dynamic VDDM current stuck at zero
+|                - [PLAT-19553] [UTB] MP2 firmware not receiving S3 Entry message on transition from S0 to S4
+|                - [PLAT-14408] [UTB] Fix programming sequence for DF PGFSM update
+|                - [SMURVN-432] [OPT] Reduce Deep Sleep Hysteresis from 10 to 0
+|                - [SMURVN-433] [UTB] SMU Clock Gating Enablement|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.21.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.21.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.20.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                23/04/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.219
+|                - [SMURVN-407] [OPT] Revert DXIO 0.219
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.20.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.20.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.19.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                21/04/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.234
+|                - [SMURVN-403] [OPT] Copy AC droop coeff from FP5 without to with BTC
+|                - [SMURVN-404] [OPT] DC BTC updates to match ZEP
+|                - [SMURVN-405] [OPT] Add debug code to dgpu link
+|                - [SMURVN-406] [BUG] Cancel VDDOFF hysteresis on GFXOFF exit
+|                - [PLAT-19043] [BUG] Fix SMU FCLK running at 1200MHZ when driver requests 400MHZ
+|                - [SMURVN-407] [OPT] Integrate DXIO 0.234
+|                - [PLAT-14408] [OPT] Update RSMU PGFSM settings for RV
+|                - [SMURVN-409] [IMP] Enabled dynamically updated DCN Watermarks
+|                - [SMURVN-410] [OPT] Change GfxOff Entry Hysteresis to 50 ms
+|                - [SMURVN-411] [OPT] Add a message to notify PSP of GfxOff Exit
+|                - [PLAT-18215] [BUG] SMU should notify ISP after RSMU handles the power gating
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.19.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.19.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.18.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                13/04/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v0.219
+|                - [SMURVN-390] [BUG] Fix intermediate state check for L3/core DID ordering
+|                - [PLAT-16729] [WKA] CP checksum fix for GFXOFF, use DMA instead of direct memory access for first DWORD
+|                - [PLAT-18851] [BUG] fix SMU release package build errors
+|                - [SMURVN-392] [BUG] Fix random number generators (integer and float)
+|                - [SMURVN-393] [BUG] Fix DFCstate disablement when Mp1 stutter mode is enabled
+|                - [PLAT-17996] [BUG] Fix GFXCLK Deep Sleep divider isn't programmed to 32
+|                - [PLAT-18716] [BUG] Fix incorrect SOCCLK deep sleep sideband programming
+|                - [SMURVN-396] [BUG] Fix AGM DPM and FCLK range got from SMU not matching
+|                - [PLAT-17783] [WKA] [RV-FP5] CPUOFF and Boost workaround make system HL but actually it is SL.
+|                - [SMURVN-397] [BUG] VDDOFF bug fixes
+|                - [SMURVN-398] [BUG] GFXOFF bug fixes
+|                - [SMURVN-399] [BUG] Add message to set min DCEFCLK deep sleep freq
+|                - [SMURVN-400] [OPT] Adding missing structures to variables file
+|                - [SMURVN-394] [OPT] Updates for Initializing GPIO and AGM GPIO Toggle
+|                - [SMURVN-395] [OPT] Update FCLK CAC Accumulator to use FCLK counter
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.18.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.18.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.17.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                31/03/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.219
+|                - [SMURVN-379] Populate VminFreq for L3 AVFS structure
+|                - configure gfxclk to 100mhz before going to full speed during gfxoff exit
+|                - avoid toggling hard_resetb multiple times on gfxoff exit
+|                - [SMURVN-380] Only throttle GFX duty cycle after GFXCLK is at Vmin
+|                - workaround for DF powergating VDCI2 setup margin corruption bug (DERVXRTL-1838)
+|                - [SMURVN-381] [BUG] Add CoreDis check for ThreadEnableStat functions
+|                - [SMURVN-382] [BUG] CPUOFF PMREG_THREADENABLESTAT restore size is wrong
+|                - [SMURVN-382] [BUG] CPUOFF PMREG_THREADENABLESTATE restore issue (incorrect PCR/PSR address offsets)
+|                - [PLAT-17051] [UTB] Fix incorrect shift value in the config state define
+|                - [PLAT-16729] [WKA] CP checksum workaround for ucode restore in GFXOFF exit
+|                - [PLAT-18549] [OPT] Initial RV FP5 OPN fan settings
+|                - [PLAT-17869] [WKA] Adjust USB D3 entry timeout to 150ms|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.17.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.17.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.16.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                24/03/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.219
+|                - [SMURVN-372] Fch Access and PostCode
+|                - fixing SMU FW revision in the release folder
+|                - fix mismatch between system power policy and CBS system config
+|                - [SMURVN-375] Add resource protection to SetDfCstateRequest
+|                - reverting DF PGFSM power up/down delays (temporary)
+|                - update FIT coefficients based on latest RV model
+|                - add support for dGPU device detection through BIOS device ID message
+|                - update message codes for dGPU messages
+|                - initialize VDDCR_SOC DC BTC offset variable to 0 since DC BTC isn't supported on that rail
+|                - [SMURVN-371] FW Workaround Needed For DECPLCPLK-2892 To Enable PC6 on RV|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.16.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.16.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.15.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                16/03/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.219
+|                - add GFX_DUTY_CYCLE enable/disable to BIOS message
+|                - add support for GFX DUTY CYCLE force/unforce test messages
+|                - scale fused GFX cac_m/cac_b by the number of GFX CUs (since these values will be fused per-CU)
+|                - adding scripts to add headers to fw image-porting CL 2566925 (FW revision offset moved from 0x60 to 0x0)
+|                - [SMURVN-367] Import all SbRmi changes from ZP
+|                - [SMURVN-369] TSC Alignment and reset to 0 on WarmReset (Fix for PLAT-16568) 
+|                - update AGM header to remove LLStalls and add IddMax
+|                - fixing SMU FW revision
+|                - AVFS FtoX calculation much check guardband type to use correct FtoP or FtoV curves
+|                - initialize core/GFX AVFS to PSM type and L3 to VOLTAGE type
+|                - [SMURVN-368] Port message to hold PC6 entry from ZP to RV
+|                - fixed hang for GFX Dynamic RM after enable in BIOS
+|                - update DPM coefficients to pre-silicon numbers
+|                - correctly read HOT and COLD fused curves for GFXCLK
+|                - VideoFps message should impact all DPMs settings
+|                - fix for mmhub accesses
+|                - update USB sequence to v.43
+|                - updae DF PGFSM power up/down delays|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.15.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.15.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.14.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                03/03/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.213
+|                - fix GFX CKS LdoRefsel calculation to calculate voltage from VID
+|                - use GPU_REG macros to access RLC registers in RM
+|                - [SMURVN-365] Power Up GFX before toggling reset
+|                - [PLAT-16879] Fixed Double Exception for renable SMU feature>
+|                - disable DFS ramping in FCLK switch
+|                - fix RDI mapping for CCX sensors
+|                - [PLAT-16431] Clear ThreadEnStat on CstateBoost entry, restore on exit
+|                - update CCLK, FCLK and LCLK DPM settings based on FSP when in full screen 3D mode
+|                - fix bug in GFXCLK DS enable sequence
+|                - [PLAT-17280] Set startup pwm when target pwm is less than 30
+|                - fix rounding differences in L3 and Cores frequency ratio|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.14.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.14.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.13.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                24/02/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.213
+|                - fix L3_TO_MIN_CORE_FREQUENCY_RESTRICTION round off error
+|                - update DC BTC to account for telemetry
+|                - don't power down FCLK PLL when in bypass (this isn't working yet)
+|                - disable GFX CKS droop detectors when in CGPG
+|                - don't enable GFX CKS when in GFXOFF
+|                - add debug counters for MP1StutterMode, DfCstate entry/exit, MP1CLK DS, SMNCLK DS
+|                - update MMHUB_DEEPSLEEP initial mask to set all bits controlled by SW
+|                - add UMC RSMU DPM to data reading for UCLK AGM logging
+|                - log temperature as part of DC BTC
+|                - optimize leakage calculation
+|                - fix FCLK DPM change bug in checking done condition (need && instead of &)
+|                - add debug code to invalidate cache when RTOS fills up to help debugging this case
+|                - set Cpl_SmuWake interrupt to edge triggered
+|                - enable DF Cstate interrupt in DF when MP1CLK or SMNCLK DS are enabled
+|                - check SmuWake signal in DF after setting SmuWakeEn to make sure DF is still in cstates before entering DS
+|                - add test message to apply test VID offset for DC BTC testing (same mechanism as ZEP)
+|                - fix MP1 stutter mode check in idle loop 
+|                - update voltage array size to be DWORD aligned 
+|                - add GFXDeviceDriverReset driver message|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.13.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.13.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.12.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                17/02/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.207
+|                - split GfxDpmSignalGfxOn into Early and Late functions
+|                - invoke changeRm function during GFXOFF when GFX is still in reset
+|                - [PLAT-15992] Fix GetClockFrequency call
+|                - program CLDOs to SIMPLE MIRROR mode when in bypass (this will reduce VDDIO_MEM power on S3)
+|                - update GFX CKS to work on CGPG events
+|                - add CGPG message counters and keep track of the state
+|                - wait for SVI2 to go idle after setting all_cpus_in_cc6
+|                - use normal GPU_REG access for CKJ stretcher enabled
+|                - don't program PCTL2 register in SOCCLK deep sleep setup (this doesnt' exist on RV)
+|                - keep the CurrLevel variable updated for FCLK changes during memory training (needed for RV2 only)
+|                - don't enable GFX CKS on CGPG resume if GFXCLK is below the threshold
+|                - clear GFX CKS master reset before enabling CKS on GFXDPM enable
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.12.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.12.0.tar.gz
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.11.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                11/02/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.204
+|                - update GFXCLK CKS settings
+|                - update USB sequence to v.36
+|                - bypass VDDM/VDDP CLDOs to VDDCR_SOC rail on S3 entry (configure normally on S3 exit)
+|                - calculate FPS in data.c based on frame submission counter register
+|                - use FPS to calculate GFX DPM alpha coefficient
+|                - add support to SetMinVideo GFXCLK and FCLK frequencies (used as min active freq when in VIDEO workload type)
+|                - set GFXCLK stretcher flag on GFXOFF exit so we correctly execute GFX CKS sequence on clock changes
+|                - fix GFXCLK CKS LdoRefSel() function to match spec
+|                - program DDx_STATIC_ENABLE=1 for all GFX DD instances on enable
+|                - update GfxDpmSignalGfxon/off functions to keep voltage calculations running and not clear voltage request
+|                - move GfxDpmSignalGfxOn until the end of the GFXOFF sequence
+|                - add debug code to GFXOFF (event counters and enter/exit timers)
+|                - GFXOFF exit updates
+|                - add support for DISPCLK messages from VBIOS
+|                - update TDC time constant to 100ms
+|                - add DPREFCLK to VBIOS clock request interface (but no proper fused frequenceis included yet)
+|                - adding scoreboard variables
+|                - [SMURVN-362] Port missing DXIO related code from ZP to RV
+|                - [FEAT-10476] IOHC Traps
+|                - fix USB proramming on S3 resume
+|                - fix USB1 SMN address space mapping in TLB
+|                - cleanup USB powergating and reset sequence
+|                - update GFXCLK CKS sequence to match stretcher/DD spec (still need to fix FIXME and handle CGPG case)
+|                - only power down FCLK PLL when PLL power down is enabled
+|                - update SHUBCLK and SOCCLK deep sleep sideband signals to match latest spec
+|                - do min/max checks on DDR bandwidth utilization calculations
+|                - increment success monitor if entry time exceeded hyst
+|                - set default CPUOFF success monitor to 10 (this gives CPUOFF residency of ~80% at windows idle)
+|                - only switch to FCLK=400 in warm reset sequence when FCLK DPM is enabled
+|                - halt CP ucodes before doing GFXOFF save and unhalt after GFXOFF exit restore
+|                - update 1 ucode to DYNAMIC=1
+|                - add GFXOFF DRAM dumping test message
+|                - disable EDC controller when GFX is in overdrive
+|                - remove log_struct.h (it is empty)
+|                - do not automatically power up SDMA on default init
+|                - ODPR init uses same method to read RDIs that is used in data
+|                - update CCLK overclock to match ZEP
+|                - update USB sequence to v.38 (USB debug bus support)
+|                - update CAC_WINDOW programmed to RSMU CAC monitors to account for 25MHz REFCLK (currently programmed assuming 100MHz REFCLK
+|                - remove MP1 DS sideband from MP0 deep sleep allow
+|                - add CCLK overclock post code (not enabled fully yet)
+|                - remove unused psp_handshake function
+|                - remove USB CAC enable/disable in SHUBCLK DPM since it is already enabled in DATA
+|                - switch SetHardMinShubclkByFreq to use ARB_HARD_MIN_ACP_FW only (since that is the only option)
+|                - update MP0 DS sideband to only factor in MP0 signal
+|                - update SMN DS sideband to factor in MP0, MP1, SMN
+|                - update WarmReset handler to match ZEP (need to factor in other clocks and SOC VID as well)
+|                - use ARB_SOFT_SOFT_MIN_VCN in SetSoftMinVcn message
+|                - fix SOCCLK deep sleep divider to use its own min clock (not DFEFCLK)
+|                - read and enforce GFX MinOverClockVid in GfxDpm (and remove from voltage_svi2)
+|                - remove unused ISRs
+|                - update WarmReset resources for PC6 exit sequence to match ZEP
+|                - initialize AutoRampVid by default to resume voltage
+|                - [DEIPCSMUA0-1106] Fixed DPM issue about SOCCLK,ISP,LCLK and VCN(Bug)
+|                - notify MP2 on S3 entry
+|                - clear DfPstateDisable bit on ABL messages to switch states
+|                - do not unhalt CP ucode on GFX restore (RLC already does this)
+|                - initialize MP2CLK to 200MHz with div-32 (but skip div-32 until MP2FW is calling messages)
+|                - add support for MP2 messages to indiacte busy, idle and get clock
+|                - remove div-1.5 and div-3 from bypass divider list (there are not supported on RV1)
+|                - fix resource deadlock in warm reset entry sequence
+|                - fix clock bypass bug that was causing 200MHz clocks to be 266
+|
+|        * Change Log
+|                - N/A
+|
+|        * Files
+|                - /proj/smu_rel/smu10/raven1x/raven1x.rev30.11.0.zip
+|                - /proj/smu_rel/smu10/raven1x/raven1x_sources.rev30.11.0.tar.gz  
+|
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.10.0           |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                26/01/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.193
+|                - fix DRAM logging to use correct byte/dword indexing
+|                - add GFXCLK stretch and DD programming on enable
+|                - add new CBS options for GFXCLK CKS (updated BiosInterfaceTable)
+|                - add support and enable RSMU MGCG for all RSMUs
+|                - update GFX FtoP and PtoV curves
+|                - add logic to EDC controller to cause equal core frequency reduction when core freq is the same and idlenesss is similar
+|                - SMURVN-358: skip clearing interrupts for blocks without any PM interrupts connected
+|                - set CPUOFF entry success monitor callback priority to 1 to match interrupt priority
+|                - accept parameter from ABL to set UCLKDiv1Mode to 1
+|                - integrate latest ZEP DPM_BUFFER timeout to RV
+|                - add FMIN to activity monitor MinActiveFreq
+|                - define missing values for MIN_ACTIVE_FREQ_TYPE for LCLK/FCLK/GFXCLK
+|                - fix GetClockFrequency message to use correct ID
+|                - update SetVoltageClientState to automatically set/clear the SMU request when needed
+|                - update FW controlled deep sleep to not use the DSAllow functions (those should only be used for sideband)
+|                - calculate and log leading load stall % per-CCLK
+|                - request AVFS_MM_CMDIN data only after DPM_MM_CMDIN is done
+|                - use 0.65V for AutoRamp voltage on VDDOFF
+|                - disable POSTDFS divider when attempting to set to DIV_BY_1
+|                - Fixed FreqTable not initialized on DPM Interface
+|                - update GFX dynamic RM to use 3 ranges and all hardcoded values (remove driver configurability)
+|                - swap VDDM TOP/BOTTOM ldo_sel values
+|                - remove support for MMPerfMon reading through AVFS_BUFFER and remove corresponding usage from FCLK DPM
+|                - reduce GFXCLK CKS PSM margin to 5 (~50mV)
+|
+|        * Change Log
+|                - N/A
+|
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 30.9.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                20/01/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.193
+|                - remove unused PC6 dma function
+|                - update current CCLK variables to match CPUOFF resume variables and skip CclkChange
+|                - fix FCLK DPM SOC_VID lookup (wrong ordering)
+|                - overwrite PCR and PSR registers to target values on CPUOFF restore
+|                - clean up CPUOFF debug code and submit final version 
+|                - PLAT-14503 SVC/SVD rise/fall time programming
+|                - fix FDD calculation for GFX DLDO (also create common function for CCLK to use as well)
+|                - update PID coefficient updates for STT (STAPM)
+|                - keep track of stapm time constant for STT coefficeint generation
+|                - update AGM table version number to submit for next AGM release
+|                - updates to Makefile for debug_release in raven1x
+|                - fix for sideband programming during clock deep sleep
+|                - update whisper mode to update PID filters/controllers on resume to account for the entry time
+|                - initializing minimum GFXCLK to be 25MHz
+|                - read initPkg from HW on CPUOFF enabled
+|                - program enter/exit dfsbypass on pll power state change
+|                - program THM slew rate registers
+|                - set to highest clock and return OK on VCN messages when requested higher than highest clocks
+|                - VNC clock request message return rounded clock that they requested, not actual clock 
+|                - voltage controller only uses voltage requests from enabled clients 
+|                - adding the PPSMC_MSG_PowerUpGfx message
+|                - maintain minimum voltage when both GFX and CPU are off (0.65V) to start with
+|                - connect SelfRefresh loggin to AGM interface
+|                - enable LINK_STATUS reading from BIF and use 16 bit read for SMN access
+|                - read telemetry slope/offset from BIOS and use it if defined (units of mA)
+|                - increase telemetry slope/offset to uint32_t in BIOS table
+|                - update MMPerf counter reading (fix config command, buffer write and reset after read) - but keep disabled
+|                - remove GFX RSMU enable/disable from normal functions (since this needs to be done as part of GFXOFF)
+|                - move FclkDpm_t to ISRDATA_SECTION since it is used in an ISR
+|                - register GFXCLK voltage client state to ON on GFXOFF exit
+|                - sample and save DFCstate state when we need to disable so we know when to reenable again
+|                - make sure all voltage clients are initialized (client state and plane)
+|                - OS pstate change uses proper arbiter function
+|                - merge MM_CMDIN and other core calculations
+|                - add BTC messages
+|                - define telemetry offset as int32_t
+|                - enforce VminFrequency for unmitigated droop equation
+|                - add CLK^2 terms to AVFS calculations
+|                - remove IddMax terms from AVFS calculations
+|                - BTC shouldn't used BindocTjoffset scaled temperatures
+|                - save GFX PSM in BTC
+|                - initialize L3_AVFS_PtoV curves to use in BTC
+|                - define IddMax constants in variables
+|                - fix SOC level IddMax static lookup
+|                - rearrange EDC controller iteration count
+|                - update max potential EDC HW throttler limits
+|                - update SOC SIDD coefficients to be reasonable.
+|                - update GFXDPM FtoP and PtoV curves to be more conservative
+|                - calculate highest voltage returns back correct data in argument
+|                - reevaluate voltage on client state change
+|
+|        * Change Log
+|                - N/A
+|
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 30.8.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                11/01/17
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - DXIO v.193
+|                - fix DWORD alignment issue in IdlePwr structure
+|                - connect QueryPowerLimit PPLIB message
+|                - add OS pstate and DRAM max BW to AGM logging
+|                - correctly calculate the DF bandwidth in Gbps
+|                - update core FDD settings from ZEP
+|                - update calculation for max possible DRAM BW
+|                - remove CCLK_RESOURCE and replace with CLK_RESOURCE
+|                - update CCLK function for CPUOFF entry/exit to set EmptyFunctionVoid for functions to be skipped
+|                - add DfInterlock mechanism to arbitrate CstateBoost and CpuOff interlock requests
+|                - add CSTATE_BOOST handler to DPM (same as ZEP)
+|                - update CstateBoost, CpuOff and wakeRequest pending functions to use DfInterlock arbiter
+|                - force ASYNC mode on FCLK changes
+|                - update DF interrupt function names to not include "Isr" and set priorities to match ZEP
+|                - <add smuMp1_dxio_getInfo function>
+|                - update core DLDO settings
+|                - update GFX DLDO settings
+|                - initialize CCLK variables on CPUOFF exit to reflect actual exit state
+|                - various CPUOFF entry/exit changes (no CPUOFF abort, remove unneeded programming, fix core InitPkg index bug)
+|                - set FCLK 400 MemPstate to 0 when highest state is 800
+|                - use default GFX FDD settings if they are not fused
+|                - update CPUOFF register save/restore list
+|                - program L3CAC weights on CPUOFF resume
+|                - fix disarming NBIO interrupt in idle_pwr, remove watermarks from sys_hal.
+|                - arbitrate DFCstate disable for all clients
+|                - save default DLDO_REG values to restore on CPUOFF exit (no need to save them on CPUOFF enter)
+|                - add CPUOFF timers to analyze entry and exit times
+|                - set XiSeparation to 0 on CPUOFF exit in InitPkg
+|                - set WLB default value in InitPkg in CPUOFF based on the current VID
+|                - set FID/DID in InitPkg in CPUOFF to known value
+|                - move shared CCX reset assert/deassert sequence to functions to be called when needed
+|                - clean up CPUOFF DMA functions
+|                - remove unused variable from dpm_hub
+|                - enable CstateBoost interlock by default when EDC controller is enabled
+|                - remove unused variables from EDC_t
+|                - add support for WLB updating during VID changes when core DLDOs are in bypass mode
+|                - remove ccx_id from SMN_CORE_ADDR macro
+|                - move nbio interrupt disarmament to after voltage has been restored.
+|                - Porting Safe reg read and write functions from ZP
+|                - Adding safe reg read and write functions to Reg32 read and write
+|                - keep CPUOFF save context in data structure
+|                - keep InitPkg arrays dedicated for CPUOFF exit
+|                - Update USB sequence to v.30 (IMPROVEMENT)
+|
+|        * Change Log
+|                - N/A
+|
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 30.7.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                30/12/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - note: DXIO v.193 failed to compile - keeping it at previous release ver v.182
+|                - move basic EDC init to default init
+|                - read fused startup VIDs for both rails on default init for use in warm reset sequence
+|                - integration and updates for edc, fan, fit
+|                - update GFX DLDO register programming
+|                - remove GFX DLDO input to output voltage drop
+|                - change the 400MHz FCLK state to DFS (instead of bypass) until bypass is working
+|                - add GFX duty cycle % to AGM log
+|                - integrate CCLK changes from ZEP
+|                - update GFX duty cycle values 
+|                - -define different fan tables for different power limits and packages
+|                - Lower test message priority below Thread_enable since BIOS is using this as a handhsake (WORKAROUND)
+|                - Changing NBIF INT from Edge to Level (BUG) 
+|                - Update USB sequence to v.29 (IMPLEMENTATION)
+|                - review idle_pwr and update whisper mode enter/exit to enable/disable unused HW
+|                - add initial support for whisper mode exit filter updating
+|                - AGM correctly shows CCLK/GFX voltage when in DLDO bypass (move telemetry to before core data)
+|                - enable GFX RSMU DPM and residency data on GFXOFF exit
+|                - update GFX VminFreq to 800MHz to help avoid the low voltage RM issue
+|                - GFXDPM enable will put GFX DLDOs into bypass if set in the BiosInterfaceTable
+|                - update DPM_HUB to always calculate voltages even if the clock hasn't changed
+|                - use empty functions in DPM hub
+|                - skip some unneeded DpmIf checks (since they are initialized)
+|                - update GFXDPM FtoP and PtoV curves
+|                - calculate HighestPriority in throttler for all enabled clients
+|                - fix special modes to calculate MinActiveFreq when DPM coefficients are updated
+|                - fix ARBITER_RANGE calculation to use MinFreq instead of VminFreq as starting point
+|                - add support for GFXCLK to throttle BELOW_VMIN_FREQ as the last throttling stage (since the VminFreq will be very high)  
+|                - remove IddMax from AVFS voltage calculations (allows us to remove iterative IddMax and Voltage calculations which saves >50us per-EDC iteration)
+|                - remove FastData timer interrupt and read telemetry as part of DPM timer (saves ~60us compute time)
+|                - reset I_reduct values in EDC controller to prevent applying the previous value to future iterations
+|                - limit EDC controller to 3 iterations to avoid over-utilization and hangs
+|                - add debug counter to keep track of how many times we skip the DPM interrupt
+|                - initialize workload types and priorities (integrate from Vega10)
+|                - don't poll postdiv status when setting AllowDS
+|                - fix programming of RSMU CAC weights to account for the number of weights registers for each IP
+|                - update SYSHUB activity monitor mask to remove signal that is always on (should check this signal later)
+|                - update SHUBCLK use case target frequencies to GHz
+|                - remove unused functions from util.c
+|                - fix linking between ISPCLK and VCN to increase SOCCLK
+|                - fix bypass select assignment to not use bypass if it == the (DID+1) frequency
+|
+|        * Change Log
+|                - N/A
+|
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 30.6.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                08/12/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                - update AGM formatting (IMPROVEMENT)
+|                - Update AGM logging of DCLK freq table (IMPROVEMENT)
+|                - limit STAPM STT output to between 0-1 (IMPROVEMENT)
+|                - check GFXOFF state in IddMax calculations (IMPROVEMENT)
+|                - initialize CCLK frequency on init so early VDCI updates are correct (BUG)
+|                - save FCLK frequency in GHz and change CCLK-FCLK ratio check accordingly (BUG)
+|                - initialize CsBypass setting in FCLK DPM table to 1 when FclkDiv1Mode is 0 (BUG)
+|                - add support for mmhub (IMPROVEMENT)
+|                - Implement msg handler (IMPLEMENTATION)
+|                - VCE MSG response and bug (BUGS)
+|                - VCE PG sequence updated to SW controlled (IMPROVEMENT)
+|                - AutoClear is a used as a boolean; but the function expected it to be a mask - keep using it as a boolean (BUG)
+|                - PGFSM programming fix (BUG)
+|                - Re-enable NBIF interrupt for USB Dstates (WORKAROUND)
+|                - Makefile and parser fix to get proper dependancy (BUG)
+|
+|        * Change Log
+|                - N/A
+|
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 30.5.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                08/12/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                smu10/smu10_megaip_raven1x@2578674
+|
+|        * Change Log
+|                - N/A
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.4.4            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                15/11/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                smu10/smu10_megaip_raven1x@2550980
+|
+|        * Change Log
+|                - N/A
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.4.3            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                10/11/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                smu10/smu10_megaip_raven1x@2544154
+|
+|        * Change Log
+|                - N/A
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.4.2            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                04/11/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                smu10/smu10_megaip_raven1x@2537702
+|
+|        * Change Log
+|                - N/A
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.4.1            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                03/11/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                smu10/smu10_megaip_raven1x@2536185
+|
+|        * Change Log
+|                - Sync to smu10/smu10_megaip_raven1x@2536185
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.4.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                31/10/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                smu10/smu10_megaip_raven1x@2532226
+|
+|        * Change Log
+|                - Sync to smu10/smu10_megaip_raven1x@2532226
+|
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.3.7            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                28/10/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/RV1X_BTO@631170
+|
+|        * Change Log
+|                - smu10/smu10_release_RV_LSDP1_2196743@2440997
+|                - Reverted changes in PMFW fuseparam file
+|                - Added support for iGPU disable
+|                - Removed direct enablement of MP0+CCP clock gating by MP1 FW
+|                - Added support for PSPSMC_MSG_ConfigSocRail message (bug fix)
+|                - Added option to skip ODPR initialization
+|                - Added support for PSPSMC_MSG_QueryMemFreqOfDfPstate message
+|                - Fix maxValidLevel issue in fclk_dpm.c
+|                - Added message response for PSPSMC_MSG_ConfigSocRail
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.3.6            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                28/10/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/RV1X_BTO@631170
+|
+|        * Change Log
+|                - smu10/smu10_release_RV_LSDP1_2196743@2440997
+|                - Reverted changes in PMFW fuseparam file
+|                - Added support for iGPU disable
+|                - Removed direct enablement of MP0+CCP clock gating by MP1 FW
+|                - Added support for PSPSMC_MSG_ConfigSocRail message (bug fix)
+|                - Added option to skip ODPR initialization
+|                - Added support for PSPSMC_MSG_QueryMemFreqOfDfPstate message
+|                - Fix maxValidLevel issue in fclk_dpm.c
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.3.5            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                25/10/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/RV1X_BTO@631170
+|
+|        * Change Log
+|                - smu10/smu10_release_RV_LSDP1_2196743@2440997
+|                - Reverted changes in PMFW fuseparam file
+|                - Added support for iGPU disable
+|                - Removed direct enablement of MP0+CCP clock gating by MP1 FW
+|                - Added support for PSPSMC_MSG_ConfigSocRail message (bug fix)
+|                - Added option to skip ODPR initialization
+|                - Added support for PSPSMC_MSG_QueryMemFreqOfDfPstate message
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.3.4            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                20/10/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/RV1X_BTO@631170
+|
+|        * Change Log
+|                - smu10/smu10_release_RV_LSDP1_2196743@2440997
+|                - Reverted changes in PMFW fuseparam file
+|                - Added support for iGPU disable
+|                - Removed direct enablement of MP0+CCP clock gating by MP1 FW
+|                - Added support for PSPSMC_MSG_ConfigSocRail message
+|                - Added option to skip ODPR initialization
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.3.3            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                14/10/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/RV1X_BTO@631170
+|
+|        * Change Log
+|                - smu10/smu10_release_RV_LSDP1_2196743@2440997
+|                - Reverted changes in PMFW fuseparam file
+|                - Added support for iGPU disable
+|                - Removed direct enablement of MP0+CCP clock gating by MP1 FW
+|                - Added support for PSPSMC_MSG_ConfigSocRail message
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.3.2            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                29/09/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/RV1X_BTO@631170
+|
+|        * Change Log
+|                - smu10/smu10_release_RV_LSDP1_2196743@2440997
+|                - Reverted changes in PMFW fuseparam file
+|                - Added support for iGPU disable
+|                - Removed direct enablement of MP0+CCP clock gating by MP1 FW
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.3.1            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                07/09/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/RV1X_BTO@631170
+|
+|        * Change Log
+|                - smu10/smu10_release_RV_LSDP1_2196743@2440997
+|                - Reverted changes in PMFW fuseparam file
+|                - Added support for iGPU disable
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.3.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                07/09/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/RV1X_BTO@631170
+|
+|        * Change Log
+|                - smu10/smu10_release_RV_LSDP1_2196743@2440997
+|                - Reverted changes in PMFW fuseparam file
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.2.7            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                19/07/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/raven1x_main@611234
+|
+|        * Change Log
+|                - smu10/smu10_megaip_raven1x@2378331
+|                   - General sequence updates
+|                   - Added GFX retention save/restore
+|                   - Added MAFDD programming for GFX DLDO
+|                   - Updated RLC message ID
+|                   - Imported CPUOFF/VDDOFF (previously PC6) from ZP
+|                   - Imported C-State Boost from ZP
+|                   - Imported CCLK Controller from ZP
+|                - Local
+|                   - Fine-grained GFXOFF entry/exit status report
+|                   - Added back BIOSSMC_MSG_PowerUpGfx (0x1E) message
+|                   - Fixed fuse distribution issue (missing fuse block end address) in GFXOFF exit sequence
+|                   - Fixed second fuse distribution issue (avoid polling for sec fuse valid when sec fuses 
+|                     are not defined) in GFXOFF exit sequence
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.2.6            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                17/07/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/raven1x_main@611234
+|
+|        * Change Log
+|                - smu10/smu10_megaip_raven1x@2378331
+|                   - General sequence updates
+|                   - Added GFX retention save/restore
+|                   - Added MAFDD programming for GFX DLDO
+|                   - Updated RLC message ID
+|                   - Imported CPUOFF/VDDOFF (previously PC6) from ZP
+|                   - Imported C-State Boost from ZP
+|                   - Imported CCLK Controller from ZP
+|                - Local
+|                   - Fine-grained GFXOFF entry/exit status report
+|                   - Added back BIOSSMC_MSG_PowerUpGfx (0x1E) message
+|                   - Fixed fuse distribution issue (missing fuse block end address) in GFXOFF exit sequence
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.2.5            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                04/07/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/raven1x_main@611234
+|
+|        * Change Log
+|                - smu10/smu10_megaip_raven1x@2378331
+|                   - General sequence updates
+|                   - Added GFX retention save/restore
+|                   - Added MAFDD programming for GFX DLDO
+|                   - Updated RLC message ID
+|                   - Imported CPUOFF/VDDOFF (previously PC6) from ZP
+|                   - Imported C-State Boost from ZP
+|                   - Imported CCLK Controller from ZP
+|                - Local
+|                   - Fine-grained GFXOFF entry/exit status report
+|                   - Added back BIOSSMC_MSG_PowerUpGfx (0x1E) message
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.2.4            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                10/06/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                raven1x/raven1x_main@611234
+|
+|        * Change Log
+|                - smu10/smu10_megaip_raven1x@2378331
+|                   - General sequence updates
+|                   - Added GFX retention save/restore
+|                   - Added MAFDD programming for GFX DLDO
+|                   - Updated RLC message ID
+|                   - Imported CPUOFF/VDDOFF (previously PC6) from ZP
+|                   - Imported C-State Boost from ZP
+|                   - Imported CCLK Controller from ZP
+|                - Local
+|                   - Fine-grained GFXOFF entry/exit status report
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.2.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                03/02/16
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                2250307
+|
+|        * Change Log
+|                - Bug fixes for PC6 found in ZP
+|                - Bug fix for ThreadEn programing
+|                - Enabled message/interrupt handling for GFXOFF entry/exit
+|                - GFXOFF entry/exit sequence updates
+|                - Switched from automated messages to manual
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.1.1            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                23/11/15
+|
+|        * Features enabled
+|                - Fixing SLVERR on virtual wire programing
+|
+|        * Changelist
+|                
+|
+|        * Change Log
+|                - modify app/pmi.c to use RSMU_REG for setting virtual wires
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.1.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                23/11/15
+|
+|        * Features enabled
+|                - Fine grain CPU pstate control fully supported
+|                - Cstate boost fully supported
+|                - SBI features fully supported
+|                - ACPI/FLR resets partially supported (nBIF only)
+|                - VDDGFX initial drop, partially supported, missing RLC/MP0/SW handshake
+|                - PC6 partially supported, missing DMA functions for save/restore. 
+|                - DXIO firmware version @2092773
+|
+|        * Changelist
+|                2181523
+|
+|        * Change Log
+|
++------------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 30.0.0            |
++---------------------------+-------------------------------------------------------------------------------
+|        * Date (dd/mm/yy)
+|                08/09/15
+|
+|        * Features enabled
+|                - N/A
+|
+|        * Changelist
+|                2091276
+|
+|        * Change Log
+|
++------------------------------------------------------------------------------------------------------------

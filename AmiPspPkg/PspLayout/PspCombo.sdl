@@ -1,0 +1,83 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+TOKEN
+    Name  = "PSP_COMBO_DIRECTORY_SIZE"
+    Value = "0x1000"
+    Help  = "Size of PSP combo directory. 4k alignment for flash"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_COMBO_DIRECTORY_OFFSET"
+    Value = "$(PSP_BLOCK_START_OFFSET) + $(TOTAL_PSP_NVRAM_SIZE)"
+    Help  = "PSP combo directory table offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_COMBO_DIRECTORY_ADDRESS"
+    Value  = "$(PSP_COMBO_DIRECTORY_OFFSET) + $(FLASH_BASE)"
+    Help  = "Physical address of the PSP combo directory table, this value is used in AmdPspFirmwareDirectoryList(PspCommon.sdl)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "COMBO_ENTRY_ELINK"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = '<COMBO_ENTRY IdSelect="0x00" Id="0xBC090000" Address="$(PSP_DIRECTORY_LEVEL_1_OFFSET_SM)"/>'
+    Parent  = "COMBO_ENTRY_ELINK"
+    InvokeOrder = AfterParent
+    Token = "SM_PSP_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = '<COMBO_ENTRY IdSelect="0x00" Id="0xBC0A0000" Address="$(PSP_DIRECTORY_LEVEL_1_OFFSET_RV)"/>'
+    Parent  = "COMBO_ENTRY_ELINK"
+    InvokeOrder = AfterParent
+    Token = "RV_PSP_SUPPORT" "=" "1"
+End
+
+OUTPUTREGISTER
+    Name  = "AUTOGEN_PSP_COMBO_XML"
+    Path  = "Build"
+    File  = "PspDataCombo.xml"
+    Template  = "BuildPspCombo.txt"
+End
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

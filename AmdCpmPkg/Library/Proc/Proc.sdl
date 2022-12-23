@@ -1,0 +1,49 @@
+TOKEN
+	Name  = "AmdCpmProc_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Proc support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AmdCpmBaseLib"
+	File  = "Base/AmdCpm3BaseLib.inf"
+	Package  = "AmdCpmPkg"
+	Arch  = "IA32 X64"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdCpmCpuLib"
+	File  = "Cpu/AmdCpm3Cpu.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "AmdCpmFchLib"
+	File  = "Fch/AmdCpm3Fch.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "AmdCpmBaseLib"
+	Instance  = "AmdCpmPkg.AmdCpmBaseLib"
+	Arch  = "IA32 X64"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdCpmCpuLib"
+	Instance  = "AmdCpmPkg.AmdCpmCpuLib"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmdCpmFchLib"
+	Instance  = "AmdCpmPkg.AmdCpmFchLib"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER"
+End
+

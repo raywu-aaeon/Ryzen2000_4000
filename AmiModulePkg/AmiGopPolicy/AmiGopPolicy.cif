@@ -1,0 +1,16 @@
+<component>
+	name = "AmiGopPolicy"
+	category = eModule
+	LocalRoot = "AmiModulePkg\AmiGopPolicy\"
+	RefName = "AmiModulePkg.AmiGopPolicy"
+[INF]
+"AmiGopPolicy.inf"
+[files]
+"AmiGopPolicy.h"
+"AmiGopPolicy.chm"	
+"AmiGopPolicy.sd"	
+"AmiGopPolicy.sdl"	
+"AmiGopPolicy.uni"	
+"AmiGopPolicySetup.c"	
+"AmiGopPolicyLinks.tmp"	
+<endComponent>

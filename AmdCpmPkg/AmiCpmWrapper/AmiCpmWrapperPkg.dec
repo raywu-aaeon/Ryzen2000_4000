@@ -1,0 +1,23 @@
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AmiCpmWrapperPkg
+  PACKAGE_GUID          = F156AF8B-3119-4143-89B4-9A7BF70ED55D
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+
+[Guids]
+  gAmiCpmWrapperPkgTokenSpaceGuid = { 0x3bbe0983, 0xa1f4, 0x4f7f, { 0x8d, 0xeb, 0x1d, 0x5f, 0x5e, 0x4b, 0xc3, 0x23 } }
+  gAmiCpmWrapperPkgUmaVariableGuid = { 0x14b90A8D, 0xBCf4, 0x2f71, { 0x1d, 0x6b, 0x5A, 0xDf, 0x9e, 0x8b, 0x73, 0x13 } }
+[Protocols]
+
+[Ppis]
+
+[PcdsFeatureFlag]
+  gAmiCpmWrapperPkgTokenSpaceGuid.PcdAmiCpmTableOverride|FALSE|BOOLEAN|0x00000001
+
+[PcdsFixedAtBuild]

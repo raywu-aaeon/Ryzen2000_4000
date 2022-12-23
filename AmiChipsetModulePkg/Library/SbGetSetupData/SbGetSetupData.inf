@@ -1,0 +1,30 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbGetSetupData
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbGetSetupData
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  AmiCspLib
+  SbSetupVar
+  $(SbSupportedFchLibList)
+
+[Sources]
+  SbGetSetupData.c
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdSbFchTypeString

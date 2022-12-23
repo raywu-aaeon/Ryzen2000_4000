@@ -1,0 +1,191 @@
+TOKEN
+	Name  = "AmdCpmDisplayFeatureAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Asl support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+
+
+TOKEN
+	Name  = "AmdCpmDGpuD3ColdAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDGpuD3ColdAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmDisplayFeatureDisplayConnectEventAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDisplayFeatureDisplayConnectEventAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmDisplayFeatureDAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDisplayFeatureDAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpm3DisplayFeatureD2Asl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpm3DisplayFeatureD2Asl support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmDisplayFeatureIAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDisplayFeatureIAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmDisplayFeatureI2Asl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDisplayFeatureI2Asl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmDisplayFeatureNoIAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDisplayFeatureNoIAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmDisplayFeatureMxmOverTAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDisplayFeatureMxmOverTAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpm3DisplayAtpxDgpuAsl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpm3DisplayAtpxDgpuAsl support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpm3DisplayAtpxDgpu2Asl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpm3DisplayAtpxDgpu2Asl support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpm3DisplayAtpxIgpuAsl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpm3DisplayAtpxIgpuAsl support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpm3DisplayAtpxIgpu2Asl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpm3DisplayAtpxIgpu2Asl support in Project"
+    TokenType = Boolean
+End
+
+
+
+INFComponent
+	Name  = "AmdCpmDGpuD3ColdAsl"
+	File  = "DGpuD3Cold/AmdCpm3DGpuD3ColdAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmDGpuD3ColdAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdCpm3DisplayAtpxDgpuAsl"
+    File  = "DisplayAtpxDgpu/AmdCpm3DisplayAtpxDgpuAsl.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "AmdCpm3DisplayAtpxDgpuAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdCpm3DisplayAtpxDgpu2Asl"
+    File  = "DisplayAtpxDgpu2/AmdCpm3DisplayAtpxDgpu2Asl.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "AmdCpm3DisplayAtpxDgpu2Asl_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdCpm3DisplayAtpxIgpuAsl"
+    File  = "DisplayAtpxIgpu/AmdCpm3DisplayAtpxIgpuAsl.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "AmdCpm3DisplayAtpxIgpuAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdCpm3DisplayAtpxIgpu2Asl"
+    File  = "DisplayAtpxIgpu2/AmdCpm3DisplayAtpxIgpu2Asl.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "AmdCpm3DisplayAtpxIgpu2Asl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmDisplayFeatureDisplayConnectEventAsl"
+	File  = "DisplayConnectEvent/AmdCpm3DisplayFeatureDisplayConnectEventAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmDisplayFeatureDisplayConnectEventAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmDisplayFeatureDAsl"
+	File  = "DisplayFeatureD/AmdCpm3DisplayFeatureDAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmDisplayFeatureDAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdCpm3DisplayFeatureD2Asl"
+    File  = "DisplayFeatureD2/AmdCpm3DisplayFeatureD2Asl.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "AmdCpm3DisplayFeatureD2Asl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmDisplayFeatureIAsl"
+	File  = "DisplayFeatureI/AmdCpm3DisplayFeatureIAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmDisplayFeatureIAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmDisplayFeatureI2Asl"
+	File  = "DisplayFeatureI2/AmdCpm3DisplayFeatureI2Asl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmDisplayFeatureI2Asl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmDisplayFeatureNoIAsl"
+	File  = "DisplayFeatureNoI/AmdCpm3DisplayFeatureNoIAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmDisplayFeatureNoIAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmDisplayFeatureMxmOverTAsl"
+	File  = "MxmOverT/AmdCpm3DisplayFeatureMxmOverTAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmDisplayFeatureMxmOverTAsl_SUPPORT" "=" "1"
+End

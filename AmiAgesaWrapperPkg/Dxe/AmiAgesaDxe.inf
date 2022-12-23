@@ -1,0 +1,103 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+#
+# This file contains code for North Bridge initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiAgesaDxe
+  FILE_GUID                      = 1DFB7BFA-BF8E-4d11-9766-2FB0D0442310
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = AmiAgesaDxeEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+
+[Sources]
+    AmiAgesaDxe.c
+    AmiAgesaDxe.h
+
+[Packages]
+    MdePkg/MdePkg.dec   
+    IntelFrameworkPkg/IntelFrameworkPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+    AmiCpuPkg/AmiCpuPkg.dec
+    AmiChipsetPkg/AmiChipsetPkg.dec
+    AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+    AmiAgesaWrapperPkg/AmiAgesaWrapperPkg.dec
+    AgesaPkg/AgesaPkg.dec
+    AgesaModulePkg/AgesaCommonModulePkg.dec
+    AgesaModulePkg/AgesaFamily15ModulePkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+    UefiDriverEntryPoint
+    BaseLib
+    HobLib
+    PcdLib
+    DebugLib
+    IoLib
+    AmdBaseLib
+    AmdSocBaseLib
+
+[Guids]
+    gAmiGlobalVariableGuid
+    gAmiAgesaSpdByPassHobGuid
+    gAmiAgesaMemRestoreSerialHobGuid
+    gEfiHobListGuid
+    gAmiAgesaMemRestoreGuid
+    gAmiAgesaAcpiSleepStateBackupGuid
+
+[Protocols]
+    gEfiMpServiceProtocolGuid         # CONSUMED
+
+[Pcd]
+    gAmiAgesaWrapperTokenSpaceGuid.PcdCmosAgesaSpecified      # CONSUMED
+    gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaByPassSpdControl   # CONSUMED
+    gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaMemrestoreSupport  # CONSUMED
+
+#AGESA PCD for memory restore
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgSignature               # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgVersion                 # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgFlags                   # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgNvStorage               # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgNvStorageSize           # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgVolatileStorage         # CONSUMED
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgVolatileStorageSize     # CONSUMED
+
+    gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiS3Support                       # CONSUMED
+[Depex]  	
+    gEfiRealTimeClockArchProtocolGuid
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

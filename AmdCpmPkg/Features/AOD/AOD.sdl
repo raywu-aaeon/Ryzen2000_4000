@@ -1,0 +1,98 @@
+TOKEN
+	Name  = "AmdCpmPkg_Features_Aod_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling AOD support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "AmdCpmOemInitMyrtle_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AmdCpmAodSsdt_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AodSsdt support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmAodDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AodDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmAodSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AodSmm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AodSsdt"
+	File  = "Asl/AodSsdt.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmAodSsdt_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AodDxe"
+	File  = "Dxe/AodDxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmAodDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AodSmmRV"
+	File  = "Smm/AodSmmRv.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AmdCpmAodSmm_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AodSmmZP"
+	File  = "Smm/AodSmmZp.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AmdCpmAodSmm_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AodRuntimeLib"
+	File  = "Library/AodRuntimeLib/AodRuntimeLib.inf"
+	Package  = "AmdCpmPkg"
+End
+
+LibraryMapping
+	Class  = "AodRuntimeLib"
+	Instance  = "AmdCpmPkg.AodRuntimeLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+
+INFComponent
+	Name  = "AodCbsLibZp"
+	File  = "Library/AodCbsLib/AodCbsLibZp/AodCbsLibZp.inf"
+	Package  = "AmdCpmPkg"
+End
+
+LibraryMapping
+	Class  = "AodCbsLibZp"
+	Instance  = "AmdCpmPkg.AodCbsLibZp"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+	Name  = "AodCbsLibRv"
+	File  = "Library/AodCbsLib/AodCbsLibRv/AodCbsLibRv.inf"
+	Package  = "AmdCpmPkg"
+End
+
+LibraryMapping
+	Class  = "AodCbsLibRv"
+	Instance  = "AmdCpmPkg.AodCbsLibRv"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End

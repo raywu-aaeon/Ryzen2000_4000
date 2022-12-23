@@ -1,0 +1,60 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbPei
+  FILE_GUID                      = 0D1ED2F7-E92B-4562-92DD-5C82EC917EAE
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CrbPeiInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  CrbPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  MandolinPkg/MandolinPkg.dec
+  AmiTcgPkg/AmiTcgPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec       # Optional. should use Mde Library instead.
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  BaseLib
+  PciLib
+  AmiPeiLib # Optional. should use Mde Library instead.
+  AmiCspLib # Optional. should use Mde Library instead.
+  PcdLib
+[Ppis]
+  gEfiPeiSmbus2PpiGuid
+  gPeiSmbusPpiGuid
+  gAmiPeiSbCustomPpiGuid
+###  gAmiPeiSbInitPolicyPpiGuid
+  gAmiPeiSbInitPolicyGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gAmiPeiCrbInfoPpiGuid
+  gAmiPeiGnbCustomPpiGuid
+  gEfiPeiBootInRecoveryModePpiGuid
+  
+[Pcd]
+ gAmiTcgPkgTokenSpaceGuid.PcdAmiTpm2CurrentIrqNum
+ gAmiTcgPkgTokenSpaceGuid.PcdAmiTpm2CurrentIrqActiveLevel
+
+[Depex]
+  gEfiPeiCpuIoPpiInstalledGuid AND
+  gEfiPciCfg2PpiGuid AND
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gAmiPeiPciTableInitPpiGuid

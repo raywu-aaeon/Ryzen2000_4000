@@ -1,0 +1,53 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+INF_VERSION = 0x00010005
+VERSION_STRING = 1.0
+BASE_NAME = PerformanceMeasurementPei
+MODULE_TYPE = PEIM
+FILE_GUID = 2FFC67DE-1FC6-4599-AAD8-7D4F2336CCD1
+
+[Sources]
+PerformanceMeasurementPei.c
+
+[LibraryClasses]
+AmiPeiLib
+PeimEntryPoint
+
+[Guids]
+gPerformanceProtocolGuid     
+
+[Packages]
+MdePkg/MdePkg.dec
+IntelFrameworkPkg/IntelFrameworkPkg.dec
+AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+MdeModulePkg/MdeModulePkg.dec
+
+[Depex]
+TRUE
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

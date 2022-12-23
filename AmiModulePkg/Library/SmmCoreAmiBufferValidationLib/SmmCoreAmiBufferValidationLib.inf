@@ -1,0 +1,65 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file
+# AmiBufferValidationLib instance for the SMM drivers
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmCoreAmiBufferValidationLib
+  FILE_GUID                      = 9499D2C1-B417-4B22-A2DD-0B56CC67D9E1
+  MODULE_TYPE                    = SMM_CORE
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  LIBRARY_CLASS                  = AmiBufferValidationLib|SMM_CORE
+  CONSTRUCTOR                    = SmmCoreAmiBufferValidationLibConstructor
+  DESTRUCTOR                     = SmmCoreAmiBufferValidationLibDestructor
+
+[Sources]
+  SmmCoreAmiBufferValidationLib.c
+  SmmCommSmiHandler.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+
+[LibraryClasses]
+  SmmServicesTableLib
+  UefiBootServicesTableLib
+  DxeServicesTableLib
+  MemoryAllocationLib
+  DebugLib
+  UefiLib
+  PcdLib
+
+[Protocols]
+  gEfiSmmAccess2ProtocolGuid ## CONSUMES
+  gEfiSmmReadyToLockProtocolGuid ## CONSUMES
+  gEfiLegacyBiosPlatformProtocolGuid ## CONSUMES
+  gAmiSmmBufferValidationProtocolGuid ## PRODUCES
+  gEfiSmmSwDispatch2ProtocolGuid ## CONSUMES
+  gEfiSmmCpuProtocolGuid ## CONSUMES
+  gEfiAcpiTableProtocolGuid ## CONSUMES
+  gAmiSmmCommunicationProtocolGuid ## PRODUCES
+
+[Guids]
+  gEfiMemoryAttributesTableGuid ## CONSUMES ## SystemTable
+  gEdkiiPiSmmCommunicationRegionTableGuid ## PRODUCES ## SystemTable
+  gAmiAcpiSmmCommunucationTableGuid  ## PRODUCES ## AcpiTable
+
+[Pcd]
+  gAmiModulePkgTokenSpaceGuid.AmiPcdSmmMemLibProperties
+  gAmiModulePkgTokenSpaceGuid.AmiPcdSmmCommunicationBufferSize
+  gAmiModulePkgTokenSpaceGuid.AmiPcdSmmCommunicationBufferSwSmi
+  gAmiModulePkgTokenSpaceGuid.AmiPcdSmmCommInterfaceProperties
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorId
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorRevision
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId

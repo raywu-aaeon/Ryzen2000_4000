@@ -1,0 +1,73 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file Ahci.inf
+#  Module that produces AHCI Bus Protocol and Booting to OS in AHCI mode 
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Ahci
+  FILE_GUID                      = 8F5A2E02-538C-4D59-B920-C4786ACBC552
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AhciBusEntryPoint
+
+[Sources]  
+  AhciBus.c
+  AhciController.c
+  AhciComponentName.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  AhciCspLib
+  DebugLib
+  
+[Guids]
+  gEfiDiskInfoIdeInterfaceGuid
+  gEfiDiskInfoAhciInterfaceGuid
+  gEfiGlobalVariableGuid
+  
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiIdeControllerInitProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiTrEEProtocolGuid
+  gEfiSmmControl2ProtocolGuid
+  gEfiAtaPassThruProtocolGuid
+  gEfiStorageSecurityCommandProtocolGuid
+  gEfiComponentNameProtocolGuid
+  gEfiComponentName2ProtocolGuid
+  gAmiAhciBusProtocolGuid
+  gAint13ProtocolGuid
+  gAmiAhciPlatformPolicyProtocolGuid
+  gAmiIdeBusInitProtocolGuid
+  gAmiHddSecurityProtocolGuid
+  gAmiHddSecurityInitProtocolGuid
+  gAmiHddSecurityEndProtocolGuid
+  gAmiHddSmartProtocolGuid
+  gAmiHddSmartInitProtocolGuid
+  gAmiHddOpalSecInitProtocolGuid
+  gAmiAtaPassThruInitProtocolGuid
+  gAmiScsiPassThruInitProtocolGuid
+  gAmiBlockIoWriteProtectionProtocolGuid
+  gAmiOnboardRaidControllerGuid
+  gAmiHddPasswordVerifiedGuid
+  gAmiTcgStorageSecurityInitProtocolGuid
+  gAmiTcgStorageSecurityProtocolGuid
+  
+[Depex]
+  TRUE

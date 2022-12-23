@@ -1,0 +1,3 @@
+FILE FREEFORM = 98E145D7-1BDC-4636-ABCF-7CBCEF7B668D {
+  SECTION RAW = AmiChipsetModulePkg/LegacyRom/Vbios/RavenGenericVbios.bin
+}

@@ -1,0 +1,21 @@
+<component>
+	name = "JedecNvdimm"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\JedecNvdimm\"
+	RefName = "AgesaModulePkg.JedecNvdimm"
+[INF]
+"JedecNvdimm.inf"
+[files]
+"JedecNvdimm.asl"
+"JedecNvdimm.c"
+"JedecNvdimm.h"
+"JedecNvdimmAcpi.c"
+"JedecNvdimmAcpi.h"
+"JedecNvdimmDsm.c"
+"JedecNvdimmDsm.h"
+"JedecNvdimmSmbus.c"
+"JedecNvdimmSmbus.h"
+"JedecNvdimm.sdl"
+<endComponent>
+
+<endComponent>

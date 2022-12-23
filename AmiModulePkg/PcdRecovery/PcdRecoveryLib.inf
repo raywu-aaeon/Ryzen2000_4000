@@ -1,0 +1,52 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file
+#   DXE instance of the PcdRecoveryLib library class
+##
+[Defines]
+  INF_VERSION                    = 0x00010015
+  BASE_NAME                      = PcdRecoveryLib
+  FILE_GUID                      = 102A24A1-D63E-4B3D-B34E-F137EEA23735
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NULL
+
+[Sources]
+  PcdRecoveryLib.c
+  PcdRecovery.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  UefiLib
+  DebugLib
+  HobLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  PcdLib
+  AmiDxeLib
+  
+[Protocols]
+  gEfiLoadFileProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gPcdProtocolGuid
+  
+[Guids]
+  gPcdDataBaseHobGuid
+  gEfiHobListGuid
+  gAmiRecoveryImageHobGuid
+
+[FixedPcd]
+  gAmiModulePkgTokenSpaceGuid.PcdUseNewImageOnFlashUpdate

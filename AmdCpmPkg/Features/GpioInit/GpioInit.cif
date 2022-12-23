@@ -1,0 +1,12 @@
+<component>
+	name = "GpioInit"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\GpioInit\"
+	RefName = "AmdCpmPkg.Features.GpioInit"
+[INF]
+"Dxe\AmdCpm3GpioInitDxe.inf"
+"Pei\AmdCpm3GpioInitPeim.inf"
+"Smm\AmdCpm3GpioInitSmm.inf"
+[files]
+"GpioInit.sdl"	
+<endComponent>

@@ -1,0 +1,15 @@
+<component>
+	name = "Fch"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Fch\"
+	RefName = "AgesaModulePkg.Fch"
+[files]
+"Common\Include\FchBiosRamUsage.h"
+"Common\Include\FchCommon.h"
+"Common\Include\FchImc.h"
+"Common\Include\FchPT.h"
+"Common\Include\FchSata.h"
+"Common\Include\FchXgbe.h"
+[parts]
+"AgesaModulePkg.Fch.Sandstone"
+<endComponent>

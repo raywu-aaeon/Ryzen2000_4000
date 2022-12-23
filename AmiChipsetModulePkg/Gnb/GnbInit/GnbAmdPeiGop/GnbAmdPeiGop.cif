@@ -1,0 +1,13 @@
+<component>
+	name = "Gnb AMD PEI GOP"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Gnb\GnbInit\GnbAmdPeiGop"
+	RefName = "AmiChipsetModulePkg.GnbAmdPeiGop"
+[files]
+"GnbAmdPeiGop.sdl"
+"Logo\logo.txt"
+"Logo\AmiLogo.bmp"
+[INF]
+"AmdGfxInitPei.inf"
+"AMDGopDriver.inf"
+<endComponent>

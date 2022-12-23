@@ -1,0 +1,18 @@
+#ifndef  _SB_ELINKS_H   //To Avoid this header get compiled twice
+#define  _SB_ELINKS_H
+
+#define ACPI_ENABLE_CALL_BACK_LIST @Elink(AcpiEnableCallbackList, "@Child", " ", "%n")
+#define ACPI_DISABLE_CALL_BACK_LIST @Elink(AcpiDisableCallbackList, "@Child", " ", "%n")
+#define SB_OEM_SETUP_CALLBACK_LIST @Elink(SbConfigurationList, "@Child", " ", "%n")
+#define SB_RESET_CALLBACK_LIST @Elink(SbResetCallbackList, "@Child", " ", "%n")
+#define SB_RTC_PWR_VALID_CALLBACK_LIST @Elink(SbRtcPwrValidCallbackList, "@Child", " ", "%n")
+#define SB_INIT_RTC_CALLBACK_LIST @Elink(SbInitRtcCallbackList, "@Child", " ", "%n")
+// one for backward compatible another for new.
+#define AMD_FIRMWARE_DIRECTORY_LIST @Elink(AmdFirmwareDirectoryList, "@Child", " ", "") @Elink(AmdPspFirmwareDirectoryList, "@Child", " ", "%n")
+#define SB_FCH_PCD_INIT_LIST @Elink(AmiFchPcdInitList, "@Child", " ", "%n")
+// Below items are different from EIP172723 but it maybe implement into chipset template.
+// We will sync chipset template once it to be changed.
+#include <SbDxeInitElink.h>
+#include <SbRunInitElink.h>
+
+#endif  // #ifndef  _SB_ELINKS_H_

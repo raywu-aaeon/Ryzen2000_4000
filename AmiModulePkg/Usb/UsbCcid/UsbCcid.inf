@@ -1,0 +1,49 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiUsbCcid
+  FILE_GUID                      = 296e5f5a-3f3e-4b54-8395-98ebcc9407a6
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = UsbCcidInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES              =  IA32 X64 IPF EBC
+#
+
+[Sources]
+  EfiUsbCcid.c
+  UsbCcid.c
+  ComponentName.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  Build/AmiUsbPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  DebugLib
+  DebugAgentLib
+  UefiLib
+  UefiUsbLib
+
+
+[Protocols]
+  gEfiUsbIoProtocolGuid
+
+[PcdEx]
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxCcidDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbCcidDevice
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdCcidUseIntInsRemoval
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUseT0T1Protocol
+
+[Depex]
+  TRUE

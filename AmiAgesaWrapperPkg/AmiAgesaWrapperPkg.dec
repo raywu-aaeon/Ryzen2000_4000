@@ -1,0 +1,70 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiAgesaWrapper
+  PACKAGE_GUID                   = 90BE556E-6EE5-42dc-9E0E-2758CFAFF79D
+  PACKAGE_VERSION                = 0.1
+################################################################################
+#
+# Include Section - list of Include Paths that are provided by this package.
+#                   Comments are used for Keywords and Module Types.
+#
+# Supported Module Types:
+#  SEC PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_SAL_DRIVER UEFI_DRIVER
+#
+################################################################################
+[Includes]
+  Dxe
+  Library
+
+[Guids]
+  gAmiAgesaWrapperTokenSpaceGuid = {0x64733217, 0x6ac4, 0x4099, {0xbf, 0xd6, 0x39, 0xd5, 0x2d, 0xce, 0x7b, 0x9e}}
+  gAmiAgesaS3NonvolatileDataGuid =  {0xb1cfc482, 0x4cb2, 0x4cee, {0x9b, 0x00, 0xce, 0x25, 0x79, 0xec, 0x71, 0x86}}
+  gAmiAgesaS3VolatileDataGuid = {0x2d492b32, 0x5701, 0x4a82, {0xbd, 0xff, 0x0b, 0xcc, 0x2c, 0x91, 0x48, 0x48}}
+
+  gAmiAgesaMemRestoreGuid = { 0xC3A4E49F, 0x485F, 0x4fd6, {0xA2, 0xEA, 0x2B, 0xC8, 0x74, 0x55, 0xAD, 0x4B}}
+  gAmiAgesaSpdByPassHobGuid = { 0xb74abeaf, 0x46a8, 0x4426, {0x9a, 0x75, 0x9e, 0x26, 0x30, 0xc, 0xd9, 0x53 }}
+  gAmiAgesaMemRestoreSerialHobGuid = { 0xd6994300, 0x7f5d, 0x11e1, {0xb0, 0xc4, 0x08, 0x00, 0x20, 0x0c, 0x9a, 0x66 }}
+
+  gAmiAgesaAcpiSleepStateBackupGuid = {0x11B3F40C, 0x44A5, 0x4CE8, {0xA3, 0xA2, 0xE0, 0xCC, 0x9D, 0x46, 0x23, 0xF0}}
+[Ppis]
+  gAmiAgesaMemRestorePpiGuid = {0xDF74DAAA, 0x4FF1, 0x4778, {0xA8, 0x04, 0x44, 0xAD, 0x7B, 0xD4, 0x39, 0x03}}
+
+[Protocols]
+  gAmiApcbLibInterfaceProtocolGuid = {0x9F1A0EE9, 0xE255, 0x47E2, {0x83, 0xC9, 0x30, 0xFE, 0xC8, 0x3D, 0x48, 0x0B}}
+
+[PcdsFixedAtBuild]
+  gAmiAgesaWrapperTokenSpaceGuid.PcdCmosAgesaSpecified|0x84|UINT8|0x10000000
+  gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaByPassSpdControl|0x1|UINT8|0x10000001
+  gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaMemoryDownSupport|0x0|UINT8|0x10000002
+  gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaMemrestoreSupport|0x0|UINT16|0x10000003 # [Fam15 only]
+  gAmiAgesaWrapperTokenSpaceGuid.PcdAgesaCapsuleSupport|0x1|UINT16|0x10000004
+  gAmiAgesaWrapperTokenSpaceGuid.PcdSmmTsegWbSupport|TRUE|BOOLEAN|0x10000005
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

@@ -1,0 +1,41 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbSkippableFv
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CrbSkippableFv
+  CONSTRUCTOR                    = CrbSkippableFvConstructor
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  MandolinPkg/MandolinPkg.dec
+  AmiNetworkPkg/AmiNetworkPkg.dec
+  
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  BaseLib
+  HobLib
+
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gEfiEndOfPeiSignalPpiGuid
+  
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdPeiCoreMaxFvSupported
+
+[Guids]
+  gCrbSkippableEmptyFvGuid  
+  gEfiNetworkStackSetupGuid
+  gCrbSkippableCsmFvFfsGuid
+  gCrbSkippableNetworkFvFfsGuid
+  gCrbSkippableTcgFvFfsGuid
+
+[Sources]
+  CrbSkippableFv.c

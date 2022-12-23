@@ -1,0 +1,1003 @@
+PCIDEVICE
+    Title  = "CrbFp5Ec - PCI0 - ASL Container"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    Token = "CrbFp5EcFirmware_SUPPORT" "=" "1"
+    Token = "CRB_FP5_EC_PCI0_ASL_SUPPORT" "=" "1"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+End
+
+PCIDEVICE
+    Title  = "NBIO Picasso IGD VBIOS Container"
+    Parent  = "NBIO Internal Br0"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ROMFile  = "AmiChipsetModulePkg/LegacyRom/Vbios/PicassoGenericVbios.bin"
+    IntA =     LNKE; 52
+    IntB =     LNKF; 53
+    IntC =     LNKG; 54
+    IntD =     LNKH; 55
+    Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+    Disable = Yes
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    OptionROM = Yes
+    ROMMain = No
+    Virtual = Yes
+    SuppressDeviceGeneration = Yes
+    LegacyRom = Yes
+    FFSFileName  = "ROM Storage"
+    ROMSectionGuid  = "430a34b2-65f8-4c0a-b765-e02adec8dd63"
+End
+
+PCIDEVICE
+    Title  = "NBIO Raven1 IGD VBIOS Container"
+    Parent  = "NBIO Internal Br0"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ROMFile  = "AmiChipsetModulePkg/LegacyRom/Vbios/RavenGenericVbios.bin"
+    IntA =     LNKE; 52
+    IntB =     LNKF; 53
+    IntC =     LNKG; 54
+    IntD =     LNKH; 55
+    Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    OptionROM = Yes
+    ROMMain = No
+    Virtual = Yes
+    SuppressDeviceGeneration = Yes
+    LegacyRom = Yes
+    FFSFileName  = "ROM Storage"
+    ROMSectionGuid  = "12bf5331-4df7-4ca8-9c7f-155ef4a67a3a"
+End
+
+TOKEN
+    Name  = "OPTIMIZATION"
+    Value  = "0"
+    Help  = "Enables/disables C compiler optimization."
+    TokenType = Boolean
+    TargetMAK = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+TOKEN
+    Name  = "CRB_PROJECT_MAJOR_VERSION"
+    Value  = "0"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CRB_PROJECT_MINOR_VERSION"
+    Value  = "02"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CRB_PROJECT_TAG"
+    Value  = "0ACRG"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AMD_AGESA_PI_STR"
+    Value  = "EmbeddedPI-FP5_1.0.0.0RC2"
+    Help  = "The string of current PI"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "UART_POLLING_REDIRECTION"
+    Value  = "0"
+    Help  = "Use polling method redirection to send and receive data from COM Port"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FCH_UART0_BASE_ADDRESS"
+    Value  = "0xFEDC9000"
+    Help  = "UART0 BASE ADDRESS"
+    TokenType = Integer
+    TargetH = Yes
+    Disable = Yes
+    Token = "AmiSerialUart0_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FCH_UART1_BASE_ADDRESS"
+    Value  = "0xFEDCA000"
+    Help  = "UART1 BASE ADDRESS"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "AmiSerialUart1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "EC_SUPPORT"
+    Value  = "0"
+    Help  = "AMD FP5 CRB EC Binary Support."
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "Terminal_SUPPORT"
+    Value  = "1"
+    Help  = "Enable/Disable 'Serial Redirection' module. \This module contains Terminal.lib/Terminalx64.lib,\the compiled binary of module 'Serial Redirection \Sources.' It also contains all setup related material\for the module.\"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FORCE_COMMON_MODE_FOR_DEVICES"
+    Value  = "1"
+    Help  = "As the console splitter binds on top of additional devices this token will force all devices to operate in a common mode."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "LEGACY_UART_INPUT_CLOCK"
+    Value  = "1843200"
+    Help  = "Legacy UART input clock frequency"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SDIO_DRIVER_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SdioDriver support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "IOMMU_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling IOMMU support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "PSP_APCB_FILENAME_RV"
+    Value  = "$(BUILD_DIR)\$(APCB_IN_BUILD_DIR)\$(RELEASE_RV_FP5_UDIMM)\APCB_RV_D4.bin"
+    Help  = "The APCB OEM binary 'APCB_RV_D4.bin'."
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "EXTERNAL_VGA_CONTROL"
+    Value  = "0"
+    Help  = "Provided for external VGA control, it is not allowed to enable if AmdCpmDisplayFeature_SUPPORT is enabled"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PCI0_DEFAULT_CONSOLE_REDIRECTION_ENABLE"
+    Value  = "0"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PCI1_DEFAULT_CONSOLE_REDIRECTION_ENABLE"
+    Value  = "0"
+    Help  = "Specifies the Setup default value for PCI port #1 redirection."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AmdCpmDisplayFeature_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling DisplayFeature support in the project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SB_DISPLAY_SATA_MODE"
+    Value  = "0"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PRESERVE_XGBE_BARS"
+    Value  = "1"
+    Help  = "Enables preservation of XGbE bars."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AmdCpmPkg_AmdXgbeWorkaround_SUPPORT" "=" "1"
+End
+
+##For Debugger to Work:
+# DEBUG_MODE = 1
+# AMIDEBUG_RX_SUPPORT = 1
+# AMIDEBUGGERPKG_SUPPORT = 1
+# AMI_DEBUGGER_SUPPORT = 1
+# FIXED_XHCI_BUS_SANDSTONE = 0x1
+TOKEN
+    Name  = "AGESA_DEBUG_MESSAGES_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AGESA DEBUG MESSAGES in Project. You must enable Debug_Mode as well to get messages."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NUMBER_OF_MEM_MODULE"
+    Value  = "2"
+    Help  = "Number of Memory Modules in this Physical Array.\Port 'get_mem_module_info' from NBSMBIOS.ASM"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "A1_MEMORY_SOCKETS"
+    Value  = "2"
+    Help  = "Number of Memory Modules/Slots in the first physical Memory Array"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DIMM_SLOTS_PER_NODE"
+    Value  = "1"
+    Help  = "Number of DIMM slots per node"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PCI_UART_INPUT_CLOCK"
+    Value  = "47923200"
+    Help  = "This is PCI UART input clock. The default value is (24000000/13) = 1843200 MHz"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "UART_INPUT_CLOCK"
+    Value  = "47923200"
+    Help  = "This is PCI UART input clock. The default value is (24000000/13) = 1843200 MHz"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHANNEL_A_DIMM_0_ADDRESS"
+    Value  = "0xA0"
+    Help  = "Smbus address of channel B DIMM 0"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+FD_AREA
+    Name = "NCB0"
+    TYPE = "RAW"
+    FD_INFO = "AMIROM"
+    Offset = "0"
+    Size = "$(FCH_FIRMWARE_OFFSET)"
+    Layout_Attribute = "0xd40"
+    Attributes = "0x0"
+    Guid = "f308bb8f-dc56-4a5e-a2a7-233499e6c3c2"
+End
+
+TOKEN
+    Name  = "CHANNEL_B_DIMM_0_ADDRESS"
+    Value  = "0xA8"
+    Help  = "Smbus address of channel B DIMM 0"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DIMM_SPD_MAP"
+    Value  = "{0, 0, CHANNEL_A_DIMM_0_ADDRESS},{1, 0, CHANNEL_B_DIMM_0_ADDRESS}"
+    Help  = "List of DIMM SPD addresses, each entry has\three byte values - Channel, Dimm and SMBUS \address. Entries must be ordered.\"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_Features_Ucsi_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AmdCpmUcsi support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmEcInit_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AmdCpmEcInit support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "S3_BASE_MEMORY_SIZE"
+	Value  = "0x200000"
+	Help  = "Number of bytes for S3 resume base memory."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0x40000 = 256K, increase/decrease it in units of 0x1000 = 4K"
+End
+
+TOKEN
+	Name  = "S3_BASE_MEMORY_SIZE"
+	Value  = "0x200000"
+	Help  = "Number of bytes for S3 resume base memory."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0x40000 = 256K, increase/decrease it in units of 0x1000 = 4K"
+	Token = "AMI_DEBUG_RX_IN_S3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmdCpmAdaptiveS4_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AdaptiveS4 support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_FanPolicyDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling FanPolicyDxe support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "KBC_SUPPORT"
+    Value  = "0"
+    Help  = "Enable/Disable KBC support"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FW_VERSION_GUID"
+    Value  = "{0xda3663a1, 0xce41, 0x40e6, {0xa0, 0x2a, 0x7b, 0xfc, 0xe5, 0x66, 0x94, 0x8d} }"
+    Help  = "FW Version GUID inserted into Firmware ID structure.\FW version has to be overridden for every project."
+    TokenType = Expression
+    TargetH = Yes
+    Range  = "GUID"
+End
+
+TOKEN
+    Name  = "AmdCpmOemInitBilby_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling Bilby support in the project"
+    TokenType = Boolean
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "NUMBER_OF_SYSTEM_SLOTS"
+    Value  = "2"
+    Help  = "Identifies the number of system slots available on platform including the AGP slot.\"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CIM_LEGACY_FREE"
+    Value  = "1"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "EMUL6064_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable KBC Emulation support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AMIUSB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "DBX_072920_defaults"
+    Value  = "1"
+    TokenType = Boolean
+    Help  = "1-Include dbx update package released on 07.29.2020. 0-Include dbx package released on 08.08.2016"
+End
+
+
+TOKEN
+    Name  = "dbxVarFile"
+    Value  = "$(SecVariables_DIR)$(PATH_SLASH)dbx"
+    TokenType = Expression
+    TargetMAK = Yes
+    Help = "Official list of 77 SHA256 certificates that have been released on August 8, 2016(http://www.uefi.org/revocationlistfile)"
+    Token = "DBX_072920_defaults" "=" "0"
+End
+
+TOKEN
+    Name  = "dbxVarFile"
+    Value  = "$(SecVariables_DIR)$(PATH_SLASH)dbxupdate_x86.bin"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "DBX_072920_defaults" "=" "1"
+    Token = "X64_SUPPORT" "=" "0"
+    Token = "DXE_ARCHITECTURE" "=" "IA32"
+End
+
+TOKEN
+    Name  = "dbxVarFile"
+    Value  = "$(SecVariables_DIR)$(PATH_SLASH)dbxupdate_amd64.bin"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "DBX_072920_defaults" "=" "1"
+    Token = "X64_SUPPORT" "=" "1"
+    Token = "DXE_ARCHITECTURE" "=" "X64"
+End
+
+TOKEN
+    Name  = "dbxVarFile"
+    Value  = "$(SecVariables_DIR)$(PATH_SLASH)dbxupdate_arm64.bin"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "DBX_072920_defaults" "=" "1"
+    Token = "DXE_ARCHITECTURE" "=" "AARCH64"
+End
+
+TOKEN
+    Name  = "LEGACYSREDIR_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AMI Legacy Serial Redirection support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "CSM_SUPPORT" "=" "1"
+    Token = "Terminal_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PS2Ctl_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable PS2 Controller support in the project."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "INSTALL_KEYBOARD_MOUSE_ALWAYS"
+    Value  = "0"
+    Help  = "1 - Install the Keyboard- SimpleTextIn, Mouse - AbsPointer Always, 0 - Install the Keyboard- SimpleTextIn, Mouse - AbsPointer only if the device is present at the time of detection."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ACPI_PM_PROFILE"
+    Value  = "1"
+    Help  = "Power Management Profile ACPI 2.0\See acpi20.h"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-8 0 = Unspecified; 1 = Desktop; 2 = Modile; 3 = Workstation; 4 = Enterprise Server; 5 = SOHO Server; 6 = Application PC; 7 = Performance Server; 8 = Tablet"
+    Token = "ACPI_BUILD_TABLES_2_0" "=" "1"
+End
+
+TOKEN
+    Name  = "DBG_PEI_XHCI_CONTROLLER_PCI_ADDRESS"
+    Value  = "{0x1, 0x00, 0x4},"
+    Help  = "Default value if XHCI controllers are not supported, Set Pcd value of PcdUsbXhciPciAddress based on the values here"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DMA_ATA_COMMAND_COMPLETE_TIMEOUT"
+    Value  = "16000"
+    Help  = "Timeout value for completion of DMA ATA command. Set to 5 second."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ALWAYS_PUBLISH_HII_RESOURCES"
+    Value  = "1"
+    Help  = "This token controls loading of the Setup related HII resources \(setup screens and strings). If this token is ‘0’, setup resources are \only published into HII database if the user enters setup. If \this token is ‘1’, setup resources are always published into the HiiDatabase. Keep it off for speed \optimization.  Set it to on if Runtime resources processing support is required."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AmdCpmOemInitMandolin_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling Mandolin support in the project"
+    TokenType = Boolean
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+#****************************************************************# 
+#                                                                #
+#                       Firmware file define                     #
+#                                                                #
+#****************************************************************#
+TOKEN
+    Name  = "SMU_FIRMWARE_FILENAME_PCO"
+    Value  = "$(Firmwares_DIR_RV)/SmuFirmwarePCO.csbin"
+    Help  = "SMU offchip firmware. Type 0x208"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SMU_FIRMWARE2_FILENAME_PCO"
+    Value  = "$(Firmwares_DIR_RV)/SmuFirmware2PCO.csbin"
+    Help  = "SMU offchip firmware 2. Type 0x212"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SECURE_POLICY_PCO_FP5_AM4"
+    Value  = "$(Firmwares_DIR_RV)/security_policy_PCO_FP5_AM4.sbin"
+    Help  = "PCO security Policy. Type 0x224"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SECURE_POLICY_RV1_NPU_FP5_AM4"
+    Value  = "$(Firmwares_DIR_RV)/security_policy_RV1_NPU_FP5_AM4.sbin"
+    Help  = "RV1 NPU FP5 AM4 security Policy. Type 0x8024"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "TYPE_0X225_ENTRY"
+    Value  = '<IMAGE_ENTRY Type="0x225" File="$(MP2FW_TOKEN_FILENAME_RV)"/>'
+    Help  = "Type 0x25 entry"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "MP2FW_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/MP2I2CFWPCO.sbin"
+    Help  = "Token MP2 I2C Firmware. Type 0x225"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "PSP_MP2_I2C_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MP2FW_TOKEN_FILENAME_RV"
+    Value  = "$(Firmwares_DIR_RV)/MP2FW.sbin"
+    Help  = "Token MP2 SFI Firmware. Type 0x25"
+    TokenType = File
+    TargetMAK = Yes
+    Token = "PSP_MP2_I2C_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "UCODE_PATCH_RV_B0"
+    Value  = "$(Firmwares_DIR_RV)/UcodePatch_RV_B0.bin"
+    Help  = "Ucode patch for rev. B0 CPUs. BIOS type 0x66, Instance 0x0"
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "APCB_RV_FP5_SODIMM_BINARY_SUPPORT"
+    Value  = "0"
+    Help  = "The master token for Apcb RV AM4 SODIMM binary."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+    Name  = "RAVEN_PI_VERSION"
+    Value  = "1206RC1"
+    Help  = "Current AGESA Version in this module."
+    TokenType = Expression
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+#TOKEN
+#    Name  = "UCODE_PATCH_PCO_B1"
+#    Value  = "$(Firmwares_DIR_RV)/UcodePatch_PCO_B1.bin"
+#    Help = "Ucode patch for rev. B0 CPUs. BIOS type 0x66, Instance 0x0"
+#    TokenType = File
+#    TargetMAK = Yes
+#End
+TOKEN
+    Name  = "TCG2Support"
+    Value  = "1"
+    Help  = "Enable or Disable TCG_generic support"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "NV_SIMULATION" "=" "0"
+End
+
+TOKEN
+    Name  = "TCG2Support"
+    Value  = "0"
+    Help  = "Enable or Disable TCG_generic support"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "NV_SIMULATION" "=" "1"
+End
+
+TOKEN
+    Name  = "OEM_USB_PER_PORT_DISABLE_SUPPORT"
+    Value  = "1"
+    Help  = "USB preport disable function will execute at ready to boot. USB device can use at setup when port is disable but not at OS, DOS or Shell."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "CONTROL_ALL_USB_METHOD" "=" "0"
+End
+
+TOKEN
+    Name  = "APCB_RV_FP5_UDIMM_BINARY_SUPPORT"
+    Value  = "1"
+    Help  = "The master token for Apcb RV AM4 SODIMM binary."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+    Name  = "APCB_RV_FP5_DRAMDOWN_BINARY_SUPPORT"
+    Value  = "0"
+    Help  = "The master token for Apcb RV AM4 SODIMM binary."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MEMORY_DOWN" "&" "1"
+    Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+    Name  = "USB_HID_KEYREPEAT_USE_SETIDLE"
+    Value  = "1"
+    Help  = "0-Use periodic SMI for key repeat 1-Use Set Idle command to implement Key Repeat action."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x60" File="$(PSP_APCB_FILENAME_RV_UDIMM)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    Priority  = 10
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "APCB_RV_FP5_UDIMM_BINARY_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = " "
+    Parent  = '<IMAGE_ENTRY Type="0x60" File="$(PSP_APCB_FILENAME_RV_SODIMM)" Size="0x2000"/>'
+    Priority  = 10
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "APCB_RV_FP5_SODIMM_BINARY_SUPPORT" "=" "0"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = '<IMAGE_ENTRY Type="0x68" File="$(PSP_APCB_FILENAME_RV_UDIMM)" Size="0x2000"/>'
+    Parent  = "RV_APCB_BINARY_ELINK"
+    Priority  = 20
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "APCB_RV_FP5_UDIMM_BINARY_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = " "
+    Parent  = '<IMAGE_ENTRY Type="0x68" File="$(PSP_APCB_FILENAME_RV_SODIMM)" Size="0x2000"/>'
+    Priority  = 20
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "APCB_RV_FP5_SODIMM_BINARY_SUPPORT" "=" "0"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "-DAGESA_DEBUG_MESSAGES_SUPPORT=1"
+    Parent  = "*_*_*_CC_FLAGS"
+    Type  = "BuildOptions"
+    Token = "AGESA_DEBUG_MESSAGES_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "-DAGESA_DEBUG_MESSAGES_SUPPORT=1"
+    Parent  = "*_*_*_CC_FLAGS"
+    Type  = "BuildOptions"
+    Token = "AGESA_DEBUG_MESSAGES_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ConnectAmiGopPolicyConOut,"
+    Parent  = "HookGopDriverBinding,"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "HookGopDriverBinding,"
+    Parent  = "ConnectVgaConOut,"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "HookGopDriverBinding,"
+    Parent  = "FastBootHook,"
+    Token = "FAST_BOOT_SUPPORT" "=" "1"
+    InvokeOrder = BeforeParent
+End
+
+INFComponent
+    Name  = "FanPolicyDxe"
+    File  = "AmdCpmPkg/Addendum/Oem/Bilby/Dxe/FanPolicyDxe/FanPolicyDxe.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmdCpmPkg_FanPolicyDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "PspResumeServicesSmm"
+    File  = "AmiPspPkg/Dxe/PspResumeServicesSmm/PspResumeServicesSmm.inf"
+    Package  = "AmiPspPkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+    Name  = "CpuDxe"
+    File  = "CpuDxe/CpuDxe.inf"
+    Package  = "UefiCpuPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Disable = Yes
+End
+
+PcdMapping
+    Name  = "PcdPhyA0DynamicControl"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Uint8"
+    Value  = "0"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdPhyA1DynamicControl"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Uint8"
+    Value  = "0"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdPhyA2DynamicControl"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Uint8"
+    Value  = "0"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdPhyA34DynamicControl"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Uint8"
+    Value  = "0"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdXgbeMdio0"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdXgbeMdio1"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdXgbeSfp"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdXgbePort0ConfigEn"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdXgbePort1ConfigEn"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdXgbePort0Table"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Pointer"
+    Value  = "{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}"
+    Offset  = 00h
+    Length  = 01ch
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdXgbePort1Table"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Pointer"
+    Value  = "{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}"
+    Offset  = 00h
+    Length  = 01ch
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPortEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdCfgPcieAriSupport"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+### FCH-UART0 PCDs
+PcdMapping
+    Name  = "PcdFchUartPort"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "1"
+    Override  = "AmiCpmWrapper.AmiFchUart0Dxe"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "The AmiFchUart0Dxe driver handle the FCH-UART0"
+    TargetDSC = Yes
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPortDetectCableConnection"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+    Token = "FCH_UART_DEBUG_SELECT" "!=" "0"
+End
+
+LibraryMapping
+    Class  = "SerialPortLib"
+    Instance  = "AmdCpmPkg.BaseSerialPortLib16550AmdFchUart"
+    Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+    Token = "FCH_UART_DEBUG_SELECT" "!=" "0"
+End
+
+FFS_FILE
+    Name  = "S3SaveStateDxe"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "MdeModulePkg.S3SaveStateDxe"
+    Apriori_Index  = "5"
+    Token = "NV_SIMULATION" "=" "1"
+End
+
+TOKEN
+    Name  = "GPI_DISPATCH_BY_BITMAP"
+    Value  = "0"
+    Help  = "ON = The registered parameter of SMM GPI dispatcher is using bitmapped.\OFF = The registered parameter of SMM GPI dispatcher is using index based"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PCI_EXPRESS_GEN2_SUPPORT"
+    Value  = "1"
+    Help  = "Enables / Disables Pci Bus Driver Native PCI Express Gen2 support"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "PCI_EXPRESS_SUPPORT" "=" "1"
+End
+

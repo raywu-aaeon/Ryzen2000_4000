@@ -1,0 +1,39 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DxeAmiHardwareSignatureLib
+  FILE_GUID                      = 7d52197b-002e-4d65-b618-7d9e74e51702
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DxeAmiHardwareSignatureLib | DXE_DRIVER
+  
+[Sources]  
+  HardwareSignatureLib.h
+  HardwareChangeDetect.c
+  SignalSetupConfig.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+
+[Guids]
+  gEfiDiskInfoIdeInterfaceGuid
+  gEfiDiskInfoAhciInterfaceGuid
+  gEfiDiskInfoNvmeInterfaceGuid
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  DevicePathLib
+
+  
+[Protocols]
+  gEfiCpuIo2ProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gEfiUsbIoProtocolGuid
+  gEfiEdidDiscoveredProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiPciIoProtocolGuid
+[Depex]
+  TRUE

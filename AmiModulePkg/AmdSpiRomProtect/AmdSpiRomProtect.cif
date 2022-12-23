@@ -1,0 +1,16 @@
+<component>
+	name = "AMD SPI ROM Protect"
+	category = eModule
+	LocalRoot = "AmiModulePkg\AmdSpiRomProtect\"
+	RefName = "AmdSpiRomProtect"
+[INF]
+"AmdSpiRomProtectPei.inf"
+"AmdSpiRomProtectDxe.inf"
+"AmdSpiRomProtectSmi.inf"
+"AmdSpiRomProtectLib.inf"
+"AmdSpiProtectHstiLib.inf"
+[files]
+"AmdSpiRomProtect.sdl"	
+"AMD Spi ROM Protect.chm"	
+"AmdSpiRomProtect.h"
+<endComponent>

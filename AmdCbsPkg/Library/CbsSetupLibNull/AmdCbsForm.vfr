@@ -1,0 +1,112 @@
+#include <Guid/HiiPlatformSetupFormset.h>
+#include <AmdCbsFormID.h>
+#include <Guid/AmdCbsConfig.h>
+#include <AmdCbsVariable.h>
+
+formset
+  guid     = FORMSET_ID_GUID_AMD_CBS,
+  title    = STRING_TOKEN(AMD_CBS_STR_CBS_ROOT_SECTION),
+  help     = STRING_TOKEN(AMD_CBS_STR_BLANK),
+  classguid = EFI_HII_PLATFORM_SETUP_FORMSET_GUID,
+
+  varstore CBS_CONFIG,                        // This is the data structure type
+    varid = CBS_CONFIGURATION_VARSTORE_ID,    // Optional VarStore ID
+    name  = AmdSetup,                         // Define referenced name in vfr
+    guid  = CBS_SYSTEM_CONFIGURATION_GUID;    // GUID of this buffer storage
+  //
+  // form - CBS_ROOT
+  //
+  form
+
+    formid        = SETUP_CBS_ROOT_LABLE,
+
+    title         = STRING_TOKEN (AMD_CBS_STR_CBS_ROOT_SECTION);
+
+    subtitle text = STRING_TOKEN (AMD_CBS_STR_CBS_ROOT_SECTION);
+    subtitle text = STRING_TOKEN (AMD_CBS_STR_BLANK);
+
+    goto SETUP_AMD_PROCESSOR_COMMON_OPTIONS_LABLE,
+      prompt      = STRING_TOKEN (AMD_CBS_STR_AMD_PROCESSOR_COMMON_OPTIONS_SECTION),
+      help        = STRING_TOKEN (AMD_CBS_STR_AMD_PROCESSOR_COMMON_OPTIONS_SECTION);
+
+    goto SETUP_AMD_FCH_COMMON_OPTIONS_LABLE,
+      prompt      = STRING_TOKEN (AMD_CBS_STR_AMD_FCH_COMMON_OPTIONS_SECTION),
+      help        = STRING_TOKEN (AMD_CBS_STR_AMD_FCH_COMMON_OPTIONS_SECTION);
+
+    goto SETUP_AMD_GNB_COMMON_OPTIONS_LABLE,
+      prompt      = STRING_TOKEN (AMD_CBS_STR_AMD_GNB_COMMON_OPTIONS_SECTION),
+      help        = STRING_TOKEN (AMD_CBS_STR_AMD_GNB_COMMON_OPTIONS_SECTION);
+
+  endform;
+
+    //
+    // form - AMD Processor Common Options
+    //
+    form
+
+      formid        = SETUP_AMD_PROCESSOR_COMMON_OPTIONS_LABLE,
+
+      title         = STRING_TOKEN (AMD_CBS_STR_AMD_PROCESSOR_COMMON_OPTIONS_SECTION);
+
+      subtitle text = STRING_TOKEN (AMD_CBS_STR_AMD_PROCESSOR_COMMON_OPTIONS_SECTION);
+      subtitle text = STRING_TOKEN (AMD_CBS_STR_BLANK);
+
+    endform;
+
+    //
+    // form - AMD FCH Common Options
+    //
+    form
+
+      formid        = SETUP_AMD_FCH_COMMON_OPTIONS_LABLE,
+
+      title         = STRING_TOKEN (AMD_CBS_STR_AMD_FCH_COMMON_OPTIONS_SECTION);
+
+      subtitle text = STRING_TOKEN (AMD_CBS_STR_AMD_FCH_COMMON_OPTIONS_SECTION);
+      subtitle text = STRING_TOKEN (AMD_CBS_STR_BLANK);
+
+    endform;
+
+    //
+    // form - AMD GNB Common Options
+    //
+    form
+
+      formid        = SETUP_AMD_GNB_COMMON_OPTIONS_LABLE,
+
+      title         = STRING_TOKEN (AMD_CBS_STR_AMD_GNB_COMMON_OPTIONS_SECTION);
+
+      subtitle text = STRING_TOKEN (AMD_CBS_STR_AMD_GNB_COMMON_OPTIONS_SECTION);
+      subtitle text = STRING_TOKEN (AMD_CBS_STR_BLANK);
+
+      oneof
+       varid       = AmdSetup.reserve,
+       prompt      = STRING_TOKEN (AMD_CBS_STR_BLANK),
+       help        = STRING_TOKEN (AMD_CBS_STR_BLANK),
+       option text = STRING_TOKEN (AMD_CBS_STR_BLANK),            value = 0xFF, flags = DEFAULT;
+       option text = STRING_TOKEN (AMD_CBS_STR_BLANK),            value = 1,    flags = 0;
+       option text = STRING_TOKEN (AMD_CBS_STR_BLANK),            value = 0,    flags = 0;
+     endoneof;
+     // SATA Mode
+     // Select OnChip SATA Type
+     oneof
+       varid       = AmdSetup.CbsCmnFchSataClass,
+       prompt      = STRING_TOKEN (AMD_CBS_STR_BLANK),
+       help        = STRING_TOKEN (AMD_CBS_STR_BLANK),
+       option text = STRING_TOKEN (AMD_CBS_STR_BLANK),            value = 0xFF, flags = DEFAULT;
+       option text = STRING_TOKEN (AMD_CBS_STR_BLANK),            value = 1,    flags = 0;
+       option text = STRING_TOKEN (AMD_CBS_STR_BLANK),            value = 0,    flags = 0;
+     endoneof;
+     // XHCI controller 0 enable
+     // XHC0/XHC1, Device-16 func-0/1
+     oneof
+       varid       = AmdSetup.CbsCmnFchUsbXHCI0Enable,
+       prompt      = STRING_TOKEN (AMD_CBS_STR_BLANK),
+       help        = STRING_TOKEN (AMD_CBS_STR_BLANK),
+       option text = STRING_TOKEN (AMD_CBS_STR_BLANK),            value = 0xFF, flags = DEFAULT;
+       option text = STRING_TOKEN (AMD_CBS_STR_BLANK),            value = 1,    flags = 0;
+       option text = STRING_TOKEN (AMD_CBS_STR_BLANK),            value = 0,    flags = 0;
+     endoneof;
+    endform;
+
+endformset; 

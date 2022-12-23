@@ -1,0 +1,11 @@
+<component>
+	name = "FvBbSig"
+	category = ModulePart
+	LocalRoot = "AmiTrustedFvPkg\FvBbSig"
+	RefName = "FvBbSig"
+[INF]
+"FvBbSig.inf"
+[files]
+"FvBbSig.sdl"
+"FvBbSig.mak"
+<endComponent>

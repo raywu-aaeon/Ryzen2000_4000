@@ -1,0 +1,359 @@
+============================ Raven 116 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 116
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.116   09/02/19,02:53AM 1992007@16.2.0.11  ATOMBuild #479077
+
+Major changes:
+1. Optimized the logic to avoid the long delay if pwr_on_vary_bl_to_blon in integrated info table is "0".
+
+============================ Raven 115 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 115
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.115   07/18/19, 01:15AM 1969498@16.2.0.11  ATOMBuild #472090
+
+Major changes:
+1. Optimize the eDP power on timing between VARY_BL(PWM) and BLON
+
+============================ Raven 114 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 114
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.114   04/25/2019, 5:29AM 1774250@16.2.0.10  ATOMBuild #457089
+
+Major changes:
+1. Revise the logic to select the supported link rate for eDP V1.4 and up
+
+============================ Raven 113 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 113
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.113   11/05/2018, 6:01AM 1702205@16.2.0.10  ATOMBuild #434044
+
+Major changes:
+1. when the OTG timing changed, the DP_MSA_PARAMETERSx should be reprogrammed.
+2. fix wrong offset when get edptolvdsrxid and stereopinid setting from integrated system info table.
+
+============================ Raven 112 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 112
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.112   10/11/2018, 7:34AM 16168098@16.2.0.9  ATOMBuild #432131
+
+Major changes:
+1. Fix the asDPTrainingStatus.usDPCD_SUPPORTED_LINK_RATES0/7 to be cleared issue after POST.
+2. Fix ulSupportedDPLinkRate in device info is not correct issue when DPCD_SUPPORTED_LINK_RATE0/7 is supported in eDP DPCD(1.4)
+
+============================ Raven 111 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 111
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.111   7/20/2018,4:00PM 1582978@16.2.0.7  ATOMBuild #425030
+
+Major changes:
+1. Fix the wrongly overwrite to DP_VS_0.4v_0dB. when enable DP customized tuning sets a logica error caused the DP_VS_0.4v_0dB to be changed but actually no need to tune it.
+
+
+============================ Raven 110 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 110
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.110   6/8/2018,6:12PM 1566107@16.2.0.7  ATOMBuild #418307
+
+Major changes:
+1. fix to DP2CRT w/ 3+4 non-DDC CRT cable on RV platform
+
+============================ Raven 109 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 109
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.109   5/14/2018,4:55PM 1554453@16.2.0.7  ATOMBuild #415546
+
+Major changes:
+1. Fix to Variable/Slow Frame Rate on 'Space Racing 3D'.
+2. Fix to Bootup corrupted or no display with BenQ 2k freesync DP panel
+
+
+============================ Raven 108 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 108
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.108   4/26/2018,3:05PM 1546820@16.2.0.7  ATOMBuild #414183
+
+Major changes:
+1. Support the GFX9 enhanced data fill mode for the DMA to clear memory. It sustains 32B per clock writes, when the source is a constant.
+   This is to fix the increased additional 60ms boot time issue.
+
+
+============================ Raven 107 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 107
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.107   3/13/2018,4:05PM 1511714@16.2.0.6  ATOMBuild #410734
+
+Major changes:
+1. Fixed the External monitor can’t display in “F10” (only the first time can display) when connecting monitor with type-c to HDMI dongle
+2. disable AZALIA_CONTROLLER_CLOCK_GATING
+3. DPCD 0xE TRAINING_AUX_RD_INTERVAL delay time in VBIOS/GOP
+4. Remove programming system aperture addresses in VBIOS
+5. VM_L2 GDB updated to March 08, 2018
+6. Set MEMORY_TYPE to 0, driver should get the memory type from the system integrated table. 
+
+============================ Raven 106 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 106
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.106   2/2/2018,5:38PM 1511714@16.2.0.5  ATOMBuild #407654
+
+Major changes:
+1. Fixed the DP-->VGA dongle no display issue.
+2. Restore the AUX RX start/receive golden aettings to the May 15, 2017 Version.   
+
+============================ Raven 105 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 105
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.105   1/19/2018,2:14PM 1505750@16.2.0.5  ATOMBuild #406648
+
+Major changes:
+1. GDB updated to January 19, 2018 to remove the security violation
+2. optimized eDP power sequence.
+3. fixed some DP-->VGA dongle no display issue. 
+
+
+============================ Raven 104 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 104
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.104   12/08/2017,5:49PM 1492425@16.2.0.5  ATOMBuild #404012
+
+Major changes:
+1. implementating the enhancement PLAT-27289 VBIOS update for security policy violation.
+
+============================ Raven 103 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 103
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.103   11/10/2017,3:33PM 1481366@16.2.0.4  ATOMBuild #401830
+
+Major changes:
+1. fix to (PLAT-26480) BSOD VIDEO_TDR_ERROR with non-256MB FB size after resume from S3
+
+
+============================ Raven 102 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 102
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.102   9/5/2017,6:56PM 1455189@16.2.0.4  ATOMBuild #396650
+
+Major changes:
+1. fix to PLAT-13692 - System hang in Vbios when FB size set to 2GB.
+
+
+============================ Raven 101 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 101
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.101   8/3/2017,4:48PM 1443286@16.2.0.2  ATOMBuild #392969
+
+Major changes:
+1. fix to PLAT-22854 - [Raven GFX Val] 5K dual input show BIOS interface ?delay about 1 minute than PC show 0230.
+2. fix to PLAT-23024 - [Raven GFX Val] 4K DP no display output at BIOS setup interface
+3. fix to PLAT-23254 - Switch display devices will hang up under Shell since GOP 2.0.1
+4. fix to PLAT-20961 - UEFI boot mode with UHD panel could not show 4K display under shell
+5. fix to PLAT-21703 - AMD extension INT10 functions A017/A018 do not work on Raven platform
+
+============================ Raven 100 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 100
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.100   6/30/2017,11:06PM 1429059@16.2.0.1  ATOMBuild #389851
+
+Major changes:
+1. VM_L2 GDB update
+2. GCEA GDB update 
+
+============================ Raven 032 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 032
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.032   6/10/2017,11:59PM 1420932@16.2.0.0  ATOMBuild #387862
+
+Major changes:
+1. Compensate DP reference clock when the SMU programms display/DP reference clock with spread spectrum enabled. 
+
+============================ Raven 031 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 030
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.031   6/5/2017,6:41PM 1418426@16.2.0.0  ATOMBuild #386319
+
+Major changes:
+1. disable stutter mode
+2. enable SMU programming display/DP reference clock. 
+
+
+============================ Raven 031 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 030
+Raven B0 0x15DD 105-D00100-00A  RavenGenericVbios.031   6/5/2017,6:41PM 1418426@16.2.0.0  ATOMBuild #386319
+
+Major changes:
+1. disable stutter mode
+2. enable SMU programming display/DP reference clock. 
+
+
+============================ Raven 030 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 030
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.030   5/26/2017,6:06PM 1414872@16.2.0.0  ATOMBuild #385566
+
+Major changes:
+1. improved watermark sequence for PLAT-20315: Enable DF C-State will cause Underflow/Stutter issue when there is no Driver.
+
+
+============================ Raven 029 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 029
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.029   5/15/2017,7:38PM 1409882@16.2.0.0  ATOMBuild #384548
+
+Major changes:
+1. fix to PLAT-20315: Enable DF C-State will cause Underflow/Stutter issue when there is no Driver.
+2. fix to PLAT-19703: RV VBIOS's boot up setting for REFCYC_PER_HTOTAL wrong.
+3. GDB Changes for RAVEN, 04661.......VM_L2on May 3, 2017. Update the value based on latest VML2 INI file.
+
+============================ Raven 028 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 028
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.028   4/07/2017,11:48AM 1395684@16.2.0.0  ATOMBuild #379731
+
+Major changes:
+1. remove MC_VM_STERRING programming in Vbios. 
+
+============================ Raven 027 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 027
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.027   3/31/2017,7:51PM 1393514@16.2.0.0  ATOMBuild #379137
+
+Major changes:
+Fix to tickets: 
+1. PLAT-15267 Raven Mandolin HDMI 2.0 compliance fails Single-ended Vswing,
+2. PLAT-17227 Raven Tambourine HDMI 1.4 compliance Rise/Fall time failed - Gating LOGO
+3. PLAT-17278 Raven Mandolin HDMI 1.4 Data Eye Diagram failed
+4. PLAT-17340 Raven Tambourine HDMI 1.4 Data Eye Diagram Tuning - Gating LOGO
+
+
+============================ Raven 026 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 026
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.026   3/17/2017,7:08PM 1387418@16.2.0.0  ATOMBuild #377682
+
+Major changes:
+1. Disable most of the VGA modes, only keep mode 3 and mode 12.
+2. fix to PLAT-17637 : Device MMHUB register PCTL1_MISC::DEEPSLEEP_DISCSDP bit is being overwritten to 0 affecting Deep Sleep and DF C-state operation
+
+
+============================ Raven 025 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 025
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.025   3/6/2017,11:17AM 1381663@16.2.0.0  ATOMBuild #376180
+
+Major changes:
+1. MMHUB golden settings update - add the DAGB0_RDCLI4_ASIC_VAL.
+
+============================ Raven 024 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 024
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.024   3/4/2017,10:16PM 1381359@16.2.0.0  ATOMBuild #376036
+
+Major changes:
+1. Fix PLAT-16374 - SSD hang on RV.
+2. MMHUB golden settings update
+
+
+============================ Raven 023 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 023
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.023   2/23/2017,1:19PM 1376966@16.2.0.0  ATOMBuild #375032
+
+Major changes:
+1. Fix PLAT-16003 - [IQE][Raven][Windows Redstone1] No image on eDP display(720p Silver) in Vbios.
+2. MMHUB golden settings update
+3. VM_L2 golden settings update 
+
+
+============================ Raven 022 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 022
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.022   2/10/2017,10:29AM 1371615@16.2.0.0  ATOMBuild #373709
+
+Major changes:
+1. Workarounded PLAT-14405 - [Raven GFX Val] [GFX] Win10 RS1 display scaling issue.
+2. Fixed PLAT-13675/13673 - Raven GFX SDMA Hang after 2MB transfer
+
+============================ Raven 021 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 021
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.021   1/23/2017,3:09PM 1364991@16.2.0.0  ATOMBuild #372501
+
+Major changes:
+1. support GOP2.0 
+2.MMHUB_Perf Golden Data base update.
+
+============================ Raven 020 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 020
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.020   12/15/2016,6:07PM 1353905@16.2.0.0  ATOMBuild #369467
+
+Major changes:
+1. Enable the mini DDI cards auto-detection mechanism.
+
+============================ Raven 019 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 019
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.019   12/6/2016,6:13PM 1350163@16.2.0.0  ATOMBuild #368537
+
+Major changes:
+1. Hardcoded eDP/DP onto DP0, HDMI on DP1, DP on USB-C till Sbios implemented the DDI auto detection, 
+2. MMHub golden setting updates.    DAGB0_RD_ADDR_DAGB.DISABLE_SELF_INIT  (0x0)
+   DAGB0_WR_ADDR_DAGB.DISABLE_SELF_INIT (0x0)
+   DAGB0_WR_DATA_DAGB.DISABLE_SELF_INIT  (0x0)
+
+============================ Raven 018 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 018
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.018   11/29/2016,9:59PM 1347377@16.2.0.0  ATOMBuild #367694
+
+Major changes:
+1. Support Mini DDI auto detection, 
+2. Solved display garbage in Shell when FB base allocated above 4GB (PLAT-13690) 3. MMHub golden setting updates.
+
+============================ Raven 017 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 017
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.017   11/25/2016,11:31AM 1346100@16.2.0.0  ATOMBuild #367297
+
+Major changes:
+1. Support 4 Displays in DAL simultaneously, 
+2. eDP or DP panel can be tested on DP0,
+3. HDMI panel can only be on DP1.
+4. Two USB-C ports support DP panels,
+5. One display can be on each time during boot up before the graphic driver is loaded.  
+
+
+============================ Raven 016 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 016
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.016   11/22/2016,12:45PM 1344378@16.2.0.0  ATOMBuild #366631
+
+Major changes:
+1. 4 DDI ports all work, 
+2. eDP or DP panel can be tested on DP0,
+3. HDMI panel can only be on DP1.
+4. Two USB-C ports support DP panels,
+5. One display can be on each time during boot up before the graphic driver is loaded.  
+
+
+============================ Raven 015 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 015
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.015   10/19/2016,8:23PM 1343721@16.2.0.0  ATOMBuild #366359
+
+Major changes:
+1. Support two DP displays on both DP0 and DP1, 
+2. boot to UEFI shell.
+3. HDMI can also be supported
+4. each time use one display.  
+
+============================ Raven 014 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 014
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.014   10/19/2016,3:55PM 1343702@16.2.0.0  ATOMBuild #366350
+
+Major changes:
+1. Removed the multi-modes set hang, boot on HDMI panel to UEFI shell.
+  
+
+============================ Raven 013 VBIOS release  ========================================
+Raven  generic Baseline VBIOS 013
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.013   10/18/2016,6:17PM 1343589@16.2.0.0  ATOMBuild #366328
+
+Major changes:
+1. fixed the memory access issue and be able to boot on HDMI panel.
+  
+
+============================ Raven 011 VBIOS release  ========================================
+
+Raven  generic Baseline VBIOS 011
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.011   10/13/2016,10:55PM 1340626@16.2.0.0  ATOMBuild #365680
+
+Major changes:
+1. build from RV Vbios release branch rel16.2.0.0.
+2. Remove the support to the HW Emulator.
+3. a bug fix to Surface pixel format.
+
+============================ Raven 010 VBIOS release  ========================================
+
+Raven  generic Baseline VBIOS 010
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.010   10/11/2016,10:55PM 1340454@staging  ATOMBuild #364647
+
+
+Major changes:
+1. Add the Vega10 SRAM Work around for RV.
+2. Enable optc clocks.
+3. Replace LUT autofill mode with bypass mode.
+4. Optimize coding.  
+
+============================ Raven 009 VBIOS release  ========================================
+
+Raven  generic Baseline VBIOS 009
+Raven A0 0x15DD 105-D00100-00A  RavenGenericVbios.009   10/07/16,12:40AM 1323724@staging  ATOMBuild #360886
+
+
+Raven bring up Vbios .
+This is a base line Vbios with all features enabled.

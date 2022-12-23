@@ -1,0 +1,85 @@
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+TOKEN
+	Name  = "AmiChipsetPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmiChipsetPkg support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AmiChipsetPkg_DIR"
+End
+
+PATH
+	Name  = "AmiChipsetPkg_Library_DIR"
+	Path  = "AmiChipsetPkg/Library"
+End
+
+PATH
+	Name  = "AmiChipsetPkg_Include_Library_DIR"
+	Path  = "AmiChipsetPkg/Include/Library"
+End
+
+INFComponent
+	Name  = "AmiChipsetIoLib"
+	File  = "AmiChipsetIoLib/AmiChipsetIoLib.inf"
+	Package  = "AmiChipsetPkg"
+	Path  = "AmiChipsetPkg_Library_DIR"
+End
+
+INFComponent
+    Name  = "AmiCspSmmBootScriptLibNull"
+    File  = "AmiCspSmmBootScriptLibNull/AmiCspSmmBootScriptLibNull.inf"
+    Package  = "AmiChipsetPkg"
+    Path  = "AmiChipsetPkg_Library_DIR"
+End
+
+LibraryMapping
+	Class  = "AmiChipsetIoLib"
+	Instance  = "AmiChipsetPkg.AmiChipsetIoLib"
+End
+
+LibraryMapping
+    Class  = "AmiCspSmmBootScriptLib"
+    Instance  = "AmiChipsetPkg.AmiCspSmmBootScriptLibNull"
+End
+
+PcdMapping
+	Name  = "AmiPcdAcpiIoPortBaseAddress"
+	GuidSpace  = "gAmiChipsetPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "$(PM_BASE_ADDRESS)"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+End
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

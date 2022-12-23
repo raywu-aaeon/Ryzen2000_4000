@@ -1,0 +1,8 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "AmiHstiPkg\Include\Guid\"
+	RefName = "AmiHstiPkg.Guid"
+[files]
+"AmiHstiPkgTokenSpace.h"
+<endComponent>

@@ -1,0 +1,45 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbResetSmmLib
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbResetLib|DXE_SMM_DRIVER
+  CONSTRUCTOR                    = SbResetSmmLibConstructor
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  $(SbResetLibPackagesList)
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  AmiCspSmmServicesLib
+  UefiLib
+  DebugLib
+  SbRtcLib
+  SbGetCapsuleFlagLib  
+  AmiCspLib
+  PcdLib
+  
+[Protocols]
+  gEfiUsbProtocolGuid
+  gAmiUsbSmmProtocolGuid
+
+[Ppis]
+
+[Sources]
+  SbResetSmmLib.c
+  SbResetLib.c
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.SbShutdownUsbLegacyPolicy
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchFullHardReset
+  $(SbResetLibPcdList)

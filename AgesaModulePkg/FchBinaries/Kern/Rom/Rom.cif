@@ -1,0 +1,9 @@
+<component>
+	name = "Rom"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\FchBinaries\Kern\Rom\"
+	RefName = "AgesaModulePkg.FchBinaries.Kern.Rom"
+[parts]
+"AgesaModulePkg.FchBinaries.Kern.Rom.Imc"
+"AgesaModulePkg.FchBinaries.Kern.Rom.Xhc"
+<endComponent>

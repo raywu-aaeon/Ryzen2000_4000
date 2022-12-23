@@ -1,0 +1,8 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\AmiCpmWrapper\Include\"
+	RefName = "AmdCpmPkg.AmiCpmWrapper.Include"
+[files]
+"Library\EcLib.h"
+<endComponent>

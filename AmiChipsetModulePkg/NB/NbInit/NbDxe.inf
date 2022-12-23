@@ -1,0 +1,112 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+#
+# This file contains code for North Bridge initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NbDxe
+  FILE_GUID                      = E4ECD0B2-E277-4f2b-BECB-E4D75C9A812E
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = NbDxeInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  NbDxe.c
+  NbDxeBoard.c
+  NbSmm.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec  
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmiCpuPkg/AmiCpuPkg.dec
+  AmiAgesaWrapperPkg/AmiAgesaWrapperPkg.dec
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  HobLib
+  AmiDxeLib
+  AmiCspLib
+  GetCpuSetupData
+  NbGetSetupData
+  PcdLib
+  AmdSocBaseLib
+  DebugLib
+
+[Guids]
+  gEfiHobListGuid
+  gAmiSmbiosDynamicDataGuid
+  gAmdMemoryInfoHobGuid
+  gAmiAgesaMemRestoreGuid
+  gAmiMemInfoGuid
+  gAmiUmaInfoHobGuid
+  gNbMemoryLengthGuid
+  gEfiHobListGuid
+  gEfiNbSmbiosDataGuid
+  gEfiEndOfDxeEventGroupGuid
+  gNbAcpiS3VariableGuid
+
+[Protocols]
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiSmmAccess2ProtocolGuid
+  gEfiLegacyBiosPlatformProtocolGuid
+  gEfiSmbiosProtocolGuid                # CONSUMED
+  gEfiCpuArchProtocolGuid               # CONSUMED
+  gEfiMpServiceProtocolGuid             # CONSUMED
+  gEfiLegacyBiosExtProtocolGuid
+  gEfiBootScriptSaveProtocolGuid
+  gEfiS3SaveStateProtocolGuid
+  gEfiSmmAccessProtocolGuid
+  gEfiSmbusHcProtocolGuid
+  gAmiMemoryInfoGuid                 # PRODUCED
+
+[FixedPcd]
+  gAmiAgesaWrapperTokenSpaceGuid.PcdSmmTsegWbSupport
+
+[Depex]
+  gEfiMpServiceProtocolGuid AND
+  gEfiPciRootBridgeIoProtocolGuid AND
+  gEfiS3SaveStateProtocolGuid AND 
+  gEfiCpuArchProtocolGuid
+  
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

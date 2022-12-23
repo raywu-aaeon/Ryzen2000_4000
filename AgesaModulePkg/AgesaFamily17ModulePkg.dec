@@ -1,0 +1,183 @@
+#;*****************************************************************************
+#;
+#; Copyright 2016 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#;
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#;
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaFamily17Pkg
+  PACKAGE_GUID          = 3a906925-7550-40af-a7dd-968de869c2a8
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+
+
+  ## CCX Lib
+
+  ## DF Lib
+
+  ## GNB Lib
+  NbioHandleLib|Include/Library/GnbHandleLib.h
+  NbioIommuIvrsLib|NbioIommuIvrsLib/Library/NbioIommuIvrsLib.h
+
+  ## FCH Lib
+
+[Guids]
+  ## PSP Recovery Detect HOB GUID
+
+  ## PSP APOB Hob Guid
+
+[Protocols]
+
+  ## Gnb Protocols
+
+  ## Gnb Depex Protocols
+
+  ## Fch Protocols
+
+  ## PSP Protocols
+
+  ## Soc Depex Protocols List
+
+  ## FCH
+
+  ## PSP
+
+  ## Memory
+  gAmdMemAm4DxeZpDepexProtocolGuid       = {0xd3d3e09f, 0x4d00, 0xfd15, {0xf9, 0x4a, 0xe1, 0xb4, 0x23, 0xcd, 0x15, 0x4b}}
+  gAmdMemSp3DxeZpDepexProtocolGuid       = {0x78f88798, 0xbd9a, 0x4ab6, {0x8f, 0xac, 0xee, 0x74, 0xdf, 0xdb, 0x9d, 0x70}}
+  gAmdMemSp3DxeSspDepexProtocolGuid      = {0x8af5eac0, 0x6201, 0x4cbc, {0x9b, 0x62, 0xb3, 0x6d, 0xaa, 0xf2, 0x5e, 0x86}}
+  gAmdMemAmdDxeDepexProtocolGuid         = {0x5f6e90e2, 0x412f, 0xb443, {0xdb, 0x28, 0xab, 0x88, 0x59, 0xe4, 0x0e, 0x38}}
+  gAmdMemSp3r2DxeZpDepexProtocolGuid     = {0xbc17edfa, 0x32c6, 0x4185, {0xae, 0xe9, 0x3c, 0x41, 0xb9, 0xb6, 0x97, 0x51}}
+
+
+  ## NBIO
+  gAmdNbioALIBZPDxeDepexProtocolGuid       = {0x6588818e, 0x5eda, 0x49d0, {0x80, 0xca, 0xfc, 0xeb, 0x7c, 0x70, 0x61, 0x71}}
+
+  ## CCX
+  gAmdCcxZenZpDepexProtocolGuid            = {0xb99a2899, 0x88be, 0x48f2, {0x89, 0x7c, 0x54, 0xe7, 0x85, 0xd2, 0x6d, 0x8c}}
+  gAmdCcxZenRvDepexProtocolGuid            = {0x17a850d7, 0x03b2, 0x4d31, {0xa4, 0xaa, 0x58, 0xe4, 0xc2, 0x1e, 0x1e, 0x9e}}
+  gAmdCcxVhDepexProtocolGuid               = {0xce03591e, 0x518c, 0x4d47, {0x84, 0x4f, 0x15, 0xd1, 0x1b, 0xa6, 0x16, 0xcf}}
+  gAmdCcxZenZpDepexSmmProtocolGuid         = {0x41821fff, 0x8b93, 0x4e4e, {0xa7, 0x5b, 0x85, 0x0d, 0x49, 0x46, 0x1a, 0x33}}
+  gAmdCcxZenRvDepexSmmProtocolGuid         = {0x343010c7, 0x4608, 0x44c8, {0x80, 0x97, 0x04, 0xc4, 0x00, 0xf4, 0x0a, 0x93}}
+  gAmdCcxVhDepexSmmProtocolGuid            = {0x19dbf79a, 0x3a95, 0x4758, {0x81, 0x69, 0x86, 0x9a, 0xe2, 0x7f, 0x38, 0x17}}
+
+  ## DF
+  gAmdFabricZpDepexProtocolGuid            = {0x4e703e0c, 0xd4b5, 0x4923, {0xa9, 0x96, 0xd1, 0x35, 0x9d, 0x1d, 0x4c, 0x68}}
+  gAmdFabricRvDepexProtocolGuid            = {0xdcef1b52, 0x2605, 0x4735, {0x8f, 0x91, 0x04, 0x9d, 0x6d, 0xe7, 0x59, 0xdf}}
+  gAmdFabricSspDepexProtocolGuid           = {0xfe9a1f0, 0x1472, 0x44e4, {0xad, 0x65, 0x9b, 0x27, 0xc3, 0x7b, 0x17, 0xbf}}
+
+  ## APCB
+  gAmdApcbServiceZpDepexProtocolGuid       = {0xdae670db, 0x2c65, 0x41e9, {0xbd, 0xf8, 0x6, 0x3c, 0x80, 0x2, 0xde, 0xa}}
+  gAmdApcbServiceRvDepexProtocolGuid       = {0x52fc9ea1, 0xb67f, 0x4a8a, {0x93, 0x87, 0xf2, 0x48, 0xa9, 0xa7, 0x1, 0xa1}}
+  gAmdApcbServiceSspDepexProtocolGuid      = {0x76f1ee35, 0xff3a, 0x43c1, { 0xa5, 0x75, 0xb1, 0x56, 0x55, 0x5c, 0xce, 0xa7 }}
+  gAmdApcbServiceV3DepexProtocolGuid       = {0x55ec2f53, 0x5abc, 0x4d9f, {0xbb, 0x2, 0xe1, 0xe7, 0x12, 0x61, 0x38, 0x96}}
+
+  ## Error Log Protocols
+[Ppis]
+  ## SOC Depex Ppi list
+
+  ## MEM
+  gAmdMemSmbiosV2RvPpiGuid               = {0x4e821e81, 0xabf3, 0x41f9, {0x94, 0x0, 0x90, 0x14, 0x35, 0x3, 0x71, 0xf6}}
+  gAmdMemSmbiosV2ZpPpiGuid               = {0x2b6302ed, 0xed25, 0x4ad8, {0x90, 0x48, 0x84, 0xad, 0xda, 0x65, 0x45, 0xb2}}
+  gAmdMemSmbiosV2ZpMcmPpiGuid            = {0xcd8d7abe, 0x7953, 0x4941, {0x94, 0xb5, 0x4a, 0x3, 0x7, 0xb, 0xfe, 0x3e}}
+  gAmdMemSmbiosV2SspPpiGuid              = {0x85c0008b, 0x48c0, 0x4ca8, {0x87, 0xe7, 0x41, 0x7e, 0x45, 0x2, 0x1, 0xdd}}
+
+  ## FCH
+
+  ## PSP
+
+  ## Memory
+  gAmdMemAm4PeimZpDepexPpiGuid           = {0x4a99b0fc, 0x494e, 0xc49e, {0x50, 0x97, 0xb7, 0xa1, 0xef, 0x8b, 0x45, 0x69}}
+  gAmdMemAm4PeimSspDepexPpiGuid          = {0x7c377a56, 0xdb0, 0x4338, {0xb6, 0x42, 0xcc, 0xd1, 0x73, 0x47, 0xdc, 0xf8}}
+  gAmdMemSp3PeimZpDepexPpiGuid           = {0x2c9c7179, 0x17ea, 0x4668, {0xa2, 0x33, 0x2e, 0x15, 0x0a, 0x96, 0x0f, 0x1b}}
+  gAmdMemSp3PeimSspDepexPpiGuid          = {0x9f107a88, 0x1824, 0x4b54, {0xa6, 0xbc, 0x92, 0x2a, 0xf6, 0xb3, 0x54, 0x1c}}
+  gAmdMemPeimDepexPpiGuid                = {0x4a19efcf, 0x40f3, 0x6fed, {0x50, 0x30, 0x17, 0x9a, 0x95, 0x11, 0x59, 0x5b}}
+  gAmdMemChanXLatZpDepexPpiGuid          = {0xe37ae8df, 0x568a, 0x4dcc, {0x93, 0x71, 0x3d, 0xcb, 0xda, 0xa4, 0x61, 0x8a}}
+  gAmdMemChanXLatSspDepexPpiGuid         = {0xbf65f5ad, 0x2853, 0x4662, {0xa7, 0xfc, 0xec, 0xb2, 0xfd, 0x6d, 0xfe, 0x8e}}
+  gAmdMemoryPeiHobRvDepexPpiGuid         = {0xf9c1ef1c, 0x9f1, 0x44cc, {0x8c, 0x71, 0x4d, 0x56, 0xbf, 0x6f, 0xdc, 0xfc}}
+  gAmdMemoryPeiHobZpDepexPpiGuid         = {0x9dec6291, 0x7106, 0x4e09, {0x88, 0x3f, 0xeb, 0xbc, 0x73, 0x2, 0x9e, 0xf3}}
+  gAmdMemoryPeiHobV2DepexPpiGuid         = {0x627ee36a, 0x869c, 0x46cf, {0xb9, 0xd2, 0x4a, 0x21, 0x8e, 0xa8, 0x50, 0xe8}}
+  gAmdMemSp3r2PeimZpDepexPpiGuid         = {0x9c9215f2, 0xf990, 0x4ccc, {0xaa, 0x8a, 0x15, 0xf2, 0x34, 0x36, 0xe1, 0x91}}
+
+
+  ## NBIO
+
+  ## CCX
+  gAmdCcxZenZpDepexPpiGuid                 = {0x620fa238, 0xd1f4, 0x4937, {0x8d, 0xcf, 0x32, 0x35, 0xe0, 0x87, 0x17, 0x02}}
+  gAmdCcxZenRvDepexPpiGuid                 = {0xa0ee78de, 0x8571, 0x4842, {0x84, 0x7d, 0xd5, 0x5b, 0x6f, 0xe1, 0x4f, 0xa1}}
+  gAmdCcxVhDepexPpiGuid                    = {0xc25c75d2, 0x6e5b, 0x4559, {0xb4, 0xaf, 0xa4, 0xfc, 0x2b, 0xdc, 0xac, 0x60}}
+
+  ## DF
+  gAmdFabricZpDepexPpiGuid                 = {0xc474190a, 0xe7b1, 0x4701, {0x8d, 0xe9, 0x0e, 0x4f, 0xec, 0xb7, 0xab, 0x5c}}
+  gAmdFabricRvDepexPpiGuid                 = {0xc6beee2e, 0x11dd, 0x4dde, {0x85, 0x09, 0xfe, 0x40, 0x49, 0x73, 0x0d, 0x81}}
+  gAmdFabricSspDepexPpiGuid                = {0xda15a525, 0xa9e4, 0x4254, {0xa4, 0x59, 0x1c, 0x67, 0x5b, 0xed, 0x8f, 0xd1}}
+
+  ## Error Log Ppis
+
+  ## GNB Ppis
+
+  ## GNB Depex Ppis
+
+  ## Feature Guids
+
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+  ## Gnb Common Build Options
+
+  ## Gnb CZ Build Options
+
+  ## Gnb Build time Options for Common System Options.
+
+  ## PSP Fixed PCDs
+
+  ## Fch Fixed PCDs
+
+[PcdsDynamic]
+
+

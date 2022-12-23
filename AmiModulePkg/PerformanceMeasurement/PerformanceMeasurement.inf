@@ -1,0 +1,73 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+	INF_VERSION = 0x00010005
+	VERSION_STRING = 1.0
+	BASE_NAME = PerformanceMeasurement
+	MODULE_TYPE  = DXE_DRIVER
+	FILE_GUID = AFE53C8E-4681-4558-A896-6FBC91548152
+	ENTRY_POINT = PmEntryPoint
+	
+[Sources]
+PerformanceMeasurement.c
+PerformanceMeasurement.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  BaseLib
+  UefiBootServicesTableLib
+  PerformanceLib
+  DxeServicesLib
+  DevicePathLib
+  PrintLib
+  PeCoffGetEntryPointLib
+  TimerLib
+  
+[Protocols]
+  gEfiComponentName2ProtocolGuid
+  gEfiLoadedImageDevicePathProtocolGuid                   # SOMETIMES_CONSUMED
+  gEfiDevicePathToTextProtocolGuid                        # SOMETIMES_CONSUMED 
+  gEfiAcpiTableProtocolGuid       ## PRODUCED
+  gEfiSmmBase2ProtocolGuid
+  gEfiSmmCommunicationProtocolGuid
+  
+[Guids]
+  gPerformanceProtocolGuid                ## CONSUMES
+  gSmmPerformanceProtocolGuid
+  gSmmPerformanceExProtocolGuid
+  
+[Depex]
+	TRUE
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

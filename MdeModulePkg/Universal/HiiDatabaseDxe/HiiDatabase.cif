@@ -1,0 +1,14 @@
+<component>
+    name = "HiiDatabase"
+    category = eCore
+    LocalRoot = "MdeModulePkg\Universal\HiiDatabaseDxe\"
+    RefName = "MdeModulePkg.HiiDatabase"
+[INF]
+"HiiDatabaseDxe.inf"
+[files]
+"HiiDatabase.sdl"	
+"HiiDatabase.chm"	
+[dependency]
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_21"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_15"
+<endComponent>

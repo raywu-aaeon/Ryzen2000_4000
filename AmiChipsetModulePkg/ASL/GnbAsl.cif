@@ -1,0 +1,16 @@
+<component>
+	name = "Gnb ASL"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\ASL\"
+	RefName = "AmiChipsetModulePkg.GnbAsl"
+[files]
+"GnbIommu.asl"	
+"Gnbd.asl"	
+"IgpCpm.asl"	
+"Pce2Cpm.asl"	
+"Pce2CpmGpp0.asl"	
+"Pce2CpmGpp1.asl"	
+"NAPE.asl"
+"Gprw19.asl"
+"Gprw08.asl"	
+<endComponent>

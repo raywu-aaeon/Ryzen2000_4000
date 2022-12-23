@@ -1,0 +1,8 @@
+<component>
+	name = "FchBinaries"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\FchBinaries\"
+	RefName = "AgesaModulePkg.FchBinaries"
+[parts]
+"AgesaModulePkg.FchBinaries.Kern"
+<endComponent>

@@ -1,0 +1,38 @@
+TOKEN
+	Name  = "AmdCpmPkg_Features_SensorFusion_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdCpmSensorFusion support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "AmdCpmOemInitMandolin_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AmdCpmSensorFusionAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmSensorFusionAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmSensorFusionDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmSensorFusionDxe support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdCpmSensorFusionAsl"
+	File  = "Asl/AmdCpm3SensorFusionAsl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmSensorFusionAsl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmSensorFusionDxe"
+	File  = "Dxe/AmdCpm3SensorFusionDxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmSensorFusionDxe_SUPPORT" "=" "1"
+End

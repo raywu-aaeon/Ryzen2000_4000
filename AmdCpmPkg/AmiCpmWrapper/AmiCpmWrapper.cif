@@ -1,0 +1,24 @@
+<component>
+	name = "AmiCpmWrapper"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\AmiCpmWrapper\"
+	RefName = "AmdCpmPkg.AmiCpmWrapper"
+[INF]
+"AmiCpmWrapperDxe/AmiCpmWrapperDxe.inf" "AmiCpmWrapperDxe/AmiCpmWrapperDxeAm4.inf"
+"AmiCpmWrapperPei/AmiCpmWrapperPei.inf" "AmiCpmWrapperPei/AmiCpmWrapperPeiAm4.inf"
+"AmiCpmWrapperAsl/AmiCpmWrapperAsl.inf"
+"AmiFchUartDxe/AmiFchUart0Dxe.inf" "AmiFchUartDxe/AmiFchUart1Dxe.inf"
+"Library/CpmAmiCompatibilityDxeLib/CpmAmiCompatibilityDxeLib.inf"
+"Library/AmiCpmTableConstructorLib/AmiCpmTableConstructorLib.inf"
+"Library/AmiCpmWrapperSecLib/AmiCpmWrapperSecLib.inf"
+"Library/AmiFchInitHookLib/AmiFchInitHookDxeLibNull.inf"
+"Library/AmiFchInitHookLib/AmiFchInitHookPeiLibNull.inf"
+"Library/AmiFchUartDebuggerGpioLib/AmiFchUartDebuggerGpioFp5Lib.inf"
+[files]
+"AmiCpmWrapper.sdl"
+"AmiCpmWrapper.mak"
+"AmiCpmWrapperPkg.dec"
+[parts]
+"AmdCpmPkg.AmiCpmWrapper.Include"
+"AmdCpmPkg.AmiCpmWrapper.Setup"
+<endComponent>

@@ -1,0 +1,8 @@
+<component>
+	name = "PSP Keys"
+	category = ModulePart
+	LocalRoot = "AmiPspPkg/Keys/"
+	RefName = "AmiPspKeys"
+[files]
+"DummySignature.sig"
+<endComponent>

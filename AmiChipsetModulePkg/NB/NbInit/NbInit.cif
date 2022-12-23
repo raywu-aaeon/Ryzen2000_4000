@@ -1,0 +1,10 @@
+<component>
+	name = "NB Init"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\NB\NbInit\"
+	RefName = "AmiChipsetModulePkg.NbInit"
+[INF]
+"NbPei.inf"
+"NbDxe.inf"
+"MemDetect.inf"
+<endComponent>

@@ -1,0 +1,13 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Include\"
+	RefName = "AmiChipsetModulePkg.GnbInclude"
+[files]
+"Guid\GnbGuid.h"
+"Library\GnbPolicy.h"
+"Library\AmdPlatformGOPPolicy.h"	
+"Gnb.h"	
+"GnbS3Save.h"	
+"Library\GnbHdaVerbTableLib.h"	
+<endComponent>

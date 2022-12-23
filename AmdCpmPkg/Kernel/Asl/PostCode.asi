@@ -1,0 +1,134 @@
+/*****************************************************************************
+ *
+ * Copyright 2014 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+/// <PostCodePrefix> 0xB0000C00
+
+#define CpmTpBaseValue                            0xB0000C00
+
+#define CpmTpZeroPowerOddRemoveEvent_ODD_DA       0x80
+#define CpmTpZeroPowerOddInsertEvent_ODD_DA       0x81
+#define CpmTpZeroPowerOddRemoveEvent_ODD_PLUGIN   0x82
+#define CpmTpZeroPowerOddInsertEvent_ODD_PLUGIN   0x83
+#define CpmTpZeroPowerOdd_PS0                     0x84
+#define CpmTpZeroPowerOdd_PS3                     0x85
+
+#define CpmTpMxmPowerOnBegin                      0x86
+#define CpmTpMxmPowerOnBeforePcieTraining         0x87
+#define CpmTpMxmPowerOnPcieTrainingFailed         0x88
+#define CpmTpMxmPowerOnEnd                        0x89
+#define CpmTpMxmPowerOffBegin                     0x8A
+#define CpmTpMxmPowerOffBeforePowerOff            0x8B
+#define CpmTpMxmPowerOffEnd                       0x8C
+
+#define CpmTpExpressCardRemoveEventBegin          0x8D
+#define CpmTpExpressCardRemoveEventEnd            0x8E
+#define CpmTpExpressCardInsertEventBegin          0x8F
+#define CpmTpExpressCardInsertEventEnd            0x90
+
+#define CpmTpOtherHotplugCard0RemoveEventBegin    0x91
+#define CpmTpOtherHotplugCard0RemoveEventEnd      0x92
+#define CpmTpOtherHotplugCard0InsertEventBegin    0x93
+#define CpmTpOtherHotplugCard0InsertEventEnd      0x94
+
+#define CpmTpOtherHotplugCard1RemoveEventBegin    0x95
+#define CpmTpOtherHotplugCard1RemoveEventEnd      0x96
+#define CpmTpOtherHotplugCard1InsertEventBegin    0x97
+#define CpmTpOtherHotplugCard1InsertEventEnd      0x98
+
+#define CpmTpWirelessButtonEventPowerOffBegin     0x99
+#define CpmTpWirelessButtonEventPowerOffDevice    0x9A
+#define CpmTpWirelessButtonEventPowerOnBegin      0x9B
+#define CpmTpWirelessButtonEventPowerOnDevice     0x9C
+
+#define CpmTpDgpuPowerOnBegin                     0x9D
+#define CpmTpDgpuPowerOnBeforePcieTraining        0x9E
+#define CpmTpDgpuPowerOnPcieTrainingFailed        0x9F
+#define CpmTpDgpuPowerOnEnd                       0xA0
+#define CpmTpDgpuPowerOffBegin                    0xA1
+#define CpmTpDgpuPowerOffBeforePowerOff           0xA2
+#define CpmTpDgpuPowerOffEnd                      0xA3
+
+#define CpmTpZeroPowerOddRemoveQEvent_ODD_DA      0xA4
+#define CpmTpZeroPowerOddInsertQEvent_ODD_DA      0xA5
+#define CpmTpZeroPowerOddRemoveQEvent_ODD_PLUGIN  0xA6
+#define CpmTpZeroPowerOddInsertQEvent_ODD_PLUGIN  0xA7
+
+#define CpmTpUcsiDsmF1Start                       0xA8
+#define CpmTpUcsiDsmF1End                         0xA9
+#define CpmTpUcsiDsmF2Start                       0xAA
+#define CpmTpUcsiDsmF2End                         0xAB
+#define CpmTpUcsiXQ50Start                        0xAC
+#define CpmTpUcsiXQ50End                          0xAD
+
+#define CpmTpOtherHotplugCardPTSStart             0xAE
+#define CpmTpOtherHotplugCardPTSEnd               0xAF
+#define CpmTpOtherHotplugCardWAKStart             0xB0
+#define CpmTpOtherHotplugCardWAKEnd               0xB1
+
+#define CpmTpMxmHpdEventIn                        0xB2
+#define CpmTpMxmHpdEventOut                       0xB3
+
+#define CpmTpAcpAzaliaPowerGateOnStart            0xB4
+#define CpmTpAcpAzaliaPowerGateOnEnd              0xB5
+#define CpmTpAcpAzaliaPowerGateOffStart           0xB6
+#define CpmTpAcpAzaliaPowerGateOffEnd             0xB7
+
+#define CpmTpLowPowerEthernetCablePlugOutBegin    0xB8
+#define CpmTpLowPowerEthernetCablePlugOutEnd      0xB9
+#define CpmTpLowPowerEthernetCablePlugInBegin     0xBA
+#define CpmTpLowPowerEthernetCablePlugInEnd       0xBB
+#define CpmTpLowPowerEthernetEJ0Begin             0xBC
+#define CpmTpLowPowerEthernetEJ0End               0xBD
+#define CpmTpLowPowerEthernetWAKStart             0xBE
+#define CpmTpLowPowerEthernetWAKEnd               0xBF
+
+#define CpmTpDgpuPowerOnUnderPcieTraining         0xC0
+#define CpmTpDgpuPowerOnAfterPcieTraining         0xC1
+
+#define CpmTpWirelessLanRecoveryResetStart        0xC2
+#define CpmTpWirelessLanRecoveryResetEnd          0xC3
+

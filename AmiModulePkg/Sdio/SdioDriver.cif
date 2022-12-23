@@ -1,0 +1,24 @@
+<component>
+	name = "SdioDriver"
+	category = eModule
+	LocalRoot = "AmiModulePkg\Sdio\"
+	RefName = "SdioDriver"
+[INF]
+"SdioControllerPeiLib.inf"
+"SdioControllerDxeLib.inf"
+"SdioDriver.inf"
+[files]
+"SdioDriver.sdl"	
+"SdioDriver.chm"	
+"SdioDriverElink.txt"	
+[parts]
+"SdioSmm"
+"SDIOINT13"
+"SdioProtocols"
+"SdioSetup"
+"SdioIncludes"
+"SdMmcTemplate"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_28"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_13"
+<endComponent>

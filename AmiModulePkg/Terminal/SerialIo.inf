@@ -1,0 +1,52 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+
+## @file SerialIo.inf
+#  INF- SerialIo Modulepart - Produces the Serial Io Protocol
+##
+
+[Defines]
+  INF_VERSION                     = 0x00010015
+  BASE_NAME                       = SerialIo
+  MODULE_TYPE                     = DXE_DRIVER
+  FILE_GUID                       = 97C81E5D-8FA0-486a-AAEA-0EFDF090FE4F
+  ENTRY_POINT                     = SerialIoEntryPoint
+
+[Sources]
+  SerialIo.c
+  SerialIo.h
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  PrintLib
+  MemoryAllocationLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[Protocols]
+  gEfiAmiSioProtocolGuid
+  gEfiSioProtocolGuid
+  gEfiComponentNameProtocolGuid
+  gEfiComponentName2ProtocolGuid
+  gEfiSerialIoProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gEfiPciIoProtocolGuid
+  gAmiSerialProtocolGuid
+  gEfiDevicePathProtocolGuid
+
+ [Depex]
+  TRUE
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialFifoControl

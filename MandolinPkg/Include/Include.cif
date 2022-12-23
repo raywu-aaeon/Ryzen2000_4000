@@ -1,0 +1,10 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "MandolinPkg\Include\"
+	RefName = "MandolinPkg.Include"
+[parts]
+"MandolinPkg.Include.Ppi"
+"MandolinPkg.Include.Protocol"
+"MandolinPkg.Include.Library"
+<endComponent>

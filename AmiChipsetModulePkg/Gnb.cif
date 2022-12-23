@@ -1,0 +1,25 @@
+<component>
+	name = "AMD Picasso - GNB"
+	category = eChipset
+	LocalRoot = "AmiChipsetModulePkg\"
+	RefName = "AmiChipsetModulePkg.GraphicNorthBridge"
+[files]
+"Gnb.sdl"	
+"Gnb\Gop\AMDGenericGop.efi"	
+"Gnb\Gop\AmdIa32GenericGop.efi"	
+"Gnb\Gop\AMDGenericGopReleaseNotes.txt"	
+"LegacyRom\Vbios\PicassoGenericVbios.bin"	
+"LegacyRom\Vbios\Raven2GenericVbios.bin" 
+"LegacyRom\Vbios\Picasso Vbios Release Notes.txt"
+"LegacyRom\Vbios\Raven2 Vbios Release Notes.txt"
+"LegacyRom\Vbios\PeiLegacyVbios.txt"
+"LegacyRom\Vbios\PeiLegacyVbiosRv2.txt"
+"Gnb\ReleaseNotes.chm"	
+"Elink\GnbElinks.txt"	
+[parts]
+"AmiChipsetModulePkg.GnbInit"
+"AmiChipsetModulePkg.GnbSetup"
+"AmiChipsetModulePkg.GnbLibrary"
+"AmiChipsetModulePkg.GnbInclude"
+"AmiChipsetModulePkg.GnbAsl"
+<endComponent>

@@ -1,0 +1,33 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiFchIoAccessDxeLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiFchIoAccessLib | DXE_DRIVER
+  CONSTRUCTOR                    = AmiFchIoAccessDxeLibConstructor
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  BaseLib
+  IoLib
+  PciLib
+  DebugLib
+  AmiChipsetIoLib
+
+[Guids]
+  gEfiEventVirtualAddressChangeGuid
+
+[Sources]
+  AmiFchIoAccessDxeLib.c
+  AmiFchIoAccessLib.c
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdFchAcpiMmioBase
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress  

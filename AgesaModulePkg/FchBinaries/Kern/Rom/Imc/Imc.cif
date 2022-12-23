@@ -1,0 +1,8 @@
+<component>
+	name = "Imc"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\FchBinaries\Kern\Rom\Imc\"
+	RefName = "AgesaModulePkg.FchBinaries.Kern.Rom.Imc"
+[files]
+"AMDKCZ00.BIN"	
+<endComponent>

@@ -1,0 +1,60 @@
+##***********************************************************************
+##*                                                                     *
+##*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+##*                                                                     *
+##*      All rights reserved. Subject to AMI licensing agreement.       *
+##*                                                                     *
+##***********************************************************************
+## @file NvmeRecovery.inf
+#  Nvme Recovery driver
+##
+
+[Defines]
+  INF_VERSION        = 0x00010015
+  VERSION_STRING     = 1.0
+  BASE_NAME          = NvmeRecovery
+  MODULE_TYPE        = PEIM
+  FILE_GUID          = 00026AEB-F334-4c15-A7F0-E1E897E9FE91
+  ENTRY_POINT        = NvmeRecoveryPeimEntry
+
+[Sources]
+  NvmeRecovery.c
+  NvmeRecovery.h
+  NvmeCtrl.h
+  NvmeCtrl.c
+  NvmePassThruPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  DebugLib
+  PciLib
+  PeiServicesLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  TimerLib
+  IoLib
+
+[Ppis]
+  gEfiPeiVirtualBlockIoPpiGuid          ## PRODUCES
+  gEfiEndOfPeiSignalPpiGuid             ## CONSUMES
+  gEdkiiIoMmuPpiGuid                    ## CONSUMES
+  gEdkiiPeiNvmExpressPassThruPpiGuid
+  gEdkiiPeiNvmExpressHostControllerPpiGuid
+  gAmiPeiPciEnumerationPpiGuid
+  
+[Pcd]
+  gAmiModulePkgTokenSpaceGuid.AmiPcdPeiPciEnumerationLastBusNumber
+  gAmiModulePkgTokenSpaceGuid.AmiPcdPeiPciMmioTopAddress
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+[Depex]
+  gEfiPeiMemoryDiscoveredPpiGuid AND
+  gEfiPciCfg2PpiGuid AND
+  ( gAmiPublishBlockIoPpiGuid OR gEfiPeiBootInRecoveryModePpiGuid ) AND
+  gAmiPeiPciEnumerationPpiGuid
+  

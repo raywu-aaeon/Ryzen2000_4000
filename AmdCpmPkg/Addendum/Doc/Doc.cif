@@ -1,0 +1,8 @@
+<component>
+	name = "Doc"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Addendum\Doc\"
+	RefName = "AmdCpmPkg.Addendum.Doc"
+[files]
+"55730_Common_Platform_Module_Implementation_Guide_Rev_1.20.pdf"	
+<endComponent>

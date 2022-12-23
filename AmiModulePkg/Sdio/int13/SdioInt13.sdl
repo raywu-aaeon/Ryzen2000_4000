@@ -1,0 +1,53 @@
+TOKEN
+    Name  = "SDIOINT13_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Sdio Int13 support in the project."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+    Token = "CSM_SUPPORT" "=" "1"
+End
+
+PATH
+    Name  = "SDIOINT13_DIR"
+    Path  = "AmiModulePkg/Sdio/int13"
+End
+
+ELINK
+    Name = "OPROM(1,0,4,$(SDIOINT13_DIR)/SdioI13.bin)"
+    Parent = "CSM_OPROM_LIST"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CollectSdioBbsDevices,"
+    Parent  = "CollectBootDevices,"
+    InvokeOrder = BeforeParent
+End
+
+INFComponent
+    Name  = "SdioInt13"
+    File  = "SdioInt13.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+    Name  = "SdioBbs"
+    File  = "SdioBbs.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.SdioBbs"
+    Override  = "AmiModulePkg.Bds"
+End
+
+
+
+
+
+
+

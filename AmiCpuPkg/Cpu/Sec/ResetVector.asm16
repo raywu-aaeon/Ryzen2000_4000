@@ -1,0 +1,83 @@
+;*************************************************************************
+;*************************************************************************
+;**                                                                     **
+;**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+;**                                                                     **
+;**                       All Rights Reserved.                          **
+;**                                                                     **
+;**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+;**                                                                     **
+;**                       Phone: (770)-246-8600                         **
+;**                                                                     **
+;*************************************************************************
+;*************************************************************************
+
+;<AMI_FHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:	ResetVector.asm16
+;
+; Description:
+;   Reset Vector. Fixup will update code to jump to EntryPoint of Startup32.asm.
+;
+;----------------------------------------------------------------------------
+;<AMI_FHDR_END>
+
+    THIS_BINARY_BASE equ 0FFFFFFC0h
+
+.686P
+.XMM
+.model tiny
+.stack 0
+.code
+
+        org     (0FFFFFFC0h - THIS_BINARY_BASE)         ;offset 0xFFFFFFC0h
+        dd      0FFFFFFFFh	;Reserve
+        dd      0FFFFFFFFh
+
+        org     (0FFFFFFD0h - THIS_BINARY_BASE)         ;offset 0xFFFFFFD0h
+        mov     di, "AP"    ;Actual AP startup (SIPI) is hardcoded to jump here.
+        jmp     ApStartup
+
+        org     (0FFFFFFE0h - THIS_BINARY_BASE)         ;offset 0xFFFFFFE0
+        dd      87654321h   ;Fixed up by tool to point to PEI CORE Entry.
+
+;
+; This is the handler for all kinds of exceptions. Since it's for debugging
+; purpose only, nothing except a deadloop would be done here. Developers could
+; analyze the cause of the exception if a debugger had been attached.
+;
+		InterruptHandler    PROC
+    		jmp     $
+    		iret
+		InterruptHandler    ENDP
+
+        org     (0FFFFFFF0h - THIS_BINARY_BASE)         ;offset 0xFFFFFFF0
+        nop                 ;Place holder to maintain byte sequence for build tool fix-ups.
+        nop                 ;Place holder to maintain byte sequence for build tool fix-ups.
+        
+ApStartup:                
+        ; Use machine code directly in case of the assembler optimization
+        ; SEC entry point relatvie address will be fixed up by some build tool.
+        ; 
+        db      0e9h        ;jmp Rel16
+        dw      -3          ;SecFixup utility changes to point to flat32.asm Entry Point.
+         
+        org     (0FFFFFFFCh - THIS_BINARY_BASE)         ;offset 0xFFFFFFFC
+		dd      012345678h  ;Fixed up by GenFvImage to Boot Firmware Volume Base.
+END
+
+;*************************************************************************
+;*************************************************************************
+;**                                                                     **
+;**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+;**                                                                     **
+;**                       All Rights Reserved.                          **
+;**                                                                     **
+;**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+;**                                                                     **
+;**                       Phone: (770)-246-8600                         **
+;**                                                                     **
+;*************************************************************************
+;*************************************************************************
+

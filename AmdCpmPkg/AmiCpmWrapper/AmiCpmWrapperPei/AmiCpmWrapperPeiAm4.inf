@@ -1,0 +1,37 @@
+
+[Defines]
+	INF_VERSION                     = 0x00010005
+	BASE_NAME                       = AmiCpmWrapperPei
+    FILE_GUID                       = 3fbd651b-5f0b-47af-be25-ae35c63c8d5d
+    MODULE_TYPE                     = PEIM
+	VERSION_STRING                  = 1.0
+	ENTRY_POINT                     = AmiCpmWrapperPeiEntry
+
+[Sources]
+    AmiCpmWrapperPei.c
+    
+[Packages]
+    MdePkg/MdePkg.dec
+    AmdCpmPkg/AmdCpmPkg.dec
+    AmdCpmPkg/AmiCpmWrapper/AmiCpmWrapperPkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AgesaModulePkg\AgesaFamily15ModulePkg.dec
+    
+[LibraryClasses]
+    PeimEntryPoint
+    AmiChipsetIoLib
+    IoLib
+
+[Guids]
+    gAmiCpmWrapperPkgUmaVariableGuid
+[Ppis]
+    gEfiEndOfPeiSignalPpiGuid
+    gEfiPeiReadOnlyVariable2PpiGuid
+[Pcd]
+    gAmdCpmPkgTokenSpaceGuid.AcpiRestoreSwSmi
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgUmaVersion
+[Depex]
+    gEfiPeiCpuIoPpiInstalledGuid AND
+    gEfiPciCfg2PpiGuid AND
+    gEfiPeiReadOnlyVariable2PpiGuid AND 
+    gAmiPeiPciTableInitPpiGuid

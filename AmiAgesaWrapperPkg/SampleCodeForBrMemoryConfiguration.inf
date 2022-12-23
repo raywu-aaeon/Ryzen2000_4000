@@ -1,0 +1,65 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+#
+# This file contains code for AGESA initialization in the Pei stage.
+#
+
+[Defines]
+    INF_VERSION    = 0x00010005
+    VERSION_STRING = 1.0
+    BASE_NAME      = SampleCodeForBrMemoryConfiguration
+    FILE_GUID      = 8a1bfe76-550d-44cc-b54a-d679b018bf0b
+    MODULE_TYPE    = PEIM
+    ENTRY_POINT    = SampleCodePeiEntry
+
+[Sources]
+    SampleCodeForBrMemoryConfiguration.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AgesaPkg/AgesaPkg.dec
+    AgesaModulePkg/AgesaCommonModulePkg.dec
+    AgesaModulePkg/AgesaFamily15ModulePkg.dec
+
+
+[LibraryClasses]
+    PeimEntryPoint
+    DebugLib
+    BaseLib
+    AmdSocBaseLib
+
+[Guids]
+
+[Ppis]
+    gAmdMemoryPlatformConfigurationPpiGuid      #Produced
+
+[Pcd]
+
+[Depex]
+	TRUE
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

@@ -1,0 +1,188 @@
+#ifdef SETUP_DATA_DEFINITION
+    UINT8   GopOutputSelect;
+#endif //SETUP_DATA_DEFINITION
+
+#ifdef FORM_SET_TYPEDEF
+    #include "AmiGopPolicy.h"
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+#define AMI_GOP_POLICY_ONEOF_GOPSELECT0\
+    oneof varid     = SETUP_DATA.GopOutputSelect,\
+        questionid  = AUTO_ID(AGP_KEY_0),\
+        prompt      = STRING_TOKEN(STR_GOP_OUTPUT_SELECT),\
+        help        = STRING_TOKEN(STR_GOP_OUTPUT_HELP),\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_0), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE;\
+    endoneof;
+
+#define AMI_GOP_POLICY_ONEOF_GOPSELECT1\
+    oneof varid     = SETUP_DATA.GopOutputSelect,\
+        questionid  = AUTO_ID(AGP_KEY_1),\
+        prompt      = STRING_TOKEN(STR_GOP_OUTPUT_SELECT),\
+        help        = STRING_TOKEN(STR_GOP_OUTPUT_HELP),\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_0), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_1), value = 1, flags = 0;\
+    endoneof;
+
+#define AMI_GOP_POLICY_ONEOF_GOPSELECT2\
+    oneof varid     = SETUP_DATA.GopOutputSelect,\
+        questionid  = AUTO_ID(AGP_KEY_2),\
+        prompt      = STRING_TOKEN(STR_GOP_OUTPUT_SELECT),\
+        help        = STRING_TOKEN(STR_GOP_OUTPUT_HELP),\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_0), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_1), value = 1, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_2), value = 2, flags = 0;\
+    endoneof;
+
+#define AMI_GOP_POLICY_ONEOF_GOPSELECT3\
+    oneof varid     = SETUP_DATA.GopOutputSelect,\
+        questionid  = AUTO_ID(AGP_KEY_3),\
+        prompt      = STRING_TOKEN(STR_GOP_OUTPUT_SELECT),\
+        help        = STRING_TOKEN(STR_GOP_OUTPUT_HELP),\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_0), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_1), value = 1, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_2), value = 2, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_3), value = 3, flags = 0;\
+    endoneof;
+
+#define AMI_GOP_POLICY_ONEOF_GOPSELECT4\
+    oneof varid     = SETUP_DATA.GopOutputSelect,\
+        questionid  = AUTO_ID(AGP_KEY_4),\
+        prompt      = STRING_TOKEN(STR_GOP_OUTPUT_SELECT),\
+        help        = STRING_TOKEN(STR_GOP_OUTPUT_HELP),\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_0), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_1), value = 1, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_2), value = 2, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_3), value = 3, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_4), value = 4, flags = 0;\
+    endoneof;
+
+#define AMI_GOP_POLICY_ONEOF_GOPSELECT5\
+    oneof varid     = SETUP_DATA.GopOutputSelect,\
+        questionid  = AUTO_ID(AGP_KEY_5),\
+        prompt      = STRING_TOKEN(STR_GOP_OUTPUT_SELECT),\
+        help        = STRING_TOKEN(STR_GOP_OUTPUT_HELP),\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_0), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_1), value = 1, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_2), value = 2, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_3), value = 3, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_4), value = 4, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_5), value = 5, flags = 0;\
+    endoneof;
+
+#define AMI_GOP_POLICY_ONEOF_GOPSELECT6\
+    oneof varid     = SETUP_DATA.GopOutputSelect,\
+        questionid  = AUTO_ID(AGP_KEY_6),\
+        prompt      = STRING_TOKEN(STR_GOP_OUTPUT_SELECT),\
+        help        = STRING_TOKEN(STR_GOP_OUTPUT_HELP),\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_0), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_1), value = 1, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_2), value = 2, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_3), value = 3, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_4), value = 4, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_5), value = 5, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_6), value = 6, flags = 0;\
+    endoneof;
+
+#define AMI_GOP_POLICY_ONEOF_GOPSELECT7\
+    oneof varid     = SETUP_DATA.GopOutputSelect,\
+        questionid  = AUTO_ID(AGP_KEY_7),\
+        prompt      = STRING_TOKEN(STR_GOP_OUTPUT_SELECT),\
+        help        = STRING_TOKEN(STR_GOP_OUTPUT_HELP),\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_0), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_1), value = 1, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_2), value = 2, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_3), value = 3, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_4), value = 4, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_5), value = 5, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_6), value = 6, flags = 0;\
+        option text = STRING_TOKEN(STR_GOP_OUTPUT_NAME_7), value = 7, flags = 0;\
+    endoneof;
+
+#endif //#ifdef CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+    AMI_GOP_POLICY_ONEOF_GOPSELECT0
+    AMI_GOP_POLICY_ONEOF_GOPSELECT1
+    AMI_GOP_POLICY_ONEOF_GOPSELECT2
+    AMI_GOP_POLICY_ONEOF_GOPSELECT3
+    AMI_GOP_POLICY_ONEOF_GOPSELECT4
+    AMI_GOP_POLICY_ONEOF_GOPSELECT5
+    AMI_GOP_POLICY_ONEOF_GOPSELECT6
+    AMI_GOP_POLICY_ONEOF_GOPSELECT7
+#endif //#ifdef CONTROLS_WITH_DEFAULTS
+
+//Select Top level menu item (formset) for you pages
+#ifdef ADVANCED_FORM_SET
+    #ifndef SUPPRESS_GRAYOUT_ENDIF //old Core
+    #define SUPPRESS_GRAYOUT_ENDIF endif;
+    #endif
+
+    #ifdef FORM_SET_VARSTORE
+        varstore AMI_GOP_POLICY_SETUP_DATA,
+        key   = AUTO_ID(AMI_GOP_POLICY_SETUP_DATA_ID),
+        name  = AmiGopPolicySetupData,
+        guid  = AMI_GOP_POLICY_VARIABLE_GUID;
+    #endif
+
+#ifdef FORM_SET_GOTO
+    suppressif  ideqval AMI_GOP_POLICY_SETUP_DATA.GopDeviceCount == 0x0;
+        goto AGP_FORM_ID, 
+        prompt = STRING_TOKEN(STR_TITLE),
+        help = STRING_TOKEN(STR_TITLE_HELP);
+    endif; //suppressif GopDeviceCount < 1
+#endif //FORM_SET_GOTO
+
+#ifdef FORM_SET_FORM
+
+    #ifndef AMI_GOP_POLICY_FORM_SETUP
+    #define AMI_GOP_POLICY_FORM_SETUP
+    form formid = AUTO_ID(AGP_FORM_ID),
+        title = STRING_TOKEN(STR_TITLE);
+
+        SUBTITLE(STRING_TOKEN(STR_GOP_DEVICE_NAME_0))
+        SUBTITLE(STRING_TOKEN(STR_GOP_DRIVER_NAME_0))
+
+        suppressif NOT ideqval AMI_GOP_POLICY_SETUP_DATA.GopOutputCount == 0x1;
+            AMI_GOP_POLICY_ONEOF_GOPSELECT0
+        endif; //suppressif GopOutputCount != 1
+
+        suppressif NOT ideqval AMI_GOP_POLICY_SETUP_DATA.GopOutputCount == 0x2;
+            AMI_GOP_POLICY_ONEOF_GOPSELECT1
+        endif; //suppressif GopOutputCount != 2
+
+        suppressif NOT ideqval AMI_GOP_POLICY_SETUP_DATA.GopOutputCount == 0x3;
+            AMI_GOP_POLICY_ONEOF_GOPSELECT2
+        endif; //suppressif GopOutputCount != 3
+
+        suppressif NOT ideqval AMI_GOP_POLICY_SETUP_DATA.GopOutputCount == 0x4;
+            AMI_GOP_POLICY_ONEOF_GOPSELECT3
+        endif; //suppressif GopOutputCount != 4
+
+        suppressif NOT ideqval AMI_GOP_POLICY_SETUP_DATA.GopOutputCount == 0x5;
+            AMI_GOP_POLICY_ONEOF_GOPSELECT4
+        endif; //suppressif GopOutputCount != 5
+
+        suppressif NOT ideqval AMI_GOP_POLICY_SETUP_DATA.GopOutputCount == 0x6;
+            AMI_GOP_POLICY_ONEOF_GOPSELECT5
+        endif; //suppressif GopOutputCount != 6
+
+        suppressif NOT ideqval AMI_GOP_POLICY_SETUP_DATA.GopOutputCount == 0x7;
+            AMI_GOP_POLICY_ONEOF_GOPSELECT6
+        endif; //suppressif GopOutputCount != 7
+
+        suppressif NOT ideqval AMI_GOP_POLICY_SETUP_DATA.GopOutputCount == 0x8;
+            AMI_GOP_POLICY_ONEOF_GOPSELECT7
+        endif; //suppressif GopOutputCount != 8
+
+    endform;
+    #endif //AMI_GOP_POLICY_SETUP_FORM
+
+#endif //FORM_SET_FORM
+
+#endif //ADVANCED_FORM_SET

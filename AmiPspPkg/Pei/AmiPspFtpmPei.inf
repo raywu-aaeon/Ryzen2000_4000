@@ -1,0 +1,68 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiPspFtpmPei
+  FILE_GUID                      = D4926BEA-00A3-40E5-A2B9-C317960F31BF
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmiPspFtpmPeiDriverEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AmiPspPkg/AmiPspPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  DebugLib
+
+
+[Sources]
+  AmiPspFtpmPei.c
+
+[Guids]
+    gAmiPspFtpmHobGuid
+
+[Protocols]
+
+[Ppis]
+    gAmdPspFtpmFactoryResetPpiGuid      #Consumed
+    gEfiPeiReadOnlyVariable2PpiGuid     #Consumed
+
+[Pcd]
+    gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+
+[Depex]
+    gEfiPeiReadOnlyVariable2PpiGuid
+
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

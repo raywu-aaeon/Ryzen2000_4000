@@ -1,0 +1,30 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = AmiFlashLibDxe
+    FILE_GUID       = E01FDFD3-48C8-432c-9555-4409DDBC6C6A
+    MODULE_TYPE     = DXE_DRIVER
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = AmiFlashLib | DXE_DRIVER UEFI_DRIVER DXE_SMM_DRIVER DXE_CORE SMM_CORE UEFI_APPLICATION
+    CONSTRUCTOR     = DxeAmiFlashLibConstructor
+
+[Sources]
+    AmiFlashLibCommon.c
+    AmiFlashLibCommon.h
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    BaseLib
+    BaseMemoryLib
+    AmiCspFlashLib
+    SpiFlashLib
+    $(AmiFlashLibOemLibClasses)

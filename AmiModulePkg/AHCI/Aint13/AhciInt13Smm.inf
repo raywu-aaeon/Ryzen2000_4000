@@ -1,0 +1,48 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file AhciInt13Smm.inf
+#
+##
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AhciInt13Smm
+  FILE_GUID                      = 501f30e9-d14f-47da-ae60-b101e4189d07
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = AhciInt13SmmEntry
+
+[Sources]
+  AhciInt13Smm.c
+  AhciInt13Smm.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  AmiBufferValidationLib
+  DebugLib
+  
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  
+[Protocols]
+  gEfiSmmCpuProtocolGuid
+  gEfiSmmBase2ProtocolGuid
+  gEfiSmmSwDispatch2ProtocolGuid
+  gEfiSmmCpuProtocolGuid
+
+[Depex]
+  gEfiSmmBase2ProtocolGuid AND
+  gEfiSmmCpuProtocolGuid AND
+  gEfiSmmSwDispatch2ProtocolGuid
+  

@@ -1,0 +1,8 @@
+TOKEN
+	Name  = "IntelFrameworkPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable IntelFrameworkPkg support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	Master = Yes
+End

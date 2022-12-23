@@ -1,0 +1,197 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = TaishanPcdsLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = TaishanPcdsLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AgesaModulePkg/Fch/Taishan/FchTaishan.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  SbGetSetupData
+
+[Sources]
+  TaishanPcdsLib.c
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdSbFchTypeString
+
+  ###
+  ###  Taishan-FchPei
+  ###       Porting required : copy PCD section from AMD-FchPei.inf
+  ###
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmbus0BaseAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSioPmeBaseAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPm1EvtBlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPm1CntBlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPmTmrBlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgCpuControlBlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiGpe0BlkAddr
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmiCmdPortAddr
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLegacyFree
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEcKbd
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchOscout1ClkContinous
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSetMaxGen2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataClkMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClockDriveStrength
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciECCDedErrRptEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSpiSpeed
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetFastSpeed
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClk0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClk1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiEc0Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiIo80Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiKbc6064Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchWdtEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSerialDebugBusEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciECCDedErrRptEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTXhciGen1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTXhciGen2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTAOAC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTHW_LPM
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTDbC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTXHC_PME
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSystemSpreadSpectrum
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPortEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggresiveDevSlpP0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggresiveDevSlpP1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggrLinkPmCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPscCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataSscCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataMsiCapability
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPortMdPort0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPortMdPort1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataHotPlug
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb31P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb31P1
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetFastSpeed
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetWriteSpeed
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetAutoMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetBurstWrite
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSpiSpeed
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSPI100Enable
+
+  ###
+  ###  Taishan-FchDxe
+  ###       Porting required : copy PCD section from AMD-FchDxe.inf
+  ###
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataClass
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataAggrLinkPmCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdHpetEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdHpetMsiDis
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSpreadSpectrum
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmbusSsid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataAhciSsid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataRaidSsid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataRaid5Ssid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataIdeSsid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciSsid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcSsid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdSsid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataRasSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataAhciDisPrefetchFunction
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdConfig
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdClockMultiplier
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdDbgConfig
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPwrFailShadow
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTDeviceEnableMap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDevSlpPort0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDevSlpPort1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDevSlpPort0Num
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDevSlpPort1Num
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortMultCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPscCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSscCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataClkAutoOff
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataFisBasedSwitching
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataCccSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMsiEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataTargetSupport8Device
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDisableGenericMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataAhciEnclosureManagement
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataHotRemovalEnh
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPhyPllShutDown
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort6
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort6
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdTimerTickTrack
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdClockInterruptTag
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSerialDebugBusEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdNoClearThermalTripSts
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdStressResetMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdALinkClkGateOff
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdBLinkClkGateOff
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAbClockGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSbgMemoryPowerSaving
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSbgClockGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXdmaDmaWrite16ByteMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXdmaMemoryPowerSaving
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXdmaPendingNprThreshold
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXdmaDncplOrderDis
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppClockRequest0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppClockRequest1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppClockRequest2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppClockRequest3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSltGfxClockRequest0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSltGfxClockRequest1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdphostBypassDataPack
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdphostDisNpmwrProtect
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcBusSpeedMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcBusWidth
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcRetuneMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcClockMultiplier
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeMdio0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeMdio1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeSfp
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0ConfigEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1ConfigEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort2ConfigEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort3ConfigEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0Table
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1Table
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort2Table
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort3Table
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0MAC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1MAC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort2MAC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort3MAC
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort6
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataHotRemovalEnhPort
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMsiCapability

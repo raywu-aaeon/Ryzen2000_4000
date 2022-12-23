@@ -1,0 +1,38 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdSpiProtectHstiLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  AmdSpiProtectHstiLib.c
+  AmdSpiProtectHstiLib.uni
+[Packages]
+  AmiHstiPkg/AmiHstiPkg.dec
+  MdePkg/MdePkg.dec 
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  $(SPIPROTECT_AGESAPackages_List)
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  DebugLib
+  HiiLib
+  UefiLib
+  AmiDxeLib
+  PcdLib
+  
+[Pcd]
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiImplementedTestBitmap
+  $(SPIPROTECT_AGESAPcd_List)

@@ -1,0 +1,86 @@
+TOKEN
+	Name  = "CrbDsmAsl_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable DsmAsl support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "CRB_DSMASL_SSDT_SUPPORT"
+	Value  = "1"
+	Help  = "Set to 1 the ASL will be produced as a SSDT."
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "CRB_DSM_ASL_FILE"
+	Value  = "CrbDsmAsl.asl"
+	Help  = "DO NOT CHANGE this token. Just help to indicate asl file under build folder for INF-PreProcess"
+	TokenType = Expression
+End
+
+PATH
+	Name  = "CRB_DSM_ASL_DIR"
+End
+
+
+## Porting required !! : Below is an example of how CrbPciSlotDsmAsl ELINK can be populated. The _SB.PCI0.Dxxx (x = number, please check the the asl name of SDL-PCIDEVICE)
+####ELINK
+####	Name  = "PCI_SLOT_DSM(1, Slot01 x8, \_SB.PCI0.D004)"
+####	Parent  = "CrbPciSlotDsmAsl"
+####	Help  = "eLink for creating platform device names with DSM method. Specify Slot number, name and current device scope"
+####	InvokeOrder = AfterParent
+####End
+
+ELINK
+	Name  = "Build/CrbSsdtDriverFdfRule.txt"
+	Parent  = "FdfRules"
+	Token = "CRB_DSMASL_SSDT_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CrbPciSlotDsmAsl"
+	Help  = "eLink parent for creating platform device names with _DSM method for PCI slot."
+	InvokeOrder = ReplaceParent
+End
+
+OUTPUTREGISTER
+	Name  = "CrbSsdtDriverFdfRule"
+	Help  = "This OUTPUTREGISTER just to help to output the identical file into Build folder. Let us include the file in the FDF without platform path"
+	Path  = "Build"
+	File  = "CrbSsdtDriverFdfRule.txt"
+	Template  = "CrbSsdtDriverFdfRule.txt"
+	Token = "CRB_DSMASL_SSDT_SUPPORT" "=" "1"
+End
+
+OUTPUTREGISTER
+	Name  = "DsmAslElinks"
+	Path  = "Build"
+	File  = "CrbDsmAsl.asl"
+	Template  = "DsmAslElink.txt"
+	Token = "CRB_DSMASL_SSDT_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CrbDsmAslDxe"
+	File  = "CrbDsmAslDxe.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	PreProcess = Yes
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "CRB_DSMASL_SSDT_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "CrbDsmAslDxe"
+	FD_AREA  = "FV_MAIN"
+	INFComponent  = "$(PLATFORM_PKG_NAME).CrbDsmAslDxe"
+	Rule_Override  = "CrbSsdtDriver"
+	Token = "CRB_DSMASL_SSDT_SUPPORT" "=" "1"
+	Help  = "Override the rule. help to pack AML in DXE driver."
+End
+

@@ -1,0 +1,63 @@
+    INF AgesaModulePkg/Debug/AmdIdsDebugPrintDxe/AmdIdsDebugPrintDxe.inf
+
+#   ##MEM Dxe Drivers
+    INF AgesaModulePkg/Mem/AmdMemAm4Dxe/AmdMemAm4Dxe.inf
+
+#   ##SOC Dxe Drivers
+    INF AgesaModulePkg/Soc/AmdSocFp5RvDxe/AmdSocFp5RvDxe.inf
+    INF AgesaModulePkg/ErrorLog/AmdErrorLogDxe/AmdErrorLogDxe.inf
+
+#   ##PSP Dxe Drivers
+    INF AgesaModulePkg/Psp/AmdPspFtpmDxe/AmdPspFtpmDxe.inf
+    INF AgesaModulePkg/Psp/AmdPspDxeV2Rv/AmdPspDxeV2.inf
+    INF AgesaModulePkg/Psp/AmdPspP2CmboxV2/AmdPspP2CmboxV2.inf
+    INF AgesaModulePkg/Psp/AmdPspSmmV2/AmdPspSmmV2.inf
+    INF AgesaModulePkg/Psp/AmdHstiV2/AmdHstiV2.inf
+    INF AgesaModulePkg/Psp/ApobDrv/ApobZpRvDxe/ApobZpRvDxe.inf
+
+#    ## Ccx Dxe Drivers
+    INF AgesaModulePkg/Fabric/RV/FabricRvDxe/AmdFabricRvDxe.inf
+    INF AgesaModulePkg/Fabric/RV/FabricRvSmm/AmdFabricRvSmm.inf
+
+#    ## DF Dxe Drivers
+    INF AgesaModulePkg/Ccx/Zen/CcxZenRvDxe/AmdCcxZenRvDxe.inf
+    INF AgesaModulePkg/Ccx/Zen/CcxZenRvSmm/AmdCcxZenRvSmm.inf
+
+#    ## Mem Dxe Drivers
+    INF AgesaModulePkg/Mem/AmdMemSmbiosV2Dxe/AmdMemSmbiosV2Dxe.inf
+    INF AgesaModulePkg/Mem/AmdMemRestoreDxe/MemRestoreDxe.inf
+
+#    ## GNb Dxe Drivers
+    INF AgesaModulePkg/Nbio/NbioBase/AmdNbioBaseRVDxe/AmdNbioBaseRVDxe.inf
+    INF AgesaModulePkg/Nbio/SMU/AmdNbioSmuV10Dxe/AmdNbioSmuV10Dxe.inf
+    INF AgesaModulePkg/Nbio/PCIe/AmdNbioPcieRVDxe/AmdNbioPcieRVDxe.inf
+    INF AgesaModulePkg/Nbio/IOMMU/AmdNbioIOMMURVDxe/AmdNbioIOMMURVDxe.inf
+    INF AgesaModulePkg/Nbio/GFX/AmdNbioGfxRVDxe/AmdNbioGfxRVDxe.inf
+    INF AgesaModulePkg/Nbio/NbioALib/AmdNbioAlibRVDxe/AmdNbioAlibRVDxe.inf
+
+#   ## Fch Dxe Drivers
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstoneDxe/FchDxe.inf
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstoneSmm/FchSmm.inf
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstoneSmbusDxe/SmbusLight.inf
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstoneCf9ResetDxe/Cf9Reset.inf
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstoneLegacyInterruptDxe/LegacyInterrupt.inf
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstoneSmmControlDxe/SmmControl.inf
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstoneSmmDispatcher/FchSmmDispatcher.inf
+    INF AgesaModulePkg/Fch/Sandstone/FchSandstoneComplement/FchSSSataD3Cold/FchSSSataD3ColdSmm.inf
+
+#   ## APCB RV Dxe Drivers
+    INF AgesaModulePkg/Psp/ApcbDrv/ApcbRvDxe/ApcbRvDxe.inf
+
+#   ## APCB RV Smm Drivers
+    INF AgesaModulePkg/Psp/ApcbDrv/ApcbRvSmm/ApcbRvSmm.inf
+
+#   ## Universal
+    INF AgesaModulePkg/Universal/Smbios/AmdSmbiosDxe.inf
+    INF AgesaModulePkg/Universal/Acpi/AmdAcpiDxe.inf
+    INF AgesaModulePkg/Universal/AmdSmmCommunication/AmdSmmCommunication.inf
+    INF AgesaModulePkg/Universal/Version/AmdVersionDxe/AmdVersionDxe.inf
+
+#   ## Ras Dxe Drivers
+    INF AgesaModulePkg/Ras/AmdRasRvApeiDxe/AmdRasRvApeiDxe.inf
+    INF AgesaModulePkg/Ras/AmdRasRvDxe/AmdRasRvDxe.inf
+    INF AgesaModulePkg/Ras/AmdRasRvSmm/AmdRasRvSmm.inf

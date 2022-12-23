@@ -1,0 +1,60 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbPciePei
+  FILE_GUID                      = 8a563114-70f2-4adc-9a47-19424dfbe82c
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CrbPciePeiInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  CrbPciePei.c
+  CrbPcieSetup.h
+  CrbPcie.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Bilby/AmdCpmOemPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MandolinPkg/MandolinPkg.dec
+  
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  BaseLib
+  PciLib
+  #HobLib
+  #AmdCpmBaseLib
+  #AmdCpmCpuLib
+  #AmdCpmFchLib
+  DebugLib
+  #AmdSocBaseLib
+  
+[Ppis]
+  gAmdCpmTablePpiGuid
+  gAmdCpmOemTablePpiGuid
+  gAmdCpmTableHobPpiGuid
+  gEfiPeiSmbus2PpiGuid
+  gEfiPeiMemoryDiscoveredPpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gAmdCpmOverrideTablePpiGuid
+  
+[Guids]
+
+[Pcd]
+
+[Depex]
+  TRUE

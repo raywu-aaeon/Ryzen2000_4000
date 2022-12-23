@@ -1,0 +1,9 @@
+<component>
+    name = "Flash - Includes"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg/Include/"
+    RefName = "FLASH_INCLUDES"
+[files]
+"FlashPart.h"
+"SpiFlashParts.h"
+<endComponent>

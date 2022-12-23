@@ -1,0 +1,11 @@
+<component>
+	name = "PauseKey"
+	category = eModule
+	LocalRoot = "AmiModulePkg\PauseKey\"
+	RefName = "PauseKey"
+[INF]
+"PauseKey.inf"
+[files]
+"PauseKey.sdl"	
+"PauseKey.chm"	
+<endComponent>

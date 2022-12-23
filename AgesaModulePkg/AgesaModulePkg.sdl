@@ -1,0 +1,39 @@
+TOKEN
+	Name  = "AGESA_MODULE_PKG_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AgesaModulePkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "BUILD_AGESA_MODULE_PKG"
+	Value  = "0"
+	Help  = "Switch for building AgesaModulePkg Package"
+	TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AGESA_MODULE_PKG_VERSION"
+    Value  = "9"
+    Help  = "The current module version for version check. Should be updated on each official Release of AgesaModulePkg."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "PLATFORM_NAME"
+	Value  = "AgesaModulePkg"
+	TokenType = Expression
+	TargetDSC = Yes
+	Token = "BUILD_AGESA_MODULE_PKG" "=" "1"
+End
+
+
+PcdMapping
+    Name  = "PcdSmiCmdPortXv"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(SW_SMI_IO_ADDRESS)"
+    TargetDSC = Yes
+End

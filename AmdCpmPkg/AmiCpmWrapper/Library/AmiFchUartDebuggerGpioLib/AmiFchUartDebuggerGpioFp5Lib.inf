@@ -1,0 +1,29 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiFchUartDebuggerGpioFp5Lib
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiFchUartDebuggerGpioFp5Lib
+  CONSTRUCTOR                    = AmiFchUartDebuggerGpioLibConstructor
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Bilby/AmdCpmOemPkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  BaseLib
+  PeiServicesLib
+
+[Protocols]
+
+[Ppis]
+
+[Sources]
+  AmiFchUartDebuggerGpioLib.c

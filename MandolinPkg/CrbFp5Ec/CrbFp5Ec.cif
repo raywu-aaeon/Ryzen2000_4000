@@ -1,0 +1,11 @@
+<component>
+	name = "Crb FP5 EC"
+	category = ModulePart
+	LocalRoot = "CrbFp5Ec\"
+	RefName = "MandolinPkg.CrbFp5Ec"
+[files]
+"CrbFp5Ec.sdl"	
+"MandolinEC.bin"
+[INF]
+"CrbFp5EcFirmware.inf"
+<endComponent>

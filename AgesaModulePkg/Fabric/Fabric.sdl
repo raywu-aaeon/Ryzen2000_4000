@@ -1,0 +1,132 @@
+TOKEN
+	Name  = "AMD_FABRIC_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Fabric support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AMD_UNB_XV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdUnbXvDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "AMD_UNB_XV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdUnbXvPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "AMD_FABRIC_RV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdFabricRvDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_FABRIC_RV_SMM_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdFabricRvSmm support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_FABRIC_RV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdFabricRvPei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_FABRIC_ZP_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdFabricZpDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "AMD_FABRIC_ZP_SMM_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdFabricZpSmm support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "AMD_FABRIC_ZP_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdFabricZpPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdUnbXvDxe"
+	File  = "XV\UnbXvDxe\AmdUnbXvDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_UNB_XV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdUnbXvPei"
+	File  = "XV\UnbXvPei\AmdUnbXvPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_UNB_XV_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdFabricRvDxe"
+	File  = "RV\FabricRvDxe\AmdFabricRvDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_FABRIC_RV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdFabricRvSmm"
+	File  = "RV\FabricRvSmm\AmdFabricRvSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AMD_FABRIC_RV_SMM_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdFabricRvPei"
+	File  = "RV\FabricRvPei\AmdFabricRvPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_FABRIC_RV_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdFabricZpDxe"
+	File  = "ZP\FabricZpDxe\AmdFabricZpDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_FABRIC_ZP_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdFabricZpSmm"
+	File  = "ZP\FabricZpSmm\AmdFabricZpSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AMD_FABRIC_ZP_SMM_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdFabricZpPei"
+	File  = "ZP\FabricZpPei\AmdFabricZpPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_FABRIC_ZP_PEI_SUPPORT" "=" "1"
+End

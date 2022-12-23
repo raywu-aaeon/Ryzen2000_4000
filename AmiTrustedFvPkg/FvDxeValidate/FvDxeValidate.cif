@@ -1,0 +1,13 @@
+<component>
+	name = "FvDxeValidate"
+	category = ModulePart
+	LocalRoot = "AmiTrustedFvPkg\FvDxeValidate"
+	RefName = "FvDxeValidate"
+[INF]
+"FvDxeValidateOnPublish.inf"
+"FvDxeValidatePpi.inf"
+"FvDxeValidatePpi1.inf"
+"FvDxeFailLib.inf"
+[files]
+"FvDxeValidate.sdl"
+<endComponent>

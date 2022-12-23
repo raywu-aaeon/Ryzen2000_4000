@@ -1,0 +1,108 @@
+TOKEN
+	Name  = "NBIO_RV_BRIDGE2_SLOT_EXISTS"
+	Value  = "0"
+	Help  = "Override for Crb OnBoard LAN BCM5"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+PCIDEVICE
+	Title  = "NBIO Pci2PciBridge(D1, F3) Slot"
+	Parent  = "NBIO Br2"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ASLdeviceName  = "BCM5"
+	IntA = 	LNKA; 32
+	IntB = 	LNKB; 33
+	IntC = 	LNKC; 34
+	IntD = 	LNKD; 35
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	PCIExpress = Yes
+	InitRoutine  = "CspGnbPciInitRoutine"
+End
+
+PCIDEVICE
+	Title  = "BCM5762  Legacy Driver"
+	Parent  = "NBIO Br2"
+	Attribute  = "0x0"
+	Dev_type  = "PciDevice"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ROMFile  = "MandolinPkg/CrbPxe/b57pxee.lom"
+	IntA = 	LNKA; 32
+	IntB = 	LNKB; 33
+	IntC = 	LNKC; 34
+	IntD = 	LNKD; 35
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	OptionROM = Yes
+	ROMMain = No
+	Virtual = Yes
+	SuppressDeviceGeneration = Yes
+	LegacyRom = Yes
+	InitRoutine  = "CrbPciInitRoutine"
+	FFSFileName  = "ROM Storage"
+	ROMSectionGuid  = "940f3713-d7a2-48e0-a77a-f5dafc87e307"
+End
+
+TOKEN
+	Name  = "CRB_PXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Chipset Reference PXE support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "CRB_PXE_LOADER_SUPPORT"
+	Value  = "1"
+	Help  = "Turn on non-PCIE PXE loader."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB_PXE_DID"
+	Value  = "0x1687"
+	Help  = "CRB PXE DID"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB_PXE_VID"
+	Value  = "0x14E4"
+	Help  = "CRB PXE VID"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+PATH
+	Name  = "CRB_PXE_DIR"
+End
+
+INFComponent
+	Name  = "CrbPxeLoader"
+	File  = "CrbPxeLoader.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "CRB_PXE_LOADER_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CrbPxeUefiDriver"
+	File  = "CrbPxeUefiDriver.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "CRB_PXE_LOADER_SUPPORT" "=" "1"
+End
+

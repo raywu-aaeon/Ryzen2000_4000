@@ -1,0 +1,24 @@
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = RestoreSpecialBootOptions
+  FILE_GUID                 = D0D645B7-9B8A-4F3D-9741-697F4029EC7A
+  MODULE_TYPE               = DXE_DRIVER
+  VERSION_STRING            = 1.0
+  LIBRARY_CLASS             = RestoreSpecialBootOptions
+
+[Sources]
+  RestoreSpecialBootOptions.c
+
+[Packages]
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  MemoryAllocationLib
+  DebugLib
+
+[Guids]
+  gEfiVariableGuid

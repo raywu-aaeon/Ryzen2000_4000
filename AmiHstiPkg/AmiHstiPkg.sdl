@@ -1,0 +1,25 @@
+TOKEN
+	Name  = "AmiHstiPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MdePkg support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AMI_HSTI_PKG_VERSION"
+	Value  = "3"
+	Help  = "AmiHstiPkg version.\Do not change."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+PATH
+	Name  = "AMIHSTIPKG_DIR"
+End
+
+

@@ -1,0 +1,465 @@
+#;*****************************************************************************
+#;
+#; Copyright 2016 - 2021 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting You permission to use this software and documentation (if
+#; any) (collectively, the "Software") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Software. If You do not have
+#; a copy of the Software License Agreement, contact Your AMD representative for
+#; a copy.
+#;
+#; You agree that You will not reverse engineer or decompile the Software, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER: THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+#; KIND. AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING
+#; BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, QUALITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT AND WARRANTIES
+#; ARISING FROM CUSTOM OF TRADE OR COURSE OF USAGE WITH RESPECT TO THE SOFTWARE,
+#; INCLUDING WITHOUT LIMITATION, THAT THE SOFTWARE WILL RUN UNINTERRUPTED OR
+#; ERROR-FREE. THE ENTIRE RISK ASSOCIATED WITH THE USE OF THE SOFTWARE IS
+#; ASSUMED BY YOU. Some jurisdictions do not allow the exclusion of implied
+#; warranties, so the above exclusion may not apply to You, but only to the
+#; extent required by law.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION: TO THE EXTENT NOT PROHIBITED BY
+#; APPLICABLE LAW, AMD AND ITS LICENSORS WILL NOT, UNDER ANY CIRCUMSTANCES BE
+#; LIABLE TO YOU FOR ANY PUNITIVE, DIRECT, INCIDENTAL, INDIRECT, SPECIAL OR
+#; CONSEQUENTIAL DAMAGES ARISING FROM POSSESSION OR USE OF THE SOFTWARE OR
+#; OTHERWISE IN CONNECTION WITH ANY PROVISION OF THIS AGREEMENT EVEN IF AMD AND
+#; ITS LICENSORS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS
+#; INCLUDES, WITHOUT LIMITATION, DAMAGES DUE TO LOST OR MISAPPROPRIATED DATA,
+#; LOST PROFITS OR CONFIDENTIAL OR OTHER INFORMATION, FOR BUSINESS INTERRUPTION,
+#; FOR PERSONAL INJURY, FOR LOSS OF PRIVACY, FOR FAILURE TO MEET ANY DUTY
+#; INCLUDING OF GOOD FAITH OR REASONABLE CARE, FOR NEGLIGENCE AND FOR ANY OTHER
+#; PECUNIARY OR OTHER LOSS WHTSOEVER. In no event shall AMD's total liability to
+#; You for all damages, losses, and causes of action (whether in contract, tort
+#; (including negligence) or otherwise) exceed the amount of $50 USD. You agree
+#; to defend, indemnify and hold harmless AMD, its subsidiaries and affiliates
+#; and their respective licensors, directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your
+#; possession or use of the Software or violation of the terms and conditions of
+#; this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS: Notice to U.S. Government End Users. The
+#; Software and related documentation are "commercial items", as that term is
+#; defined at 48 C.F.R. Section 2.101, consisting of "commercial computer
+#; software" and "commercial computer software documentation", as such terms are
+#; used in 48 C.F.R. Section 12.212 and 48 C.F.R. Section 227.7202,
+#; respectively. Consistent with 48 C.F.R. Section 12.212 or 48 C.F.R. Sections
+#; 227.7202-1 through 227.7202-4, as applicable, the commercial computer
+#; software and commercial computer software documentation are being licensed to
+#; U.S. Government end users: (a) only as commercial items, and (b) with only
+#; those rights as are granted to all other end users pursuant to the terms and
+#; conditions set forth in this Agreement. Unpublished rights are reserved under
+#; the copyright laws of the United States.
+#;
+#; EXPORT RESTRICTIONS:  You shall adhere to all applicable U.S. import/export
+#; laws and regulations, as well as the import/export control laws and
+#; regulations of other countries as applicable. You further agree You will not
+#; export, re-export, or transfer, directly or indirectly, any product,
+#; technical data, software or source code received from AMD under this license,
+#; or the direct product of such technical data or software to any country for
+#; which the United States or any other applicable government requires an export
+#; license or other governmental approval without first obtaining such licenses
+#; or approvals, or in violation of any applicable laws or regulations of the
+#; United States or the country where the technical data or software was
+#; obtained. You acknowledges the technical data and software received will not,
+#; in the absence of authorization from U.S. or local law and regulations as
+#; applicable, be used by or exported, re-exported or transferred to: (i) any
+#; sanctioned or embargoed country, or to nationals or residents of such
+#; countries; (ii) any restricted end-user as identified on any applicable
+#; government end-user list; or (iii) any party where the end-use involves
+#; nuclear, chemical/biological weapons, rocket systems, or unmanned air
+#; vehicles.  For the most current Country Group listings, or for additional
+#; information about the EAR or Your obligations under those regulations, please
+#; refer to the website of the U.S. Bureau of Industry and Security at
+#; http://www.bis.doc.gov/.
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaNbioPkg
+  PACKAGE_GUID          = 1486f0fe-39ee-4856-a39f-222ff2404f26
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+  GnbLib|Include/Library/GnbLib.h
+
+
+[Guids]
+  gGnbNbioBaseZPHobInfoGuid                 = {0xce3e2c94, 0x82e2, 0x4429, {0xba, 0x69, 0xcc, 0xf6, 0xb9, 0xba, 0x1,  0x4c}}
+  gGnbPcieHobInfoGuid                       = {0x3eb1d90,  0xce14, 0x40d8, {0xa6, 0xba, 0x10, 0x3a, 0x8d, 0x7b, 0xd3, 0x2d}}
+  gGnbIntegratedSysInfoHobGuid              = {0x0664BCCF, 0x0A93, 0x407C, {0xA5, 0x8B, 0x2A, 0x56, 0xE4, 0x88, 0x6A, 0x24}}
+
+[Protocols]
+  gAmdCoreTopologyServicesProtocolGuid      = {0xecf77b54, 0x9b7b, 0x4fcb, {0x9a, 0x3f, 0x2,  0x28, 0x82, 0xa1, 0x36, 0x7a}}
+  gAmdCoreTopologyServicesV2ProtocolGuid    = {0x8e169307, 0xa77c, 0x4785, {0xa3, 0x7f, 0xc5, 0x24, 0x84, 0x56, 0xa3, 0x3f}}
+  gAmdGnbMidDxeInitCompleteProtocolGuid     = {0x21b0f8f8, 0x2d53, 0x460f, {0x96, 0x21, 0x53, 0x2e, 0x13, 0xb7, 0x37, 0x60}}
+  gAmdGnbLateDxeInitCompleteProtocolGuid    = {0xd64dfa32, 0x7ee4, 0x4a80, {0xab, 0xd3, 0xba, 0xc6, 0x3,  0xa,  0x61, 0xc6}}
+  gAmdGnbMidLateDxeInitCompleteProtocolGuid = {0x41dce477, 0xe8f5, 0x4ad4, {0xb4, 0x5e, 0x61, 0x12, 0xb8, 0xe2, 0x8a, 0xd1}}
+  gAmdNbioSmuServicesProtocolGuid           = {0x264272b3, 0x81d1, 0x453a, {0x85, 0x3,  0x89, 0x89, 0xf4, 0x38, 0x2e, 0x68}}
+  gAmdIGpuAcpiCratServicesProtocolGuid      = {0xfb75e5a6, 0x4d55, 0x4a4d, {0x95, 0xe9, 0xa4, 0xb3, 0x74, 0x0d, 0xa9, 0xaf}}
+
+  ## Gnb Protocols
+  gAmdNbioPcieServicesProtocolGuid          = {0x756db75c, 0xbb9d, 0x4289, {0x81, 0x3a, 0xdf, 0x21, 0x5,  0xc4, 0xf8, 0xe}}
+  gAmdNbioDebugServicesProtocolGuid         = {0x636a5dc3, 0xe94a, 0x4f10, {0x85, 0x7f, 0x5e, 0xff, 0xe6, 0x5b, 0xf8, 0xb6}}
+  gAmdNbioALibServicesProtocolGuid          = {0x329955de, 0xbc26, 0x46a9, {0x97, 0x9b, 0x32, 0x65, 0x1f, 0x7f, 0x24, 0x24}}
+
+  #NBIO
+  gAmdNbioBaseCZDepexProtocolGuid           = {0x1db226e8, 0x152e, 0x48ab, {0xaf, 0x79, 0x8d, 0xa5, 0xbb, 0xf3, 0x7b, 0x5d}}
+  gAmdNbioBaseZPDxeDepexProtocolGuid        = {0xa7f7e6ef, 0x4f51, 0x1ed7, {0xba, 0xd3, 0xa5, 0x8e, 0xbc, 0xe2, 0x29, 0x1f}}
+  gAmdNbioBaseRVDxeDepexProtocolGuid        = {0x596d93e1, 0x2437, 0x49f2, {0x89, 0xc4, 0x60, 0x3b, 0x52, 0x41, 0x94, 0x3e}}
+  gAmdNbioBaseRNDxeDepexProtocolGuid        = {0xb0f836fc, 0x99f0, 0x4e63, {0xa8, 0x01, 0x3e, 0x74, 0x5b, 0x39, 0xf2, 0x61}}
+  gAmdNbioBaseSSPDxeDepexProtocolGuid       = {0x17100CDE, 0xF316, 0x4E3E, {0xC2, 0xCF, 0x8E, 0x32, 0x6C, 0xDC, 0xC2, 0x91}}
+  gAmdNbioSmuV8DepexProtocolGuid            = {0xaf1f4b98, 0xdf0a, 0x43c8, {0x9b, 0xb,  0xa1, 0x51, 0xf6, 0x51, 0xa8, 0x4}}
+  gAmdNbioSmuV9DxeDepexProtocol             = {0xd8bd23c9, 0x43dc, 0xc124, {0x9a, 0x5c, 0x7f, 0xa9, 0x60, 0x77, 0x01, 0x70}}
+  gAmdNbioSmuV10DxeDepexProtocol            = {0x4523b4db, 0x5d76, 0x48b9, {0x9d, 0xdc, 0x84, 0xa9, 0x51, 0xc9, 0xa2, 0x7a}}
+  gAmdNbioSmuV11DxeDepexProtocol            = {0x611C535E, 0x8856, 0x4CCA, {0x53, 0xF5, 0xC2, 0xBB, 0xA9, 0xB2, 0xEA, 0xB2}}
+  gAmdNbioPcieZPDxeDepexProtocolGuid        = {0x695aa59e, 0x499d, 0xf523, {0xc4, 0xe1, 0x0d, 0x8d, 0xb0, 0xb8, 0x6e, 0x49}}
+  gAmdNbioPcieRVDxeDepexProtocolGuid        = {0x3178b580, 0x9fc5, 0x48f1, {0x85, 0xa8, 0x4a, 0xef, 0x92, 0xa1, 0x8f, 0x66}}
+  gAmdNbioPcieRNDxeDepexProtocolGuid        = {0x5eb2d483, 0x45c0, 0x4c94, {0xa0, 0x24, 0xb9, 0x5c, 0xec, 0x29, 0xd3, 0xcd}}
+  gAmdNbioPcieSSPDxeDepexProtocolGuid       = {0x13E01531, 0xC130, 0x41CB, {0xA8, 0x0E, 0xC2, 0x7C, 0xDE, 0xF3, 0x97, 0x8C}}
+  gAmdNbioIOMMUZPDxeDepexProtocolGuid       = {0x716fc6ab, 0x4fde, 0x8d13, {0xa8, 0xfa, 0x0e, 0xa1, 0xb4, 0xf2, 0x1f, 0x6d}}
+  gAmdNbioIOMMURVDxeDepexProtocolGuid       = {0x5bfce3f4, 0xa980, 0x43a3, {0x88, 0x3d, 0x4c, 0x1a, 0x1d, 0x84, 0xca, 0xc8}}
+  gAmdNbioIOMMURNDxeDepexProtocolGuid       = {0x17b75484, 0xed78, 0x4521, {0xaa, 0xd7, 0x90, 0xe5, 0x79, 0xae, 0xec, 0xe1}}
+  gAmdNbioIOMMUSSPDxeDepexProtocolGuid      = {0xBA41F071, 0xA105, 0x47D0, {0xC3, 0x2A, 0x34, 0x48, 0x37, 0xA8, 0x8D, 0x9D}}
+
+  gAmdNbioALIBSSPDxeDepexProtocolGuid       = {0x284e0764, 0x5382, 0x4fb4, {0xb4, 0x92, 0x4c, 0x6f, 0x4c, 0x0a, 0x7c, 0xd2}}
+  gAmdNbioALIBZPDxeDepexProtocolGuid        = {0x6588818e, 0x5eda, 0x49d0, {0x80, 0xca, 0xfc, 0xeb, 0x7c, 0x70, 0x61, 0x71}}
+  gAmdNbioALIBRVDxeDepexProtocolGuid        = {0x47006b41, 0x7270, 0x433b, {0x98, 0xcf, 0x98, 0x88, 0x6d, 0x0c, 0xb6, 0xbb}}
+
+  gAmdSmmCommunicationDepexProtocolGuid     = {0x84cb08f0, 0x4769, 0x4b65, {0x9c, 0x23, 0xe2, 0x89, 0x5b, 0xd6, 0xbf, 0x1e}}
+
+  ## NBIO Srvices Protocols
+  gAmdNbioSmuInitCompleteProtocolGuid       = {0xc7d74155, 0xa8d7, 0x4462, {0xa7, 0xe8, 0x53, 0xa3, 0x74, 0x77, 0x39, 0xef}}
+
+[Ppis]
+  gAmdNbioPcieTrainingStartPpiGuid         = {0xa99f2e33, 0x7f34, 0x4b5c, {0x83, 0xc1, 0x43, 0x92, 0x2f, 0x5b, 0x89, 0x58}}
+  gAmdNbioPcieTrainingDonePpiGuid          = {0x72166411, 0x442c, 0x4aab, {0xa2, 0x60, 0x57, 0xd5, 0x84, 0xd3, 0x21, 0x39}}
+  gAmdCoreTopologyServicesPpiGuid          = {0x8c61c925, 0x224e, 0x42d7, {0x89, 0x78, 0x81, 0x2a, 0xe5, 0x61, 0x2d, 0x23}}
+  gAmdCoreTopologyServicesV2PpiGuid        = {0xa3e9c86f, 0xd620, 0x432a, {0x9a, 0x8a, 0x0c, 0x7e, 0xc7, 0x81, 0x76, 0xce}}
+  gAmdNbioSmuServicesPpiGuid               = {0xea335e48, 0x7275, 0x4d2b, {0x82, 0x76, 0x55, 0xba, 0x55, 0x31, 0xd7, 0xd7}}
+  gAmdNbioEarlyLinkPpiGuid                 = {0x2ab93c90, 0xd69a, 0x4b57, {0x98, 0x49, 0x98, 0xd5, 0xcc, 0x4f, 0x88, 0xde}}
+
+  #NBIO
+  gAmdNbioRVEarlyPhaseDepexPpiGuid       = {0xb397ad2b, 0x5153, 0x4950, {0xad, 0xa2, 0xb2, 0x8b, 0x0a, 0x07, 0xe1, 0x42}}
+  gAmdNbioBaseCZDepexPpiGuid             = {0x456e435f, 0xca3,  0x430c, {0xaa, 0x78, 0xa,  0x3b, 0x66, 0x7c, 0xb,  0x9b}}
+  gAmdNbioBaseZPPeiDepexPpiGuid          = {0x25117e9f, 0x46b8, 0xaebc, {0x3c, 0x29, 0xa2, 0x85, 0x31, 0xbe, 0x45, 0xc1}}
+  gAmdNbioBaseRVPeiDepexPpiGuid          = {0x150f6f3,  0x58e8, 0x407b, {0xb0, 0x66, 0xdf, 0x54, 0x34, 0x2d, 0x50, 0x6b}}
+  gAmdNbioBaseRNPeiDepexPpiGuid          = {0xc03f9d1d, 0xb6ec, 0x4493, {0x92, 0xa0, 0x1d, 0x7d, 0x90, 0x4e, 0xb8, 0x03}}
+  gAmdNbioBaseSSPPeiDepexPpiGuid         = {0xCE99DE68, 0x0F45, 0x4E31, {0x16, 0x17, 0x7D, 0xF4, 0x1F, 0xAF, 0xBD, 0xAF}}
+  gAmdNbioSmuV8DepexPpiGuid              = {0x7ffe0bbc, 0xf7b4, 0x4e01, {0x98, 0xc5, 0xa8, 0xdc, 0x23, 0x2c, 0x6,  0xf8}}
+  gAmdNbioSmuV9PeiDepexPpiGuid           = {0x9781c88a, 0x4046, 0x8286, {0xe2, 0x04, 0x6a, 0xb9, 0x8d, 0x38, 0x9a, 0x24}}
+  gAmdNbioSmuV10PeiDepexPpiGuid          = {0xc3902c7a, 0x424a, 0x435d, {0x9a, 0x18, 0x7b, 0x9b, 0xa3, 0xeb, 0xd5, 0x96}}
+  gAmdNbioSmuV11PeiDepexPpiGuid          = {0xD7257734, 0x772A, 0x422C, {0x7F, 0xFE, 0xD6, 0x75, 0x3C, 0x35, 0x02, 0xA1}}
+  gAmdNbioPcieZPPeiDepexPpiGuid          = {0x4e96fa1f, 0x475d, 0xd21e, {0x70, 0x1a, 0xfb, 0x85, 0x7d, 0xd2, 0x82, 0xb4}}
+  gAmdNbioPcieRVPeiDepexPpiGuid          = {0x5eb022b2, 0x939f, 0x469f, {0x8d, 0x7c, 0xfa, 0x39, 0xc0, 0x89, 0xf0, 0x2 }}
+  gAmdNbioPcieSSPPeiDepexPpiGuid         = {0x628FF19D, 0x8423, 0x45C7, {0x4B, 0x95, 0xEA, 0xAC, 0x8E, 0xD9, 0x69, 0xBA}}
+  gAmdNbioPcieRNPeiDepexPpiGuid          = {0x33d6330a, 0x08bb, 0x4951, {0xb0, 0x75, 0x6a, 0xaa, 0x37, 0x9b, 0xf5, 0xab}}
+
+  gAmdNbioIOMMUZPPeiDepexPpiGuid         = {0xf4ae2bec, 0xe8f1, 0x4715, {0x9b, 0x5,  0x61, 0x31, 0x14, 0xd6, 0x33, 0xe7}}
+  gAmdNbioIOMMUSSPPeiDepexPpiGuid        = {0xF701DC2D, 0x3BB0, 0x45D6, {0x6B, 0xC2, 0xE7, 0xBD, 0xF5, 0x69, 0xD1, 0xA0}}
+  gAmdNbioIOMMURNPeiDepexPpiGuid         = {0xd3681448, 0xce2a, 0x4b0c, {0x8b, 0x2c, 0x3a, 0xbc, 0x5b, 0x75, 0x54, 0xd2}}
+  gAmdNbioPcieDpcStatusPpiGuid           = {0x7e70bbc8, 0x9e8d, 0x4bcb, {0x8a, 0x3f, 0xaf, 0x0c, 0xde, 0x67, 0x9d, 0x92}}
+
+  ## Gnb Ppis
+  gAmdNbioSmuServicesPpiGuid             = {0xea335e48, 0x7275, 0x4d2b, {0x82, 0x76, 0x55, 0xba, 0x55, 0x31, 0xd7, 0xd7}}
+  gAmdNbioPcieServicesPpiGuid            = {0x5af9cd51, 0x36ee, 0x4bab, {0xb4, 0x14, 0xaa, 0xa0, 0x54, 0x1c, 0x5b, 0x38}}
+#  gAmdNbioDebugServicesPpiGuid          = {0xea89bf6,  0xded1, 0x4705, {0xa6, 0xde, 0x37, 0x91, 0xd2, 0x71, 0x96, 0x49}}
+  gAmdNbioBaseServicesZpPpiGuid          = {0x556e2ead, 0xb0a2, 0x43d9, {0xa8, 0xf2, 0xf3, 0x36, 0x85, 0xaa, 0x21, 0xba}}
+  gAmdNbioBaseServicesSspPpiGuid         = {0x4F12525F, 0xA771, 0x4381, {0x31, 0xBE, 0xA2, 0xC3, 0x1D, 0x67, 0x0B, 0x8C}}
+  gAmdNbioBaseEarlyBeforeCpuPpiGuid      = {0xc568822a, 0xc89a, 0x4282, {0x8a, 0xa2, 0x18, 0x52, 0xde, 0x0,  0x95, 0x2e}}
+  gAmdNbioGfxPpiGuid                     = {0xed92898e, 0xb59a, 0x4647, {0x88, 0xcc, 0xdb, 0xeb, 0xa3, 0xb4, 0xa6, 0xcd}}
+
+
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+  #Gnb Common Build Options
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgScsSupport|FALSE|BOOLEAN|0x00021000
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgUmaSteering|1|UINT8|0x00021001
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGmcPowerGating|1|UINT8|0x00021002
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGmcClockGating|FALSE|BOOLEAN|0x00021003
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgOrbDynWakeEnable|FALSE|BOOLEAN|0x00021004
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgOrbClockGatingEnable|FALSE|BOOLEAN|0x00021005
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIocLclkClockGatingEnable|FALSE|BOOLEAN|0x00021006
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgBapmSupport|FALSE|BOOLEAN|0x00021007
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDcTdpEnable|FALSE|BOOLEAN|0x00021008
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbNumDisplayStreamPipes|1|UINT8|0x00021009
+  #Gnb CZ Build Options
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgChubClockGating|FALSE|BOOLEAN|0x00021010
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAcpClockGating|FALSE|BOOLEAN|0x00021011
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAxgDisable|FALSE|BOOLEAN|0x00021012
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieHwInitPwerGating|1|UINT8|0x00021013
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAriSupport|FALSE|BOOLEAN|0x00021014
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSpgClockGatingEnable|FALSE|BOOLEAN|0x00021015
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAcgAzClockGatingEnable|FALSE|BOOLEAN|0x00021016
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgOrbTxMemPowerGating|1|UINT8|0x00021017
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgOrbRxMemPowerGating|1|UINT8|0x00021018
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgParityErrorConfiguration|FALSE|BOOLEAN|0x00021019
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSpgMemPowerGatingEnable|1|UINT8|0x0002101A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAcgAzMemPowerGatingEnable|1|UINT8|0x0002101B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgBifMemPowerGatingEnable|1|UINT8|0x0002101C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSDMAMemPowerGatingEnable|FALSE|BOOLEAN|0x0002101D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieTxpwrInOff|1|UINT8|0x0002101E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieRxpwrInOff|1|UINT8|0x0002101F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSmuDeterminismAmbient|1|UINT32|0x00021020
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPSIEnable|FALSE|BOOLEAN|0x00021021
+
+  #Gnb Build time Options for Common System Options.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIgfxModeAsPcieEp|TRUE|BOOLEAN|0x00021030                   #///< Itegrated Gfx mode Pcie EP or Legacy
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbLinkReceiverDetectionPooling|60000|UINT32|0x00021031 #///< Receiver pooling detection time in us.                               (60 * 1000)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbLinkL0Pooling|60000|UINT32|0x00021032                #///< Pooling for link to get to L0 in us                                  (60 * 1000)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbLinkGpioResetAssertionTime|2000|UINT32|0x00021033    #///< Gpio reset assertion time in us                                      (2 * 1000)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbLinkResetToTrainingTime|2000|UINT32|0x00021034       #///< Time duration between deassert GPIO reset and release training in us (2 * 1000)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbTrainingAlgorithm|0|UINT8|0x00021035                 #///< distribution of training across interface calls                      (PcieTrainingStandard)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPciePowerGatingFlags|0|UINT8|0x00021036                 #///< Pcie Power gating flags
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcieAspmBlackListEnable|TRUE|BOOLEAN|0x00021037               #///< Control Pcie Aspm Black List
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGnbLoadRealFuseTable|TRUE|BOOLEAN|0x0002103A               #///< Support for fuse table loading
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIommuMMIOAddressReservedEnable|FALSE|BOOLEAN|0x00021100 #///< 1: Enable Iommu MMIO reserved from GNB driver. 0:Disable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitSmu|TRUE|BOOLEAN|0x00021200            #///< Configure non pci device bar for SMU
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitDbg|FALSE|BOOLEAN|0x00021201           #///< Configure non pci device bar for DBG
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitFastReg|FALSE|BOOLEAN|0x00021202       #///< Configure non pci device bar for FastReg
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitFastRegCtl|FALSE|BOOLEAN|0x00021203    #///< Configure non pci device bar for FastRegCtl
+
+[PcdsDynamic]
+  # Gnb UserOptions
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnb3dStereoPinIndex|0|UINT8|0x00041001
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGpuFrequencyLimit|0|UINT32|0x00041002
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsSpreadSpectrum|0|UINT16|0x00041003
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsSpreadSpectrumRate|0|UINT16|0x00041004
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqDigonToDe|0|UINT8|0x00041005
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqDeToVaryBl|0|UINT8|0x00041006
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqDeToDigon|0|UINT8|0x00041007
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqVaryBlToDe|0|UINT8|0x00041008
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqOnToOffDelay|0|UINT8|0x00041009
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqVaryBlToBlon|0|UINT8|0x0004100A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsPowerOnSeqBlonToVaryBl|0|UINT8|0x0004100B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsMaxPixelClockFreq|0|UINT16|0x0004100C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLcdBitDepthControlValue|0|UINT32|0x0004100D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvds24bbpPanelMode|0|UINT8|0x0004100E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsMiscControlValue|0|UINT8|0x0004100F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieRefClkSpreadSpectrum|375|UINT16|0x00041010
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbRemoteDisplaySupport|FALSE|BOOLEAN|0x00041011
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLvdsMiscVoltAdjustment|0|UINT8|0x00041012
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDisplayMiscControlValue|0|UINT8|0x00041013
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDpFixedVoltSwingType|0|UINT8|0x00041014
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgEDPv14VSMode|0|UINT8|0x00041015
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgExtHDMIReDrvSlvAddr|0|UINT8|0x00041016
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgExtHDMIReDrvRegNum|0|UINT8|0x00041017
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgExtHDMIRegSetting|0|UINT64|0x00041018
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbIoapicAddress|0|UINT64|0x00041019
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgMaxNumAudioEndpoints|0xFF|UINT8|0x0004101A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgiGpuVgaMode|0|UINT8|0x0004101B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieAcsCapability|0|UINT8|0x0004101C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbIoapicId|0|UINT8|0x0004101D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgFchIoapicId|0|UINT8|0x0004101E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPCIeAEREnable|FALSE|BOOLEAN|0x00041020
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIommuL1ClockGatingEnable|TRUE|BOOLEAN|0x00041021
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIommuL2ClockGatingEnable|TRUE|BOOLEAN|0x00041022
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIommuL1MemPowerGating|FALSE|BOOLEAN|0x00041023
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIommuL2MemPowerGating|FALSE|BOOLEAN|0x00041024
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIOHCClkGatingSupport|TRUE|BOOLEAN|0x00041025
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSstunlClkGating|TRUE|BOOLEAN|0x00041026
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSataPhyTuning|0|UINT8|0x00041027
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNTBClockGatingEnable|TRUE|BOOLEAN|0x00041028
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgHotplugMode|0|UINT8|0x00041029
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIOMMUDynamicPgEnable|TRUE|BOOLEAN|0x0004102A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIOMMUL2MemoryPGEnable|TRUE|BOOLEAN|0x0004102B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPCIePHYPowerGating|FALSE|BOOLEAN|0x0004102C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPCIeLTREnable|TRUE|BOOLEAN|0x0004102D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIOHCPgEnable|TRUE|BOOLEAN|0x0004102E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgHotplugPollInterval|50|UINT32|0x0004102F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPciePhyClkCntrlEnable|TRUE|BOOLEAN|0x00041030
+
+
+  # GFX HDMI re-timer/re-driver
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDp0RetimerRedriverTable|0|UINT32|0x00041040
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDp1RetimerRedriverTable|0|UINT32|0x00041041
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDp2RetimerRedriverTable|0|UINT32|0x00041042
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDp3RetimerRedriverTable|0|UINT32|0x00041043
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAbmSupport|0|UINT8|0x00041101
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDynamicRefreshRate|0|UINT8|0x00041102
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLcdBackLightControl|200|UINT16|0x00041103
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAcpPowerGating|FALSE|BOOLEAN|0x00041104
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbAzI2sBusSelect|1|UINT32|0x00041105     #PcdCfgGnbAzI2sBusSelect
+                                                                                      # 00h            ; < I2sBus
+                                                                                      # 01h            ; < Azalia
+                                                                                      # 02h            ; < Not valid value, used to verify input
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbAzI2sBusPinConfig|0|UINT32|0x00041106  #AZ I2SBUS pin configuration
+                                                                                      # 00h            ; < 4Tx4Rx and Bluetooth
+                                                                                      # 01h            ; < 2Tx4Rx and Bluetooth
+                                                                                      # 02h            ; < 6Tx4Rx and Bluetooth
+                                                                                      # 03h            ; < Not valid value, used to verify input
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAzaliaSsid|0|UINT32|0x00041107
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAzaliaCodecVerbTable|0|UINT32|0x00041108
+
+  # Specify the default values for the VRM controlling the VDD plane.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPkgPwrLimitAC|0|UINT32|0x0004110B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPkgPwrLimitDC|0|UINT32|0x0004110C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgBatteryBoostTune|0|UINT32|0x0004110D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgThermCtlLimit|0|UINT32|0x0004110E
+
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgBTCEnable|TRUE|BOOLEAN|0x00041111
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNTBEnable|FALSE|BOOLEAN|0x00041112
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNTBLocation|0|UINT8|0x00041113
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNTBPcieCoreSel|0|UINT8|0x00041114
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNTBMode|0|UINT8|0x00041115
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNTBLinkSpeed|0|UINT8|0x00041116
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieAspmBlackListEnableEnable|TRUE|BOOLEAN|0x00041117
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgMaxPayloadEnable|TRUE|BOOLEAN|0x00041118
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIvrsRelativeAddrNamesSupport|FALSE|BOOLEAN|0x00041119      #///< Support for relative address names
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgMaxReadRequestSize|0xff|UINT8|0x0004111A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIvrsControl|TRUE|BOOLEAN|0x0004111B
+
+  #Gnb SMU BLDCFG
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmuFeatureControlDefinesExt|0x0|UINT32|0x00041200
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmuFeatureControlDefines|0x0|UINT32|0x00041201   # SmuFeatureControlDefines == 0    ///< default SMU features are enabled in SMU drvier
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSmuMessageEnable|FALSE|BOOLEAN|0x00041202
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmuAllocateDramBufferSize|0x00|UINT32|0x00041203
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCakeDataLatDis|FALSE|BOOLEAN|0x00041207
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgTemperatureLimit|0x4D|UINT8|0x00041208
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgFrequencyAdjust|0x64|UINT16|0x00041209
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgHTFmaxFrequenecy|0x0|UINT16|0x0004120A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgHTFmaxTemperature|0x0|UINT16|0x0004120B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIgpuContorl|0x1|UINT8|0x0004120C    #0: Disable , Others: Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSkipPspMessage|0x1|UINT8|0x0004120D #1: Skip
+
+  # Gnb SMU 9 CBS debug options
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDldoPsmMargin|0x00|UINT8|0x00041230
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCoreStretchThreshEn|0x00|UINT8|0x00041231
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCoreStretchThresh|0x00|UINT8|0x00041232
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdL3StretchThreshEn|0x00|UINT8|0x00041233
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdL3StretchThresh|0x00|UINT8|0x00041234
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDldoBypass|0x1|UINT8|0x00041235
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXiSeparationEn|0x00|UINT8|0x00041236
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXiSeparationHigh|0x00|UINT8|0x00041237
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXiSeparationLow|0x00|UINT8|0x00041238
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAvfsCoeffTableOverride|0x00|UINT8|0x00041239
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdForceVddcrCpuVidEn|0x00|UINT8|0x0004123A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdForceVddcrCpuVid|0x00|UINT8|0x0004123B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdVddcrCpuVoltageMargin|0x00|UINT32|0x0004123C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFcwSlewFracL3FidTotalSteps|0x00|UINT16|0x0004123D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFcwSlewFracL3FidTotalStepsEn|0x00|UINT8|0x0004123E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdForceCclkFrequencyEn|0x00|UINT8|0x0004123F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdForceCclkFrequency|0x00|UINT32|0x00041240
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUseTelemetryData|0x00|UINT8|0x00041241
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdWaitVidCompDis|0x00|UINT8|0x00041242
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdVoltageSlewRate|0x00|UINT8|0x00041243
+
+  # Nbio DBGU options
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPCIeExactMatchEnable|FALSE|BOOLEAN|0x00041249
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdNbioMemHoleSize|0x00|UINT32|0x0004124A
+  # DXIO Phy Programming
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDxioPhyProgramming|0x01|UINT8|0x0004124B
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPcieDxioTimingControlEnable|FALSE|BOOLEAN|0x0004124C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPCIELinkResetToTrainingTime|0|UINT32|0x0004124D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPCIELinkReceiverDetectionPolling|0|UINT32|0x0004124E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPCIELinkL0Polling|0|UINT32|0x0004124F
+
+
+  # Gnb SMU 9 CBS debug options [AVFS]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCorePsfFreq|0x00|UINT32|0x00041250
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCorePsfTemp|0x00|UINT32|0x00041251
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCorePsfSidd|0x00|UINT32|0x00041252
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCorePsfCac|0x00|UINT32|0x00041253
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCorePsfNumActiveCores|0x00|UINT32|0x00041254
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCorePsfOtherDie|0x00|UINT32|0x00041255
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCorePsfSigma|0x00|UINT32|0x00041256
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdL3PsfFreq|0x00|UINT32|0x00041257
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdL3PsfTemp|0x00|UINT32|0x00041258
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdL3PsfSidd|0x00|UINT32|0x00041259
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdL3PsfCac|0x00|UINT32|0x0004125A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdL3PsfNumActiveCores|0x00|UINT32|0x0004125B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdL3PsfOtherDie|0x00|UINT32|0x0004125C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdL3PsfSigma|0x00|UINT32|0x0004125D
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdxGMIForceLinkWidthEn|0x00|UINT8|0x00041260
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdxGMIForceLinkWidth|0x00|UINT8|0x00041261
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdxGMIMaxLinkWidthEn|0x00|UINT8|0x00041262
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdxGMIMaxLinkWidth|0x00|UINT8|0x00041263
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAcBtc|0x00|UINT8|0x00041264
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDcBtc|0x01|UINT8|0x00041265
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdXgmiReadaptation|FALSE|BOOLEAN|0x00041267
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppAtomicOps|0x01|UINT8|0x00041268
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGfxAtomicOps|0x01|UINT8|0x00041269
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUSBMsiXCapEnable|FALSE|BOOLEAN|0x00041270
+
+  #GNB SMU10
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdVddOffVidCtrl|FALSE|BOOLEAN|0x00041271
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdVddOffVid|0x00|UINT32|0x00041272
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUlvVidCtrl|FALSE|BOOLEAN|0x00041273
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUlvVidOffset|0x00|UINT32|0x00041274
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdVddcrSocVoltageMargin|0x00|UINT32|0x00041275
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdNbioSpcMode2P5GT|FALSE|BOOLEAN|0x00041276
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdNbioSpcMode5GT|TRUE|BOOLEAN|0x00041277
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEnableSmuPostCode|FALSE|BOOLEAN|0x00041278
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdRichtekVrmPsi0Workaround|FALSE|BOOLEAN|0x00041279
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDcBtcVid|0x86|UINT8|0x0004127A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDcBtcErrorOfsetVoltageMargin|0x00|UINT8|0x0004127B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEnableSmuPostCodeLevel|0|UINT32|0x0004127C
+
+  #Managed OC Mode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocPPTLimit|0x00|UINT32|0x00041280
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocTDCLimit|0x00|UINT32|0x00041281
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocEDCLimit|0x00|UINT32|0x00041282
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocPBOLimitScalar|0x00|UINT32|0x00041283
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocTjMax|0x00|UINT32|0x00041284
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocSocTDCLimit|0x00|UINT32|0x00041285
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocSocEDCLimit|0x00|UINT32|0x00041286
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocGfxClockFrequency|0x00|UINT16|0x00041290
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocGfxCoreVid|0x00|UINT8|0x00041291
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLowPowerPromontory|0x00|UINT8|0x00041292
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSoftMaxCclk|0x00|UINT16|0x00041293
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSoftMinCclk|0x00|UINT16|0x00041294
+
+  #PT
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPortID|0xFF|UINT32|0x00041295
+
+  #Misc
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDmaDsXgbeEnable|TRUE|BOOLEAN|0x000412A1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDmaDsUsb1Enable|TRUE|BOOLEAN|0x000412A2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeDisable|0x1|UINT8|0x000412A5
+
+  #PMM
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdShubclkDpmControl|TRUE|BOOLEAN|0x00041300   ##RV2 only
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLcSchedRxEqEvalInt|0|UINT8|0x00041301
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieLoopbackMode|TRUE|BOOLEAN|0x00041302
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNonPCIBarInitIommuVf|TRUE|BOOLEAN|0x00041303            #///< Configure non pci device bar for Iommu VF
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNonPCIBarInitIommuVfCntl|TRUE|BOOLEAN|0x00041304        #///< Configure non pci device bar for Iommu VF Control
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNonPCIBarInitIommuVfEnBit|TRUE|BOOLEAN|0x00041305       #///< Hit the enable bit on any allocated VF Bars for IOMMU
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPcieEqSearchMode|1|UINT8|0x00041306
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPcieEqSearchPreset|0xFF|UINT8|0x00041307
+
+  #GNB SMU10 part 2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdVddcrVddVoltageMargin|0|UINT32|0x00041400
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdR3VddcrVddVoltageMargin|0|UINT32|0x00041401
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdR5VddcrVddVoltageMargin|0|UINT32|0x00041402
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdR7VddcrVddVoltageMargin|0|UINT32|0x00041403
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdminSocVidOffset|0|UINT8|0x00041404
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAclkDpm0Freq400MHz|0|UINT8|0x00041405   # 1:400Mhz , 0:200Mhz
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.Pcditemp|0|UINT8|0x0004140D  # Change i-Temp situation, 1:enable  0:default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdWLANS0i3SaveRestore|0|UINT32|0x0004140E  # //[31:24]Offset,[23:16]PcieBus,[15:8]PcieDevice,[7:0]PcieFunction
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSparseControlDisable|0|UINT8|0x00041410  # RV2 serial
+

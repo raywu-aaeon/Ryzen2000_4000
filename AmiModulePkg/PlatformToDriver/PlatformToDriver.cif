@@ -1,0 +1,11 @@
+<component>
+	name = "PlatformToDriver"
+	category = eModule
+	LocalRoot = "AmiModulePkg\PlatformToDriver\"
+	RefName = "AmiModulePkg.PlatformToDriver"
+[INF]
+"PlatformToDriver.inf"
+[files]
+"PlatformToDriver.sdl"	
+"PlatformToDriver.chm"	
+<endComponent>

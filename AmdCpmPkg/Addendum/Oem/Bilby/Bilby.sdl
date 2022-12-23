@@ -1,0 +1,1359 @@
+TOKEN
+	Name  = "AmdCpmOemInitBilby_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling Bilby support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+PATH
+    Name  = "AMD_CPM_PKG_ADDENDUM_PLATFORM_DIR"
+End
+
+TOKEN
+    Name  = "AmdCpmOemInitMandolin_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Disabling Mandolin support in the project"
+    TokenType = Boolean
+    Token = "AmdCpmOemInitBilby_SUPPORT" "=" "1"
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "AMD_CPM_PKG_ADDENDUM_PLATFORM_PATH"
+    Value  = "AmdCpmPkg/Addendum/Oem/Bilby"
+    TokenType = Expression
+    Help  = "The PATH-AMD_CPM_PKG_ADDENDUM_PLATFORM_DIR is backword slash. So we define this path for C header."
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_AmdCpmOemInitDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpmOemInitDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_AmdPbsSetupDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdPbsSetupDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmOemInitPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmOemInitPeim support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_AmdAgesaParameterGroupPei_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdAgesaParameterGroupPei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_AmdPlatformMemoryConfiguration_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdPlatformMemoryConfiguration support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_PspPlatformDriver_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable PspPlatformDriver support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_PlatformCustomizePei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformCustomizePei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_AgesaCcxPlatformLib_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AgesaCcxPlatformLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_AmdCalloutDxeLib_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdCalloutDxeLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_AmdCalloutPeiLib_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdCalloutPeiLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_FchInitHookDxeLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchInitHookDxeLib support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_FchInitHookPeiLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchInitHookPeiLib support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_GpioResetControlLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable GpioResetControlLib support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_AmdPbsConfigDxeLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdPbsConfigDxeLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_AmdPbsConfigPeiLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdPbsConfigPeiLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_AmdCpmOemSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmOemSmm support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmiAmdCpmOemTable_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmiAmdCpmOemTableLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "OEM_CPM_INIT_PEIM_FILE"
+	Value  = '"OemCpmInitPeim.h"'
+	Help  = "This gives OEM an opportunity to override the cpm platform default setting"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_I2cMaster_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling I2cMaster support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_xGbEI2cMaster_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable xGbEI2cMaster support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_AmdXgbeAndDisplayConfigureDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdXgbeAndDisplayConfigureDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_M24LC128_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling M24LC128 support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_Pca9535a_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling Pca9535a support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_Pca9545a_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling Pca9545a support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_AmdXgbeWorkaround_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling AmdXgbeWorkaround support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_FanPolicyDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable FanPolicyDxe support in Project"
+    TokenType = Boolean
+End
+
+PATH
+	Name  = "CPM_ADDENDUM_OEM_DIR"
+End
+
+INFComponent
+    Name  = "AmdCpmOemInitDxe"
+    File  = "Dxe/AmdCpmOemInitDxe/AmdCpmOemInitDxe.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmdCpmPkg_AmdCpmOemInitDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdPbsSetupDxe"
+    File  = "Dxe/AmdPbsSetupDxe/AmdPbsSetupDxe.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmdCpmPkg_AmdPbsSetupDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmOemInitPeim"
+	File  = "Pei/AmdCpmOemInitPei/AmdCpm3OemInitPeim.inf"
+	Package  = "AmdCpmPkg"
+	Arch  = "IA32"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmOemInitPeim_SUPPORT" "=" "1"
+End
+
+### RVA9 : Support later ###INFComponent
+### RVA9 : Support later ###    Name  = "AmiCpmOemTableLib"
+### RVA9 : Support later ###    File  = "Pei/AmdCpmOemInitPei/AmiCpmOemTableLib.inf"
+### RVA9 : Support later ###    Package  = "AmdCpmPkg"
+### RVA9 : Support later ###    Arch  = "IA32"
+### RVA9 : Support later ###    ModuleTypes  = "PEIM"
+### RVA9 : Support later ###    Token = "AmdCpmOemInitPeim_SUPPORT" "=" "1"
+### RVA9 : Support later ###    Token = "AmiAmdCpmOemTable_SUPPORT" "=" "0"
+### RVA9 : Support later ###End
+
+INFComponent
+	Name  = "AmdAgesaParameterGroupPei"
+	File  = "Pei/AmdAgesaParameterGroupPei/AmdAgesaParameterGroupPei.inf"
+	Package  = "AmdCpmPkg"
+	Arch  = "IA32"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmPkg_AmdAgesaParameterGroupPei_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PlatformMemoryConfigurationPei"
+	File  = "Pei/PlatformMemoryConfigurationPei/PlatformMemoryConfigurationPei.inf"
+	Package  = "AmdCpmPkg"
+	Arch  = "IA32"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmPkg_AmdPlatformMemoryConfiguration_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PlatformCustomizePei"
+	File  = "Pei\PlatformCustomizePei\PlatformCustomizePei.inf"
+	Package  = "AmdCpmPkg"
+	Arch  = "IA32"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmPkg_PlatformCustomizePei_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PspPlatformDriver"
+	File  = "Dxe/PspPlatformDriver/PspPlatform.inf"
+	Package  = "AmdCpmPkg"
+	Token = "AmdCpmPkg_PspPlatformDriver_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AgesaCcxPlatformLib"
+	File  = "Library/AgesaCcxPlatformLib/AgesaCcxPlatformLib.inf"
+	Package  = "AmdCpmPkg"
+	Token = "AmdCpmPkg_AgesaCcxPlatformLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCalloutDxeLib"
+	File  = "Library/AmdCalloutLib/AmdCalloutDxeLib.inf"
+	Package  = "AmdCpmPkg"
+	Token = "AmdCpmPkg_AmdCalloutDxeLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCalloutPeiLib"
+	File  = "Library/AmdCalloutLib/AmdCalloutPeiLib.inf"
+	Package  = "AmdCpmPkg"
+	Token = "AmdCpmPkg_AmdCalloutPeiLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchInitHookDxeLib"
+	File  = "Library/FchInitHookLib/FchInitHookDxeLib.inf"
+	Package  = "AmdCpmPkg"
+	Token = "AmdCpmPkg_FchInitHookDxeLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchInitHookPeiLib"
+	File  = "Library/FchInitHookLib/FchInitHookPeiLib.inf"
+	Package  = "AmdCpmPkg"
+	Token = "AmdCpmPkg_FchInitHookPeiLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "GpioResetControlLib"
+	File  = "Library\GpioResetControlLib\GpioResetControlLib.inf"
+	Package  = "AmdCpmPkg"
+	Token = "AmdCpmPkg_GpioResetControlLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdPbsConfigDxeLib"
+	File  = "Library\AmdPbsConfigLib\AmdPbsConfigDxeLib.inf"
+	Package  = "AmdCpmPkg"
+	Token = "AmdCpmPkg_AmdPbsConfigDxeLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdPbsConfigPeiLib"
+	File  = "Library\AmdPbsConfigLib\AmdPbsConfigPeiLib.inf"
+	Package  = "AmdCpmPkg"
+	Token = "AmdCpmPkg_AmdPbsConfigPeiLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdI2cMasterDxe"
+    File  = "Features/I2cMaster/Dxe/AmdI2cMasterDxe.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmdCpmPkg_I2cMaster_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdI2CMasterPei"
+    File  = "Features/I2cMaster/Pei/AmdI2cMasterPei.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "PEIM"
+    Token = "AmdCpmPkg_I2cMaster_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "xGbEI2cMasterDxe"
+    File  = "Features/xGbEI2cMaster/xGbEI2cMasterDxe.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmdCpmPkg_xGbEI2cMaster_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdXgbeAndDisplayConfigureDxe"
+    File  = "Pei/AmdXgbeAndDisplayConfigure/AmdXgbeAndDisplayConfigure.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "PEIM"
+    Token = "AmdCpmPkg_AmdXgbeAndDisplayConfigureDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "M24Lc128Pei"
+    File  = "Devices/M24LC128/Pei/M24Lc128Pei.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "PEIM"
+    Token = "AmdCpmPkg_M24LC128_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "Pca9535aDxe"
+    File  = "Devices/Pca9535a/Dxe/Pca9535aDxe.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmdCpmPkg_Pca9535a_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "Pca9535aPei"
+    File  = "Devices/Pca9535a/Pei/Pca9535aPei.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "PEIM"
+    Token = "AmdCpmPkg_Pca9535a_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "Pca9545aDxe"
+    File  = "Devices/Pca9545a/Dxe/Pca9545aDxe.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmdCpmPkg_Pca9545a_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "Pca9545aPei"
+    File  = "Devices/Pca9545a/Pei/Pca9545aPei.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "PEIM"
+    Token = "AmdCpmPkg_Pca9545a_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdXgbeWorkaround"
+    File  = "Dxe/AmdXgbeWorkaround/AmdXgbeWorkaround.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmdCpmPkg_AmdXgbeWorkaround_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdXgbeWorkaround"
+    File  = "Pei/AmdXgbeWorkaround/AmdXgbeWorkaround.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "PEIM"
+    Token = "AmdCpmPkg_AmdXgbeWorkaround_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "FanPolicyDxe"
+    File  = "Dxe\FanPolicyDxe\FanPolicyDxe.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmdCpmPkg_FanPolicyDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdCpmOemSmm"
+    File  = "Smm\AmdCpmOemSmm.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "AmdCpmPkg_AmdCpmOemSmm_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdCalloutLib"
+	Instance  = "AmdCpmPkg.AmdCalloutDxeLib"
+	Token = "AmdCpmPkg_AmdCalloutDxeLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdCalloutLib"
+	Instance  = "AmdCpmPkg.AmdCalloutPeiLib"
+	Token = "AmdCpmPkg_AmdCalloutPeiLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AgesaCcxPlatformLib"
+	Instance  = "AmdCpmPkg.AgesaCcxPlatformLib"
+	Token = "AmdCpmPkg_AgesaCcxPlatformLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CpmFchInitHookLib"
+	Instance  = "AmdCpmPkg.FchInitHookDxeLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmPkg_FchInitHookDxeLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CpmFchInitHookLib"
+	Instance  = "AmdCpmPkg.FchInitHookPeiLib"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmPkg_FchInitHookPeiLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdPbsConfigLib"
+	Instance  = "AmdCpmPkg.AmdPbsConfigDxeLib"
+	ModuleTypes  = "DXE_DRIVER UEFI_DRIVER"
+	Token = "AmdCpmPkg_AmdPbsConfigDxeLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdPbsConfigLib"
+	Instance  = "AmdCpmPkg.AmdPbsConfigPeiLib"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmPkg_AmdPbsConfigPeiLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "OemGpioResetControlLib"
+    Instance  = "AmdCpmPkg.GpioResetControlLib"
+    Token = "AmdCpmPkg_GpioResetControlLib_SUPPORT" "=" "1"
+End
+
+### RVA9 : Support later ###LibraryMapping
+### RVA9 : Support later ###    Class  = "AmiCpmOemTableLib"
+### RVA9 : Support later ###    Instance  = "AmdCpmPkg.AmiCpmOemTableLib"
+### RVA9 : Support later ###    Token = "AmdCpmOemInitPeim_SUPPORT" "=" "1"
+### RVA9 : Support later ###End
+
+FFS_FILE
+	Name  = "AmdCpmOemInitPeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmdCpmPkg.AmdCpmOemInitPeim"
+	Index  = '"BEFORE" "AmdCpmInitPeim"'
+	Help  = "Rever to (AmdCpmPkg.pei.inc.fdf) the AmdCpmOemInitPeim is first priority"
+End
+
+TOKEN
+    Name  = "=====================Refer AmdCpmPkg\Addendum\Oem\Bilby\AmdCpmPkg.inc.dsc====================="
+    Value  = "==============================================================="
+    TokenType = Expression
+End
+
+ PcdMapping
+	Name  = "ApuSupportMask"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT32"
+	Value  = "0x00001800"  
+	Offset  = 00h
+	Length  = 01h
+	Help  = "Raven"
+	TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "EcRamBaseAddr"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint16"
+    Value  = "0x0662"
+    Offset  = 00h
+    Length  = 02h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSerialIoDecode"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdBspStackSize"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT32"
+    Value  = "0x20000"  
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdBspStackSize"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT32"
+    Value  = "$(CAR_TOTAL_SIZE)"  
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+    Help  = "Override the value if CAR_TOTAL_SIZE exist"
+    Token = "CAR_TOTAL_SIZE" "!=" "0"
+End
+
+TOKEN
+    Name  = "=====================Refer AmdCpmPkg\Addendum\Oem\Bilby\AmdCpmPkg.inc.dsc====================="
+    Value  = "=================================# V9 Pcds   # IDS Debug Lib Pcds=============================="
+    TokenType = Expression
+End
+
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "BOOLEAN"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "#Switch for Debug Print function."
+    TargetDSC = Yes
+End
+
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintHdtOutEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "BOOLEAN"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "#Switch for HDTOUT translation layer of debug print"
+    TargetDSC = Yes
+End
+
+
+  
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintHdtOutForceEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "BOOLEAN"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "  #Switch for HDTOUT translation layer of debug print."
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintRedirectIOEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "BOOLEAN"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    Help  = " #Switch for Redirect IO layer of debug print, normally used on emulation platform."
+    TargetDSC = Yes
+End
+
+  
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPortEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "BOOLEAN"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "Switch for Serial port support of AGESA debug print, NOTE, AGESA will not init the serial port, serial port should be initialized before call AGESA debug print"
+    TargetDSC = Yes
+End
+
+  
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPort"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT64"
+    Value  = "0xFEDC9000"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "#Specify the IO port for serial out"
+    TargetDSC = Yes
+End
+  
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintFilter"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT64"
+    #Value  = "0xF3FFFFFFFFFFFF00"
+    Value  = "0x100401008A30040C"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "Specify the filter for IdsDebugPrint, refer Library/IdsLib.h for details, Master token: PcdAmdIdsDebugPrintEnable #0x100401008A30042C (GNB_TRACE | PCIE_MISC | NB_MISC | GFX_MISC  | CPU_TRACE | MEM_FLOW | MEM_STATUS | MEM_PMU | FCH_TRACE | MAIN_FLOW| TEST_POINT | PSP_TRACE) #0x100401008A300408 (GNB_TRACE | PCIE_MISC | NB_MISC | GFX_MISC  | CPU_TRACE | MEM_FLOW | FCH_TRACE  | MAIN_FLOW| TEST_POINT | PSP_TRACE)"
+    TargetDSC = Yes
+End
+  
+TOKEN
+    Name  = "=====================Refer AmdCpmPkg\Addendum\Oem\Bilby\AmdCpmPkg.inc.dsc====================="
+    Value  = "=================================# Customized DIMM Vendor Strings=============================="
+    TokenType = Expression
+End
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord0"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0x2C00"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord1"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0xAD00"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord2"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0xC100"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord3"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0xCE00"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord4"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0x4F00"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord5"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0x9801"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord6"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0xFE02"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord7"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0x0B03"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord8"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0x2503"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord9"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0x8303"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord10"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0xCB04"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord11"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0xC106"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+
+PcdMapping
+    Name  = "PcdAmdSmbiosDimmVendorWord11"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0xC106"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "SMBIOS DIMM Vendor"
+    TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr0"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"Micron Technology"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr1"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"Hynix"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr2"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"Infineon (Siemens)"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr3"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"Samsung"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr4"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"Transcend Information"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr5"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"Kingston"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr6"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"ELPIDA"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr7"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"Nanya Technology"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr8"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"Kingmax Semiconductor"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr9"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"Buffalo (Formerly Melco)"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr10"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"A-DATA Technology"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosDimmVendorStr11"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"ASint Technology"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdAmdSmbiosSocketDesignationSocket0"
+     GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"FP5"'
+     Offset  = 00h
+     Length  = 030h
+     TargetDSC = Yes
+End
+
+
+TOKEN
+    Name  = "=====================Refer AmdCpmPkg\Addendum\Oem\Bilby\AmdCpmPkg.inc.dsc====================="
+    Value  = "================================= #Fch============================="
+    TokenType = Expression
+End    
+      
+###PcdMapping
+###    Name  = "PcdAmdFchCfgSioPmeBaseAddress"
+###    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+###    PcdType  = "PcdsFixedAtBuild"
+###    DataType  = "UINT16"
+###    Value  = "0x1640"
+###    Offset  = 00h
+###    Length  = 01h
+###    TargetDSC = Yes
+###End
+
+TOKEN
+    Name  = "=====================Refer AmdCpmPkg\Addendum\Oem\Bilby\AmdCpmPkg.inc.dsc====================="
+    Value  = "================================= ## Customize AGESA GNB============================="
+    TokenType = Expression
+End 
+
+PcdMapping
+    Name  = "PcdCfgGnbIoapicAddress"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT64"
+    Value  = "$(GNB_IOAPIC_BASE_ADDRESS)"
+    Offset  = 00h
+    Length  = 0h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdCfgAzaliaSsid"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "$(BLDCFG_GNB_AZ_SSID)"
+    Offset  = 00h
+    Length  = 0h
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "=====================Refer AmdCpmPkg\Addendum\Oem\Bilby\AmdCpmPkg.inc.dsc====================="
+    Value  = "================================= Customize AGESA FCH============================="
+    TokenType = Expression
+End 
+
+PcdMapping 
+    Name  = "PcdLegacyFree"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "$(CIM_LEGACY_FREE)"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdHpetEnable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "$(HPET_SUPPORT)"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdHpetMsiDis"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+
+PcdMapping
+    Name  = "PcdOemProgrammingTablePtr"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Pointer"
+    Value  = "{0x00, 0x00, 0xB0, 0xAC,  0x02, 0x48, 0x00, 0x08,0x02, 0x78, 0x00, 0x19, 0x02, 0x79, 0x00, 0x19, 0x02, 0x58, 0x00, 0x18, 0x02, 0x59, 0x00, 0x18, 0x02, 0x5A, 0x00, 0x18, 0x02, 0x70, 0x00, 0x01, 0xFF, 0xFF, 0xFF, 0xFF} "
+    Offset  = 00h
+    Length  = 0FFh 
+    TargetDSC = Yes
+End
+
+
+PcdMapping 
+    Name  = "PcdNativePcieSupport"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "$(PEHP)"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdNoneSioKbcSupport"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "$(NONE_SIO_KBC_SUPPORT)"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSataEnable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSataClass"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT8"
+    Value  = "0x02"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "Amd default 0x06 SataIde2Ahci7804, 02:SataAhci" 
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdXhci0Enable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdLpcClockDriveStrength"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT8"
+    Value  = "$(FCH_LPC_CLK_DRVSTH)"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSdConfig"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT8"
+    Value  = "0"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "Configuration values for SdConfig, 2 = SdVer3, 6 = SdDump"
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSmbusSsid"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSataAhciSsid"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSataRaidSsid"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSataRaid5Ssid"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSataIdeSsid"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdXhciSsid"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdLpcSsid"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdSdSsid"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "FchRTSataDevSlpPort0S5Pin"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "$(FCH_SATA_DEVSLP_PORT0_S5PIN)"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "=====================Refer AmdCpmPkg\Addendum\Oem\Bilby\AmdCpmPkg.inc.dsc====================="
+    Value  = "=================================  # Disable UMA above 4 GB============================="
+    TokenType = Expression
+End 
+
+TOKEN
+    Name  = "=====================Refer AmdCpmPkg\Addendum\Oem\Bilby\AmdCpmPkg.inc.dsc====================="
+    Value  = "=================================  Enable Ftpm ============================="
+    TokenType = Expression
+End 
+
+PcdMapping 
+    Name  = "PcdAmdPspSystemTpmConfig"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Uint8"
+    Value  = "1"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdEspiEnable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdEspiEc0Enable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdEspiIo80Enable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdEspiKbc6064Enable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdBpX48M0OutputEnable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "Turn off BP_X48M0 Clock Output - Mandolin doesn't use BP_X48M0 clock, it can be disabled."
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "=====================Refer AmdCpmPkg\Addendum\Oem\Bilby\AmdCpmPkg.inc.dsc====================="
+    Value  = "================================= #Turn on AGESA APCB recovery mechanism ============================="
+    TokenType = Expression
+End
+
+PcdMapping 
+    Name  = "PcdAmdPspApcbRecoveryEnable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End

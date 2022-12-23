@@ -1,0 +1,39 @@
+TOKEN
+	Name  = "PauseKey_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PauseKey support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SUPPRESS_PAUSE_MESSAGE"
+	Value  = "0"
+	Help  = "This token provides the ability to not display the Pause Message on the screen when Pause Key is pressed"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+PATH
+	Name  = "PauseKey_DIR"
+	Path  = "AmiModulePkg/PauseKey"
+End
+
+ELINK
+	Name  = "PAUSEKEY_PRESSED_MSG_TRANSLATIONS"
+	Help  = "This token is the parent link for adding translations of the Pause Message to the module"
+	InvokeOrder = ReplaceParent
+End
+
+INFComponent
+	Name  = "PauseKey"
+	File  = "PauseKey.inf"
+	Package  = "AmiModulePkg"
+	PreProcess = Yes
+	ModuleTypes  = "DXE_DRIVER"
+End
+

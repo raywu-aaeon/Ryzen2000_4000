@@ -1,0 +1,633 @@
+;*************************************************************************
+;*************************************************************************
+;**                                                                     **
+;**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+;**                                                                     **
+;**                       All Rights Reserved.                          **
+;**                                                                     **
+;**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+;**                                                                     **
+;**                       Phone: (770)-246-8600                         **
+;**                                                                     **
+;*************************************************************************
+;*************************************************************************
+
+;<AMI_FHDR_START>
+;---------------------------------------------------------------------------
+;
+; Name:		MBIOSMAC.MAC
+;
+; Description:	Assembly Macroses
+;
+;---------------------------------------------------------------------------
+;<AMI_FHDR_END>
+
+
+;Inclusion guard
+ifndef _mbiosmac_mac_
+_mbiosmac_mac_	equ	1
+.xlist
+
+
+;<AMI_MHDR_START>
+;----------------------------------------------------------------------------
+; Name:         SET_ORG
+;
+; Description:  This macro can be used as a replacement to "ORG" directive
+;               in source files. The advantage in using this macro instead
+;               of "ORG" directive is that it generates necessary labels for
+;               for mapguard utility, so that any possible code overlaps
+;               betweens ORGs can be detected during build time itself.
+;
+; Input:        OrgValue - Value for ORG.
+;               GuardTag - Tag name for mapgaurd utility.
+;----------------------------------------------------------------------------
+;<AMI_MHDR_END>
+
+SET_ORG	MACRO	OrgValue, GuardTag
+
+	PUBLIC	orgguard_&GuardTag&_&OrgValue&_start
+orgguard_&GuardTag&_&OrgValue&_start	LABEL	BYTE
+
+IFDEF LAST_LABEL_USED
+   IF LAST_LABEL_ACTIVE
+	PUBLIC	LAST_LABEL_USED
+LAST_LABEL_USED	LABEL	BYTE
+   ENDIF
+ENDIF
+
+	ORG	OrgValue
+	PUBLIC	orgguard_&GuardTag&_&OrgValue&_end
+orgguard_&GuardTag&_&OrgValue&_end	LABEL	BYTE
+
+	PUBLIC	orgguard_&GuardTag&_&OrgValue&_$blockBegin
+orgguard_&GuardTag&_&OrgValue&_$blockBegin	LABEL	BYTE
+LAST_LABEL_USED TEXTEQU <orgguard_&GuardTag&_&OrgValue&_$blockEndPlusOne>
+LAST_LABEL_ACTIVE = 1
+
+ENDM
+
+;<AMI_MHDR_START>
+;----------------------------------------------------------------------------
+; Name:         SET_LAST_ORG
+;
+; Description:  This macro is to be used in any file that uses SET_ORG.
+;               SET_LAST_ORG needs to be specified after the last SET_ORG
+;
+; Input:        None
+;----------------------------------------------------------------------------
+;<AMI_MHDR_END>
+
+SET_LAST_ORG	MACRO
+
+	PUBLIC	LAST_LABEL_USED
+LAST_LABEL_USED	LABEL	BYTE
+LAST_LABEL_ACTIVE = 0
+
+ENDM
+
+
+;<AMI_MHDR_START>
+;----------------------------------------------------------------------------
+; Name:         SET_ORG_PLUS
+;
+; Description:  This macro can be used as a replacement to "ORG" directive
+;               in source files. The advantage in using this macro instead
+;               of "ORG" directive is that it generates necessary labels for
+;               for mapguard utility, so that any possible code overlaps
+;               betweens ORGs can be detected during build time itself.
+;
+; Input:        OrgBase     Value for ORG base
+;               OrgPlus     Offset from the OrgBase.
+;               GuardTag    Tag name for mapgaurd utility.
+;----------------------------------------------------------------------------
+;<AMI_MHDR_END>
+
+SET_ORG_Plus	MACRO	OrgBase, OrgPlus, GuardTag
+
+	PUBLIC	orgguard_&GuardTag&_&OrgPlus&_&OrgBase&_start
+orgguard_&GuardTag&_&OrgPlus&_&OrgBase&_start	LABEL	BYTE
+
+IFDEF LAST_LABEL_USED
+   IF LAST_LABEL_ACTIVE
+	PUBLIC	LAST_LABEL_USED
+LAST_LABEL_USED	LABEL	BYTE
+   ENDIF
+ENDIF
+
+	ORG	OrgBase + OrgPlus
+	PUBLIC	orgguard_&GuardTag&_&OrgPlus&_&OrgBase&_end
+orgguard_&GuardTag&_&OrgPlus&_&OrgBase&_end	LABEL	BYTE
+
+	PUBLIC	orgguard_&GuardTag&_&OrgPlus&_&OrgBase&_$blockBegin
+orgguard_&GuardTag&_&OrgPlus&_&OrgBase&_$blockBegin	LABEL	BYTE
+LAST_LABEL_USED TEXTEQU <orgguard_&GuardTag&_&OrgPlus&_&OrgBase&_$blockEndPlusOne>
+LAST_LABEL_ACTIVE = 1
+
+ENDM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mEXTERN_NEAR
+;
+; Description:  This macro can be used to define an extern with the label
+;               name provided in the input. The label will be declared as
+;               NEAR extern. This is used to declare eLink for x86 code
+;
+; Input:        LabelName       Name of the label to be used for the extern
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEXTERN_NEAR MACRO LabelName
+
+	EXTERN	LabelName:NEAR		; Define the label as a NEAR EXTERN.
+
+ENDM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mEXTERN_NEAR32
+;
+; Description:  This macro can be used to define an extern with the label
+;               name provided in the input. The label will be declared as
+;               NEAR32 extern. This is used to declare eLink for x86 code
+;
+; Input:        LabelName       Name of the label to be used for the extern
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEXTERN_NEAR32 MACRO LabelName
+
+	EXTERN	LabelName:NEAR32		; Define the label as a NEAR EXTERN.
+
+ENDM
+
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mEXTERN_FAR
+;
+; Description:  This macro can be used to define an extern with the label
+;               name provided in the input. The label will be declared as
+;               FAR extern. This is used to declare eLink for x86 code
+;
+; Input:        LabelName       Name of the label to be used for the extern
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEXTERN_FAR MACRO LabelName
+
+	EXTERN	LabelName:FAR		; Define the label as a FAR EXTERN.
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mSTART_PROC_NEAR
+;
+; Description:  This macro can be used to define an procedure entry point for
+;               the label provided in the input. The label will be declared as
+;               NEAR procedure. This is used to declare eLink for x86 code
+;
+; Input:        LabelName       Name of the label to be used for the procedure
+;                               start
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mSTART_PROC_NEAR MACRO LabelName
+
+LabelName PROC NEAR PUBLIC
+
+ENDM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mSTART_PROC_NEAR32
+;
+; Description:  This macro can be used to define an procedure entry point for
+;               the label provided in the input. The label will be declared as
+;               NEAR32 procedure. This is used to declare eLink for x86 code
+;
+; Input:        LabelName       Name of the label to be used for the procedure
+;                               start
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mSTART_PROC_NEAR32 MACRO LabelName
+
+LabelName PROC NEAR32 PUBLIC
+
+ENDM
+
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mBODY_CALL_PROC_NEAR
+;
+; Description:  This macro can be used to call a procedure using the 
+;               label provided in the input. A Call instruction will be created
+;               with The label will be created. This is used to declare eLink 
+;               for x86 code
+;
+; Input:        LabelName       Name of the label to be used for the procedure
+;                               call
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_CALL_PROC_NEAR MACRO LabelID, LabelName
+
+	call	LabelName
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mBODY_JMP_PROC_NEAR
+;
+; Description:  This macro can be used to perform a jmp to the label name
+;               provided and it provides a return label with "End" added to the
+;               name of the label. This is used to declare eLink 
+;               for x86 code. This performs a NEAR jmp
+;
+; Input:        LabelName       Name of the label to be used for the jmp
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_JMP_PROC_NEAR MACRO LabelID, LabelName
+
+	jmp	LabelName
+	PUBLIC	LabelName&End
+LabelName&End::
+
+ENDM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mBODY_JMP_PROC_NEAR32
+;
+; Description:  This macro can be used to perform a jmp to the label name
+;               provided and it provides a return label with "End" added to the
+;               name of the label. This is used to declare eLink 
+;               for x86 code. This performs a NEAR32 jmp
+;
+; Input:        LabelName       Name of the label to be used for the jmp
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_JMP_PROC_NEAR32 MACRO LabelID, LabelName
+
+	jmp	LabelName
+	PUBLIC	LabelName&End
+LabelName&End::
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mEND_PROC_NEAR
+;
+; Description:  This macro can be used to indicate the end of the near 
+;               procedure by including 'ret' instruction. This is used to declare eLink 
+;               for x86 code
+;
+; Input:        LabelName       Name of the label to be used for the function end
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_NEAR MACRO LabelName
+
+	ret
+LabelName ENDP
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mEND_PROC_WITH_JMP_NEAR
+;
+; Description:  This macro can be used to indicate the end of the near 
+;               jmp procedure by including 'jmp' instruction with the label
+;               name appended with 'End'. This is used to declare eLink 
+;               for x86 code.This performs a NEAR jmp
+;
+; Input:        LabelName       Name of the label to be used for the function end
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_WITH_JMP_NEAR MACRO LabelName
+
+	EXTERN	LabelName&End:NEAR
+	jmp	LabelName&End
+LabelName ENDP
+
+ENDM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mEND_PROC_WITH_JMP_NEAR32
+;
+; Description:  This macro can be used to indicate the end of the near 
+;               jmp procedure by including 'jmp' instruction with the label
+;               name appended with 'End'. This is used to declare eLink 
+;               for x86 code.This performs a NEAR32 jmp
+;
+; Input:        LabelName       Name of the label to be used for the function end
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_WITH_JMP_NEAR32 MACRO LabelName
+
+	EXTERN	LabelName&End:NEAR32
+	jmp	LabelName&End
+LabelName ENDP
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mSTART_PROC_FAR
+;
+; Description:  This macro can be used to start a new FAR procedure block with
+;               the label name provided.  This is used to declare eLink for
+;               x86 code.
+;
+; Input:        LabelName       Name of the label to be used for the function
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mSTART_PROC_FAR MACRO LabelName
+
+LabelName PROC FAR PUBLIC
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mBODY_CALL_PROC_FAR
+;
+; Description:  This macro can be used to invoke a FAR procedure block with
+;               the label name provided.  This is used to declare eLink for
+;               x86 code.
+;
+; Input:        LabelName       Name of the label to be used for the function
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_CALL_PROC_FAR MACRO LabelID, LabelName
+
+	call	LabelName
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mBODY_JMP_PROC_FAR
+;
+; Description:  This macro can be used to invoke a FAR procedure block with
+;               the label name provided using JMP insruction.  This is used to 
+;               declare eLink for x86 code.
+;
+; Input:        LabelName       Name of the label to be used for the function
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_JMP_PROC_FAR MACRO LabelID, LabelName
+
+	jmp	LabelName
+	PUBLIC	LabelName&End
+LabelName&End::
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mEND_PROC_FAR
+;
+; Description:  This macro can be used to create the end block for the function
+;               that was invoked using CALL FAR.  This function returns to the
+;               caller by executing 'ret'.  This is used to declare eLink 
+;               for x86 code.
+;
+; Input:        LabelName       Name of the label to be used for the function
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_FAR MACRO LabelName
+
+	ret
+LabelName ENDP
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mEND_PROC_WITH_JMP_FAR
+;
+; Description:  This macro can be used to create the end block for the function
+;               that was invoked using JMP FAR.  This function returns to the
+;               caller by invoking JMP FAR with the label name appended with
+;               End.  This is used to declare eLink for x86 code.
+;
+; Input:        LabelName       Name of the label to be used for the function
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_WITH_JMP_FAR MACRO LabelName
+
+	EXTERN	LabelName&End:FAR
+	jmp	LabelName&End
+LabelName ENDP
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mSTART_TBL
+;
+; Description:  This macro can be used to create labels for the table start.
+;               This is used by the x86 code to create tables
+;
+; Input:        LabelName       Name of the table
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mSTART_TBL MACRO LabelName
+
+	PUBLIC	LabelName
+LabelName LABEL BYTE
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mBODY_TBL_ENTRY_NEAR
+;
+; Description:  This macro can be used to create a table entry with the 
+;               function name provided. This is used by the x86 code to 
+;               create tables. The entry created have a NEAR pointer.
+;
+; Input:        LabelName       Name of the function in the table
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_TBL_ENTRY_NEAR MACRO LabelID, LabelName
+
+	stTblEntryNEAR <LabelName>
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mBODY_ID_AND_TBL_ENTRY_NEAR
+;
+; Description:  This macro can be used to create a table entry with the 
+;               function name provided. This is used by the x86 code to 
+;               create tables. The entry created have a NEAR pointer.
+;
+; Input:        LabelID         ID for the function
+;               LabelName       Name of the function in the table
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_ID_AND_TBL_ENTRY_NEAR MACRO LabelID, LabelName
+
+	stIDAndTblEntryNEAR <LabelID, LabelName>
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mBODY_TBL_ENTRY_FAR
+;
+; Description:  This macro can be used to create a table entry with the 
+;               function name provided. This is used by the x86 code to 
+;               create tables. The entry created have a FAR pointer.
+;
+; Input:        LabelName       Name of the function in the table
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_TBL_ENTRY_FAR MACRO LabelID, LabelName
+
+	stTblEntryFAR <LabelName>
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mBODY_ID_AND_TBL_ENTRY_NEAR
+;
+; Description:  This macro can be used to create a table entry with the 
+;               function name provided. This is used by the x86 code to 
+;               create tables. The entry created have a FAR pointer.
+;
+; Input:        LabelID         ID for the function
+;               LabelName       Name of the function in the table
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_ID_AND_TBL_ENTRY_FAR MACRO LabelID, LabelName
+
+	stIDAndTblEntryFAR <LabelID, LabelName>
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:         mEND_TBL
+;
+; Description:  This macro can be used to end the table created using start
+;               table macro.  This is used by the x86 code to 
+;               create tables. 
+;
+; Input:        LabelName       Name of the function in the table
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_TBL MACRO LabelName
+
+	PUBLIC	LabelName&End
+LabelName&End LABEL BYTE
+
+ENDM
+
+;---------------------------------------;
+.list
+
+;End of Inclusion guard
+endif	;_mbiosmac_mac_
+
+;*************************************************************************
+;*************************************************************************
+;**                                                                     **
+;**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+;**                                                                     **
+;**                       All Rights Reserved.                          **
+;**                                                                     **
+;**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+;**                                                                     **
+;**                       Phone: (770)-246-8600                         **
+;**                                                                     **
+;*************************************************************************
+;*************************************************************************

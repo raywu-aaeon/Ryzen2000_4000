@@ -1,0 +1,841 @@
+#;*****************************************************************************
+#;
+#; Copyright 2015 - 2021 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting You permission to use this software and documentation (if
+#; any) (collectively, the "Software") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Software. If You do not have
+#; a copy of the Software License Agreement, contact Your AMD representative for
+#; a copy.
+#;
+#; You agree that You will not reverse engineer or decompile the Software, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER: THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+#; KIND. AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING
+#; BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, QUALITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT AND WARRANTIES
+#; ARISING FROM CUSTOM OF TRADE OR COURSE OF USAGE WITH RESPECT TO THE SOFTWARE,
+#; INCLUDING WITHOUT LIMITATION, THAT THE SOFTWARE WILL RUN UNINTERRUPTED OR
+#; ERROR-FREE. THE ENTIRE RISK ASSOCIATED WITH THE USE OF THE SOFTWARE IS
+#; ASSUMED BY YOU. Some jurisdictions do not allow the exclusion of implied
+#; warranties, so the above exclusion may not apply to You, but only to the
+#; extent required by law.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION: TO THE EXTENT NOT PROHIBITED BY
+#; APPLICABLE LAW, AMD AND ITS LICENSORS WILL NOT, UNDER ANY CIRCUMSTANCES BE
+#; LIABLE TO YOU FOR ANY PUNITIVE, DIRECT, INCIDENTAL, INDIRECT, SPECIAL OR
+#; CONSEQUENTIAL DAMAGES ARISING FROM POSSESSION OR USE OF THE SOFTWARE OR
+#; OTHERWISE IN CONNECTION WITH ANY PROVISION OF THIS AGREEMENT EVEN IF AMD AND
+#; ITS LICENSORS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS
+#; INCLUDES, WITHOUT LIMITATION, DAMAGES DUE TO LOST OR MISAPPROPRIATED DATA,
+#; LOST PROFITS OR CONFIDENTIAL OR OTHER INFORMATION, FOR BUSINESS INTERRUPTION,
+#; FOR PERSONAL INJURY, FOR LOSS OF PRIVACY, FOR FAILURE TO MEET ANY DUTY
+#; INCLUDING OF GOOD FAITH OR REASONABLE CARE, FOR NEGLIGENCE AND FOR ANY OTHER
+#; PECUNIARY OR OTHER LOSS WHTSOEVER. In no event shall AMD's total liability to
+#; You for all damages, losses, and causes of action (whether in contract, tort
+#; (including negligence) or otherwise) exceed the amount of $50 USD. You agree
+#; to defend, indemnify and hold harmless AMD, its subsidiaries and affiliates
+#; and their respective licensors, directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your
+#; possession or use of the Software or violation of the terms and conditions of
+#; this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS: Notice to U.S. Government End Users. The
+#; Software and related documentation are "commercial items", as that term is
+#; defined at 48 C.F.R. Section 2.101, consisting of "commercial computer
+#; software" and "commercial computer software documentation", as such terms are
+#; used in 48 C.F.R. Section 12.212 and 48 C.F.R. Section 227.7202,
+#; respectively. Consistent with 48 C.F.R. Section 12.212 or 48 C.F.R. Sections
+#; 227.7202-1 through 227.7202-4, as applicable, the commercial computer
+#; software and commercial computer software documentation are being licensed to
+#; U.S. Government end users: (a) only as commercial items, and (b) with only
+#; those rights as are granted to all other end users pursuant to the terms and
+#; conditions set forth in this Agreement. Unpublished rights are reserved under
+#; the copyright laws of the United States.
+#;
+#; EXPORT RESTRICTIONS:  You shall adhere to all applicable U.S. import/export
+#; laws and regulations, as well as the import/export control laws and
+#; regulations of other countries as applicable. You further agree You will not
+#; export, re-export, or transfer, directly or indirectly, any product,
+#; technical data, software or source code received from AMD under this license,
+#; or the direct product of such technical data or software to any country for
+#; which the United States or any other applicable government requires an export
+#; license or other governmental approval without first obtaining such licenses
+#; or approvals, or in violation of any applicable laws or regulations of the
+#; United States or the country where the technical data or software was
+#; obtained. You acknowledges the technical data and software received will not,
+#; in the absence of authorization from U.S. or local law and regulations as
+#; applicable, be used by or exported, re-exported or transferred to: (i) any
+#; sanctioned or embargoed country, or to nationals or residents of such
+#; countries; (ii) any restricted end-user as identified on any applicable
+#; government end-user list; or (iii) any party where the end-use involves
+#; nuclear, chemical/biological weapons, rocket systems, or unmanned air
+#; vehicles.  For the most current Country Group listings, or for additional
+#; information about the EAR or Your obligations under those regulations, please
+#; refer to the website of the U.S. Bureau of Industry and Security at
+#; http://www.bis.doc.gov/.
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaPkg
+  PACKAGE_GUID          = DABFEFC6-5A79-444b-862A-1F6FE9F561FE
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+  Addendum/Apcb/Inc
+
+[LibraryClasses]
+  OemAgesaCcxPlatformLib|Include/Library/OemAgesaCcxPlatformLib.h
+  AmdHeapLib|Include/Library/AmdHeapLib.h
+  OemPcieResetControlLib|AgesaPkg/Include/Library/OemPcieResetControlLib.h
+  OemGpioResetControlLib|AgesaPkg/Include/Library/OemGpioResetControlLib.h
+  FabricResourceManagerLib|Include/Library/FabricResourceManagerLib.h
+
+  #PSP Libs
+  AmdPspCommonLib|Include/Library/AmdPspCommonLib.h
+  AmdPspFtpmLib|Include/Library/AmdPspFtpmLib.h
+  AmdPspApobLib|Include/Library/AmdPspApobLib.h
+  ApcbLib|Include/Library/ApcbLib.h
+  ApobCommonServiceLib|Include/Library/ApobCommonServiceLib.h
+
+[Guids]
+  gEfiAmdAgesaPkgTokenSpaceGuid          = { 0xd4d8435f, 0xfffb, 0x4acb, { 0xa0, 0x4d, 0xff, 0xf, 0xad, 0x67, 0x7f, 0xe9 } }
+  gAmdMemoryInfoHobGuid                  = { 0x1bce3d14, 0xa5fe, 0x4a0b, { 0x9a, 0x8d, 0x69, 0xca, 0x5d, 0x98, 0x38, 0xd3 } }
+  gAmdHeapHobGuid                        = { 0xd97d161a, 0x16cd, 0x4ada, { 0xb9, 0xf6, 0xae, 0xc3, 0xf9, 0xfc, 0xcc, 0x2c } }
+  gAmdCapsuleStatusHobGuid               = { 0x3a8e17f2, 0x7895, 0x4fb6, { 0xa8, 0x6c, 0xde, 0x82, 0xd3, 0x65, 0x63, 0x1e } }
+  gAmdMemoryMbistHobGuid                 = { 0xfdd95c81, 0xea58, 0x4b51, { 0x99, 0x74, 0x82, 0xc1, 0x4a, 0x36, 0x55, 0xc7 } }
+
+[Protocols]
+  gAmdHeapHeaderProtocolGuid             = { 0xaf62673d, 0xdeda, 0x43ae, { 0x8f, 0x3, 0x9c, 0x2d, 0x89, 0xfd, 0x78, 0xda } }
+
+  ## Error Log Protocols
+  gAmdErrorLogServiceProtocolGuid        = {0x7ef3f75c, 0xae1f, 0x46fc, {0x87, 0x86, 0xe, 0xb4, 0xf2, 0x81, 0xb2, 0x3d}}
+  gAmdErrorLogFullProtocolGuid           = {0x38c2bd90, 0x7bac, 0x47f2, {0xb7, 0x25, 0x4, 0x9, 0xad, 0x7b, 0x8d, 0xe8}}
+  gAmdErrorLogAvailableProtocolGuid      = {0x8444f699, 0xdb97, 0x4f27, {0xb1, 0x1, 0x3b, 0x7b, 0x88, 0x9a, 0xb9, 0xd8}}
+  #PSP Protocols
+  gPspPlatformProtocolGuid               = {0xccf14a29, 0x37e0, 0x48ad, { 0x90, 0x5, 0x1f, 0x89, 0x62, 0x2f, 0xb7, 0x98 }}
+  ## Fch Protocols
+  gFchInitProtocolGuid                   = { 0xdb4a79ac, 0x5bbb, 0x4625, {0xa6, 0x9e, 0xfe, 0xbf, 0x9d, 0x6d, 0x95, 0xeb } }
+  gFchInitDonePolicyProtocolGuid         = { 0xc63c0c73, 0xf612, 0x4c02, {0x84, 0xa3, 0xc6, 0x40, 0xad, 0xb, 0xa6, 0x22 } }
+  gFchMultiFchInitProtocolGuid           = { 0xbb6afbf4, 0x1b0d, 0x483d, {0x96, 0x87, 0xee, 0x02, 0x3c, 0x1b, 0x54, 0x55 } }
+  gFchControlServiceProtocolGuid         = { 0xae8fa023, 0xa0b6, 0x4ebc, {0xa3, 0xc7, 0x3d, 0xf3, 0xa6, 0xa8, 0x94, 0xe9} }
+  gFchSmmGpiDispatch2ProtocolGuid        = { 0x7051ab6d, 0x9ec2, 0x42eb, { 0xa2, 0x13, 0xde, 0x48, 0x81, 0xf1, 0xf7, 0x87 } }
+  gFchSmmIoTrapDispatch2ProtocolGuid     = { 0x91288fc4, 0xe64b, 0x4ef9, { 0xa4, 0x63, 0x66, 0x88, 0x0, 0x71, 0x7f, 0xca } }
+  gFchSmmPeriodicalDispatch2ProtocolGuid = { 0x736102f1, 0x9584, 0x44e7, { 0x82, 0x8a, 0x43, 0x4b, 0x1e, 0x67, 0x5c, 0xc4 } }
+  gFchSmmPwrBtnDispatch2ProtocolGuid     = { 0xa365240e, 0x56b0, 0x426d, { 0x83, 0xa, 0x30, 0x66, 0xc6, 0x81, 0xbe, 0x9a } }
+  gFchSmmSwDispatch2ProtocolGuid         = { 0x881b4ab6, 0x17b0, 0x4bdf, { 0x88, 0xe2, 0xd4, 0x29, 0xda, 0x42, 0x5f, 0xfd } }
+  gFchSmmSxDispatch2ProtocolGuid         = { 0x87e2a6cf, 0x91fb, 0x4581, { 0x90, 0xa9, 0x6f, 0x50, 0x5d, 0xdc, 0x1c, 0xb2 } }
+  gFchSmmUsbDispatch2ProtocolGuid        = { 0xfbbb2ea9, 0xce0e, 0x4689, { 0xb3, 0xf0, 0xc6, 0xb8, 0xf0, 0x76, 0xbd, 0x20 } }
+  gFchSmmMiscDispatchProtocolGuid        = { 0x13bd659b, 0xb4c6, 0x47da, {0x9b, 0x22, 0x11, 0x50, 0xd4, 0xf3, 0xb, 0xda } }
+  gFchSmmApuRasDispatchProtocolGuid      = { 0xf871ee59, 0x29d2, 0x4b15, {0x9e, 0x67, 0xaf, 0x32, 0xcd, 0xc1, 0x41, 0x73 } }
+  gFchSmmUsbDispatchProtocolGuid         = { 0x59053b0d, 0xeeb8, 0x4379, {0xb1, 0xc8, 0x14, 0x5f, 0x1b, 0xb, 0xe4, 0xb9 } }
+  ## Nbio Protocols
+  gAmdHotplugDescProtocolGuid            = {0xe8d7e476, 0xedab, 0x4a80, {0x91, 0x19, 0xea, 0x5b, 0xcc, 0xc4, 0xc1, 0x95}}
+  gAmdNbioPcieAerProtocolGuid            = { 0xe48c773, 0x4445, 0x40d5, {0x9f, 0x11, 0x5f, 0x25, 0x6d, 0x19, 0xc1, 0x7b}}
+  gAmdNbioIommuProtocolGuid              = { 0x30dc4b0e, 0xcd83, 0x4b85, { 0xbb, 0x11, 0x19, 0xa8, 0xa4, 0xbc, 0xe5, 0x62 } }
+
+  #Universal
+  gAmdSmbiosDxeInitCompleteProtocolGuid  = {0x607614f9, 0x3f1c, 0x45dd, {0x9c, 0x78, 0x1, 0x72, 0x3b, 0xc3, 0x85, 0xd9}}
+  gAmdAcpiDxeInitCompleteProtocolGuid    = {0x2148aa15, 0x700c, 0x4f75, {0x87, 0xaf, 0x10, 0xa4, 0xdd, 0xbb, 0xb9, 0xe1}}
+  gAmdCapsuleSmmHookProtocolGuid = { 0x4fc43bbe, 0x1433, 0x4951, { 0xac, 0x2d, 0xd, 0x1, 0xfe, 0xc0, 0xe, 0xb1 } }
+
+  # Ccx
+  gAmdMpServicesPreReqProtocolGuid       = {0x33f4458, 0x9c78, 0x42be, { 0x8e, 0x3d, 0x7b, 0xc6, 0x34, 0xb9, 0x5d, 0xe }}
+
+  # DF
+  gAmdFabricResourceManagerServicesProtocolGuid = {0xaf96f126, 0x64b6, 0x43dc, {0x9e, 0x6d, 0x76, 0x3f, 0xf1, 0x9b, 0xf3, 0x96}}
+
+  # RAS
+  gAmdRasApeiProtocolGuid                = {0xe9dbcc60, 0x8f93, 0x47ed, {0x84, 0x78, 0x46, 0x78, 0xf1, 0x9f, 0x73, 0x4a}}
+  gAmdRasSmmProtocolGuid                 = {0x4E41A9E3, 0x46AB, 0x1549, {0x06, 0x44, 0xB6, 0xA5, 0x55, 0x29, 0x89, 0x77}}
+  gAmdRasApei2ProtocolGuid               = {0xD8ABD054, 0x468F, 0x503C, {0xD3, 0xA7, 0xE5, 0x80, 0xD5, 0x6B, 0x29, 0xB9}}
+  gAmdRasSmm2ProtocolGuid                = {0x0CA49B20, 0x4EEF, 0xBFCB, {0x27, 0xE6, 0xCB, 0x90, 0x33, 0xEE, 0xD4, 0x29}}
+
+  # AGESA Version String Protocol
+  gAmdVersionStringProtocolGuid          = {0x144b3f95, 0x35, 0x4918, {0x97, 0xd2, 0xfa, 0xfd, 0xcd, 0x74, 0x74, 0x15 }}
+
+[Ppis]
+  gAmdMemoryInfoHobPpiGuid               = { 0xba16e587, 0x1d66, 0x41b7, { 0x9b, 0x52, 0xca, 0x4f, 0x2c, 0xad, 0xd, 0xc8 } }
+
+  ## Error Log Ppis
+  gAmdErrorLogServicePpiGuid             = {0x7cdf73a2, 0x51a9, 0x4c0b, {0xaa, 0x68, 0x3c, 0x46, 0x91, 0x75, 0x76, 0xf9}}
+  gAmdErrorLogFullPpiGuid                = {0xcbe31239, 0x532c, 0x4c27, {0x8f, 0x4e, 0x65, 0x7b, 0x3c, 0x39, 0xa5, 0x56}}
+  gAmdErrorLogAvailablePpiGuid           = {0xb2b0fa81, 0x8b34, 0x4351, {0xa3, 0x9c, 0x8f, 0x5a, 0x88, 0x60, 0x19, 0x47}}
+
+  # PCIe Complex Ppis
+  gAmdNbioPcieComplexPpiGuid             = {0x324a4e15, 0x26ed, 0x4679, { 0xa9, 0xef, 0xba, 0x8a, 0x8f, 0xe7, 0x9a, 0xdb}}
+  gAmdNbioPcieComplexFm15PpiGuid         = {0xdcd2770d, 0xede5, 0x41d0, { 0xa8, 0x84, 0xa8, 0x16, 0x8a, 0xcc, 0xa1, 0x5d}}
+  gAmdNbioPcieGen1TrainingCompleteFm15PpiGuid = {0x3cc7c387, 0xee90, 0x4495, {0x98, 0x5, 0x6c, 0xf6, 0x38, 0x5d, 0xee, 0xd4}}
+
+  gAmdFchInitPpiGuid                     = { 0x3fb7a27a, 0x33f3, 0x483d, {0xbc, 0x6f, 0x7a, 0x51, 0xbe, 0xf5, 0x3d, 0xa } }
+  gAmdFchMultiFchInitPpiGuid             = { 0xa5640daf, 0xfb8b, 0x4265, {0xbf, 0xab, 0x9c, 0x77, 0xf4, 0xe9, 0xd6, 0x20} }
+
+  ## SOC AGESA Group Identification Ppi
+  gAmdSocAgesaGroupIdentificationPpiGuid = {0x970e2d2f, 0x52f7, 0x483d, {0x94, 0x5e, 0x30, 0xfd, 0x4b, 0x34, 0xb2, 0x17}}
+  gAmdPcdInitReadyPpiGuid = {0x60db76a0, 0x5d55, 0x47bb, {0x97, 0xf, 0x34, 0xd8, 0xd0, 0xbe, 0x36, 0x9e}}
+
+  # AGESA Version String Ppi
+  gAmdVersionStringPpiGuid = {0x17632cbe, 0x6c80, 0x49b6, {0x82, 0x7, 0x12, 0xb5, 0x3d, 0x9b, 0x25, 0x70}}
+
+  ## Universal
+  gCapsuleUpdateDetectedPpiGuid = { 0x745dfc73, 0xc401, 0x4ced, { 0x8d, 0x3b, 0x1a, 0x82, 0xf3, 0xda, 0xdc, 0xf8 } }
+
+  # PCIe Topology
+  gAmdNbioPcieTopologyPpiGuid = { 0x778E7A72, 0x5F90, 0x41A9, { 0x54, 0x0E, 0xCB, 0xA4, 0x00, 0x87, 0x86, 0xB1 } }
+
+  # DF
+  gAmdFabricResourceManagerServicesPpiGuid = {0xf9060a2e, 0xf514, 0x4d70, {0x8a, 0x62, 0xea, 0x2a, 0xe0, 0x4f, 0x68, 0x52}}
+
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+  #IDS PCDs
+   #Switch for AGESA_TESTPOINT
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaTestPointEnable|TRUE|BOOLEAN|0x00020001               # TRUE:   Enable
+                                                                                              # FALSE:  Disable
+
+  #Specify AGESA_TESTPOINT output width, Master token: PcdAgesaTestPointEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaTestPointWidth|3|UINT8|0x00020002                     # 1: AccessWidth8
+                                                                                              # 2: AccessWidth16
+                                                                                              # 3: AccessWidth32
+
+  #Specify AGESA_TESTPOINT output IO port, Master token: PcdAgesaTestPointEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdIdsDebugPort|0x80|UINT16|0x00020003
+
+  #Switch for Debug Print function
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEnable|FALSE|BOOLEAN|0x00020004            # TRUE: Enable IdsDebugPrint output
+
+  #Specify the filter for IdsDebugPrint, refer Library/IdsLib.h for details, Master token: PcdAmdIdsDebugPrintEnable
+  #0x100401008A30042C (GNB_TRACE | PCIE_MISC | NB_MISC | GFX_MISC  | CPU_TRACE | MEM_FLOW | MEM_STATUS | MEM_PMU | FCH_TRACE | MAIN_FLOW| TEST_POINT | PSP_TRACE)
+  #0x100401008A300408 (GNB_TRACE | PCIE_MISC | NB_MISC | GFX_MISC  | CPU_TRACE | MEM_FLOW | FCH_TRACE  | MAIN_FLOW| TEST_POINT | PSP_TRACE)
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintFilter|0x100401000A300408|UINT64|0x00020005
+
+  #Switch for HDTOUT translation layer of debug print.
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintHdtOutEnable|TRUE|BOOLEAN|0x00020006       #TRUE:  Enable
+                                                                                              #FALSE: Disable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintHdtOutForceEnable|FALSE|BOOLEAN|0x00020007 #TRUE:  Enable
+                                                                                              #FALSE: Disable
+  #Switch for Redirect IO layer of debug print, normally used on emulation platform
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintRedirectIOEnable|FALSE|BOOLEAN|0x00020008  #TRUE:  Enable
+                                                                                              #FALSE: Disable
+
+  #Switch for Serial port support of AGESA debug print, NOTE, AGESA will not init the serial port, serial port should be initialized
+  #before call AGESA debug print
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintSerialPortEnable|FALSE|BOOLEAN|0x00020009  #TRUE:  Enable
+                                                                                              #FALSE: Disable
+
+  #Switch for serial port cable connection check, if your serial device can't support cable detection, please set it to FALSE
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintSerialPortDetectCableConnection|TRUE|BOOLEAN|0x0002000A  #TRUE:  Enable
+                                                                                                            #FALSE: Disable
+
+  #Specify the IO port for serial out
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintSerialPort|0x3F8|UINT64|0x0002000B         # If it's IO port, it must < 0x10000
+                                                                                              # If it's Memory, it must >= 0x10000
+
+  #Switch for IDS_HOOK
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsHookEnable|TRUE|BOOLEAN|0x0002000C                   #TRUE:  Enable
+                                                                                              #FALSE: Disable
+  #Switch for AGESA ASSERT
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaAssertEnable|TRUE|BOOLEAN|0x0002000D                   #TRUE:  Enable AGESA ASSERT
+                                                                                               #FALSE: Disable AGESA ASSERT
+
+  #Fch Fixed PCDs
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmbus0BaseAddress|0xB00|UINT16|0x0002F001
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSioPmeBaseAddress|0xE00|UINT16|0x0002F003
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPm1EvtBlkAddr|0x400|UINT16|0x0002F004
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPm1CntBlkAddr|0x404|UINT16|0x0002F005
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPmTmrBlkAddr|0x408|UINT16|0x0002F006
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgCpuControlBlkAddr|0x410|UINT16|0x0002F007
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiGpe0BlkAddr|0x420|UINT16|0x0002F008
+  #gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmiCmdPortAddr|0xB0|UINT16|0x0002F009
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemBeforePciRestoreSwSmi|0xD3|UINT8|0x0002F010
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemAfterPciRestoreSwSmi|0xD4|UINT8|0x0002F011
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemEnableAcpiSwSmi|0xA0|UINT8|0x0002F012
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemDisableAcpiSwSmi|0xA1|UINT8|0x0002F013
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemSpiUnlockSwSmi|0xAA|UINT8|0x0002F014
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemSpiLockSwSmi|0xAB|UINT8|0x0002F015
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemStartTimerSmi|0xBC|UINT8|0x0002F016
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemStopTimerSmi|0xBD|UINT8|0x0002F017
+
+  #CCX
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNumberOfIoApics|3|UINT8|0x000CA000                      # BR
+
+  #Fabric
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdBottomMmioReservedForPrimaryRb|0xFE000000|UINT32|0x000CC100  # From the address specified by this PCD to 0xFEE0_0000 (Local APIC) is reserved for devices connect to DIE0 as MMIO space
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNumberOfPhysicalSocket|1|UINT8|0x000CC103               # Number of physical socket.
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMmioSizePerRbForNonPciDevice|0x1000000|UINT32|0x000CC104 # Reserved appropriate MMIO (below 4G) per root bridge for non PCI devices such as PSP, IOMMU... Default is 16M per root bridge
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAbove4GMmioSizePerRbForNonPciDevice|0x20200000|UINT32|0x000CC105 # Reserved appropriate MMIO (above 4G) per root bridge for non PCI devices such as PSP, IOMMU... Default is 518M per root bridge
+
+  # Fixed-MTRR settings
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr250|0xFFFFFFFFFFFFFFFF|UINT64|0x000CC110       # MTRR_FIX64k_00000 (MSR_0000_0250) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr258|0xFFFFFFFFFFFFFFFF|UINT64|0x000CC111       # MTRR_FIX16k_80000 (MSR_0000_0258) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr259|0xFFFFFFFFFFFFFFFF|UINT64|0x000CC112       # MTRR_FIX16k_A0000 (MSR_0000_0259) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr268|0xFFFFFFFFFFFFFFFF|UINT64|0x000CC113       # MTRR_FIX4k_C0000  (MSR_0000_0268) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr269|0xFFFFFFFFFFFFFFFF|UINT64|0x000CC114       # MTRR_FIX4k_C8000  (MSR_0000_0269) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr26A|0xFFFFFFFFFFFFFFFF|UINT64|0x000CC115       # MTRR_FIX4k_D0000  (MSR_0000_026A) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr26B|0xFFFFFFFFFFFFFFFF|UINT64|0x000CC116       # MTRR_FIX4k_D8000  (MSR_0000_026B) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr26C|0x1818181818181818|UINT64|0x000CC117       # MTRR_FIX4k_E0000  (MSR_0000_026C) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr26D|0x1818181818181818|UINT64|0x000CC118       # MTRR_FIX4k_E8000  (MSR_0000_026D) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr26E|0x1818181818181818|UINT64|0x000CC119       # MTRR_FIX4k_F0000  (MSR_0000_026E) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFixedMtrr26F|0x1818181818181818|UINT64|0x000CC11A       # MTRR_FIX4k_F8000  (MSR_0000_026F) setting for all APs, BSP may be impacted because MTRRs are shared. 0xFFFFFFFFFFFFFFFF --- all APs sync with BSP
+
+  #ACPI
+  #  Cpu SSDT
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtProcessorScopeName0|0x43|UINT8|0x000AC001    # ScopeName0 = 'C'; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtProcessorScopeName1|0x30|UINT8|0x000AC002    # ScopeName1 = '0'; BR SM
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtProcessorScopeInSb|FALSE|BOOLEAN|0x000AC003  # True  - processor scope in _SB; BR SM
+                                                                                              # False - processor scope in _PR
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiTableHeaderOemId|"AMD"|VOID*|0x000AC004             # Less than or equal to 6 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiTableHeaderOemTableId|"AmdTable"|VOID*|0x000AC005   # Less than or equal to 8 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtTableHeaderOemTableId|"AMD CPU"|VOID*|0x000AC006   # Less than or equal to 8 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiAlibSsdtTableHeaderOemTableId|"AMD ALIB"|VOID*|0x000AC007 # Less than or equal to 8 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiPtSsdtTableHeaderOemTableId|"AMD PT"|VOID*|0x000AC008   # Less than or equal to 8 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCditTableHeaderOemTableId|"AMD CDIT"|VOID*|0x000AC009   # Less than or equal to 8 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCratTableHeaderOemTableId|"AMD CRAT"|VOID*|0x000AC00A   # Less than or equal to 8 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiSlitTableHeaderOemTableId|"AMD SLIT"|VOID*|0x000AC00B   # Less than or equal to 8 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiSratTableHeaderOemTableId|"AMD SRAT"|VOID*|0x000AC00C   # Less than or equal to 8 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiIvrsTableHeaderOemTableId|"AMD IVRS"|VOID*|0x000AC00D   # Less than or equal to 8 bytes; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiMsctTableHeaderOemTableId|"AMD MSCT"|VOID*|0x000AC00E   # Less than or equal to 8 bytes; BR SM
+
+  #SMBIOS
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdRemoveSmbios|FALSE|BOOLEAN|0x00001000
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosSocketDesignationSocket0|"Unknown"|VOID*|0x00001001
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosSerialNumberSocket0|"Unknown"|VOID*|0x00001002
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosAssetTagSocket0|"Unknown"|VOID*|0x00001003
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosPartNumberSocket0|"Unknown"|VOID*|0x00001004
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosSocketDesignationSocket1|"Unknown"|VOID*|0x00001005
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosSerialNumberSocket1|"Unknown"|VOID*|0x00001006
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosAssetTagSocket1|"Unknown"|VOID*|0x00001007
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosPartNumberSocket1|"Unknown"|VOID*|0x00001008
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosT16MaximumCapacity|0x04000000|UINT32|0x00001009   # 4G  - 0x00400000
+                                                                                              # 8G  - 0x00800000
+                                                                                              # 16G - 0x01000000
+                                                                                              # 32G - 0x02000000
+                                                                                              # 64G - 0x04000000
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord0|0x2C00|UINT16|0x00001010
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord1|0xAD00|UINT16|0x00001011
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord2|0xC100|UINT16|0x00001012
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord3|0xCE00|UINT16|0x00001013
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord4|0x4F00|UINT16|0x00001014
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord5|0x9801|UINT16|0x00001015
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord6|0xFE02|UINT16|0x00001016
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord7|0x0B03|UINT16|0x00001017
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord8|0x2503|UINT16|0x00001018
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord9|0x8303|UINT16|0x00001019
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord10|0xCB04|UINT16|0x0000101A
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord11|0xC106|UINT16|0x0000101B
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord12|0x4304|UINT16|0x0000101C
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord13|0x0000|UINT16|0x0000101D
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord14|0x0000|UINT16|0x0000101E
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorWord15|0x0000|UINT16|0x0000101F
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr0|"Micron Technology"|VOID*|0x00001020
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr1|"SK Hynix"|VOID*|0x00001021
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr2|"Infineon (Siemens)"|VOID*|0x00001022
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr3|"Samsung"|VOID*|0x00001023
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr4|"Transcend Information"|VOID*|0x00001024
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr5|"Kingston"|VOID*|0x00001025
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr6|"Elpida"|VOID*|0x00001026
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr7|"Nanya Technology"|VOID*|0x00001027
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr8|"Kingmax Semiconductor"|VOID*|0x00001028
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr9|"Buffalo (Formerly Melco)"|VOID*|0x00001029
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr10|"A-DATA Technology"|VOID*|0x0000102A
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr11|"ASint Technology"|VOID*|0x0000102B
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr12|"Ramaxel Technology"|VOID*|0x0000102C
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr13|"Unknown"|VOID*|0x0000102D
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr14|"Unknown"|VOID*|0x0000102E
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosDimmVendorStr15|"Unknown"|VOID*|0x0000102F
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmbiosT16ExtMaximumCapacity|0x0000020000000000|UINT64|0x00001030   # 2TB  - 0x0000020000000000
+
+  # APCB 3.0
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdApcbPriorityLevelAdmin|2|UINT8|0x000AB000     # Customizable Priority Levels
+                                                                                    #   - 2 (APCB_PRIORITY_CUSTOM0)
+                                                                                    #   - 3 (APCB_PRIORITY_CUSTOM1)
+                                                                                    #   - 5 (APCB_PRIORITY_CUSTOM2)
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdApcbPriorityLevelDebug|3|UINT8|0x000AB001
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdApcbPriorityLevelNormal|5|UINT8|0x000AB002
+
+[PcdsDynamic]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMemEccEnable|TRUE|BOOLEAN|0x00030001
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMemUmaEnable|TRUE|BOOLEAN|0x00030002
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMemDmiEnable|TRUE|BOOLEAN|0x00030003
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMemPostPackageRepair|TRUE|BOOLEAN|0x00030004
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateMode|1|UINT8|0x000CC001                # 0 - CStateModeDisabled, 1 - CStateModeC6; BR SM RV
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateIoBaseAddress|0x413|UINT16|0x000CC002  # Setting IoBaseAddress = 0 to disable IoCstate and CC6; BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPowerCeiling|0x0|UINT32|0x000CC003           # BR
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCpbMode|0x1|UINT8|0x000CC004                 # 0 - CPB disabled, 1 - Auto ;BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHardwarePrefetchMode|0|UINT8|0x000CC005      # See enum HARDWARE_PREFETCH_MODE; BR SM
+                                                                                   # 0 - HARDWARE_PREFETCHER_AUTO;
+                                                                                   # 1 - DISABLE_HW_PREFETCHER_TRAINING_ON_SOFTWARE_PREFETCHES;
+                                                                                   # 2 - DISABLE_L1_PREFETCHER;
+                                                                                   # 3 - DISABLE_L2_STRIDE_PREFETCHER
+                                                                                   # 4 - DISABLE_HARDWARE_PREFETCH
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSoftwarePrefetchMode|0|UINT8|0x000CC006      # See enum SOFTWARE_PREFETCH_MODE; BR SM
+                                                                                   # 0 - SOFTWARE_PREFETCHES_AUTO
+                                                                                   # 1 - DISABLE_SOFTWARE_PREFETCHES
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAgesaPstatePolicy|0|UINT8|0x000CC007         # 0 - PSD is dependent or independent per processor default; BR SM
+                                                                                   # 1 - PSD is forced dependent
+                                                                                   # 2 - PSD is forced independent
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDownCoreMode|0|UINT8|0x000CC008              # See enum CCX_DOWN_CORE_MODE; BR ZP RV SSP
+                                                                                   # Valid values for RV = 0, 1, 3, 4
+                                                                                   # Note that if down coring occurs, the system must be power cycled
+                                                                                   # to restore disabled cores, or before attempting to down core further
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmtMode|0x1|UINT8|0x000CC009                 # 0 - SMT disabled, 1 - SMT Auto; ZP RV SSP
+                                                                                   # Note that once SMT has been disabled, the system must be power
+                                                                                   # cycled to restore the disabled threads
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCcdMode|0|UINT8|0x000CC00A                   # SSP. See enum CCD_MODE
+                                                                                   # Note that if CCD down coring occurs, the system must be power cycled
+                                                                                   # to restore disabled CCDs, or before attempting to down core further
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdt|TRUE|BOOLEAN|0x000CC00B          # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtPct|TRUE|BOOLEAN|0x000CC00C       # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtPss|TRUE|BOOLEAN|0x000CC00D       # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtXpss|TRUE|BOOLEAN|0x000CC00E      # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtPsd|TRUE|BOOLEAN|0x000CC00F       # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtPpc|TRUE|BOOLEAN|0x000CC010       # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCstC1|TRUE|BOOLEAN|0x000CC011            # BR SM RV
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCstC3|FALSE|BOOLEAN|0x000CC012           # RV
+
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCrat|TRUE|BOOLEAN|0x000CC013             # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCdit|TRUE|BOOLEAN|0x000CC014             # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiWhea|TRUE|BOOLEAN|0x000CC015             # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiSrat|TRUE|BOOLEAN|0x000CC016             # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiSlit|TRUE|BOOLEAN|0x000CC017             # BR SM
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAgesaDmi|TRUE|BOOLEAN|0x000CC018             # BR SM
+
+  # Dynamic PCD used to indicate whether or not the current config supports S3
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiS3Support|TRUE|BOOLEAN|0x000CC019        # BR ZP RV
+                                                                                   # TRUE - S3 can be enabled
+                                                                                   # FALSE - S3 support should be disabled
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCpuWdtEn|TRUE|BOOLEAN|0x000CC01A             # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCpuWdtTimeout|0xFFFF|UINT16|0x000CC01B       # ZP SSP. '0xFFFF' means Auto which will use silicon reset value
+                                                                                   #   RESTRICTION: When both CPU WDT & DF WDT are enable, the CPU WDT timeout must be greater than or equal to the DF CCM WDT timeout limit
+                                                                                   #    upper 8 bits - CpuWdtCountSel | lower 8 bits - CpuWdtTimeBase
+                                                                                   #      0 - 4095                        00 - 1.31ms
+                                                                                   #      1 - 2047                        01 - 1.28us
+                                                                                   #      2 - 1023                        Reserved
+                                                                                   #      3 - 511
+                                                                                   #      4 - 255
+                                                                                   #      5 - 127
+                                                                                   #      6 - 63
+                                                                                   #      7 - 31
+                                                                                   #      8 - 8191
+                                                                                   #      9 - 16383
+                                                                                   #      Reserved
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL1StreamPrefetcher|TRUE|BOOLEAN|0x000CC01C   # SM RV
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL2StreamPrefetcher|TRUE|BOOLEAN|0x000CC01D   # SM RV
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuPerfPresentCap|0xFF|UINT8|0x000CC01E  # BR SM RV
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiMsct|TRUE|BOOLEAN|0x000CC01F             # BR SM
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdScnLockNEnable|FALSE|BOOLEAN|0x000CC020      # ZP-SP3
+                                                                                   # TRUE: force Locks to only schedule non-speculative
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuCstC1Latency|0x00000001|UINT16|0x000CC021  # RV. 1.   Used when C3 is on, otherwise use PPR value.
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuCstC2Latency|0x00000012|UINT16|0x000CC022  # RV. 18.  Used when C3 is on, otherwise use PPR value.
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuCstC3Latency|0x0000015E|UINT16|0x000CC023  # RV. 350. Used when C3 is on, otherwise use PPR value.
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC1MinRes|0x00000000|UINT32|0x000CC024   # RV. 0
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC2MinRes|0x0000003C|UINT32|0x000CC025   # RV. 60
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC3MinRes|0x000003E8|UINT32|0x000CC026   # RV. 1000
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC1WorstCaseWakeupLatency|0x00000001|UINT32|0x000CC027 # RV. 1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC2WorstCaseWakeupLatency|0x00000012|UINT32|0x000CC028 # RV. 18
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC3WorstCaseWakeupLatency|0x0000015E|UINT32|0x000CC029 # RV. 350
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiC3Ctrl|0x00|UINT8|0x000CC02A              # RV. ACPI C3 control
+                                                                                    # 0 - Disable
+                                                                                    # 1 - CST
+                                                                                    # 2 - LPI with CST
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricPstateSupport|TRUE|BOOLEAN|0x000DF000  # BR
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricEccScrubRedirection|TRUE|BOOLEAN|0x000DF001  # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricEccScrubPoisoned|TRUE|BOOLEAN|0x000DF002 # SSP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricEccScrubRedirectionLimit|0xFF|UINT8|0x000DF003 # SSP NOTE: Only works when either PcdAmdFabricEccScrubRedirection or PcdAmdFabricEccScrubPoisoned is TRUE
+                                                                                           # 0 - Infinite
+                                                                                           # 1 - 2
+                                                                                           # 2 - 4
+                                                                                           # 3 - 8
+                                                                                           # 0xFF - Auto
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricDramScrubTime|0xFF|UINT8|0x000DF004    # ZP SSP
+                                                                                   #    0 - Disable;
+                                                                                   #   24 - 24 hours (default)
+                                                                                   # 0xFF - Auto
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricWdtCfg|0xFF|UINT8|0x000DF005           # ZP
+                                                                                   # 0 - 1.31ms
+                                                                                   # 1 - 1.28us
+                                                                                   # 2 - 10ns
+                                                                                   # 3 - Disabled
+                                                                                   # 0xFF - Auto
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricWdtCntSel|0xFF|UINT8|0x000DF006        # ZP
+                                                                                   # 0: 31
+                                                                                   # 1: 127
+                                                                                   # 2: 255
+                                                                                   # 3: 511
+                                                                                   # 4: 1023
+                                                                                   # 5: 2047
+                                                                                   # 6: 4095
+                                                                                   # 7: 16383
+                                                                                   # 0xFF - Auto
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitDegree|0xFF|UINT8|0x000DF007       # ZP
+                                                                                   # 0: Honor the hardware
+                                                                                   # 1: Maximum 1 unique distance (all self)
+                                                                                   # 2: Maximum 2 unique distances (self, not self)
+                                                                                   # 3: Maximum 3 unique distances (self, on socket, remote socket)
+                                                                                   # 0xFF - Auto
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabric2ndDegreeSlitDistance|0x1C|UINT8|0x000DF008        # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabric3rdDegreeSlitLocalDistance|0x10|UINT8|0x000DF009   # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabric3rdDegreeSlitRemoteDistance|0x20|UINT8|0x000DF00A  # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricCcxAsNumaDomain|FALSE|BOOLEAN|0x000DF00B           # SSP
+                                                                                               # create a layer of virtual domains on top of the physical
+                                                                                               # domains in which each CCX is declared to be in its on domain
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitDistancePcdCtrl|0xFF|UINT8|0x000DF00C          # SSP
+                                                                                               # 0: Manual - honor the PCDs
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitVirtualDistance|0x0B|UINT8|0x000DF00D          # SSP
+                                                                                               # if PcdAmdFabricSlitDistancePcdCtrl is zero, this value
+                                                                                               # specifies the distance between two virtual domains that
+                                                                                               # belong to the same physical domain
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitLocalDistance|0x0C|UINT8|0x000DF00E            # SSP
+                                                                                               # if PcdAmdFabricSlitDistancePcdCtrl is zero, this value
+                                                                                               # specifies the distance between two physical domains on
+                                                                                               # the same socket
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitRemoteDistance|0x20|UINT8|0x000DF00F           # SSP
+                                                                                               # if PcdAmdFabricSlitDistancePcdCtrl is zero, this value
+                                                                                               # specifies the distance between two physical domains on
+                                                                                               # different sockets
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitAutoRemoteFar|TRUE|BOOLEAN|0x000DF010          # SSP
+                                                                                               # if PcdAmdFabricSlitDistancePcdCtrl is non-zero, this boolean
+                                                                                               # switches between setting a value of 2.8 or 3.2 is reported
+                                                                                               # for domains on different sockets.  The possible values are
+                                                                                               # on two different sides of a threshold for certain operating
+                                                                                               # systems
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitSLinkLocalDistance|0x32|UINT8|0x000DF011       # SSP
+                                                                                               # if PcdAmdFabricSlitDistancePcdCtrl is zero, this value
+                                                                                               # specifies the distance between a conventional domain and
+                                                                                               # an SLink connected domain, both on the same socket
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitSLinkRemoteDistance|0x3C|UINT8|0x000DF012      # SSP
+                                                                                               # if PcdAmdFabricSlitDistancePcdCtrl is zero, this value
+                                                                                               # specifies the distance between a conventional domain and
+                                                                                               # an SLink connected domain, each on different sockets
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitInterSLinkLocalDistance|0xFF|UINT8|0x000DF013  # SSP
+                                                                                               # if PcdAmdFabricSlitDistancePcdCtrl is zero, this value
+                                                                                               # specifies the distance between two SLink connected
+                                                                                               # domains, both on the same socket
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitInterSLinkRemoteDistance|0xFF|UINT8|0x000DF014 # SSP
+                                                                                               # if PcdAmdFabricSlitDistancePcdCtrl is zero, this value
+                                                                                               # specifies the distance between two SLink connected
+                                                                                               # domains, each on different sockets
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmiCmdPortAddr|0xB0|UINT16|0x0003FFC0
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchApuRasSmiSupport|FALSE|BOOLEAN|0x0003FFC1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMmioAbove4GLimit|0xFFFFFFFFFFFFFFFF|UINT64|0x0003FFC2   # TOM2 ~ PcdAmdMmioAbove4GLimit is total above 4G MMIO will be used
+                                                                                              # if PcdAmdMmioAbove4GLimit <= TOM2 or 4G, there's no above 4G MMIO
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricResourceDefaultMap|FALSE|BOOLEAN|0x0003FFC3 # TRUE - MMIO/IO distribution would apply the default strategy (evenly)
+
+  #NBIO
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPcieSubsystemDeviceID|0x1453|UINT16|0x00041500  # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPcieSubsystemVendorID|0x1022|UINT16|0x00041501  # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCfgGnbPcieSSID|0x12341022|UINT32|0x00041502     # BR
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCfgGnbIGPUSSID|0|UINT32|0x00041503              # BR
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCfgGnbHDAudioSSID|0|UINT32|0x00041504           # BR
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgNbioSsid|0|UINT32|0x00041505                    # ZP Subsystem ID/Subsystem Vendor ID for
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSsid|0|UINT32|0x00041506                   # ZP Subsystem ID/Subsystem Vendor ID for
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgPspccpSsid|0|UINT32|0x00041507                  # ZP Subsystem ID/Subsystem Vendor ID for
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgNtbccpSsid|0|UINT32|0x00041508                  # ZP Subsystem ID/Subsystem Vendor ID for
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgXgbeSsid|0|UINT32|0x00041509                    # ZP Subsystem ID/Subsystem Vendor ID for
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgNbifF0Ssid|0|UINT32|0x0004150A                  # ZP Subsystem ID/Subsystem Vendor ID for
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgNbifRCSsid|0|UINT32|0x0004150B                  # ZP Subsystem ID/Subsystem Vendor ID for
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgNtbSsid|0|UINT32|0x0004150C                     # ZP Subsystem ID for NTB devices
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgAEREnable|TRUE|BOOLEAN|0x0004F000
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgPeApmEnable|0|UINT8|0x0004F001
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgACSEnable|TRUE|BOOLEAN|0x0004F002
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdHotplugI2cAddress|0x70|UINT8|0x0004F003
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEarlyBmcLinkTraining|FALSE|BOOLEAN|0x0004F004   # ZP Server
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEarlyBmcLinkSocket|0xFF|UINT8|0x0004F005        # ZP Server
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEarlyBmcLinkDie|0xFF|UINT8|0x0004F006           # ZP Server
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgPcieAriSupport|FALSE|BOOLEAN|0x0004F007
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgHdAudioEnable|TRUE|BOOLEAN|0x0004F008
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdHotplugSlotIndex|0x0|UINT8|0x0004F009
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPcieLinkTrainingType|0x0|UINT8|0x0004F00A
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPowerSupplyIdleControl|0x01|UINT8|0x0004F00B # 0x01 = Low Current Idle
+                                                                                   # 0x00 = Typical Current Idle
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgSensorFusionHubEnable|FALSE|BOOLEAN|0x0004F00C # TRUE = Enable, FALSE = Disable
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgForcePcieGenSpeed|0|UINT8|0x0004F00D    # 1 - Gen1
+                                                                              # 2 - Gen2
+                                                                              # 3 - Gen3
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSetSlowPPTLimitApuOnly|0|UINT32|0x0004F00E    # AA Mode enable, then user can input mW
+
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDisableSideband|0|BOOLEAN|0x0004F010        # 1 = hot plug controller ignores sideband signals
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDisableL1wa|0|BOOLEAN|0x0004F011            # 1 = disable hot plug controller form enforcing valid device presence during L1 hot remove
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDisableBridgeDis|0|BOOLEAN|0x0004F012       # 1 = disable register update of BridgeDis based on sideband
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDisableIrqPoll|0|BOOLEAN|0x0004F013         # 1 = hot plug controller holds root port IRQ until DL_Active is set
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIrqSetBridgeDis|0|BOOLEAN|0x0004F014        # 1 = register control of BridgeDis depends only on DL_Active
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgTDC|0x00|UINT32|0x0004F020              # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgEDC|0x00|UINT32|0x0004F021              # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioAudioSelect|0x1|UINT8|0x0004F022            # RV
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDeterminismControl|FALSE|BOOLEAN|0x0004F023     # ZP # FALSE - Power, TRUE - Performance
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdcTDP|0x00|UINT32|0x0004F024                  # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPSIDisable|FALSE|BOOLEAN|0x0004F026          # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport|TRUE|BOOLEAN|0x0004F027
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEfficiencyOptimizedMode|FALSE|BOOLEAN|0x0004F029 # 0 = use performance optimized CCLK DPM settings, 1 = use power efficiency optimized CCLK DPM settings
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAcpController|TRUE|BOOLEAN|0x0004F02A           # Enable:TRUE  Disable:False
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgSystemConfiguration|0|UINT8|0x0004F02B       # This is the FW configurations; 0 = use fused default; >0 = user specified value
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioReportEdbErrors|FALSE|BOOLEAN|0x0004F02C
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDxioMajorRevision|0|UINT32|0x0004F02D
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDxioMinorRevision|0|UINT32|0x0004F02E
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgAzaliaEnable|TRUE|BOOLEAN|0x0004F02F         #Az function enable
+  #PCie PSPP Power Policy
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPsppPolicy|0|UINT8|0x0004F030              # PsppDisabled PSPP disabled
+                                                                                # PsppPerformance = 1,        ///< Performance
+                                                                                # PsppBalance,                ///< Balance-Low
+                                                                                # PsppPowerSaving,            ///< Power Saving
+                                                                                # MaxPspp                     ///< Max Pspp for boundary check
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDfCstateEnable|0|UINT8|0x00051000
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPackagePowerLimitEnable|0|UINT8|0x00051001
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdcTDPControlEnable|0|UINT8|0x00051002
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPackagePowerLimitControlEnable|0|UINT8|0x00051003
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgApbDis|0|UINT8|0x00051004
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgFixedSocPstate|0|UINT8|0x00051005
+
+  #Fan table control
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdForceFanPwmEn|0x00|UINT8|0x0004F031
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdForceFanPwm|0x00|UINT8|0x0004F032
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableOverride|0x00|UINT8|0x0004F033
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableHysteresis|0x00|UINT8|0x0004F034
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableTempLow|0x00|UINT8|0x0004F035
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableTempMed|0x00|UINT8|0x0004F036
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableTempHigh|0x00|UINT8|0x0004F037
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableTempCritical|0x00|UINT8|0x0004F038
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePwmLow|0x00|UINT8|0x0004F039
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePwmMed|0x00|UINT8|0x0004F03A
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePwmHigh|0x00|UINT8|0x0004F03B
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePwmFreq|0x00|UINT8|0x0004F03C
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePolarity|0x00|UINT8|0x0004F03D
+
+  #GFX
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpPhyOverride|0x00|UINT16|0x0004F040 #
+                                                                           #ENABLE_DVI_TUNINGSET    = 0x01
+                                                                           #ENABLE_HDMI_TUNINGSET   = 0x02
+                                                                           #ENABLE_HDMI6G_TUNINGSET = 0x04
+                                                                           #ENABLE_DP_TUNINGSET     = 0x08
+                                                                           #ENABLE_DP_HBR3_TUNINGSET= 0x10
+                                                                           #ENABLE_DP_HBR_TUNINGSET = 0x20
+                                                                           #ENABLE_HBR2_TUNINGSET   = 0x40
+                                                                           #ENABLE_EDP_TUNINGSET    = 0x80
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_max_symclk_in10khz|0x00|UINT32|0x0004F041     # 400000 = override DP1 and DP2 phy HDMI setting above 4Ghz
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_encoder_mode|0x00|UINT8|0x0004F042            # 2: DVI, 3: HDMI mode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_phy_sel|0x00|UINT8|0x0004F043                 # bit0= phya, bit1=phyb, ....bit5 = phyf
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_margindeemph|0x00|UINT16|0x0004F044           # COMMON_MAR_DEEMPH_NOM[7:0]tx_margin_nom [15:8]deemph_gen1_nom
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_deemph_6db_4|0x00|UINT8|0x0004F045            # COMMON_SELDEEMPH60[31:24]deemph_6db_4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_boostadj|0x00|UINT8|0x0004F046                # CMD_BUS_GLOBAL_FOR_TX_LANE0 [19:16]tx_boost_adj  [20]tx_boost_en  [23:22]tx_binary_ron_code_offset
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_tx_driver_fifty_ohms|0x00|UINT8|0x0004F047    # COMMON_ZCALCODE_CTRL[21].tx_driver_fifty_ohms
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_deemph_sel|0x00|UINT8|0x0004F048              # MARGIN_DEEMPH_LANE0.DEEMPH_SEL
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_max_symclk_in10khz|0x00|UINT32|0x0004F049     # 400000 = override DP1 and DP2 phy HDMI setting above 4Ghz
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_encoder_mode|0x00|UINT8|0x0004F04A            # 2: DVI, 3: HDMI mode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_phy_sel|0x00|UINT8|0x0004F04B                 # bit0= phya, bit1=phyb, ....bit5 = phyf
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_margindeemph|0x00|UINT16|0x0004F04C           # COMMON_MAR_DEEMPH_NOM[7:0]tx_margin_nom [15:8]deemph_gen1_nom
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_deemph_6db_4|0x00|UINT8|0x0004F04D            # COMMON_SELDEEMPH60[31:24]deemph_6db_4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_boostadj|0x00|UINT8|0x0004F04E                # CMD_BUS_GLOBAL_FOR_TX_LANE0 [19:16]tx_boost_adj  [20]tx_boost_en  [23:22]tx_binary_ron_code_offset
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_tx_driver_fifty_ohms|0x00|UINT8|0x0004F04F    # COMMON_ZCALCODE_CTRL[21].tx_driver_fifty_ohms
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_deemph_sel|0x00|UINT8|0x0004F050              # MARGIN_DEEMPH_LANE0.DEEMPH_SEL
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_max_symclk_in10khz|0x00|UINT32|0x0004F051   # 400000 = override DP1 and DP2 phy HDMI setting above 4Ghz
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_encoder_mode|0x00|UINT8|0x0004F052          # 2: DVI, 3: HDMI mode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_phy_sel|0x00|UINT8|0x0004F053               # bit0= phya, bit1=phyb, ....bit5 = phyf
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_margindeemph|0x00|UINT16|0x0004F054         # COMMON_MAR_DEEMPH_NOM[7:0]tx_margin_nom [15:8]deemph_gen1_nom
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_deemph_6db_4|0x00|UINT8|0x0004F055          # COMMON_SELDEEMPH60[31:24]deemph_6db_4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_boostadj|0x00|UINT8|0x0004F056              # CMD_BUS_GLOBAL_FOR_TX_LANE0 [19:16]tx_boost_adj  [20]tx_boost_en  [23:22]tx_binary_ron_code_offset
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_tx_driver_fifty_ohms|0x00|UINT8|0x0004F057  # COMMON_ZCALCODE_CTRL[21].tx_driver_fifty_ohms
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_deemph_sel|0x00|UINT8|0x0004F058            # MARGIN_DEEMPH_LANE0.DEEMPH_SEL
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdBackLightPwmHz|200|UINT16|0x0004F059
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrOnDigonToDe|0x0|UINT8|0x0004F060
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrOnDeToVaryBl|0x0|UINT8|0x0004F061
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrDownVaryBloffToDe|0x0|UINT8|0x0004F062
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrDownDeToDigOff|0x0|UINT8|0x0004F063
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrOffDelay|0x0|UINT8|0x0004F064
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrOnVaryBlToBlon|0x0|UINT8|0x0004F065
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrDownBloffToVaryBlOff|0x0|UINT8|0x0004F066
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMinAllowedBlLevel|0x0|UINT8|0x0004F067
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpPhySel|0x00|UINT8|0x0004F068
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpVersion|0x00|UINT8|0x0004F069
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpTableSize|0x00|UINT16|0x0004F070
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAtomDpPhyDpSetting|0x00|UINT32|0x0004F071
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr3PhySel|0x00|UINT8|0x0004F072
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr3Version|0x00|UINT8|0x0004F073
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr3TableSize|0x00|UINT16|0x0004F074
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAtomDpHbr3PhyDpSetting|0x00|UINT32|0x0004F075
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgMaxNumAudioEndpoints|0x4|UINT8|0x0004F076
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDpHBR2Disable0|FALSE|BOOLEAN|0x0004F077
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDpHBR2Disable1|FALSE|BOOLEAN|0x0004F078
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDpHBR2Disable2|FALSE|BOOLEAN|0x0004F079
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDpHBR2Disable3|FALSE|BOOLEAN|0x0004F07A
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDpHBR3Disable0|FALSE|BOOLEAN|0x0004F07B
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDpHBR3Disable1|FALSE|BOOLEAN|0x0004F07C
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDpHBR3Disable2|FALSE|BOOLEAN|0x0004F07D
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDpHBR3Disable3|FALSE|BOOLEAN|0x0004F07E
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdHDMI2Disable0|FALSE|BOOLEAN|0x0004F07F
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdHDMI2Disable1|FALSE|BOOLEAN|0x0004F080
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdHDMI2Disable2|FALSE|BOOLEAN|0x0004F081
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdHDMI2Disable3|FALSE|BOOLEAN|0x0004F082
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbrPhySel|0x00|UINT8|0x0004F083
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbrVersion|0x00|UINT8|0x0004F084
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbrTableSize|0x00|UINT16|0x0004F085
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAtomDpHbrTuningSetting|0x00|UINT32|0x0004F086
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr2PhySel|0x00|UINT8|0x0004F087
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr2Version|0x00|UINT8|0x0004F088
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr2TableSize|0x00|UINT16|0x0004F089
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAtomDpHbr2TuningSetting|0x00|UINT32|0x0004F090
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdEDpPhySel|0x00|UINT8|0x0004F091
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdEDpVersion|0x00|UINT8|0x0004F092
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdEDpTableSize|0x00|UINT16|0x0004F093
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAtomEDpTuningSetting|0x00|UINT32|0x0004F094
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopEnable|FALSE|BOOLEAN|0x0004F095
+
+  #GNB SMU 10 CBS debug options
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetry_VddcrVddfull_Scale_Current|0x00|UINT32|0x0004F0A0
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetry_VddcrVddOffset|0x00|UINT32|0x0004F0A1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetry_VddcrSocfull_Scale_Current|0x00|UINT32|0x0004F0A2
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetry_VddcrSocOffset|0x00|UINT32|0x0004F0A3
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFastPptLimit|0x00|UINT32|0x0004F0A4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSlowPptLimit|0x00|UINT32|0x0004F0A5
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSlowPptTimeConstant|0x00|UINT32|0x0004F0A6
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmLowPowerThreshold|0x00|UINT32|0x0004F0A7
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmSocLowPowerThreshold|0x00|UINT32|0x0004F0A8
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgThermCtlValue|0x00|UINT32|0x0004F0A9
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmMaximumCurrentLimit|0x00|UINT32|0x0004F0AA
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmSocMaximumCurrentLimit|0x00|UINT32|0x0004F0AB
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSustainedPowerLimit|0x00|UINT32|0x0004F0AC
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStapmTimeConstant|0x00|UINT32|0x0004F0AD
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdProchotlDeassertionRampTime|0|UINT32|0x0004F0AE
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmCurrentLimit|0x00|UINT32|0x0004F0AF
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmSocCurrentLimit|0x00|UINT32|0x0004F0B0
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVminFrequency|0x00|UINT32|0x0004F0B1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFMaxFrequency|0x00|UINT32|0x0004F0B2
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPhyA0DynamicControl|0|UINT8|0x0004F0B4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPhyA1DynamicControl|0|UINT8|0x0004F0B5
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPhyA2DynamicControl|0|UINT8|0x0004F0B6
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPhyA34DynamicControl|0|UINT8|0x0004F0B7
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetryVddcrVddfullScale2Current|0|UINT32|0x0004F0BC
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetryVddcrVddfullScale3Current|0|UINT32|0x0004F0BD
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetryVddcrVddfullScale4Current|0|UINT32|0x0004F0BE
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetryVddcrVddfullScale5Current|0|UINT32|0x0004F0BF
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgPPT|0|UINT32|0x0004F0C0                               # Package Power limit, separate from TDP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmuCc1Dis|0|UINT8|0x0004F0C2                          # 0=Use the default, 1=Disable CC1 for debug purposes
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSbTsiAlertComparatorModeEn|FALSE|BOOLEAN|0x0004F0C3
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdGetRVFamilyOPN|0|UINT32|0x0004F0C4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCoreDldoBypass|1|UINT8|0x0004F0C6                       #[1 means bypass]
+
+  #PIC
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdS0i2Enable|0|UINT8|0x0004F0D0
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdS0i3Enable|0|UINT8|0x0004F0D1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMinS0i3SleepTimeMs|0|UINT32|0x0004F0D2
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSttMinLimit|0|UINT32|0x0004F0D3
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsbPortsToClearWceWde0|0|UINT8|0x0004F0D4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsbPortsToClearWceWde1|0|UINT8|0x0004F0D5
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCfgGnbIGPUAudioSSID|0|UINT32|0x0004F0D6
+
+  #Overclocking Control
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdOcDisable|FALSE|BOOLEAN|0x0004F100
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdOcVoltageMax|0x00|UINT16|0x0004F101
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdOcFrequencyMax|0x00|UINT16|0x0004F102
+
+  #Ras Feature Control
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioPoisonConsumption|FALSE|BOOLEAN|0x000A5001  # ZP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioRASControl|FALSE|BOOLEAN|0x000A5002         # ZP
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMceSwSmiData|0x80|UINT8|0x000A5003
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMcaErrThreshEn|TRUE|BOOLEAN|0x000A5004
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMcaErrThreshCount|0x0FF5|UINT16|0x000A5005
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioCorrectedErrThreshEn|FALSE|BOOLEAN|0x000A5006
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioCorrectedErrThreshCount|0x0FF5|UINT16|0x000A5007
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioDeferredErrThreshEn|FALSE|BOOLEAN|0x000A5008
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioDeferredErrThreshCount|0x0FF5|UINT16|0x000A5009
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPcieEcrcEnablement|TRUE|BOOLEAN|0x000A500A
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPcieEcrcSeverityFatal|TRUE|BOOLEAN|0x000A500B
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspEinjSupport|FALSE|BOOLEAN|0x000A500C
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEgressPoisonSeverityLo|0x4|UINT32|0x000A5010                         # Sets value for EGREES POISON SEVERITY
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEgressPoisonSeverityHi|0x30011|UINT32|0x000A5011                     # Sets value for EGREES POISON SEVERITY
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMaskNbioSyncFlood|TRUE|BOOLEAN|0x000A5012                         # TRUE - Mask SyncFlood; FALSE - do not mask
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSyncFloodToApml|FALSE|BOOLEAN|0x000A5013                             # TRUE - Enable SyncFlood reporting to APML; FALSE disable reporting to APML
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioEgressPoisonMaskHi|0xFFFCFFFF|UINT32|0x000A5014               # Sets value for EGRESS POISON MASK
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioEgressPoisonMaskLo|0xFFFFFFFB|UINT32|0x000A5015               # Sets value for EGRESS POISON MASK
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioRASUcpMaskLo|0x00000004|UINT32|0x000A5016                     # A value of 1 in the bit position triggers a system fatal error event on arrays associated with that egress port.
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioRASUcpMaskHi|0x00030000|UINT32|0x000A5017                     # A value of 1 in the bit position triggers a system fatal error event on arrays associated with that egress port.
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSyshubWdtTimerInterval|2600|UINT32|0x000A5018                        # Value in milliseconds 1-65535
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSlinkConvertReadResponseErrorsToOkay|FALSE|BOOLEAN|0x000A5019        # (TRUE) enable or (FALSE) disable convert read response errors to "okay" responses with data of all FFs
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSlinkWriteResponseErrorHandling|0|UINT8|0x000A501A                   # (0) log errors in MCA; (1) trigger an MCOMMIT error; (2) convert to "OKAY" response.
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdLogPoisonDataFromSLink|FALSE|BOOLEAN|0x000A501B                   # (TRUE) enable or (FALSE) disable generating a deferred error when poison data is propagated from S-Link
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPcieAerReportMechanism|0|UINT8|0x000A501D                         # (0) MCA reporting; (1) OS First; (2) FW First
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdEdpcEnable|0|UINT8|0x000A501E                                     # (0) Disabled; (1) Enabled; (3) Auto
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioRASControlV2|0|UINT8|0x000A5020                               # Used for SSP and onward. (0) Disabled, (1) MCA, (2) Legacy
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAfterResetDelay|0|UINT16|0x000A5021
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdS0i3SetGenericPeRstEnable|FALSE|BOOLEAN|0x000A5022
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdS0i3SetGenericPeRstGpio0|0|UINT32|0x000A5023
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdS0i3SetGenericPeRstGpio1|0|UINT32|0x000A5024
+
+  #FCH
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchFullHardReset|FALSE|BOOLEAN|0x000A6002
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEspiOperatingFreq|0x0F|UINT8|0x000A6003                              # ESPI Operating Frequency  - 0:16.7MHz, 1:33MHz, 2:66MHz, 0x0F:Auto depend on the capability of the Host and Device
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEspiIoMode|0x0F|UINT8|0x000A6004                                     # ESPI IO Mode  - 0:Single IO, 1:Dual IO, 2:Quad IO, 0x0F:Auto depend on the capability of the Host and Device
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEspiIoMmioDecode|{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}|VOID*|0x000A6005
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiIoMmioDecode|{ \
+  #   #ESPI IO decode range parameter
+  #   # 1,ENABLE              - ESPI IO Decode Range 0 (UINT8)  - 0:disable, 1:enable
+  #   # 2,3,BASE              - ESPI IO Decode Range base (UINT16) - support 4Ch/4Eh/4Fh 62h/66h 600h-6FFh
+  #   # 4,SIZE                - ESPI IO Decode Range size (UINT8) - 0:1 byte, 1:2 byte, etc.
+  #   #ESPI IO decode range 0
+  #   0x00, 0x00, 0x00, 0x00, \
+  #   #ESPI IO decode range 1
+  #   0x00, 0x00, 0x00, 0x00, \
+  #   #ESPI IO decode range 2
+  #   0x00, 0x00, 0x00, 0x00, \
+  #   #ESPI IO decode range 3
+  #   0x00, 0x00, 0x00, 0x00, \
+  #   #ESPI MMIO decode range parameter
+  #   # 1,ENABLE              - ESPI MMIO Decode Range 0 (UINT8)  - 0:disable, 1:enable
+  #   # 2,3,4,5,BASE          - ESPI MMIO Decode Range base (UINT32)
+  #   # 6,7,SIZE              - ESPI MMIO Decode Range size (UINT16)
+  #   #ESPI MMIO decode range 0
+  #   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
+  #   #ESPI MMIO decode range 1
+  #   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
+  #   #ESPI MMIO decode range 2
+  #   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
+  #   #ESPI MMIO decode range 3
+  #   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
+
+[PcdsDynamicEx]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopConfigMemsize|0x00|UINT32|0x00050000
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopVmFbOffset|0x00|UINT32|0x00050001
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopVmFbLocationTop|0x00|UINT32|0x00050002
+
+

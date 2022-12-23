@@ -1,0 +1,11 @@
+<component>
+	name = "RandomNumberGen"
+	category = eModule
+	LocalRoot = "SecurityPkg\RandomNumberGenerator\"
+	RefName = "RandomNumberGen"
+[INF]
+"RngDxe\RngDxe.inf"
+[files]
+"RandomNumberGen.sdl"
+"RandomNumberGen.chm"		
+<endComponent>

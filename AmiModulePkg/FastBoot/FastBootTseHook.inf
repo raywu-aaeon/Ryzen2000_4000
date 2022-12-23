@@ -1,0 +1,40 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FastBootTseHook
+  FILE_GUID                      = 9edcbd06-3c78-4822-bd6e-a6847f7531c4
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = FastBootTseLib
+
+[Sources]
+  FastBootTseHook.c
+
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+
+[Protocols]
+  #gAmiFastBootProtocolGuid
+
+#[Guids]
+[BuildOptions]
+ MSFT:*_*_*_CC_FLAGS = /DPTT_BUILD
+ GCC:*_*_*_CC_FLAGS = -DPTT_BUILD
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************

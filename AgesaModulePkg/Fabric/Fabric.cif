@@ -1,0 +1,12 @@
+<component>
+	name = "Fabric"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Fabric\"
+	RefName = "AgesaModulePkg.Fabric"
+[INF]
+"RV\FabricRvDxe\AmdFabricRvDxe.inf"
+"RV\FabricRvSmm\AmdFabricRvSmm.inf"
+"RV\FabricRvPei\AmdFabricRvPei.inf"
+[files]
+"Fabric.sdl"
+<endComponent>

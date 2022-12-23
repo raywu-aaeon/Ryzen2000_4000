@@ -1,0 +1,126 @@
+#;*****************************************************************************
+#;
+#; Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#; 
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#; 
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#; 
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#; 
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#; 
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;*****************************************************************************
+
+#*****************************************************************************
+#*
+#* This software package can be used to enable the Overclocking of certain
+#* AMD processors and its use is subject to the terms and conditions of the
+#* AMD Overclocking Waiver. Enabling overclocking through use of the low-level
+#* routines included in this package and operating an AMD processor outside of
+#* the applicable AMD product specifications will void any AMD warranty and 
+#* can result in damage to the processor or the system into which the processor
+#* has been integrated. The user of this software assumes, and AMD disclaims,
+#* all risk, liability, costs and damages relating to or arising from the 
+#* overclocking of AMD processors.
+#*
+#******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AodSmmZp
+  FILE_GUID                      = AAF875D2-0968-4585-A40A-B35C9FE0CAEC
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AodSmmEntryPoint
+
+[sources]
+  AodSmm.c
+
+[sources.ia32]
+
+[sources.x64]
+
+[LibraryClasses]
+
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  BaseLib
+  DebugLib
+  SmmServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  UefiLib
+  PcdLib
+  AodRuntimeLib
+  AodCbsLibZp
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdAodUpdateMemClkTimings
+
+[Guids]
+
+[Protocols]
+  gFchSmmSwDispatch2ProtocolGuid         #CONSUMED
+  gEfiSmmBase2ProtocolGuid               #CONSUMED
+  gEfiSmmVariableProtocolGuid            #CONSUMED
+  gAodNvAreaUpdatedProtocolGuid          #CONSUMED
+  gEfiMetronomeArchProtocolGuid          #CONSUMED
+  gAmdApcbSmmServiceProtocolGuid         #CONSUMED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaFamily17ModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+
+[Depex]
+  gEfiSmmBase2ProtocolGuid
+  AND
+  gFchSmmSwDispatch2ProtocolGuid
+  AND
+  gAmdFchTaishanDepexProtocolGuid
+  AND
+  gAodNvAreaUpdatedProtocolGuid
+  AND
+  gEfiMetronomeArchProtocolGuid
+  AND
+  gAmdApcbSmmServiceProtocolGuid

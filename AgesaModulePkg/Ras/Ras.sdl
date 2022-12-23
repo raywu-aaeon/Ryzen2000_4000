@@ -1,0 +1,56 @@
+TOKEN
+	Name  = "AMD_RAS_ZP_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AMD Ras support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AMD_RAS_RV_APEI_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdRasRvApeiDxe support in the project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_RAS_RV_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdRasRvDxe support in the project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_RAS_RV_SMM_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdRasRvSmm support in the project"
+	TokenType = Boolean
+End
+
+
+INFComponent
+	Name  = "AmdRasRvApeidxe"
+	File  = "AmdRasRvApeidxe\AmdRasRvApeidxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_RAS_RV_APEI_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdRasRvDxe"
+	File  = "AmdRasRvDxe\AmdRasRvDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_RAS_RV_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdRasRvSmm"
+	File  = "AmdRasRvSmm\AmdRasRvSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_RAS_RV_SMM_SUPPORT" "=" "1"
+End

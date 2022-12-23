@@ -1,0 +1,11 @@
+<component>
+	name = "CbsFuncLibNull"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Library\CbsFuncLibNull\"
+	RefName = "AmdCbsPkg.CbsFuncLibNull"
+[INF]
+"CbsFuncLibDxe.inf"
+"CbsFuncLibPei.inf"
+[files]
+"CbsFuncLibNull.sdl"	
+<endComponent>

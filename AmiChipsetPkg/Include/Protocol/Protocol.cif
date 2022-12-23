@@ -1,0 +1,13 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "AmiChipsetPkg\Include\Protocol\"
+	RefName = "AmiChipsetPkg.Protocol"
+[files]
+"AcpiModeEnable.h"	
+"AmiMemInfo.h"	
+"NbSmiProtocol.h"	
+"SbSmiProtocol.h"
+"SbSataProtocol.h"	
+"SmmBiosWriteDispatch.h"	
+<endComponent>

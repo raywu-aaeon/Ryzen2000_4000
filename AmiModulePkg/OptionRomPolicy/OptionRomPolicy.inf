@@ -1,0 +1,69 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+
+## @file
+#  Option Rom Policy Driver implementation
+#
+## CONSUMES
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  VERSION_STRING            = 1.0
+  BASE_NAME                 = OptionRomPolicy
+  MODULE_TYPE               = DXE_DRIVER
+  FILE_GUID                 = 734E8BE9-4801-4a31-A3FA-D61CCB601CA9
+  ENTRY_POINT               = OptionRomPolicyEntryPoint
+  UEFI_HII_RESOURCE_SECTION = TRUE
+
+[Sources]
+  OptionRomPolicy.c
+  OptionRomPolicyPrivate.h
+  OptionRomPolicy.uni
+  OptionRomPolicy.vfr
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  HiiLib
+  PrintLib
+  AmiSdlLib
+  AmiPciBusLib
+  AmiHiiUpdateLib
+  DevicePathLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+
+[Protocols]
+  gAmiBoardInfo2ProtocolGuid  
+  gAmiBoardPciInitProtocolGuid
+  gEfiLegacyBiosProtocolGuid
+  gAmiBoardInfo2ProtocolGuid     
+  gEfiPciIoProtocolGuid
+  gAmiOpromPolicyProtocolGuid
+  gAmiCsmOpromPolicyProtocolGuid
+  gAmiOptionRomPolicyProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiPciIoProtocolGuid
+  gAmiBdsConnectDriversProtocolGuid  
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+
+[Depex]
+  gAmiBoardInfo2ProtocolGuid AND
+  gEfiPciRootBridgeIoProtocolGuid
+
+

@@ -1,0 +1,21 @@
+<component>
+    name = "Bds"
+    category = eCore
+    LocalRoot = "AmiModulePkg\Bds\"
+    RefName = "AmiModulePkg.Bds"
+[INF]
+"Bds.inf"
+[files]
+"Bds.sdl"	
+"Bds.mak"	
+"Bds.chm"	
+"AmiPlatformDriverOverrideHooksTemplate.h"	
+[dependency]
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;5.004_AmiCompatibilityPkg_13"
+IntelFrameworkModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/IntelFrameworkModulePkg;5.004_IntelFrameworkModulePkg_2"
+IntelFrameworkPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/IntelFrameworkPkg;5.004_IntelFrameworkPkg_02"
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;5.004_AmiTse_2_15_1237"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_10"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_14"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_48"
+<endComponent>

@@ -1,0 +1,628 @@
+TOKEN
+	Name  = "CrbPostTime_SUPPORT"
+	Value  = "1"
+	Help  = "For Post Time."
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "CrbPostTime_Optimized_SUPPORT"
+    Value  = "0"
+    Help  = "Enable PSP BB compress and disabled ctrl home recovery feature for optimized POST time."
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PSP_FV_BB_COMPRESS"
+	Value  = "1"
+	Help  = "A feature to turn on FV_BB compression"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+    Token = "CrbPostTime_Optimized_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "TcgCoreFvOverrideSupport"
+	Value  = "1"
+	Help  = "Enable or Disable TcgCoreFvOverride"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ENABLE_ROM_CACHE_IN_DXE"
+	Value  = "1"
+	Help  = "Switch to enable ROM cache in DXE"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PeiRamBootSupport"
+	Value  = "0"
+	Help  = "Main switch to enable PEI RAM Boot support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "ENABLE_ROM_CACHE_IN_DXE" "=" "1"
+End
+
+TOKEN
+    Name  = "CRB_SKIP_SWSMIxFF_IN_ROOT_SMI_HANDLER"
+    Value  = "1"
+    Help  = "Skip SwSmi 0xFF in root smi handler dispatcher"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB_SKIPPABLE_CSM_SUPPORT"
+	Value  = "1"
+	Help  = "To skip CSM related FFSs if CSM SETUP off"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NESTED_FV_MAIN" "=" "1"
+	Token = "CSM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CRB_SKIPPABLE_NETWORK_SUPPORT"
+	Value  = "1"
+	Help  = "To skip Network Stack related FFSs if Network SETUP off.\Please making sure all inf under AmiNetworkPkg(build\Platform.fdf) need to be appended into skip list."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NESTED_FV_MAIN" "=" "1"
+	Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CRB_SKIPPABLE_TCG_SUPPORT"
+    Value  = "1"
+    Help  = "To skip TCG related FFSs if TCG SETUP off"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetFDF = Yes
+    Token = "NESTED_FV_MAIN" "=" "1"
+    Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+    Token = "TCG2Support" "=" "1"
+End
+
+### For debugging
+###TOKEN
+###    Name  = "FLASH_DEFINITION"
+###    Value  = "DEBUG/POSTTIME/PlatformTest.fdf"
+###    TokenType = Expression
+###    TargetDSC = Yes
+###End
+ELINK
+	Name  = " "
+	Parent  = "IsCtrlHomePressed,"
+	Help  = "Ctr+Home detection"
+	Token = "KBC_SUPPORT" "=" "1"
+	InvokeOrder = ReplaceParent
+    Token = "CrbPostTime_Optimized_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "CrbSkippableFv"
+    File  = "CrbSkippableFv.inf"
+    Package  = "$(PLATFORM_PKG_NAME)"
+    ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "$(PLATFORM_PKG_NAME).CrbSkippableFv"
+    ModuleTypes  = "PEIM"
+    Override  = "$(PLATFORM_PKG_NAME).CrbPei"
+End
+
+FFS_FILE
+	Name  = "CrbSkippableFvFdf"
+	FD_AREA  = "FV_MAIN_WRAPPER"
+	Index  = '"BEFORE" "FvMainCompressed"'
+	FILE_Stmt  = "MandolinPkg/CrbPostTime/FvCrbSkippableFfsFdfFileStatement.txt"
+	Token = "NESTED_FV_MAIN" "=" "1"
+	Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+	Help  = "The FV contains the FFS that can be skipped for post time."
+End
+
+FFS_FILE
+	Name  = "CrbSkippableFvFdf"
+	FD_AREA  = "FV_MAIN_WRAPPER"
+	Index  = '"BEFORE" "FvMainCompressed"'
+	FILE_Stmt  = "MandolinPkg/CrbPostTime/FvCrbSkippableFfsFdfFileStatement.txt"
+	Token = "NESTED_FV_MAIN" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+	Help  = "The FV contains the FFS that can be skipped for post time."
+End
+
+FFS_FILE
+    Name  = "CrbSkippableFvFdf"
+    FD_AREA  = "FV_MAIN_WRAPPER"
+    Index  = '"BEFORE" "FvMainCompressed"'
+    FILE_Stmt  = "MandolinPkg/CrbPostTime/FvCrbSkippableFfsFdfFileStatement.txt"
+    Token = "NESTED_FV_MAIN" "=" "1"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+    Help  = "The FV contains the FFS that can be skipped for post time."
+End
+
+####--NO IMPROVE--FFS_FILE
+####--NO IMPROVE--    Name  = "CrbDxeBbFvFdf"
+####--NO IMPROVE--    FD_AREA  = "FV_BB"
+####--NO IMPROVE--    FILE_Stmt  = "MandolinPkg/CrbPostTime/FvCrbDxeFfsBbFdfFileStatement.txt"
+####--NO IMPROVE--    Help  = "The FV contains the DXE FFS that place in BB for post time."
+####--NO IMPROVE--End
+####--NO IMPROVE--
+####--NO IMPROVE--FFS_FILE
+####--NO IMPROVE--    Name  = "ROM Storage"
+####--NO IMPROVE--    FD_AREA  = "FV_CRB_DXE_BB"
+####--NO IMPROVE--    OpRom  = "AmiModulePkg\BoardInfo\PciRomTemplate.txt"
+####--NO IMPROVE--    Guid  = "a0327fe0-1fda-4e5b-905d-b510c45a61d0"
+####--NO IMPROVE--    Help  = "Override the original one in the AmiBoardInfo. The FFS place in the BB for post time."
+####--NO IMPROVE--End
+###---###-- Do not use. (debugging)
+###---PCIDEVICE
+###---    Title  = "NBIO Raven IGD UEFI GOP Container"
+###---    Parent  = "NBIO Internal Br0"
+###---    Attribute  = "0x0"
+###---    Dev_type  = "Container"
+###---    Dev  = 00h
+###---    Fun  = 00h
+###---    SleepNum  = 01h
+###---    ROMFile  = "AmiChipsetModulePkg/Gnb/Gop/AMDGenericGop.efi"
+###---    IntA =  LNKE; 52
+###---    IntB =  LNKF; 53
+###---    IntC =  LNKG; 54
+###---    IntD =  LNKH; 55
+###---    Token = "NBIO_RV_BRIDGE7_EXISTS" "=" "1"
+###---    DeviceType = OnBoard
+###---    PCIBusSize = 32bit
+###---    OptionROM = Yes
+###---    ROMMain = No
+###---    Virtual = Yes
+###---    SuppressDeviceGeneration = Yes
+###---    UefiRom = Yes
+###---    FFSFileName  = "UEFI ROM Storage"
+###---    ROMSectionGuid  = "dfd5316f-e5c0-4e61-8bc6-3876ec6c2083"
+###---    Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+###---    Help  = "To override the original PCIDEVICE. Separate UEFI rom to another storage(UEFI ROM Storage)"
+###---End
+###---FFS_FILE
+###---    Name  = "UEFI ROM Storage"
+###---    FD_AREA  = "FV_MAIN"
+###---    OpRom  = "AmiModulePkg/BoardInfo/PciRomTemplate.txt"
+###---    Guid  = "77777777-1fda-4e5b-905d-b510c45a61d0"
+###---    Help  = "The FFS contains UEFI oprom for us and separate the legacy rom to skippable FV"
+###---    Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+###---End
+###---FFS_FILE
+###---    Name  = "ROM Storage"
+###---    FD_AREA  = "FV_CRB_SKIPPABLE_CSM"
+###---###    Index  = '"BEFORE" "CrbSkippableFvFdf"'
+###---    OpRom  = "AmiModulePkg\BoardInfo\PciRomTemplate.txt"
+###---    Guid  = "a0327fe0-1fda-4e5b-905d-b510c45a61d0"
+###---    Help  = "Override the original one in the AmiBoardInfo. The FFS contains legacy oprom for us and separate the legacy rom to skippable FV"
+###---    Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+###---End
+### NOT YET ###INF AmiChipsetModulePkg/SB/SmBus/SmBusSmm.inf
+### NOT YET ###INF AgesaModulePkg/Psp/AmdPspKvm/AmdPspKvm.inf
+### NOT YET ###INF Build/NetworkStackSetupScreen.inf
+FFS_FILE
+	Name  = "LegacyInterrupt"
+	FD_AREA  = "FV_CRB_SKIPPABLE_CSM"
+	INFComponent  = "AmiChipsetModulePkg.LegacyInterrupt"
+	Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "LegacyRegion"
+	FD_AREA  = "FV_CRB_SKIPPABLE_CSM"
+	INFComponent  = "AmiChipsetModulePkg.LegacyRegion"
+	Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "CsmDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_CSM"
+	INFComponent  = "AmiModulePkg.CsmDxe"
+	Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+End
+FFS_FILE
+	Name  = "CsmBlockIo"
+	FD_AREA  = "FV_CRB_SKIPPABLE_CSM"
+	INFComponent  = "AmiModulePkg.CsmBlockIo"
+	Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "CsmVideo"
+	FD_AREA  = "FV_CRB_SKIPPABLE_CSM"
+	INFComponent  = "AmiModulePkg.CsmVideo"
+	Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "x86thunk"
+	FD_AREA  = "FV_CRB_SKIPPABLE_CSM"
+	INFComponent  = "AmiModulePkg.x86thunk"
+	Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "CrbPxeUefiDriver"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "$(PLATFORM_PKG_NAME).CrbPxeUefiDriver"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "SnpDxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+    INFComponent  = "AmiNetworkPkg.SnpDxe"
+    Token = "SnpDxe_SUPPORT" "=" "1"
+    Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "DpcDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.DpcDxe"
+	Token = "DpcDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "TlsAuthConfigDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.TlsAuthConfigDxe"
+	Token = "TlsAuthConfigDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "MnpDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.MnpDxe"
+	Token = "MnpDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "ArpDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.ArpDxe"
+	Token = "ArpDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "IpSecDxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+    INFComponent  = "AmiNetworkPkg.IpSecDxe"
+    Token = "IpSecDxe_SUPPORT" "=" "1"
+    Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "TcpDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.TcpDxe"
+	Token = "TcpDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "UefiPxeBcDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.UefiPxeBcDxe"
+	Token = "UefiPxeBcDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "VlanConfigDxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+    INFComponent  = "AmiNetworkPkg.VlanConfigDxe"
+    Token = "VLanConfigDxe_SUPPORT" "=" "1"
+    Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "HttpBootDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.HttpBootDxe"
+	Token = "HttpBootDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "HttpDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.HttpDxe"
+	Token = "HttpDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "DnsDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.DnsDxe"
+	Token = "DnsDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "HttpUtilitiesDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.HttpUtilitiesDxe"
+	Token = "HttpUtilitiesDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "TlsAuthConfigDxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+    INFComponent  = "AmiNetworkPkg.TlsAuthConfigDxe"
+    Token = "TlsAuthConfigDxe_SUPPORT" "=" "1"
+    Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "TlsDxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.TlsDxe"
+	Token = "TlsDxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "Dhcp4Dxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.Dhcp4Dxe"
+	Token = "Dhcp4Dxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "Ip4Dxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.Ip4Dxe"
+	Token = "Ip4Dxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "Mtftp4Dxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.Mtftp4Dxe"
+	Token = "Mtftp4Dxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "Tcp4Dxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+    INFComponent  = "AmiNetworkPkg.Tcp4Dxe"
+    Token = "Tcp4Dxe_SUPPORT" "=" "1"
+    Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "Udp4Dxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.Udp4Dxe"
+	Token = "Udp4Dxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "PreserveIP4ConfigVariable"
+    FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+    INFComponent  = "AmiNetworkPkg.PreserveIP4ConfigVariable"
+    Token = "PRESERVE_IP4_CONFIG_VARIABLE_SUPPORT" "=" "1"
+    Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "Ip6Dxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.Ip6Dxe"
+	Token = "Ip6Dxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "Udp6Dxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.Udp6Dxe"
+	Token = "Udp6Dxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "Dhcp6Dxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.Dhcp6Dxe"
+	Token = "Dhcp6Dxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "Mtftp6Dxe"
+	FD_AREA  = "FV_CRB_SKIPPABLE_NETWORK"
+	INFComponent  = "AmiNetworkPkg.Mtftp6Dxe"
+	Token = "Mtftp6Dxe_SUPPORT" "=" "1"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "AmiTcgNvflagSample"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.AmiTcgNvflagSample"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "AmiTcgPlatformDxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.AmiTcgPlatformDxe"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "TcgDxeplatform"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.TcgDxeplatform"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "TcgLegacy"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.TcgLegacy"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "Tpm20PlatformDxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.Tpm20PlatformDxe"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "Tpm20Acpi"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.Tpm20Acpi"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "TpmSmbiosDxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.TpmSmbiosDxe"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "TcgSmm"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.TcgSmm"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "TpmClearOnRollbackSmm"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.TpmClearOnRollbackSmm"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "AmiLegx16Bin"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.AmiLegx16Bin"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "AmiTpm32Bin"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.AmiTpm32Bin"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "AmiMpTpmBin"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.AmiMpTpmBin"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "TcgDxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.TcgDxe"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "Tcg2Dxe"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.Tcg2Dxe"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "TCMDXE"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.TCMDXE"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+    Token = "TCG2_VERSION" ">=" "18"
+End
+
+FFS_FILE
+    Name  = "TpmNvmeSupport"
+    FD_AREA  = "FV_CRB_SKIPPABLE_TCG"
+    INFComponent  = "AmiModulePkg.TpmNvmeSupport"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+    Token = "TCG2_VERSION" ">=" "18"
+End
+
+FD_AREA
+	Name  = "FV_CRB_SKIPPABLE_CSM"
+	TYPE  = "StandAlone"
+	FD_INFO  = "AMIROM"
+	Offset  = "0"
+	Size  = "0"
+	Attributes  = "0xffff"
+	Alignment  = "16"
+	Guid  = "51c81e99-df1a-4dc5-9966-0b8d9aa09cad"
+	Token = "CRB_SKIPPABLE_CSM_SUPPORT" "=" "1"
+	Help  = "The FV contains skippable FFS."
+End
+
+FD_AREA
+	Name  = "FV_CRB_SKIPPABLE_NETWORK"
+	TYPE  = "StandAlone"
+	FD_INFO  = "AMIROM"
+	Offset  = "0"
+	Size  = "0"
+	Attributes  = "0xffff"
+	Alignment  = "16"
+	Guid  = "e5274881-d739-4209-9882-7c564b19e263"
+	Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+	Help  = "The FV contains skippable FFS."
+End
+
+FD_AREA
+    Name  = "FV_CRB_SKIPPABLE_TCG"
+    TYPE  = "StandAlone"
+    FD_INFO  = "AMIROM"
+    Offset  = "0"
+    Size  = "0"
+    Attributes  = "0xffff"
+    Alignment  = "16"
+    Guid  = "03fe8617-2e04-472e-93e9-545227eb0786"
+    Token = "CRB_SKIPPABLE_TCG_SUPPORT" "=" "1"
+    Help  = "The FV contains skippable FFS."
+End
+
+FD_AREA
+    Name  = "FV_CRB_SKIPPABLE_EMPTY"
+    TYPE  = "StandAlone"
+    FD_INFO  = "AMIROM"
+    Offset  = "0"
+    Size  = "0"
+    Attributes  = "0xffff"
+    Alignment  = "16"
+    Guid  = "34e280d7-8b23-40e9-9647-b3ab8a20e58a"
+    Token = "CRB_SKIPPABLE_NETWORK_SUPPORT" "=" "1"
+    Help  = "A empty FV let kernel load it if kernel attempt to load skippable FV.(FV GUID is gCrbSkippableEmptyFvGuid)"
+End

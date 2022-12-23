@@ -1,0 +1,32 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiSmbiosLib
+  FILE_GUID                      = B219A640-C42E-4b7e-B7FA-135BFA9D6964
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiSmbiosLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+#
+
+[Sources]
+  AmiSmbiosLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  IoLib
+  PcdLib
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdSbWakeType
+

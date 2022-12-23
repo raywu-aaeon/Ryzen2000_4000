@@ -1,0 +1,102 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiCpuPkg
+  PACKAGE_GUID                   = 90BE556E-6EE5-42dc-9E0E-2758CFAFF79D
+  PACKAGE_VERSION                = 0.1
+################################################################################
+#
+# Include Section - list of Include Paths that are provided by this package.
+#                   Comments are used for Keywords and Module Types.
+#
+# Supported Module Types:
+#  SEC PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_SAL_DRIVER UEFI_DRIVER
+#
+################################################################################
+[Includes]
+  Cpu/Include
+  Cpu/Dxe
+
+################################################################################
+#
+# Library Class Header section - list of Library Class header files that are
+#                                provided by this package.
+#
+################################################################################
+#[LibraryClasses]
+#  ##  @libraryclass  Provides a service to retrieve a pointer to the EFI Boot Services Table.
+#  #                  Only available to DXE and UEFI module types.
+#  #UefiBootServicesTableLib|Include/Library/UefiBootServicesTableLib.h
+#
+################################################################################
+#
+# Global Guid Definition section - list of Global Guid C Name Data Structures
+#                                  that are provided by this package.
+#
+################################################################################
+[Guids]
+  gAmiCpuTokenSpaceGuid      = { 0x3746a390, 0xb0ba, 0x4f35, { 0xa5, 0xb7, 0x83, 0x33, 0xf3, 0xc7, 0xfe, 0x01 }}
+  gResetTypeGuid =  {0x308DD02C, 0x092B, 0x4123, {0xA2, 0xAF, 0x3E, 0xF4, 0x44, 0x0A, 0x6B, 0x4A}}
+  gCpuS3ResumeGuid = {0x30b98b95, 0xdfa3, 0x4501, {0xa3, 0xce, 0xe3, 0x8c, 0x18, 0x63, 0x84, 0xa0}}
+  gAmiMtrrHobGuid = {0x98807687, 0x4eec, 0x4f76, {0x4c, 0xda, 0xd4, 0xff, 0xcc, 0xd1, 0x63, 0xca}}
+
+################################################################################
+#
+# Global Protocols Definition section - list of Global Protocols C Name Data
+#                                  Structures that are provided by this package.
+#
+################################################################################
+[Protocols]
+
+  gAmiCpuInfoProtocolGuid = {0xf109f361,0x370c,0x4d9c,{0xb1,0xab,0x7c,0xa2,0xd4,0xc8,0xb3,0xff}}
+  
+################################################################################
+#
+# Global Ppis Definition section - list of Global Ppis C Name Data Structures
+#                                  that are provided by this package.
+#
+################################################################################
+[Ppis]
+  ## Include/PPI/CPUPolicy.h
+  gAmiPEICpuInitPolicyGuid       = {0xf824ccbb, 0xd8e0, 0x4522, { 0x8a, 0xa8, 0x65, 0xf0, 0x4b, 0x46, 0x3d, 0xb5}}
+  gAmdAfterCpuPeiPpiGuid         = {0xa39d7e82, 0x8abf, 0x4129, { 0xaf, 0x00, 0xda, 0x21, 0x5d, 0x87, 0xf9, 0x22}}
+
+################################################################################
+#
+# PCD Declarations section - list of all PCDs Declared by this Package
+#                            Only this package should be providing the
+#                            declaration, other packages should not.
+#
+################################################################################
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+  ## Maximum number of cores, Family 17h AM4 - 16 is maximum
+  gAmiCpuTokenSpaceGuid.PcdCpuMaxCores|16|UINT32|0x10000000
+  
+  ## Enable non UC/WB memory type attribute to be set through EfiCpuSetMemoryAttributes()
+  gAmiCpuTokenSpaceGuid.AmiPcdMtrrNonUcWbEnabled|FALSE|BOOLEAN|0x10000001 # Unused when CPU_SET_MEMORY_ATTRIBUTES_SWITCH_BACK = 1.
+  
+  ## Clean up MTRR for TSEG. There is a pair of MSR for TSEG when SMM TSeg Mask[TValid] is 1. Reduce the number of MTRR in use.
+  #  MTRR_MEMORY_CACHE_TYPE From MtrrLib.h
+  #  CacheUncacheable    = 0
+  #  CacheWriteCombining = 1
+  #  CacheWriteThrough   = 4
+  #  CacheWriteProtected = 5
+  #  CacheWriteBack      = 6
+  gAmiCpuTokenSpaceGuid.AmiPcdTsegMtrrAttribute|6|UINT8|0x10000002 # Unused when CPU_SET_MEMORY_ATTRIBUTES_SWITCH_BACK = 1.
+

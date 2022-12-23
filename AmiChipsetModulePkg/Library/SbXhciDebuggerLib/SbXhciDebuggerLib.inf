@@ -1,0 +1,23 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbXhciDebuggerLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbXhciDebuggerLib
+  CONSTRUCTOR                    = SbXhciDebuggerLibConstructor
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec 
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+
+[LibraryClasses]
+  DebugLib
+
+[Protocols]
+
+[Ppis]
+
+[Sources]
+  SbXhciDebuggerLib.c

@@ -1,0 +1,20 @@
+<component>
+	name = "Default Secure Boot Variables"
+	category = ModulePart
+	LocalRoot = "Keys\Variables\"
+	RefName = "SecVariables"
+[files]
+"Variables.chm"	
+"Variables.sdl"	
+"Variables.mak"	
+"PK"
+"KEK"
+"db"
+"dbx"
+"dbt"
+"dbr"
+"dbxupdate_x86.bin"
+"dbxupdate_x64.bin"
+"dbxupdate_arm64.bin"
+"PKfileStatement.txt"
+<endComponent>

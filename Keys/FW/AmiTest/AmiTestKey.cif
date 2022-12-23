@@ -1,0 +1,12 @@
+<component>
+	name = "SecureFlash,Ami Test FwKey store"
+	category = eModule
+	LocalRoot = "Keys\FW\AmiTest"
+	RefName = "SecureFlashModTestFWKey"
+[files]
+"AmiTestKey.sdl"
+"priKey"
+"pubKey"
+"FW_pubKey.cer"	
+"FW_priKey.pfx"	
+<endComponent>

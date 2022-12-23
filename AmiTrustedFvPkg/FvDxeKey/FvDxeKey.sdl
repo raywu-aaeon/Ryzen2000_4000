@@ -1,0 +1,83 @@
+TOKEN
+     Name  = "FVDXE_FwKey_framework_SUPPORT"
+     Value  = "1"
+     Help  = "Enable FW Key framework"
+     TokenType = Boolean
+     Master = Yes
+     Token = "FwKey_framework_SUPPORT" "=" "0"
+End
+
+TOKEN
+     Name  = "FWpub"
+     Value  = "$(FVDXE_Key_DIR)$(PATH_SLASH)pubKey"
+     Help  = "Root of trust Key for signed BIOS verification.\Public portion of the Key is inserted as ffs file inside BIOS RTU (FV_BB)\RSA Key formatted as PKCS#1v2.1 ASN.1 or X.509 DER file."
+     TokenType = Expression
+     TargetMAK = Yes
+End
+
+TOKEN
+     Name  = "FWpriv"
+     Value  = "$(FVDXE_Key_DIR)$(PATH_SLASH)priKey"
+     Help  = "A Signer Certificate Key in the FwCapsule Hdr.\Used as upgrade(new) key in 2-key signing model\RSA Key formatted as PKCS#1v2.1 ASN.1 or X.509 DER file."
+     TokenType = Expression
+     TargetMAK = Yes
+End
+
+TOKEN
+     Name  = "FWrootKey"
+     Value  = "$(FWpriv)"
+     Help  = "A Root Certificate key in the FwCapsule Hdr.\Used as back-up(old) key in a dual-key signing model(only for FWCAPSULE_CERT_FORMAT=0)"
+     TokenType = Expression
+     TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FWKEY_FILE_FORMAT"
+    Value  = "1"
+    Help  = "FW Key store format inside BIOS RTU (FV_BB).\0-n-modulus of RSA2048 key, 1-SHA256 hash of RSA2048 n-modulus or hash of tbs section of x.509 cert,\2-x.509 DER encoded Certificate key, 3-xx reserved"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetFDF = Yes
+    Lock = Yes
+End
+
+TOKEN
+     Name  = "FWKEY_FILE_SIZE"
+     Value  = "32"
+     Help  = "Key file size for SHA256 Hash. Don't change the value."
+     TokenType = Integer
+     TargetMAK = Yes
+     TargetH = Yes
+     Lock = Yes
+End
+
+TOKEN
+     Name  = "FWKEY_FILE_GUID"
+     Value  = "5B85965C-455D-4CC6-9C4C-7F086967D2B0"
+     TokenType = Expression
+     TargetMAK = Yes
+End
+
+PATH
+     Name  = "FVDXE_Key_DIR"
+     Help  = "Path to default Platform FW Signing Key.\User may change this path to point to another location of FW Key."
+End
+
+MODULE
+     File  = "FvDxeKey.mak"
+End
+
+INFComponent
+    Name  = "FWKey"
+    File  = "../../Build/FWKey.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "USER_DEFINED"
+End
+
+FFS_FILE
+    Name  = "FWKey"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiModulePkg.FWKey"
+    Index  = "1"
+    Rule_Override  = "Uncompressed"
+End

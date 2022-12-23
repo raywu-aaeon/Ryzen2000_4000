@@ -1,0 +1,10 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "UefiCpuPkg\Include\Guid\"
+	RefName = "UefiCpuPkg.Guid"
+[files]
+"CpuFeaturesInitDone.h"
+"CpuFeaturesSetDone.h"
+"MsegSmram.h"
+<endComponent>

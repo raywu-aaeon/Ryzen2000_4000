@@ -1,0 +1,105 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+#
+# This file contains code for North Bridge initialization in the PEI stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MemDetect
+  FILE_GUID                      = 15CF24A9-F9AB-46d0-8DCF-83664C632FD8
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MemDetectSupportInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32
+#
+#
+
+[Sources]
+  MemDetect.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmiAgesaWrapperPkg/AmiAgesaWrapperPkg.dec
+  AmiCpuPkg/AmiCpuPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  $(MEM_DETECT_DEC)
+  
+[LibraryClasses]
+  PeimEntryPoint
+  BaseLib ## The library for CompareGuid of MdePkg
+  HobLib
+  PcdLib
+  IoLib
+  DebugLib
+  BaseMemoryLib
+  AmdSocBaseLib
+  AmiSbMiscLib
+  AmiPeiLib
+  AmdCapsuleLib
+  CpuCspLib
+
+[Guids]
+  gAmdMemoryInfoHobGuid
+  gEfiAcpiVariableGuid
+  gAmiMemInfoGuid
+  gAmiDTomGuid
+  gAmiDTom2Guid
+  gAmiUmaInfoHobGuid
+  gEfiGlobalVariableGuid
+  gNbMemoryLengthGuid
+  gAmiMtrrHobGuid
+  gEfiAcpiVariableGuid
+  gNbAcpiS3VariableGuid
+  gEfiSmmPeiSmramMemoryReserveGuid
+
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid   ## MdePkg.dec
+  gEfiPeiCapsulePpiGuid             ## MdePkg.dec CONSUMED
+  gAmdMemoryInitCompletePpiGuid
+
+
+[Pcd]
+  gAmiAgesaWrapperTokenSpaceGuid.PcdCmosAgesaSpecified  # CONSUMED
+
+[Depex]
+  $(MEM_DETECT_DEPENDENCY)
+  gAmdMemoryInitCompletePpiGuid AND
+  gAmiPeiNbInitPolicyGuid
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

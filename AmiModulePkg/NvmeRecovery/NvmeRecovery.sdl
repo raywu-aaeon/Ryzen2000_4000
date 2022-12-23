@@ -1,0 +1,82 @@
+TOKEN
+    Name  = "NvmeRecovery_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Nvme device recovery support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+    Token = "FsRecovery_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "ENABLE_NVME_RECOVERY_TRACES"
+    Value  = "0"
+    Help  = "Main token to enable Nvme Recovery driver Trace support "
+    TokenType = Integer
+    TargetH = Yes
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MAX_NVME_RECOVERY_DEVICE"
+    Value  = "4"
+    Help  = "Maximum NVme Device to be supported for recovery."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000044"
+    Override  = "AmiModulePkg.NvmeRecovery"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Display minimal debug messages when ENABLE_NVME_RECOVERY_TRACES token value is disables"
+    TargetDSC = Yes
+    Token = "ENABLE_NVME_RECOVERY_TRACES" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80400044"
+    Override  = "AmiModulePkg.NvmeRecovery"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Display all debug messages when ENABLE_NVME_RECOVERY_TRACES token value is enabled.Make sure project override PCD mapping value for PcdDebugPrintErrorLevel also have these Debug Print levels enabled in order to print all debug messages."
+    TargetDSC = Yes
+    Token = "ENABLE_NVME_RECOVERY_TRACES" "=" "1"
+End
+
+INFComponent
+    Name  = "NvmeRecovery"
+    File  = "NvmeRecovery.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+End
+                                
+ELINK         
+    Name = "{0x01,0x08,0x02,0x00},"
+    Parent = "PEI_PCI_CLASSCODE_LIST"             
+    InvokeOrder = ReplaceParent
+    Token = "PeiPciEnumeration_SUPPORT" "=" "1"
+End
+
+# Platform specific porting.
+# This Pcd is cloned to support Intel VT-d feature.
+# Port this Pcd with sufficient DMA Buffer size required to support
+# IoMmu feature added in NvmeRecovery. 
+PcdMapping
+    Name  = "PcdVTdPeiDmaBufferSize"
+    GuidSpace  = "gIntelSiliconPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x02100000"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Declares VTd PEI DMA buffer size"
+    TargetDSC = Yes
+    TOKEN = "IntelSiliconPkg_VTd_SUPPORT" "=" "1" 
+End

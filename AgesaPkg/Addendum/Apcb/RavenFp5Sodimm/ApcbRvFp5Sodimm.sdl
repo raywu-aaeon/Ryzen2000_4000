@@ -1,0 +1,37 @@
+
+TOKEN
+    Name  = "APCB_RV_FP5_SODIMM_BINARY_SUPPORT"
+    Value  = "1"
+    Help  = "The master token for Apcb RV AM4 SODIMM binary."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMak = Yes
+    Master = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+MODULE
+	Help  = "Includes ApcbRvFp5Sodimm.mak to Project"
+	File  = "ApcbRvFp5Sodimm.mak"
+End
+
+PATH
+    Name = "APCB_SCRIPT_RV_FP5_SODIMM_DIR"
+    path = "AgesaPkg\Addendum\Apcb\RavenFp5Sodimm"
+End
+
+TOKEN
+    Name  = "RELEASE_RV_FP5_SODIMM"
+    Value  = "ReleaseRvFp5Sodimm"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_APCB_FILENAME_RV_SODIMM"
+    Value  = "Build\$(APCB_IN_BUILD_DIR)\$(RELEASE_RV_FP5_SODIMM)\APCB_RV_D4.bin"
+    Help  = "The APCB OEM binary 'APCB_RV_D4.bin'."
+    TokenType = File
+    TargetMAK = Yes
+End

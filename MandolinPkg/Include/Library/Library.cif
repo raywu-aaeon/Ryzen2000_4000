@@ -1,0 +1,8 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "MandolinPkg\Include\Library\"
+	RefName = "MandolinPkg.Include.Library"
+[files]
+"CrbLib.h"
+<endComponent>

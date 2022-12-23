@@ -1,0 +1,152 @@
+TOKEN
+	Name  = "AGESA_ADDENDUM_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AgesaPkg addendum support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "ADDENDUM_CCX_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling AgesaPkg addendum Ccx support in the project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "NBIO_OEM_GPIO_RESET_CONTROL_LIB_NULL_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable OemGpioResetControlLibNull support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "NBIO_OEM_PCIE_RESET_CONTROL_LIB_NULL_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable OemPcieResetControlLibNull support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "NBIO_PCIE_COMPLEX_FM15_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable PcieComplexFm15Pei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "NBIO_PCIE_COMPLEX_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable PcieComplexPei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "NBIO_SERVER_HOTPLUG_DXE_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable ServerHotplugDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "ADDENDUM_PSP_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling AgesaPkg addendum Psp support in the project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "ADDENDUM_SOC_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling AgesaPkg addendum Soc support in the project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "OemAgesaCcxPlatformLibNull"
+	File  = "Ccx\OemAgesaCcxPlatformLibNull\OemAgesaCcxPlatformLibNull.inf"
+	Package  = "AgesaPkg"
+	ModuleTypes  = "BASE"
+	Token = "ADDENDUM_CCX_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "OemGpioResetControlLibNull"
+	File  = "Nbio\OemGpioResetControlLibNull\OemGpioResetControlLibNull.inf"
+	Package  = "AgesaPkg"
+	ModuleTypes  = "PEIM"
+	Token = "NBIO_OEM_GPIO_RESET_CONTROL_LIB_NULL_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "OemPcieResetControlLibNull"
+	File  = "Nbio\OemPcieResetControlLibNull\OemPcieResetControlLibNull.inf"
+	Package  = "AgesaPkg"
+	ModuleTypes  = "PEIM"
+	Token = "NBIO_OEM_PCIE_RESET_CONTROL_LIB_NULL_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PcieComplexFm15Pei"
+	File  = "Nbio\PcieComplexFm15Pei\PcieComplexFm15Pei.inf"
+	Package  = "AgesaPkg"
+	ModuleTypes  = "PEIM"
+	Token = "NBIO_PCIE_COMPLEX_FM15_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PcieComplexPei"
+	File  = "Nbio\PcieComplexPei\PcieComplexPei.inf"
+	Package  = "AgesaPkg"
+	ModuleTypes  = "PEIM"
+	Token = "NBIO_PCIE_COMPLEX_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "ServerHotplugDxe"
+	File  = "Nbio\ServerHotplugDxe\ServerHotplugDxe.inf"
+	Package  = "AgesaPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "NBIO_SERVER_HOTPLUG_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdPspFlashAccLibSmm"
+	File  = "Psp\AmdPspFlashAccLibSmm\AmdPspFlashAccLibSmm.inf"
+	Package  = "AgesaPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "ADDENDUM_PSP_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdAgesaParameterGroupPei"
+	File  = "Soc\AmdAgesaParameterGroupPei.inf"
+	Package  = "AgesaPkg"
+	ModuleTypes  = "PEIM"
+	Token = "ADDENDUM_SOC_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "OemAgesaCcxPlatformLib"
+	Instance  = "AgesaPkg.OemAgesaCcxPlatformLibNull"
+	Token = "ADDENDUM_CCX_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "OemGpioResetControlLib"
+	Instance  = "AgesaPkg.OemGpioResetControlLibNull"
+	Token = "NBIO_OEM_GPIO_RESET_CONTROL_LIB_NULL_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "OemPcieResetControlLib"
+	Instance  = "AgesaPkg.OemPcieResetControlLibNull"
+	Token = "NBIO_OEM_PCIE_RESET_CONTROL_LIB_NULL_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmdPspFlashAccLib"
+	Instance  = "AgesaPkg.AmdPspFlashAccLibSmm"
+	ModuleTypes = "DXE_SMM_DRIVER"
+	Token = "ADDENDUM_PSP_SUPPORT" "=" "1"
+End

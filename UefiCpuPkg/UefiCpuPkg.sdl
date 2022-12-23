@@ -1,0 +1,311 @@
+TOKEN
+	Name  = "UefiCpuPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling UefiCpuPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+
+TOKEN
+    Name  = "Write_Microcode_Pcds"
+    Value  = "0"
+    Help  = "Try to find microcode from token FV_MICROCODE_UPDATE_BASE, which is in Intel Microcode module,and change PcdCpuMicrocodePatchAddress and PcdCpuMicrocodePatchRegionSize to Dynamic type."
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "Write_Microcode_Pcds"
+    Value  = "1"
+    Help  = "Try to find microcode from token FV_MICROCODE_UPDATE_BASE, which is in Intel Microcode module,and change PcdCpuMicrocodePatchAddress and PcdCpuMicrocodePatchRegionSize to Dynamic type."
+    TokenType = Boolean
+    Token = "Microcode_SUPPORT" "=" "1"
+End
+
+PATH
+	Name  = "UEFI_CPU_PKG_DIR"
+	Path  = "UefiCpuPkg"
+End
+
+INFComponent
+	Name  = "BaseUefiCpuLib"
+	File  = "Library/BaseUefiCpuLib/BaseUefiCpuLib.inf"
+	Package  = "UefiCpuPkg"
+End
+
+INFComponent
+	Name  = "BaseXApicX2ApicLib"
+	File  = "Library/BaseXApicX2ApicLib/BaseXApicX2ApicLib.inf"
+	Package  = "UefiCpuPkg"
+End
+
+INFComponent
+	Name  = "DxeCpuExceptionHandlerLib"
+	File  = "Library/CpuExceptionHandlerLib/DxeCpuExceptionHandlerLib.inf"
+	Package  = "UefiCpuPkg"
+End
+
+INFComponent
+	Name  = "SecPeiCpuExceptionHandlerLib"
+	File  = "Library/CpuExceptionHandlerLib/SecPeiCpuExceptionHandlerLib.inf"
+	Package  = "UefiCpuPkg"
+End
+
+INFComponent
+	Name  = "SmmCpuExceptionHandlerLib"
+	File  = "Library/CpuExceptionHandlerLib/SmmCpuExceptionHandlerLib.inf"
+	Package  = "UefiCpuPkg"
+End
+
+INFComponent
+	Name  = "MtrrLib"
+	File  = "Library/MtrrLib/MtrrLib.inf"
+	Package  = "UefiCpuPkg"
+End
+
+INFComponent
+	Name  = "SmmCpuFeaturesLib"
+	File  = "Library/SmmCpuFeaturesLib/SmmCpuFeaturesLib.inf"
+	Package  = "UefiCpuPkg"
+End
+
+INFComponent
+    Name  = "AmiCpuPeiPreMem"
+    File  = "AmiCpuPeiPreMem/AmiCpuPeiPreMem.inf"
+    Package  = "UefiCpuPkg"
+    ModuleTypes  = "PEIM"
+    Token = "Write_Microcode_Pcds" "=" "1"
+End
+
+LibraryMapping
+	Class  = "UefiCpuLib"
+	Instance  = "UefiCpuPkg.BaseUefiCpuLib"
+End
+
+LibraryMapping
+	Class  = "LocalApicLib"
+	Instance  = "UefiCpuPkg.BaseXApicX2ApicLib"
+End
+
+LibraryMapping
+	Class  = "CpuExceptionHandlerLib"
+	Instance  = "UefiCpuPkg.DxeCpuExceptionHandlerLib"
+	Arch  = "IA32 X64"
+	ModuleTypes  = "DXE_CORE DXE_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+End
+
+LibraryMapping
+	Class  = "CpuExceptionHandlerLib"
+	Instance  = "UefiCpuPkg.SecPeiCpuExceptionHandlerLib"
+	Arch  = "IA32 X64"
+	ModuleTypes  = "PEI_CORE PEIM SEC"
+End
+
+LibraryMapping
+	Class  = "CpuExceptionHandlerLib"
+	Instance  = "UefiCpuPkg.SmmCpuExceptionHandlerLib"
+	Arch  = "IA32 X64"
+	ModuleTypes  = "DXE_SMM_DRIVER SMM_CORE"
+End
+
+LibraryMapping
+	Class  = "MtrrLib"
+	Instance  = "UefiCpuPkg.MtrrLib"
+End
+
+LibraryMapping
+	Class  = "SmmCpuFeaturesLib"
+	Instance  = "UefiCpuPkg.SmmCpuFeaturesLib"
+End
+
+PcdMapping
+    Name  = "PcdCpuMicrocodePatchAddress"
+    GuidSpace  = "gUefiCpuPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT64"
+    Value  = "0"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "Write_Microcode_Pcds" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdCpuMicrocodePatchRegionSize"
+    GuidSpace  = "gUefiCpuPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT64"
+    Value  = "0"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "Write_Microcode_Pcds" "=" "1"
+End
+#(AMI AMD Porting)>> For AMD system
+INFComponent
+    Name  = "CpuMpPei"
+    File  = "CpuMpPei/CpuMpPei.inf"
+    Package  = "UefiCpuPkg"
+    ModuleTypes = "PEIM"
+End
+
+INFComponent
+    Name  = "CpuDxe"
+    File  = "CpuDxe/CpuDxe.inf"
+    Package  = "UefiCpuPkg"
+    ModuleTypes = "DXE_DRIVER"
+End
+
+INFComponent
+    Name  = "DxeMpInitLib"
+    File  = "Library/MpInitLib/DxeMpInitLib.inf"
+    Package  = "UefiCpuPkg"
+End
+
+INFComponent
+    Name  = "PeiMpInitLib"
+    File  = "Library/MpInitLib/PeiMpInitLib.inf"
+    Package  = "UefiCpuPkg"
+End
+
+INFComponent
+    Name  = "PiSmmCommunicationPei"
+    File  = "PiSmmCommunication/PiSmmCommunicationPei.inf"
+    Package  = "UefiCpuPkg"
+    ModuleTypes = "PEIM"
+End
+
+INFComponent
+    Name  = "PiSmmCommunicationSmm"
+    File  = "PiSmmCommunication/PiSmmCommunicationSmm.inf"
+    Package  = "UefiCpuPkg"
+    ModuleTypes = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+    Name  = "PiSmmCpuDxeSmm"
+    File  = "PiSmmCpuDxeSmm/PiSmmCpuDxeSmm.inf"
+    Package  = "UefiCpuPkg"
+    ModuleTypes = "DXE_SMM_DRIVER"
+    PreProcess = Yes
+End
+
+LibraryMapping
+    Class  = "MpInitLib"
+    Instance  = "UefiCpuPkg.PeiMpInitLib"
+    ModuleTypes = "PEIM"
+End
+
+LibraryMapping
+    Class  = "MpInitLib"
+    Instance  = "UefiCpuPkg.DxeMpInitLib"
+    ModuleTypes = "DXE_DRIVER"
+End
+
+PcdMapping
+     Name  = "PcdCpuSmmStackSize"
+     GuidSpace  = "gUefiCpuPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "UINT32"
+     Value  = "0x10000"
+     Offset  = 00h
+     Length  = 00h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdCpuMaxLogicalProcessorNumber"
+     GuidSpace  = "gUefiCpuPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "UINT32"
+     Value  = "32"
+     Offset  = 00h
+     Length  = 00h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdCpuSmmApSyncTimeout"
+     GuidSpace  = "gUefiCpuPkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "UINT64"
+     Value  = "5000"
+     Offset  = 00h
+     Length  = 00h
+     TargetDSC = Yes
+End
+
+PcdMapping
+     Name  = "PcdCpuSmmBlockStartupThisAp"
+     GuidSpace  = "gUefiCpuPkgTokenSpaceGuid"
+     PcdType  = "PcdsFeatureFlag"
+     Value  = "TRUE"
+     Offset  = 00h
+     Length  = 00h
+     TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "===================== Setting for level 3 security(SMM isolation) ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "SMM_ISOLATION_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable SMMISOLATION support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "AmiPiSmmCpuDxeSmmDecAdditional"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "SmmSupervisorPkg/SmmSupervisorPkg.dec"
+    Parent  = "AmiPiSmmCpuDxeSmmDecAdditional"
+    InvokeOrder = AfterParent
+    Token = "SMM_ISOLATION_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "AmiPiSmmCpuDxeSmmLibraryAdditional"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "SysCallLib"
+    Parent  = "AmiPiSmmCpuDxeSmmLibraryAdditional"
+    InvokeOrder = AfterParent
+    Token = "SMM_ISOLATION_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "AmiPiSmmCpuDxeSmmProtocolAdditional"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "gSmmSupervisorProtocolGuid"
+    Parent  = "AmiPiSmmCpuDxeSmmProtocolAdditional"
+    InvokeOrder = AfterParent
+    Token = "SMM_ISOLATION_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "AmiPiSmmCpuDxeSmmDepexAdditional"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "gSmmSupervisorProtocolGuid AND"
+    Parent  = "AmiPiSmmCpuDxeSmmDepexAdditional"
+    InvokeOrder = AfterParent
+    Token = "SMM_ISOLATION_SUPPORT" "=" "1"
+End
+
+#(AMI AMD Porting)<<

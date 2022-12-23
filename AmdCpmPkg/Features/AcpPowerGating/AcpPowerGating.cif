@@ -1,0 +1,11 @@
+<component>
+	name = "AcpPowerGating"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\AcpPowerGating\"
+	RefName = "AmdCpmPkg.Features.AcpPowerGating"
+[INF]
+"Asl\AmdCpmAcpPowerGatingAsl.inf"
+"Dxe\AmdCpmAcpPowerGatingDxe.inf"
+[files]
+"AcpPowerGating.sdl"	
+<endComponent>

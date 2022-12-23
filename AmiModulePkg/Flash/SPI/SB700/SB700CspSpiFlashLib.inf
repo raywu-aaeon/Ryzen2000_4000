@@ -1,0 +1,30 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = SB700CspSpiFlashLib
+    FILE_GUID       = D80A8C58-A978-4DC7-AC0F-EB3B03DC63B5
+    MODULE_TYPE     = DXE_DRIVER
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = CspSpiFlashLib
+
+[Sources]
+    SPIFlash.c
+    SpiFlashInc.h
+    SpiFlashAsm.nasm
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    BaseLib
+    BaseMemoryLib
+    CacheMaintenanceLib
+    IoLib
+    SpiFlashAddressLib

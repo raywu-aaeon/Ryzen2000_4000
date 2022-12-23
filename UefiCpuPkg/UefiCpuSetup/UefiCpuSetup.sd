@@ -1,0 +1,86 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+//<AMI_FHDR_START>
+//----------------------------------------------------------------------------
+//
+// Name:    UefiCpuSetup.sd
+//
+// Description:
+//  Setup definition for UefiCpuSetup.
+//
+//----------------------------------------------------------------------------
+//<AMI_FHDR_END>
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example: UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+
+    UINT8   SMM_ISOLATION;
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+    #define SMM_ISOLATION_SUPPORT\
+        oneof varid = SETUP_DATA.SMM_ISOLATION,\
+            prompt      = STRING_TOKEN(STR_SMM_ISOLATION),\
+            help        = STRING_TOKEN(STR_SMM_ISOLATION_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED;\
+        endoneof;
+
+#endif // CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+
+    SMM_ISOLATION_SUPPORT
+
+#endif // CONTROLS_WITH_DEFAULTS
+
+
+#ifdef ADVANCED_FORM_SET
+    #ifndef SUPPRESS_GRAYOUT_ENDIF
+        #define SUPPRESS_GRAYOUT_ENDIF endif;
+    #endif
+
+    #ifdef FORM_SET_ITEM
+    //  Define controls to be added to the main page of the formset
+
+    #endif
+
+    #ifdef FORM_SET_GOTO
+    // Define goto commands for the forms defined in this file
+        goto UEFI_CPU_FORM_ID,
+            prompt = STRING_TOKEN(STR_UEFI_CPU_FORM),
+            help = STRING_TOKEN(STR_UEFI_CPU_FORM_HELP);
+    #endif
+
+#ifdef FORM_SET_FORM
+// Define forms
+    form formid = AUTO_ID(UEFI_CPU_FORM_ID),
+        title = STRING_TOKEN(STR_UEFI_CPU_FORM);
+
+        SUBTITLE(STRING_TOKEN(STR_UEFI_CPU_FORM))
+        SEPARATOR
+
+        SMM_ISOLATION_SUPPORT
+
+    endform;    // form id UEFI_CPU_FORM_ID
+
+#endif // #ifdef FORM_SET_FORM
+
+#endif // #ifdef ADVANCED_FORM_SET
+

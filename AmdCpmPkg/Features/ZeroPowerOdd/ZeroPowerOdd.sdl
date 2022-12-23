@@ -1,0 +1,94 @@
+TOKEN
+	Name  = "AmdCpmZeroPowerOdd_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling ZeroPowerOdd support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "CPM_ZERO_POWER_ODD_SETUP_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable this feature SETUP item support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmZeroPwrOddAsl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmZeroPwrOddAsl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpm3ZeroPowerOddFm17Asl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpmZeroPwrOddAsl support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpm3ZeroPowerOddFm15Asl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmdCpmZeroPwrOddAsl support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmZeroPowerOddDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmZeroPowerOddDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmZeroPowerOddPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmZeroPowerOddPeim support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdCpm3ZeroPowerOddFm17Asl"
+	File  = "Asl/Fm17/AmdCpm3ZeroPowerOddFm17Asl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmZeroPwrOddAsl_SUPPORT" "=" "1"
+	Token = "AmdCpm3ZeroPowerOddFm17Asl_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmdCpm3ZeroPowerOddFm15Asl"
+    File  = "Asl/Fm15/AmdCpm3ZeroPowerOddFm15Asl.inf"
+    Package  = "AmdCpmPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "AmdCpmZeroPwrOddAsl_SUPPORT" "=" "1"
+    Token = "AmdCpm3ZeroPowerOddFm15Asl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmZeroPowerOddDxe"
+	File  = "Dxe/AmdCpm3ZeroPowerOddDxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmZeroPowerOddDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmZeroPowerOddPeim"
+	File  = "Pei/AmdCpm3ZeroPowerOddPeim.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmZeroPowerOddPeim_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "AmdCpmZeroPowerOddPeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmdCpmPkg.AmdCpmZeroPowerOddPeim"
+	Index  = '"AFTER" "AmdCpmInitPeim"'
+	Help  = "Refer to (AmdCpmPkg.pei.inc.fdf)"
+End
+

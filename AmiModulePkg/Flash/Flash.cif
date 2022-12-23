@@ -1,0 +1,23 @@
+<component>
+    name = "Flash - Source"
+    category = FLASH
+    LocalRoot = "AmiModulePkg\Flash\"
+    RefName = "FLASH_COMBINED_SOURCE"
+[INF]
+"AmiFlashLibPei.inf"
+"AmiFlashLibDxe.inf"
+"AmiFlashLibRuntime.inf"
+"AmiFlashPlatformLib.inf"
+"FlashLib.inf"
+"FlashLibPei.inf"
+[files]
+"Flash.sdl"
+"Flash.mak"
+"Flash.chm"
+[parts]
+"SPI_INTERFACE_SOURCE"
+"FLASH_INCLUDES"
+"FLASH_NULL_LIBS"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_52"
+<endComponent>

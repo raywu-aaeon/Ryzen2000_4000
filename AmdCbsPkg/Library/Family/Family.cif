@@ -1,0 +1,8 @@
+<component>
+	name = "Family"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Library\Family\"
+	RefName = "AmdCbsPkg.Library.Family"
+[parts]
+"AmdCbsPkg.Library.Family.0x17"
+<endComponent>

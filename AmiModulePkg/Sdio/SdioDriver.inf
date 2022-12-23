@@ -1,0 +1,60 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010015
+  BASE_NAME                      = SdioDriver
+  FILE_GUID                      = 2BA0D612-C3AD-4249-915D-AA0E8709485F
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SdioDriverEntryPoint
+
+[Sources]
+  SdioDriver.c
+  SdioBlkIo.c
+  SdMmcPassThru.c
+  SdioBlkErase.c
+  SdioDriver.h
+  SdMmcPassThruSupport.h
+
+[Packages]
+  AmiModulePkg/AmiModulePkg.dec
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DevicePathLib
+  DebugLib
+  SdioControllerDxeLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  
+[Guids]
+  gEfiEventLegacyBootGuid
+  gEfiEventExitBootServicesGuid
+
+[Protocols]
+  gEfiDriverBindingProtocolGuid           # PROTOCOL ALWAYS_CONSUMED 
+  gEfiPciIoProtocolGuid                   # PROTOCOL ALWAYS_CONSUMED 
+  gEfiDevicePathProtocolGuid              # PROTOCOL ALWAYS_CONSUMED 
+  gEfiBlockIoProtocolGuid                 # PROTOCOL ALWAYS_CONSUMED 
+  gEfiDiskInfoProtocolGuid                # PROTOCOL ALWAYS_CONSUMED 
+  gEfiComponentNameProtocolGuid           # PROTOCOL ALWAYS_CONSUMED 
+  gEfiLegacyBiosExtProtocolGuid           # PROTOCOL ALWAYS_CONSUMED 
+  gEfiSmmControl2ProtocolGuid             # PROTOCOL ALWAYS_CONSUMED 
+  gSdioBusInitProtocolGuid                # PROTOCOL ALWAYS_PRODUCED 
+  gEfiComponentName2ProtocolGuid          # PROTOCOL ALWAYS_PRODUCED 
+  gEfiSmmCommunicationProtocolGuid        # PROTOCOL ALWAYS_CONSUMED 
+  gAmiBlockIoWriteProtectionProtocolGuid  # PROTOCOL ALWAYS_CONSUMED 
+  #gAmiBdsAllDriversConnectedProtocolGuid 
+  
+[Depex]
+  gEfiSmmCommunicationProtocolGuid
+  
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel

@@ -1,0 +1,17 @@
+<component>
+    name = "Foundation"
+    category = eCore
+    LocalRoot = "MdeModulePkg\Core\"
+    RefName = "MdeModulePkg.Foundation"
+[INF]
+"Dxe\DxeMain.inf"
+"Pei\PeiMain.inf"
+"DxeIplPeim\DxeIpl.inf"
+"RuntimeDxe\RuntimeDxe.inf"
+"PiSmmCore\PiSmmCore.inf"
+"PiSmmCore\PiSmmIpl.inf"
+[files]
+"Foundation.sdl"	
+"Foundation.mak"	
+"Foundation.chm"	
+<endComponent>

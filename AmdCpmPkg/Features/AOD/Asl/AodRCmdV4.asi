@@ -1,0 +1,702 @@
+/*****************************************************************************
+ *
+ * Copyright 2007 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+/*****************************************************************************
+ *
+ * This software package can be used to enable the Overclocking of certain
+ * AMD processors and its use is subject to the terms and conditions of the
+ * AMD Overclocking Waiver. Enabling overclocking through use of the low-level
+ * routines included in this package and operating an AMD processor outside of
+ * the applicable AMD product specifications will void any AMD warranty and can
+ * result in damage to the processor or the system into which the processor has
+ * been integrated. The user of this software assumes, and AMD disclaims, all
+ * risk, liability, costs and damages relating to or arising from the overclocking
+ * of AMD processors.
+ *
+ ******************************************************************************
+ */
+
+
+//This file used to support run command method
+
+        Name(CMDV,4)  //Run command version
+        Name(OBUF,buffer(200) {})  //Run command output buffer
+
+        #include "AOD.cfg"
+
+/******************************************************************
+
+typedef struct _AodMemoryBufferStruct {
+  UINT32     AodMemBufferSignature;    // offset 0x0
+  UINT32     Version;                  // offset 0x4
+  UINT32     Command;                  // offset 0x8
+  UINT16     MemClkFreq;               // offset 0xC
+  UINT8      Tcl;                      // offset 0xE
+  UINT8      Trcdrd;                   // offset 0xF
+  UINT8      Trcdwr;                   //offset 0x10
+  UINT8      Tras;                     // offset 0x11
+  UINT8      Trp;                      // offset 0x12
+  UINT16     VddioMV;                  // offset 0x13
+  UINT16     VTTMV;                    // offset 0x15
+  UINT16     VPPMV;                    // offset 0x17
+  UINT16     procODT;                  // offset 0x19
+  UINT16     Trcpage;                  // offset 0x1B
+  UINT8      Trc;                      // offset 0x1D
+  UINT16     Trfc;                     // offset 0x1E
+  UINT16     Trfc2;                    // offset 0x20
+  UINT16     Trfc4;                    // offset 0x22
+  UINT8      Tfaw;                     // offset 0x24
+  UINT8      TrrdS;                    // offset 0x25
+  UINT8      TrrdL;                    // offset 0x26
+  UINT8      Twr;                      // offset 0x27
+  UINT8      TwtrS;                    // offset 0x28
+  UINT8      TwtrL;                    // offset 0x29
+  UINT8      TCke;                     // offset 0x2A
+  UINT8      Tcwl;                     // offset 0x2B
+  UINT8      Trtp;                     // offset 0x2C
+  UINT8      TrdrdSc;                  // offset 0x2D
+  UINT8      TrdrdScL;                 // offset 0x2E
+  UINT8      TrdrdSd;                  // offset 0x2F
+  UINT8      TrdrdDd;                  // offset 0x30
+  UINT8      TwrwrSc;                  // offset 0x31
+  UINT8      TwrwrScL;                 // offset 0x32
+  UINT8      TwrwrSd;                  // offset 0x33
+  UINT8      TwrwrDd;                  // offset 0x34
+  UINT8      Trdwr;                    // offset 0x35
+  UINT8      Twrrd;                    // offset 0x36
+  UINT8      GearDownEn;               // offset 0x37
+  UINT8      Cmd2t;                    // offset 0x38
+  UINT8      RttNom;                   // offset 0x39
+  UINT8      RttWR;                    // offset 0x3A
+  UINT8      RttPark;                  // offset 0x3B
+  UINT8      PowerDownEn;              // offset 0x3C
+  UINT8      OcDisable;                // offset 0x3D
+  UINT32     OcVoltageMax;             // offset 0x3E
+  UINT32     OcFrequencyMax;           // offset 0x42
+  UINT8      SmtEnabled;               // offset 0x46
+  INT32      TempOffset;               // offset 0x47
+  UINT8      EdcThrottlerCtrl;         // offset 0x4B
+  UINT16     ActiveCoreNum;            // offset 0x4C
+  UINT8      AddrCmdSetup;             // offset 0x4E
+  UINT8      CsOdtSetup;               // offset 0x4F
+  UINT8      CkeSetup;                 // offset 0x50
+  UINT8      CadBusClkDrvStren;        // offset 0x51
+  UINT8      CadBusAddrDrvStren;       // offset 0x52
+  UINT8      CadBusCsOdtCmdDrvStren;   // offset 0x53
+  UINT8      CadBusCkeDrvStren;        // offset 0x54
+  UINT16     CldoVddp;                 // offset 0x55
+  UINT8      EdcThrottlerCtrlOpnValue; // offset 0x57
+  UINT32     MemInterleavingCap;       // offset 0x58
+  UINT32     MemInterleavingMode;      // offset 0x5C
+  UINT32     InterleavingSize;         // offset 0x60
+  UINT32     PptPlatformPCD;           // offset 0x64
+  UINT32     TdcPlatformPCD;           // offset 0x68
+  UINT32     EdcPlatformPCD;           // offset 0x6C
+  UINT8      FclkOcMode;               // offset 0x70
+  UINT8      VddcrSocVid;              // offset 0x71
+  UINT8      MemReserved[70];          // offset 0x72
+} AodMemoryBufferStruct;
+
+
+typedef struct _AodNvAreaStruct {
+  UINT16                    AodSmiCmd;
+  UINT32                    AodSmiStatus;
+  UINT16                    Reserved1;
+  AodMemoryBufferStruct     AodMemBuffer;
+} AodNvAreaStruct;
+*******************************************************************
+*/
+
+       //This structure must be match with "AodNvAreaStruct" in Aod.h.
+        OperationRegion(AODT, SystemMemory, 0xffffff00, 0xC8)   //AOD transfer buffer
+        Field(AODT, AnyAcc, NoLock, Preserve) {
+            offset(0),
+            ASCD,16,    // AOD SMI CMD
+            ASTS,32,    // AOD SMI status
+            RSD1,16,    // reserved
+            MBSN,32,    // AOD MEM Buffer: AodMemBufferSignature
+            MBVS,32,    // AOD MEM Buffer: Version
+            MBCB,32,    // AOD MEM Buffer: CommandBitMap
+            MBMC,16,    // AOD MEM Buffer: MemClkFreq
+            TTCL,8,     // AOD MEM Buffer: Tcl
+            TRCR,8,     // AOD MEM Buffer: Trcdrd
+            TRCW,8,     // AOD MEM Buffer: Trcdwr
+            TRAS,8,     // AOD MEM Buffer: Tras
+            TTRP,8,     // AOD MEM Buffer: Trp
+            VDIO,16,    // AOD MEM Buffer: VddioMV
+            VMTT,16,    // AOD MEM Buffer: VTTMV
+            VMPP,16,    // AOD MEM Buffer: VPPMV
+            PODT,16,    // AOD MEM Buffer: ProcODT
+            TRPG,16,    // AOD MEM Buffer: Trcpage
+            TTRC,8,     // AOD MEM Buffer: Trc
+            TRFC,16,    // AOD MEM Buffer: Trfc
+            TRF2,16,    // AOD MEM Buffer: Trfc2
+            TRF4,16,    // AOD MEM Buffer: Trfc4
+            TFAW,8,     // AOD MEM Buffer: Tfaw
+            TRRS,8,     // AOD MEM Buffer: TrrdS
+            TRRL,8,     // AOD MEM Buffer: TrrdL
+            TTWR,8,     // AOD MEM Buffer: Twr
+            TWTS,8,     // AOD MEM Buffer: TwtrS
+            TWTL,8,     // AOD MEM Buffer: TwtrL
+            TCKE,8,     // AOD MEM Buffer: TCke
+            TCWL,8,     // AOD MEM Buffer: Tcwl
+            TRTP,8,     // AOD MEM Buffer: Trtp
+            TRSC,8,     // AOD MEM Buffer: TrdrdSc
+            TRSL,8,     // AOD MEM Buffer: TrdrdScL
+            TRSD,8,     // AOD MEM Buffer: TrdrdSd
+            TRDD,8,     // AOD MEM Buffer: TrdrdDd
+            TWSC,8,     // AOD MEM Buffer: TwrwrSc
+            TWSL,8,     // AOD MEM Buffer: TwrwrScL
+            TWSD,8,     // AOD MEM Buffer: TwrwrSd
+            TWDD,8,     // AOD MEM Buffer: TwrwrDd
+            TRWR,8,     // AOD MEM Buffer: Trdwr
+            TWRD,8,     // AOD MEM Buffer: Twrrd
+            GRDN,8,     // AOD MEM Buffer: GearDownEn
+            CM2T,8,     // AOD MEM Buffer: Cmd2t
+            RTNM,8,     // AOD MEM Buffer: RttNom
+            RTWR,8,     // AOD MEM Buffer: RttWR
+            RTPK,8,     // AOD MEM Buffer: RttPark
+            PWDE,8,     // AOD MEM Buffer: PowerDownEn
+            OCDS,8,     // AOD MEM Buffer: OcDisable
+            OCVM,32,    // AOD MEM Buffer: OcVoltageMax
+            OCFM,32,    // AOD MEM Buffer: OcFrequencyMax
+            SMTE,8,     // AOD MEM Buffer: SmtEnabled
+            TOFF,32,    // AOD MEM Buffer: TempOffset
+            EDCT,8,     // AOD MEM Buffer: EdcThrotterCtrl
+            ACNT,16,    // AOD MEM Buffer: ActiveCoreNum
+            ACSP,8,     // AOD MEM Buffer: AddrCmdSetup
+            COSP,8,     // AOD MEM Buffer: CsOdtSetup
+            CESP,8,     // AOD MEM Buffer: CkeSetup
+            CBCK,8,     // AOD MEM Buffer: CadBusClkDrvStren
+            CBAC,8,     // AOD MEM Buffer: CadBusAddrDrvStren
+            CBCO,8,     // AOD MEM Buffer: CadBusCsOdtCmdDrvStren
+            CBCE,8,     // AOD MEM Buffer: CadBusCkeDrvStren
+            CDVP,16,    // AOD MEM Buffer: CldoVddp
+            EDCO,8,     // AOD MEM Buffer: EdcThrotterCtrlOpnValue
+            INLC,32,    // AOD MEM Buffer: MemInterleavingCap
+            INLM,32,    // AOD MEM Buffer: MemInterleavingMode
+            INLS,32,    // AOD MEM Buffer: InterleavingSize
+            PPTL,32,    // AOD MEM Buffer: PptPlatformPCD
+            TDCL,32,    // AOD MEM Buffer: TdcPlatformPCD
+            EDCL,32,    // AOD MEM Buffer: EdcPlatformPCD
+            FCOC,8,     // AOD MEM Buffer: FclkOcMode
+            SVID,8,     // AOD MEM Buffer: VddcrSocVid
+            MRSD,560,   // AOD MEM Buffer: Reserved
+            RSD2,64,    // Reserved2
+        }
+
+        Method(R101,1) {   // Get memory info
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (AOD_CMD_GET_MEM_DATA_BUFFER, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R102,1) {   // Get memory info
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (AOD_CMD_GET_VDDIO, Local0)
+          store (Local0, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_VOLTAGE)
+        }
+
+        Method(R201,1) {   // Set memory clock
+          createwordfield (arg0, 4, MCLK)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MCLK, MBMC)
+          store (AOD_CMD_SET_MEMORY_CLK, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R202,1) {   // Set memory Tcl
+          createbytefield (arg0, 4, MTCL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MTCL, TTCL)
+          store (AOD_CMD_SET_TCL, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R203,1) {   // Set memory Trcdrd
+          createbytefield (arg0, 4, MRDD)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MRDD, TRCR)
+          store (AOD_CMD_SET_TRCDRD, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R204,1) {   // Set memory Trcdwr
+          createbytefield (arg0, 4, MRDW)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MRDW, TRCW)
+          store (AOD_CMD_SET_TRCDWR, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R205,1) {   // Set memory Tras
+          createbytefield (arg0, 4, MTRS)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MTRS, TRAS)
+          store (AOD_CMD_SET_TRAS, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R206,1) {   // Set memory Trp
+          createbytefield (arg0, 4, MTRP)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MTRP, TTRP)
+          store (AOD_CMD_SET_TRP, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R207,1) {   // Set memory ProcODT
+          createbytefield (arg0, 4, MPOT)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MPOT, PODT)
+          store (AOD_CMD_SET_PROC_ODT, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R208,1) {   // Set memory TRCPAGE
+          createbytefield (arg0, 4, MRPG)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MRPG, TRPG)
+          store (AOD_CMD_SET_TRCPAGE, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R209,1) {   // Set memory TRC
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TTRC)
+          store (AOD_CMD_SET_TRC, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R20A,1) {   // Set memory TRFC
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRFC)
+          store (AOD_CMD_SET_TRFC, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R20B,1) {   // Set memory TRFC2
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRF2)
+          store (AOD_CMD_SET_TRFC2, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R20C,1) {   // Set memory TRFC4
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRF4)
+          store (AOD_CMD_SET_TRFC4, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R20D,1) {   // Set memory TFAW
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TFAW)
+          store (AOD_CMD_SET_TFAW, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R20E,1) {   // Set memory TRRDS
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRRS)
+          store (AOD_CMD_SET_TRRDS, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R20F,1) {   // Set memory TRRDL
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRRL)
+          store (AOD_CMD_SET_TRRDL, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R210,1) {   // Set memory TWR
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TTWR)
+          store (AOD_CMD_SET_TWR, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R211,1) {   // Set memory TWTRS
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TWTS)
+          store (AOD_CMD_SET_TWTRS, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R212,1) {   // Set memory TWTRL
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TWTL)
+          store (AOD_CMD_SET_TWTRL, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R213,1) {   // Set memory TCKE
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TCKE)
+          store (AOD_CMD_SET_TCKE, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R214,1) {   // Set memory TCWL
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TCWL)
+          store (AOD_CMD_SET_TCWL, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R215,1) {   // Set memory TRTP
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRTP)
+          store (AOD_CMD_SET_TRTP, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R216,1) {   // Set memory TRDRDSC
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRSC)
+          store (AOD_CMD_SET_TRDRDSC, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R217,1) {   // Set memory TRDRDSCL
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRSL)
+          store (AOD_CMD_SET_TRDRDSCL, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R218,1) {   // Set memory TRDRDSD
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRSD)
+          store (AOD_CMD_SET_TRDRDSD, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R219,1) {   // Set memory TRDRDDD
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRDD)
+          store (AOD_CMD_SET_TRDRDDD, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R21A,1) {   // Set memory TWRWRSC
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TWSC)
+          store (AOD_CMD_SET_TWRWRSC, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R21B,1) {   // Set memory TWRWRSCL
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TWSL)
+          store (AOD_CMD_SET_TWRWRSCL, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R21C,1) {   // Set memory TWRWRSD
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TWSD)
+          store (AOD_CMD_SET_TWRWRSD, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R21D,1) {   // Set memory TWRWRDD
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TWDD)
+          store (AOD_CMD_SET_TWRWRDD, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R21E,1) {   // Set memory TRDWR
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TRWR)
+          store (AOD_CMD_SET_TRDWR, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R21F,1) {   // Set memory TWRRD
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, TWRD)
+          store (AOD_CMD_SET_TWRRD, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R220,1) {   // Set memory GEAR_DOWN_EN
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, GRDN)
+          store (AOD_CMD_SET_GEAR_DOWN_EN, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R221,1) {   // Set memory CMD2T
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, CM2T)
+          store (AOD_CMD_SET_CMD_2T, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R222,1) {   // Set memory RTTNOM
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, RTNM)
+          store (AOD_CMD_SET_RTT_NOM, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R223,1) {   // Set memory RTTWR
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, RTWR)
+          store (AOD_CMD_SET_RTT_WR, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R224,1) {   // Set memory RTTPARK
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, RTPK)
+          store (AOD_CMD_SET_RTT_PARK, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R225,1) {   // Set memory PowerDownEn
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, PWDE)
+          store (AOD_CMD_SET_POWER_DOWN_EN, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R226,1) {   // Set SMT En
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, SMTE)
+          store (AOD_CMD_SET_SMT_EN, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R227,1) {   // Software downcore config
+          createwordfield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, ACNT)
+          store (AOD_CMD_SW_DOWNCORE_CONFIG, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R228,1) {   // Set EDC Throttler Control
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, EDCT)
+          store (AOD_CMD_SET_EDC_TROTTLER_CONTROL, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R229,1) {   // Set AddrCmdSetup
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, ACSP)
+          store (AOD_CMD_SET_ADDR_CMD_SETUP, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R22A,1) {   // Set CsOdtSetup
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, COSP)
+          store (AOD_CMD_SET_CS_ODT_SETUP, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R22B,1) {   // Set CkeSetup
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, CESP)
+          store (AOD_CMD_SET_CKE_SETUP, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R22C,1) {   // Set CadBusClkDrvStren
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, CBCK)
+          store (AOD_CMD_SET_CAD_BUS_CLK_DRV_STREN, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R22D,1) {   // Set CadBusAddrCmdDrvStren
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, CBAC)
+          store (AOD_CMD_SET_CAD_BUS_ADDR_DRV_STREN, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R22E,1) {   // Set CadBusCsOdtCmdDrvStren
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, CBCO)
+          store (AOD_CMD_SET_CAD_BUS_CS_ODT_CMD_DRV_STREN, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R22F,1) {   // Set CadBusCkeDrvStren
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, CBCE)
+          store (AOD_CMD_SET_CAD_BUS_CKE_DRV_STREN, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R230,1) {   // Set CLDO_VDDP
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, CDVP)
+          store (AOD_CMD_SET_CLDO_VDDP, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R231,1) {   // Set Interleave Mode
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, INLM)
+          store (AOD_CMD_SET_INTERLEAVE_MODE, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R232,1) {   // Set Interleave Size
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, INLS)
+          store (AOD_CMD_SET_INTERLEAVE_SIZE, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R233,1) {   // Set FCLK OC mode
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, FCOC)
+          store (AOD_CMD_SET_FCLK_OC_MODE, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R234,1) {   // Set SOC VID
+          createbytefield (arg0, 4, SVAL)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (SVAL, SVID)
+          store (AOD_CMD_SET_SOC_VID, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_TIMINGS)
+        }
+
+        Method(R301,1) {   // Set memory Vddio
+          createwordfield (arg0, 4, MVIO)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MVIO, VDIO)
+          store (AOD_CMD_SET_VDDIO, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_VOLTAGE)
+        }
+
+        Method(R302,1) {   // Set memory VTT
+          createwordfield (arg0, 4, MVTT)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MVTT, VMTT)
+          store (AOD_CMD_SET_VTT, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_VOLTAGE)
+        }
+
+        Method(R303,1) {   // Set memory VPP
+          createwordfield (arg0, 4, MVPP)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (MVPP, VMPP)
+          store (AOD_CMD_SET_VPP, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_VOLTAGE)
+        }
+
+        Method(R401,1) {   // Command Buffer Start
+          createwordfield (arg0, 4, MVPP)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (AOD_CMD_COMMAND_BUFFER_START, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_VOLTAGE)
+        }
+
+        Method(R402,1) {   // Command Buffer End
+          createwordfield (arg0, 4, MVPP)
+          store (AOD_MEMPROFILEVer, MBVS)
+          store (AOD_CMD_COMMAND_BUFFER_END, MBCB)
+          ASMI (SMI_GENERATED_BY_AOD_VOLTAGE)
+        }
+
+        Method(R505,1) {   // Test function to loop back the input buffer to output buffer
+          store (AOD_MEMPROFILEVer, MBVS)
+        }
+//#endif

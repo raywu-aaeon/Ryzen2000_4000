@@ -1,0 +1,8 @@
+<component>
+    name = "Application"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\Application\"
+    RefName = "AmiNetworkPkg.Application"
+[parts]
+"NwInfoApp"
+<endComponent>

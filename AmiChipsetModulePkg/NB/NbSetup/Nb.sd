@@ -1,0 +1,251 @@
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************
+//*************************************************************************
+//<AMI_FHDR_START>
+//
+// Name:	NB.sd
+//
+// Description:	North Bridge Chipset setup definition.
+//
+//<AMI_FHDR_END>
+//*************************************************************************
+
+#ifdef MAIN_FORM_SET
+
+ #ifdef FORM_SET_ITEM
+    // Define controls to be added to the main page of the formset
+
+    SEPARATOR
+    SUBTITLE(STRING_TOKEN(STR_MEMORY))
+
+    text
+        help   = STRING_TOKEN(STR_MEMORY_SIZE_HELP),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_NAME),
+        text   = STRING_TOKEN(STR_MEMORY_SIZE_VALUE),
+        flags  = 0,
+        key    = 0;
+ #endif
+
+#endif  // MAIN_FORM_SET
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+
+//Interleaving
+    UINT8   EnableBankIntlv; // [Fam15 only]
+    UINT8   EnableChannelIntlv; // [Fam15 only]
+    UINT8   MemClk; // [Fam15 only]
+//Memory Clear
+    UINT8   MemClr; // [Fam15 only]
+    UINT8   MemClrFlag; // [Fam15 only]
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+    // [Fam15 only]
+    #define NB_MEM_CLK\
+        oneof varid  = SETUP_DATA.MemClk,\
+            prompt      = STRING_TOKEN(STR_MEM_CLK_PROMPT ),\
+            help        = STRING_TOKEN(STR_MEM_CLK_PROMPT_HELP),\
+            option text = STRING_TOKEN(STR_NB_AUTO), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_DDR1333_FREQUENCY_TEXT), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DDR1600_FREQUENCY_TEXT), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DDR1866_FREQUENCY_TEXT), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DDR2133_FREQUENCY_TEXT), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DDR2400_FREQUENCY_TEXT), value = 5, flags = RESET_REQUIRED;\
+        endoneof;
+
+    // [Fam15 only]
+    #define NB_BANK_INTERLEAVING\
+        oneof varid  = SETUP_DATA.EnableBankIntlv,\
+            prompt      = STRING_TOKEN(STR_BANK_INTERLEAVE),\
+            help        = STRING_TOKEN(STR_BANK_INTERLEAVE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED_TEXT), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+
+    // [Fam15 only]
+    #define NB_CHANNEL_INTERLEAVING\
+        oneof varid  = SETUP_DATA.EnableChannelIntlv,\
+            prompt      = STRING_TOKEN(STR_CHANNEL_INTERLEAVE),\
+            help        = STRING_TOKEN(STR_CHANNEL_INTERLEAVE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED_TEXT), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+
+    // [Fam15 only]
+    #define NB_MEMORY_CLEAR\
+        oneof varid  = SETUP_DATA.MemClr,\
+            prompt      = STRING_TOKEN(STR_MEMCLR),\
+            help        = STRING_TOKEN(STR_MEMCLR_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags =DEFAULT | MANUFACTURING | RESET_REQUIRED ;\
+            option text = STRING_TOKEN(STR_ENABLED_TEXT), value = 1, flags = RESET_REQUIRED;\
+        endoneof;
+
+    // [Fam15 only]
+    #define NB_MEMORY_CLEAR_FLAG\
+        checkbox varid  = SETUP_DATA.MemClrFlag,\
+            prompt      = STRING_TOKEN(STR_MEMCLR),\
+            help        = STRING_TOKEN(STR_MEMCLR_HELP),\
+            flags       = 0,\
+            default     = 0, defaultstore = AmiMfgDefault,\
+        endcheckbox;
+
+#endif // CONTROL_DEFINITION
+
+//---------------------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+
+    NB_MEM_CLK // [Fam15 only]
+    NB_BANK_INTERLEAVING // [Fam15 only]
+    NB_CHANNEL_INTERLEAVING // [Fam15 only]
+    NB_MEMORY_CLEAR // [Fam15 only]
+    NB_MEMORY_CLEAR_FLAG // [Fam15 only]
+
+#endif // CONTROLS_WITH_DEFAULTS
+//---------------------------------------------------------------------------
+
+#ifdef FORM_SET_TYPEDEF
+    #ifndef TYPEDEF_SETUP_CPU_FEATURES
+    #define TYPEDEF_SETUP_CPU_FEATURES
+        #include <CPU\Dxe\CpuDxe.h>
+    #endif
+#endif
+
+
+#ifdef CHIPSET_FORM_SET
+
+//--    #ifdef FORM_SET_VARSTORE
+//--        #ifndef VARSTORE_SETUP_CPU_FEATURES
+//--        #define VARSTORE_SETUP_CPU_FEATURES
+//--        varstore SETUP_CPU_FEATURES,
+//--            key   = CPU_FEATURES_ID,
+//--            name  = SetupCpuFeatures,
+//--            guid  = SETUP_GUID;
+//--        #endif
+//--    #endif
+
+    #ifdef FORM_SET_ITEM
+        // Define controls to be added to the main page of the formset
+    #endif
+
+    #ifdef FORM_SET_GOTO
+        // Define goto commands for the forms defined in this file
+    goto NB_FORM_ID,
+        prompt = STRING_TOKEN(STR_NB_FORM),
+        help = STRING_TOKEN(STR_NB_FORM_HELP);
+    #endif
+
+#ifdef FORM_SET_FORM
+    // Define forms
+    form formid = AUTO_ID(NB_FORM_ID),
+        title = STRING_TOKEN(STR_NB_FORM);
+
+        SUBTITLE(STRING_TOKEN(STR_NB_CONFIG))
+        SEPARATOR
+
+// Placeholder for additional control in NB page
+        #undef FORM_SET_FORM
+        #define NB_MAIN_FORM_ITEM
+        #include <SetupDefinitions.h>
+        #undef NB_MAIN_FORM_ITEM
+        #define FORM_SET_FORM
+
+        SUBTITLE(STRING_TOKEN(STR_MEMORY))
+        SEPARATOR
+
+        SUBTITLE(STRING_TOKEN(STR_MEMORY_SIZE_VALUE))
+
+suppressif ideqval SETUP_DATA.HideF15Op == 1;
+        goto AMI_MEM_CFG_ID,
+        prompt  = STRING_TOKEN(STR_MEMCFG_SUBMENU_STRING),
+        help    = STRING_TOKEN(STR_MEMCFG_SUBMENU_STRING);
+endif;
+
+#if NB_SHOW_EXTENDED_SETUP_INFO
+        goto NB_FORM_SCKT0_ID,
+        prompt  = STRING_TOKEN(STR_SCKT0_FORM),
+        help    = STRING_TOKEN(STR_SCKT0_HELP);
+#endif //  #if NB_SHOW_EXTENDED_SETUP_INFO
+
+    endform;    // form id  NB_FORM_ID
+
+    // ====================================================================
+    // Socket 0 Information
+    // ====================================================================
+#if NB_SHOW_EXTENDED_SETUP_INFO
+    form formid = AUTO_ID(NB_FORM_SCKT0_ID),
+    	title = STRING_TOKEN(STR_SCKT0_FORM);
+
+    	SUBTITLE(STRING_TOKEN(STR_SCKT0_FORM))
+
+        SEPARATOR
+        // Socket start address
+        SUBTITLE(STRING_TOKEN(STR_MEMORY_SCKT0_START_ADDRESS_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_MEMORY_SCKT0_END_ADDRESS_VALUE))
+
+        SEPARATOR
+        SEPARATOR
+        // Dimm Info
+        SUBTITLE(STRING_TOKEN(STR_MEMORY_SIZE_SCKT0_SLOT0_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_MEMORY_SIZE_SCKT0_SLOT1_VALUE))
+  #if SOLUTION_TYPE
+        SUBTITLE(STRING_TOKEN(STR_MEMORY_SIZE_SCKT0_SLOT2_VALUE))
+        SUBTITLE(STRING_TOKEN(STR_MEMORY_SIZE_SCKT0_SLOT3_VALUE))
+  #endif // #if SOLUTION_TYPE
+
+    endform;    // form id NB_FORM_SCKT0_ID
+#endif // #if NB_SHOW_EXTENDED_SETUP_INFO
+
+// [Fam15 only]>
+    form formid = AUTO_ID(AMI_MEM_CFG_ID),
+        title = STRING_TOKEN(STR_MEMCFG_SUBMENU_STRING);
+        subtitle text = STRING_TOKEN(STR_MEMCFG_SUBMENU_STRING);
+        subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+        SEPARATOR
+        
+        SUBTITLE(STRING_TOKEN(STR_NB_FAM15_ONLY_TEXT))
+        NB_MEM_CLK
+        NB_BANK_INTERLEAVING
+        NB_CHANNEL_INTERLEAVING
+        NB_MEMORY_CLEAR
+
+    endform;    // form id AMI_MEM_CFG_ID
+// [Fam15 only]<
+
+#endif // #ifdef FORM_SET_FORM
+
+#endif // #ifdef CHIPSET_FORM_SET
+
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************

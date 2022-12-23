@@ -1,0 +1,37 @@
+
+TOKEN
+    Name  = "APCB_RV_FP5_UDIMM_BINARY_SUPPORT"
+    Value  = "1"
+    Help  = "The master token for Apcb RV AM4 SODIMM binary."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMak = Yes
+    Master = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+MODULE
+	Help  = "Includes ApcbRvFp5Udimm.mak to Project"
+	File  = "ApcbRvFp5Udimm.mak"
+End
+
+PATH
+    Name = "APCB_SCRIPT_RV_FP5_UDIMM_DIR"
+    path = "AgesaPkg\Addendum\Apcb\RavenFp5Udimm"
+End
+
+TOKEN
+    Name  = "RELEASE_RV_FP5_UDIMM"
+    Value  = "ReleaseRvFp5Udimm"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PSP_APCB_FILENAME_RV_UDIMM"
+    Value  = "Build\$(APCB_IN_BUILD_DIR)\$(RELEASE_RV_FP5_UDIMM)\APCB_RV_D4.bin"
+    Help  = "The APCB OEM binary 'APCB_RV_D4.bin'."
+    TokenType = File
+    TargetMAK = Yes
+End

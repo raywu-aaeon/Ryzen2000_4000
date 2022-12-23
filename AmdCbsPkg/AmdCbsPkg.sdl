@@ -1,0 +1,100 @@
+TOKEN
+	Name  = "AmdCbsPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdCbsPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+PATH
+    Name  = "AmdCbsPkg_DIR"
+    Help  = "Path to Variables Module in Project"
+End
+
+MODULE
+    Help  = "Includes AmdCbsPkg.mak to Project"
+    File  = "AmdCbsPkg.mak"
+End
+
+TOKEN
+	Name  = "Build_AmdCbsPkg"
+	Value  = "1"
+	Help  = "Switch for building AmdCbsPkg Package"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PLATFORM_NAME"
+	Value  = "AmdCbsPkg"
+	TokenType = Expression
+	TargetDSC = Yes
+	Token = "Build_AmdCbsPkg" "=" "1"
+End
+
+TOKEN
+	Name  = "CbsBaseDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable CbsBaseDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "CbsBasePei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable CbsBasePei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "CbsSetupDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable CbsSetupDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "BctBaseSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable BctBaseSmm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "CbsBaseDxeRV"
+	File  = "CbsBaseDxe/CbsBaseDxeRV.inf"
+	Package  = "AmdCbsPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "CbsBaseDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CbsBasePeiRV"
+	File  = "CbsBasePei/CbsBasePeiRV.inf"
+	Package  = "AmdCbsPkg"
+	ModuleTypes  = "PEIM"
+	Token = "CbsBasePei_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CbsSetupDxeRV"
+	File  = "CbsSetupDxe/CbsSetupDxeRV.inf"
+	Package  = "AmdCbsPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "CbsSetupDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "BctBaseSmmRV"
+	File  = "BctBaseSmm/BctBaseSmmRV.inf"
+	Package  = "AmdCbsPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "BctBaseSmm_SUPPORT" "=" "1"
+End
+
+OUTPUTREGISTER
+    Name  = "RunIdsIdGenExe"
+    Help  = "This OUTPUTREGISTER to help to output "
+    Path  = "Build"
+    File  = "RunIdsIdGenExe.bat"
+    Template  = "Tools/IdsIdGenExe.bat"
+End

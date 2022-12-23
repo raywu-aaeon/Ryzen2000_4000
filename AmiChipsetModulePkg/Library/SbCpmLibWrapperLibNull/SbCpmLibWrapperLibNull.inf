@@ -1,0 +1,19 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbCpmLibWrapperLibNull
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbCpmLibWrapperLib
+
+[Packages]
+  MdePkg/MdePkg.dec 
+
+[LibraryClasses]
+
+[Sources]
+  SbCpmLibWrapperLibNull.c
+
+[BuildOptions]
+
+[Pcd]

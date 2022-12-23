@@ -1,0 +1,10 @@
+<component>
+	name = "AmiSerialUart1"
+	category = eModule
+	LocalRoot = "AmiModulePkg/AmiSerialUart1/"
+	RefName = "AmiModulePkg.AmiSerialUart1"
+[INF]
+"AmiSerialUart1.inf"
+[files]
+"AmiSerialUart1.sdl"
+<endComponent>

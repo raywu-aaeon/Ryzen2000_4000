@@ -1,0 +1,43 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiSbMiscLib
+  FILE_GUID                      = 3cb147a1-02bd-45f6-9229-b26844141d0f  
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiSbMiscLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+#
+
+[Sources]
+  AmiSbMiscLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+
+[LibraryClasses]
+  IoLib
+  PcdLib
+  BaseLib
+  AmiChipsetIoLib
+  AmiFchIoAccessLib
+  SbResetLib
+
+[Pcd]
+  gAmiChipsetPkgTokenSpaceGuid.AmiPcdAcpiIoPortBaseAddress
+### RVA9-EIP310737###  gAmiChipsetModulePkgTokenSpaceGuid.PcdRcrbBaseAddress
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdGpioPortBaseAddress
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdSbPwrLossData
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdSbPwrLossDataMask
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+

@@ -1,0 +1,71 @@
+TOKEN
+	Name  = "AmdCpmDisplayFeature_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling DisplayFeature support in the project"
+	TokenType = Boolean
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "CPM_SPECIAL_VGA_FEATURE_SETUP_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable this feature SETUP item support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmDisplayFeatureDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDisplayFeatureDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmDisplayFeaturePeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDisplayFeaturePeim support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmDisplayFeatureSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmDisplayFeatureSmm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdCpmDisplayFeatureDxe"
+	File  = "Dxe/AmdCpm3DisplayFeatureDxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmDisplayFeatureDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmDisplayFeaturePeim"
+	File  = "Pei/AmdCpm3DisplayFeaturePeim.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmDisplayFeaturePeim_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmDisplayFeatureSmm"
+	File  = "Smm/AmdCpm3DisplayFeatureSmm.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AmdCpmDisplayFeatureSmm_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "AmdCpmDisplayFeaturePeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmdCpmPkg.AmdCpmDisplayFeaturePeim"
+	Index  = '"AFTER" "AmdCpmPcieInitPeim"'
+	Help  = "refer to (AmdCpmPkg.pei.inc.fdf)"
+End
+

@@ -1,0 +1,13 @@
+<component>
+	name = "ApcbRavenFp5Sodimm"
+	category = ModulePart
+	LocalRoot = "AgesaPkg\Addendum\Apcb\RavenFp5Sodimm\"
+	RefName = "AgesaPkg.Addendum.Apcb.RavenFp5Sodimm"
+[files]
+"ApcbCreate.bat"
+"ApcbRvFp5Sodimm.mak"
+"ApcbRvFp5Sodimm.sdl"
+[parts]
+"AgesaPkg.Addendum.Apcb.RavenFp5Sodimm.ApcbData"
+"AgesaPkg.Addendum.Apcb.RavenFp5Sodimm.Include"
+<endComponent>

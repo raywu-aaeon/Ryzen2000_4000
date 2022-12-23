@@ -1,0 +1,262 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+/**
+    @file Ntp.sd
+    This is the setup page 'NTP Synchronization.'
+    The link to the page is in the setup 'Advanced' tab. 
+**/
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+#define NTP_ONEOF_SUPPORT\
+    oneof varid     = NTP_CONFIG_SUPPORT.Enable,\
+        prompt      = STRING_TOKEN(STR_NTP_SUPPORT_ENABLE),\
+        help        = STRING_TOKEN(STR_NTP_SUPPORT_ENABLE_HELP),\
+        option text = STRING_TOKEN(STR_DISABLED), value=0, flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_ENABLED), value=1, flags= RESET_REQUIRED;\
+        default     = NTP_DEFAULT_VALUE,\
+        default     = NTP_DEFAULT_VALUE, defaultstore = AmiMfgDefault,\
+    endoneof;
+
+#define NTP_CONFIG_IP4_ADDR(Address, PromptStr, PrompthelpStr, AutoKey)\
+    string  varid   = Address,\
+        prompt      = PromptStr,\
+        help        = PrompthelpStr,\
+        flags       = INTERACTIVE,\
+        key         = AutoKey,\
+        minsize     = IP4_MINIMUM_SIZE,\
+        maxsize     = IP4_MAXIMUM_SIZE,\
+    endstring;
+
+#define NTP_CONFIG_SERVER_NAME_STRING(Name, PromptStr, PrompthelpStr, AutoKey)\
+    string  varid   = Name,\
+        prompt      = PromptStr,\
+        help        = PrompthelpStr,\
+        flags       = INTERACTIVE,\
+        key         = AutoKey,\
+        minsize     = IP4_MINIMUM_SIZE,\
+        maxsize     = MAX_STRING_NAME,\
+    endstring;
+
+#define NTP_CONFIG_STATIC_LOCAL_ADDR(Address)\
+    NTP_CONFIG_IP4_ADDR(Address, STRING_TOKEN(STR_LOCAL_IP_ADDRESS), STRING_TOKEN(STR_LOCAL_IP_ADDRESS_HELP), AUTO_ID(LOCAL_IP_KEY))
+
+#define NTP_CONFIG_STATIC_SUBNETMASK_ADDR(Address)\
+    NTP_CONFIG_IP4_ADDR(Address, STRING_TOKEN(STR_SUBNETMASK_IP_ADDRESS), STRING_TOKEN(STR_SUBNETMASK_IP_ADDRESS_HELP), AUTO_ID(SUBNETMASK_IP_KEY))
+
+#define NTP_CONFIG_STATIC_GATEWAY_ADDR(Address)\
+    NTP_CONFIG_IP4_ADDR(Address, STRING_TOKEN(STR_GATEWAY_IP_ADDRESS), STRING_TOKEN(STR_GATEWAY_IP_ADDRESS_HELP), AUTO_ID(GATEWAY_IP_KEY))
+
+#define NTP_CONFIG_STATIC_PRIMARY_DNS_SERVER_ADDR(Address)\
+    NTP_CONFIG_IP4_ADDR(Address, STRING_TOKEN(STR_PRIMARY_DNS_SERVER_IP_ADDRESS), STRING_TOKEN(STR_PRIMARY_DNS_SERVER_IP_ADDRESS_HELP), AUTO_ID(PRIMARY_DNS_SERVER_IP_KEY))
+
+#define NTP_CONFIG_SERVER_HOST_NAME_STRING(Name)\
+    NTP_CONFIG_SERVER_NAME_STRING(Name, STRING_TOKEN(STR_SERVER_HOST_NAME), STRING_TOKEN(STR_SERVER_HOST_NAME_HELP), AUTO_ID(SERVER_HOST_NAME_KEY))
+
+#define NTP_CONFIG_LOCAL_IP_ADDRESS\
+    oneof varid     = NTP_CONFIGURATION.LocalAddressOpt,\
+        prompt      = STRING_TOKEN(STR_NTP_CONFIG_LOCAL_IP),\
+        help        = STRING_TOKEN(STR_NTP_CONFIG_LOCAL_IP_HELP),\
+        option text = STRING_TOKEN(STR_NTP_CONFIG_LOCAL_IP_STATIC), value=NTP_CONFIG_LOCAL_IP_STATIC, flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_NTP_CONFIG_LOCAL_IP_DYNAMIC), value=NTP_CONFIG_LOCAL_IP_DYNAMIC, flags= RESET_REQUIRED;\
+        default     = NTP_CONFIG_LOCAL_ADDRESS,\
+        default     = NTP_CONFIG_LOCAL_ADDRESS, defaultstore = AmiMfgDefault,\
+    endoneof;\
+    \
+    suppressif ideqval NTP_CONFIGURATION.LocalAddressOpt == NTP_CONFIG_LOCAL_IP_DYNAMIC;\
+        NTP_CONFIG_STATIC_LOCAL_ADDR(NTP_CONFIGURATION.LocalAddress)\
+        NTP_CONFIG_STATIC_SUBNETMASK_ADDR(NTP_CONFIGURATION.SubnetMask)\
+        NTP_CONFIG_STATIC_GATEWAY_ADDR(NTP_CONFIGURATION.GatewayAddress)\
+        NTP_CONFIG_STATIC_PRIMARY_DNS_SERVER_ADDR(NTP_CONFIGURATION.PrimaryDnsServer)\
+    endif;
+
+#define NTP_CONFIG_SERVER_HOST_NAME\
+    oneof varid     = NTP_CONFIGURATION.NtpServerOpt,\
+        prompt      = STRING_TOKEN(STR_NTP_CONFIG_SERVER_HOST_NAME),\
+        help        = STRING_TOKEN(STR_NTP_CONFIG_SERVER_HOST_NAME_HELP),\
+        option text = STRING_TOKEN(STR_NTP_CONFIG_SERVER_HOST_NAME_DEFAULT), value=NTP_SERVER_OPT_DEFAULT, flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_NTP_CONFIG_SERVER_HOST_NAME_MANUAL), value=NTP_SERVER_OPT_MANUAL, flags= RESET_REQUIRED;\
+        default     = NTP_CONFIG_SERVER_NAME,\
+        default     = NTP_CONFIG_SERVER_NAME, defaultstore = AmiMfgDefault,\
+    endoneof;\
+    \
+    suppressif NOT ideqval NTP_CONFIGURATION.NtpServerOpt == NTP_SERVER_OPT_MANUAL;\
+        NTP_CONFIG_SERVER_HOST_NAME_STRING(NTP_CONFIGURATION.NtpServerName)\
+    endif;
+
+#define NTP_CONFIG_TIME_ZONE\
+    oneof varid     = NTP_CONFIG_ADJUST_TIME.TimeZoneOpt,\
+        prompt      = STRING_TOKEN(STR_NTP_TIME_ZONE),\
+        help        = STRING_TOKEN(STR_NTP_TIME_ZONE_HELP),\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_12),   value=TIME_ZONE_MINUS_12,   flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_11),   value=TIME_ZONE_MINUS_11,   flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_10),   value=TIME_ZONE_MINUS_10,   flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_9),    value=TIME_ZONE_MINUS_9,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_8),    value=TIME_ZONE_MINUS_8,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_7),    value=TIME_ZONE_MINUS_7,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_6),    value=TIME_ZONE_MINUS_6,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_5),    value=TIME_ZONE_MINUS_5,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_4_30), value=TIME_ZONE_MINUS_4_30, flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_4),    value=TIME_ZONE_MINUS_4,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_3_30), value=TIME_ZONE_MINUS_3_30, flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_3),    value=TIME_ZONE_MINUS_3,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_2),    value=TIME_ZONE_MINUS_2,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_MINUS_1),    value=TIME_ZONE_MINUS_1,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_0),          value=TIME_ZONE_0,          flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_1),     value=TIME_ZONE_PLUS_1,     flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_2),     value=TIME_ZONE_PLUS_2,     flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_3),     value=TIME_ZONE_PLUS_3,     flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_3_30),  value=TIME_ZONE_PLUS_3_30,  flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_4),     value=TIME_ZONE_PLUS_4,     flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_4_30),  value=TIME_ZONE_PLUS_4_30,  flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_5),     value=TIME_ZONE_PLUS_5,     flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_5_30),  value=TIME_ZONE_PLUS_5_30,  flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_5_45),  value=TIME_ZONE_PLUS_5_45,  flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_6),     value=TIME_ZONE_PLUS_6,     flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_6_30),  value=TIME_ZONE_PLUS_6_30,  flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_7),     value=TIME_ZONE_PLUS_7,     flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_8),     value=TIME_ZONE_PLUS_8,     flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_9),     value=TIME_ZONE_PLUS_9,     flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_9_30),  value=TIME_ZONE_PLUS_9_30,  flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_10),    value=TIME_ZONE_PLUS_10,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_11),    value=TIME_ZONE_PLUS_11,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_12),    value=TIME_ZONE_PLUS_12,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_13),    value=TIME_ZONE_PLUS_13,    flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_TIME_ZONE_PLUS_14),    value=TIME_ZONE_PLUS_14,    flags= RESET_REQUIRED;\
+        default     = NTP_CONFIG_DEFAULT_TIME_ZONE_OFFSET,\
+        default     = NTP_CONFIG_DEFAULT_TIME_ZONE_OFFSET, defaultstore = AmiMfgDefault,\
+    endoneof;\
+
+#define NTP_CONFIG_TIME_OUT\
+    numeric varid   = NTP_CONFIGURATION.Timeout,\
+        prompt      = STRING_TOKEN(STR_NTP_TIME_OUT),\
+        help        = STRING_TOKEN(STR_NTP_TIME_OUT_HELP),\
+        flags       = INTERACTIVE,\
+        minimum     = 1,\
+        maximum     = 0xFF,\
+        step        = 1,\
+        default     = NTP_CONFIG_DEFAULT_TIME_OUT,\
+        default     = NTP_CONFIG_DEFAULT_TIME_OUT, defaultstore = AmiMfgDefault,\
+    endnumeric;
+
+#define NTP_CONFIG_DAYLIGHT_SAVING\
+    oneof varid     = NTP_CONFIG_ADJUST_TIME.Daylight,\
+        prompt      = STRING_TOKEN(STR_NTP_DAYLIGHT_SAVING),\
+        help        = STRING_TOKEN(STR_NTP_DAYLIGHT_SAVING_HELP),\
+        option text = STRING_TOKEN(STR_DISABLED), value=0, flags= RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_ENABLED), value=1, flags= RESET_REQUIRED;\
+        default     = NTP_CONFIG_DAYLIGHT_SAVING_ENABLE,\
+        default     = NTP_CONFIG_DAYLIGHT_SAVING_ENABLE, defaultstore = AmiMfgDefault,\
+    endoneof;
+
+#define NTP_UPDATE_TIME\
+    text\
+        help   = STRING_TOKEN(STR_NTP_UPDATE_TIME_HELP),\
+        text   = STRING_TOKEN(STR_NTP_UPDATE_TIME),\
+        flags  = INTERACTIVE,\
+        key    = AUTO_ID(NTP_UPDATE_TIME_KEY);
+
+#endif //End of CONTROL_DEFINITION
+
+#ifdef FORM_SET_TYPEDEF
+    #include "Ntp.h"
+#endif
+
+#ifdef FORM_SET_VARSTORE
+    varstore NTP_CONFIG_SUPPORT,
+        key  = AUTO_ID(NTP_CONFIG_SUPPORT_KEY),
+        name = NtpConfigSupport,
+        guid = SETUP_GUID;
+
+    varstore NTP_CONFIGURATION,
+        key  = AUTO_ID(NTP_CONFIGURATION_KEY),
+        name = NtpConfig,
+        guid = SETUP_GUID;
+
+    varstore NTP_CONFIG_ADJUST_TIME,
+        key  = AUTO_ID(NTP_CONFIG_ADJUST_TIME_KEY),
+        name = NtpConfigAdjustTime,
+        guid = SETUP_GUID;
+
+#endif // end of FORM_SET_VARSTORE
+
+//**********************************************************************
+//                ADVANCED - NTP Synchronization Form
+//**********************************************************************
+#ifdef ADVANCED_FORM_SET
+
+    #ifdef FORM_SET_GOTO
+        //
+        // Define goto commands for the forms defined in this file
+        //
+        suppressif ideqval NTP_CONFIG_SUPPORT.NsEnable == 0;
+            goto NTP_SYNC_FORM_ID,
+                prompt  = STRING_TOKEN(STR_NTP_SYNCHRONIZATION),
+                help    = STRING_TOKEN(STR_NTP_SYNCHRONIZATION_HELP);
+        endif;
+    #endif
+
+    #ifdef FORM_SET_FORM
+        //
+        // Define forms
+        //
+        form formid = AUTO_ID(NTP_SYNC_FORM_ID),
+        title = STRING_TOKEN(STR_NTP_SYNCHRONIZATION);
+
+            SUBTITLE(STRING_TOKEN(STR_NTP_SYNCHRONIZATION))
+            SEPARATOR
+
+            // Enable or Disable
+            NTP_ONEOF_SUPPORT
+
+            SEPARATOR
+
+            suppressif ideqval NTP_CONFIG_SUPPORT.Enable == 0;
+
+                goto NTP_CONFIG_FORM_ID,
+                    prompt  = STRING_TOKEN(STR_NTP_CONFIGURATION),
+                    help    = STRING_TOKEN(STR_NTP_CONFIGURATION_HELP);
+
+                // Parsing NTP
+                NTP_UPDATE_TIME
+
+            endif; // End suppressif
+        endform;
+
+        //
+        // Define NTP configuration forms
+        //
+        form formid = AUTO_ID(NTP_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_NTP_CONFIGURATION);
+
+            SUBTITLE(STRING_TOKEN(STR_NTP_CONFIGURATION))
+            SEPARATOR
+
+            NTP_CONFIG_LOCAL_IP_ADDRESS
+            SEPARATOR
+
+            NTP_CONFIG_SERVER_HOST_NAME
+            SEPARATOR
+
+            NTP_CONFIG_TIME_ZONE
+            SEPARATOR
+
+            NTP_CONFIG_DAYLIGHT_SAVING
+            SEPARATOR
+
+            NTP_CONFIG_TIME_OUT
+            SEPARATOR
+    endform;
+
+  #endif //FORM_SET_FORM
+
+#endif  // ADVANCED_FORM_SET

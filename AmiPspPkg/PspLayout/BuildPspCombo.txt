@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<DIRS AddressMode="0">
+ <COMBO_DIR Base="@Token(PSP_COMBO_DIRECTORY_OFFSET)" LookUpMode="0">
+ @elink(COMBO_ENTRY_ELINK, "@Child", "%n", "")
+ </COMBO_DIR>
+</DIRS>

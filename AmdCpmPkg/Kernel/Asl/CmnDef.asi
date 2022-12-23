@@ -1,0 +1,638 @@
+/*****************************************************************************
+ *
+ * Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+#define CpmSetPostCode                                  M000
+#define CpmIsFchPcie                                    M001
+#define CpmFchGppHotplugService                         M002
+#define CpmCalculateABLinkRegister                      M003
+#define CpmReadABLinkRegister                           M004
+#define CpmWriteABLinkRegister                          M005
+#define CpmReadWriteABLinkRegister                      M006
+#define CpmFchSetGen1                                   M007
+#define CpmFchSetGen2                                   M008
+#define CpmReadGpio                                     M009
+#define CpmWriteGpio                                    M010
+#define CpmReadMem8                                     M011
+#define CpmWriteMem8                                    M012
+#define CpmReadMem32                                    M013
+#define CpmWriteMem32                                   M014
+#define CpmReadPm2                                      M015
+#define CpmWritePm2                                     M016
+#define CpmReadPci                                      M017
+#define CpmWritePci                                     M018
+#define CpmReadPci32                                    M019
+#define CpmWritePci32                                   M020
+#define CpmReadPcieRegister                             M021
+#define CpmWritePcieRegister                            M022
+#define CpmClearPresenceDetectChangeBit                 M023
+#define CpmCheckVirtualChannelNegotiationPending        M024
+#define CpmRetrainPcieLink                              M025
+#define CpmReconfigPcieLink                             M026
+#define CpmGetPcieAspm                                  M027
+#define CpmSetPcieAspm                                  M028
+#define CpmReadGevent                                   M029
+#define CpmWriteGevent                                  M030
+#define CpmReadGeventTriggerType                        M031
+#define CpmWriteGeventTriggerType                       M032
+#define CpmGetPciePmCapability                          M033
+#define CpmReadRtc                                      M034
+#define CpmReadAcpiMmio                                 M035
+#define CpmWriteAcpiMmio                                M036
+#define CpmGeventGpioMappingTable                       M037
+#define CpmKbcReadGpio                                  M038
+#define CpmKbcWriteGpio                                 M039
+#define CpmKbcRead8                                     M040
+#define CpmKbcWrite8                                    M041
+#define CpmKbcMutex                                     M042
+#define CpmCallBack                                     M043
+#define CpmIsWin8                                       M045
+#define CpmCurrentOSType                                M046
+#define CpmCurrentOSFlag                                M047
+#define CpmOddStatus                                    M048
+#define CpmReadTable                                    M049
+#define CpmFanTempCtrl0                                 M050
+#define CpmFanTempCtrl1                                 M051
+#define CpmFanTempCtrl2                                 M052
+#define CpmFanTempCtrl3                                 M053
+#define CpmFanSpeedCtrl0                                M054
+#define CpmFanSpeedCtrl1                                M055
+#define CpmFanSpeedCtrl2                                M056
+#define CpmFanSpeedCtrl3                                M057
+#define CpmHystersisForActiveCooling                    M058
+#define CpmHystersisForPassiveCooling                   M059
+#define CpmGetZoneTemperature                           M060
+#define CpmThermalTrapHandler                           M061
+#define CpmCurrentTemperature                           M062
+#define CpmSetTemperatureThreshold                      M063
+#define CpmSetFanSpeed                                  M064
+#define CpmUpdateTemperatureThreshold                   M065
+#define CpmInitFanoutRegister                           M066
+#define CpmInitTempInRegister                           M067
+#define CpmFanStatus                                    M068
+#define CpmTemperatureHighThreshold                     M069
+#define CpmTemperatureLowThreshold                      M070
+#define CpmCriticalTemperatureThreshold                 M071
+#define CpmPassiveCoolingThreshold                      M072
+#define CpmGetFanStatus                                 M073
+#define CpmTc1                                          M074
+#define CpmTc2                                          M075
+#define CpmSamplePeriod                                 M076
+#define CpmAc0                                          M077
+#define CpmAc1                                          M078
+#define CpmAc2                                          M079
+#define CpmAc3                                          M080
+#define CpmPstateLimit                                  M081
+#define CpmVersion                                      M082
+#define CpmPcieMmioBaseAddr                             M083
+#define CpmAcpiMmioBaseAddr                             M084
+#define CpmSbChipId                                     M085
+#define CpmChipId                                       M086
+#define CpmIsDgpuPrimary                                M087
+#define CpmiGpuP2pBridgePfa                             M088
+#define CpmiGpuP2pDevicePfa                             M089
+#define CpmdGpuP2pBridgeFuncNum                         M090
+#define CpmdGpuP2pBridgeDeviceNum                       M091
+#define CpmdGpuP2pBridgeBusNum                          M092
+#define CpmdGpuP2pDeviceFuncNum                         M093
+#define CpmdGpuP2pDeviceDeviceNum                       M094
+#define CpmdGpuP2pDeviceBusNum                          M095
+#define CpmdGpuAspmLxEnable                             M096
+#define CpmdGpuAudioDisable                             M097
+#define CpmAtpxSupportedFunctionMask                    M098
+#define CpmAtpxFlags                                    M099
+#define CpmAtcsSupportedFunctionMask                    M100
+#define CpmAtifSupportedNotificationMask                M101
+#define CpmAtifFunctionBitVector                        M102
+#define CpmAtifFlags                                    M103
+#define CpmAtifDeviceListBuffer                         M104
+#define CpmAtrmRomSize                                  M105
+#define CpmAtrmRomImage                                 M106
+#define CpmSmiCheckCheckToolData                        M107
+#define CpmDeviceDetectionTable                         M108
+#define CpmDeviceResetTable                             M109
+#define CpmDevicePowerTable                             M110
+#define CpmSetDevicePower                               M111
+#define CpmSetDeviceReset                               M112
+#define CpmGetDeviceStatus                              M113
+#define CpmPcieHotplug                                  M114
+#define CpmInterfaceBuffer                              M115
+#define CpmStructureSizeField                           M116
+#define CpmFunctionField                                M117
+#define CpmDeviceField                                  M118
+#define CpmBusField                                     M119
+#define CpmHotplugField                                 M120
+#define CpmWirelessButtonEventMethod                    M121
+#define CpmWirelessButtonTable                          M122
+#define CpmWirelessBridge0                              M123
+#define CpmWirelessBridge1                              M124
+#define CpmWirelessBridge2                              M125
+#define CpmWirelessBridge3                              M126
+#define CpmWirelessButtonCurrentStatus                  M127
+#define CpmMainTable                                    M128
+#define CpmExpressCardEventMethod                       M129
+#define CpmExpressCardBridge                            M130
+#define CpmSaveContextTable                             M131
+#define CpmExpressCardTable                             M132
+#define CpmDisplayFeatureTable                          M133
+#define CpmZeroPowerOddTable                            M134
+#define CpmAdaptiveS4Table                              M135
+#define CpmAcpiThermalFanTable                          M136
+#define CpmAdaptiveTimers                               M137
+#define CpmS4TimerTargetMinute                          M138
+#define CpmS4TimerTargetHour                            M139
+#define CpmS4TimerTargetDay                             M140
+#define CpmS4TimerTargetMonth                           M141
+#define CpmS4TimerTargetYear                            M142
+#define CpmS4TimerCurrentMinute                         M143
+#define CpmS4TimerCurrentHour                           M144
+#define CpmS4TimerCurrentDay                            M145
+#define CpmS4TimerCurrentMonth                          M146
+#define CpmS4TimerCurrentYear                           M147
+#define CpmS4TimerBufferMinute                          M148
+#define CpmS4TimerBufferHour                            M149
+#define CpmS4TimerBufferDay                             M150
+#define CpmS4TimerBufferMonth                           M151
+#define CpmS4TimerBufferYear                            M152
+#define CpmGetDayofMonth                                M153
+#define CpmGetRelativeTime                              M154
+#define CpmGetAbsoluteTime                              M155
+#define CpmAdaptiveS4InitFlag                           M156
+#define CpmStructureSize                                M157
+#define CpmInterfaceVersion                             M158
+#define CpmSupportedNotificationsMask                   M159
+#define CpmSupportedFunctionsBitVector                  M160
+#define CpmValidFlagsMask                               M161
+#define CpmFlags                                        M162
+#define CpmNotifyCommandCode                            M163
+#define CpmPendingSystemBIOSRequestBuffer               M164
+#define CpmDisplaySwitchRequest                         M165
+#define CpmExpansionModeChangeRequest                   M166
+#define CpmThermalStateChangeRequest                    M167
+#define CpmForcedPowerStateChangeRequest                M168
+#define CpmSystemPowerStateChangeRequest                M169
+#define CpmDisplayConfigurationChangeRequest            M170
+#define CpmPowerXpressGraphicsSwitchToggleRequest       M171
+#define CpmPanelBrightnessLevelChangeRequest            M172
+#define CpmDgpuDisplayConnectStateChangeRequest         M173
+#define CpmPendingSystemBIOSRequests                    M174
+#define CpmExpansionMode                                M175
+#define CpmThermalStateTargetGraphicsController         M176
+#define CpmThermalStateStateId                          M177
+#define CpmForcedPowerStateTargetGraphicsController     M178
+#define CpmForcedPowerStateStateId                      M179
+#define CpmSystemPowerSource                            M180
+#define CpmPanelBrightnessBacklightLevel                M181
+#define CpmSelectedDisplays                             M182
+#define CpmConnectedDisplays                            M183
+#define CpmNextDisplayOption                            M184
+#define CpmConnectorIndex                               M185
+#define CpmDeviceCombinationBuffer                      M186
+#define CpmDeviceCombinationNumber                      M187
+#define CpmLidState                                     M188
+#define CpmAtpxBuffer                                   M189
+#define CpmDgpuSubSystemVendorId                        M190
+#define CpmHdaudioSubSystemVendorId                     M191
+#define CpmPowerState                                   M192
+#define CpmDisplayConnectorNumber                       M193
+#define CpmDisplayConnectorBuffer                       M194
+#define CpmDisplaySwitch                                M195
+#define CpmI2cSwitch                                    M196
+#define CpmStructureSize2                               M197
+#define CpmBusNumber                                    M198
+#define CpmDeviceNumber                                 M199
+#define CpmFunctionNumber                               M200
+#define CpmHotplugStatus                                M201
+#define CpmVbiosBuffer                                  M202
+#define CpmDockingFlag                                  M203
+#define CpmDockingStatus                                M204
+#define CpmReturnValue                                  M205
+#define CpmPsppPolicy                                   M206
+#define CpmAtcsBuffer0                                  M207
+#define CpmAtcsBuffer1                                  M208
+#define CpmActiveLaneNumber                             M209
+#define CpmSaveExpansionMode                            M210
+#define CpmSaveThermalStateTargetGraphicsController     M211
+#define CpmSaveThermalStateStateId                      M212
+#define CpmSaveForcedPowerStateTargetGraphicsController M213
+#define CpmSaveForcedPowerStateStateId                  M214
+#define CpmSaveSystemPowerSource                        M215
+#define CpmSavePanelBrightnessBacklightLevel            M216
+#define CpmMxmOverTempEventMethod                       M217
+#define CpmDisplayConnectEventMethod                    M218
+#define CpmSetDeviceClock                               M219
+#define CpmPcieClockTable                               M220
+#define CpmSbStrap                                      M221
+#define CpmOtherHotplugCard0EventMethod                 M222
+#define CpmOtherHotplugCard0Bridge                      M223
+#define CpmOtherHotplugCard1EventMethod                 M224
+#define CpmOtherHotplugCard1Bridge                      M225
+#define CpmOtherHotplugCardTable                        M226
+#define CpmGeventGpioMappingTable2                      M227
+#define CpmSetDevicePowerTable                          M228
+#define CpmEcRamGpioBaseOffset                          M229
+#define CpmSwSmiMutex                                   M230
+#define CpmSwSmiPort                                    M231
+#define CpmTriggerSmi                                   M232
+#define CpmUmaSize                                      M233
+#define CpmCurrentUmaSize                               M234
+#define CpmSwSmiCmdSetAutoUmaMode                       M235
+#define CpmDgpuPowerResourceBuffer                      M236
+#define CpmDgpuPowerResourceVcc                         M237
+#define CpmDgpuPowerResourceVccFlag                     M239
+#define CpmDgpuSetPower                                 M241
+#define CpmDgpuPowerResourceDeviceId                    M242
+#define CpmBridgeDevice                                 M243
+#define CpmBridgeFunction                               M244
+#define CpmDgpuBus                                      M245
+#define CpmDgpuSsidVid0                                 M246
+#define CpmDgpuSsidVid1                                 M247
+#define CpmGetInternalBusNumber                         M248
+#define CpmReadSmnRegister                              M249
+#define CpmWriteSmnRegister                             M250
+#define CpmCoreTopologyTable                            M251
+#define CpmGetMultiDieBusNumber                         M252
+#define CpmRwSmnMutex                                   M253
+#define CpmAlibStructureSize                            M254
+#define CpmAlibSubFunction                              M255
+#define CpmAlibControlValue                             M256
+#define CpmOtherHotplugCard0ConnectMethod               M257
+#define CpmOtherHotplugCard0DisconnectMethod            M258
+#define CpmOtherHotplugCard1ConnectMethod               M259
+#define CpmOtherHotplugCard1DisconnectMethod            M260
+#define CpmOtherHotplugCard0Connect                     M261
+#define CpmOtherHotplugCard1Connect                     M262
+#define CpmOtherHotplugCard_PTS                         M263
+#define CpmOtherHotplugCard_WAK                         M264
+#define CpmGetPcieClockPmCapability                     M265
+#define CpmDgpuD3ColdMacoGpio                           M266
+#define CpmDgpuD3ColdMxmPwrEnGpio                       M267
+#define CpmDgpuD3ColdTimeMacoUpPwrDn                    M268
+#define CpmDgpuD3ColdTimePwrDnRstDn                     M269
+#define CpmDgpuD3ColdTimePwrUpRstUp                     M270
+#define CpmDgpuD3ColdTimeRstUpMacoDn                    M271
+#define CpmDgpuD3ColdHotPlugOK                          M272
+#define CpmDgpuD3ColdHotPlugMode                        M273
+#define CpmNonEvalDgpuSupport                           M274
+#define CpmCheckDeviceResetState                        M275
+
+#define CpmPowerGateOn                                  M276
+#define CpmPowerGateOff                                 M277
+#define CpmAcpPresentState                              M278
+#define CpmAzaliaPresentState                           M279
+#define CpmAcpController                                M27A
+
+#define CpmLowPowerEthernetTable                        M280
+#define CpmLowPowerEthernetCablePlugOutMethod           M281
+#define CpmLowPowerEthernetCablePlugInMethod            M282
+#define CpmLowPowerEthernetBridgeAslName                M283
+#define CpmLowPowerEthernet_WAK                         M284
+
+#define CpmPostCodeBuffer                               M285
+#define CpmTestPointEnable                              M286
+#define CpmTestPointWidth                               M287
+#define CpmDebugPort                                    M288
+
+#define CpmWirelessLanRecoveryTable                     M290
+#define CpmWirelessLanBridgeAslName                     M291
+
+#define CpmPowerLimitRequest                            M300
+#define CpmPowerLimitTargetGraphicsController           M301
+#define CpmPowerLimitValue                              M302
+#define CpmSavePowerLimitTargetGraphicsController       M303
+#define CpmSavePowerLimitValue                          M304
+
+#define CpmUcsiTable                                    M310
+#define CpmUcsiPldBuffer                                M311
+#define CpmUcsiPldBufferDW0                             M312
+#define CpmUcsiPldBufferDW1                             M313
+#define CpmUcsiPldBufferDW2                             M314
+#define CpmUcsiPldBufferDW3                             M315
+#define CpmUcsiPldBufferDW4                             M316
+#define CpmUcsiOperationRegionBufferBegin               M317
+#define CpmUcsiWriteFromEc                              M318
+#define CpmKbcWriteIo                                   M319
+#define CpmKbcReadIo                                    M31A
+#define CpmKbcCmd                                       M31B
+#define CpmUcsiOPMData                                  M320
+#define CpmUcsiEcUcsiLocation                           M321
+#define CpmUcsiEcVersionLocation                        M322
+#define CpmUcsiEcCciLocation                            M323
+#define CpmUcsiEcCtlLocation                            M324
+#define CpmUcsiEcMgiLocation                            M325
+#define CpmUcsiEcMgoLocation                            M326
+#define CpmUcsiEcCommandIo                              M327
+#define CpmUcsiEcUcsiCommand                            M328
+#define CpmGeventGpioMappingTableZP                     M329
+#define CpmGeventGpioMappingTableRV                     M330
+
+#define CpmdGpuBridgePMemPostBuffer                     M350
+#define CpmdGpuBridgeUpStPostBuffer                     M351
+#define CpmdGpuBridgeDnStPostBuffer                     M352
+#define CpmdGpuDevicePMemPostBuffer                     M353
+#define CpmdGpuBridgePMemSaveBuffer                     M354
+#define CpmdGpuBridgeUpStSaveBuffer                     M355
+#define CpmdGpuBridgeDnStSaveBuffer                     M356
+#define CpmdGpuDevicePMemSaveBuffer                     M357
+#define CpmdGpuZeroBuffer                               M358
+#define CpmBridgePMemPostBusNumberReg                   M359
+#define CpmBridgeUpStPostBusNumberReg                   M360
+#define CpmBridgeDnStPostBusNumberReg                   M361
+#define CpmDevicePMemPostDeviceId                       M362
+#define CpmDevicePMemPostBar2                           M363
+#define CpmDevicePMemPostBar5                           M364
+#define CpmBridgeCommand                                M365
+#define CpmBridgeBusNumberReg                           M366
+#define CpmBridgeNonPrefetchable                        M367
+#define CpmBridgeLimitBaseLowReg                        M368
+#define CpmBridgeBaseHighReg                            M369
+#define CpmBridgeLimitHighReg                           M370
+#define CpmProgramRegister                              M371
+#define CpmCheckDgpuVidDid                              M372
+#define CpmSaveGfxResource                              M373
+#define CpmProgramGfxResource                           M374
+#define CpmDisableDgpuAudio                             M375
+#define CpmProgramDgpuSsid                              M376
+#define CpmRestoreGfxResource                           M377
+
+#define CpmAtrmRomImage1                                M378
+#define CpmAtrmRomImage2                                M379
+#define CpmAtrmRomImage3                                M380
+#define CpmAtrmRomImage4                                M381
+#define CpmAtrmRomImage5                                M382
+#define CpmAtrmRomImage6                                M383
+#define CpmAtrmRomImage7                                M384
+#define CpmAtrmRomImage8                                M385
+#define CpmAtrmRomImage9                                M386
+#define CpmAtrmRomImageA                                M387
+#define CpmAtrmRomImageB                                M388
+#define CpmAtrmRomImageC                                M389
+#define CpmAtrmRomImageD                                M390
+#define CpmAtrmRomImageE                                M391
+#define CpmAtrmRomImageF                                M392
+#define CpmVbiosBuffer1                                 M393
+#define CpmVbiosBuffer2                                 M394
+
+#define CpmDgpuPmeTurnOffSupport                        M400
+#define CpmFindPcieRootPortNumber                       M401
+#define CpmSendPmeTurnOff                               M402
+#define CpmWakeLink                                     M403
+#define CpmClkReqMappingTable                           M404
+#define CpmReadClkReq                                   M405
+#define CpmWriteClkReq                                  M406
+#define CpmDgpuD3ColdHpdSupport                         M407
+
+// CPM OEM Call Back Function
+#define CpmCallBackAtif16                               0x00        // Arg0: Device Number
+                                                                    // Arg1: 0: iGPU. 1: dGPU
+
+#define CPM_POWER_ON                                    0x01
+#define CPM_POWER_OFF                                   0x00
+
+//
+// CPM Table Definition
+//
+#define CpmTableHeaderSize                              0x10
+
+//
+// AMD_CPM_MAIN_TABLE
+//
+#define CpmDisplayFeature                               0x63
+#define CpmZeroPowerOddEn                               0x67
+#define CpmAdaptiveS4En                                 0x6B
+#define CpmWirelessButtonEn                             0x6C
+#define CpmUcsiEn                                       0x78
+#define CpmModernStandbyEn                              0x79
+#define CpmSensorFusionEn                               0x7A
+
+//
+// AMD_CPM_GPIO_DEVICE_POWER
+//
+#define CpmGpioDevicePowerSize                          0x08
+#define CpmGpioDevicePowerDeviceId                      0x00
+#define CpmGpioDevicePowerMode                          0x01
+#define CpmGpioDevicePowerType                          0x02
+#define CpmGpioDevicePowerConfig                        0x03
+#define CpmGpioDevicePowerInitFlag                      0x07
+
+//
+// AMD_CPM_PCIE_CLOCK_TABLE
+//
+#define CpmPcieClockSize                                0x0C
+#define CpmPcieClockClkId                               0x00
+#define CpmPcieClockClkReq                              0x01
+#define CpmPcieClockClkIdExt                            0x02
+#define CpmPcieClockClkReqExt                           0x03
+#define CpmPcieClockDeviceId                            0x04
+#define CpmPcieClockDevice                              0x05
+#define CpmPcieClockFunction                            0x06
+#define CpmPcieClockSlotCheck                           0x07
+#define CpmPcieClockSpecialFunctionId                   0x08
+
+//
+// AMD_CPM_GPIO_DEVICE_RESET
+//
+#define CpmGpioDeviceResetSize                          0x08
+#define CpmGpioDeviceResetDeviceId                      0x00
+#define CpmGpioDeviceResetMode                          0x01
+#define CpmGpioDeviceResetType                          0x02
+#define CpmGpioDeviceResetConfig                        0x03
+#define CpmGpioDeviceResetInitFlag                      0x07
+
+//
+// AMD_CPM_GPIO_DEVICE_DETECTION
+//
+#define CpmGpioDeviceDetectionSize                      0x0B
+#define CpmGpioDeviceDetectionDeviceId                  0x00
+#define CpmGpioDeviceDetectionType                      0x01
+#define CpmGpioDeviceDetectionPinNum1                   0x02
+#define CpmGpioDeviceDetectionValue1                    0x04
+#define CpmGpioDeviceDetectionPinNum2                   0x05
+#define CpmGpioDeviceDetectionValue2                    0x07
+#define CpmGpioDeviceDetectionPinNum3                   0x08
+#define CpmGpioDeviceDetectionValue3                    0x0A
+
+//
+// AMD_CPM_WIRELESS_BUTTON_TABLE
+//
+#define CpmWirelessButtonBridge                         0x10
+#define CpmWirelessButtonEventPin                       0x14
+#define CpmWirelessButtonDeviceIdRadio                  0x15
+#define CpmWirelessButtonDeviceIdPower                  0x16
+#define CpmWirelessButtonDeviceIdOther                  0x17
+
+// AMD_CPM_SAVE_CONTEXT_TABLE
+#define CpmSaveContextBufferType                        0x10
+#define CpmSaveContextBufferOffset                      0x11
+#define CpmWirelessButtonStatus                         0x0C
+#define CpmdGpuStateOnResume                            0x0E
+
+// AMD_CPM_EXPRESS_CARD_TABLE
+#define CpmExpressCardBridgeDevice                      0x10
+#define CpmExpressCardBridgeFunction                    0x11
+#define CpmExpressCardEventPin                          0x12
+#define CpmExpressCardDeviceId                          0x13
+
+// AMD_CPM_OTHER_HOTPLUG_CARD_TABLE
+#define CpmOtherHotplugCardNumber                       0x10
+#define CpmOtherHotplugCard0BridgeDevice                0x11
+#define CpmOtherHotplugCard0BridgeFunction              0x12
+#define CpmOtherHotplugCard0EventSource                 0x13
+#define CpmOtherHotplugCard0EventPin                    0x14
+#define CpmOtherHotplugCard0QEventFalling               0x15
+#define CpmOtherHotplugCard0QEventRising                0x16
+#define CpmOtherHotplugCard0HotPlugMode                 0x17
+#define CpmOtherHotplugCard0DeviceId                    0x18
+#define CpmOtherHotplugCard1BridgeDevice                0x19
+#define CpmOtherHotplugCard1BridgeFunction              0x1A
+#define CpmOtherHotplugCard1EventSource                 0x1B
+#define CpmOtherHotplugCard1EventPin                    0x1C
+#define CpmOtherHotplugCard1QEventFalling               0x1D
+#define CpmOtherHotplugCard1QEventRising                0x1E
+#define CpmOtherHotplugCard1HotPlugMode                 0x1F
+#define CpmOtherHotplugCard1DeviceId                    0x20
+
+// AMD_CPM_LOW_POWER_ETHERNET_TABLE
+#define CpmLowPowerEthernetBridgeDevice                 0x10
+#define CpmLowPowerEthernetBridgeFunction               0x11
+#define CpmLowPowerEthernetQEventCablePlugOut           0x12
+#define CpmLowPowerEthernetQEventCablePlugIn            0x13
+#define CpmLowPowerEthernetLanLowPowerPin               0x14
+#define CpmLowPowerEthernetDeviceId                     0x15
+
+// AMD_CPM_WIRELESS_LAN_RECOVERY_TABLE
+#define CpmWirelessLanRecoveryBridgeDevice              0x10
+#define CpmWirelessLanRecoveryBridgeFunction            0x11
+#define CpmWirelessLanRecoveryResetPin                  0x12
+#define CpmWirelessLanRecoveryDeviceId                  0x13
+
+//AMD_CPM_DISPLAY_FEATURE_TABLE
+#define CpmDisplayFeatureMxmDeviceId                    0x11
+#define CpmDisplayFeatureMxmOverTempEvent               0x12
+#define CpmDisplayFeatureMxmOverTempStateId             0x13
+#define CpmDisplayFeatureDisplayConnectEvent            0x14
+#define CpmDisplayFeatureDockingDeviceId                0x15
+#define CpmDisplayFeatureDisplayMuxDeviceId             0x17
+#define CpmDisplayFeatureI2cMuxDeviceId                 0x18
+#define CpmDisplayFeatureAtpxConnector8Number           0x19
+#define CpmDisplayFeatureAtpxConnector8                 0x1A
+#define CpmDisplayFeatureAtpxConnector9Number           0x7E
+#define CpmDisplayFeatureAtpxConnector9                 0x7F
+#define CpmDisplayFeatureAtifDeviceCombinationNumber    0xBF
+#define CpmDisplayFeatureAtifDeviceCombinationBuffer    0xC0
+#define CpmDisplayFeatureAtif16Buffer                   0xD4
+#define CpmDisplayFeatureMacoGpio                       0x1D4
+#define CpmDisplayFeatureMxmPwrEnGpio                   0x1D6
+#define CpmDisplayFeatureTimeMacoUpPwrDn                0x1D8
+#define CpmDisplayFeatureTimePwrDnRstDn                 0x1D9
+#define CpmDisplayFeatureTimePwrUpRstUp                 0x1DA
+#define CpmDisplayFeatureTimeRstUpMacoDn                0x1DB
+
+// AMD_CPM_ZERO_POWER_ODD_TABLE
+#define CpmZeroPowerOddDeviceId                         0x10
+#define CpmZeroPowerOddEventPin1                        0x11
+#define CpmZeroPowerOddEventPin2                        0x12
+#define CpmZeroPowerOddEventPin3                        0x13
+#define CpmZeroPowerOddSataModeSupportMask              0x14
+#define CpmZeroPowerOddSataPortId                       0x15
+#define CpmZeroPowerOddEventSource1                     0x16
+#define CpmZeroPowerOddEventSource2                     0x17
+#define CpmZeroPowerOddQEventFalling1                   0x18
+#define CpmZeroPowerOddQEventRising1                    0x19
+#define CpmZeroPowerOddQEventFalling2                   0x1A
+#define CpmZeroPowerOddQEventRising2                    0x1B
+
+// AMD_CPM_ADAPTIVE_S4_TABLE
+#define CpmAdaptiveS4BufferType                         0x10
+#define CpmAdaptiveS4BufferOffset                       0x11
+#define CpmAdaptiveS4BufferSize                         0x12
+#define CpmAdaptiveS4EcRamOffset                        0x13
+
+// AMD_CPM_UCSI_TABLE
+#define CpmUcsiOperationRegionBegin                     0x1D
+#define CpmUcsiPldInfo0                                 0x4D
+#define CpmUcsiPldInfo1                                 0x61
+
+// AMD_CPM_ACPI_THERMAL_FAN_TABLE
+#define CpmAcpiThermalFanEventPin                       0x10
+#define CpmAcpiThermalFanFanNum                         0x11
+#define CpmAcpiThermalFanCpuCRT                         0x12
+#define CpmAcpiThermalFanCpuPSV                         0x13
+#define CpmAcpiThermalFanCpuAC0                         0x14
+#define CpmAcpiThermalFanCpuAC1                         0x15
+#define CpmAcpiThermalFanCpuAC2                         0x16
+#define CpmAcpiThermalFanCpuAC3                         0x17
+#define CpmAcpiThermalFanCpuAL0                         0x18
+#define CpmAcpiThermalFanCpuAL1                         0x19
+#define CpmAcpiThermalFanCpuAL2                         0x1A
+#define CpmAcpiThermalFanCpuAL3                         0x1B
+#define CpmAcpiThermalFanThermalSensor                  0x1C
+#define CpmAcpiThermalFanHysteresisInfo                 0x1D
+#define CpmAcpiThermalFanHysteresisInfoPsv              0x1E
+
+// AMD FCH REVISION ID
+#define CPM_FCH_REVISION_ID_DEFAULT                     0x00
+#define CPM_FCH_REVISION_ID_KB                          0x01
+#define CPM_FCH_REVISION_ID_ML                          0x02
+#define CPM_FCH_REVISION_ID_CZ                          0x03
+#define CPM_FCH_REVISION_ID_NL                          0x04
+#define CPM_FCH_REVISION_ID_AM                          0x05
+#define CPM_FCH_REVISION_ID_ST                          0x06
+#define CPM_FCH_REVISION_ID_BR                          0x07
+#define CPM_FCH_REVISION_ID_ZP                          0x08
+#define CPM_FCH_REVISION_ID_RV                          0x09
+#define CPM_FCH_REVISION_ID_RV2                         0x0A
+#define CPM_FCH_REVISION_ID_SSP                         0x0B
+#define CPM_FCH_REVISION_ID_MTS                         0x0C
+#define CPM_FCH_REVISION_ID_RN                          0x0D
+
+// AMD_CPM_CORE_TOPOLOGY_TABLE
+#define CpmCoreTopologySize                             0x04
+#define CpmCoreTopologySocket                           0x00
+#define CpmCoreTopologyDie                              0x01
+#define CpmCoreTopologyBridge                           0x02
+#define CpmCoreTopologyBus                              0x03
+

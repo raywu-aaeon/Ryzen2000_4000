@@ -1,0 +1,86 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+#
+# This file contains code for North Bridge initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Stibp
+  FILE_GUID                      = C7DD8530-96D8-40DD-BE88-CBDF446C6474
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = StibpEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+
+[Sources]
+    Stibp.c
+
+[Packages]
+    MdePkg/MdePkg.dec   
+    IntelFrameworkPkg/IntelFrameworkPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+    AmiCpuPkg/AmiCpuPkg.dec
+    AmiChipsetPkg/AmiChipsetPkg.dec
+    AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+    AmiAgesaWrapperPkg/AmiAgesaWrapperPkg.dec
+    AgesaPkg/AgesaPkg.dec
+    AgesaModulePkg/AgesaCommonModulePkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+    UefiDriverEntryPoint
+    UefiBootServicesTableLib
+    UefiRuntimeServicesTableLib
+    BaseLib
+    HobLib
+    PcdLib
+    DebugLib
+    IoLib
+    AmdBaseLib
+    AmdSocBaseLib
+
+[Guids]
+    gAmiGlobalVariableGuid
+    gEfiHobListGuid
+
+[Protocols]
+    gEfiMpServiceProtocolGuid         # CONSUMED
+
+[Pcd]
+
+[Depex]  	
+    gEfiMpServiceProtocolGuid
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

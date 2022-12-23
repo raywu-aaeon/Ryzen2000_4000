@@ -1,0 +1,350 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+/** @file Acoustic.sd
+    Acoustic driver Setup data definitions
+
+**/
+
+//***********************************************************
+//* Put NVRAM data definitions here.
+//* For example: UINT8 Data1;
+//* These definitions will be converted by the build process
+//* to a definitions of SETUP_DATA fields.
+//***********************************************************
+//---------------------------------------------------------------------------
+
+#ifdef FORM_SET_TYPEDEF
+#include "AcousticSetupVar.h"
+#endif
+//---------------------------------------------------------------------------
+// Add more entries if more than 18 devices
+#if 0
+AUTO_ID(ACOUSTIC_LEVEL_KEY_00)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_01)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_02)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_03)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_04)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_05)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_06)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_07)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_08)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_09)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_10)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_11)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_12)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_13)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_14)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_15)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_16)
+AUTO_ID(ACOUSTIC_LEVEL_KEY_17)
+#endif
+
+//Initialize Macro Arguments 
+#define DEV 0
+#define DEV00 0
+#define DEV01 1
+#define DEV02 2
+#define DEV03 3
+#define DEV04 4
+#define DEV05 5
+#define DEV06 6
+#define DEV07 7
+#define DEV08 8
+#define DEV09 9
+#define DEV10 10
+#define DEV11 11
+#define DEV12 12
+#define DEV13 13
+#define DEV14 14
+#define DEV15 15
+#define DEV16 16
+#define DEV17 17
+  
+#define ACOUSTIC_SATA_CONTROLLER0 0
+#define ACOUSTIC_SATA_CONTROLLER1 1
+#define ACOUSTIC_SATA_CONTROLLER2 2
+
+#if (ACOUSTIC_MAXIMUM_CONTROLLER_SUPPORTED > 0)
+    #ifdef FORM_SET_VARSTORE
+        varstore HDD_ACOUSTIC_DEVICE_DATA,
+           key      = AUTO_ID(HDD_ACOUSTIC_DEVICE_DATA_KEY),
+           name     = AcousticVarName,
+           guid     = HDD_ACOUSTIC_DEVICE_GUID;
+    #endif //FORM_SET_VARSTORE
+#endif //if (ACOUSTIC_MAXIMUM_CONTROLLER_SUPPORTED > 0)
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+    #define CONTROL_DEFINITION
+#endif
+#ifdef CONTROL_DEFINITION
+#if (ACOUSTIC_MAXIMUM_CONTROLLER_SUPPORTED > 0)
+
+    #define ACOUSTIC_ONEOF_ACOUSTICPWRMGMT\
+        oneof varid  = HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt, questionid = AUTO_ID(DISABLE_ACOUSTIC_KEY),\
+            prompt   = STRING_TOKEN(STR_AUTO_ACOUSTIC),\
+            help     = STRING_TOKEN(STR_AUTO_ACOUSTIC_HELP),\
+            option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE | RESET_REQUIRED ;\
+        endoneof;
+        
+    #if !INDIVIDUAL_ACOUSTIC_SUPPORT
+        #define ACOUSTIC_ONEOF_ACOUSTICLEVEL\
+            oneof varid  = HDD_ACOUSTIC_DEVICE_DATA.AcousticLevel, questionid = AUTO_ID(COMMON_ACOUSTIC_LEVEL_KEY),\
+                prompt   = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE),\
+                help     = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE_HELP),\
+                option text = STRING_TOKEN(STR_BYPASS_STRING), value = 0xFF, flags = DEFAULT | MANUFACTURING | INTERACTIVE | RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_QUIET_STRING), value = 0x80, flags = INTERACTIVE | RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_MAXIMUM_PERFORMANCE_STRING), value = 0xFE, flags = INTERACTIVE | RESET_REQUIRED;\
+            endoneof;
+        #define ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_SUPPORTED(DEV)\
+            oneof varid  = HDD_ACOUSTIC_DEVICE_DATA.AcousticLevelIndv[DEV],\
+                prompt   = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE_INDV),\
+                help     = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE_HELP),\
+                option text = STRING_TOKEN(STR_SUPPORTED), value = 0xFF, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED ;\
+            endoneof;
+    #else
+        #define ACOUSTIC_ONEOF_ACOUSTICLEVEL
+        #define ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_SUPPORTED(DEV)
+    #endif // END #if !INDIVIDUAL_ACOUSTIC_SUPPORT
+    
+    #define ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_NOTSUPPORTED(DEV)\
+        oneof varid  = HDD_ACOUSTIC_DEVICE_DATA.AcousticLevelIndv[DEV],\
+            prompt   = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE_INDV),\
+            help     = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE_HELP),\
+            option text = STRING_TOKEN(STR_NOT_SUPPORTED), value = 0xFF, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED ;\
+        endoneof;
+
+    #define ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_NOTAVAILABLE(DEV)\
+        oneof varid  = HDD_ACOUSTIC_DEVICE_DATA.AcousticLevelIndv[DEV],\
+            prompt   = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE_INDV),\
+            help     = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE_HELP),\
+            option text = STRING_TOKEN(STR_NOT_AVAILABLE), value = 0xFF, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+        
+    #if INDIVIDUAL_ACOUSTIC_SUPPORT
+        #define ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_PRESENT(DEV, KEY)\
+            oneof varid  = HDD_ACOUSTIC_DEVICE_DATA.AcousticLevelIndv[DEV], questionid = KEY,\
+                prompt   = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE_INDV),\
+                help     = STRING_TOKEN(STR_AUTO_ACOUSTIC_MODE_HELP),\
+                option text = STRING_TOKEN(STR_BYPASS_STRING), value = 0xFF, flags = DEFAULT | MANUFACTURING | INTERACTIVE | RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_QUIET_STRING), value = 0x80, flags = INTERACTIVE | RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_MAXIMUM_PERFORMANCE_STRING), value = 0xFE, flags = INTERACTIVE | RESET_REQUIRED;\
+            endoneof;
+            
+        #define SATA_CONTROLLER_DISPLAY_PORTS(STRING1, STRING2, DEV, KEY)\
+            suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticDevicePresent[DEV] == 0x0; \
+                text \
+                    help   = STRING_TOKEN(STR_EMPTY),\
+                    text   = STRING1,\
+                    text   = STRING_TOKEN(STR_EMPTY),\
+                    flags  = 0,\
+                    key    = 0;\
+                text\
+                    help   = STRING_TOKEN(STR_EMPTY),\
+                    text   = STRING2,\
+                    text   = STRING_TOKEN(STR_EMPTY),\
+                    flags  = 0,\
+                    key    = 0;\
+            endif;\
+            suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticSupported[DEV] == 0x0;\
+                ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_PRESENT(DEV, KEY)\
+            endif;\
+            suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticDevicePresent[DEV] == 0x0 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticSupported[DEV] == 0x1 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0;\
+            grayoutif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x1;\
+                ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_NOTSUPPORTED(DEV)\
+            endif;\
+            endif;\
+            suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticDevicePresent[DEV] == 0x0 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x1;\
+            grayoutif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0;\
+                ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_NOTAVAILABLE(DEV)\
+            endif;\
+            endif;
+    #else
+        #define ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_PRESENT(DEV, KEY)
+        #define SATA_CONTROLLER_DISPLAY_PORTS(STRING1, STRING2, DEV, KEY)\
+            suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticDevicePresent[DEV] == 0x0; \
+                text \
+                    help   = STRING_TOKEN(STR_EMPTY),\
+                    text   = STRING1,\
+                    text   = STRING_TOKEN(STR_EMPTY),\
+                    flags  = 0,\
+                    key    = 0;\
+                text\
+                    help   = STRING_TOKEN(STR_EMPTY),\
+                    text   = STRING2,\
+                    text   = STRING_TOKEN(STR_EMPTY),\
+                    flags  = 0,\
+                    key    = 0;\
+            endif;\
+            suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticSupported[DEV] == 0x0;\
+            grayoutif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x1;\
+                ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_SUPPORTED(DEV)\
+            endif;\
+            endif;\
+            suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticDevicePresent[DEV] == 0x0 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticSupported[DEV] == 0x1 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0;\
+            grayoutif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x1;\
+                ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_NOTSUPPORTED(DEV)\
+            endif;\
+            endif;\
+            suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticDevicePresent[DEV] == 0x0 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x1;\
+            grayoutif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0;\
+                ACOUSTIC_ONEOF_ACOUSTICLEVELINDV_NOTAVAILABLE(DEV)\
+            endif;\
+            endif;
+    #endif // End of INDIVIDUAL_ACOUSTIC_SUPPORT
+#endif // End of ACOUSTIC_MAXIMUM_CONTROLLER_SUPPORTED
+#endif // End of CONTROL_DEFINITION
+
+#ifdef ADVANCED_FORM_SET
+
+    #ifdef FORM_SET_GOTO
+        goto SATA_ACOUSTIC_DEVICE_OPTIONS_FORM_ID,
+        prompt  = STRING_TOKEN(STR_ACOUSTIC_SUBTITLE),
+        help    = STRING_TOKEN(STR_ACOUSTIC_SUBTITLE_HELP);
+    #endif // End of FORM_SET_GOTO
+    
+    #ifdef FORM_SET_FORM
+        #define SATA_CONTROLLER_00_SUBPAGE(TITLE_STR_TOKEN, FORM_ID, CONT_NUM, STRING0,STRING1,STRING2,STRING3,STRING4,STRING5) \
+            form formid = FORM_ID, \
+                title = TITLE_STR_TOKEN; \
+                suppressif CONT_NUM != 0x00; \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT0), STRING_TOKEN(STRING0),DEV00, ACOUSTIC_LEVEL_KEY_00) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT1), STRING_TOKEN(STRING1),DEV01, ACOUSTIC_LEVEL_KEY_01) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT2), STRING_TOKEN(STRING2),DEV02, ACOUSTIC_LEVEL_KEY_02) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT3), STRING_TOKEN(STRING3),DEV03, ACOUSTIC_LEVEL_KEY_03) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT4), STRING_TOKEN(STRING4),DEV04, ACOUSTIC_LEVEL_KEY_04) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT5), STRING_TOKEN(STRING5),DEV05, ACOUSTIC_LEVEL_KEY_05) \
+               endif; \
+            endform;
+            
+        #define SATA_CONTROLLER_01_SUBPAGE(TITLE_STR_TOKEN, FORM_ID, CONT_NUM, STRING0,STRING1,STRING2,STRING3,STRING4,STRING5) \
+            form formid = FORM_ID, \
+                title = TITLE_STR_TOKEN; \
+               suppressif CONT_NUM != 0x01; \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT0), STRING_TOKEN(STRING0),DEV06, ACOUSTIC_LEVEL_KEY_06) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT1), STRING_TOKEN(STRING1),DEV07, ACOUSTIC_LEVEL_KEY_07) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT2), STRING_TOKEN(STRING2),DEV08, ACOUSTIC_LEVEL_KEY_08) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT3), STRING_TOKEN(STRING3),DEV09, ACOUSTIC_LEVEL_KEY_09) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT4), STRING_TOKEN(STRING4),DEV10, ACOUSTIC_LEVEL_KEY_10) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT5), STRING_TOKEN(STRING5),DEV11, ACOUSTIC_LEVEL_KEY_11) \
+               endif; \
+            endform;
+            
+       #define SATA_CONTROLLER_02_SUBPAGE(TITLE_STR_TOKEN, FORM_ID, CONT_NUM, STRING0,STRING1,STRING2,STRING3,STRING4,STRING5) \
+            form formid = FORM_ID, \
+                title = TITLE_STR_TOKEN; \
+               suppressif CONT_NUM != 0x02; \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT0), STRING_TOKEN(STRING0),DEV12, ACOUSTIC_LEVEL_KEY_12) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT1), STRING_TOKEN(STRING1),DEV13, ACOUSTIC_LEVEL_KEY_13) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT2), STRING_TOKEN(STRING2),DEV14, ACOUSTIC_LEVEL_KEY_14) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT3), STRING_TOKEN(STRING3),DEV15, ACOUSTIC_LEVEL_KEY_15) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT4), STRING_TOKEN(STRING4),DEV16, ACOUSTIC_LEVEL_KEY_16) \
+                        SATA_CONTROLLER_DISPLAY_PORTS( STRING_TOKEN(STR_ACOUSTIC_SATA_PORT5), STRING_TOKEN(STRING5),DEV17, ACOUSTIC_LEVEL_KEY_17) \
+               endif; \
+           endform;
+            
+           SATA_CONTROLLER_00_SUBPAGE(STRING_TOKEN(STR_ACOUSTIC_SATA0_SETTINGS),\
+                     AUTO_ID(ACOUSTIC_CONTROLLER0_SETTINGS_ID),\
+                     ACOUSTIC_SATA_CONTROLLER0,\
+                     STR_ACOUSTIC_SATA0_PORT0_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA0_PORT1_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA0_PORT2_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA0_PORT3_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA0_PORT4_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA0_PORT5_DEVICE_NAME)
+                     
+           SATA_CONTROLLER_01_SUBPAGE(STRING_TOKEN(STR_ACOUSTIC_SATA1_SETTINGS),\
+                     AUTO_ID(ACOUSTIC_CONTROLLER1_SETTINGS_ID),\
+                     ACOUSTIC_SATA_CONTROLLER1,\
+                     STR_ACOUSTIC_SATA1_PORT0_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA1_PORT1_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA1_PORT2_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA1_PORT3_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA1_PORT4_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA1_PORT5_DEVICE_NAME)
+
+           SATA_CONTROLLER_02_SUBPAGE(STRING_TOKEN(STR_ACOUSTIC_SATA2_SETTINGS),\
+                     AUTO_ID(ACOUSTIC_CONTROLLER2_SETTINGS_ID),\
+                     ACOUSTIC_SATA_CONTROLLER2,\
+                     STR_ACOUSTIC_SATA2_PORT0_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA2_PORT1_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA2_PORT2_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA2_PORT3_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA2_PORT4_DEVICE_NAME,\
+                     STR_ACOUSTIC_SATA2_PORT5_DEVICE_NAME)
+
+        #ifndef ACOUSTIC_FORM_MAIN
+            #define ACOUSTIC_FORM_MAIN
+                form formid = AUTO_ID(SATA_ACOUSTIC_DEVICE_OPTIONS_FORM_ID),
+                title = STRING_TOKEN(STR_SATA_ACOUSTIC_OPTIONS_FORM_TITLE);
+            
+                SEPARATOR
+                SUBTITLE(STRING_TOKEN(STR_ACOUSTIC_SUBTITLE))
+                SEPARATOR
+                
+                suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.ControllerPresent[ACOUSTIC_SATA_CONTROLLER0] == 0x00;
+                    ACOUSTIC_ONEOF_ACOUSTICPWRMGMT
+                endif;
+                
+                #if !INDIVIDUAL_ACOUSTIC_SUPPORT
+                    suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.ControllerPresent[ACOUSTIC_SATA_CONTROLLER0] == 0x00;
+                        ACOUSTIC_ONEOF_ACOUSTICLEVEL
+                    endif;
+                #endif
+
+                    suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.ControllerPresent[ACOUSTIC_SATA_CONTROLLER0] == 0x00 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0;
+                        goto ACOUSTIC_CONTROLLER0_SETTINGS_ID,
+                        prompt = STRING_TOKEN(STR_ACOUSTIC_SATA0_SETTINGS),
+                        help = STRING_TOKEN(STR_ACOUSTIC_SATA0_SETTINGS);
+                    endif;
+      
+                    suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.ControllerPresent[ACOUSTIC_SATA_CONTROLLER1] == 0x00 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0;
+                        goto ACOUSTIC_CONTROLLER1_SETTINGS_ID,
+                        prompt = STRING_TOKEN(STR_ACOUSTIC_SATA1_SETTINGS),
+                        help = STRING_TOKEN(STR_ACOUSTIC_SATA1_SETTINGS);
+                    endif;
+      
+                    suppressif ideqval HDD_ACOUSTIC_DEVICE_DATA.ControllerPresent[ACOUSTIC_SATA_CONTROLLER2] == 0x00 OR ideqval HDD_ACOUSTIC_DEVICE_DATA.AcousticPwrMgmt == 0x0;
+                        goto ACOUSTIC_CONTROLLER2_SETTINGS_ID,
+                        prompt = STRING_TOKEN(STR_ACOUSTIC_SATA2_SETTINGS),
+                        help = STRING_TOKEN(STR_ACOUSTIC_SATA2_SETTINGS);
+                    endif;
+                    
+                    suppressif NOT ideqval HDD_ACOUSTIC_DEVICE_DATA.ControllerPresent[ACOUSTIC_SATA_CONTROLLER0] == 0x00;
+                        text
+                            help   = STRING_TOKEN(STR_EMPTY),\
+                            text   = STRING_TOKEN(STR_HDD_NOT_FOUND),\
+                            text   = STRING_TOKEN(STR_EMPTY),\
+                            flags  = 0,\
+                            key    = 0;\
+                    endif;
+                endform;
+        #endif // End of ACOUSTIC_FORM_MAIN
+    #endif // End of FORM_SET_FORM
+#endif // End of ADVANCED_FORM_SET
+
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

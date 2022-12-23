@@ -1,0 +1,87 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiPspFtpmDxe
+  FILE_GUID                      = A77C8452-0821-4544-AE47-257489855F91
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmiPspFtpmDxeDriverEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  AmiPspFtpmDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AmiPspPkg/AmiPspPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  BaseLib
+  PcdLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  UefiLib
+  HobLib
+
+[Guids]
+  gAmiPspFtpmHobGuid
+  gAmiPspFtpmSmmCommunicationGuid
+
+[Protocols]
+  gAmiPostManagerProtocolGuid
+  gEfiSimpleTextInProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gBdsAllDriversConnectedProtocolGuid
+  gEfiSmmCommunicationProtocolGuid
+
+[Pcd]
+  gAmiPspPkgTokenSpaceGuid.PcdFtpmSmmCommunicateBuffer
+  gAmiPspPkgTokenSpaceGuid.PcdFtpmSmmCommunicateBufferSize
+
+[Depex]
+  TRUE
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

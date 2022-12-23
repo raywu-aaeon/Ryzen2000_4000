@@ -1,0 +1,39 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmbiosPeim
+  FILE_GUID                      = 968C1D9F-80C4-43b7-8CAE-668AA56C4E71
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SmbiosPeiEntryPoint
+
+[Sources]  
+  SmbiosPei.c
+
+[Packages]
+  AmiModulePkg/AmiModulePkg.dec
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  AmiPeiLib
+  LockBoxLib
+  $(SMBIOS_LIB_CLASSES_LIST)
+
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid
+
+[Guids]
+  gAmiSmbiosNvramGuid
+  
+[Depex]
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gEfiPeiMemoryDiscoveredPpiGuid 

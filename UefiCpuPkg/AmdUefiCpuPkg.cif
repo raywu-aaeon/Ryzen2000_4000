@@ -1,0 +1,32 @@
+<component>
+    name = "AmdUefiCpuPkg"
+    category = eModule
+    LocalRoot = "UefiCpuPkg\"
+    RefName = "AmdUefiCpuPkg"
+[INF]
+"AmiCpuPeiPreMem\AmiCpuPeiPreMem.inf"
+"CpuDxe\CpuDxe.inf"
+"CpuFeatures\CpuFeaturesDxe.inf"
+"CpuFeatures\CpuFeaturesPei.inf"
+"CpuMpPei\CpuMpPei.inf"
+"CpuS3DataDxe\CpuS3DataDxe.inf"
+"PiSmmCommunication\PiSmmCommunicationPei.inf"
+"PiSmmCommunication\PiSmmCommunicationSmm.inf"
+"PiSmmCpuDxeSmm\PiSmmCpuDxeSmm.inf"
+"SecCore\SecCore.inf"
+[files]
+"UefiCpuPkg.sdl"	
+"UefiCpuPkg.dec"	
+"UefiCpuPkg.uni"	
+"UefiCpuPkgExtra.uni"	
+"License.txt"	
+"UefiCpuPkg.chm"	
+"PiSmmCpuDxeSmm\CpuS3.c"
+[parts]
+"UefiCpuPkg.Include"
+"UefiCpuPkg.LibraryInstances"
+"UefiCpuPkg.ResetVector"
+"UefiCpuPkg.UefiCpuSetup"
+[dependency.incompatible]
+IA32FamilyCpuPkg  "SS: AptioV;$/AptioV/Source/Hardware/Cpu/Intel/IA32FamilyCpuPkg;"
+<endComponent>

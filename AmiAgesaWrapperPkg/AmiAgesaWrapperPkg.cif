@@ -1,0 +1,30 @@
+<component>
+	name = "AmiAgesaWrapperPkg"
+	category = eModule
+	LocalRoot = "AmiAgesaWrapperPkg\"
+	RefName = "AmiAgesaWrapperPkg"
+[INF]
+"Ccx\OemAgesaCcxPlatformLib.inf"
+"Dxe\AmiAgesaDxe.inf"
+"Library\AmdCalloutLib\AmdCalloutDxeLib.inf"
+"Library\AmdCalloutLib\AmdCalloutPeiLib.inf"
+"Library\HardCodedMemCommonServiceLib\HardCodedMemCommonServiceDxeLib.inf"
+"Library\HardCodedMemCommonServiceLib\HardCodedMemCommonServicePeiLib.inf"
+"Library\ZpRomLayout\ZpRomLayout.inf"
+"Pei\AmiAgesaPei.inf"
+"Psp\AmdPspFlashAccLibSmm\AmdPspFlashAccLibSmm.inf"
+"SampleCodeForBrMemoryConfiguration.inf"
+[files]
+"AmiAgesaCmosTokens.ssp"
+"AmiAgesaWrapper.h"
+"AmiAgesaWrapperPkg.dec"
+"AmiAgesaWrapperPkg.sdl"
+"Elink/OemAgesaElinks.txt"
+"OemApcbCustomizedDefinitionsRavenAm4Sodimm.h"
+"OemApcbCustomizedDefinitionsRavenAm4Udimm.h"
+"OemApcbCustomizedDefinitionsRavenFp5Dramdown.h"
+"OemApcbCustomizedDefinitionsRavenFp5Sodimm.h"
+"OemApcbCustomizedDefinitionsRavenFp5Udimm.h"
+"OemApcbCustomizedDefinitionsSummitAm4Udimm.h"
+"OemApcbCustomizedDefinitionsSummitAm4Sodimm.h"
+<endComponent>

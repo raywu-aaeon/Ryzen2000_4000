@@ -1,0 +1,133 @@
+TOKEN
+    Name  = "RsdpPlus_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable RsdpPlus support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name = "RsdpRuntimeShadowWrite_SUPPORT"
+    Value = "1"
+    Help  = "Enable or Disable NbRuntimeShadowRamWrite ELINK"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "RSDP_PLUS_DEBUG_MESSAGES"
+    Value  = "0"
+    Help  = "Enables/disables debug messages for RsdpPlus driver."
+    TokenType = Boolean
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+PATH
+    Name  = "RsdpPlus_DIR"
+    Help  = "Path to RsdpPlus Module in Project"
+End
+
+MODULE
+    Help  = "Includes RsdpPlus.mak to Project"
+    File  = "RsdpPlus.mak"
+End
+
+ELINK
+    Name  = "UpdateShadow,"
+    Parent  = "BeforeEfiBootLaunchHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "EraseShadow,"
+    Parent  = "AfterEfiBootLaunchHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CreateRsdpInFseg,"
+    Parent  = "UpdateShadow,"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "RsdpPlusCsmOnEntryPoint,"
+    Parent  = "CsmOnLinkHook"
+    Token = "CSM_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "NbRuntimeShadowRamWrite,"
+    Parent  = "EnableRuntimeShadowWriteHook"
+    Token = "RsdpRuntimeShadowWrite_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "EraseRsdpInFseg,"
+    Parent  = "BeforeLegacyBootLaunchHook,"
+    Token = "CSM_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "UpdateE000ShadowRamHook"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "UpdateF000ShadowRamHook"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "CsmOnLinkHook"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "EnableRuntimeShadowWriteHook"
+    InvokeOrder = ReplaceParent
+End
+
+INFComponent
+    Name  = "RsdpPlus"
+    File  = "RsdpPlus.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+    Name  = "RsdpPlusLib"
+    File  = "RsdpPlusLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "RsdpPlusLib"
+    Instance  = "AmiModulePkg.RsdpPlusLib"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+ELINK
+    Name  = "RsdpPlusLib"
+    Parent  = "ADDITIONAL_AMITSE_LibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiModulePkg.RsdpPlus"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Disables all debug messages based on RSDP_PLUS_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "RSDP_PLUS_DEBUG_MESSAGES" "=" "0"
+End

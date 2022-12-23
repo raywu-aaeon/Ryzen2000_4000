@@ -1,0 +1,63 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+	INF_VERSION  =  0x00010005
+	VERSION_STRING  =  1.0
+	BASE_NAME  = PerformanceMeasurementSmm
+	MODULE_TYPE = DXE_SMM_DRIVER
+  	FILE_GUID = 6B421217-9FB7-4ea4-B78B-61C9652108A1
+  	PI_SPECIFICATION_VERSION       = 0x0001000A
+  	ENTRY_POINT = PerformanceMeasurementSmmEntryPoint
+  	
+[Sources]
+  PerformanceMeasurementSmm.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  PeCoffGetEntryPointLib
+  UefiBootServicesTableLib
+  DxeServicesLib
+  
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+  gEfiComponentName2ProtocolGuid
+  gEfiLoadedImageDevicePathProtocolGuid                   # SOMETIMES_CONSUMED
+  gEfiDevicePathToTextProtocolGuid                        # SOMETIMES_CONSUMED 
+[Guids]
+  gSmmPerformanceProtocolGuid
+  gSmmPerformanceExProtocolGuid
+[Depex]
+  gEfiSmmSwDispatch2ProtocolGuid
+  
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

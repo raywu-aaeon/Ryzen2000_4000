@@ -1,0 +1,22 @@
+<component>
+	name = "ResourceRVFP5"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Library\Family\0x17\RV\External\ResourceRVFP5\"
+	RefName = "AmdCbsPkg.RV.External.ResourceRVFP5"
+[INF]
+"CbsSetAgesaPcdLibRV.inf"
+[files]
+"AmdCbsDefault.c"
+"AmdCbsForm.vfr"
+"AmdCbsFormID.h"
+"AmdCbsStrings.uni"
+"AmdCbsVariable.h"
+"AmdCbsVariable.h.Ori"
+"ApcbSetDataRV.c"
+"CbsIdsNvRV.c"
+"ApcbAutoGenRV.h"		
+"IdsNvDefRV.h"		
+"IdsNvIntDefRV.h"		
+"IdsSampleRV.c"
+"Resource.sdl"
+<endComponent>

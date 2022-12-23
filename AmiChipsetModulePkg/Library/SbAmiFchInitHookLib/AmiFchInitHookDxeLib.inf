@@ -1,0 +1,39 @@
+
+[Defines]
+    INF_VERSION                     = 0x00010005
+    BASE_NAME                       = AmiFchInitHookDxeLib
+    FILE_GUID                       = 8D5D0C15-6FF5-43cf-A45D-628EB9BFCD9D
+    MODULE_TYPE                     = DXE_DRIVER
+    LIBRARY_CLASS                   = AmiFchInitHookLib
+    CONSTRUCTOR                     = AmiFchInitHookConstructor
+
+[Sources]
+    AmiFchInitHookDxeLib.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiChipsetPkg/AmiChipsetPkg.dec
+    AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+    AgesaModulePkg/Fch/Sandstone/FchSandstone.dec
+    AgesaModulePkg/AgesaModuleFchPkg.dec
+
+[LibraryClasses]
+    UefiBootServicesTableLib
+    UefiRuntimeServicesTableLib
+    BaseMemoryLib
+    S3BootScriptLib
+    PciLib
+    DebugLib
+    SbGetSetupData
+    $(AmiFchInitHookDxeLibList)
+    $(SbSupportedFchLibList)
+
+[Protocols]
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdSbFchTypeString
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSata6AhciCap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataClass
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataControllerAutoShutdown
+
+[BuildOptions]

@@ -1,0 +1,14 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbPxeUefiDriver
+  FILE_GUID                      = 4DD4DF07-3278-406f-B5DE-EC7EECC650E1
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+
+[Sources]
+  CrbPxeUefiDriver.dxs
+
+[Binaries.X64]
+PE32|b57undix64.efi|*

@@ -1,0 +1,106 @@
+
+## refer to "AmdCpm3OemInitPeim.inf"
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmiCpmOemTableLib
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiCpmOemTableLib
+
+[Sources.common]
+
+[Sources.ia32]
+  AmdCpmOemTable.c
+  OemCpmInitPeim.h
+  
+[Sources.x64]
+
+[BuildOptions]
+  *_*_*_CC_FLAGS = -DAGESA_V9
+
+[LibraryClasses]
+  BaseLib
+  HobLib
+  DebugLib
+  PeimEntryPoint
+  AmdCpmBaseLib
+  AmdCpmCpuLib
+  AmdCpmFchLib
+  AmdPbsConfigLib
+  IoLib
+  AmdBaseLib
+
+[Guids]
+  gAmdCpmTableHobGuid
+
+[Protocols]
+
+[Ppis]
+  gAmdCpmTablePpiGuid
+  gAmdCpmOemTablePpiGuid
+  gAmdCpmTableHobPpiGuid
+  gEfiPeiSmbus2PpiGuid
+  gEfiPeiMemoryDiscoveredPpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gAmdCpmOverrideTablePpiGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/Fch/Sandstone/FchSandstone.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Bilby/AmdCpmOemPkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdSimpleSltSupport
+  gAmdCpmPkgTokenSpaceGuid.OriginalPlatformId
+  gAmdCpmPkgTokenSpaceGuid.CurrentPlatformId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAzaliaCodecVerbTable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTDeviceEnableMap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLegacyFree
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialRegisterBase
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gAmdCpmPkgTokenSpaceGuid.PcdSerialIoDecode
+  gAmdCpmPkgTokenSpaceGuid.EcRamBaseAddr
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspKvmEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspKvmMouseProtocol
+  gAmdCpmPkgTokenSpaceGuid.PcdECFwVersion
+  gAmdCpmPkgTokenSpaceGuid.PcdUSBPDFwSection1Version
+  gAmdCpmPkgTokenSpaceGuid.PcdUSBPDFwSection2Version
+  gAmdCpmPkgTokenSpaceGuid.PcdFchUartPort
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintSerialPort
+  gAmdCpmPkgTokenSpaceGuid.PmicVersion
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetry_VddcrVddfull_Scale_Current
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetry_VddcrVddOffset
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetry_VddcrSocfull_Scale_Current
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdTelemetry_VddcrSocOffset
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+  gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMmioAbove4GLimit
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr2PhySel
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr2Version
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr2TableSize
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAtomDpHbr2TuningSetting
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr3PhySel
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr3Version
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpHbr3TableSize
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAtomDpHbr3PhyDpSetting
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpPhyOverride
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPCIeLTREnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPsppPolicy
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPciePhyClkCntrlEnable
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmIgnoreOemTableId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdRichtekVrmPsi0Workaround
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPCIePHYPowerGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDp0RetimerRedriverTable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDp1RetimerRedriverTable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDp2RetimerRedriverTable
+
+[Depex]
+  gEfiPeiReadOnlyVariable2PpiGuid
+

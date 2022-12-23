@@ -1,0 +1,18 @@
+<component>
+    name = "DebugPortTables"
+    category = eModule
+    LocalRoot = "AmiModulePkg\DbgTables\"
+    RefName = "AmiModulePkg.DebugPortTables"
+[INF]
+"DebugPortTableDxe.inf"
+"DxeDebugPortTablesLib.inf"
+[files]
+"DebugPortTables.sdl"	
+"DebugPortTables.chm"	
+"DebugPortTables.sd"	
+"DebugPortTables.uni"	
+[parts]
+"AmiModulePkg.DebugPortTablesLibHeaders"
+[dependency]
+AmiModulePkg.ACPI >= "SS: AptioV;$/AptioV/Source/Modules/ACPI;5.004_ACPI_02"
+<endComponent>

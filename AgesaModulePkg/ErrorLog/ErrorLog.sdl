@@ -1,0 +1,37 @@
+TOKEN
+	Name  = "AMD_ERROR_LOG_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AMD ErrorLog support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AMD_ERROR_LOG_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdErrorLogDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_ERROR_LOG_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdErrorLogPei support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdErrorLogDxe"
+	File  = "AmdErrorLogDxe\AmdErrorLogDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_ERROR_LOG_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdErrorPei"
+	File  = "AmdErrorLogPei\AmdErrorLogPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_ERROR_LOG_PEI_SUPPORT" "=" "1"
+End

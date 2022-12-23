@@ -1,0 +1,676 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//**********************************************************************
+// $Header: $
+//
+// $Revision: $
+//
+// $Date: $
+//**********************************************************************
+
+//*************************************************************************
+//<AMI_FHDR_START>
+//
+// Name:    Crb.sd
+//
+// Description: Chipset Reference Board setup form
+//
+//<AMI_FHDR_END>
+//*************************************************************************
+
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+    UINT8   OnBoardPXENIC;
+    UINT8   CrbOnBoardTpm;
+    UINT8   CrbSdConnector;
+    UINT8   CrbWhckEhciDebugPort;
+
+#if CRB_AMD_PCIE_CONTROL_SUPPORT
+
+    UINT8   CrbAmdPcieControl;
+
+    UINT8   Device0Enabled;
+    UINT8   Device1Enabled;
+    UINT8   Device2Enabled;
+    UINT8   Device3Enabled;
+    UINT8   Device4Enabled;
+    UINT8   Device5Enabled;
+    UINT8   Device6Enabled;
+    UINT8   Device7Enabled;
+        
+    UINT8   Device0AspmMode;
+    UINT8   Device1AspmMode;
+    UINT8   Device2AspmMode;
+    UINT8   Device3AspmMode;
+    UINT8   Device4AspmMode;
+    UINT8   Device5AspmMode;
+    UINT8   Device6AspmMode;
+    UINT8   Device7AspmMode;
+
+
+    UINT8   Device0HotPlugMode;
+    UINT8   Device1HotPlugMode;
+    UINT8   Device2HotPlugMode;
+    UINT8   Device3HotPlugMode;
+    UINT8   Device4HotPlugMode;
+    UINT8   Device5HotPlugMode;
+    UINT8   Device6HotPlugMode;
+    UINT8   Device7HotPlugMode;
+
+#endif //CRB_AMD_PCIE_CONTROL_SUPPORT
+#endif
+
+#if CRB_AMD_PCIE_CONTROL_SUPPORT
+    #ifdef FORM_SET_TYPEDEF
+    #include <CrbPcie/CrbPcieSetup.h>
+    #endif
+#endif
+
+//Change the Chipset CPU setupt item default value as the platform
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+#define CRB_ON_BOARD_PXE_NIC\
+        oneof varid  = SETUP_DATA.OnBoardPXENIC,\
+            prompt      = STRING_TOKEN(STR_ONBOARD_LAN_PXE_PROMPT),\
+            help        = STRING_TOKEN(STR_ONBOARD_LAN_PXE_PROMPT_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+//
+
+//#define CRB_ONEOF_SD_CONNECTOR\
+//        oneof varid  = SETUP_DATA.CrbSdConnector,\
+//            prompt      = STRING_TOKEN(STR_CRB_SD_CONNECTOR_PROMPT),\
+//            help        = STRING_TOKEN(STR_CRB_SD_CONNECTOR_PROMPT_HELP),\
+//            option text = STRING_TOKEN(STR_CRB_REALTEK_SD), value = 0, flags = RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_CRB_FCH_SD), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+//        endoneof;\
+
+#define CRB_ONEOF_WHCK_EHCI_DEBUG_PORT\
+        oneof varid  = SETUP_DATA.CrbWhckEhciDebugPort,\
+            prompt      = STRING_TOKEN(STR_CRB_WHCK_EHCI_DEBUG_PORT_PROMPT),\
+            help        = STRING_TOKEN(STR_CRB_WHCK_EHCI_DEBUG_PORT_PROMPT_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+        endoneof;\
+
+#if CRB_AMD_PCIE_CONTROL_SUPPORT
+
+#define CRB_AMD_PCIE_CONTROL\
+         oneof varid       = SETUP_DATA.CrbAmdPcieControl,\
+           prompt      = STRING_TOKEN(STR_CRB_AMD_PCIE_CONTROL),\
+           help        = STRING_TOKEN(STR_CRB_AMD_PCIE_CONTROL_HELP),\
+           option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+           option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+         endoneof;\
+
+
+#define CRB_ROOT_PORT_D0_ENABLED\
+        oneof varid  = SETUP_DATA.Device0Enabled,\
+            prompt      = STRING_TOKEN(STR_DEVICE0_ENABLED),\
+            help        = STRING_TOKEN(STR_DEVICE_ENABLED_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D0_ASPM\
+        oneof varid  = SETUP_DATA.Device0AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D0_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device0HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+        
+
+#define CRB_ROOT_PORT_D1_ENABLED\
+        oneof varid  = SETUP_DATA.Device1Enabled,\
+            prompt      = STRING_TOKEN(STR_DEVICE1_ENABLED),\
+            help        = STRING_TOKEN(STR_DEVICE_ENABLED_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D1_ASPM\
+        oneof varid  = SETUP_DATA.Device1AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+        
+#define CRB_ROOT_PORT_D1_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device1HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+        
+#define CRB_ROOT_PORT_D2_ENABLED\
+        oneof varid  = SETUP_DATA.Device2Enabled,\
+            prompt      = STRING_TOKEN(STR_DEVICE2_ENABLED),\
+            help        = STRING_TOKEN(STR_DEVICE_ENABLED_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D2_ASPM\
+        oneof varid  = SETUP_DATA.Device2AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+        
+#define CRB_ROOT_PORT_D2_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device2HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+
+#define CRB_ROOT_PORT_D3_ENABLED\
+        oneof varid  = SETUP_DATA.Device3Enabled,\
+            prompt      = STRING_TOKEN(STR_DEVICE3_ENABLED),\
+            help        = STRING_TOKEN(STR_DEVICE_ENABLED_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D3_ASPM\
+        oneof varid  = SETUP_DATA.Device3AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+        
+#define CRB_ROOT_PORT_D3_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device3HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D4_ENABLED\
+        oneof varid  = SETUP_DATA.Device4Enabled,\
+            prompt      = STRING_TOKEN(STR_DEVICE4_ENABLED),\
+            help        = STRING_TOKEN(STR_DEVICE_ENABLED_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D4_ASPM\
+        oneof varid  = SETUP_DATA.Device4AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+        
+#define CRB_ROOT_PORT_D4_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device4HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D5_ENABLED\
+        oneof varid  = SETUP_DATA.Device5Enabled,\
+            prompt      = STRING_TOKEN(STR_DEVICE5_ENABLED),\
+            help        = STRING_TOKEN(STR_DEVICE_ENABLED_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D5_ASPM\
+        oneof varid  = SETUP_DATA.Device5AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+        
+#define CRB_ROOT_PORT_D5_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device5HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+             option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+        
+#define CRB_ROOT_PORT_D6_ENABLED\
+        oneof varid  = SETUP_DATA.Device6Enabled,\
+            prompt      = STRING_TOKEN(STR_DEVICE6_ENABLED),\
+            help        = STRING_TOKEN(STR_DEVICE_ENABLED_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D6_ASPM\
+        oneof varid  = SETUP_DATA.Device6AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+        
+#define CRB_ROOT_PORT_D6_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device6HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+        
+#define CRB_ROOT_PORT_D7_ENABLED\
+        oneof varid  = SETUP_DATA.Device7Enabled,\
+            prompt      = STRING_TOKEN(STR_DEVICE7_ENABLED),\
+            help        = STRING_TOKEN(STR_DEVICE_ENABLED_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+#define CRB_ROOT_PORT_D7_ASPM\
+        oneof varid  = SETUP_DATA.Device7AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;\
+
+        
+#define CRB_ROOT_PORT_D7_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device7HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;
+
+#endif //CRB_AMD_PCIE_CONTROL_SUPPORT
+//----------------------------------------------------------------------------
+//                PciBus Setup item override
+//----------------------------------------------------------------------------
+#ifdef PCIBUS_ONEOF_ASPMMODE
+#undef PCIBUS_ONEOF_ASPMMODE
+#define PCIBUS_ONEOF_ASPMMODE
+#endif //PCIBUS_ONEOF_ASPMMODE
+
+//----------------------------------------------------------------------------
+//                ACPI Setup item override
+//----------------------------------------------------------------------------
+
+//Change the module ACPI setupt item default value as the platform
+#ifdef ACPI_ONEOF_ACPISLEEPSTATE
+#undef ACPI_ONEOF_ACPISLEEPSTATE
+#define ACPI_ONEOF_ACPISLEEPSTATE\
+      oneof varid  = SETUP_DATA.AcpiSleepState,\
+            prompt = STRING_TOKEN(STR_ACPI_SLEEP_PROMPT),\
+            help = STRING_TOKEN(STR_ACPI_SLEEP_HELP),\
+            option text = STRING_TOKEN(STR_ACPI_SLEEP_NO), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ACPI_SLEEP_S3), value = 2, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;\
+      endoneof;
+#endif //ACPI_ONEOF_ACPISLEEPSTATE
+
+//Not support ON Board USB3.0 LAN.
+#ifdef SB_ONEOF_XHCI0PORTEN1
+#undef SB_ONEOF_XHCI0PORTEN1
+#define SB_ONEOF_XHCI0PORTEN1\
+        oneof varid = SETUP_DATA.Xhci0PortEn1,\
+            prompt  = STRING_TOKEN(STR_XHCI0PORT_1_STRING),\
+            help  = STRING_TOKEN(STR_XHCI0PORT_1_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;
+#endif
+
+//
+//----------------------------------------------------------------------------
+// TCG2 module setting
+//----------------------------------------------------------------------------
+#if defined(AMI_DEBUGGER_SUPPORT) && (AMI_DEBUGGER_SUPPORT == 1)
+    //
+    // This is a workaround for USB3 debugger.
+    //	Current proejct with Debugger40 or Debugger39 will hang windows desktop if we turn on both fTPM and Debugger. 
+    //
+#ifdef TCG_ONEOF_TPMSUPPORT
+#undef TCG_ONEOF_TPMSUPPORT
+#define TCG_ONEOF_TPMSUPPORT\
+			oneof varid = SETUP_DATA.TpmSupport,\
+				prompt = STRING_TOKEN(STR_TPM_SUPPORT_PROMPT ),\
+				help = STRING_TOKEN(STR_TPMSUPPORT_HELP),\
+				option text = STRING_TOKEN(STR_TPM_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;\
+				option text = STRING_TOKEN(STR_TPM_ENABLE),  value = 1, flags = RESET_REQUIRED;\
+			endoneof;
+#endif // TCG_ONEOF_TPMSUPPORT
+
+#ifdef TCG_ONEOF_TCMSUPPORT
+#undef TCG_ONEOF_TCMSUPPORT
+#define TCG_ONEOF_TCMSUPPORT\
+			oneof varid = SETUP_DATA.TpmSupport,\
+				prompt = STRING_TOKEN(STR_TCM_SUPPORT_PROMPT ),\
+				help = STRING_TOKEN(STR_TPMSUPPORT_HELP),\
+				option text = STRING_TOKEN(STR_TPM_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;\
+				option text = STRING_TOKEN(STR_TPM_ENABLE),  value = 1, flags = RESET_REQUIRED;\
+			endoneof;
+#endif // TCG_ONEOF_TCMSUPPORT
+#endif // defined(AMI_DEBUGGER_SUPPORT) && (AMI_DEBUGGER_SUPPORT == 1)
+
+#if defined(CRB_ONBOARD_TPM_SUPPORT) && (CRB_ONBOARD_TPM_SUPPORT == 1)
+#ifdef PSP_ONEOF_AMD_FTPM_SWITCH
+#undef PSP_ONEOF_AMD_FTPM_SWITCH
+#define PSP_ONEOF_AMD_FTPM_SWITCH\
+            oneof varid = SETUP_DATA.fTPMSwitch,\
+                prompt = STRING_TOKEN(STR_FTPM_SWITCH),\
+                help = STRING_TOKEN(STR_CRB_ONBOARD_TPM_PROMPT_HELP),\
+                option text = STRING_TOKEN(STR_TPM_AMDFTPM), value = 0, flags = RESET_REQUIRED  | DEFAULT | MANUFACTURING;\
+                option text = STRING_TOKEN(STR_CRB_LPC_TPM), value = 1, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_CRB_SPI_TPM), value = 2, flags = RESET_REQUIRED;\
+			endoneof;
+#endif // PSP_ONEOF_AMD_FTPM_SWITCH
+#endif // CRB_ONBOARD_TPM_SUPPORT
+
+#endif //CONTROL_DEFINITION
+
+//----------------------------------------------------------------------------
+//                CONTROLS_WITH_DEFAULTS
+//----------------------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+    CRB_ON_BOARD_PXE_NIC
+
+//    CRB_ONEOF_SD_CONNECTOR
+    CRB_ONEOF_WHCK_EHCI_DEBUG_PORT
+#if CRB_AMD_PCIE_CONTROL_SUPPORT
+    CRB_AMD_PCIE_CONTROL
+
+    CRB_ROOT_PORT_D0_ENABLED
+    CRB_ROOT_PORT_D0_ASPM
+    CRB_ROOT_PORT_D0_HOTPLUGMODE
+   
+    CRB_ROOT_PORT_D1_ENABLED
+    CRB_ROOT_PORT_D1_ASPM
+    CRB_ROOT_PORT_D1_HOTPLUGMODE
+    
+    CRB_ROOT_PORT_D2_ENABLED
+    CRB_ROOT_PORT_D2_ASPM
+    CRB_ROOT_PORT_D2_HOTPLUGMODE
+    
+    CRB_ROOT_PORT_D3_ENABLED
+    CRB_ROOT_PORT_D3_ASPM
+    CRB_ROOT_PORT_D3_HOTPLUGMODE
+    
+    CRB_ROOT_PORT_D4_ENABLED
+    CRB_ROOT_PORT_D4_ASPM
+    CRB_ROOT_PORT_D4_HOTPLUGMODE
+    
+    CRB_ROOT_PORT_D5_ENABLED
+    CRB_ROOT_PORT_D5_ASPM
+    CRB_ROOT_PORT_D5_HOTPLUGMODE
+    
+    CRB_ROOT_PORT_D6_ENABLED
+    CRB_ROOT_PORT_D6_ASPM
+    CRB_ROOT_PORT_D6_HOTPLUGMODE
+    
+    CRB_ROOT_PORT_D7_ENABLED
+    CRB_ROOT_PORT_D7_ASPM
+    CRB_ROOT_PORT_D7_HOTPLUGMODE
+
+#endif //CRB_AMD_PCIE_CONTROL_SUPPORT
+#endif // CONTROLS_WITH_DEFAULTS
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+    #ifdef FORM_SET_ITEM
+    // Define controls to be added to the main page of the formset
+    #endif
+
+    #ifdef FORM_SET_GOTO
+    // Define goto commands for the forms defined in this file
+        goto CRB_FORM_ID,
+            prompt = STRING_TOKEN(STR_CRB_FORM),
+            help = STRING_TOKEN(STR_CRB_FORM_HELP);
+    #endif
+
+    #ifdef FORM_SET_FORM
+    // Define forms
+        form formid = AUTO_ID(CRB_FORM_ID),
+            title = STRING_TOKEN(STR_CRB_FORM);
+
+            CRB_ON_BOARD_PXE_NIC
+
+#if defined(CRB_WHCK_DEBUG_CAPABILITY_TEST) && (CRB_WHCK_DEBUG_CAPABILITY_TEST == 1)
+        CRB_ONEOF_WHCK_EHCI_DEBUG_PORT
+#endif
+//        CRB_ONEOF_SD_CONNECTOR
+
+#if CRB_AMD_PCIE_CONTROL_SUPPORT
+        goto PORT_FORM_ID,
+            prompt  = STRING_TOKEN(STR_PORT_FORM),
+            help    = STRING_TOKEN(STR_PORT_FORM_HELP);
+#endif //CRB_AMD_PCIE_CONTROL_SUPPORT
+        // Define goto commands for the forms defined in this file
+        // Apply CPM platform definition.
+		#ifdef AMD_CPM_SETUP_FORM_ID
+		goto AMD_CPM_SETUP_FORM_ID,
+			prompt = STRING_TOKEN(STR_AMD_CPM_SETUP_FORM_TITLE),
+			help = STRING_TOKEN(STR_AMD_CPM_SETUP_FORM_TITLE);
+		#endif
+
+        SEPARATOR
+
+        endform;  // CRB_FORM_ID
+
+    #endif  // FORM_SET_FORM
+
+#endif  // ADVANCED_FORM_SET
+#if CRB_AMD_PCIE_CONTROL_SUPPORT
+//----------------------------------------------------------------------------
+//                ADVANCED -> Demo Board -> Port
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+    #ifdef FORM_SET_VARSTORE
+        varstore UINT8,
+        key   = AUTO_ID(AMD_PCIE_DEVICE_SETUP_DATA_ID),
+        name  = AmdPcieDeviceCount,
+        guid  = AMD_PCIE_DEVICE_VARIABLE_GUID;
+    #endif
+
+    #ifdef FORM_SET_FORM
+    // Define forms
+        form formid = AUTO_ID(PORT_FORM_ID),
+            title = STRING_TOKEN(STR_PORT_FORM);
+            SUBTITLE(STRING_TOKEN(STR_PORT_FORM))
+
+        CRB_AMD_PCIE_CONTROL
+        
+        suppressif ideqval SETUP_DATA.CrbAmdPcieControl == 0;
+
+        suppressif  ideqvallist AmdPcieDeviceCount == 0;
+                CRB_ROOT_PORT_D0_ENABLED
+            suppressif ideqval SETUP_DATA.Device0Enabled == 0;        
+                CRB_ROOT_PORT_D0_ASPM
+                CRB_ROOT_PORT_D0_HOTPLUGMODE
+            endif;
+        endif; 
+        
+        suppressif  ideqvallist AmdPcieDeviceCount == 0 1;
+                CRB_ROOT_PORT_D1_ENABLED
+            suppressif ideqval SETUP_DATA.Device1Enabled == 0;
+                CRB_ROOT_PORT_D1_ASPM
+                CRB_ROOT_PORT_D1_HOTPLUGMODE
+            endif;    
+        endif;
+                  
+        suppressif  ideqvallist AmdPcieDeviceCount ==  0 1 2;
+                CRB_ROOT_PORT_D2_ENABLED
+            suppressif ideqval SETUP_DATA.Device2Enabled == 0;
+                CRB_ROOT_PORT_D2_ASPM
+                CRB_ROOT_PORT_D2_HOTPLUGMODE
+            endif;
+        endif;
+        
+        suppressif  ideqvallist AmdPcieDeviceCount == 0 1 2 3 ;
+                CRB_ROOT_PORT_D3_ENABLED
+            suppressif ideqval SETUP_DATA.Device3Enabled == 0;
+                CRB_ROOT_PORT_D3_ASPM
+                CRB_ROOT_PORT_D3_HOTPLUGMODE
+            endif;
+        endif;
+        
+        suppressif  ideqvallist AmdPcieDeviceCount == 0 1 2 3 4 ;
+                CRB_ROOT_PORT_D4_ENABLED
+            suppressif ideqval SETUP_DATA.Device4Enabled == 0;
+                CRB_ROOT_PORT_D4_ASPM
+                CRB_ROOT_PORT_D4_HOTPLUGMODE
+            endif;
+        endif;
+        
+        suppressif  ideqvallist AmdPcieDeviceCount ==  0 1 2 3 4 5 ;
+                CRB_ROOT_PORT_D5_ENABLED
+            suppressif ideqval SETUP_DATA.Device5Enabled == 0;
+                CRB_ROOT_PORT_D5_ASPM
+                CRB_ROOT_PORT_D5_HOTPLUGMODE
+            endif;
+        endif;
+        
+        suppressif  ideqvallist AmdPcieDeviceCount == 0 1 2 3 4 5 6 ;
+                CRB_ROOT_PORT_D6_ENABLED
+            suppressif ideqval SETUP_DATA.Device6Enabled == 0;
+                CRB_ROOT_PORT_D6_ASPM
+                CRB_ROOT_PORT_D6_HOTPLUGMODE
+            endif;
+        endif;
+       
+        suppressif  ideqvallist AmdPcieDeviceCount == 0 1 2 3 4 5 6 7 ;
+                CRB_ROOT_PORT_D7_ENABLED
+            suppressif ideqval SETUP_DATA.Device7Enabled == 0;
+                CRB_ROOT_PORT_D7_ASPM
+                CRB_ROOT_PORT_D7_HOTPLUGMODE
+            endif;
+        endif;
+
+        endif; //CrbAmdPcieControl == 0
+
+        endform;  // PORT_FORM_ID
+    #endif  // FORM_SET_FORM
+#endif  // ADVANCED_FORM_SET
+#endif //CRB_AMD_PCIE_CONTROL_SUPPORT
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

@@ -1,0 +1,282 @@
+/*****************************************************************************
+ *
+ * Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+#ifndef CPM_COMMON_ASL
+    External (CpmSetPostCode, MethodObj)
+    External (CpmIsFchPcie, MethodObj)
+    External (CpmFchGppHotplugService, MethodObj)
+    External (CpmCalculateABLinkRegister, MethodObj)
+    External (CpmReadABLinkRegister, MethodObj)
+    External (CpmWriteABLinkRegister, MethodObj)
+    External (CpmReadWriteABLinkRegister, MethodObj)
+    External (CpmFchSetGen1, MethodObj)
+    External (CpmFchSetGen2, MethodObj)
+    External (CpmReadGpio, MethodObj)
+    External (CpmWriteGpio, MethodObj)
+    External (CpmReadRtc, MethodObj)
+    External (CpmReadMem8, MethodObj)
+    External (CpmWriteMem8, MethodObj)
+    External (CpmReadMem32, MethodObj)
+    External (CpmWriteMem32, MethodObj)
+    External (CpmReadPm2, MethodObj)
+    External (CpmWritePm2, MethodObj)
+    External (CpmReadAcpiMmio, MethodObj)
+    External (CpmWriteAcpiMmio, MethodObj)
+    External (CpmReadPci, MethodObj)
+    External (CpmWritePci, MethodObj)
+    External (CpmReadPci32, MethodObj)
+    External (CpmWritePci32, MethodObj)
+    External (CpmReadPcieRegister, MethodObj)
+    External (CpmWritePcieRegister, MethodObj)
+    External (CpmClearPresenceDetectChangeBit, MethodObj)
+    External (CpmCheckVirtualChannelNegotiationPending, MethodObj)
+    External (CpmRetrainPcieLink, MethodObj)
+    External (CpmReconfigPcieLink, MethodObj)
+    External (CpmGetPcieAspm, MethodObj)
+    External (CpmSetPcieAspm, MethodObj)
+    External (CpmReadGevent, MethodObj)
+    External (CpmWriteGevent, MethodObj)
+    External (CpmReadGeventTriggerType, MethodObj)
+    External (CpmWriteGeventTriggerType, MethodObj)
+    External (CpmGetPciePmCapability, MethodObj)
+    External (CpmSetDevicePower, MethodObj)
+    External (CpmSetDevicePowerTable, MethodObj)
+    External (CpmSetDeviceClock, MethodObj)
+    External (CpmSetDeviceReset, MethodObj)
+    External (CpmGetDeviceStatus, MethodObj)
+    External (CpmPcieHotplug, MethodObj)
+    External (CpmInterfaceBuffer, BuffObj)
+    External (CpmStructureSizeField, BuffFieldObj)
+    External (CpmFunctionField, BuffFieldObj)
+    External (CpmDeviceField, BuffFieldObj)
+    External (CpmBusField, BuffFieldObj)
+    External (CpmHotplugField, BuffFieldObj)
+    External (CpmGeventGpioMappingTable, DeviceObj)
+    External (CpmGeventGpioMappingTable2, DeviceObj)
+    External (CpmGeventGpioMappingTableZP, DeviceObj)
+    External (CpmGeventGpioMappingTableRV, DeviceObj)
+
+    External (CpmVersion, FieldUnitObj)
+    External (CpmPcieMmioBaseAddr, FieldUnitObj)
+    External (CpmAcpiMmioBaseAddr, FieldUnitObj)
+    External (CpmSbChipId, FieldUnitObj)
+    External (CpmSbStrap, FieldUnitObj)
+    External (CpmChipId, FieldUnitObj)
+    External (CpmEcRamGpioBaseOffset, FieldUnitObj)
+    External (CpmSwSmiPort, FieldUnitObj)
+    External (CpmSwSmiCmdSetAutoUmaMode, FieldUnitObj)
+    External (CpmUmaSize, FieldUnitObj)
+    External (CpmIsDgpuPrimary, FieldUnitObj)
+    External (CpmiGpuP2pBridgePfa, FieldUnitObj)
+    External (CpmiGpuP2pDevicePfa, FieldUnitObj)
+    External (CpmdGpuP2pBridgeFuncNum, FieldUnitObj)
+    External (CpmdGpuP2pBridgeDeviceNum, FieldUnitObj)
+    External (CpmdGpuP2pBridgeBusNum, FieldUnitObj)
+    External (CpmdGpuP2pDeviceFuncNum, FieldUnitObj)
+    External (CpmdGpuP2pDeviceDeviceNum, FieldUnitObj)
+    External (CpmdGpuP2pDeviceBusNum, FieldUnitObj)
+    External (CpmdGpuAspmLxEnable, FieldUnitObj)
+    External (CpmdGpuAudioDisable, FieldUnitObj)
+
+    External (CpmAtpxSupportedFunctionMask, FieldUnitObj)
+    External (CpmAtpxFlags, FieldUnitObj)
+    External (CpmAtcsSupportedFunctionMask, FieldUnitObj)
+    External (CpmAtifSupportedNotificationMask, FieldUnitObj)
+    External (CpmAtifFunctionBitVector, FieldUnitObj)
+    External (CpmAtifFlags, FieldUnitObj)
+    External (CpmAtifDeviceListBuffer, FieldUnitObj)
+    External (CpmAtrmRomSize, FieldUnitObj)
+    External (CpmAtrmRomImage, FieldUnitObj)
+    External (CpmSmiCheckCheckToolData, FieldUnitObj)
+    External (CpmMainTable, FieldUnitObj)
+    External (CpmDeviceDetectionTable, FieldUnitObj)
+    External (CpmDeviceResetTable, FieldUnitObj)
+    External (CpmDevicePowerTable, FieldUnitObj)
+    External (CpmWirelessButtonTable, FieldUnitObj)
+    External (CpmSaveContextTable, FieldUnitObj)
+    External (CpmExpressCardTable, FieldUnitObj)
+    External (CpmOtherHotplugCardTable, FieldUnitObj)
+    External (CpmDisplayFeatureTable, FieldUnitObj)
+    External (CpmZeroPowerOddTable, FieldUnitObj)
+    External (CpmAdaptiveS4Table, FieldUnitObj)
+    External (CpmAcpiThermalFanTable, FieldUnitObj)
+    External (CpmPcieClockTable, FieldUnitObj)
+    External (CpmTriggerSmi, MethodObj)
+    External (CpmCallBack, MethodObj)
+    External (CpmIsWin8, MethodObj)
+    External (CpmCurrentOSType, DeviceObj)
+    External (CpmCurrentOSFlag, DeviceObj)
+    External (CpmReadTable, MethodObj)
+    External (MLIB, MethodObj)
+    External (CpmGetInternalBusNumber, MethodObj)
+    External (CpmReadSmnRegister, MethodObj)
+    External (CpmWriteSmnRegister, MethodObj)
+    External (CpmCoreTopologyTable, FieldUnitObj)
+    External (CpmGetMultiDieBusNumber, MethodObj)
+    External (CpmUcsiTable, FieldUnitObj)
+    External (CpmUcsiOPMData, FieldUnitObj)
+    External (CpmUcsiEcUcsiLocation, FieldUnitObj)
+    External (CpmUcsiEcVersionLocation, FieldUnitObj)
+    External (CpmUcsiEcCciLocation, FieldUnitObj)
+    External (CpmUcsiEcCtlLocation, FieldUnitObj)
+    External (CpmUcsiEcMgiLocation, FieldUnitObj)
+    External (CpmUcsiEcMgoLocation, FieldUnitObj)
+    External (CpmUcsiEcCommandIo, FieldUnitObj)
+    External (CpmUcsiEcUcsiCommand, FieldUnitObj)
+    External (CpmGetPcieClockPmCapability, MethodObj)
+    External (CpmCheckDeviceResetState, MethodObj)
+    External (CpmPowerGateOn, MethodObj)
+    External (CpmPowerGateOff, MethodObj)
+    External (CpmLowPowerEthernetTable, FieldUnitObj)
+    External (CpmWirelessLanRecoveryTable, FieldUnitObj)
+    External (CpmAtrmRomImage1, FieldUnitObj)
+    External (CpmAtrmRomImage2, FieldUnitObj)
+    External (CpmAtrmRomImage3, FieldUnitObj)
+    External (CpmAtrmRomImage4, FieldUnitObj)
+    External (CpmAtrmRomImage5, FieldUnitObj)
+    External (CpmAtrmRomImage6, FieldUnitObj)
+    External (CpmAtrmRomImage7, FieldUnitObj)
+    External (CpmAtrmRomImage8, FieldUnitObj)
+    External (CpmAtrmRomImage9, FieldUnitObj)
+    External (CpmAtrmRomImageA, FieldUnitObj)
+    External (CpmAtrmRomImageB, FieldUnitObj)
+    External (CpmAtrmRomImageC, FieldUnitObj)
+    External (CpmAtrmRomImageD, FieldUnitObj)
+    External (CpmAtrmRomImageE, FieldUnitObj)
+    External (CpmAtrmRomImageF, FieldUnitObj)
+    External (CpmFindPcieRootPortNumber, MethodObj)
+    External (CpmSendPmeTurnOff, MethodObj)
+    External (CpmWakeLink, MethodObj)
+    External (CpmClkReqMappingTable, DeviceObj)
+    External (CpmReadClkReq, MethodObj)
+    External (CpmWriteClkReq, MethodObj)
+#else
+    External (MOEM, MethodObj)
+#endif
+#ifndef CPM_EC_ASL
+    External (CpmKbcRead8, MethodObj)
+    External (CpmKbcWrite8, MethodObj)
+    External (CpmKbcReadGpio, MethodObj)
+    External (CpmKbcWriteGpio, MethodObj)
+    External (CpmKbcWriteIo, MethodObj)
+    External (CpmKbcReadIo, MethodObj)
+    External (CpmKbcCmd, MethodObj)
+#else
+    External (CpmKbcMutex, MutexObj)
+#endif
+#ifndef CPM_ACPI_THERMAL_FAN_ASL
+    External (CpmFanTempCtrl0, DeviceObj)
+    External (CpmFanTempCtrl1, DeviceObj)
+    External (CpmFanTempCtrl2, DeviceObj)
+    External (CpmFanTempCtrl3, DeviceObj)
+    External (CpmFanSpeedCtrl0, DeviceObj)
+    External (CpmFanSpeedCtrl1, DeviceObj)
+    External (CpmFanSpeedCtrl2, DeviceObj)
+    External (CpmFanSpeedCtrl3, DeviceObj)
+    External (CpmHystersisForActiveCooling, DeviceObj)
+    External (CpmHystersisForPassiveCooling, DeviceObj)
+    External (CpmGetZoneTemperature, MethodObj)
+    External (CpmThermalTrapHandler, MethodObj)
+    External (CpmCurrentTemperature, DeviceObj)
+    External (CpmSetTemperatureThreshold, MethodObj)
+    External (CpmSetFanSpeed, MethodObj)
+    External (CpmUpdateTemperatureThreshold, MethodObj)
+    External (CpmInitFanoutRegister, MethodObj)
+    External (CpmInitTempInRegister, MethodObj)
+    External (CpmFanStatus, DeviceObj)
+    External (CpmTemperatureHighThreshold, DeviceObj)
+    External (CpmTemperatureLowThreshold, DeviceObj)
+    External (CpmCriticalTemperatureThreshold, DeviceObj)
+    External (CpmPassiveCoolingThreshold, DeviceObj)
+    External (CpmGetFanStatus, MethodObj)
+    External (CpmTc1, DeviceObj)
+    External (CpmTc2, DeviceObj)
+    External (CpmSamplePeriod, DeviceObj)
+    External (CpmAc0, DeviceObj)
+    External (CpmAc1, DeviceObj)
+    External (CpmAc2, DeviceObj)
+    External (CpmAc3, DeviceObj)
+    External (CpmPstateLimit, DeviceObj)
+#endif
+#ifndef CPM_PCIE_EXPRESS_CARD_ASL
+    External (CpmExpressCardEventMethod, MethodObj)
+#else
+    External (\_SB.PCI0.CpmExpressCardBridge, DeviceObj)
+#endif
+#ifndef CPM_PCIE_OTHER_HOTPLUG_ASL
+    External (CpmOtherHotplugCard0EventMethod, MethodObj)
+    External (CpmOtherHotplugCard1EventMethod, MethodObj)
+    External (CpmOtherHotplugCard0ConnectMethod, MethodObj)
+    External (CpmOtherHotplugCard0DisconnectMethod, MethodObj)
+    External (CpmOtherHotplugCard1ConnectMethod, MethodObj)
+    External (CpmOtherHotplugCard1DisconnectMethod, MethodObj)
+    External (\_SB.CpmOtherHotplugCard_PTS, MethodObj)
+    External (\_SB.CpmOtherHotplugCard_WAK, MethodObj)
+#else
+    External (\_SB.PCI0.CpmOtherHotplugCard0Bridge, DeviceObj)
+    External (\_SB.PCI0.CpmOtherHotplugCard1Bridge, DeviceObj)
+#endif
+#ifndef CPM_PCIE_WIRELESS_BUTTON_ASL
+    External (CpmWirelessButtonEventMethod, MethodObj)
+    External (CpmWirelessButtonCurrentStatus, DeviceObj)
+#else
+    External (\_SB.PCI0.CpmWirelessBridge0, DeviceObj)
+    External (\_SB.PCI0.CpmWirelessBridge1, DeviceObj)
+    External (\_SB.PCI0.CpmWirelessBridge2, DeviceObj)
+    External (\_SB.PCI0.CpmWirelessBridge3, DeviceObj)
+#endif
+#ifndef CPM_PCIE_LOW_POWER_ETHERNET_ASL
+    External (CpmLowPowerEthernetCablePlugOutMethod, MethodObj)
+    External (CpmLowPowerEthernetCablePlugInMethod, MethodObj)
+    External (\_SB.CpmLowPowerEthernet_WAK, MethodObj)
+#endif
+#ifndef CPM_ZERO_POWER_ODD
+    External (\_SB.PCI0.SATA.TPTS, MethodObj)
+    External (\_SB.PCI0.SATA.TWAK, MethodObj)
+    External (\_SB.PCI0.GP18.SATA.TPTS, MethodObj)
+    External (\_SB.PCI0.GP18.SATA.TWAK, MethodObj)
+#endif

@@ -1,0 +1,81 @@
+#;*****************************************************************************
+#;
+#; Copyright 2016 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#;
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#;
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#;
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#;
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#;
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaMemPkg
+  PACKAGE_GUID          = 445f7303-3171-428c-ad0b-32df4474a7ad
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include/
+
+[LibraryClasses]
+  AmdMemSmbiosV2Lib|include/Library/MemSmbiosV2Lib.h
+  
+[Guids]
+  gAmdMemSmbiosDepexProtocolGuid           = {0xcab714fa, 0xba50, 0x476e, {0xbd, 0xdb, 0x8f, 0x70, 0xe0, 0x64, 0x9e, 0x9a}}
+  gAmdMemSmbiosV2DepexProtocolGuid         = {0xc774a092, 0x5685, 0x4e01, {0x9c, 0x2c, 0xef, 0xc7, 0xe9, 0xae, 0x2e, 0x25}}
+  gAmdNvdimmInfoHobGuid                    = {0x6d069e32, 0x4498, 0xb64b, {0x25, 0x1b, 0x6d, 0x8e, 0xda, 0x4a, 0xcb, 0x3c}}
+  gAmdMemCfgFormSetGuid = {0x6EBD23B8, 0xB00C, 0x422F, {0x9F, 0xE6, 0xA7, 0x86, 0x49, 0x6A, 0x15, 0xFC}}
+
+[Protocols]
+  gAmdMemSmbiosServicesProtocolGuid        = {0xd6d0c512, 0x1a12, 0x43a5, {0x86, 0xe8, 0x24, 0xe8, 0xc4, 0x5e, 0xd8, 0x3d}}
+  gAmdMemRestoreDepexProtocolGuid          = {0x538232d6, 0xf494, 0x47df, { 0xb0, 0xcb, 0xe8, 0xe9, 0x81, 0x50, 0x6e, 0x47}}
+  gAmdPostPackageRepairInfoProtocolGuid    = {0x37430a06, 0xe7a4, 0x4b0d, { 0xaf, 0xc, 0x48, 0xd7, 0xe9, 0xf3, 0x1e, 0x4f}}
+
+[Ppis]
+  gAmdMemoryInitCompletePpiGuid            = {0xe54e6e84, 0x20b, 0x4081, {0x81, 0x56, 0x37, 0xe9, 0xc6, 0x2c, 0x1e, 0xd6}}
+  gAmdMemChanXLatPpiGuid                   = {0xd36cd978, 0x33ce, 0x4c09, { 0xa5, 0x4d, 0x95, 0x2f, 0x82, 0x8e, 0x19, 0x39}}
+  gAmdMemRestoreDepexPpiGuid               = {0xd030fc8c, 0x31d3, 0x4eee, {0x90, 0x57, 0x0, 0xb, 0x45, 0xec, 0xef, 0x69}}
+  gAmdMbistPeiPpiGuid                      = {0x8eb674cd, 0xe982, 0x4089, { 0x9a, 0xcd, 0x95, 0x8, 0xc1, 0xa0, 0x9a, 0x8f}}
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemCfgMaxPostPackageRepairEntries|64|UINT32|0x00029001   # 4 * 2 * 8 by default
+
+[PcdsDynamic]
+

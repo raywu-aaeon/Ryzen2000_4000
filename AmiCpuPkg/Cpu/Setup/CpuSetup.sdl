@@ -1,0 +1,94 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+PATH
+	Name  = "AMI_CPU_SETUP"
+End
+
+TOKEN
+    Name  = "CACHE_INFO_MODEL"
+    Value  = "0"
+    Help  = "This is to decide the model of cache info in setup"
+    TokenType = Boolean
+    TargetH = Yes
+    Range  = "0 - L1 instruction/Data cache, L2 data cache are displayed per core. 1 - L1 cache and L2 cache are displayed in summary."
+End
+
+ELINK
+	Name  = "$(AMI_CPU_SETUP)/Cpu.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AMI_CPU_SETUP)/CpuSetup.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "InitCpuStrings,"
+	Parent  = "SetupStringInit"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AMI_CPU_SETUP)/Cpu.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CpuCspLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiCpuInfoProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiCpuPkg/AmiCpuPkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CcxPstatesLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AgesaModulePkg/AgesaCommonModulePkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

@@ -1,0 +1,21 @@
+
+[Defines]
+	INF_VERSION                     = 0x00010005
+	BASE_NAME                       = AmiFchInitHookDxeLibNull
+    FILE_GUID                       = 8D5D0C15-6FF5-43cf-A45D-628EB9BFCD9D
+    MODULE_TYPE                     = DXE_DRIVER
+    LIBRARY_CLASS                   = AmiFchInitHookLib
+
+[Sources]
+    AmiFchInitHookDxeLib.c
+    
+[Packages]
+    MdePkg/MdePkg.dec
+    
+[LibraryClasses]
+    
+[Protocols]
+    
+[Depex]
+    
+[BuildOptions]

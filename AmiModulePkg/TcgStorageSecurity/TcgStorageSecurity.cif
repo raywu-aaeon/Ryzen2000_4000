@@ -1,0 +1,29 @@
+<component>
+    name = "TcgStorageSecurity"
+    category = eModule
+    LocalRoot = "AmiModulePkg\TcgStorageSecurity\"
+    RefName = "TcgStorageSecurity"
+[INF]
+"TcgStorageSecurity.inf"
+"TcgStorageSecurityPei.inf"
+[files]
+"TcgStorageSecurity.sdl"	
+"TcgStorageSecurity.chm"	
+[parts]
+"TcgStorageDynamicSetup"
+"AmiTseTcgStorageSecurity"
+"TcgStorageSecurityIncludes"
+"SmmTcgStorageSec"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_53"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_21"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_19"
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;AMITSE_2_20_1274"
+SmmConfidentialMemModule >= "SS: AptioV;$/AptioV/Source/Modules/SmmConfidentialMemModule;SmmConfidentialMemModule_01"
+[dependency.optional]
+AHCI >= "SS: AptioV;$/AptioV/Source/Modules/AHCI;AHCI_27"
+OpalSecurity >= "SS: AptioV;$/AptioV/Source/Modules/OpalSecurity;OpalSecurity_06"
+NVMe >= "SS: AptioV;$/AptioV/Source/Modules/NVMe;Nvme_28"
+ESA >= "SS: AptioV;$/AptioV/Source/Modules/ESA;ESA_2_20_0050_39"
+NvmeRstPassword >= "SS: AptioV;$/AptioV/Source/Hardware/Chipset/Intel/NvmeRstPassword;NvmeRstPassword_05"
+<endComponent>

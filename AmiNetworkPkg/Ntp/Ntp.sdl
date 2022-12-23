@@ -1,0 +1,214 @@
+TOKEN
+    Name      = "NTP_SUPPORT"
+    Value     = "0"
+    Help      = "Main switch to enable Ntp support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH   = Yes
+    Master    = Yes
+End
+
+PATH
+    Name  = "NTP_DIR"
+End
+
+ELINK
+    Name        = "$(NTP_DIR)/Ntp.sd"
+    Parent      = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "$(NTP_DIR)/Ntp.uni"
+    Parent      = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "$(NTP_DIR)/Ntp.c"
+    Parent      = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "$(NTP_DIR)/Ntp.h"
+    Parent      = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "$(NTP_DIR)/NtpImpl.c"
+    Parent      = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "$(NTP_DIR)/NtpImpl.h"
+    Parent      = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "NetLib"
+    Parent      = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "UdpIoLib"
+    Parent      = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "BaseMemoryLib"
+    Parent      = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "gEfiNetworkStackSetupGuid"
+    Parent      = "AdditionalSetupGuids"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "gEfiIp4ServiceBindingProtocolGuid"
+    Parent      = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "gEfiUdp4ServiceBindingProtocolGuid"
+    Parent      = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "gEfiUdp4ProtocolGuid"
+    Parent      = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "gEfiIp4Config2ProtocolGuid"
+    Parent      = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "gEfiDns4ProtocolGuid"
+    Parent      = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "gEfiDns4ServiceBindingProtocolGuid"
+    Parent      = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "gEfiCpuArchProtocolGuid"
+    Parent      = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "InitNtpStrings,"
+    Parent      = "SetupStringInit"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "AmiPkg/AmiPkg.dec"
+    Parent      = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,NTP_UPDATE_TIME_KEY,NtpSyncStart),"
+    Parent      = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,LOCAL_IP_KEY,NtpVerifyIpAddress),"
+    Parent      = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,SUBNETMASK_IP_KEY,NtpVerifyIpAddress),"
+    Parent      = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,GATEWAY_IP_KEY,NtpVerifyIpAddress),"
+    Parent      = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name        = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,PRIMARY_DNS_SERVER_IP_KEY,NtpVerifyIpAddress),"
+    Parent      = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name      = "NTP_DEFAULT_VALUE"
+    Value     = "1"
+    Help      = "Token to set default value of NTP Support Enabled or Disabled."
+    TokenType = Boolean
+    TargetH   = Yes
+End
+
+TOKEN
+    Name      = "NTP_CONFIG_LOCAL_ADDRESS"
+    Value     = "1"
+    Help      = "Token to set default configuring local IP address. 0: Static, 1: Dynamic."
+    TokenType = Boolean
+    TargetH   = Yes
+End
+
+TOKEN
+    Name      = "NTP_CONFIG_SERVER_NAME"
+    Value     = "0"
+    Help      = "Token to set default configuring NTP server name. 0: Default, 1: Manual."
+    TokenType = Boolean
+    TargetH   = Yes
+End
+
+TOKEN
+    Name      = "NTP_DEFAULT_SERVER_HOSTNAME"
+    Value     = 'L"tick.stdtime.gov.tw"'
+    Help      = "Default NTP server hostname."
+    TokenType = Expression
+    TargetH   = Yes
+End
+
+TOKEN
+    Name      = "NTP_CONFIG_DEFAULT_TIME_ZONE_OFFSET"
+    Value     = "TIME_ZONE_PLUS_8"
+    Help      = "Token to set default time zone offset. The expressions are defined in Ntp.h (TIME_ZONE_MINUS_12 to TIME_ZONE_PLUS_14)."
+    TokenType = Expression
+    TargetH   = Yes
+End
+
+TOKEN
+    Name      = "NTP_CONFIG_DEFAULT_TIME_OUT"
+    Value     = "3"
+    Help      = "Token to set default time out for NTP server response in seconds."
+    TokenType = Integer
+    TargetH   = Yes
+    Range     = "1 - 0xFF"
+End
+
+TOKEN
+    Name      = "NTP_CONFIG_DAYLIGHT_SAVING_ENABLE"
+    Value     = "0"
+    Help      = "Token to set default enable/disable daylight saving time. 0: Disable, 1: Enable."
+    TokenType = Boolean
+    TargetH   = Yes
+End

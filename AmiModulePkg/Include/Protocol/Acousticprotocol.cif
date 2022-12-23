@@ -1,0 +1,8 @@
+<component>
+    name = "HddAcoustic Protocol"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\Include\Protocol\"
+    RefName = "AcousticProtocol"
+[files]
+"AcousticProtocol.h"
+<endComponent>

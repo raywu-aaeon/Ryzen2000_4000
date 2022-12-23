@@ -1,0 +1,49 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbPxeLoader
+  FILE_GUID                      = 27EEDF2D-469E-478c-805E-993CCFB5C0C1
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CrbPxeLoaderInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  CrbPxeLoader.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  MandolinPkg/MandolinPkg.dec
+  AmiNetworkPkg/AmiNetworkPkg.dec
+
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiLib
+  IoLib
+  AmiDxeLib
+  AmiCspLib
+
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gOpromStartEndProtocolGuid
+
+[Guids]  
+  gCrbPxeDriverLoaderGuid
+  gEfiNetworkStackSetupGuid
+
+[Depex]
+  TRUE

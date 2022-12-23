@@ -1,0 +1,168 @@
+TOKEN
+	Name  = "AmdCbsPkg_F17_RV_External_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling External support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+MODULE
+    Help  = "Includes External.mak to RV"
+    File  = "ExternalRV.mak"
+End
+
+TOKEN
+    Name  = "CBS_SOLUTION_TYPE"
+    Value  = "RVFP5"
+    TokenType = Expression
+    TargetDSC = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "ResourceRVFP5"
+    Value  = "Resource$(CBS_SOLUTION_TYPE)"
+    TokenType = Expression
+    Help  = "A helper for file path refer to the build folder in PreProcess"
+End
+
+INFComponent
+    Name  = "CbsSetAgesaPcdLibRV"
+    File  = "..\..\..\..\..\..\Build\Resource$(CBS_SOLUTION_TYPE)\CbsSetAgesaPcdLibRV.inf"
+    Package  = "AmdCbsPkg"
+    ModuleTypes  = "BASE"
+    Help  = "Use the file of AutoGen by AMD tools."
+End
+
+INFComponent
+    Name  = "CbsBctSmmLibFP5"
+    File  = "CbsBctSmmLibFP5.inf"
+    Package  = "AmdCbsPkg"
+    ModuleTypes = "DXE_SMM_DRIVER"
+    Token = "BctBaseSmm_SUPPORT" "=" "1"
+    PreProcess = Yes
+End
+
+INFComponent
+	Name  = "CbsFuncLibDxeFP5"
+	File  = "CbsFuncLibDxeFP5.inf"
+	Package  = "AmdCbsPkg"
+	ModuleTypes = "DXE_DRIVER"
+	PreProcess = Yes
+End
+
+INFComponent
+	Name  = "CbsFuncLibPeiFP5"
+	File  = "CbsFuncLibPeiFP5.inf"
+	Package  = "AmdCbsPkg"
+	ModuleTypes = "PEIM"
+	PreProcess = Yes
+End
+
+INFComponent
+	Name  = "CbsIdsLibDxeFP5"
+	File  = "CbsIdsLibDxeFP5.inf"
+	Package  = "AmdCbsPkg"
+	ModuleTypes = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "CbsIdsLibPeiFP5"
+	File  = "CbsIdsLibPeiFP5.inf"
+	Package  = "AmdCbsPkg"
+	ModuleTypes = "PEIM"
+End
+
+INFComponent
+    Name  = "CbsSetupLibFP5"
+    File  = "CbsSetupLibFP5.inf"
+    Package  = "AmdCbsPkg"
+    ModuleTypes = "DXE_DRIVER"
+    PreProcess = Yes
+End
+
+LibraryMapping
+    Class  = "CbsBctSmmLib"
+    Instance  = "AmdCbsPkg.CbsBctSmmLibFP5"
+    Override  = "AmdCbsPkg.BctBaseSmmRV"
+    Token = "BctBaseSmm_SUPPORT" "=" "1"
+End
+LibraryMapping
+    Class  = "CbsPeiFuncLib"
+    Instance  = "AmdCbsPkg.CbsFuncLibPeiFP5"
+    Override  = "AmdCbsPkg.CbsBasePeiRV"
+End
+
+LibraryMapping
+	Class  = "CbsSetupLib"
+	Instance  = "AmdCbsPkg.CbsSetupLibFP5"
+	Override  = "AmdCbsPkg.CbsSetupDxeRV"
+End
+LibraryMapping
+    Class  = "CbsDxeFuncLib"
+    Instance  = "AmdCbsPkg.CbsFuncLibDxeFP5"
+    Override  = "AmdCbsPkg.CbsSetupDxeRV"
+End
+
+LibraryMapping
+    Class  = "CbsDxeFuncLib"
+    Instance  = "AmdCbsPkg.CbsFuncLibDxeFP5"
+    Override  = "AmdCbsPkg.CbsBaseDxeRV"
+End
+
+LibraryMapping
+    Class  = "AmdIdsHookExtLib"
+    Instance  = "AmdCbsPkg.CbsIdsLibPeiFP5"
+    ModuleTypes = "PEIM"
+End
+
+LibraryMapping
+    Class  = "AmdIdsHookExtLib"
+    Instance  = "AmdCbsPkg.CbsIdsLibDxeFP5"
+    ModuleTypes = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "CbsPeiFuncLib"
+    Instance  = "AmdCbsPkg.CbsFuncLibPeiFP5"
+    ModuleTypes = "PEIM"
+End
+
+LibraryMapping
+    Class  = "CbsDxeFuncLib"
+    Instance  = "AmdCbsPkg.CbsFuncLibDxeFP5"
+    ModuleTypes = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "CbsSetupLib"
+    Instance  = "AmdCbsPkg.CbsSetupLibFP5"
+    ModuleTypes = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "CbsBctSmmLib"
+    Instance  = "AmdCbsPkg.CbsBctSmmLibFP5"
+    ModuleTypes = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+    Class  = "CbsSetAgesaPcdLib"
+    Instance  = "AmdCbsPkg.CbsSetAgesaPcdLibRV"
+    Override = "AmdCbsPkg.CbsBasePeiRV"
+End
+
+LibraryMapping
+    Class  = "CbsSetAgesaPcdLib"
+    Instance  = "AmdCbsPkg.CbsSetAgesaPcdLibRV"
+    ModuleTypes  = "PEIM"
+End
+
+OUTPUTREGISTER
+    Name  = "RunXmlParseExe"
+    Help  = "This OUTPUTREGISTER to help to output "
+    Path  = "Build"
+    File  = "RunXmlParseExe.bat"
+    Template  = "xmlparseExe.bat"
+End

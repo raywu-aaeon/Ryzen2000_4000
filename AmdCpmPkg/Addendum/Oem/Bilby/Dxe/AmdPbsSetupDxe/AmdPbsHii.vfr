@@ -1,0 +1,516 @@
+//#;*****************************************************************************
+//#;
+//#; Copyright 2016 - 2021 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+//#;
+//#; AMD is granting You permission to use this software and documentation (if
+//#; any) (collectively, the "Software") pursuant to the terms and conditions of
+//#; the Software License Agreement included with the Software. If You do not have
+//#; a copy of the Software License Agreement, contact Your AMD representative for
+//#; a copy.
+//#;
+//#; You agree that You will not reverse engineer or decompile the Software, in
+//#; whole or in part, except as allowed by applicable law.
+//#;
+//#; WARRANTY DISCLAIMER: THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+//#; KIND. AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING
+//#; BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, QUALITY,
+//#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT AND WARRANTIES
+//#; ARISING FROM CUSTOM OF TRADE OR COURSE OF USAGE WITH RESPECT TO THE SOFTWARE,
+//#; INCLUDING WITHOUT LIMITATION, THAT THE SOFTWARE WILL RUN UNINTERRUPTED OR
+//#; ERROR-FREE. THE ENTIRE RISK ASSOCIATED WITH THE USE OF THE SOFTWARE IS
+//#; ASSUMED BY YOU. Some jurisdictions do not allow the exclusion of implied
+//#; warranties, so the above exclusion may not apply to You, but only to the
+//#; extent required by law.
+//#;
+//#; LIMITATION OF LIABILITY AND INDEMNIFICATION: TO THE EXTENT NOT PROHIBITED BY
+//#; APPLICABLE LAW, AMD AND ITS LICENSORS WILL NOT, UNDER ANY CIRCUMSTANCES BE
+//#; LIABLE TO YOU FOR ANY PUNITIVE, DIRECT, INCIDENTAL, INDIRECT, SPECIAL OR
+//#; CONSEQUENTIAL DAMAGES ARISING FROM POSSESSION OR USE OF THE SOFTWARE OR
+//#; OTHERWISE IN CONNECTION WITH ANY PROVISION OF THIS AGREEMENT EVEN IF AMD AND
+//#; ITS LICENSORS HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS
+//#; INCLUDES, WITHOUT LIMITATION, DAMAGES DUE TO LOST OR MISAPPROPRIATED DATA,
+//#; LOST PROFITS OR CONFIDENTIAL OR OTHER INFORMATION, FOR BUSINESS INTERRUPTION,
+//#; FOR PERSONAL INJURY, FOR LOSS OF PRIVACY, FOR FAILURE TO MEET ANY DUTY
+//#; INCLUDING OF GOOD FAITH OR REASONABLE CARE, FOR NEGLIGENCE AND FOR ANY OTHER
+//#; PECUNIARY OR OTHER LOSS WHTSOEVER. In no event shall AMD's total liability to
+//#; You for all damages, losses, and causes of action (whether in contract, tort
+//#; (including negligence) or otherwise) exceed the amount of $50 USD. You agree
+//#; to defend, indemnify and hold harmless AMD, its subsidiaries and affiliates
+//#; and their respective licensors, directors, officers, employees, affiliates or
+//#; agents from and against any and all loss, damage, liability and other
+//#; expenses (including reasonable attorneys' fees), resulting from Your
+//#; possession or use of the Software or violation of the terms and conditions of
+//#; this Agreement.
+//#;
+//#; U.S. GOVERNMENT RESTRICTED RIGHTS: Notice to U.S. Government End Users. The
+//#; Software and related documentation are "commercial items", as that term is
+//#; defined at 48 C.F.R. Section 2.101, consisting of "commercial computer
+//#; software" and "commercial computer software documentation", as such terms are
+//#; used in 48 C.F.R. Section 12.212 and 48 C.F.R. Section 227.7202,
+//#; respectively. Consistent with 48 C.F.R. Section 12.212 or 48 C.F.R. Sections
+//#; 227.7202-1 through 227.7202-4, as applicable, the commercial computer
+//#; software and commercial computer software documentation are being licensed to
+//#; U.S. Government end users: (a) only as commercial items, and (b) with only
+//#; those rights as are granted to all other end users pursuant to the terms and
+//#; conditions set forth in this Agreement. Unpublished rights are reserved under
+//#; the copyright laws of the United States.
+//#;
+//#; EXPORT RESTRICTIONS:  You shall adhere to all applicable U.S. import/export
+//#; laws and regulations, as well as the import/export control laws and
+//#; regulations of other countries as applicable. You further agree You will not
+//#; export, re-export, or transfer, directly or indirectly, any product,
+//#; technical data, software or source code received from AMD under this license,
+//#; or the direct product of such technical data or software to any country for
+//#; which the United States or any other applicable government requires an export
+//#; license or other governmental approval without first obtaining such licenses
+//#; or approvals, or in violation of any applicable laws or regulations of the
+//#; United States or the country where the technical data or software was
+//#; obtained. You acknowledges the technical data and software received will not,
+//#; in the absence of authorization from U.S. or local law and regulations as
+//#; applicable, be used by or exported, re-exported or transferred to: (i) any
+//#; sanctioned or embargoed country, or to nationals or residents of such
+//#; countries; (ii) any restricted end-user as identified on any applicable
+//#; government end-user list; or (iii) any party where the end-use involves
+//#; nuclear, chemical/biological weapons, rocket systems, or unmanned air
+//#; vehicles.  For the most current Country Group listings, or for additional
+//#; information about the EAR or Your obligations under those regulations, please
+//#; refer to the website of the U.S. Bureau of Industry and Security at
+//#; http://www.bis.doc.gov/.
+//#;******************************************************************************
+
+#include "AmdPbsConfig.h"
+#include "AmdPbsSetupDxeStrDefs.h"
+
+formset
+  guid     = AMD_PBS_SETUP_FORMSET_GUID,
+  title    = STRING_TOKEN(STR_AMD_PBS_SETUP_TITLE),
+  help     = STRING_TOKEN(STR_AMD_PBS_SETUP_TITLE_HELP),
+  class    = AMD_PBS_SETUP_CLASS,
+  subclass = AMD_PBS_SETUP_SUB_CLASS,
+
+  //
+  // Define a Buffer Storage (EFI_IFR_VARSTORE)
+  //
+  varstore AMD_PBS_SETUP_OPTION,                          // This is the data structure type
+    name  = AMD_PBS_SETUP,                                // Define referenced name in vfr
+    guid  = AMD_PBS_SETUP_GUID;                           // GUID of this buffer storage
+
+  form formid = AMD_PBS_SETUP_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_SETUP_FORM_TITLE);  // Form title
+
+    goto AMD_PBS_FWVER_FORM_ID,
+      prompt      = STRING_TOKEN(STR_AMD_PBS_FWVER_FORM_TITLE),
+      help        = STRING_TOKEN(STR_AMD_PBS_FWVER_FORM_HELP);
+
+    oneof
+      varid       = AMD_PBS_SETUP.StallForUnlock,
+      prompt      = STRING_TOKEN(STR_AMD_STALLFORUNLOCK_STRING),
+      help        = STRING_TOKEN(STR_AMD_STALLFORUNLOCK_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.HdtBreakPointBoot,
+      prompt      = STRING_TOKEN(STR_AMD_HDTBREAKPOINTBOOT_STRING),
+      help        = STRING_TOKEN(STR_AMD_HDTBREAKPOINTBOOT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.HdtBreakPointS3,
+      prompt      = STRING_TOKEN(STR_AMD_HDTBREAKPOINTS3_STRING),
+      help        = STRING_TOKEN(STR_AMD_HDTBREAKPOINTS3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+
+    oneof
+      varid       = AMD_PBS_SETUP.SpecialVgaFeature,
+      prompt      = STRING_TOKEN(STR_SPECIAL_VGA_FEATURE_STRING),
+      help        = STRING_TOKEN(STR_SPECIAL_VGA_FEATURE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_HG_TEXT),        value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.DgpuAudio,
+      prompt      = STRING_TOKEN(STR_DGPU_AUDIO_STRING),
+      help        = STRING_TOKEN(STR_DGPU_AUDIO_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_HW_DEFAULT_TEXT),  value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.PrimaryVideoAdaptor,
+      prompt      = STRING_TOKEN(STR_PRIMARY_VIDEO_ADAPTOR_PROMPT),
+      help        = STRING_TOKEN(STR_PRIMARY_VIDEO_ADAPTOR_HELP),
+      option text = STRING_TOKEN(STR_INT_GRAPHICS),       value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_EXT_PCIE_GRAPHICS),  value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    // SATA devices Power control;
+    oneof
+      varid       = AMD_PBS_SETUP.SataPort0HddPowerEn,
+      prompt      = STRING_TOKEN(STR_SATA_HDD_POWER_CONTROL_STRING),
+      help        = STRING_TOKEN(STR_SATA_HDD_POWER_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),            value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),             value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_MANUAL_BY_JUMPER_STRING),  value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SataPort1OddPowerEn,
+      prompt      = STRING_TOKEN(STR_SATA_ODD_POWER_CONTROL_STRING),
+      help        = STRING_TOKEN(STR_SATA_ODD_POWER_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SataPortSsdPowerEn,
+      prompt      = STRING_TOKEN(STR_SATA_SSD_POWER_CONTROL_STRING),
+      help        = STRING_TOKEN(STR_SATA_SSD_POWER_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.EvalAutoDetection,
+      prompt      = STRING_TOKEN(STR_EVAL_AUTO_DETECTION_STRING),
+      help        = STRING_TOKEN(STR_EVAL_AUTO_DETECTION_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+   suppressif NOT ideqval AMD_PBS_SETUP.PlatformId == 0;
+      oneof
+        varid       = AMD_PBS_SETUP.SdPowerControl,
+        prompt      = STRING_TOKEN(STR_SD_POWER_STRING),
+        help        = STRING_TOKEN(STR_SD_POWER_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      endoneof;
+
+      // SD Configuration Mode
+      // Select SD Mode
+      oneof
+        varid       = AMD_PBS_SETUP.FchSdConfig,
+        prompt      = STRING_TOKEN (STR_SD_CONFIGURATION_STRING),
+        help        = STRING_TOKEN (STR_SD_CONFIGURATION_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_TEXT),     value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN (STR_VER2_DOT_0_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_VER3_DOT_0_TEXT),   value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_VER3_SDR50_TEXT),   value = 3, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_VER3_SDR104_TEXT),  value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_VER3_DDR50_TEXT),   value = 5, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_SDDUMP_TEXT),       value = 6, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+   endif;
+
+
+    oneof
+      varid       = AMD_PBS_SETUP.MITTWITTControl,
+      prompt      = STRING_TOKEN(STR_PSP_MITTWITT_STRING),
+      help        = STRING_TOKEN(STR_PSP_MITTWITT_STRING),
+      option text = STRING_TOKEN(STR_PSP_MITT_STRING),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PSP_WITT_STRING),  value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PSP_NONE_STRING),  value = 2, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.UnusedGppClkOff,
+      prompt      = STRING_TOKEN(STR_UNUSED_GPPCLK_OFF_STRING),
+      help        = STRING_TOKEN(STR_UNUSED_GPPCLK_OFF_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED ;
+    endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.ClockRequest2,
+        prompt      = STRING_TOKEN(STR_CLKREQ2_SSD_STRING),
+        help        = STRING_TOKEN(STR_CLKREQ2_SSD_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT ;
+      endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.ClockRequest3,
+        prompt      = STRING_TOKEN(STR_CLKREQ_WIFI_STRING),
+        help        = STRING_TOKEN(STR_CLKREQ_WIFI_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ClockRequest4,
+      prompt      = STRING_TOKEN(STR_CLKREQ_DT_STRING),
+      help        = STRING_TOKEN(STR_CLKREQ_DT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ClockRequest5,
+      prompt      = STRING_TOKEN(STR_CLKREQ_SSD_STRING),
+      help        = STRING_TOKEN(STR_CLKREQ_SSD_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT ;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED ;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ClockRequest6,
+      prompt      = STRING_TOKEN(STR_CLKREQ_MXM_STRING),
+      help        = STRING_TOKEN(STR_CLKREQ_MXM_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.KbcSupport,
+      prompt      = STRING_TOKEN(STR_KBC_SUPPORT_STRING),
+      help        = STRING_TOKEN(STR_KBC_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+ suppressif  TRUE;
+    oneof
+      varid       = AMD_PBS_SETUP.XgbePortPhySwitch,
+      questionid  = KEY_XGBE_PORT_PHY_SWITCH,
+      prompt      = STRING_TOKEN(STR_XGBE_PORT_PHY_SELECT_STRING),
+      help        = STRING_TOKEN(STR_XGBE_PORT_PHY_SELECT_HELP),
+      option text = STRING_TOKEN(STR_XGBE_PORT_PHY_RJ45),        value = 0, flags = INTERACTIVE | RESET_REQUIRED ;
+      option text = STRING_TOKEN(STR_XGBE_PORT_PHY_SFP),         value = 1,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_XGBE_PORT_PHY_BACKPLANE),   value = 2, flags = INTERACTIVE | RESET_REQUIRED ;
+    endoneof;
+
+    suppressif  ideqval AMD_PBS_SETUP.XgbePortPhySwitch == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.XgbePortSpeedSwitch,
+        prompt      = STRING_TOKEN(STR_XGBE_PORT_SPEED_SELECT_STRING),
+        help        = STRING_TOKEN(STR_XGBE_PORT_SPEED_SELECT_HELP),
+        option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_1G),       value = 0,  flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_10G),      value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+//      option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_100M),     value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_ALL),      value = 3, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        suppressif NOT ideqval AMD_PBS_SETUP.XgbePortPhySwitch == 2;
+           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_2_5G),     value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+        endif
+      endoneof;
+    endif;
+
+//   suppressif NOT ideqval AMD_PBS_SETUP.XgbePortPhySwitch == 2;
+//      oneof
+//        varid       = AMD_PBS_SETUP.XgbePortRJ45Mode,
+//        prompt      = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_SELECT_STRING),
+//        help        = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_SELECT_HELP),
+//        option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_10_1_BACKPLANE),        value = 1,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+//        option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_2_5_BACKPLANE),         value = 2,  flags = INTERACTIVE | RESET_REQUIRED;
+//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_1000BASET),             value = 3,  flags = INTERACTIVE | RESET_REQUIRED;
+//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_1000BASEX),             value = 4,  flags = INTERACTIVE | RESET_REQUIRED;
+//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_NBASET),                value = 5,  flags = INTERACTIVE | RESET_REQUIRED;
+//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_10GBASET),              value = 6,  flags = INTERACTIVE | RESET_REQUIRED;
+//	option text = STRING_TOKEN(STR_XGBE_PORT_RJ45_MODE_10GBASER),              value = 7,  flags = INTERACTIVE | RESET_REQUIRED;
+//      endoneof;
+//    endif;
+endif;
+    oneof
+      varid       = AMD_PBS_SETUP.VDDP,
+      prompt      = STRING_TOKEN(STR_VDDP_STRING),
+      help        = STRING_TOKEN(STR_VDDP_HELP),
+      option text = STRING_TOKEN(STR_VDDP_DEFAULT),     value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_VDDP0_80_TEXT),    value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.AmdPspKvmMouseProtocol,
+      prompt      = STRING_TOKEN(STR_AMD_KVM_MOUSE_PROTOCOL_STRING),
+      help        = STRING_TOKEN(STR_AMD_KVM_MOUSE_PROTOCOL_HELP),
+      option text = STRING_TOKEN(STR_AMD_KVM_ABSOLUTE_PROTOCOL),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_AMD_KVM_SIMPLE_PROTOCOL),    value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_AUTO_TEXT),                  value = 3, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.AmdBlinkLed,
+      prompt      = STRING_TOKEN(STR_AMD_BLINK_LED_STRING),
+      help        = STRING_TOKEN(STR_AMD_BLINK_LED_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_GPIO11_LOW_TEXT),  value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_GPIO11_HIGH_TEXT), value = 3, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+        varid       = AMD_PBS_SETUP.DisplaySelect1,
+        prompt      = STRING_TOKEN(STR_DISPLAY_TYPE_SELECT_STRING1),
+        help        = STRING_TOKEN(STR_DISPLAY_TYPE_SELECT_HELP1),
+        option text = STRING_TOKEN(STR_DISPLAY_TYPE_HDMI),       	value = 0,  flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISPLAY_TYPE_DP),         	value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+        varid       = AMD_PBS_SETUP.DisplaySelect2,
+        prompt      = STRING_TOKEN(STR_DISPLAY_TYPE_SELECT_STRING2),
+        help        = STRING_TOKEN(STR_DISPLAY_TYPE_SELECT_HELP2),
+        option text = STRING_TOKEN(STR_DISPLAY_TYPE_HDMI),       	value = 0,  flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISPLAY_TYPE_DP),         	value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    suppressif TRUE;
+    	oneof
+	  varid       = AMD_PBS_SETUP.PxeBoot,
+	  prompt      = STRING_TOKEN(STR_PXE_BOOT_SELECT_STRING),
+	  help        = STRING_TOKEN(STR_PXE_BOOT_SELECT_HELP),
+	  option text = STRING_TOKEN(STR_PXE_BOOT_PORT_0),         value = 1,  flags = INTERACTIVE | RESET_REQUIRED ;
+	  option text = STRING_TOKEN(STR_PXE_BOOT_PORT_1),         value = 2,  flags = INTERACTIVE | RESET_REQUIRED ;
+	  option text = STRING_TOKEN(STR_DISABLED_TEXT),           value = 0,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+	endoneof;
+    endif;
+
+    // EMBSWDEV-6181: Add any Setup Option before this code
+    oneof
+        varid       = AMD_PBS_SETUP.XgbeVsPcieXn,
+        questionid  = KEY_XGBE_PCIE,
+        prompt      = STRING_TOKEN(STR_XGBE_VS_PCIEX2_SELECT_STRING),
+        help        = STRING_TOKEN(STR_XGBE_VS_PCIEX2_SELECT_HELP),
+        option text = STRING_TOKEN(STR_XGBE_VS_PCIEX2_M2_SATA),         value = 0,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_XGBE_VS_PCIEX2_PCIEX2),       value = 1,  flags = INTERACTIVE | RESET_REQUIRED ;
+	option text = STRING_TOKEN(STR_XGBE_VS_PCIEX2_PCIEX4),       value = 2,  flags = INTERACTIVE | RESET_REQUIRED ;
+	//option text = STRING_TOKEN(STR_XGBE_VS_PCIEX2_X2NVME),  value = 3,  flags = INTERACTIVE | RESET_REQUIRED ;
+    endoneof;
+
+     // EMBSWDEV-6181:DO NOT ADD CODE HERE
+
+  endform;
+
+  //
+  //  Form AMD_PBS_FWVER_FORM_ID: Firmware Version
+  //
+  form formid = AMD_PBS_FWVER_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_FWVER_FORM_TITLE);  // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_FWVER_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_AGESA_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_AGESA_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PSP_BOOT_LOADER_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PSP_BOOT_LOADER_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PSP_TRUSTED_OS_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PSP_TRUSTED_OS_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_ABL_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_ABL_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_APCB_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_APCB_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_APOB_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_APOB_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_UCODE_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_UCODE_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_SMU_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_SMU_VALUE),
+      flags       = 0,
+      key         = 0;
+
+//  text
+//    help        = STRING_TOKEN(STR_BLANK_STRING),
+//    text        = STRING_TOKEN(STR_AMD_PBS_FWVER_SMU_RV2_STRING),
+//    text        = STRING_TOKEN(STR_AMD_PBS_FWVER_SMU_RV2_VALUE),
+//    flags       = 0,
+//    key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_DXIO_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_DXIO_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_MP2_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_MP2_VALUE),
+      flags       = 0,
+      key         = 0;
+
+//  text
+//    help        = STRING_TOKEN(STR_BLANK_STRING),
+//    text        = STRING_TOKEN(STR_AMD_PBS_FWVER_MP2_RV2_STRING),
+//    text        = STRING_TOKEN(STR_AMD_PBS_FWVER_MP2_RV2_VALUE),
+//    flags       = 0,
+//    key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_XHCI_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_XHCI_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_VBIOS_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_VBIOS_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_GOP_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_GOP_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+  endform;
+
+endformset;

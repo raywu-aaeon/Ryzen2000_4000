@@ -1,0 +1,74 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CrbDxe
+  FILE_GUID                      = 16271FCA-55D9-4a33-93FC-5A3EB128DEB6
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CrbDxeInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  CrbDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  MandolinPkg/MandolinPkg.dec
+
+  IntelFrameworkPkg/IntelFrameworkPkg.dec       # Optional. should use Mde Library instead.
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  AmiNetworkPkg/AmiNetworkPkg.dec
+  
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Bilby/AmdCpmOemPkg.dec
+  
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdGetRVFamilyOPN
+    
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiLib
+  IoLib
+  ##PciLib # Default DXE_DRIVER PciLib should depend on gEfiPciRootBridgeIoProtocolGuid.
+
+  DEFINE MDE = $(WORKSPACE)/MdePkg/Library
+  PciLib|$(MDE)/BasePciLibPciExpress/BasePciLibPciExpress.inf # Optional use PciExpress base instead.
+  ### 1. DxeS3BootScriptLibS3SaveStateProtocolConstructor of AmiModulePkg_26. 2. APRIORI ##S3PciLib
+
+  AmiDxeLib # Optional. should use Mde Library instead.
+  AmiCspLib # Optional. should use Mde Library instead.
+  
+  AmdPbsConfigLib
+  AmdSocBaseLib
+  FchSandstoneDxeLib
+  
+[Guids]  
+  gEfiNetworkStackSetupGuid
+  gAmdPbsSystemConfigurationGuid
+  
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gEfiS3SaveStateProtocolGuid
+  gAmiEfiCrbInfoProtocolGuid
+  gEfiPciHotPlugInitProtocolGuid 
+  gEfiBootScriptSaveGuid # Optional. should use Mde Library instead.
+  gEfiUsbProtocolGuid
+  
+  gEfiAcpiSdtProtocolGuid
+  
+[Depex]
+  TRUE

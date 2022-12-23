@@ -1,0 +1,14 @@
+<component>
+    name = "CSP : ATI SB700 SPI - Source"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\Flash\SPI\SB700\"
+    RefName = "ICHX_SPI_CSP_SOURCE"
+[INF]
+"SB700CspSpiFlashLib.inf"
+"SB700CspSpiFlashPeiLib.inf"
+"SpiFlashAddressLib.inf"
+[files]
+"SB700Spi.sdl"
+[parts]
+"EXT_SPI_FLASH_LIB"
+<endComponent>

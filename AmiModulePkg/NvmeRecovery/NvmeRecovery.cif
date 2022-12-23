@@ -1,0 +1,18 @@
+<component>
+    name = "NvmeRecovery"
+    category = eModule
+    LocalRoot = "AmiModulePkg\NvmeRecovery\"
+    RefName = "NvmeRecovery"
+[INF]
+"NvmeRecovery.inf"
+[files]
+"NvmeRecovery.sdl"	
+"NvmeRecovery.chm"	
+[dependency]
+AmiModulePkg.Recovery >= "SS: AptioV;$/AptioV/Source/Modules/Recovery;Recovery_11"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_49"
+PeiPciEnumeration >= "SS: AptioV;$/AptioV/Source/Modules/PeiPciEnumeration;PeiPciEnumeration_04"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_19"
+[dependency.optional]
+AhciRecovery >= "SS: AptioV;$/AptioV/Source/Modules/AHCIRecovery;AhciRecovery_04"
+<endComponent>

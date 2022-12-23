@@ -1,0 +1,398 @@
+TOKEN
+	Name  = "DEBUG_PORT_TABLES_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Debug Port Tables support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "DBGP_INTERFACE_TYPE"
+	Value  = "0"
+	Help  = "Indicate the type of the COM Port register interface.(ACPI 2.0 SPEC)."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 = full 16550 interface; 1 = 16550 subset interface compatible with Microsoft Debug Port Specification; 2-255 = reserved."
+End
+
+TOKEN
+	Name  = "DBGP_ADDR_SPC_ID"
+	Value  = "1"
+	Help  = "UART BLK Register Id (Part of GAS_20 Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+	Name  = "DBGP_ADDR_BIT_WIDTH"
+	Value  = "8"
+	Help  = "UART BLK Register Bit Width (Part of GAS_20 Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS_20 elements"
+End
+
+TOKEN
+	Name  = "DBGP_ADDR_BIT_OFFSET"
+	Value  = "0"
+	Help  = "UART BLK Register Bit Offset (Part of GAS_20 Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS_20 elements"
+End
+
+TOKEN
+	Name  = "DBGP_ACCESS_SIZE"
+	Value  = "0"
+	Help  = "UART BLK Register Bit Offset (Part of GAS_20 Structure, refer to ACPI v2.0 spec for details)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "value range depends on other GAS_20 elements"
+End
+
+TOKEN
+    Name  = "DEBUG_PORT_TABLES_DEBUG_MESSAGES"
+    Value  = "0"
+    Help  = "Enables/disables debug messages for DebugPortTables driver."
+    TokenType = Boolean
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+PATH
+	Name  = "DBGP_TABLE_DIR"
+End
+
+ELINK
+    Name  = "$(DBGP_TABLE_DIR)/DebugPortTables.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(DBGP_TABLE_DIR)/DebugPortTables.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "DebugPortTableDxe"
+	File  = "DebugPortTableDxe.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+    Name  = "DxeDebugPortTablesLib"
+    File  = "DxeDebugPortTablesLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "DxeDebugPortTablesLib"
+    Instance  = "AmiModulePkg.DxeDebugPortTablesLib"
+    Token = "SB_DBG2BOARD_SUPPORT" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiModulePkg.DebugPortTableDxe"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Disables all debug messages based on DEBUG_PORT_TABLES_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "DEBUG_PORT_TABLES_DEBUG_MESSAGES" "=" "0"
+End
+
+TOKEN
+    Name  = "SERIAL_DEV_INFO_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Serial Device Information in Project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SERIAL_GENERIC_ADDR_SIZE"
+    Value  = "32"
+    Help  = "Set the value of SERIAL Debug Device Information AddressSize."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SERIAL_NUM_OF_GENERIC_ADDR_REG"
+    Value  = "1"
+    Help  = "Set the value of NumberOfGenericAddressRegisters."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SERIAL_NAME_SPACE"
+    Value  = '"."'
+    Help = "Set the value of Serial Name Space"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SERIAL_DBG2_ADDR_SPC_ID"
+    Value  = "1"
+    Help  = "UART BLK Register Id (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+    Token = "SERIAL_DEV_INFO_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SERIAL_DBG2_ADDR_BIT_WIDTH"
+    Value  = "8"
+    Help  = "UART BLK Register Bit Width (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "value range depends on other GAS_30 elements"
+    Token = "SERIAL_DEV_INFO_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SERIAL_DBG2_ADDR_BIT_OFFSET"
+    Value  = "0"
+    Help  = "UART BLK Register Bit Offset (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "value range depends on other GAS_30 elements"
+    Token = "SERIAL_DEV_INFO_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SERIAL_DBG2_ACCESS_SIZE"
+    Value  = "0"
+    Help  = "UART BLK Register Bit Offset (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "value range depends on other GAS_30 elements"
+    Token = "SERIAL_DEV_INFO_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "EHCI_DEV_INFO_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable EHCI Device Information in Project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "EHCI_GENERIC_ADDR_SIZE"
+    Value  = "32"
+    Help  = "Set the value of EHCI Debug Device Information AddressSize."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "EHCI_NUM_OF_GENERIC_ADDR_REG"
+    Value  = "1"
+    Help  = "Set the value of NumberOfGenericAddressRegisters."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "EHCI_SEG_BUS_DEV_FUN"
+    Value  = "{0x00, 0x00, 0x1D, 0x00}"
+    Help = "Set the value of EHCI Segment Bus Device Function"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "EHCI_USB_NAME_SPACE"
+    Value  = '"."'
+    Help = "Set the value of EHCI Usb Name Space"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "EHCIPORT0_DBG2_ADDR_SPC_ID"
+    Value  = "0"
+    Help  = "EHCI BLK Register Id (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+    Name  = "EHCIPORT0_DBG2_ADDR_BIT_WIDTH"
+    Value  = "8"
+    Help  = "EHCI BLK Register Bit Width (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "value range depends on other GAS_30 elements"
+End
+
+TOKEN
+    Name  = "EHCIPORT0_DBG2_ADDR_BIT_OFFSET"
+    Value  = "0"
+    Help  = "EHCI BLK Register Bit Offset (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "value range depends on other GAS_30 elements"
+End
+
+TOKEN
+    Name  = "EHCIPORT0_DBG2_ACCESS_SIZE"
+    Value  = "0"
+    Help  = "EHCI BLK Register Bit Offset (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "value range depends on other GAS_30 elements"
+End
+
+TOKEN
+    Name  = "XHCI_DEV_INFO_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable XHCI Device Information in Project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "XHCI_GENERIC_ADDR_SIZE"
+    Value  = "12"
+    Help  = "Set the value of XHCI Debug Device Information AddressSize."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "XHCI_NUM_OF_GENERIC_ADDR_REG"
+    Value  = "1"
+    Help  = "Set the value of NumberOfGenericAddressRegisters."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "XHCI_SEG_BUS_DEV_FUN"
+    Value  = "{0x00, 0x00, 0x14, 0x00}"
+    Help = "Set the value of XHCI Segment Bus Device Function"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "XHCI_USB_NAME_SPACE"
+    Value  = '"."'
+    Help = "Set the value of XHCI Usb Name Space"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "XHCIPORT0_DBG2_ADDR_SPC_ID"
+    Value  = "0"
+    Help  = "XHCI BLK Register Id (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0=System memory; 1=System I/O; 2=PCI Config Space; 3=Embeded Controller; 4=SMBus; 0x7F=Functional Fixed Hardware; All other values reserved"
+End
+
+TOKEN
+    Name  = "XHCIPORT0_DBG2_ADDR_BIT_WIDTH"
+    Value  = "8"
+    Help  = "XHCI BLK Register Bit Width (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "value range depends on other GAS_30 elements"
+End
+
+TOKEN
+    Name  = "XHCIPORT0_DBG2_ADDR_BIT_OFFSET"
+    Value  = "0"
+    Help  = "XHCI BLK Register Bit Offset (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "value range depends on other GAS_30 elements"
+End
+
+TOKEN
+    Name  = "XHCIPORT0_DBG2_ACCESS_SIZE"
+    Value  = "0"
+    Help  = "XHCI BLK Register Bit Offset (Part of GAS_30 Structure, refer to ACPI v5.0 spec for details)"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "value range depends on other GAS_30 elements"
+End
+
+TOKEN
+    Name  = "DBG_ACPI_OEM_ID"
+    Value  = '"ALASKA"'
+    Help  = "ACPI OEM Id -\a string value to be filled into ACPI table headers"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "1-6 characters"
+End
+
+TOKEN
+    Name  = "DBG_ACPI_OEM_TBL_ID"
+    Value  = '"A M I "'
+    Help  = "ACPI OEM Id -\a string value to be filled into ACPI table headers"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "1-8 characters"
+End
+
+TOKEN
+    Name  = "DBG_ACPI_OEM_ID"
+    Value  = '"ALASKA"'
+    Help  = "ACPI OEM Id -\a string value to be filled into ACPI table headers"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "1-6 characters"
+    Token = "ACPI_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "DBG_ACPI_OEM_TBL_ID"
+    Value  = '"A M I "'
+    Help  = "ACPI OEM Id -\a string value to be filled into ACPI table headers"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "1-8 characters"
+    Token = "ACPI_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "DBG_ACPI_OEM_ID"
+    Value  = '"$(T_ACPI_OEM_ID)"'
+    Help  = "ACPI OEM Id -\a string value to be filled into ACPI table headers"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "1-6 characters"
+    Token = "ACPI_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "DBG_ACPI_OEM_TBL_ID"
+    Value  = '"$(T_ACPI_OEM_TBL_ID)"'
+    Help  = "ACPI OEM Id -\a string value to be filled into ACPI table headers"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "1-8 characters"
+    Token = "ACPI_SUPPORT" "=" "1"
+End
+

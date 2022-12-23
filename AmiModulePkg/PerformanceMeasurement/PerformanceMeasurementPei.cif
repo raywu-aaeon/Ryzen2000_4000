@@ -1,0 +1,10 @@
+<component>
+	name = "PerformanceMeasurementPei"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\PerformanceMeasurement\"
+	RefName = "AmiModulePkg.PerformanceMeasurementPei"
+[INF]
+"PerformanceMeasurementPei.inf"
+[files]
+"PerformanceMeasurementPei.sdl"	
+<endComponent>

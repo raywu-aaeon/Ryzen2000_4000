@@ -1,0 +1,19 @@
+<component>
+	name = "Ras"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Ras\"
+	RefName = "AgesaModulePkg.Ras"
+[INF]
+"AmdRasBrApeiDxe\AmdRasBrApeiDxe.inf"
+"AmdRasRvApeiDxe\AmdRasRvApeiDxe.inf"
+"AmdRasRvDxe\AmdRasRvDxe.inf"
+"AmdRasRvSmm\AmdRasRvSmm.inf"
+"AmdRasSspApeiDxe\AmdRasSspApeiDxe.inf"
+"AmdRasSspDxe\AmdRasSspDxe.inf"
+"AmdRasSspSmm\AmdRasSspSmm.inf"
+"AmdRasZpApeiDxe\AmdRasZpApeiDxe.inf"
+"AmdRasZpDxe\AmdRasZpDxe.inf"
+"AmdRasZpSmm\AmdRasZpSmm.inf"
+[files]
+"Ras.sdl"
+<endComponent>

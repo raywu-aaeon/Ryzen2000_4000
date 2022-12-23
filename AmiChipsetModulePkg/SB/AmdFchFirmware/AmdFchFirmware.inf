@@ -1,0 +1,16 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdFchFirmware
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 1.0
+  FILE_GUID                      = DB19CF1F-0B69-460b-98D8-08628073E241
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+
+[Sources]
+  AmdFchFirmware.cbin

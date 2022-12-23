@@ -1,0 +1,98 @@
+TOKEN
+	Name  = "AMD_UNIVERSAL_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Universal support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AMD_ACPI_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdAcpiDxe support in Project"
+	TokenType = Boolean
+End
+
+#TOKEN
+#	Name  = "AMD_UNIVERSAL_MEMORY_HOB_INFO_PEIM_SUPPORT"
+#	Value  = "0"
+#	Help  = "Main switch to enable AmdMemoryHobInfoPeim support in Project"
+#	TokenType = Boolean
+#End
+
+TOKEN
+	Name  = "AMD_SMM_COMMUNICATION_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdSmmCommunication support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_SMBIOS_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdSmbiosDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_VERSION_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdVersionDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_VERSION_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdVersionPei support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdAcpiDxe"
+	File  = "Acpi\AmdAcpiDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_ACPI_DXE_SUPPORT" "=" "1"
+End
+
+#INFComponent
+#	Name  = "AmdMemoryHobInfoPeim"
+#	File  = "AmdMemoryHobInfoPeim\AmdMemoryHobInfoPeim.inf"
+#	Package  = "AgesaModulePkg"
+#	ModuleTypes  = "PEIM"
+#	Token = "AMD_UNIVERSAL_MEMORY_HOB_INFO_PEIM_SUPPORT" "=" "1"
+#End
+
+INFComponent
+	Name  = "AmdSmmCommunication"
+	File  = "AmdSmmCommunication\AmdSmmCommunication.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AMD_SMM_COMMUNICATION_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdSmbiosDxe"
+	File  = "Smbios\AmdSmbiosDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_SMBIOS_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdVersionDxe"
+	File  = "Version\AmdVersionDxe\AmdVersionDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_VERSION_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdVersionPei"
+	File  = "Version\AmdVersionPei\AmdVersionPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_VERSION_PEI_SUPPORT" "=" "1"
+End
+

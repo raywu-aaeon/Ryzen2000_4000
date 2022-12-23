@@ -1,0 +1,17 @@
+TOKEN
+    Name  = "AmiSerialUart1_SUPPORT"
+    Value  = "1"
+    Help  = "Serial Protocol"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+INFComponent
+    Name  = "AmiSerialUart1"
+    File  = "AmiSerialUart1.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End

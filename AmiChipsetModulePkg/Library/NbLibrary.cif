@@ -1,0 +1,12 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Library\"
+	RefName = "AmiChipsetModulePkg.NbLibrary"
+[INF]
+"NbGetSetupData\NbPeiGetSetupData.inf"
+"NbGetSetupData\NbGetSetupData.inf"
+"AmiShadowLib\AmiShadowLib.inf"
+[parts]
+"AmiChipsetModulePkg.AmiNbCspLib"
+<endComponent>

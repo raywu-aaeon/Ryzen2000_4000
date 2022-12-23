@@ -1,0 +1,141 @@
+TOKEN
+	Name  = "AgesaPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AgesaPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "AGESA_PKG_VERSION"
+    Value  = "8"
+    Help  = "The current module version for version check. Should be updated on each official Release of AgesaPkg."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "Build_AgesaPkg"
+	Value  = "0"
+	Help  = "Switch for building AgesaPkg Package"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PLATFORM_NAME"
+	Value  = "AgesaPkg"
+	TokenType = Expression
+	TargetDSC = Yes
+	Token = "Build_AgesaPkg" "=" "1"
+End
+
+TOKEN
+    Name  = "AMD_AGESA_PI_STR"
+    Value  = "PicassoPI-FP5 1.0.0.3"
+    TokenType = Expression
+    Help  = "The string of current PI"
+End
+
+PcdMapping
+     Name  = "PcdAmdPackageString"
+     GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+     PcdType  = "PcdsFixedAtBuild"
+     DataType  = "Pointer"
+     Value  = '"AGESA!V9\0$(AMD_AGESA_PI_STR)"'
+     Length  = 023h
+     TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdAcpiCpuSsdtProcessorScopeName0"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT8"
+    Value  = "0x50"
+    Help  = "ASL match Cpu1N.asl"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "BOOLEAN"
+    Value  = "FALSE"
+    Help  = "This is to enable/disable the AGESA debug message."
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintFilter"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT64"
+    Value  = "0x100401008A30040C"
+    Help  = "AGESA debug message filter. Please refer to IdsLib.h for filter detail"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPortEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "BOOLEAN"
+    Value  = "FALSE"
+    Help  = "AGESA debug message through serial port."
+    TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdAmdCStateMode"
+	GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint8"
+	Value  = "0x01"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdAmdCStateIoBaseAddress"
+	GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint16"
+	Value  = "0x413"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdTelemetry_VddcrVddfull_Scale_Current"
+	GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint32"
+	Value  = "0x00000000"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdTelemetry_VddcrVddOffset"
+	GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint32"
+	Value  = "0x00000000"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdTelemetry_VddcrSocfull_Scale_Current"
+	GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint32"
+	Value  = "0x00000000"
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdTelemetry_VddcrSocOffset"
+	GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint32"
+	Value  = "0x00000000"
+	TargetDSC = Yes
+End

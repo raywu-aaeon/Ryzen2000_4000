@@ -1,0 +1,17 @@
+TOKEN
+  Name      = "AmdSnpDxe_SUPPORT"
+  Value     = "1"
+  Help      = "Main switch to enable SnpDxe support in Project"
+  TokenType = Boolean
+  TargetEQU = Yes
+  TargetMAK = Yes
+  Master = Yes
+End
+
+INFComponent
+  Name        = "SnpDxePort"
+  File        = "SnpDxePort.inf"
+  Package     = "AgesaModulePkg"
+  ModuleTypes = "UEFI_DRIVER"
+  Token = "AmdSnpDxe_SUPPORT" "=" "1"
+End

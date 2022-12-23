@@ -1,0 +1,69 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiPspFtpmBdsLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiPspFtpmBdsLib
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmiPspPkg/AmiPspPkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+  
+[LibraryClasses]
+  DebugLib
+  BaseLib
+  PcdLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  HobLib
+  UefiLib
+
+[Protocols]
+  gEfiSmmCommunicationProtocolGuid
+  gAmiPostManagerProtocolGuid
+
+[Ppis]
+
+[Guids]
+  gAmiPspFtpmSmmCommunicationGuid
+
+[Pcd]
+  gAmiPspPkgTokenSpaceGuid.PcdFtpmSmmCommunicateBuffer
+  gAmiPspPkgTokenSpaceGuid.PcdFtpmSmmCommunicateBufferSize
+
+[Sources]
+  AmiPspFtpmBdsLib.c
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

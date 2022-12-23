@@ -1,0 +1,21 @@
+
+[Defines]
+	INF_VERSION                     = 0x00010005
+	BASE_NAME                       = AmiFchInitHookPeiLibNull
+    FILE_GUID                       = D8FB3951-67D0-49b0-AC45-1C9F5D82C5FF
+    MODULE_TYPE                     = PEIM
+	LIBRARY_CLASS                   = AmiFchInitHookLib
+
+[Sources]
+    AmiFchInitHookPeiLib.c
+    
+[Packages]
+    MdePkg/MdePkg.dec
+    
+[LibraryClasses]
+    
+[Protocols]
+    
+[Depex]
+    
+[BuildOptions]

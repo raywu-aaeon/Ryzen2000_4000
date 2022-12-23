@@ -1,0 +1,2018 @@
+/*****************************************************************************
+ *
+ * Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+//
+//  Set Post Code to Port 80
+//  Arg0 - Post Code
+//
+Method (CpmSetPostCode, 1, Serialized) {
+    Name (CpmPostCodeBuffer, Buffer (4) {0, 3, 0x80, 0})
+    CreateByteField (CpmPostCodeBuffer, 0, CpmTestPointEnable)  // PcdAgesaTestPointEnable
+    CreateByteField (CpmPostCodeBuffer, 1, CpmTestPointWidth)   // PcdAgesaTestPointWidth
+    CreateWordField (CpmPostCodeBuffer, 2, CpmDebugPort)        // PcdIdsDebugPort
+    If (LEqual (ToInteger(CpmTestPointEnable), 1)) {
+        Store (Add (Arg0, CpmTpBaseValue), Local0)
+        Store (ToInteger(CpmDebugPort), Local1)
+        If (LEqual (ToInteger(CpmTestPointWidth), 3)) {
+            OperationRegion(varM, SystemIO, Local1, 0x4)
+            Field(varM, DWordAcc, NoLock, Preserve) {
+                varR, 32
+            }
+            Store (Local0, varR)
+        } ElseIf (LEqual (ToInteger(CpmTestPointWidth), 2)) {
+            OperationRegion(varN, SystemIO, Local1, 0x2)
+            Field(varN, WordAcc, NoLock, Preserve) {
+                varS, 16
+            }
+            Store (And (Local0, 0xFFFF), varS)
+        } ElseIf (LEqual (ToInteger(CpmTestPointWidth), 1)) {
+            OperationRegion(varO, SystemIO, Local1, 0x1)
+            Field(varO, ByteAcc, NoLock, Preserve) {
+                varT, 8
+            }
+            Store (And (Local0, 0xFF), varT)
+        }
+    }
+}
+
+//
+//  Read PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//
+Method (CpmReadPci32, 4, Serialized) {
+    Return ( CpmReadPci (Arg0, Arg1, Arg2, Arg3, 0,32) )
+}
+
+//
+//  Write PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//  Arg4 - Value
+//
+Method (CpmWritePci32, 5, Serialized)
+{
+    CpmWritePci (Arg0, Arg1, Arg2, Arg3, 0, 32, Arg4)
+}
+
+//
+//  Read SMN register
+//  Arg0 - Socket Number
+//  Arg1 - Die Number
+//  Arg2 - Bridge Number
+//  Arg3 - Smn Register
+//
+Mutex(CpmRwSmnMutex, 0)
+
+Method (CpmReadSmnRegister, 4, Serialized)
+{
+    If (LEqual (Add (Add (Arg0, Arg1), Arg2), 0)) {
+        Store (0, Local0)
+    } Else {
+        Store (CpmGetMultiDieBusNumber (Arg0, Arg1, Arg2), Local0)
+    }
+    If (LEqual (Local0, 0xFFFFFFFF)) {
+        Return (0xFFFFFFFF)
+    }
+    Add (CpmPcieMmioBaseAddr, ShiftLeft (Local0, 20), Local0)
+    Add (0xB8, Local0, Local0)
+    Acquire (CpmRwSmnMutex, 0xFFFF)
+    OperationRegion(varM, SystemMemory, Local0, 0x8)
+        Field(varM, DWordAcc, NoLock, Preserve) {
+            Offset (0x0),
+            var1, 32,
+        }
+        BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+            Offset (0x4),
+            var2, 32,
+        }
+    Store(var1, Local1)
+    Store(var2, Local2)
+    Store(Local1, var1)
+    Release (CpmRwSmnMutex)
+    Return (Local2)
+}
+
+//
+//  Write SMN register
+//  Arg0 - Socket Number
+//  Arg1 - Die Number
+//  Arg2 - Bridge Number
+//  Arg3 - Smn Register
+//  Arg4 - Write Data
+//
+
+Method (CpmWriteSmnRegister, 5, Serialized)
+{
+    If (LEqual (Add (Add (Arg0, Arg1), Arg2), 0)) {
+        Store (0, Local0)
+    } Else {
+        Store (CpmGetMultiDieBusNumber (Arg0, Arg1, Arg2), Local0)
+    }
+    If (LNotEqual (Local0, 0xFFFFFFFF)) {
+        Add (CpmPcieMmioBaseAddr, ShiftLeft (Local0, 20), Local0)
+        Add (0xB8, Local0, Local0)
+        Acquire (CpmRwSmnMutex, 0xFFFF)
+        OperationRegion(varM, SystemMemory, Local0, 0x8)
+            Field(varM, DWordAcc, NoLock, Preserve) {
+                Offset (0x0),
+                var1, 32,
+            }
+            BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+                Offset (0x4),
+                var2, 32,
+            }
+        Store(var1, Local1)
+        Store(Arg4, var2)
+        Store(Local1, var1)
+        Release (CpmRwSmnMutex)
+    }
+}
+
+//
+//  Read PCIE P2P Indirect PCIE register in this PCIE P2P
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register index
+//
+
+Method (CpmReadPcieRegister, 4, Serialized)
+{
+    Add (CpmPcieMmioBaseAddr, ShiftLeft (Arg0, 20), Local0)
+    Add (Local0, ShiftLeft (Arg1, 15), Local0)
+    Add (Local0, ShiftLeft (Arg2, 12), Local0)
+    Add (0xE0, Local0, Local0)
+    OperationRegion(varM, SystemMemory, Local0, 0x8)
+        Field(varM, DWordAcc, NoLock, Preserve) {
+            Offset (0x0),
+            var1, 32,
+        }
+        BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+            Offset (0x4),
+            var2, 32,
+        }
+    Store(var2, Local0)
+    Return(Local0)
+}
+
+//
+//  Write PCIE P2P Indirect PCIE register in this PCIE P2P
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register index
+//  Arg4 - Value
+//
+Method (CpmWritePcieRegister, 5, Serialized)
+{
+    Add (CpmPcieMmioBaseAddr, ShiftLeft (Arg0, 20), Local0)
+    Add (Local0, ShiftLeft (Arg1, 15), Local0)
+    Add (Local0, ShiftLeft (Arg2, 12), Local0)
+    Add (0xE0, Local0, Local0)
+    OperationRegion(varM, SystemMemory, Local0, 0x8)
+        Field(varM, DWordAcc, NoLock, Preserve) {
+            Offset (0x0),
+            var1, 32,
+        }
+        BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+            Offset (0x4),
+            var2, 32,
+        }
+    Store(Arg4, var2)
+}
+
+//
+//  Clear presence detect change bit
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//
+Method (CpmClearPresenceDetectChangeBit, 3, Serialized)
+{
+    CpmWritePci (Arg0, Arg1, Arg2, 0x70, 3, 1, 0)
+    CpmWritePci (Arg0, Arg1, Arg2, 0x70, 19, 1, 1)
+}
+
+//
+//  Check virtual channel negotiation pending. Test PCIE P2P Data Link Negotiation bit, return Ones if bit=1, Zero if bit=0
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//
+Method (CpmCheckVirtualChannelNegotiationPending, 3, Serialized)
+{
+    Store (CpmReadPci32 (Arg0, Arg1, Arg2, 0x128), Local0)
+    If(And(Local0, 0x00020000))
+    {
+        Return(Ones)
+    }
+    Else
+    {
+        Return(Zero)
+    }
+}
+
+//
+//  Retraining Link: PCIE Port specific re-training using PCIE_LC_LINK_WIDTH_CNTL
+//  Retraining in this fashion takes the Link completely down and clears PCIE registers
+//  on both sides of the link as specified by PCIE spec. set b[2:0] = b[6:4] and b[8]=1
+//  of PCIEIND_P register 0xA2
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//
+Method(CpmReconfigPcieLink, 3, Serialized)
+{
+    Store (CpmReadPcieRegister (Arg0, Arg1, Arg2, 0xA2), Local0)
+    And(Local0, Not(0x07), Local0)
+    ShiftRight(Local0, 4, Local1)           // move b[6:4] to b[2:0]
+    And(Local1, 0x07, Local1)               // clear all except b[2:0]
+    Or(Local0, Local1, Local0)
+    Or(Local0, 0x100, Local0)
+    CpmWritePcieRegister (Arg0, Arg1, Arg2, 0xA2, Local0)
+}
+
+//
+//  Retrain this PCIE P2P's Link using PCIE specification defined LinkControl register.
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//
+Method (CpmRetrainPcieLink, 3, Serialized)
+{
+    Store (CpmReadPci32 (Arg0, Arg1, Arg2, 0x68), Local0)
+    And(Local0, Not(0x20), Local0)                  // RetrainLink = 0
+    CpmWritePci32 (Arg0, Arg1, Arg2, 0x68, Local0)
+    Or(Local0, 0x20, Local0)
+    CpmWritePci32 (Arg0, Arg1, Arg2, 0x68, Local0)  // RetrainLink = 1
+    Store(0x64, Local1)
+    Store(0x01, Local2)
+    While(LAnd(Local1, Local2))                     // LinkTraining = 0 or >64ms
+    {
+        Sleep(1)
+        Store (CpmReadPci32 (Arg0, Arg1, Arg2, 0x68), Local3)
+        If(And(Local3, 0x08000000))
+        {
+            Decrement(Local1)
+        }
+        Else
+        {
+            Store(0, Local2)
+        }
+    }
+    And(Local0, Not(0x20), Local0)
+    CpmWritePci32 (Arg0, Arg1, Arg2, 0x68, Local0)  // RetrainLink = 0
+    If(LNot(Local2))
+    {
+        Return(Ones)                                // if LinkTraining = 0
+    }
+    Else
+    {
+        Return(Zero)                                // if LinkTraining = 1
+    }
+}
+
+//
+//  Read GPIO pin Status
+//  Arg0 - Pin Number
+//
+Method(CpmReadGpio, 1, Serialized)
+{
+    ShiftRight (Arg0, 8, Local0)
+    And (Arg0, 0xFF, Local1)
+    Store (0, Local2)
+    If (LEqual (Local0, 0)) {
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ML)) {
+            Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (Local1, 4), 0, 1), Local2)
+        } Else {
+            Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x100), Local1, 7, 1), Local2)
+        }
+    } Elseif (LEqual(Local0, 1)) {
+        Store(CpmKbcReadGpio (Local1), Local2)
+    } Elseif (LEqual(Local0, 2)) {
+        Store(CpmKbcReadGpio (Add (Local1, 8)), Local2)
+    }
+    return (Local2)
+}
+
+//
+//  Set GPIO pin
+//  Arg0 - Pin Number
+//  Arg1 - GPIO level: 0: Low. 1: High
+//
+Method(CpmWriteGpio, 2, Serialized)
+{
+    ShiftRight (Arg0, 8, Local0)
+    And (Arg0, 0xFF, Local1)
+    If (LEqual (Local0, 0)) {
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ML)) {
+            CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (Local1, 4), 6, 2, Or(2, Arg1))
+        } Else {
+            CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x100), Local1, 6, 1, Arg1)
+            CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x100), Local1, 5, 1, 0)
+        }
+    } ElseIf (LEqual (Local0, 1)) {
+        CpmKbcWriteGpio (Local1, Arg1)
+    } ElseIf (LEqual (Local0, 2)) {
+        CpmKbcWriteGpio (Add (Local1, 8), Arg1)
+    }
+}
+
+//
+//  Read GEVENT pin Status
+//  Arg0 - Pin Number
+//
+Name (CpmGeventGpioMappingTable, Buffer (23){
+  0x7E,         // GEVENT0 => GPIO126
+  0x81,         // GEVENT1 => GPIO129
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x15,         // GEVENT5 => GPIO21
+  0x0E,         // GEVENT6 => GPIO14
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x20,         // GEVENT9 => GPIO32
+  0x06,         // GEVENT10 => GPIO6
+  0x07,         // GEVENT11 => GPIO7
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x12,         // GEVENT14 => GPIO18
+  0x18,         // GEVENT15 => GPIO24
+  0x17,         // GEVENT16 => GPIO23
+  0x19,         // GEVENT17 => GPIO25
+  0x0B,         // GEVENT18 => GPIO11
+  0x01,         // GEVENT19 => GPIO1
+  0x0F,         // GEVENT20 => GPIO15
+  0x0D,         // GEVENT21 => GPIO13
+  0x09          // GEVENT22 => GPIO9
+})
+
+Name (CpmGeventGpioMappingTable2, Buffer (24) {
+  0x41,         // GEVENT0 => GPIO65
+  0x42,         // GEVENT1 => GPIO66
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x15,         // GEVENT5 => GPIO21
+  0x0E,         // GEVENT6 => GPIO14
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x44,         // GEVENT9 => GPIO68
+  0x06,         // GEVENT10 => GPIO6
+  0x07,         // GEVENT11 => GPIO7
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x12,         // GEVENT14 => GPIO18
+  0x18,         // GEVENT15 => GPIO24
+  0x17,         // GEVENT16 => GPIO23
+  0x45,         // GEVENT17 => GPIO69
+  0x0B,         // GEVENT18 => GPIO11
+  0x01,         // GEVENT19 => GPIO1
+  0x0F,         // GEVENT20 => GPIO15
+  0x0D,         // GEVENT21 => GPIO13
+  0x09,         // GEVENT22 => GPIO9
+  0x08          // GEVENT23 => GPIO8
+})
+
+Name (CpmGeventGpioMappingTableZP, Buffer (24) {
+  0x59,         // GEVENT0 => GPIO89
+  0x5A,         // GEVENT1 => GPIO90
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x15,         // GEVENT5 => GPIO21
+  0x5B,         // GEVENT6 => GPIO91
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x56,         // GEVENT9 => GPIO86
+  0x06,         // GEVENT10 => GPIO6
+  0x4C,         // GEVENT11 => GPIO7      // ZP & SSP & MTS = GPIO76
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x12,         // GEVENT14 => GPIO18
+  0x18,         // GEVENT15 => GPIO24
+  0x17,         // GEVENT16 => GPIO23
+  0x81,         // GEVENT17 => GPIO129
+  0x54,         // GEVENT18 => GPIO84
+  0x01,         // GEVENT19 => GPIO1
+  0x28,         // GEVENT20 => GPIO40
+  0x00,         // GEVENT21 => GPIO0
+  0x09,         // GEVENT22 => GPIO9
+  0x08          // GEVENT23 => GPIO8
+})
+
+Name (CpmGeventGpioMappingTableRV, Buffer (24) {
+  0x59,         // GEVENT0 => GPIO89
+  0x5A,         // GEVENT1 => GPIO90
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x15,         // GEVENT5 => GPIO21
+  0x5B,         // GEVENT6 => GPIO91
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x56,         // GEVENT9 => GPIO86
+  0x06,         // GEVENT10 => GPIO6
+  0x07,         // GEVENT11 => GPIO7
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x12,         // GEVENT14 => GPIO18
+  0x18,         // GEVENT15 => GPIO24
+  0x17,         // GEVENT16 => GPIO23
+  0x81,         // GEVENT17 => GPIO129
+  0x54,         // GEVENT18 => GPIO84
+  0x01,         // GEVENT19 => GPIO1
+  0x28,         // GEVENT20 => GPIO40
+  0x00,         // GEVENT21 => GPIO0
+  0x09,         // GEVENT22 => GPIO9
+  0x08          // GEVENT23 => GPIO8
+})
+
+Method(CpmReadGevent, 1, Serialized)
+{
+    If (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ML)) {
+        return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf(Index(CpmGeventGpioMappingTable, Arg0)), 4), 0, 1))
+    } Else {
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RV)) {
+            If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP)) {
+                return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf(Index(CpmGeventGpioMappingTableZP, Arg0)), 4), 0, 1))
+            } Else {
+                return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf(Index(CpmGeventGpioMappingTableRV, Arg0)), 4), 0, 1))
+            }
+        } Else {
+            If (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP)) {
+                return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf(Index(CpmGeventGpioMappingTableZP, Arg0)), 4), 0, 1))
+            } Else {
+                If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_CZ)) {
+                    return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf(Index(CpmGeventGpioMappingTable2, Arg0)), 4), 0, 1))
+                } Else {
+                    return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x160), Arg0, 7, 1))
+                }
+            }
+        }
+    }
+}
+
+//
+//  Get GEVENT Trigger Type: 0: Active Low. 1: Active High
+//  Arg0 - Pin Number
+//
+Method(CpmReadGeventTriggerType, 1, Serialized)
+{
+    Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x240), Arg0, 0, 5), Local0)
+    return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x208), Divide (Local0, 0x08), And (Local0, 0x07), 1))
+}
+
+//
+//  Set GEVENT Trigger Type
+//  Arg0 - Pin Number
+//  Arg1 - Trigger Type: 0: Active Low. 1: Active High
+//
+Method(CpmWriteGeventTriggerType, 2, Serialized)
+{
+    Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x240), Arg0, 0, 5), Local0)
+    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x208), Divide (Local0, 0x08), And (Local0, 0x07), 1, Arg1)
+}
+
+//
+//  Read Memory
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Start Bit
+//  Arg3 - Bit Width
+//
+Method(CpmReadMem32, 4, Serialized)
+{
+    Add (Arg0, Arg1, Local0)
+    OperationRegion(varM, SystemMemory, Local0, 0x4)
+        Field(varM, DWordAcc, NoLock, Preserve) {
+            varR, 32,
+        }
+    Store(varR, Local1)
+    Store(0x7FFFFFFF, Local5)
+    Or(Local5, 0x80000000, Local5)
+    And(ShiftRight(Local1, Arg2), ShiftRight(Local5, Subtract(32, Arg3)), Local2)
+    return (Local2)
+}
+
+//
+//  Write Memory
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Start Bit
+//  Arg3 - Bit Width
+//  Arg4 - Value
+//
+Method(CpmWriteMem32, 5, Serialized)
+{
+    Add (Arg0, Arg1, Local0)
+    OperationRegion(varM, SystemMemory, Local0, 0x4)
+        Field(varM, DWordAcc, NoLock, Preserve) {
+            varR, 32,
+        }
+    Store(varR, Local1)
+
+    Store(0x7FFFFFFF, Local5)
+    Or(Local5, 0x80000000, Local5)
+    Add (Arg2, Arg3, Local2)
+    Subtract (32, Local2, Local2)
+    ShiftRight ( And (ShiftLeft (Local5, Local2), Local5), Local2, Local2)
+    ShiftLeft ( ShiftRight (Local2, Arg2), Arg2, Local2)
+    ShiftLeft ( Arg4, Arg2, Local3 )
+    Or ( And ( Local1, Xor (Local5, Local2) ), Local3, Local4)
+    Store(Local4, varR)
+}
+
+//
+//  Read Memory in Byte
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Start Bit
+//  Arg3 - Bit Width
+//
+Method(CpmReadMem8, 4, Serialized)
+{
+    Add (Arg0, Arg1, Local0)
+    OperationRegion(varM, SystemMemory, Local0, 0x1)
+        Field(varM, ByteAcc, NoLock, Preserve) {
+            varR, 8,
+        }
+    Store(varR, Local1)
+    And(ShiftRight(Local1, Arg2), ShiftRight(0xFF, Subtract(8, Arg3)), Local2)
+    return (Local2)
+}
+
+//
+//  Write Memory in Byte
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Start Bit
+//  Arg3 - Bit Width
+//  Arg4 - Value
+//
+Method(CpmWriteMem8, 5, Serialized)
+{
+    Add (Arg0, Arg1, Local0)
+    OperationRegion(varM, SystemMemory, Local0, 0x1)
+        Field(varM, ByteAcc, NoLock, Preserve) {
+            varR, 8,
+        }
+    Store(varR, Local1)
+
+    Add (Arg2, Arg3, Local2)
+    Subtract (8, Local2, Local2)
+    ShiftRight ( And (ShiftLeft (0xFF, Local2), 0xFF), Local2, Local2)
+    ShiftLeft ( ShiftRight (Local2, Arg2), Arg2, Local2)
+    ShiftLeft ( Arg4, Arg2, Local3 )
+    Or ( And ( Local1, Xor (0xFF, Local2) ), Local3, Local4)
+    Store(Local4, varR)
+}
+
+//
+//  Read PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//  Arg4 - Start Bit
+//  Arg5 - Bit Width
+//
+Method (CpmReadPci, 6, Serialized) {
+    Store(CpmPcieMmioBaseAddr, Local0)
+    ShiftRight (CpmPcieMmioBaseAddr, 20, Local1)
+    And (Local1, 0xF00, Local2)
+    Add (Local2, 0x100, Local2)
+    If (LGreaterEqual (Add (Local1, Arg0), Local2)) {
+      Store(0x7FFFFFFF, Local3)
+      Or(Local3, 0x80000000, Local3)
+      And(ShiftRight(Local3, Arg4), ShiftRight(Local3, Subtract(32, Arg5)), Local4)
+      return (Local4)
+    }
+    Add ( ShiftLeft (Arg0, 20), Local0, Local0)
+    Add ( ShiftLeft (Arg1, 15), Local0, Local0)
+    Add ( ShiftLeft (Arg2, 12), Local0, Local0)
+    return ( CpmReadMem32 ( Local0, Arg3, Arg4, Arg5 ) )
+}
+
+//
+//  Write PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//  Arg4 - Start Bit
+//  Arg5 - Bit Width
+//  Arg6 - Value
+//
+Method (CpmWritePci, 7, Serialized)
+{
+    Store(CpmPcieMmioBaseAddr, Local0)
+    ShiftRight (CpmPcieMmioBaseAddr, 20, Local1)
+    And (Local1, 0xF00, Local2)
+    Add (Local2, 0x100, Local2)
+    If (LLess (Add (Local1, Arg0), Local2)) {
+      Add ( ShiftLeft (Arg0, 20), Local0, Local0)
+      Add ( ShiftLeft (Arg1, 15), Local0, Local0)
+      Add ( ShiftLeft (Arg2, 12), Local0, Local0)
+      // Check PCI device is present or not.
+      If (LNotEqual(CpmReadMem32 ( Local0, 0, 0, 32 ), 0xFFFFFFFF)) {
+        CpmWriteMem32 ( Local0, Arg3, Arg4, Arg5, Arg6 )
+      }
+    }
+}
+
+//
+//  Get Clock PM Capability of PCI Device
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+Method (CpmGetPcieClockPmCapability, 3, Serialized)
+{
+    Store (0, Local0)
+    Store (CpmReadPci (Arg0, Arg1, Arg2, 0x34, 0, 8), Local1)
+    While (LNotEqual (Local1, 0))
+    {
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Local1, 0, 8), Local2)
+        If (LOr(LEqual(Local2, 0x00), LEqual(Local2, 0xFF)))
+        {
+            break
+        }
+        If (LEqual(Local2, 0x10))
+        {
+            Store (CpmReadPci (Arg0, Arg1, Arg2, Add(Local1,0x0C), 18, 1), Local3)
+            Store (CpmReadPci (Arg0, Arg1, Arg2, Add(Local1,0x10), 8, 1), Local4)
+            If (LAnd(LEqual(Local3, 1), LEqual(Local4, 1)))
+            {
+                Store (1, Local0)
+            }
+            break
+        }
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Add(Local1,1), 0, 8), Local1)
+    }
+    return (Local0)
+}
+
+//
+//  Get PM Capability of PCI Device
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+Method (CpmGetPciePmCapability, 3, Serialized)
+{
+    Store (0, Local0)
+    Store (CpmReadPci (Arg0, Arg1, Arg2, 0x34, 0, 8), Local1)
+    While (LNotEqual (Local1, 0))
+    {
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Local1, 0, 8), Local2)
+        If (LOr(LEqual(Local2, 0x00), LEqual(Local2, 0xFF)))
+        {
+            break
+        }
+        If (LEqual(Local2, 0x10))
+        {
+            Store (CpmReadPci (Arg0, Arg1, Arg2, Add(Local1,0x0C), 10, 2), Local0)
+            break
+        }
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Add(Local1,1), 0, 8), Local1)
+    }
+    return (Local0)
+}
+
+//
+//  Get PmControl of PCI Device
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+Method (CpmGetPcieAspm, 3, Serialized)
+{
+    Store (0, Local0)
+    Store (CpmReadPci (Arg0, Arg1, Arg2, 0x34, 0, 8), Local1)
+    While (LNotEqual (Local1, 0))
+    {
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Local1, 0, 8), Local2)
+        If (LOr(LEqual(Local2, 0x00), LEqual(Local2, 0xFF)))
+        {
+            break
+        }
+        If (LEqual(Local2, 0x10))
+        {
+            Store (CpmReadPci (Arg0, Arg1, Arg2, Add(Local1,0x10), 0, 2), Local0)
+            break
+        }
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Add(Local1,1), 0, 8), Local1)
+    }
+
+    return (Local0)
+}
+
+//
+//  Set PmControl of PCI Device
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Value of PmControl
+Method (CpmSetPcieAspm, 4, Serialized)
+{
+    Store (CpmReadPci (Arg0, Arg1, Arg2, 0x34, 0, 8), Local1)
+    While (LAnd (LNotEqual (Local1, 0), LLess (Local1, 0xFF)))
+    {
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Local1, 0, 8), Local2)
+        If (LOr(LEqual(Local2, 0x00), LEqual(Local2, 0xFF)))
+        {
+            break
+        }
+        If (LEqual(Local2, 0x10))
+        {
+            CpmWritePci (Arg0, Arg1, Arg2, Add(Local1,0x10), 0, 2, Arg3)
+            break
+        }
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Add(Local1,1), 0, 8), Local1)
+    }
+}
+
+//
+//  Read RTC Register
+//  Arg0 - Offset
+//
+Method(CpmReadRtc, 1, Serialized)
+{
+    return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x700), Arg0, 0, 8))
+}
+
+//
+//  Read PM2 Register
+//  Arg0 - Offset
+//
+Method(CpmReadPm2, 1, Serialized)
+{
+    return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x400), Arg0, 0, 8))
+}
+
+//
+//  Write PM2 Register
+//  Arg0 - Offset
+//  Arg1 - Value
+//
+Method(CpmWritePm2, 2, Serialized)
+{
+    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x400), Arg0, 0, 8, Arg1)
+}
+
+//
+//  Read ACPI Mmio Register
+//  Arg0 - Offset
+//
+Method(CpmReadAcpiMmio, 1, Serialized)
+{
+    return (CpmReadMem8 (CpmAcpiMmioBaseAddr, Arg0, 0, 8))
+}
+
+//
+//  Write ACPI Mmio Register
+//  Arg0 - Offset
+//  Arg1 - Value
+//
+Method(CpmWriteAcpiMmio, 2, Serialized)
+{
+    CpmWriteMem8 (CpmAcpiMmioBaseAddr, Arg0, 0, 8, Arg1)
+}
+
+//
+// Check whether the bridge is in FCH
+//  Arg0 - Device
+//  Arg1 - Function
+//
+Method (CpmIsFchPcie, 2, Serialized)
+{
+    Store (0, Local0)
+    if (LEqual (Arg0, 21))
+    {
+        Store (1, Local0)
+    }
+    return (Local0)
+}
+
+//
+// Calculate AB link register
+//  Arg0 - RegSpace. 0: AXINDC.
+//                   1: RCINDC.
+//                   2: AXINDP.
+//                   3: RCINDP.
+//                   4: AXCFG.
+//                   6: ABCFG
+//  Arg1 - PortNum
+//  Arg2 - RegAddr
+//
+Method (CpmCalculateABLinkRegister, 3, Serialized)
+{
+    ShiftLeft (arg0, 5, Local0)
+    Add (Local0, arg1, Local1)
+    ShiftLeft (Local1, 24, Local2)
+    Add (Local2, arg2, Local3)
+    return (Local3)
+}
+
+//
+// Read AB link register
+//  Arg0 - Index of AB Link Register
+//
+Method (CpmReadABLinkRegister, 1, Serialized)
+{
+    OperationRegion (varM, SystemIO, 0xCD8, 0x8)
+        Field (varM, DWordAcc, NoLock, Preserve)
+        {
+            var1, 32,
+        }
+        BankField (varM, var1, Arg0, DwordAcc, NoLock, Preserve) {
+            Offset (0x4),
+            var2, 32,
+        }
+    Store(var2, Local0)
+    return (Local0)
+}
+
+//
+// Write AB link register
+//  Arg0 - Index of AB Link Register
+//  Arg1 - Value
+//
+Method (CpmWriteABLinkRegister, 2, Serialized)
+{
+    OperationRegion (varM, SystemIO, 0xCD8, 0x8)
+        Field (varM, DWordAcc, NoLock, Preserve)
+        {
+            var1, 32,
+        }
+        BankField (varM, var1, Arg0, DwordAcc, NoLock, Preserve) {
+            Offset (0x4),
+            var2, 32,
+        }
+    Store(arg1, var2)
+}
+
+//
+// Read & Write AB link register
+//  Arg0 - Index of AB Link Register
+//  Arg1 - And Mask
+//  Arg2 - Or Mask
+//
+Method (CpmReadWriteABLinkRegister, 3, Serialized)
+{
+    And (CpmReadABLinkRegister (arg0), arg1, Local0)
+    Or (Local0, arg2, Local1)
+    CpmWriteABLinkRegister (arg0, Local1)
+}
+
+//
+// Fch GPP Hot plug Service
+//  Arg0 - 0: Insert. 1: Remove
+//  Arg1 - GPP Number
+//
+Method (CpmFchGppHotplugService, 2, Serialized)
+{
+    if (LEqual (arg0, 0))
+    {
+        if (LEqual (arg1, 0))
+        {
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (6, 0, 0xc0), 0xffffefff, 0x00000000)
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (1, 0, 0x65), 0xfffffefe, 0x00000000)
+        }
+        if (LEqual (arg1, 1))
+        {
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (6, 0, 0xc0), 0xffffdfff, 0x00000000)
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (1, 0, 0x65), 0xfffffdfd, 0x00000000)
+        }
+        if (LEqual (arg1, 2))
+        {
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (6, 0, 0xc0), 0xffffbfff, 0x00000000)
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (1, 0, 0x65), 0xfffffbfb, 0x00000000)
+        }
+        if (LEqual (arg1, 3))
+        {
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (6, 0, 0xc0), 0xffff7fff, 0x00000000)
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (1, 0, 0x65), 0xfffff7f7, 0x00000000)
+        }
+        sleep (1)
+    }
+    if (LEqual (arg0,1))
+    {
+        if (LEqual (arg1, 0))
+        {
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (6, 0, 0xc0), 0xffffefff, 0x00001000)
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (1, 0, 0x65), 0xfffffefe, 0x00000101)
+        }
+        if (LEqual (arg1, 1))
+        {
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (6, 0, 0xc0), 0xffffdfff, 0x00002000)
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (1, 0, 0x65), 0xfffffdfd, 0x00000202)
+        }
+        if (LEqual (arg1, 2))
+        {
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (6, 0, 0xc0), 0xffffbfff, 0x00004000)
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (1, 0, 0x65), 0xfffffbfb, 0x00000404)
+        }
+        if (LEqual (arg1, 3))
+        {
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (6, 0, 0xc0), 0xffff7fff, 0x00008000)
+            CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (1, 0, 0x65), 0xfffff7f7, 0x00000808)
+        }
+        sleep (1)
+    }
+    if (LEqual (arg0, 0))
+    {
+        CpmFchSetGen2 (arg1)
+        Store (CpmReadABLinkRegister (CpmCalculateABLinkRegister (3, arg1, 0xa5)), Local0)
+        And (Local0, 0xff, Local0)
+        Store (500, Local1)
+        while (LAnd (LGreater (Local1, 0), LNotEqual (Local0, 0x10)))
+        {
+            Store (CpmReadABLinkRegister (CpmCalculateABLinkRegister (3, arg1, 0xa5)), Local0)
+            And (Local0, 0xff, Local0)
+            Decrement (Local1)
+            sleep (1)
+        }
+        if (LNotEqual (Local0, 0x10))
+        {
+            CpmFchSetGen1 (arg1)
+        }
+    }
+}
+
+//
+// Set Fch Gpp port to Gen2
+//  Arg0 - GPP Number
+//
+Method (CpmFchSetGen2, 1, Serialized)
+{
+    Store (CpmReadPci32 (0, 21, arg0, 0x88), Local0)
+    Or (And (Local0, 0xfffffff0), 2, Local1)
+    CpmWritePci32 (0, 21, arg0, 0x88, Local1)
+    CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (3, arg0, 0xa4), 0xfffffffe, 0x00000001)
+    CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (3, arg0, 0xa2), 0xffffdfff, 0x00002000)
+    CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (3, arg0, 0xc0), 0xffff7fff, 0x00008000)
+    CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (3, arg0, 0xa4), 0xdfffffff, 0x20000000)
+    sleep (1)
+}
+
+//
+// Set Fch Gpp port to Gen1
+//  Arg0 - GPP Number
+//
+Method (CpmFchSetGen1, 1, Serialized)
+{
+    Store (CpmReadPci32 (0, 21, arg0, 0x88), Local0)
+    Or (And (Local0, 0xfffffff0), 1, Local1)
+    CpmWritePci32 (0, 21, arg0, 0x88, Local1)
+    CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (3, arg0, 0xa4), 0xfffffffe, 0x00000000)
+    CpmReadWriteABLinkRegister (CpmCalculateABLinkRegister (3, arg0, 0xa2), 0xffffdfff, 0x00002000)
+    sleep (1)
+}
+
+//
+// Set Device Power On/Off
+//  Arg0 - Device Id
+//  Arg1 - Power State
+//
+Method (CpmSetDevicePower, 2, Serialized)
+{
+    If(LNotEqual(Arg0, 0))
+    {
+        Store (CpmDevicePowerTable, Local0)
+        If (Local0)
+        {
+            Add (Local0, CpmTableHeaderSize, Local0)
+            Store (0, Local1)
+            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerDeviceId, 0, 8), Local2)
+            While (LAnd (LNotEqual (Local2, 0xFF), LNotEqual (Local2, 0x00)))
+            {
+                Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerMode, 0, 8), Local3)
+                If (LAnd (LEqual (Local2, Arg0), LEqual (Local3, Arg1)))
+                {
+                    Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerInitFlag, 0, 8), Local3)
+                    If (LNotEqual (Local3, 0))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerType, 0, 8), Local4)
+                        If (LEqual (Local4, 0))
+                        {
+                            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 0, 16), Local5)
+                            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 16, 8), Local6)
+                            CpmWriteGpio (Local5, Local6)
+                        }
+                        If (LEqual (Local4, 1))
+                        {
+                            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 0, 16), Local5)
+                            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 16, 8), Local6)
+                            While (LNotEqual (CpmReadGpio (Local5), Local6))
+                            {
+                            }
+                        }
+                        If (LEqual (Local4, 2))
+                        {
+                            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 0, 32), Local5)
+                            Sleep (Divide (Add (Local5, 999), 1000))
+                        }
+                    }
+                }
+                Add (Local1, CpmGpioDevicePowerSize, Local1)
+                Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerDeviceId, 0, 8), Local2)
+            }
+        }
+    }
+}
+
+//
+// Set Device Power Table
+//  Arg0 - Init Flag
+//
+Method (CpmSetDevicePowerTable, 1, Serialized)
+{
+    If(LGreater(Arg0, 3))
+    {
+        Store (CpmDevicePowerTable, Local0)
+        If (Local0)
+        {
+            Add (Local0, CpmTableHeaderSize, Local0)
+            Store (0, Local1)
+            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerDeviceId, 0, 8), Local2)
+            While (LAnd (LNotEqual (Local2, 0xFF), LNotEqual (Local2, 0x00)))
+            {
+                Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerInitFlag, 0, 8), Local3)
+                If (LEqual (Local3, Arg0))
+                {
+                    Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerType, 0, 8), Local4)
+                    If (LEqual (Local4, 0))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 16, 8), Local6)
+                        CpmWriteGpio (Local5, Local6)
+                    }
+                    If (LEqual (Local4, 1))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 16, 8), Local6)
+                        While (LNotEqual (CpmReadGpio (Local5), Local6))
+                        {
+                        }
+                    }
+                    If (LEqual (Local4, 2))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerConfig, 0, 32), Local5)
+                        Sleep (Divide (Add (Local5, 999), 1000))
+                    }
+                }
+                Add (Local1, CpmGpioDevicePowerSize, Local1)
+                Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDevicePowerDeviceId, 0, 8), Local2)
+            }
+        }
+    }
+}
+
+//
+// Set Device Clock On/Off
+//  Arg0 - Device Id
+//  Arg1 - Clock State
+//
+Method (CpmSetDeviceClock, 2, Serialized)
+{
+    If(LNotEqual(Arg0, 0))
+    {
+        Store (CpmSbStrap, Local0)
+        If (And (Local0, 2))
+        {
+            Store (CpmPcieClockTable, Local0)
+            If (Local0)
+            {
+                Add (Local0, CpmTableHeaderSize, Local0)
+                Store (0, Local1)
+                Store (1, Local2)
+                While (LNotEqual (Local2, 0xFF))
+                {
+                    Store (CpmReadMem32 (Add (Local0, Local1), CpmPcieClockClkId, 0, 8), Local2)
+                    Store (CpmReadMem32 (Add (Local0, Local1), CpmPcieClockClkReq, 0, 8), Local3)
+                    Store (CpmReadMem32 (Add (Local0, Local1), CpmPcieClockDeviceId, 0, 8), Local4)
+                    Store (CpmReadMem32 (Add (Local0, Local1), CpmPcieClockSlotCheck, 0, 8), Local5)
+                    Store (CpmReadMem32 (Add (Local0, Local1), CpmPcieClockSpecialFunctionId, 0, 32), Local7)
+                    If (LEqual (Local4, Arg0))
+                    {
+                        If (LAnd (LLess (Local2, 0x0A), And (Local5, 0x80)))
+                        {
+                            if (LEqual (Arg1, 0))
+                            {
+                                If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_NL))
+                                {
+                                    If (LGreater (ShiftRight (Local7, 16), 0))
+                                    {
+                                        // Use SMN registers access if one of Socket/Die/Bridge/Misc is not zero.
+                                        If (LEqual (ShiftRight (Local7, 28), 2))
+                                        {
+                                            // Use MISC2 SMN Registers
+                                            Store (CpmReadSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D02300), Local6)
+                                        }
+                                        Else
+                                        {
+                                            // Use MISC SMN Registers
+                                            Store (CpmReadSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D01E00), Local6)
+                                        }
+                                        And (Local6, Xor (0xFFFFFFFF, ShiftLeft (0x3, ShiftLeft (Local2, 1))), Local6)
+//                                        Or (Local6, ShiftLeft (Local3, ShiftLeft (Local2, 1)), Local6)
+                                        If (LEqual (ShiftRight (Local7, 28), 2))
+                                        {
+                                            // Use MISC2 SMN Registers
+                                            CpmWriteSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D02300, Local6)
+                                        }
+                                        Else
+                                        {
+                                            // Use MISC SMN Registers
+                                            CpmWriteSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D01E00, Local6)
+                                        }
+                                    }
+                                    Else
+                                    {
+                                        // Use FCH MMIO registers access if all of Socket/Die/Bridge/Misc are zero.
+                                        If (LGreaterEqual (Local2, 4))
+                                        {
+                                            CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 1, Multiply (Subtract (Local2, 4), 2), 2, 0)
+                                        }
+                                        Else
+                                        {
+                                            CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 0, Multiply (Local2, 2), 2, 0)
+                                        }
+                                    }
+                                }
+                                Else
+                                {
+                                    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), Divide (Local2, 2), Multiply (And (Local2, 1), 4), 4, 0)
+                                }
+                            }
+                            Else
+                            {
+                                If (And (Local5, 0x04))
+                                {
+                                    if (LEqual (Arg1, 1))
+                                    {
+                                        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_NL))
+                                        {
+                                            If (LGreater (ShiftRight (Local7, 16), 0))
+                                            {
+                                                // Use SMN registers access if one of Socket/Die/Bridge/Misc is not zero.
+                                                If (LEqual (ShiftRight (Local7, 28), 2))
+                                                {
+                                                    // Use MISC2 SMN Registers
+                                                    Store (CpmReadSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D02300), Local6)
+                                                }
+                                                Else
+                                                {
+                                                    // Use MISC SMN Registers
+                                                    Store (CpmReadSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D01E00), Local6)
+                                                }
+                                                And (Local6, Xor (0xFFFFFFFF, ShiftLeft (0x3, ShiftLeft (Local2, 1))), Local6)
+                                                Or (Local6, ShiftLeft (0x3, ShiftLeft (Local2, 1)), Local6)
+                                                If (LEqual (ShiftRight (Local7, 28), 2))
+                                                {
+                                                    // Use MISC2 SMN Registers
+                                                    CpmWriteSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D02300, Local6)
+                                                }
+                                                Else
+                                                {
+                                                    // Use MISC SMN Registers
+                                                    CpmWriteSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D01E00, Local6)
+                                                }
+                                            }
+                                            Else
+                                            {
+                                                // Use FCH MMIO registers access if all of Socket/Die/Bridge/Misc are zero.
+                                                If (LGreaterEqual (Local2, 4))
+                                                {
+                                                    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 1, Multiply (Subtract (Local2, 4), 2), 2, 0x3)
+                                                }
+                                                Else
+                                                {
+                                                    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 0, Multiply (Local2, 2), 2, 0x3)
+                                                }
+                                            }
+                                        }
+                                        Else
+                                        {
+                                            CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), Divide (Local2, 2), Multiply (And (Local2, 1), 4), 4, 0xF)
+                                        }
+                                    }
+                                    if (LEqual (Arg1, 2))
+                                    {
+                                        Store (CpmReadPci (0, CpmReadMem32 (Add (Local0, Local1), CpmPcieClockDevice, 0, 8), CpmReadMem32 (Add (Local0, Local1), CpmPcieClockFunction, 0, 8), 0x19, 0, 8), Local6)  // Secondary Bus
+                                        If (LEqual (CpmGetPcieClockPmCapability (Local6, 0, 0), 1))       // Clock PM of Device
+                                        {
+                                            If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_NL))
+                                            {
+                                                If (LGreater (ShiftRight (Local7, 16), 0))
+                                                {
+                                                    // Use SMN registers access if one of Socket/Die/Bridge/Misc is not zero.
+                                                    If (LEqual (ShiftRight (Local7, 28), 2))
+                                                    {
+                                                        // Use MISC2 SMN Registers
+                                                        Store (CpmReadSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D02300), Local6)
+                                                    }
+                                                    Else
+                                                    {
+                                                        // Use MISC SMN Registers
+                                                        Store (CpmReadSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D01E00), Local6)
+                                                    }
+                                                    And (Local6, Xor (0xFFFFFFFF, ShiftLeft (0x3, ShiftLeft (Local2, 1))), Local6)
+                                                    Or (Local6, ShiftLeft (Local3, ShiftLeft (Local2, 1)), Local6)
+                                                    If (LEqual (ShiftRight (Local7, 28), 2))
+                                                    {
+                                                        // Use MISC2 SMN Registers
+                                                        CpmWriteSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D02300, Local6)
+                                                    }
+                                                    Else
+                                                    {
+                                                        // Use MISC SMN Registers
+                                                        CpmWriteSmnRegister (And (ShiftRight (Local7, 24), 0xF), And (ShiftRight (Local7, 20), 0xF), And (ShiftRight (Local7, 16), 0xF), 0x02D01E00, Local6)
+                                                    }
+                                                }
+                                                Else
+                                                {
+                                                    // Use FCH MMIO registers access if all of Socket/Die/Bridge/Misc are zero.
+                                                    If (LGreaterEqual (Local2, 4))
+                                                    {
+                                                        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 1, Multiply (Subtract (Local2, 4), 2), 2, Local3)
+                                                    }
+                                                    Else
+                                                    {
+                                                        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 0, Multiply (Local2, 2), 2, Local3)
+                                                    }
+                                                }
+                                            }
+                                            Else
+                                            {
+                                                CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), Divide (Local2, 2), Multiply (And (Local2, 1), 4), 4, Local3)
+                                            }
+                                        }
+                                    }
+                                }
+                                Else
+                                {
+                                    If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_NL))
+                                    {
+                                        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 0, Multiply (Local2, 2), 2, 0x3)
+                                    }
+                                    Else
+                                    {
+                                        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), Divide (Local2, 2), Multiply (And (Local2, 1), 4), 4, Local3)
+                                    }
+                                }
+                            }
+                            Store (0xFF, Local2)
+                        }
+                    }
+                    Add (Local1, CpmPcieClockSize, Local1)
+                }
+            }
+        }
+    }
+}
+
+//
+// Reset Device
+//  Arg0 - Device Id
+//  Arg1 - Reset State
+//
+Method (CpmSetDeviceReset, 2, Serialized)
+{
+    If(LNotEqual(Arg0, 0))
+    {
+        Store (CpmDeviceResetTable, Local0)
+        If (Local0)
+        {
+            Add (Local0, CpmTableHeaderSize, Local0)
+            Store (0, Local1)
+            Store (1, Local2)
+            While (LAnd (LNotEqual (Local2, 0xFF), LNotEqual (Local2, 0x00)))
+            {
+                Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetDeviceId, 0, 8), Local2)
+                Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetMode, 0, 8), Local3)
+                If (LAnd (LEqual (Local2, Arg0), LEqual (Local3, Arg1)))
+                {
+                    If (LLess (Local3, 2))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetType, 0, 8), Local4)
+                        If (LEqual (Local4, 0))
+                        {
+                            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetConfig, 0, 16), Local5)
+                            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetConfig, 16, 8), Local6)
+                            CpmWriteGpio (Local5, Local6)
+                        }
+                    }
+                    If (LEqual (Local3, 2))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetConfig, 0, 32), Local5)
+                        Sleep (Divide (Add (Local5, 999), 1000))
+                    }
+                }
+                Add (Local1, CpmGpioDeviceResetSize, Local1)
+            }
+        }
+    }
+}
+
+//
+// Check Device Reset State
+//  Arg0 - Device Id
+//  Arg1 - Reset State is 0 or 1, it cannot be 2
+//
+Method (CpmCheckDeviceResetState, 2, Serialized)
+{
+    Store (0, Local7)
+    If(LNotEqual(Arg0, 0))
+    {
+        Store (CpmDeviceResetTable, Local0)
+        If (Local0)
+        {
+            Add (Local0, CpmTableHeaderSize, Local0)
+            Store (0, Local1)
+            Store (1, Local2)
+            While (LAnd (LNotEqual (Local2, 0xFF), LNotEqual (Local2, 0x00)))
+            {
+                Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetDeviceId, 0, 8), Local2)
+                Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetMode, 0, 8), Local3)
+                If (LAnd (LEqual (Local2, Arg0), LEqual (Local3, Arg1)))
+                {
+                    If (LLess (Local3, 2))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetType, 0, 8), Local4)
+                        If (LEqual (Local4, 0))
+                        {
+                            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetConfig, 0, 16), Local5)
+                            Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceResetConfig, 16, 8), Local6)
+                            If (LEqual (CpmReadGpio (Local5), Local6))
+                            {
+                                Store (1, Local7)
+                            }
+                        }
+                    }
+                }
+                Add (Local1, CpmGpioDeviceResetSize, Local1)
+            }
+        }
+    }
+    Return (Local7)
+}
+
+//
+// Detect Device
+//  Arg0 - Device Id
+//
+Method (CpmGetDeviceStatus, 1, Serialized)
+{
+    If(LNotEqual(Arg0, 0))
+    {
+        Store (CpmDeviceDetectionTable, Local0)
+        Store (1, Local7)
+        If (Local0)
+        {
+            Add (Local0, CpmTableHeaderSize, Local0)
+            Store (0, Local1)
+            Store (1, Local2)
+            While (LAnd (LNotEqual (Local2, 0xFF), LNotEqual (Local2, 0x00)))
+            {
+                Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionDeviceId, 0, 8), Local2)
+                If (LEqual (Local2, Arg0))
+                {
+                    Store (0xFF, Local2)
+                    Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionType, 0, 8), Local3)
+                    If (LEqual (Local3, 0))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum1, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue1, 0, 8), Local6)
+                        Store (LEqual(CpmReadGpio (Local5), Local6), Local7)
+                    }
+                    If (LEqual (Local3, 1))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum1, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue1, 0, 8), Local6)
+                        Store (LEqual(CpmReadGpio (Local5), Local6), Local7)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum2, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue2, 0, 8), Local6)
+                        And (Local7, LEqual(CpmReadGpio (Local5), Local6), Local7)
+                    }
+                    If (LEqual (Local3, 2))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum1, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue1, 0, 8), Local6)
+                        Store (LEqual(CpmReadGpio (Local5), Local6), Local7)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum2, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue2, 0, 8), Local6)
+                        And (Local7, LEqual(CpmReadGpio (Local5), Local6), Local7)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum3, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue3, 0, 8), Local6)
+                        And (Local7, LEqual(CpmReadGpio (Local5), Local6), Local7)
+                    }
+                    If (LEqual (Local3, 3))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum1, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue1, 0, 8), Local6)
+                        Store (LEqual(CpmReadGpio (Local5), Local6), Local7)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum2, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue2, 0, 8), Local6)
+                        Or (Local7, LEqual(CpmReadGpio (Local5), Local6), Local7)
+                    }
+                    If (LEqual (Local3, 4))
+                    {
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum1, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue1, 0, 8), Local6)
+                        Store (LEqual(CpmReadGpio (Local5), Local6), Local7)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum2, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue2, 0, 8), Local6)
+                        Or (Local7, LEqual(CpmReadGpio (Local5), Local6), Local7)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionPinNum3, 0, 16), Local5)
+                        Store (CpmReadMem32 (Add (Local0, Local1), CpmGpioDeviceDetectionValue3, 0, 8), Local6)
+                        Or (Local7, LEqual(CpmReadGpio (Local5), Local6), Local7)
+                    }
+                }
+                Else
+                {
+                    Add (Local1, CpmGpioDeviceDetectionSize, Local1)
+                }
+            }
+        }
+    }
+    Else
+    {
+        Store (0, Local7)
+    }
+    If (Local7)
+    {
+        Store (1, Local7)
+    }
+    Return (Local7)
+}
+
+//
+// PCIe Device Hotplug Support
+//  Arg0 - Device Num of PCIe Bridge
+//  Arg1 - Function Num of PCIe Bridge
+//  Arg2 - 0: Remove. 1: Assert.
+//  Arg3 - 0: Basic Mode. 1: Enhanced Mode.
+//
+Method(CpmPcieHotplug, 4, Serialized)
+{
+    Store(0, Local7)
+    If (LNot (CpmIsFchPcie (Arg0, Arg1))) {
+        Name(CpmInterfaceBuffer, Buffer(0x05){})                      // GNB-Platform BIOS interface buffer
+        CreateWordField(CpmInterfaceBuffer, 0, CpmStructureSizeField) // Structure size field
+        CreateField(CpmInterfaceBuffer, 16, 3, CpmFunctionField)      // func field
+        CreateField(CpmInterfaceBuffer, 19, 5, CpmDeviceField)        // dev field
+        CreateByteField(CpmInterfaceBuffer, 3, CpmBusField)           // bus field
+        CreateByteField(CpmInterfaceBuffer, 4, CpmHotplugField)       // hotplug field
+
+        Store(5, CpmStructureSizeField)                               // size
+        Store(0, CpmBusField)                                         // bus
+        Store(Arg0, CpmDeviceField)                                   // device
+        Store(Arg1, CpmFunctionField)                                 // function
+
+        If (LEqual(Arg2, 0))                                          // hot remove
+        {
+            If (LNotEqual (Arg3, 1)) {
+                Store(0, CpmHotplugField)
+                \_SB.ALIB(6, CpmInterfaceBuffer)                      // notify plug event
+            }
+        }
+        else                                                          // hot insert
+        {
+            If (LNotEqual (Arg3, 1)) {
+                Store(1, CpmHotplugField)
+                \_SB.ALIB(6, CpmInterfaceBuffer)                      // notify plug event
+            }
+            Store(CpmReadPci(0, Arg0, Arg1, 0x19, 0, 8), Local0)      // Secondary Bus
+
+            If (LAnd(LNotEqual(Local0, 0x00), LNotEqual(Local0, 0xFF)))
+            {
+                Store(CpmReadPci32(Local0, 0, 0, 0), Local1)              // SSID & VID
+                Store(0x7FFFFFFF, Local2)
+                Or(Local2, 0x80000000, Local2)
+                If (LAnd(LNotEqual(Local1, 0x00000000), LNotEqual(Local1, Local2)))
+                {
+//                  Store(CpmGetPciePmCapability(0, Arg0, Arg1), Local1)  // Aspm Cap of Bridge
+//                  Store(CpmGetPciePmCapability(Local0, 0, 0), Local2)   // Aspm Cap of Device
+//                  And(Local1, Local2, Local3)                           // Aspm Cap
+//                  CpmSetPcieAspm(0, Arg0, Arg1, Local3)                 // Set Aspm on Bridge
+//                  CpmSetPcieAspm(Local0, 0, 0, Local3)                  // Set Aspm on Device
+                    Store(1, Local7)
+                }
+            }
+        }
+    }
+    Else
+    {
+        If (LEqual(Arg2, 0))                                          // hot remove
+        {
+            CpmFchGppHotplugService(1, Arg1)                          // Lane Power Down
+        }
+        else                                                          // hot insert
+        {
+            CpmFchGppHotplugService(0, Arg1)                          // Lane Power Up
+            Store(CpmReadPci(0, Arg0, Arg1, 0x19, 0, 8), Local0)      // Secondary Bus
+            If (LAnd(LNotEqual(Local0, 0x00), LNotEqual(Local0, 0xFF)))
+            {
+                Store(CpmReadPci32(Local0, 0, 0, 0), Local1)              // SSID & VID
+                Store(0x7FFFFFFF, Local2)
+                Or(Local2, 0x80000000, Local2)
+                If (LAnd(LNotEqual(Local1, 0x00000000), LNotEqual(Local1, Local2)))
+                {
+//                  Store(CpmGetPciePmCapability(0, Arg0, Arg1), Local1)  // Aspm Cap of Bridge
+//                  Store(CpmGetPciePmCapability(Local0, 0, 0), Local2)   // Aspm Cap of Device
+//                  And(Local1, Local2, Local3)                           // Aspm Cap
+//                  CpmSetPcieAspm(0, Arg0, Arg1, Local3)                 // Set Aspm on Bridge
+//                  CpmSetPcieAspm(Local0, 0, 0, Local3)                  // Set Aspm on Device
+                    Store(1, Local7)
+                }
+            }
+        }
+    }
+    Return(Local7)
+}
+
+//
+// Get Multi-Die Bus Number from AMD_CPM_CORE_TOPOLOGY_TABLE
+//  Arg0    - Socket Number
+//  Arg1    - Die Number
+//  Arg2    - Bridge Number
+//
+//  Return  - Bus Number
+//
+Method (CpmGetMultiDieBusNumber, 3, Serialized)
+{
+    If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP))
+    {
+        Store (CpmCoreTopologyTable, Local0)
+        If (Local0)
+        {
+            Add (Local0, CpmTableHeaderSize, Local0)
+            Store (0, Local1)
+            Store (0, Local2)
+            While (LNotEqual (Local2, 0xFF))
+            {
+                Store (CpmReadMem8 (Add (Local0, Local1), CpmCoreTopologySocket, 0, 8), Local2)
+                Store (CpmReadMem8 (Add (Local0, Local1), CpmCoreTopologyDie, 0, 8), Local3)
+                Store (CpmReadMem8 (Add (Local0, Local1), CpmCoreTopologyBridge, 0, 8), Local4)
+                Store (CpmReadMem8 (Add (Local0, Local1), CpmCoreTopologyBus, 0, 8), Local5)
+                If (LAnd (LEqual (Local2, Arg0), LEqual (Local3, Arg1)))
+                {
+                    If (LEqual (Local4, Arg2))
+                    {
+                        Return (Local5)
+                    }
+                }
+                Add (Local1, CpmCoreTopologySize, Local1)
+            }
+        }
+    }
+    Return(0xFFFFFFFF)
+}
+
+//
+// Check current OS type
+//
+
+Name (CpmCurrentOSType, Zero)
+Name (CpmCurrentOSFlag, Ones)
+
+Method(CpmIsWin8, 0, Serialized)
+{
+    Store(0x00, Local0)
+    If(LEqual(CpmCurrentOSFlag,Ones))
+    {
+      Store(0x00,CpmCurrentOSFlag)
+      Store(0x00,CpmCurrentOSType)
+      If(CondRefOf(\_OSI))
+      {
+        If(\_OSI("Windows 2012"))
+        {
+          Store(0x01,CpmCurrentOSType)
+        }
+        If(\_OSI("Windows 2013"))
+        {
+          Store(0x01,CpmCurrentOSType)
+        }
+        If(\_OSI("Windows 2015"))
+        {
+          Store(0x01,CpmCurrentOSType)
+        }
+        If(\_OSI("Windows 2016"))
+        {
+          Store(0x01,CpmCurrentOSType)
+        }
+        If(\_OSI("Windows 2017"))
+        {
+          Store(0x01,CpmCurrentOSType)
+        }
+      }
+    }
+    If(LEqual(CpmCurrentOSType,0x01))
+    {
+      Store(0x01,Local0)
+    }
+    Return(Local0)
+}
+
+//
+//  Read Table in Byte
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//
+Method(CpmReadTable, 2, Serialized)
+{
+    Store(0, Local0)
+    If (LNotEqual(Arg0, 0))
+    {
+        Store(CpmReadMem8 (Arg0, Arg1, 0, 8), Local0)
+    }
+    return (Local0)
+}
+
+//
+//  Trigger a software SMI
+//  Arg0 - SW SMI Command
+//  Arg1 - SW SMI Data
+//  Arg2 - SW SMI Delay
+//
+Mutex(CpmSwSmiMutex, 0)
+
+Method(CpmTriggerSmi, 3, Serialized)
+{
+    Store (Arg0, Local0)
+    Store (Arg1, Local1)
+    Store (Arg2, Local2)
+    Acquire (CpmSwSmiMutex, 0xFFFF)
+    Store (Arg0, Local0)
+    OperationRegion (varM, SystemIO, CpmSwSmiPort, 0x2)
+        Field(varM, ByteAcc, NoLock, Preserve) {
+            var1, 8,
+            Var2, 8,
+        }
+    Store (Local1, Var2)
+    Store (Local0, Var1)
+    Sleep (Local2)
+    Release (CpmSwSmiMutex)
+}
+
+//
+// CPM oem call back function
+//  Arg0 - CPM Callback Function Number
+//  Arg1 - Parameter 0
+//  Arg2 - Parameter 1
+//
+Method(CpmCallBack, 3, Serialized)
+{
+    If (CondRefOf(MOEM))
+    {
+        Return(MOEM(Arg0, Arg1, Arg2))
+    }
+    Else
+    {
+        Return(0)
+    }
+}
+
+//
+// CPM MLIB interface method
+//  Arg0 - Function ID
+//  Arg1 - Function specific data buffer
+//
+Method(MLIB, 2, Serialized)
+{
+    Switch (ToInteger(Arg0))
+    {
+        Case (0) {
+            Store (DerefOf (Index (Arg1, 0x2)), Local0)
+            Switch (ToInteger(Local0))
+            {
+                Case (3) {
+                    CpmSetDevicePowerTable (4)    // S0->S3/S4/S5
+                    CpmSetDevicePowerTable (5)    // S0->S3
+                }
+                Case (4) {
+                    CpmSetDevicePowerTable (4)    // S0->S3/S4/S5
+                    CpmSetDevicePowerTable (6)    // S0->S4
+                }
+                Case (3) {
+                    CpmSetDevicePowerTable (4)    // S0->S3/S4/S5
+                    CpmSetDevicePowerTable (7)    // S0->S5
+                }
+            }
+        }
+    }
+}
+
+//
+// Cpm Get Internal Bus Number interface method
+//  Arg0 - 0: Internal Bus A, 1: Internal Bus B, 2: Internal Bus C, 3: Internal Bus D
+//
+Method(CpmGetInternalBusNumber, 1, Serialized)
+{
+    If (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP)) {
+        If (LEqual (Arg0, 0)) {
+            return (CpmReadPci(0, 7, 1, 0x19, 0, 8))
+        } Else {
+            return (CpmReadPci(0, 8, 1, 0x19, 0, 8))
+        }
+    } Else {
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP)) {
+            If (LEqual (Arg0, 0)) {
+                return (CpmReadPci(0, 7, 1, 0x19, 0, 8))
+            } Else {
+                return (CpmReadPci(0, 8, Arg0, 0x19, 0, 8))
+            }
+        } Else {
+            If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RV)) {
+                If (LEqual (Arg0, 0)) {
+                    return (CpmReadPci(0, 8, 1, 0x19, 0, 8))
+                } Else {
+                    return (CpmReadPci(0, 8, 2, 0x19, 0, 8))
+                }
+            } Else {
+                return (0x0)
+            }
+        }
+    }
+}
+
+//
+// Find PCIe Root Port Number
+//  Arg0 - PCIe root port Device number
+//  Arg1 - PCIe root port Function number
+//
+Method (CpmFindPcieRootPortNumber, 2) {
+    And (Arg0, 0x1F, Local0)
+    Or (ShiftLeft (Local0, 3), And (Arg1, 0x7), Local0)
+    Store (0, Local1)
+    If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RV), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RV2))) {
+      Store (7, Local2)
+    } Else {
+      Store (10, Local2)
+    }
+    Store (0x14301000, Local3)
+    Store (CpmReadSmnRegister (0, 0, 0, Add (Multiply (Local1, 4), Local3)), Local4)
+    While (LAnd (LLess (Local1, Local2), LNotEqual (Local4, Local0))) {
+        Increment (Local1)
+        Store (CpmReadSmnRegister (0, 0, 0, Add (Multiply (Local1, 4), Local3)), Local4)
+    }
+    If (LLessEqual (Local1, Local2)) {
+        return (Local1)
+    } Else {
+        return (0xFF)
+    }
+}
+
+//
+// Send PME_TURN_OFF message to dGPU
+//  Arg0 - PCIe root port Device number
+//  Arg1 - PCIe root port Function number
+//
+Method (CpmSendPmeTurnOff, 2) {
+    Store (CpmFindPcieRootPortNumber (Arg0, Arg1), Local4)                  // Local4 = PCIe Root Port Number
+    If (LNotEqual (Local4, 0xFF)) {
+        If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP))) {
+            Store (CpmReadSmnRegister (0, 0, 0, 0x11180188), Local0)
+            And (Local0, 0xFFFFDFFF, Local0)
+            CpmWriteSmnRegister (0, 0, 0, 0x11180188, Or (Local0, 0x2000))  // Write RX_RC_DROP_PME_TO_ACK[13] = 1
+        }
+
+        And (CpmReadPci32 (0, 0, 0, 0x84), 0xFF00FCFF, Local1)              // Clear PMETarget[23:16], PMETurnOff[9] and PMEMode[8]
+        Or (ShiftLeft (Arg0, 19), ShiftLeft (Arg1, 16), Local2)
+        Or (Local1, Local2, Local1)
+        CpmWritePci32 (0, 0, 0, 0x84, Or (Local1, 0x100))                   // Write PMETarget[23:16] and PMEMode[8]
+        CpmWritePci32 (0, 0, 0, 0x84, Or (Local1, 0x300))                   // Write PMETarget[23:16], PMETurnOff[9] and PMEMode[8]
+
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_MTS)) {
+            Store (CpmReadPci32 (0, 0, 0, 0x84), Local3)
+            Store (20202, Local5)
+            While (LAnd (LGreater (Local5, 0), LNotEqual (And (Local3, 0x400), 0x400))) {
+                Store (Subtract (Local5, 1), Local5)
+                Stall (99)                                                  // 99us * 20202 = 1999ms time out
+                Store (CpmReadPci32 (0, 0, 0, 0x84), Local3)
+            }
+        }
+        If (LAnd (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RN), LGreaterEqual (Local4, 3))) {
+            Add (0x11240294, ShiftLeft (Subtract (Local4, 3), 12), Local2)  // PCIE1
+        } Else {
+            Add (0x11140294, ShiftLeft (Local4, 12), Local2)                // PCIE0
+        }
+        Store (CpmReadSmnRegister (0, 0, 0, Local2), Local3)
+        Store (20202, Local5)
+        While (LAnd (LGreater (Local5, 0), LNotEqual (And (Local3, 0x3F), 0x1F))) {
+            Store (Subtract (Local5, 1), Local5)
+            Stall (99)                                                      // 99us * 20202 = 1999ms time out
+            Store (CpmReadSmnRegister (0, 0, 0, Local2), Local3)
+        }
+
+        CpmWritePci32 (0, 0, 0, 0x84, Or (Local1, 0x100))                   // Write PMETarget[23:16] and PMEMode[8]
+        If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP))) {
+            CpmWriteSmnRegister (0, 0, 0, 0x11180188, Local0)               // Write RX_RC_DROP_PME_TO_ACK[13] = 0
+        }
+    }
+}
+
+//
+// Triggers waking the Link from L2/L3 Ready
+//  Arg0 - PCIe root port Device number
+//  Arg1 - PCIe root port Function number
+//  Arg2 - 1 = Wake Link, 0 = Normal Operation
+//
+Method (CpmWakeLink, 3) {
+    Store (CpmFindPcieRootPortNumber (Arg0, Arg1), Local4)                  // Local4 = PCIe Root Port Number
+    If (LNotEqual (Local4, 0xFF)) {
+        If (LAnd (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RN), LGreaterEqual (Local4, 3))) {
+            Add (0x11240280, ShiftLeft (Subtract (Local4, 3), 12), Local2)  // PCIE1
+        } Else {
+            Add (0x11140280, ShiftLeft (Local4, 12), Local2)                // PCIE0
+        }
+        Store (CpmReadSmnRegister (0, 0, 0, Local2), Local0)
+        And (Local0, 0xFFBFFFFF, Local0)
+        Store (Arg2, Local1)
+        Or (Local0, ShiftLeft (Local1, 22), Local0)
+        CpmWriteSmnRegister (0, 0, 0, Local2, Local0)                       // Write LC_WAKE_FROM_L23[22]
+    }
+}
+
+Name (CpmClkReqMappingTable, Buffer (7) {
+  0x00,         // ClkReq0 => Bit[1:0]
+  0x02,         // ClkReq1 => Bit[3:2]
+  0x06,         // ClkReq2 => Bit[7:6]
+  0x08,         // ClkReq3 => Bit[9:8]
+  0x04,         // ClkReq4 => Bit[5:4]
+  0x0A,         // ClkReq5 => Bit[11:10]
+  0x0C          // ClkReq6 => Bit[13:12]
+})
+
+//
+//  Read Clock Request Setting
+//  Arg0    - Socket Number
+//  Arg1    - Die Number
+//  Arg2    - Bridge Number
+//  Arg3    - 0 = Misc Register, 1 = Misc2 Register
+//  Arg4    - Clock Request Pin Number
+//
+Method(CpmReadClkReq, 5, Serialized) {
+    If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_NL)) {
+        Store (derefof (index (CpmClkReqMappingTable, Arg4)), Local1)
+        If (LOr (LOr (LGreater (Arg0, 0), LGreater (Arg1, 0)), LOr (LGreater (Arg2, 0), LGreater (Arg3, 0)))) {
+            // Use SMN registers access if one of Socket/Die/Bridge/Misc is not zero.
+            If (LEqual (Arg3, 2)) {
+                // Use MISC2 SMN Registers
+                Store (CpmReadSmnRegister (Arg0, Arg1, Arg2, 0x02D02300), Local0)
+            } Else {
+                // Use MISC SMN Registers
+                Store (CpmReadSmnRegister (Arg0, Arg1, Arg2, 0x02D01E00), Local0)
+            }
+            ShiftLeft (Local0, Multiply (Local1, 2), Local0)
+            And (Local0, 0x3, Local0)
+        } Else {
+            // Use FCH MMIO registers access if all of Socket/Die/Bridge/Misc are zero.
+            If (LGreaterEqual (Local1, 4)) {
+                Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 1, Multiply (Subtract (Local1, 4), 2), 2), Local0)
+            } Else {
+                Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 0, Multiply (Local1, 2), 2), Local0)
+            }
+        }
+    } Else {
+        // If (LLess (CpmSbChipId, CPM_FCH_REVISION_ID_NL))
+        Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), Divide (Arg4, 2), Multiply (And (Arg4, 1), 4), 4), Local0)
+    }
+    return (Local0)
+}
+
+//
+//  Write Clock Request Setting
+//  Arg0    - Socket Number
+//  Arg1    - Die Number
+//  Arg2    - Bridge Number
+//  Arg3    - 0 = Misc Register, 1 = Misc2 Register
+//  Arg4    - Clock Request Pin Number
+//  Arg5    - Clock Request Setting
+//
+Method(CpmWriteClkReq, 6, Serialized) {
+    If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_NL)) {
+        Store (derefof (index (CpmClkReqMappingTable, Arg4)), Local1)
+        If (LOr (LOr (LGreater (Arg0, 0), LGreater (Arg1, 0)), LOr (LGreater (Arg2, 0), LGreater (Arg3, 0)))) {
+            // Use SMN registers access if one of Socket/Die/Bridge/Misc is not zero.
+            If (LEqual (Arg3, 2)) {
+                // Use MISC2 SMN Registers
+                Store (CpmReadSmnRegister (Arg0, Arg1, Arg2, 0x02D02300), Local0)
+            } Else {
+                // Use MISC SMN Registers
+                Store (CpmReadSmnRegister (Arg0, Arg1, Arg2, 0x02D01E00), Local0)
+            }
+            And (Local0, Xor (0xFFFFFFFF, ShiftLeft (0x3, ShiftLeft (Local1, 1))), Local0)
+            Or (Local0, ShiftLeft (Arg5, ShiftLeft (Local1, 1)), Local0)
+            If (LEqual (Arg3, 2)) {
+                // Use MISC2 SMN Registers
+                CpmWriteSmnRegister (Arg0, Arg1, Arg2, 0x02D02300, Local0)
+            } Else {
+                // Use MISC SMN Registers
+                CpmWriteSmnRegister (Arg0, Arg1, Arg2, 0x02D01E00, Local0)
+            }
+        } Else {
+            // Use FCH MMIO registers access if all of Socket/Die/Bridge/Misc are zero.
+            If (LGreaterEqual (Local1, 4)) {
+                CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 1, Multiply (Subtract (Local1, 4), 2), 2, Arg5)
+            } Else {
+                CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), 0, Multiply (Local1, 2), 2, Arg5)
+            }
+        }
+    } Else {
+        // If (LLess (CpmSbChipId, CPM_FCH_REVISION_ID_NL))
+        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0xE00), Divide (Arg4, 2), Multiply (And (Arg4, 1), 4), 4, Arg5)
+    }
+}
+
+//
+// CPM MPTS interface method
+//  Arg0 - An Integer containing the value of the sleeping state (1 for S1, 2 for S2, etc.)
+//
+Method (MPTS, 1) {
+    Store(CpmReadTable(CpmMainTable, CpmZeroPowerOddEn), Local0)
+    // ODD Zero Power is enabled, and ODD Hotplug is enabled.
+    If (LEqual(And(Local0, 3), 3)) {
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP)) {
+            \_SB.PCI0.GP18.SATA.TPTS(Arg0)
+        } Else {
+            \_SB.PCI0.SATA.TPTS(Arg0)
+        }
+    }
+    If (LNotEqual(CpmOtherHotplugCardTable, 0)) {
+        \_SB.CpmOtherHotplugCard_PTS (Arg0)
+    }
+}
+
+//
+// CPM MWAK interface method
+//  Arg0 - An Integer containing the value of the sleeping state (1 for S1, 2 for S2, etc.)
+//
+Method (MWAK, 1) {
+    Store(CpmReadTable(CpmMainTable, CpmZeroPowerOddEn), Local0)
+    // ODD Zero Power is enabled, and ODD Hotplug is enabled.
+    If (LEqual(And(Local0, 3), 3)) {
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP)) {
+            \_SB.PCI0.GP18.SATA.TWAK(Arg0)
+        } Else {
+            \_SB.PCI0.SATA.TWAK(Arg0)
+        }
+    }
+    If (LNotEqual(CpmOtherHotplugCardTable, 0)) {
+        \_SB.CpmOtherHotplugCard_WAK (Arg0)
+    }
+    If (LNotEqual(CpmLowPowerEthernetTable, 0)) {
+        \_SB.CpmLowPowerEthernet_WAK (Arg0)
+    }
+}
+

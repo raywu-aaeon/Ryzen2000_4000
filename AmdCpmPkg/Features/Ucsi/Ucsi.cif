@@ -1,0 +1,12 @@
+<component>
+	name = "Ucsi"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\Ucsi\"
+	RefName = "AmdCpmPkg.Features.Ucsi"
+[INF]
+"Asl\AmdCpm3UcsiAsl.inf"
+"Dxe\AmdCpm3UcsiDxe.inf"
+"Pei\AmdCpm3UcsiPeim.inf"
+[files]
+"Ucsi.sdl"	
+<endComponent>

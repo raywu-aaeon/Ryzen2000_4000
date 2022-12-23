@@ -1,0 +1,31 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbGetCapsuleFlagLib
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbGetCapsuleFlagLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+
+[Pcd]
+
+[Protocols]
+
+[Guids]
+  gEfiCapsuleVendorGuid
+
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid
+
+[Sources]
+  SbGetCapsuleFlagLib.c

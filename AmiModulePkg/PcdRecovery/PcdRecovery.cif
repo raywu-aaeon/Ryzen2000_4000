@@ -1,0 +1,17 @@
+<component>
+    name = "PcdRecovery"
+    category = eModule
+    LocalRoot = "AmiModulePkg\PcdRecovery\"
+    RefName = "PcdRecovery"
+[INF]
+"PcdRecoveryLib.inf"
+"PcdRecoveryPei.inf"
+[files]
+"PcdRecovery.chm"	
+"PcdRecovery.sdl"	
+[dependency]
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_24"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_35"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_10"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_15"
+<endComponent>

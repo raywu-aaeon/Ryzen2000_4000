@@ -1,0 +1,38 @@
+TOKEN
+	Name  = "FCH_SANDSTONE_SMM_DISPATCHER_MAIN_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling FchSandstoneSmmDispatcher support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_SMM_DIAG_DISPATCHER_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable FchSmmDiagDispatcher support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_SMM_DISPATCHER_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchSmmDispatcher support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "FchSandstoneSmmDiagDispatcher"
+	File  = "FchSmmDiagDispatcher.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "FCH_SANDSTONE_SMM_DIAG_DISPATCHER_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSandstoneSmmDispatcher"
+	File  = "FchSmmDispatcher.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "FCH_SANDSTONE_SMM_DISPATCHER_SUPPORT" "=" "1"
+End
+

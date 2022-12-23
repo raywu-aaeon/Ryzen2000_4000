@@ -1,0 +1,9 @@
+<component>
+	name = "SM"
+	category = ModulePart
+	LocalRoot = "AmiPspPkg\PspLayout\SM"
+	RefName = "AmiPspPkg.PspLayout.SM"
+[files]
+"BuildPspSm.txt"
+"PspLayoutSm.sdl"
+<endComponent>

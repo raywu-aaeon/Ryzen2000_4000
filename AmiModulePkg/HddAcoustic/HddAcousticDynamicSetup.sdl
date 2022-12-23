@@ -1,0 +1,40 @@
+TOKEN
+    Name  = "HddAcousticDynamicSetup_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable HddAcousticDynamicSetup support in Project and Disables Static Setup page control"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Master = Yes
+    Token = "LOCAL_ACOUSTIC_SETUP" "=" "1"
+End
+
+INFComponent
+    Name  = "HddAcousticDynamicSetup"
+    File  = "HddAcousticDynamicSetup.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "HddAcousticDynamicSetup_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name = "{ {0xC48AA1AC, 0xF870, 0x418D, { 0xA6, 0xEF, 0xC1, 0xDD, 0x89, 0xC1, 0xCE, 0x19 }}, 0, NULL},"
+    Parent  = "AMITSE_HIDDEN_PAGE_LIST"
+    Help  = "Provide GUIDs of dynmaic formset to suppress. Terminate entry with comma"
+    InvokeOrder = AfterParent
+    Token = "LOCAL_ACOUSTIC_SETUP" "=" "1"
+End
+
+ELINK
+    Name = "$(ACOUSTIC_DIR)/HddAcousticDynamicSetup.sd"
+    Parent = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+    Token = "LOCAL_ACOUSTIC_SETUP" "=" "1"
+End
+
+ELINK
+    Name  = "$(ACOUSTIC_DIR)/HddAcousticDynamicSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+    Token = "LOCAL_ACOUSTIC_SETUP" "=" "1"
+End

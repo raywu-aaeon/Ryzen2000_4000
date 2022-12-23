@@ -1,0 +1,30 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = AmiFlashLibPei
+    FILE_GUID       = F7D6D25E-6243-4D5C-9BA5-C2DC48F003B0
+    MODULE_TYPE     = PEIM
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = AmiFlashLib | PEIM
+    CONSTRUCTOR     = PeiAmiFlashLibConstructor
+
+[Sources]
+    AmiFlashLibCommon.c
+    AmiFlashLibCommon.h
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    BaseLib
+    BaseMemoryLib
+    AmiCspFlashLib
+    SpiFlashLib
+    $(AmiFlashLibOemLibClasses)

@@ -1,0 +1,88 @@
+TOKEN
+	Name  = "AmiChipsetModulePkg_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmiChipsetModulePkg support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+    Name  = "IHV_RC_VER"
+    Value  = "$(AMD_AGESA_PI_STR)"
+    Help  = "IHV Reference Code Version. For example: 0.5. If platform don't have RC, please set the value to '.'."
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "IHV_ME_TXE_VER"
+    Value  = "."
+    Help  = "IHV ME/TXE FW Version. For example: 3.1. If platform don't have ME and TXE, please set the value to '.'."
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+	Name  = "CSP_BOOT_SCRIPT_SMM_COMMUNICATION"
+	Value  = "1"
+	TokenType = Boolean
+	Token = "BootScript_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_CHIPSET"
+	Value  = "0"
+	Help  = "Pre-define for Chipset component if Core less or equal 5.12. According to AMI_Aptio_5.x_Module_Developer's_Guide_INT.doc the domain will be support in the Core5.13."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+PATH
+	Name  = "AmiChipsetModulePkg_DIR"
+End
+
+INFComponent
+	Name  = "AmiCspSmmBootScriptLib"
+	File  = "Library/AmiCspSmmBootScriptLib/AmiCspSmmBootScriptLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "AmiChipsetModulePkg_DIR"
+	Token = "CSP_BOOT_SCRIPT_SMM_COMMUNICATION" "=" "1"
+End
+
+INFComponent
+	Name  = "AmiCspSmmBootScriptSmmLib"
+	File  = "Library/AmiCspSmmBootScriptLib/AmiCspSmmBootScriptSmmLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "AmiChipsetModulePkg_DIR"
+	Token = "CSP_BOOT_SCRIPT_SMM_COMMUNICATION" "=" "1"
+End
+
+INFComponent
+	Name  = "AmiS3BootScriptLib"
+	File  = "Library/AmiS3BootScriptLib/AmiS3BootScriptLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "AmiChipsetModulePkg_DIR"
+	Token = "CSP_BOOT_SCRIPT_SMM_COMMUNICATION" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmiCspSmmBootScriptLib"
+	Instance  = "AmiChipsetModulePkg.AmiCspSmmBootScriptLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "CSP_BOOT_SCRIPT_SMM_COMMUNICATION" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.AmiCspSmmBootScriptSmmLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Override  = "AmiChipsetModulePkg.SmmChildDispatcher2"
+	Token = "CSP_BOOT_SCRIPT_SMM_COMMUNICATION" "=" "1"
+End
+

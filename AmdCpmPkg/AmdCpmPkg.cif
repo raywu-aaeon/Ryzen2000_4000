@@ -1,0 +1,19 @@
+<component>
+	name = "AmdCpmPkg - R2000"
+	category = eModule
+	Rank = 30
+	LocalRoot = "AmdCpmPkg\"
+	RefName = "AmdCpmPkg.AmdCpmPkg"
+[files]
+"AmdCpmPkg.sdl"	
+"AmdCpmPkg.dec"	
+"ReleaseNotes.txt"	
+"Elink\CpmElinks.txt"	
+[parts]
+"AmdCpmPkg.Addendum"
+"AmdCpmPkg.Features"
+"AmdCpmPkg.Include"
+"AmdCpmPkg.Kernel"
+"AmdCpmPkg.Library"
+"AmdCpmPkg.AmiCpmWrapper"
+<endComponent>

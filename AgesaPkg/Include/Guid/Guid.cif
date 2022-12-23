@@ -1,0 +1,10 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "AgesaPkg\Include\Guid\"
+	RefName = "AgesaPkg.Include.Guid"
+[files]
+"SSP\AmdMbistHob.h"
+"ZPMcm\AmdMbistHob.h"
+"AmdMemoryInfoHob.h"	
+<endComponent>

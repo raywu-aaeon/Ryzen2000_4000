@@ -1,0 +1,491 @@
+TOKEN
+	Name  = "AmiCpmWrapper_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmiCpmWrapper support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+
+PCIDEVICE
+	Title  = "AmiCpmWrapperAsl (Virtual)"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Container"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	Virtual = Yes
+	ASL_PTS  = "Method;\MPTS(Arg0)"
+	ASL_WAK  = "Method;\MWAK(Arg0)"	
+    ASLfile  = "'AmdCpmPkg\AmiCpmWrapper\AmiCpmWrapperAsl\AmiCpmWrapperAsl.asl'"
+    Token = "BRISTOL_ROUTING_CONTROL" "=" "1"
+End
+
+PCIDEVICE
+    Title  = "AmiCpmWrapperAsl (Virtual)"
+    Parent  = "PciRoot"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    ASL_PTS  = "Method;\MPTS(Arg0)"
+    ASL_WAK  = "Method;\MWAK(Arg0)" 
+    ASLfile  = "'AmdCpmPkg\AmiCpmWrapper\AmiCpmWrapperAsl\AmiCpmWrapperAsl.asl'"
+    Token = "SUMMIT_PINNACLE_ROUTING_CONTROL" "=" "1"
+End
+
+PCIDEVICE
+    Title  = "AmiCpmWrapperAsl (Virtual)"
+    Parent  = "PciRoot"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    ASL_PTS  = "Method;\MPTS(Arg0)"
+    ASL_WAK  = "Method;\MWAK(Arg0)" 
+    ASLfile  = "'AmdCpmPkg\AmiCpmWrapper\AmiCpmWrapperAsl\AmiCpmWrapperAsl.asl'"
+End
+
+MODULE
+    Help  = "Includes AmiCpmWrapper.mak to Project"
+    File  = "AmiCpmWrapper.mak"
+    Token = "AmdCpmOemInitMyrtle_SUPPORT" "=" "1"
+End
+
+PATH
+    Name = "AOD_OEM_ASI_DIR"
+    path = "AmdCpmPkg\Features\AOD\Asl"
+End
+
+PATH
+    Name = "AOD_OEM_ASI_OVERRIDE_DIR"
+    path = "AmdCpmPkg\Addendum\Oem\Myrtle\Override\Features\AOD\Asl"
+End
+
+TOKEN
+	Name  = "CPM_SEC_PCIE_BASE_ENABLED"
+	Value  = "1"
+	Help  = "Enable the PCIE Base Address at AMD CPM Sec phase ,the main purpose is for the gCpmPreInitTable Init. details ,please see EIP141932"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "AmdCpmAdaptiveS4_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AdaptiveS4 support in the project(remove AdaptiveS4 on FP5)"
+    TokenType = Boolean
+    Token = "AmdCpmOemInitMandolin_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmdCpmAdaptiveS4_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AdaptiveS4 support in the project(remove AdaptiveS4 on FP5)"
+    TokenType = Boolean
+    Token = "AmdCpmOemInitDibbler_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmdCpmEcInit_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AmdCpmEcInit support in the project"
+    TokenType = Boolean
+    Token = "AmdCpmOemInitDibbler_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmdCpmOtherHotplugAsl_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AmdCpmOtherHotplugAsl support in Project"
+    TokenType = Boolean
+    Token = "AmdCpmOemInitDibbler_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmdCpmWirelessButtonAsl_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AmdCpmWirelessButtonAsl support in Project"
+    TokenType = Boolean
+    Token = "AmdCpmOemInitDibbler_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmdCpmZeroPowerOdd_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling ZeroPowerOdd support in the project"
+    TokenType = Boolean
+    Token = "AmdCpmOemInitDibbler_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmdCpmLowPowerEthernetAsl_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AmdCpmLowPowerEthernetAsl support in Project"
+    TokenType = Boolean
+    Token = "AmdCpmOemInitMyrtle_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmiCpmFchUartDriver_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AmiCpmFchUartDriver support in the project"
+    TokenType = Boolean
+    Token = "Terminal_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmiFchUart0Dxe_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling AmiFchUart0Dxe support in the project"
+    TokenType = Boolean
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AmiFchUart1Dxe_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling AmiFchUart1Dxe support in the project"
+    TokenType = Boolean
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+End
+
+PATH
+	Name  = "AmiCpmWrapper_DIR"
+End
+
+PATH
+	Name  = "CPM_WRAPPER_INCLUDE_DIR"
+	Path  = "$(AmiCpmWrapper_DIR)/Include"
+End
+
+PATH
+	Name  = "CPM_WRAPPER_INCLUDE_LIBRARY_DIR"
+	Path  = "$(CPM_WRAPPER_INCLUDE_DIR)/Library"
+End
+
+ELINK
+	Name  = "AmdCpmPkg/AmdCpmPkg.dec"
+	Parent  = "AdditionalSetupPackages"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "InsatllAmdCpmProtocol,"
+	Parent  = "ConnectRootBridgeHandles,"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AmdCpmPkg/AmdCpmPkg.dec"
+	Parent  = "AMI_CSP_PACKAGES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SECCPM_EarlyInit"
+	Parent  = "SECCoreAtPowerOn"
+	Help  = "CPM Early Init in SEC (before Cache as memory enabling)"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CpmConfigurationList"
+	InvokeOrder = ReplaceParent
+End
+
+INFComponent
+	Name  = "CpmAmiCompatibilityDxeLib"
+	File  = "Library/CpmAmiCompatibilityDxeLib/CpmAmiCompatibilityDxeLib.inf"
+	Package  = "AmiCpmWrapper"
+	Token = "AmiCpmWrapper_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmiCpmWrapperSecLib"
+	File  = "Library/AmiCpmWrapperSecLib/AmiCpmWrapperSecLib.inf"
+	Package  = "AmiCpmWrapper"
+	Token = "AmiCpmWrapper_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmiCpmWrapperDxe"
+	File  = "AmiCpmWrapperDxe/AmiCpmWrapperDxe.inf"
+	Package  = "AmiCpmWrapper"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmiCpmWrapper_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmiCpmWrapperPei"
+	File  = "AmiCpmWrapperPei/AmiCpmWrapperPei.inf"
+	Package  = "AmiCpmWrapper"
+	ModuleTypes  = "PEIM"
+	Token = "AmiCpmWrapper_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmiCpmWrapperDxe"
+    File  = "AmiCpmWrapperDxe/AmiCpmWrapperDxeAm4.inf"
+    Package  = "AmiCpmWrapper"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmiCpmWrapper_SUPPORT" "=" "1"
+    Token = "AmdCpmOemInitMyrtle_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmiCpmWrapperPei"
+    File  = "AmiCpmWrapperPei/AmiCpmWrapperPeiAm4.inf"
+    Package  = "AmiCpmWrapper"
+    ModuleTypes  = "PEIM"
+    Token = "AmiCpmWrapper_SUPPORT" "=" "1"
+    Token = "AmdCpmOemInitMyrtle_SUPPORT" "=" "1"
+End
+
+
+INFComponent
+	Name  = "AmiCpmTableConstructorLib"
+	File  = "Library/AmiCpmTableConstructorLib/AmiCpmTableConstructorLib.inf"
+	Package  = "AmiCpmWrapper"
+	ModuleTypes  = "PEIM"
+	Token = "AmiCpmWrapper_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmiFchUartDebuggerGpioLib"
+    File  = "Library/AmiFchUartDebuggerGpioLib/AmiFchUartDebuggerGpioFp5Lib.inf"
+    Package  = "AmiCpmWrapper"
+    ModuleTypes  = "PEIM"
+    Token = "AmiCpmWrapper_SUPPORT" "=" "1"
+    Token = "AmdCpmOemInitMandolin_SUPPORT" "=" "1"
+    Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmiFchUart0Dxe"
+    File  = "AmiFchUartDxe/AmiFchUart0Dxe.inf"
+    Package  = "AmiCpmWrapper"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmiFchUart1Dxe"
+    File  = "AmiFchUartDxe/AmiFchUart1Dxe.inf"
+    Package  = "AmiCpmWrapper"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AmiFchUart1Dxe_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiCpmWrapper.CpmAmiCompatibilityDxeLib"
+	Override  = "AmiModulePkg.Bds"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiCpmWrapper.AmiCpmTableConstructorLib"
+	Override  = "AmdCpmPkg.AmdCpmOemInitPeim"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiCpmWrapper.AmiCpmTableConstructorLib"
+    Override  = "AmdCpmPkg.AmdCpmOemRvInitPeim"
+    Token = "AmdCpmOemInitMyrtle_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiCpmWrapper.AmiFchUartDebuggerGpioLib"
+    Override  = "AmdCpmPkg.AmdCpmOemInitPeim"
+    Token = "AmiCpmWrapper_SUPPORT" "=" "1"
+    Token = "AmdCpmOemInitMandolin_SUPPORT" "=" "1"
+    Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiCpmWrapper.AmiCpmWrapperSecLib"
+	ModuleTypes  = "SEC"
+	Override  = "AmiCpuPkg.SecCore"
+End
+
+LibraryMapping
+    Class  = "PlatformHookLib"
+    Instance  = "AmdCpmPkg.BasePlatformHookLibAmdFchUart"
+    Override  = "AmiCpmWrapper.AmiFchUart0Dxe"
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "PlatformHookLib"
+    Instance  = "AmdCpmPkg.BasePlatformHookLibAmdFchUart"
+    Override  = "AmiCpmWrapper.AmiFchUart1Dxe"
+    Token = "AmiFchUart1Dxe_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "SerialPortLib"
+    Instance  = "MdeModulePkg.BaseSerialPortLib16550"
+    Override  = "AmiCpmWrapper.AmiFchUart0Dxe"
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "SerialPortLib"
+    Instance  = "MdeModulePkg.BaseSerialPortLib16550"
+    Override  = "AmiCpmWrapper.AmiFchUart1Dxe"
+    Token = "AmiFchUart1Dxe_SUPPORT" "=" "1"
+End
+
+### FCH-UART0 PCDs
+PcdMapping
+    Name  = "PcdFchUartPort"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiCpmWrapper.AmiFchUart0Dxe"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "The AmiFchUart0Dxe driver handle the FCH-UART0"
+    TargetDSC = Yes
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialRegisterBase"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint64"
+    Value  = "0xFEDC9000"
+    Override  = "AmiCpmWrapper.AmiFchUart0Dxe"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialUseMmio"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Override  = "AmiCpmWrapper.AmiFchUart0Dxe"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialRegisterStride"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "4"
+    Override  = "AmiCpmWrapper.AmiFchUart0Dxe"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialClockRate"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "48000000"
+    Override  = "AmiCpmWrapper.AmiFchUart0Dxe"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+### FCH-UART1 PCDs
+PcdMapping
+    Name  = "PcdFchUartPort"
+    GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "1"
+    Override  = "AmiCpmWrapper.AmiFchUart1Dxe"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "The AmiFchUart1Dxe driver handle the FCH-UART1"
+    TargetDSC = Yes
+    Token = "AmiFchUart1Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialRegisterBase"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint64"
+    Value  = "0xFEDCA000"
+    Override  = "AmiCpmWrapper.AmiFchUart1Dxe"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "AmiFchUart1Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialUseMmio"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Boolean"
+    Value  = "TRUE"
+    Override  = "AmiCpmWrapper.AmiFchUart1Dxe"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "AmiFchUart1Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialRegisterStride"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "4"
+    Override  = "AmiCpmWrapper.AmiFchUart1Dxe"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "AmiFchUart1Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialClockRate"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "48000000"
+    Override  = "AmiCpmWrapper.AmiFchUart1Dxe"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "AmiFchUart1Dxe_SUPPORT" "=" "1"
+End

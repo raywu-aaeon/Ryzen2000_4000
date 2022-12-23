@@ -1,0 +1,69 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018 American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+#
+# This file contains code for SmBus initialization in the PEI stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  VERSION_STRING                 = 1.0
+  BASE_NAME                      = SmBusPei
+  MODULE_TYPE                    = PEIM
+  FILE_GUID                      = 7AB0F90A-BDF8-4010-A434-4329FB61330D
+  PI_SPECIFICATION_VERSION       = 0x0001000A 
+  ENTRY_POINT                    = SmBusPeiEntryPoint
+
+#
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32
+#
+
+[Sources]
+  SmBusPei.c
+  SmBusPei.h
+
+[LibraryClasses]
+  PeimEntryPoint
+  AmiSmBusLib
+  AmiPeiLib
+  AmiCspLib
+  PeiServicesTablePointerLib
+
+[Ppis]
+  gEfiPeiSmbus2PpiGuid
+  gEfiPeiSmbusPpiGuid
+  gEfiPeiStallPpiGuid
+  gEfiEndOfPeiSignalPpiGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+
+[Depex]
+  ### RVA9 : ORG ###gEfiPeiCpuIoPpiInstalledGuid AND
+  ### RVA9 : ORG ###gEfiPeiStallPpiGuid
+  ### Below dependence refer to FchSandstoneSmbusPei.
+  gEfiPeiCpuIoPpiInstalledGuid  AND
+  gAmdFchInitPpiGuid AND
+  gAmdFchSSSmbusDepexPpiGuid
+  # gEfiPeiSmbus2PpiGuid needs to be available before Agesa AmdInitReset has 
+  # been run even though AmdInitReset should be the function that initializes 
+  # the southbridge.  Don't put a dependency on gAmdPeiInitResetPpiGuid

@@ -1,0 +1,310 @@
+TOKEN
+	Name  = "HstiAmi_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable HstiAmi support in Project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "HSTI_REVISION"
+	Value  = "0"
+	Help  = "This token defines the revision of the HSTI Specification that is currently supported.\ 0 = version 1.1a.\ 1 = version 2.0."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+INFComponent
+	Name  = "Hsti - AMI"
+	File  = "HstiAmi.inf"
+	Package  = "AmiHstiPkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+PcdMapping
+	Name  = "AmiPcdFirmwareRollbackProtection"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Boolean"
+	Value  = "TRUE"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+	Token = "IGNORE_IMAGE_ROLLBACK" "=" "0"
+	Token = "IGNORE_RUNTIME_UPDATE_IMAGE_REVISION_CHECK" "=" "0"
+	Token = "X64_SUPPORT" "=" "0"
+End
+
+PcdMapping
+	Name  = "AmiPcdSecureBootBypass"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Boolean"
+	Value  = "TRUE"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+	Token = "ENABLE_IMAGE_EXEC_POLICY_OVERRIDE" "=" "1"
+	Token = "X64_SUPPORT" "=" "0"
+End
+
+PcdMapping
+	Name  = "AmiPcdFirmwareRollbackProtection"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Boolean"
+	Value  = "TRUE"
+	Arch  = "X64"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+	Token = "IGNORE_IMAGE_ROLLBACK" "=" "0"
+	Token = "IGNORE_RUNTIME_UPDATE_IMAGE_REVISION_CHECK" "=" "0"
+	Token = "X64_SUPPORT" "=" "1"	
+End
+
+PcdMapping
+	Name  = "AmiPcdSecureBootBypass"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Boolean"
+	Value  = "TRUE"
+	Arch  = "X64"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+	Token = "ENABLE_IMAGE_EXEC_POLICY_OVERRIDE" "=" "1"
+	Token = "X64_SUPPORT" "=" "1"
+End
+
+
+##================================================================================================
+##================================================================================================
+##================================================================================================
+## PCD mappings for HSTI Spec version 1.1a
+PcdMapping
+	Name  = "AmiPcdHstiNumSecurityBytes"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "0x03"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+	Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+	Name  = "AmiPcdHstiImplementedTestBitmap"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint64"
+	Value  = "0x3F0000"
+	Offset  = 00h
+	Length  = 08h
+	TargetDSC = Yes
+	Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+	Name  = "AmiPcdHstiCryptoStrengthImplementationBit"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "16"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+	Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+	Name  = "AmiPcdHstiFirmwareRollbackImplementationBit"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "17"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+	Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+	Name  = "AmiPcdHstiSecureBootBypassImplementationBit"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "18"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+	Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+	Name  = "AmiPcdHstiNoTestKeyImplementationBit"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "19"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+	Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+	Name  = "AmiPcdHstiExternalDeviceDmaImplementationBit"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "20"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+	Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+	Name  = "AmiPcdHstiMorSupportImplementationBit"
+	GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "21"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+	Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiSecureBootCsmDisableImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "0xFF"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiManufacturingModeImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "0xFF"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiSignedFirmwareUpdateImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "0xFF"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiSecureUpdateWithDefaultKeyImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "0xFF"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "HSTI_REVISION" "=" "0"
+End
+
+ELINK
+    Name  = "IbvImplementedHstiTests"
+    Help  = "Parent for IBV implemented HSTI Tests"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name = "FirmwareTrustCryptoStrength,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "Crypto Strength test elink"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "ExternalDeviceDMA,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "External DMA test elink"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "MorSupportTest,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "MOR Support test elink"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "FirmwareRollbackProtection,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "MOR Support test elink"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "TestKeyVerification,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "MOR Support test elink"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "SecureBootBypass,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "Crypto Strength test elink"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "SecureBootCsmDisable,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "Crypto Strength test elink"
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name = "SignedFirmwareUpdate,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "MOR Support test elink"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "ManufacturingMode,"
+    Parent  = "IbvImplementedHstiTests"
+    Help  = "MOR Support test elink"
+    InvokeOrder = AfterParent
+End
+
+OUTPUTREGISTER
+    Name  = "HSTI_ELINKS_H"
+    Path  = "Build"
+    File  = "AmiHstiElinks.h"
+    Template  = "AmiHstiElinkList.txt"
+End
+
+##================================================================================================
+##================================================================================================
+##================================================================================================
+

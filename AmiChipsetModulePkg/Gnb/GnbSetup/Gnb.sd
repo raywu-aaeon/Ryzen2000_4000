@@ -1,0 +1,400 @@
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+
+//*************************************************************************
+//<AMI_FHDR_START>
+//
+// Name:	Gnb.sd
+//
+// Description:	GNB Chipset setup definition.
+//
+//<AMI_FHDR_END>
+//*************************************************************************
+
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+#if EXTERNAL_VGA_CONTROL
+    UINT8   PrimaryVideo;		// 0= IGD;1= PCIe
+#endif
+    UINT8   AmdGopPlatformToDriver;
+    UINT32  AmdGopPlatformToDriverData1;
+    UINT32  AmdGopPlatformToDriverData2;
+    UINT32  AmdGopPlatformToDriverData3;
+    UINT32  AmdGopPlatformToDriverData4;
+    UINT32  AmdGopPlatformToDriverData5;
+    UINT32  AmdGopPlatformToDriverData6;
+    UINT8   AmdGopLcdBootUpBlLevel;
+    UINT8   iGpuControl;
+    UINT8   UmaFrameBufferSize;
+    UINT8   PsppPolicy;
+#if GNB_IOMMU_SUPPORT
+    UINT8   IommuSupport;
+#endif
+    UINT8   GnbRemoteDisplaySupport;
+    UINT8   GnbHdAudio;
+
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+ #if EXTERNAL_VGA_CONTROL
+    #define GNB_ONEOF_PRIMARY_VIDEO\
+        oneof varid     = SETUP_DATA.PrimaryVideo,\
+            prompt      = STRING_TOKEN(STR_PRI_VIDEO_PROMPT),\
+            help        = STRING_TOKEN(STR_PRI_VIDEO_HELP),\
+            option text = STRING_TOKEN(STR_IGD_GRFX), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_NB_PCIE_GRFX),  value = 1, flags = RESET_REQUIRED;\
+        endoneof;
+ #endif
+
+ #if AMD_GOP_PLATFORMTODRIVER_SUPPORT
+    #define GNB_ONEOF_PLATFORMTODRIVER_CONTROL\
+        oneof varid  = SETUP_DATA.AmdGopPlatformToDriver,\
+            prompt      = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL),\
+            help        = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_HELP),\
+            option text = STRING_TOKEN(STR_DEFAULT_TEXT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_MANUALLY_TEXT), value = 1, flags =  RESET_REQUIRED;\
+        endoneof;
+
+    #define GNB_ONEOF_PLATFORMTODRIVER_LCD_BOOTUP_BL_LEVEL\
+        numeric varid = SETUP_DATA.AmdGopLcdBootUpBlLevel, \
+            prompt = STRING_TOKEN(STR_GOP_BOOTUP_LEVEL), \
+            help = STRING_TOKEN(STR_GOP_BOOTUP_LEVEL_HELP), \
+	    	flags = RESET_REQUIRED,\
+            minimum = 0x0, \
+            maximum = 0xff, \
+            step = 1, \
+            default = 0xff,\
+            default = 0xff, defaultstore = AmiMfgDefault,\
+        endnumeric;
+
+    #define GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA1\
+        oneof varid  = SETUP_DATA.AmdGopPlatformToDriverData1,\
+            prompt      = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA1),\
+            help        = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA_HELP),\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT_TEXT),  value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_LCD_TEXT),  value = 1, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT2_TEXT), value = 2, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP1_TEXT), value = 3, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP2_TEXT), value = 4, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP3_TEXT), value = 5, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP4_TEXT), value = 6, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP5_TEXT), value = 7, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP6_TEXT), value = 8, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP7_TEXT), value = 9, flags =  RESET_REQUIRED;\
+        endoneof;
+
+    #define GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA2\
+        oneof varid  = SETUP_DATA.AmdGopPlatformToDriverData2,\
+            prompt      = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA2),\
+            help        = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA_HELP),\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT_TEXT),  value = 0, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_LCD_TEXT),  value = 1, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT2_TEXT), value = 2, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP1_TEXT), value = 3, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP2_TEXT), value = 4, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP3_TEXT), value = 5, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP4_TEXT), value = 6, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP5_TEXT), value = 7, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP6_TEXT), value = 8, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP7_TEXT), value = 9, flags =  RESET_REQUIRED;\
+        endoneof;
+
+    #define GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA3\
+        oneof varid  = SETUP_DATA.AmdGopPlatformToDriverData3,\
+            prompt      = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA3),\
+            help        = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA_HELP),\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT_TEXT),  value = 0, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_LCD_TEXT),  value = 1, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT2_TEXT), value = 2, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP1_TEXT), value = 3, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP2_TEXT), value = 4, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP3_TEXT), value = 5, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP4_TEXT), value = 6, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP5_TEXT), value = 7, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP6_TEXT), value = 8, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP7_TEXT), value = 9, flags =  RESET_REQUIRED;\
+        endoneof;
+
+    #define GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA4\
+        oneof varid  = SETUP_DATA.AmdGopPlatformToDriverData4,\
+            prompt      = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA4),\
+            help        = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA_HELP),\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT_TEXT),  value = 0, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_LCD_TEXT),  value = 1, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT2_TEXT), value = 2, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP1_TEXT), value = 3, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP2_TEXT), value = 4, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP3_TEXT), value = 5, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP4_TEXT), value = 6, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP5_TEXT), value = 7, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP6_TEXT), value = 8, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP7_TEXT), value = 9, flags =  RESET_REQUIRED;\
+        endoneof;
+
+    #define GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA5\
+        oneof varid  = SETUP_DATA.AmdGopPlatformToDriverData5,\
+            prompt      = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA5),\
+            help        = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA_HELP),\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT_TEXT),  value = 0, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_LCD_TEXT),  value = 1, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT2_TEXT), value = 2, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP1_TEXT), value = 3, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP2_TEXT), value = 4, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP3_TEXT), value = 5, flags =  DEFAULT | MANUFACTURING |   RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP4_TEXT), value = 6, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP5_TEXT), value = 7, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP6_TEXT), value = 8, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP7_TEXT), value = 9, flags =  RESET_REQUIRED;\
+        endoneof;
+
+    #define GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA6\
+        oneof varid  = SETUP_DATA.AmdGopPlatformToDriverData6,\
+            prompt      = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA6),\
+            help        = STRING_TOKEN(STR_AMD_PLATFORM_TO_DRIVER_CONTROL_DATA_HELP),\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT_TEXT),  value = 0, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_LCD_TEXT),  value = 1, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_CRT2_TEXT), value = 2, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP1_TEXT), value = 3, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP2_TEXT), value = 4, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP3_TEXT), value = 5, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP4_TEXT), value = 6, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP5_TEXT), value = 7, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP6_TEXT), value = 8, flags =  RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_DISPLAY_DEVICE_DFP7_TEXT), value = 9, flags =  RESET_REQUIRED;\
+        endoneof;
+
+ #endif
+
+// #if GNB_UMA_SYSTEM
+//    #define GNB_ONEOF_IGPU_CONTROL\
+//        oneof varid  = SETUP_DATA.iGpuControl,\
+//            prompt      = STRING_TOKEN(STR_INTEGRATED_GRAPHICS_CONTRL),\
+//            help        = STRING_TOKEN(STR_INTEGRATED_GRAPHICS_CONTRL_HELP),\
+//            option text = STRING_TOKEN(STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 1, flags = RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_FORCE_TEXT), value = 2, flags = RESET_REQUIRED;\
+//        endoneof;
+//
+//     #define GNB_ONEOF_UMA_FRAME_BUFFER_SIZE\
+//        oneof varid  = SETUP_DATA.UmaFrameBufferSize,\
+//            prompt      = STRING_TOKEN(STR_UMA_FB_SIZE_STRING),\
+//            help        = STRING_TOKEN(STR_UMA_FB_SIZE_HELP),\
+//            option text = STRING_TOKEN(STR_UMA_32_TEXT),    value = 1, flags = RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_UMA_64_TEXT),    value = 2, flags = RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_UMA_128_TEXT),   value = 4, flags = RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_UMA_256_TEXT),   value = 8, flags = RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_UMA_512_TEXT),   value = 16, flags = RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_UMA_1G_TEXT),    value = 32, flags = RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_UMA_2G_TEXT),    value = 64, flags = RESET_REQUIRED;\
+//            option text = STRING_TOKEN(STR_AUTO), 			value = -1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+//        endoneof;
+// #endif
+
+    #define GNB_ONEOF_PSPP_POLICY\
+	    oneof varid  = SETUP_DATA.PsppPolicy,\
+            prompt      = STRING_TOKEN(STR_PSPP_POLICY_STRING),\
+            help        = STRING_TOKEN(STR_PSPP_POLICY_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PERFORMANCE_STRING), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BALANCED_HIGH_STRING), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BALANCED_LOW_STRING), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_POWER_SAVING_STRING), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = -1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+        endoneof;
+
+ #if GNB_IOMMU_SUPPORT
+    #define GNB_ONEOF_IOMMU_CONTROL\
+        oneof varid  = SETUP_DATA.IommuSupport,\
+            prompt      = STRING_TOKEN(STR_IOMMU),\
+            help        = STRING_TOKEN(STR_IOMMU_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED_TEXT), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+ #endif
+
+    #define GNB_ONEOF_AWD_CONTROL\
+        oneof varid  = SETUP_DATA.GnbRemoteDisplaySupport,\
+            prompt      = STRING_TOKEN(STR_AWD),\
+            help        = STRING_TOKEN(STR_AWD_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED_TEXT), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+
+    #define GNB_ONEOF_HDAUDIO_CONTROL\
+        oneof varid  = SETUP_DATA.GnbHdAudio,\
+            prompt      = STRING_TOKEN(STR_HDAUDIO),\
+            help        = STRING_TOKEN(STR_HDAUDIO_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ENABLED_TEXT), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+
+#endif // CONTROL_DEFINITION
+
+//---------------------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+
+ #if EXTERNAL_VGA_CONTROL
+     //## depends on AMD-PBS ## GNB_ONEOF_PRIMARY_VIDEO
+ #endif
+ 
+ #if AMD_GOP_PLATFORMTODRIVER_SUPPORT
+     GNB_ONEOF_PLATFORMTODRIVER_CONTROL
+     GNB_ONEOF_PLATFORMTODRIVER_LCD_BOOTUP_BL_LEVEL
+     GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA1
+     GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA2
+     GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA3
+     GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA4
+     GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA5
+     GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA6
+ #endif 
+
+// #if GNB_UMA_SYSTEM
+    //## depends on AMD-PBS ## GNB_ONEOF_IGPU_CONTROL
+    //## depends on AMD-CBS ## GNB_ONEOF_UMA_FRAME_BUFFER_SIZE
+// #endif
+    //## depends on AMD-CBS ## GNB_ONEOF_PSPP_POLICY
+ #if GNB_IOMMU_SUPPORT
+    //## depends on AMD-CBS ## GNB_ONEOF_IOMMU_CONTROL
+ #endif
+    // GNB_ONEOF_AWD_CONTROL
+    // GNB_ONEOF_HDAUDIO_CONTROL
+
+#endif // CONTROLS_WITH_DEFAULTS
+//---------------------------------------------------------------------------
+
+#ifdef FORM_SET_TYPEDEF
+
+#endif
+
+
+#ifdef CHIPSET_FORM_SET
+
+
+    #ifdef FORM_SET_ITEM
+        // Define controls to be added to the main page of the formset
+    #endif
+
+    #ifdef FORM_SET_GOTO
+        // Define goto commands for the forms defined in this file
+    goto GNB_FORM_ID,
+        prompt = STRING_TOKEN(STR_GFX_SUBMENU_STRING),
+        help = STRING_TOKEN(STR_GFX_SUBMENU_STRING);
+    #endif
+
+#ifdef FORM_SET_FORM
+    // Define forms
+    form formid = AUTO_ID(GNB_FORM_ID),
+        title = STRING_TOKEN(STR_GFX_SUBMENU_STRING);
+
+        SUBTITLE(STRING_TOKEN(STR_GFX_SUBMENU_STRING))
+        SEPARATOR
+
+        //SUBTITLE(STRING_TOKEN(STR_VBIOS_VERSION))
+
+#if GNB_IOMMU_SUPPORT
+        //## depends on AMD-CBS ## GNB_ONEOF_IOMMU_CONTROL
+#endif
+        // SEPARATOR
+
+        // GNB_ONEOF_AWD_CONTROL
+        // GNB_ONEOF_HDAUDIO_CONTROL
+        SEPARATOR
+
+#if AMD_GOP_PLATFORMTODRIVER_SUPPORT
+
+    #if (defined(CsmOptOut_SUPPORT) && (CsmOptOut_SUPPORT != 0))
+        suppressif ideqval SETUP_DATA.VideoOpRom == 0 OR ideqval SETUP_DATA.VideoOpRom == 2;
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL
+        endif;
+
+        suppressif ideqval SETUP_DATA.AmdGopPlatformToDriver == 0
+                OR ideqval SETUP_DATA.VideoOpRom == 0 OR ideqval SETUP_DATA.VideoOpRom == 2;
+        SEPARATOR
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA1
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA2
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA3
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA4
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA5
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA6
+        endif;
+        SEPARATOR
+        GNB_ONEOF_PLATFORMTODRIVER_LCD_BOOTUP_BL_LEVEL
+    #else
+        GNB_ONEOF_PLATFORMTODRIVER_CONTROL
+        suppressif ideqval SETUP_DATA.AmdGopPlatformToDriver == 0;
+        SEPARATOR
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA1
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA2
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA3
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA4
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA5
+            GNB_ONEOF_PLATFORMTODRIVER_CONTROL_DATA6
+        endif;
+        SEPARATOR
+        GNB_ONEOF_PLATFORMTODRIVER_LCD_BOOTUP_BL_LEVEL
+    #endif
+#endif 
+        SEPARATOR
+#if EXTERNAL_VGA_CONTROL
+        //## depends on AMD-PBS ## 
+        //#####if (defined(CsmOptOut_SUPPORT) && (CsmOptOut_SUPPORT != 0))
+        //#####if (defined(AmdCpmDisplayFeature_SUPPORT) && (AmdCpmDisplayFeature_SUPPORT == 0))
+        //####suppressif ideqval SETUP_DATA.VideoOpRom == 1;
+        //####    GNB_ONEOF_PRIMARY_VIDEO
+        //####endif;
+        //#####endif
+        //#####endif
+#endif
+
+//#if GNB_UMA_SYSTEM
+        // Integrated Graphics Controller
+        //## depends on AMD-PBS ## GNB_ONEOF_IGPU_CONTROL
+
+		// UMA Frame Buffer Size
+		//## depends on AMD-CBS ## GNB_ONEOF_UMA_FRAME_BUFFER_SIZE
+//#endif //GNB_UMA_SYSTEM
+
+        // PSPP Policy
+        //## depends on AMD-CBS ## GNB_ONEOF_PSPP_POLICY
+
+    endform;    // form id GNB_FORM_ID
+
+
+#endif // #ifdef FORM_SET_FORM
+
+#endif // #ifdef CHIPSET_FORM_SET
+
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************

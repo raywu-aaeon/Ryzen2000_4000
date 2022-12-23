@@ -1,0 +1,86 @@
+TOKEN
+    Name  = "USB_DEV_CCID"
+    Value  = "1"
+    Help  = "Enable/disable support for USB CCID devices"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "USB_DEV_CCID_COUNT"
+    Value  = "6"
+    Help  = "Specifies the max number of USB CCID devices present in the system."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "USE_T0_T1_PROTOCOL"
+    Value  = "1"
+    Help  = "0 for T0 and 1 for T1. Used to select T0/T1 when CCID can support both T0 and T1"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "CCID_USE_INTERRUPT_INSERTION_REMOVAL"
+    Value  = "1"
+    Help  = "0: Disable, 1 : Enable. Some SMARTD Card readers don't generate interrupt when card is insert/removed even though they declare it supported."
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+INFComponent
+	Name  = "UsbCcid"
+	File  = "UsbCcid.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes = "DXE_DRIVER"
+	Token = "USB_DEV_CCID" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbCcidDevice"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "USB_DEV_CCID" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdMaxCcidDevCount"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(USB_DEV_CCID_COUNT)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "USB_DEV_CCID_COUNT" "!=" "6"
+End
+
+PcdMapping
+    Name  = "AmiPcdUseT0T1Protocol"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(USE_T0_T1_PROTOCOL)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "USE_T0_T1_PROTOCOL" "!=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdCcidUseIntInsRemoval"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "CCID_USE_INTERRUPT_INSERTION_REMOVAL" "=" "0"
+End

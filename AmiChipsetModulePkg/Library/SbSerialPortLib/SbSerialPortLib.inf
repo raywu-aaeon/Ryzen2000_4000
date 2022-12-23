@@ -1,0 +1,28 @@
+[Defines]
+INF_VERSION = 0x00010005
+VERSION_STRING = 1.0
+BASE_NAME = SbSerialPortLib
+MODULE_TYPE = BASE
+LIBRARY_CLASS = SerialPortLib
+FILE_GUID = 15B26F43-A389-4bae-BDE3-4BB0719B7D4F
+
+[Sources]
+SbSerialPortLib.c
+
+[LibraryClasses]
+BaseLib
+PcdLib
+IoLib
+PciLib
+TimerLib
+PcdLib
+
+[Packages]
+MdePkg/MdePkg.dec
+MdeModulePkg/MdeModulePkg.dec
+AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+AmiChipsetPkg/AmiChipsetPkg.dec
+AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+
+[Pcd]
+  gAmiChipsetModulePkgTokenSpaceGuid.AmiPcdSbFchTypeString

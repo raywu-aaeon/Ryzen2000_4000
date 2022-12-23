@@ -1,0 +1,11 @@
+<component>
+	name = "TcgCoreFvOverride"
+	category = eModule
+	LocalRoot = "MandolinPkg\CrbPostTime\TcgCoreFvOverride\"
+	RefName = "TcgCoreFvOverride"
+[files]
+"TcgCoreFvOverride.sdl"
+"OemTCGAuxListTemplate.txt"
+[INF]
+"TcgCoreFvOverride.inf"
+<endComponent>

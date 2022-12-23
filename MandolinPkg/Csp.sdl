@@ -1,0 +1,844 @@
+#TOKEN
+#	Name  = "CSPLIB_SUPPORT"
+#	Value  = "0"
+#	Help  = "Main switch to enable CSP Library support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+TOKEN
+	Name  = "===================== CSP.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+#TOKEN
+#	Name  = "PCIE_BASE_ADDRESS"
+#	Value  = "$(PCIEX_BASE_ADDRESS)"
+#	Help  = "Specify the Base address where PCI Config space is mapped.\ Set to 0 if PCI Express access functions are not supported."
+#	TokenType = Integer
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "DEFAULT_ACPI_SPCR_CONSOLE_REDIRECTION_ENABLE"
+	Value  = "0"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "duty_offset"
+#	Value  = "1"
+#	Help  = "The zero-based index of where the processor's duty cycle setting is within the processor's P_CNT register.\(for more information, ACPI SPEC)."
+#	TokenType = Integer
+#	TargetH = Yes
+#	Range  = "0-0xf0"
+#End
+
+#TOKEN
+#	Name  = "duty_width"
+#	Value  = "3"
+#	Help  = "The bit width of the processor's duty cycle setting value in the P_CNT register. Each processor's duty cycle setting\allows the software to select a nominal processor frequency below its absolute frequency.\(for more information, ACPI SPEC)."
+#	TokenType = Integer
+#	TargetH = Yes
+#	Range  = "0-0xff: depends on 'duty_offset'"
+#End
+
+PcdMapping
+    Name  = "AmiPcdPcieBaseAddressBuffer"
+    GuidSpace  = "gAmiModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Pointer"
+    Value  = "{0x0,0x0,0x0,0xF8,0x0,0x0,0x0,0x0}"
+    Offset  = 00h
+    Length  = 08h
+    Help  = "<PORTING REQUIRED: sync PCIEX_BASE_ADDRESS>\Value must be byte sequence of AMI_MAX_NUMBER_OF_PCI_SEGMENTS UINT64 bit values in array./Length must be (sizeof(UINT64)*$(AMI_MAX_NUMBER_OF_PCI_SEGMENTS))"
+    TargetDSC = Yes
+End
+
+TOKEN
+	Name  = "===================== AMD SB900 module ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+#TOKEN
+#	Name  = "CIMX_MISC_UI_SUPPORT"
+#	Value  = "0"
+#	Help  = "CIMx RAID UI bin support"
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#End
+
+TOKEN
+	Name  = "SB_LPC_PORT80_SUPPORT"
+	Value  = "1"
+	Help  = "LPC Port 80 support"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "SB_RAID5_SUPPORT"
+#	Value  = "0"
+#	Help  = "On:Platform support Raid5\OFF:Platform don't support Raid5"
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "XHCI_EVENT_SERVICE_MODE"
+	Value  = "1"
+	Help  = "This token controlls xHCI event service mode.\0 - Use periodic timer SMI.\1 - Use xHCI hardware SMI.\2 - Both periodic timer SMI and se xHCI hardware SMI."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0..2"
+End
+
+#TOKEN
+#	Name  = "SmBus_SUPPORT"
+#	Value  = "1"
+#	Help  = "Main switch to enable SmBus support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+TOKEN
+    Name  = "=====================SPI Interface - Source ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "YANGTZE_SPI"
+	Value  = "1"
+	Help  = "Switch to SPI support for YangTze."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "REG80_FIFO_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to use 64 bytes FIFO at register 0x80"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "LPCFlash_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable LPC Flash support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "STDFlash_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable STD Flash support in Project"
+    TokenType = Boolean
+End
+
+#TOKEN
+#	Name  = "===================== GNB.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+#
+#TOKEN
+#	Name  = "PCIEX_BASE_ADDRESS"
+#	Value  = "0xF8000000"
+#	Help  = "Contains the base address programmed for PCI Express. \Set this value to 0 if PCI Express support is not present. \Enables/disables PCI configuration access through memory. \Make sure PCIEX_BASE_ADDRESS is set appropriately. \If PCI is accessed through PCI \config mechanism then the maximum register offset that can be accessed is 256."
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetH = Yes
+#End
+#
+#TOKEN
+#	Name  = "===================== AGESA ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+#
+#TOKEN
+#	Name  = "IGNORE_SPD_CHECKSUM"
+#	Value  = "1"
+#	Help  = "Set to ignore SPD checkum. (DIMMS may return an incorrect SPD Checksum) "
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#End
+
+TOKEN
+	Name  = "===================== ACPI ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+#TOKEN
+#	Name  = "FEC00000_APIC_AUTODETECT"
+#	Value  = "1"
+#	Help  = "This will Auto Detect IO/APIC(s) which resides in MMIO region from 0xFEC0_0000  to 0xFED0_0000-1.\\ If set to 'off' ACPI initialization software will assume - system has one IO/APIC\with address provided in 'APCB' token."
+#	TokenType = Boolean
+#	TargetH = Yes
+#	Range  = "On - Off"
+#End
+
+TOKEN
+	Name  = "IO_APIC_BASE_ADDRESS_TOP"
+	Value  = "0xFEC10000"
+	Help  = "Platform defined APIC search top of APIC address"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FEC00000_APIC_AUTODETECT" "=" "1"
+End
+
+TOKEN
+	Name  = "IO_APIC_VERSION_PARAMETER"
+	Value  = "0x22"
+	Help  = "IOAPIC/IOSAPIC revision BOUNDARY. For Intel it is should be 0x21. Clone and reasign if different"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FEC00000_APIC_AUTODETECT" "=" "1"
+End
+
+TOKEN
+	Name  = "IRQ_09_POLARITY"
+	Value  = "3"
+	Help  = "0 = Conforms to specifications of bus.\1 = Active High.\3 = Active Low."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0, 1 or 3. 2-reserved"
+	Token = "IRQ_09_OVERRIDE_ENABLE" "=" "1"
+End
+
+#TOKEN
+#	Name  = "MPS_TABLE_SUPPORT"
+#	Value  = "0"
+#	Help  = "Main switch to enable MPS V 1.4 Table support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "ACPI_PM_PROFILE"
+	Value  = "2"
+	Help  = "Power Management Profile ACPI 2.0\See acpi20.h"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-8 0 = Unspecified; 1 = Desktop; 2 = Mobile; 3 = Workstation; 4 = Enterprise Server; 5 = SOHO Server; 6 = Application PC; 7 = Performance Server; 8 = Tablet"
+	Token = "ACPI_BUILD_TABLES_2_0" "=" "1"
+End
+
+TOKEN
+	Name  = "FACP_FLAG_TMR_VAL_EXT"
+	Value  = "1"
+	Help  = "(EIP36898+)A zero indicates TMR_VAL is implemented as a \24-bit value. A one indicates TMR_VAL is \implemented as a 32-bit value. The TMR_STS \bit is set when the most significant bit of the \TMR_VAL toggles."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "A_S1"
+	Value  = "0"
+	Help  = "S1 Sleep state enabled in BIOS"
+	TokenType = Boolean
+	TargetMAK = Yes
+End
+
+#TOKEN
+#	Name  = "===================== CPU.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+
+TOKEN
+	Name  = "===================== PciBus.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+PCIDEVICE
+	Title  = "PciHost (Virtual)"
+	Attribute  = "0x2"
+	Dev_type  = "HostBridge"
+	Dev  = 00h
+	SleepNum  = 03h
+	ASLfile  = "'AmiChipsetModulePkg/ASL/AmdASLLIB.asl;Before Pci Tree','AmiModulePkg/ACPI/AMLUPD.ASL;Before Pci Tree'"
+	ASLdeviceName  = "HST0"
+	Token = "PCI_FIXED_BUS_ASSIGNMENT" "=" "1"
+	DeviceType = OnBoard
+	PCIBusSize = 64bit
+	ROMMain = No
+	Virtual = Yes
+	PCIExpress = Yes
+	Enforce = Yes
+	Help  = "Override ASLLIB.ASL by AMDASLLIB.asl to sync ASL code with AMD demo BIOS."
+End
+
+PCIDEVICE
+	Title  = "PciHost (Virtual)"
+	Attribute  = "0x2"
+	Dev_type  = "HostBridge"
+	Dev  = 00h
+	SleepNum  = 03h
+	ASLfile  = "'AmiChipsetModulePkg/ASL/AmdASLLIB.asl;Before Pci Tree','AmiModulePkg/ACPI/AMLUPD.ASL;Before Pci Tree'"
+	ASLdeviceName  = "HST0"
+	Token = "PCI_FIXED_BUS_ASSIGNMENT" "=" "0"
+	DeviceType = OnBoard
+	PCIBusSize = 64bit
+	ROMMain = No
+	Virtual = Yes
+	PCIExpress = Yes
+	Help  = "Override ASLLIB.ASL by AMDASLLIB.asl to sync ASL code with AMD demo BIOS."
+End
+
+TOKEN
+	Name  = "===================== USB.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "UHCI_SUPPORT"
+	Value  = "0"
+	Help  = "Enable/Disable UHCI controller(s)."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OHCI_SUPPORT"
+	Value  = "0"
+	Help  = "Enable/Disable OHCI controller(s)"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "EHCI_SUPPORT"
+	Value  = "0"
+	Help  = "(Raven/Picasso only XHCI) Enable/Disable EHCI controller(s)"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "XHCI_SUPPORT"
+	Value  = "1"
+	Help  = "Enable/Disable xHCI controller(s)"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "USB_HOTPLUG_FDD"
+#	Value  = "0"
+#	Help  = "Includes the support for USB hot plug floppy drive."
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "USB_DEBUG_MESSAGES"
+	Value  = "0"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "DEBUG_CODE" "!=" "0"
+End
+
+#TOKEN
+#	Name  = "USB_DEBUG_MESSAGES"
+#	Value  = "0"
+#	TokenType = Boolean
+#	TargetH = Yes
+#	Token = "AMI_DEBUGGER_SUPPORT" "=" "1"
+#	Token = "DEBUG_MODE_dbg" "!=" "0"
+#End
+
+#TOKEN
+#	Name  = "===================== AHCI Driver ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+
+#TOKEN
+#	Name  = "ICH_SATA_BUS_NUMBER"
+#	Value  = "$(FIXED_SATA_BUS_SANDSTONE)"
+#	Help  = "Sata BUS number"
+#	TokenType = Integer
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "ICH_SATA_DEVICE_NUMBER"
+#	Value  = "0x0"
+#	Help  = "Sata Device Number"
+#	TokenType = Integer
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "ICH_SATA_FUNCTION_NUMBER"
+#	Value  = "0x0"
+#	Help  = "SATA Function No"
+#	TokenType = Integer
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "===================== USB PEI Support ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "USBPEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable USB PEI support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OHCI_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Enable/Disable OHCI controller(s) in PEI"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "USBPEI_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "EHCI_PEI_SUPPORT"
+    Value  = "0"
+    Help  = "Enable/Disable EHCI controller(s) in PEI"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "USBPEI_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "XHCI_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Enable/Disable XHCI controller(s) in PEI"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "USBPEI_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PEI_XHCI_CONTROLLER_PCI_ADDRESS"
+	Value  = "{2, $(FIXED_XHCI_BUS_SANDSTONE), 0x0, 0x3, $(FIXED_XHCI_BUS_SANDSTONE), 0x0, 0x4}"
+	Help  = "Default value if XHCI controllers are not supported"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PEI_BRIDGE_MMIO_MIN_H"
+    Value  = "0xFE"
+    Help  = "Bridge mmio resource"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PEI_BRIDGE_MMIO_MIN_L"
+    Value  = "0x50"
+    Help  = "Bridge mmio resource"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PEI_BRIDGE_MMIO_MAX_H"
+    Value  = "0xFE"
+    Help  = "Bridge mmio resource"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PEI_BRIDGE_MMIO_MAX_L"
+    Value  = "0x90"
+    Help  = "Bridge mmio resource"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+
+
+#TOKEN
+#	Name  = "PEI_XHCI_CONTROLLER_PCI_REGISTER_VALUES"
+#       Value  = "{0, 0x8, 0x1, 0x18, 32, ((($(FIXED_XHCI_BUS_SANDSTONE)<<8)+$(FIXED_XHCI_BUS_SANDSTONE))<<8), 0xFFFFFF}, {0, 0x8, 0x1, 0x20, 16, $(PEI_BRIDGE_MMIO_MIN), 0xFFFF}, {0, 0x8, 0x1, 0x22, 16, $(PEI_BRIDGE_MMIO_MAX), 0xFFFF}, {0, 0x8, 0x1, 0x4, 0x8, 0x6, 0}, {$(FIXED_XHCI_BUS_SANDSTONE), 0x0, 0x3, 0x10, 32, 0xfe700000, 0xFFFFFFFF}, {$(FIXED_XHCI_BUS_SANDSTONE), 0x0, 0x4, 0x10, 32, 0xfe600000, 0xFFFFFFFF},"
+#       Value  = "{0}"
+#	Help  = "Enable PCIe slot by programming bridge with the secondary/subordinate bus number and memory window.\Information format (AccessWidth is decimal), with a comma at the end:\   {Bus, Device, Function, Register, AccessWidth, BitsToSet, BitsToClear},"
+#	TokenType = Expression
+#	TargetH = Yes
+#	Token = "XHCI_PEI_SUPPORT" "=" "1"
+#End
+
+TOKEN
+    Name  = "PEI_XHCI_CONTROLLER_PCI_REGISTER_VALUES"
+    Value  = "{0x06, 0x00, 0x08, 0x01, 0x18,0x0,0x0,0x0, 32, 0,$(NBIO_FIXED_ONCHIP_BUS_A),$(NBIO_FIXED_ONCHIP_BUS_A),0x0, 0x00,0x0,0x0,0x0,  0x00, 0x08, 0x01, 0x20,0x0,0x0,0x0, 16, $(PEI_BRIDGE_MMIO_MIN_L),$(PEI_BRIDGE_MMIO_MIN_H),0x0,0x0, 0x00,0x0,0x0,0x0,  0x00, 0x08, 0x01, 0x22,0x0,0x0,0x0, 16, $(PEI_BRIDGE_MMIO_MAX_L),$(PEI_BRIDGE_MMIO_MAX_H),0x0,0x0, 0x00,0x0,0x0,0x0,  0x00, 0x08, 0x01, 0x4,0x0,0x0,0x0, 8, 0x06,0x0,0x0,0x0, 0x00,0x0,0x0,0x0,  $(NBIO_FIXED_ONCHIP_BUS_A), 0x0, 0x3, 0x10,0x0,0x0,0x0, 32, 0x00,0x0,0x70,0xFE,  0x00,0x0,0x0,0x0,  $(NBIO_FIXED_ONCHIP_BUS_A), 0x0, 0x4, 0x10,0x0,0x0,0x0, 32, 0x00,0x0,0x60,0xFE,  0x00,0x0,0x0,0x0}"
+    Help  = "Enable PCIe slot by programming bridge with the secondary/subordinate bus number and memory window.\Information format (AccessWidth is decimal), with a comma at the end:\   {Count N, (UINT8)Bus#1, (UINT8)Device#1, (UINT8)Function#1, (UINT32)Register#1, (UINT8)AccessWidth#1, (UINT32)BitsToSet#1, (UINT32)BitsToClear#1,....N},"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+
+
+TOKEN
+	Name  = "===================== AhciRecovery.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "ATAPI_RECOVERY_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "AhciRecovery_SUPPORT" "=" "1"    
+End
+
+TOKEN
+	Name  = "===================== SMM ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "SMM_CACHE_SUPPORT"
+	Value  = "0"
+	Help  = "Enable/disable SMM Cache Support"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "ATIS"
+#	Value  = "0xB0"
+#	Help  = "ATI Software SMI"
+#	TokenType = Integer
+#	TargetASL = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "MAX_MANAGED_CMOS_ADDRESS"
+	Value  = "256"
+	Help  = "Last CMOS address + 1 used to specify the maximum address that is managed by CMOS Manager. \\Note: the region starting at FIRST_MANAGED_CMOS_ADDRESS and ending at MAX_MANAGED_CMOS_ADDRESS - 1 represents the managed region."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PROCESSOR_INFO"
+	Value  = "0"
+	Help  = "ON  -> Processor Information (Type 4) structure will be present\OFF -> Processor Information (Type 4) structure will not be present\The number of CPU is defined in CPU.SDL as NCPU.\Total number of processors will be NCPU ( specified in CPU.SDL) \Currenty there is support for 4 Processors. \To support more processores modify in SMBDESC.DEF and SMBIOS.SDL"
+	TokenType = Boolean
+	TargetEQU = Yes
+End
+
+TOKEN
+	Name  = "S3_BASE_MEMORY_SIZE"
+	Value  = "0x100000"
+	Help  = "Number of bytes for S3 resume base memory."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0x40000 = 256K, increase/decrease it in units of 0x1000 = 4K"
+End
+
+TOKEN
+	Name  = "S3_BASE_MEMORY_SIZE"
+	Value  = "0x100000"
+	Help  = "Number of bytes for S3 resume base memory."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0x40000 = 256K, increase/decrease it in units of 0x1000 = 4K"
+	Token = "AMI_DEBUG_RX_IN_S3_SUPPORT" "=" "1"
+End
+
+#TOKEN
+#	Name  = "IDE_CONTROLLER_LOCATION"
+#	Value  = "{0, 0x11, 0}"
+#	Help  = "Bus, Device and Function of the First IDE (SATA) controller."
+#	TokenType = Expression
+#	TargetH = Yes
+#	Token = "ACOUSTIC_MANAGEMENT_DRIVER_SUPPORT" "=" "1"
+#End
+
+#TOKEN
+#	Name  = "SECOND_CONTROLLER_LOCATION"
+#	Value  = "{0, 0x14, 1}"
+#	Help  = "Location of second IDE (SATA) controller (if any)."
+#	TokenType = Expression
+#	TargetH = Yes
+#	Token = "ACOUSTIC_MANAGEMENT_DRIVER_SUPPORT" "=" "1"
+#End
+
+#TOKEN
+#    Name  = "===================== SB700Spi ====================="
+#    Value  = "==========================================================="
+#    TokenType = Expression
+#End
+#
+#TOKEN
+#    Name  = "ENABLE_ROM_CACHE_IN_DXE"
+#    Value  = "0"
+#    Help  = "Switch to enable ROM cache in DXE"
+#    TokenType = Boolean
+#    TargetH = Yes
+#End
+
+TOKEN
+	Name  = "===================== TCG ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "TCGSMIPORT"
+	Value  = "$(SW_SMI_IO_ADDRESS)"
+	Help  = "IO port used to generate software SMI."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "TCGSMIDATAPORT"
+	Value  = "$(SW_SMI_IO_ADDRESS) + 1"
+	Help  = "IO port used to generate software SMI."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NO_SIO_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NO_SIO_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "SIO_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "DEBUG_PLATFORM"
+    Value  = "0"
+    Help  = "Pre-define for CRB component if Core less or equal 5.12. According to AMI_Aptio_5.x_Module_Developer's_Guide_INT.doc the domain will be support in the Core5.13."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+PATH
+	Name  = "MdeModulePkg_Lib_DIR"
+	Path  = "MdeModulePkg/Library"
+End
+
+PATH
+	Name  = "MdePkg_Lib_DIR"
+	Path  = "MdePkg/Library"
+End
+
+#ELINK
+#	Name  = "{ 32, 0xc, 0x2010, 0x0 },"
+#	Parent  = "USBR_OHCI_CONTROLLER_PCI_REGISTER_VALUE"
+#	Priority  = 0
+#	Help  = "Latency timer and cache line size"
+#	Token = "PEI_OHCI_SUPPORT" "=" "1"
+#	InvokeOrder = AfterParent
+#End
+#
+#ELINK
+#	Name  = "{ 32, 0x40, 0x100, 0x0 },"
+#	Parent  = "USBR_OHCI_CONTROLLER_PCI_REGISTER_VALUE"
+#	Priority  = 0
+#	Help  = "Disable MSI"
+#	Token = "PEI_OHCI_SUPPORT" "=" "1"
+#	InvokeOrder = AfterParent
+#End
+#
+#ELINK
+#	Name  = "{0x0, 0x12, 0x0},{0x0, 0x13, 0x0},{0x0, 0x14, 0x5},{0x0, 0x16, 0x0}"
+#	Parent  = "USBR_OHCI_CONTROLLER_PCI_ADDRESS"
+#	Token = "PEI_OHCI_SUPPORT" "=" "1"
+#	InvokeOrder = AfterParent
+#End
+
+INFComponent
+	Name  = "BasePlatformHookLibNull"
+	File  = "BasePlatformHookLibNull/BasePlatformHookLibNull.inf"
+	Package  = "MdeModulePkg"
+	Path  = "MdeModulePkg_Lib_DIR"
+End
+
+INFComponent
+	Name  = "BaseSerialPortLibNull"
+	File  = "BaseSerialPortLibNull/BaseSerialPortLibNull.inf"
+	Package  = "MdePkg"
+	Path  = "MdePkg_Lib_DIR"
+	Help  = "Build pass for 5.004_UefiCpuPkg_03 if there is no SIO-Serial port component."
+End
+
+INFComponent
+    Name  = "BaseSerialPortLib16550"
+    File  = "BaseSerialPortLib16550/BaseSerialPortLib16550.inf"
+    Package  = "MdeModulePkg"
+    Path  = "MdeModulePkg_Lib_DIR"
+End
+
+LibraryMapping
+	Class  = "PlatformHookLib"
+	Instance  = "MdeModulePkg.BasePlatformHookLibNull"
+	Token = "NO_SIO_SUPPORT" "=" "1"
+	Token = "AmdCpmPlatformHookLib_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+	Class  = "SerialPortLib"
+	Instance  = "MdePkg.BaseSerialPortLibNull"
+	Help  = "Build pass for 5.004_UefiCpuPkg_03 if there is no SIO-Serial port component."
+	Token = "NO_SIO_SUPPORT" "=" "1"
+	Token = "FCH_UART_DEBUG_SELECT" "=" "0"
+End
+
+PcdMapping
+	Name  = "PcdUseNewImageOnFlashUpdate"
+	GuidSpace  = "gAmiModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Boolean"
+	Value  = "FALSE"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "SOLUTION_TYPE"
+    Value  = "0"
+    Help  = "0 = Enable Fp5 Support, 1 = Enable Am4 support"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+   Name  = "NUMBER_OF_MEM_MODULE"
+  Value  = "4"
+   Help  = "Number of Memory Modules in this Physical Array.\Port 'get_mem_module_info' from NBSMBIOS.ASM"
+   TokenType = Integer
+   TargetEQU = Yes
+   TargetH = Yes
+End
+
+TOKEN
+   Name  = "A1_MEMORY_SOCKETS"
+  Value  = "4"
+   Help  = "Number of Memory Modules/Slots in the first physical Memory Array"
+   TokenType = Integer
+   TargetEQU = Yes
+   TargetH = Yes
+End
+
+TOKEN
+   Name  = "DIMM_SLOTS_PER_NODE"
+  Value  = "4"
+   Help  = "Number of DIMM slots per node"
+   TokenType = Integer
+   TargetH = Yes
+End
+
+TOKEN
+	Name  = "TYPE16_STRUCTURE"
+	Value  = "0"
+	Help  = "ON  -> Physical Memory Array Information structure will be present\OFF -> Physical Memory Array Information structure will not be present"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "MEMORY_DEVICE_INFO"
+	Value  = "0"
+	Help  = "ON   -> Memory Device Mapped Address Information (Type 20) structures will be present.\OFF  -> Memory Device Mapped Address Information (Type 20) structures will not be present."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WDT_SUPPORT"
+	Value  = "0"
+	Help  = "Enables Watchdog Timer (WDT) Support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "FCH_LPC_CLK_RUN_SUPPORT"
+#	Value  = "0"
+#	Help  = " LPC Clock Run support"
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+PcdMapping
+    Name  = "PcdAmdSmbiosT16MaximumCapacity"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT32"
+    Value  = "0x02000000"
+    Help  = "Maximum memory size.\ This Pcd will depend on platform configuration.\ For example, solder down DIMM or memory channel number could cause different maximum capacity."
+    TargetDSC = Yes
+End
+
+#ELINK
+#  Name  = "= $(EDK_TOOLS_PATH)\iasl5"
+#  Parent  = "MSFT:*_*_*_ASL_PATH"
+#  InvokeOrder = AfterParent
+#End
+
+#ELINK
+#    Name ="MSFT:*_*_*_ASL_PATH"
+#    Type="BuildOptions"
+#    InvokeOrder= ReplaceParent
+#    OutDsc=Yes
+#End

@@ -1,0 +1,158 @@
+TOKEN
+	Name  = "BcpBootOrder_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable BcpBootOrder support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+	Master = Yes
+End
+
+MODULE
+	Help  = "Includes BcpBootOrder.mak to Project"
+	File  = "BcpBootOrder.mak"
+End
+
+TOKEN
+    Name  = "BCP_DEFAULT_BOOT_ORDER"
+    Value = "BCP_USB_FDD,BCP_USB_HDD,BCP_PM_HDD,BCP_PS_HDD,BCP_SM_HDD,BCP_SS_HDD,BCP_SATA0_HDD,BCP_SATA1_HDD,BCP_SATA2_HDD,BCP_SATA3_HDD,BCP_SATA4_HDD,BCP_SATA5_HDD,BCP_SATA6_HDD,BCP_SATA7_HDD,BCP_PM_CD,BCP_PS_CD,BCP_SM_CD,BCP_SS_CD,BCP_SATA0_CD,BCP_SATA1_CD,BCP_SATA2_CD,BCP_SATA3_CD,BCP_SATA4_CD,BCP_SATA5_CD,BCP_SATA6_CD,BCP_SATA7_CD,BCP_USB_CD"
+    Help  = "This is default BCP Boot Order /To add support for UEFI Boot Options refer to the BCP Boot Order Porting Guide for details"
+    TokenType = Expression
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+#TOKEN
+	#Name  = "BCP_DEFAULT_BOOT_ORDER_LENGTH"
+	#Value  = "34"
+	#Help  = "The number of comma separated entries in BCP_DEFAULT_BOOT_ORDER"
+	#TokenType = Integer
+	#TargetH = Yes
+#End
+
+TOKEN
+    Name  = "BCP_DEBUG_MESSAGES_LEVEL"
+    Value  = "0"
+    Help  = "Debug level for the module."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BCP_ENABLE_CUSTOM_GROUPING_SUPPORT"
+    Value  = "0"
+    Help  = "This token enables/disables the ability to add custom boot groups to the BCP Boot Order module and AMI BCP"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BCP_NUM_NEW_STRINGS"
+    Value  = "0"
+    Help  = "This is the number of new String Entries in the STRING_BLOCK structure provided for AMI BCP"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "BCP_ENABLE_CUSTOM_GROUPING_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BCP_GROUPING_MAX_STRING_LENGTH"
+    Value  = "0"
+    Help  = "This is the length of the longest string in the group list.  \The shorter strings must have trailing spaces upto this length"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "BCP_ENABLE_CUSTOM_GROUPING_SUPPORT" "=" "1"
+End
+
+ELINK
+	Name  = "MatchUefiUsbBootGroup"
+	Parent  = "BCP_BOOT_GROUP_DETECTION"
+	Priority  = 10
+	Token = "UEFI_USB_DEVICE_TYPE_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+	Help = "Function that determines if the device is a USB device or not. \Disabled by default"
+End
+
+ELINK
+	Name  = "MatchUefiHddBootGroup"
+	Parent  = "BCP_BOOT_GROUP_DETECTION"
+	Priority  = 20
+	InvokeOrder = AfterParent
+	Help = "Function that determines if the device is an HDD device or not."
+End
+
+ELINK
+	Name  = "MatchUefiCdBootGroup"
+	Parent  = "BCP_BOOT_GROUP_DETECTION"
+	Priority  = 30
+	InvokeOrder = AfterParent
+	Help = "Function that determines if the device is an CD or DVD device or not."
+End
+
+ELINK
+	Name  = "MatchUefiNetworkBootGroup"
+	Parent  = "BCP_BOOT_GROUP_DETECTION"
+	Priority  = 40
+	InvokeOrder = AfterParent
+	Help = "Function that determines if the device is an Network Boot device or not."
+End
+
+ELINK
+	Name  = "MatchUefiFloppyBootGroup"
+	Parent  = "BCP_BOOT_GROUP_DETECTION"
+	Priority  = 50
+	InvokeOrder = AfterParent
+	Help = "Function that determines if the device is an USB_Floppy device or not."
+End
+
+ELINK
+	Name  = "CheckIfFirstBoot,"
+	Parent  = "CreateBootOptionsForNewBootDevices,"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SetDefaultBcpBootOptionPriorities,"
+	Parent  = "/*Process Boot Option List*/"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "BCP_BOOT_GROUP_DETECTION"
+	Help  = "eLink parent that will contain a list of functions that test what kind of device the UEFI boot option is"
+	InvokeOrder = ReplaceParent
+End
+
+OUTPUTREGISTER
+	Name  = "BcpBootOrderElinks"
+	Path  = "Build"
+	File  = "BcpBootOrderElinks.h"
+	Template  = "BcpBootOrderElinks.txt"
+End
+
+INFComponent
+	Name  = "BcpBootOrder"
+	File  = "BcpBootOrder.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "USER_DEFINED"
+End
+
+INFComponent
+	Name  = "BootOrderSection"
+	File  = "BootOrderSection.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "USER_DEFINED"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiModulePkg.BcpBootOrder"
+	Override  = "AmiModulePkg.Bds"
+End
+
+FFS_FILE
+	Name  = "BootOrderSection"
+	FD_AREA  = "FV_MAIN"
+	INFComponent  = "AmiModulePkg.BootOrderSection"
+	Rule_Override  = "SubtypeGuidUnCompressed"
+End
+

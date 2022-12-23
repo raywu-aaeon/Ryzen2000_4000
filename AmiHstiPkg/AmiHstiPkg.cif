@@ -1,0 +1,18 @@
+<component>
+	name = "AmiHstiPkg"
+	category = eModule
+	LocalRoot = "AmiHstiPkg\"
+	RefName = "AmiHstiPkg"
+[files]
+"AmiHstiPkg.dec"	
+"AmiHstiPkg.sdl"	
+"AmiHstiPkg.chm"	
+[parts]
+"AmiHstiPkg.Include"
+"HstiAmi"
+[dependency]
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_13"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_08"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_25"
+AmiCryptoPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCryptoPkg;AmiCryptoPkg_023"
+<endComponent>

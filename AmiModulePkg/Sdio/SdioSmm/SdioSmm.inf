@@ -1,0 +1,75 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+## @file SdioSmm.inf
+# SdioSmm Module supports SDIO driver in SMM
+# This driver performs SDIO SMM registration
+#
+##
+
+[Defines]
+    INF_VERSION               = 0x00010015
+    VERSION_STRING            = 1.0
+    BASE_NAME                 = SdioSmm
+    MODULE_TYPE               = DXE_SMM_DRIVER
+    FILE_GUID                 = EA343100-1A37-4239-A3CB-B92240B935CF
+    PI_SPECIFICATION_VERSION  = 0x0001000A
+
+    ENTRY_POINT               = SdioSmmDriverEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+# VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+    SdioSmm.c
+    SdioSmm.h
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+    IntelFrameworkPkg/IntelFrameworkPkg.dec
+    
+[LibraryClasses]
+    UefiDriverEntryPoint
+    DebugLib
+    SdioControllerDxeLib
+    AmiBufferValidationLib
+    BaseLib
+    
+[Protocols]
+    gEfiSmmBase2ProtocolGuid          # PROTOCOL ALWAYS_CONSUMED
+    gEfiSmmSwDispatch2ProtocolGuid    # PROTOCOL ALWAYS_CONSUMED
+    gEfiSmmEndOfDxeProtocolGuid
+    gEfiLegacyBiosProtocolGuid
+    
+[Depex]
+    gEfiSmmBase2ProtocolGuid AND
+    gEfiSmmSwDispatch2ProtocolGuid
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

@@ -1,0 +1,33 @@
+<component>
+	name = "AMI CPU Module"
+	category = ModulePart
+	LocalRoot = "AmiCpuPkg\Cpu\"
+	RefName = "AMI_CPU"
+[INF]
+"Sec\SecCore.inf"
+"Library\CpuCspLib.inf"
+"Library\DxeInitializeMtrrLib.inf"
+"Library\TscTimerLib.inf"
+"Library\CpuDisableCar.inf"
+"Library\GetCpuSetupData.inf"
+"Library\GetPeiCpuSetupData.inf"
+"Library\PeiInitializeMtrrLib.inf"
+"Library\SmmCpuPlatformHookLib.inf"
+"Pei\CpuPei.inf"
+"Pei\CpuSetAgesaPcd.inf"
+"Dxe\CpuDxe.inf"
+"Dxe\CpuIoDxe.inf"
+"Dxe\CpuSmm.inf"
+"Dxe\Stibp.inf"
+[files]
+"Cpu.sdl"	
+"Cpu.mak"	
+"CpuPeiDebugger.c"	
+"Library\CpuElinks.txt"	
+[parts]
+"AMD_CPU_SETUP"
+"AMD_CPU_INCLUDE"
+"AMD_CPU_ASL"
+"AMD_CPU_PPI"
+"AMD_CPU_PROTOCOL"
+<endComponent>

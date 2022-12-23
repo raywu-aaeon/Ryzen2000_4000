@@ -1,0 +1,9 @@
+
+<component>
+	name = "Oem"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Addendum\Oem\"
+	RefName = "AmdCpmPkg.Addendum.Oem"
+[parts]
+"AmdCpmPkg.Addendum.Oem.Bilby"
+<endComponent>

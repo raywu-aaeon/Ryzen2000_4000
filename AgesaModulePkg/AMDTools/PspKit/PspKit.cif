@@ -1,0 +1,14 @@
+<component>
+	name = "PspKit"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\AMDTools\PspKit\"
+	RefName = "AgesaModulePkg.AMDTools.PspKit"
+[files]
+"BuildPspImage.bat"	
+"BuildPspImage.sh"
+"readme.txt"	
+"reversestr.exe"
+"SetLocal.bat"
+[parts]
+"AgesaModulePkg.AMDTools.PspKit.PspDirectoryTool"
+<endComponent>

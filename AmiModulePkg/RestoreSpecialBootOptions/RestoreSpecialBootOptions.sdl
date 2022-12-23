@@ -1,0 +1,59 @@
+TOKEN
+    Name  = "RestoreSpecialBootOptions_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling RestoreSpecialBootOptions support in the project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+PATH
+    Name  = "RestoreSpecialBootOptions_DIR"
+End
+
+MODULE
+    Help  = "Includes RestoreSpecialBootOptions.mak to Project"
+    File  = "RestoreSpecialBootOptions.mak"
+End
+
+ELINK
+    Name = "BackupSpecialOrphanBootOptions,"
+    Parent = "PreProcessBootOptions,"
+    InvokeOrder = BeforeParent
+    Token = "NON_FW_ORPHAN_BOOT_OPTIONS_POLICY" "=" "ORPHAN_BOOT_OPTIONS_POLICY_DELETE"
+End
+
+ELINK
+    Name = "RestoreSpecialOrphanBootOptions,"
+    Parent = "PreProcessBootOptions,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "RESTORED_BOOT_OPTION_NAMES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name = "{USB Entry for Windows To Go},"
+    Parent = "RESTORED_BOOT_OPTION_NAMES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{USB Entry for Windows To Go Logo Test},"
+    Parent = "RESTORED_BOOT_OPTION_NAMES"
+    InvokeOrder = AfterParent
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.RestoreSpecialBootOptions"
+    Override  = "AmiModulePkg.Bds"
+End
+
+INFComponent
+    Name  = "RestoreSpecialBootOptions"
+    File  = "RestoreSpecialBootOptions.inf"
+    Package  = "AmiModulePkg"
+End
+

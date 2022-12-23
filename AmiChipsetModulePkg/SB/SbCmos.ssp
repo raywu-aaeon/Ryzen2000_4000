@@ -1,0 +1,135 @@
+// This AMI Setup Script Processor (SSP) file contains setup items that
+// are related to the CMOS Manager.
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//**********************************************************************
+
+//---------------------------------------------------------------------------
+// CMOS manager starts auto-assigning at 0x40
+//
+// This is a typical CMOS usage arrangement.  
+// (Note: these locations are not currently reserverd by default.)
+//---------------------------------------------------------------------------
+//
+// 0x00..0x3F   Legacy CMOS area, used by CSM
+// 0x40..0x7F   OEM/ODM
+// 0x80..0xBF   Chipset
+// 0xC0..0xFF   Core+Technologies
+//
+// This is the format of a CMOS token defintion:  
+//---------------------------------------------------------------------------
+// NvramField
+//  OptionBits = integer    // how many bits to use
+//  [Default = integer]     // "optimal" value in assembler format "xxxh"
+//  [CheckSum = YES | NO]   // include = YES
+//  [Location = cmos address, clobber mask]
+// EndNvramField
+
+
+//---------------------------------------------------------------------------
+//
+// Here we pre-define currently known, project-independent, locations. 
+//
+// Note: These definitions should be updated/deleleted as modules
+//       begin to integrate CMOS manager.
+//
+//       *CMOS manager will not complain on duplicate names, unless there
+//        is a mask or location conflict.
+//
+//---------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+// CMOS Checksum Location
+//----------------------------------------------------------------------------
+// Declare the CMOS checksum location as a non-checksummed value, that spans 
+// 2 bytes.  The checksum will include only those CMOS addresses that have 
+// been explicitly declared with Checksum = YES.  
+//
+//    * All non-checksummed addresses appear in the NonChecksumTable macros 
+//      in SspData.h)
+//
+//    * The checksum will be computed/used for the entire range of managed, 
+//      checksummed, CMOS.
+
+#IF (MKF_MAX_MANAGED_CMOS_ADDRESS > 0FFh)
+
+//----------------------------------------------------------------------------
+// Reserve 32-Bit CMOS for AGESA FCH FchConfigPtr 
+// it could refer the routine :"RecordFchConfigPtr" on the file
+//----------------------------------------------------------------------------
+
+
+NvramField (CMOS_SBPOINTER_BYTE0)
+	OptionBits  = 8
+    Managed     = NO
+    Location    = 088h, 0FFh
+EndNvramField
+
+NvramField (CMOS_SBPOINTER_BYTE1)
+	OptionBits  = 8
+    Managed     = NO
+    Location    = 089h, 0FFh
+EndNvramField
+
+NvramField (CMOS_SBPOINTER_BYTE2)
+	OptionBits  = 8
+    Managed     = NO
+    Location    = 08Ah, 0FFh
+EndNvramField
+
+NvramField (CMOS_SBPOINTER_BYTE3)
+	OptionBits  = 8
+    Managed     = NO
+    Location    = 08Bh, 0FFh
+EndNvramField
+
+//----------------------------------------------------------------------------
+// Reserve 8-Bit CMOS for AGESA FCH SPI setting 
+// it could refer the routine :"FchSetSpi" on the file
+// AmdAgesaPkg\Proc\Fch\Kern\KernSpi\KernSpiEnv.c
+//----------------------------------------------------------------------------
+NvramField (CMOS_SPI_DEVICE_ID)
+	OptionBits  = 8
+    Managed     = NO
+    Location    = 08Ch, 0FFh
+EndNvramField
+
+NvramField (CMOS_CAPSULE_FLAG)
+	OptionBits  = 8
+    Managed     = NO
+    Location    = MKF_CAPSULE_FLAG_ADDRESS, 0FFh
+EndNvramField
+
+NvramField (CMOS_BAD_DEAFULT)
+	OptionBits  = 8
+	Managed     = NO
+    Location    = MKF_CMOS_BAD_CHECK_ADDRESS, 0FFh
+EndNvramField
+
+#ENDIF
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

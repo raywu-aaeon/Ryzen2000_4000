@@ -1,0 +1,13 @@
+<component>
+	name = "AMDTools"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\AMDTools\"
+	RefName = "AgesaModulePkg.AMDTools"
+[parts]
+"AgesaModulePkg.AMDTools.ApcbToolV2"
+"AgesaModulePkg.AMDTools.NewPspKit"
+"AgesaModulePkg.AMDTools.PspKit"
+[files]
+"CompressBios\CompressBios.exe"
+"CompressBios\Ionic.Zlib.dll"
+<endComponent>

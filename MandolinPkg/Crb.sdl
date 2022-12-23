@@ -1,0 +1,4226 @@
+PCIDEVICE
+    Title  = "CRB Container - Crb ASL"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'MandolinPkg/Asl/CrbSysMem.asl;Before Pci Tree','MandolinPkg/Asl/CrbUsb.asl;After Pci Tree','MandolinPkg/Asl/CrbDev.asl;After Pci Tree'"
+    Token = "CRB_FEATURE_ASL_SUPPORT" "=" "1"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+End
+
+#PCIDEVICE
+#    Title  = "TCG Container"
+#    Parent  = "PciHost (Virtual)"
+#    Attribute  = "0x0"
+#    Dev_type  = "Container"
+#    Dev  = 00h
+#    Fun  = 00h
+#    SleepNum  = 01h
+#    ASLfile  = "'Build/tpm.asl;After Pci Tree','Build/tcg_ppi1_3_Ex.asl;After Pci Tree'"
+#    Token = "TCG2Support" "=" "1"
+#    Token = "FTpmPlatformProfile" "=" "1"
+##    Token = "WORD_ACCESS_SMI_PORT" "=" "1"
+#    DeviceType = OnBoard
+#    PCIBusSize = 32bit
+#    ROMMain = No
+#    Virtual = Yes
+#    ASL_PTS  = "Method;\_SB.TPM.TPTS(Arg0)"
+#End
+
+
+TOKEN
+	Name  = "MANDOLIN_CRB_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Chipset Reference Board support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PLATFORM_PKG_NAME"
+	Value  = "MandolinPkg"
+	Help  = "The package of this platform."
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetDSC = Yes
+	Section  = "Defines"
+End
+
+TOKEN
+	Name  = "PLATFORM_NAME"
+	Value  = "PicassoMandolin"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetDSC = Yes
+End
+
+TOKEN
+	Name  = "TARGET_ARCH"
+	Value  = "X64"
+	Help  = "Project CPU Architecture"
+	TokenType = Expression
+	TargetMAK = Yes
+	Range  = "IA32 or X64"
+End
+
+TOKEN
+	Name  = "PLATFORM_GUID"
+	Value  = "331831d5-7c75-03e8-3c73-1d5dd46b1a25 "
+	Help  = "The unique platform GUID that does into the description file.\MUST BE CLONED IN EVERY PROJECT!"
+	TokenType = Expression
+	TargetDSC = Yes
+End
+
+TOKEN
+	Name  = "FLASH_DEFINITION"
+	Value  = "Build/platform.fdf"
+	TokenType = Expression
+	TargetDSC = Yes
+	Token = "CORE_BUILD_NUMBER" "<" "10"
+End
+
+TOKEN
+    Name  = "FLASH_DEFINITION"
+    Value  = "Build/Platform.fdf"
+    TokenType = Expression
+    TargetDSC = Yes
+    Token = "CORE_BUILD_NUMBER" ">" "9"
+End
+
+TOKEN
+	Name  = "FW_VERSION_GUID"
+	Value  = "{ 0x331831d5, 0x7c75, 0x03e8, { 0x3c, 0x73, 0x1d, 0x5d, 0xd4, 0x6b, 0x1a, 0x25 } }"
+	Help  = "FW Version GUID inserted into Firmware ID structure.\FW version has to be overridden for every project."
+	TokenType = Expression
+	TargetH = Yes
+	Range  = "GUID"
+End
+
+TOKEN
+	Name  = "PLATFORM_RC_PACKAGE"
+	Value  = "AgesaModulePkg"
+	Help  = "!!PORTING REQUIRED!!\Specific your RC code package."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "PATCHFILE"
+	Value  = "$(CRB_DIR)\PatchFile.exe"
+	Help  = "Create DEC File"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "CHIPSET_REF_DEC_PATH"
+	Value  = "$(PLATFORM_RC_PACKAGE)\$(PLATFORM_RC_PACKAGE).dec"
+	Help  = "!!PORTING REQUIRED!!\Specific your RC code DEC path."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "CHIPSET_REF_DEC_NAME"
+	Value  = "ChipsetReference.dec"
+	TokenType = Expression
+	TargetMAK = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "===================== CRB .sdl====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "INCLUDE_CRB_ASM_FILE_IN_SEC"
+	Value  = "1"
+	Help  = "Includes an ASM file and an eLink in SEC build process for CRB code modification."
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "Recovery_Time_Delay"
+	Value  = "5"
+	Help  = "Loop count to calculate the delay for Atapi Recovery"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "ISA_IRQ_MASK"
+    Value  = "0xE305"
+    Help  = "This is an IRQ mask which may be used by ISA devices\ If BIT == 0 IRQ Available BIT == 1 IRQ Used.\DEFAULT VALUE == 0xE305."
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0...0FFFFh"
+End
+
+TOKEN
+	Name  = "ISA_DMA_MASK"
+	Value  = "0x10"
+	Help  = "This is DEFAULT mask of ISA DMA channels which may be used by ISA devices.\Set BIT=1 means Channel CAN NOT be used, Reset BIT=0 means Channel is AVAILABLE.\Channel 4 of ISA DMA controller is tacken for CASCADE DMA channel. \All the rest are available."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0...0EFh"
+End
+
+TOKEN
+	Name  = "CRB_SWSMI"
+	Value  = "0xbf"
+	Help  = "Value to write into SMI command register to generate software SMI for CRB"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0xBE - 0xBF"
+End
+
+#TOKEN
+#	Name  = "ATHEROS_NIC_SUPPORT"
+#	Value  = "0"
+#	Help  = "Main switch to enable the prefix string of Network Boot Device Selection for Atheros LAN"
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "REFLASH_UPDATE_BOOT_BLOCK"
+#	Value  = "1"
+#	Help  = "Enables/Disables update of the boot block flash area.\When REFLASH_INTERACTIVE is on and REFLASH_UPDATE_BOOT_BLOCK_CONTROL is on\this value can be overriden by the user using setup option."
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "AMI_SEC_ROM"
+#	Value  = "$(PROJECT_TAG).rom"
+#	Help  = "File name of the BIOS rom image"
+#	TokenType = Expression
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Range  = "valid file name"
+#End
+
+#TOKEN
+#	Name  = "CRB_USB_ASL_SUPPORT"
+#	Value  = "1"
+#	Help  = "Enable USB related ASL porting code for CRB board."
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+
+#TOKEN
+#	Name  = "CRB_LS_ASL_SUPPORT"
+#	Value  = "0"
+#	Help  = "Enable Light sensor related ASL porting code for CRB board."
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+    Name  = "CRB_FEATURE_ASL_SUPPORT"
+    Value  = "1"
+    Help  = "Enable Light sensor related ASL porting code for CRB board."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+#TOKEN
+#   Name  = "CRB_DEVICE_ASL_SUPPORT"
+#    Value  = "1"
+#    Help  = "Enable Light sensor related ASL porting code for CRB board."
+#    TokenType = Boolean
+#    TargetEQU = Yes
+#    TargetMAK = Yes
+#    TargetH = Yes
+#End
+
+TOKEN
+	Name  = "===================== AmdAgesaPkg ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "AMI_PSP_FTPM_WRAPPER_LIB_SUPPORT"
+	Value  = "1"
+	Help  = "Set to 1 for On board TPM and 0 for AMD PSP device"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_PSP_FTPM_WRAPPER_LIB_SUPPORT"
+	Value  = "0"
+	Help  = "Set to 1 for On board TPM and 0 for AMD PSP device"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "TCG2Support" "=" "0"
+End
+
+#TOKEN
+#	Name  = "===================== GNB.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+
+### RVA9 ###TOKEN
+### RVA9 ###	Name  = "NBIO_RV_BRIDGE2_SLOT_EXISTS"
+### RVA9 ###	Value  = "0"
+### RVA9 ###	Help  = "Slot Exists on PCI-Express GNB Bridge D2 F2(Slot # and name may need modification)"
+### RVA9 ###	TokenType = Boolean
+### RVA9 ###	TargetH = Yes
+### RVA9 ###	Token = "NBIO_RV_BRIDGE2_EXISTS" "=" "1"
+### RVA9 ###End
+
+TOKEN
+	Name  = "===================== TCG ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+#TOKEN
+#	Name  = "DEFAULT_SHA256_BANK_ENABLE"
+#	Value  = "02"
+#	Help  = " 00h: Disable SHA256 Bank, 02h: Enable SHA256 Bank"
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "MOR_RESET_S4S5"
+	Value  = "1"
+	Help  = "When OS Reset the systme under S4/S5, we can reset the MOR Bit"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "TCG_WAIT_OS_TPM_READY"
+	Value  = "1"
+	Help  = "Patch for most TPM, when OS ResetSystem/Shutdown/Resume, we need to wait the TPM_Shutdown(...) Command finishted"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "TCG2Support"
+	Value  = "1" 
+	Help  = "Enable or Disable TCG_generic support"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "TCGPPISPEC_1_2_SUPPORT"
+#	Value  = "1"
+#	Help  = "This will enable TCG Ppi spec 1.2 support. The default is 1.0 support since most O.S. will support released version 1.0."
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+
+TOKEN
+	Name  = "CRB_ONBOARD_TPM_SUPPORT"
+	Value  = "1"
+	Help  = "Set to 1 for On board TPM and 0 for AMD PSP device"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB_AMD_FTPM_SUPPORT"
+	Value  = "1"
+	Help  = "Enable FTPM support"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "FTpmPlatformProfile"
+	Value  = "0"
+	Help  = "Set to 0 for Intel PTT and 1 for AMD PSP device"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "CRB_ONBOARD_TPM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "FTpmPlatformProfile"
+	Value  = "1"
+	Help  = "Set to 0 for Intel PTT and 1 for AMD PSP device"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "CRB_AMD_FTPM_SUPPORT" "=" "1"
+END
+
+TOKEN
+    Name  = "ALLOCATE_PCR_AFTER_SMM_INIT"
+    Value  = "1"
+    Help  = "Some Ftpm hardware require SMM to be initialized before PCR allocations can occur"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "WORD_ACCESS_SMI_PORT"
+#	Value  = "1"
+#	Help  = "This will cause 16 bit read and write to the TPM SMI port required for some AMD platforms"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "FTpmPlatformProfile" "=" "1"
+#	Token = "TCG2Support" "=" "1"
+#End
+
+TOKEN
+	Name  = "AdditionalTcgSetupPeiPolicyDepex"
+	Value  = "AND gEfiPeiMemoryDiscoveredPpiGuid"
+	TokenType = Expression
+End
+
+TOKEN
+    Name  = "===================== TCG2 for 19H1 dTPM GPIO interrupt setting ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+PcdMapping
+    Name  = "PcdAmiTpm2CurrentIrqNum"
+    GuidSpace  = "gAmiTcgPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmiTpm2CurrentIrqActiveLevel"
+    GuidSpace  = "gAmiTcgPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x00000000"
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "TPM_IRQ_NUM"
+    Value  = "0"    
+    Help  = "..PORTING... discrete TPM interrupt number in TPM ASL"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Disable = Yes
+End
+
+TOKEN
+    Name  = "TMRQ"
+    Value  = "$(TPM_IRQ_NUM)"
+    TokenType = Integer
+    TargetASL = Yes
+    Help  = "TPM IRQ value for TPM ASL code"
+    Disable = Yes
+End
+
+TOKEN
+    Name  = "TPMIRQLEVEL"
+    Value  = "TLVL"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "4 characters max"
+End
+
+TOKEN
+    Name  = "AMI_TCG_TPM_GPIO_RESOURCE_OVERRIDE"
+    Value  = "1"
+    Help  = "For platforms that want to override the way TPM interrupt resources are defined"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+OUTPUTREGISTER
+    Name  = "AmiTpmInterruptPlatformResourceTemplate"
+    Path  = "Build"
+    File  = "AmiTpmInterruptPlatformResourceTemplate.asl"
+    Template  = "CrbAmiTpmInterruptPlatformResourceTemplate.txt"
+End
+
+TOKEN
+	Name  = "===================== Board.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "CRB_PROJECT_MAJOR_VERSION"
+	Value  = "0"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB_PROJECT_MINOR_VERSION"
+	Value  = "16"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB_PROJECT_TAG"
+	Value  = "1AVSZ"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PROJECT_MAJOR_VERSION"
+	Value  = "$(CRB_PROJECT_MAJOR_VERSION)"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PROJECT_MINOR_VERSION"
+	Value  = "$(CRB_PROJECT_MINOR_VERSION)"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PROJECT_TAG"
+	Value  = "$(CRB_PROJECT_TAG)"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_ROM"
+	Value  = "$(PROJECT_TAG)$(PROJECT_MAJOR_VERSION)$(PROJECT_MINOR_VERSION).rom"
+	Help  = "File name of the BIOS rom image"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "valid file name"
+End
+
+TOKEN
+	Name  = "===================== CORE.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+        Name  = "X64_SUPPORT"
+        Value  = "1"
+        TokenType = Boolean
+        TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "x64_BUILD"
+	Value  = "$(X64_SUPPORT)"
+	Help  = "This token is for backward compatibility.!!!\Main switch to enable x64 support in Project\DO REBUILD ALL AFTER CHANGING THIS SWITCH!!!"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+
+#
+# Sync to Configuration.sdl
+#
+
+#TOKEN
+#	Name  = "FAULT_TOLERANT_NVRAM_UPDATE"
+#	Value  = "1"
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "PCI_EXPRESS_GEN2_SUPPORT"
+	Value  = "0"
+	Help  = "Enables / Disables Pci Bus Driver Native PCI Express Gen2 support"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "PCI_EXPRESS_SUPPORT" "=" "1"
+End
+
+###  The following for VS2015
+TOKEN
+	Name  = "TOOL_CHAIN_TAG"
+	Value  = "VS2015"
+	Help  = "Tool chain tag"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "ARCH"
+	Value  = "VS2015x64"
+	Help  = "Tool chain tag for TSE"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "APTIOV_TOOLS_VERSION"
+	Value  = "32"
+	Help  = "Tool chain tag for TSE"
+	TokenType = Integer
+End
+
+TOKEN
+	Name  = "===================== NVRAM.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+#TOKEN
+#	Name  = "NVRAM_RT_GARBAGE_COLLECTION_SUPPORT"
+#	Value  = "1"
+#	Help  = "This token enables/disables support of the NVRAM garbage collection at runtime."
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "===================== AMI DEBUG ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "DEBUG_MODE"
+	Value  = "0"
+	Help  = "Main switch to enable/disable debug mode."
+	TokenType = Boolean
+	TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FCH_UART_DEBUG_SELECT"
+    Value  = "1"
+    Help  = "0: Disable,1:UART0,2:UART1. Select Fch Uart port as debug port."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CRB_EXT_SERIAL_PORT_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AMD CRB external serial port support in Project"
+    TokenType = Boolean
+    Token = "FCH_UART_DEBUG_SELECT" "=" "0"
+End
+
+TOKEN
+    Name  = "FCH_UART_DEBUG_SELECT"
+    Value  = "0"
+    Help  = "0: Disable,1:UART0,2:UART1. Select Fch Uart port as debug port."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "0"
+End
+
+TOKEN
+	Name  = "DEBUG_CODE"
+	Value  = "0"
+	Help  = "Enables/disables debug-specific code such as debug messages."
+	TokenType = Boolean
+	TargetMAK = Yes
+	Token = "DEBUG_MODE" "=" "0"
+End
+
+###TOKEN
+###	Name  = "SERIAL_STATUS_SUPPORT"
+###	Value  = "0"
+###	Help  = "Enables/Disables serail port status code routine"
+###	TokenType = Boolean
+###	TargetH = Yes
+###	Token = "STRING_STATUS_SUPPORT" "=" "1"
+###End
+
+TOKEN
+	Name  = "===================== AMI RX DEBUGGER =================="
+	Value  = "==========================================================="
+	Help  = "CRB has been tested as follows combinations \(4.6.2_AMI_Debug_Rx_1.32.0024_Be , 4.6.2_USBRedirection_1.32.0024_ , 4.6.2_Debugger_1.32.0024_Beta , AMI Debugger 2.0 VEB)"
+	TokenType = Expression
+End
+
+TOKEN
+    Name  = "AMIDEBUGGERPKG_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AMIDebuggerPkg support in the project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_DEBUGGER_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling Debugger support in the project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DbgPortStatusRedirectionOnly_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable only status redirection Ami DbgPort. The Debugging and Console Support not available. Make Sure EFI_SYMBOLIC_DEBUG is OFF"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_DEBUG_RX_IN_S3_SUPPORT"
+	Value  = "1"
+	Help  = "SDL token to have AMI Debug RX support in S3 Resume. "
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "AMIDEBUG_RX_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "Terminal_SUPPORT"
+	Value  = "0"
+	Help  = "Enable/Disable 'Serial Redirection' module. \This module contains Terminal.lib/Terminalx64.lib,\the compiled binary of module 'Serial Redirection \Sources.' It also contains all setup related material\for the module.\"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "Terminal_SUPPORT"
+	Value  = "0"
+	Help  = "Porting switch to support Debugger in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Token = "CONSOLE_REDIRECTION_SUPPORT" "!=" "1"
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_RX_FFS_IN_FVMAIN_SUPPORT"
+	Value  = "0"
+	Help  = "SDL token to have Debugger related ffs in FV_MAIN or FV_BB. "
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "LZMA_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AMIDEBUG_RX_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable Ami Debug Rx Module.\(We turn it off default in CRB. If you want AMI Debugger support Please turn it on and append related module)"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+
+TOKEN
+	Name  = "===================== Usb3 Status code  =================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "Usb3Statuscode_Support"
+	Value  = "0"
+	Help  = "Main switch to enable Usb3Statuscode support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "AMIDEBUGGERPKG_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AMIDebuggerPkg support in the project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "Usb3Statuscode_Support" "=" "1"
+End
+
+TOKEN
+    Name  = "XHCI_MMIO_BASEADDRESS"
+    Value  = "$(DBG_PEI_XHCI_MMIOBASE)"
+    Help  = "MMIO Base Address for first XHCI Controller"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "===================== Serial Debugger support  =================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "SERIAL_DEBUGGER_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling Serial Debugger support in the project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "FCH_UART_DEBUG_SELECT"
+	Value  = "2"
+	Help  = "0: Disable,1:UART0,2:UART1. Select Fch Uart port as debug port.\(!!!AMI Mandolin rework board only. Because of UART0 TX-GOOD/RX-NG, UART1 both TX/RX available.!!!)"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+PcdMapping
+	Name  = "FchRTDeviceEnableMap"
+	GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsDynamicDefault"
+	DataType  = "Uint32"
+	Value  = "$(FCH_UART_DEBUG_SELECT) * 0x800"
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+	Help  = "Turn on UART0 or UART1 (BIT11 or BIT12)"
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "USB_3_DEBUG_SUPPORT"
+    Value  = "0"
+    Help  = "Main token switch to enable the USB 3.0 Debug Port interface\installation into the project.Do Not Change this SDL Token."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "===================== SMBios.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+    Name  = "CRB_SMBIOS_UPDATE"
+    Value  = "1"
+    Help  = "Update SMBIOS without modify to SMBIOS module"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TYPE8_STRUCTURE"
+    Value  = "0"
+    Help  = "Alternate token name for PORT_CONNECTOR_INFO"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CRB_SMBIOS_UPDATE" "=" "1"
+End
+
+TOKEN
+    Name  = "SYSTEM_SLOT_INFO"
+    Value  = "0"
+    Help  = "ON  -> System Slot Information structure will be present\OFF -> System Slot Information structure will not be present"
+    TokenType = Boolean
+    TargetEQU = Yes
+    Lock = Yes
+    Token = "CRB_SMBIOS_UPDATE" "=" "1"
+End
+
+TOKEN
+    Name  = "UPDATE_SLOT_TYPE9"
+    Value  = "1"
+    Help  = "Alternate token name for SYSTEM_SLOT_INFO"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CRB_SMBIOS_UPDATE" "=" "1"
+End
+
+TOKEN
+	Name  = "NUMBER_OF_SYSTEM_SLOTS"
+	Value  = "4"
+	Help  = "Identifies the number of system slots available on platform including the AGP slot.\"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMBER_OF_SYSTEM_CONFIG_STRINGS"
+	Value  = "1"
+	Help  = "NUMBER OF SYSTEM CONFIGURATION STRINGS\identifies the total number of strings defined for this structure."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "0-5"
+End
+
+TOKEN
+	Name  = "NUMBER_OF_ONBOARD_DEVICES"
+	Value  = "1"
+	Help  = "Number of Onboard Devices Present in the System."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "TYPE41_STRUCTURE"
+    Value  = "0"
+    Help  = "Alternate token name for PORT_CONNECTOR_INFO"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CRB_SMBIOS_UPDATE" "=" "1"
+End
+
+TOKEN
+	Name  = "SMBIOS_PI_1_1"
+	Value  = "1"
+	Help  = "SMBIOS PI 1.1 Support"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "===================== CSM.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+
+#TOKEN
+#	Name  = "CSM_OEM_SUPPORT"
+#	Value  = "1"
+#	Help  = "Enable/disable CSM OEM support."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#End
+
+TOKEN
+	Name  = "===================== SMM.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+#TOKEN
+#	Name  = "SMM_THUNK_IN_CSM"
+#	Value  = "0"
+#	Help  = "Enable/disable SMM Thunk in CSM"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetH = Yes
+#	Token = "CSM_SUPPORT" "=" "1"
+#End
+
+#TOKEN
+#	Name  = "SMM_THUNK_NO_AB_SEG"
+#	Value  = "0"
+#	Help  = "Enable/disable using A & B segment for SMM Thunk.\Some CPUs don't provide support for SMM THUNK in A&B segment."
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "LOAD_SMM_DRIVERS_IN_TSEG_OUTSIDE_SMM"
+#	Value  = "1"
+#	Help  = "This is to increase performance of AMD CPUs.\When enabled, most drivers are loaded into\ TSEG outside of SMM. Driver entry point is still\ executed inside of SMM.\"
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+TOKEN
+    Name  = "===================== Terminal_SUPPORT  ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+###
+### if Terminal_SUPPORT turn on the following token setting for the CPM-FCH-UART on CRB. 
+###
+TOKEN
+    Name  = "AmiCpmFchUartDriver_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling AmiCpmFchUartDriver support in the project"
+    TokenType = Boolean
+    Token = "Terminal_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "TOTAL_SIO_SERIAL_PORTS"
+    Value  = "0"
+    Help  = "**PORTING NEEDED** Total number of Super IO serial ports or ISA serial port present"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "0-10"
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "TOTAL_PCI_SERIAL_PORTS"
+    Value  = "2"
+    Help  = "**PORTING NEEDED** Total number of PCI serial ports present."
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "0-4"
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SHELL_TEXT_MODE"
+    Value  = "2"
+    Help  = "Assign the GC_MODE while boot to SHELL.\0xFF = ignored, 0/1/2/.. = GC_MODE0/GC_MODE1/GC_MODE2/.."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "EXTENDED_RESOLUTION_ENABLE"
+    Value  = "1"
+    Help  = "Enable or disable 100 x 31 terminal resolution"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SERIALIO_PCI_SERIAL_SUPPORT"
+    Value  = "1"
+    Help  = "0-Serial IO doesn't support the PCI serial Devices.1- Serial Io Driver installs the Serial IO for PCI serial Device."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PCI0_DEFAULT_CONSOLE_REDIRECTION_ENABLE"
+    Value  = "1"
+    Help  = "Specifies the Setup default value for PCI port #0 redirection."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+    Token = "AmiFchUart0Dxe_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PCI1_DEFAULT_CONSOLE_REDIRECTION_ENABLE"
+    Value  = "1"
+    Help  = "Specifies the Setup default value for PCI port #1 redirection."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+    Token = "AmiFchUart1Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "FchRTDeviceEnableMap"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Uint32"
+    Value  = "$(AmiFchUart0Dxe_SUPPORT)*0x800 + $(AmiFchUart1Dxe_SUPPORT)*0x1000"
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+    Help  = "Turn on UART0/UART1 (BIT11/BIT12)"
+    Token = "Terminal_SUPPORT" "=" "1"
+    Token = "AmiCpmFchUartDriver_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "===================== Setup.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "FORCE_USER_TO_SETUP_ON_FIRST_BOOT"
+	Value  = "0"
+	Help  = "When this flag is on, Setup will be automatically launched\whenever NVRAM is blank (during the first boot and\during any subsequent flash update)."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "===================== ACPI.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+#TOKEN
+#	Name  = "HIDK"
+#	Value  = '"MSFT0001"'
+#	TokenType = Expression
+#	TargetASL = Yes
+#End
+
+#TOKEN
+#	Name  = "HIDM"
+#	Value  = '"MSFT0003"'
+#	TokenType = Expression
+#	TargetASL = Yes
+#End
+
+#TOKEN
+#	Name  = "CIDK"
+#	Value  = 'EISAID("PNP0303")'
+#	TokenType = Expression
+#	TargetASL = Yes
+#End
+
+#TOKEN
+#	Name  = "CIDM"
+#	Value  = 'EISAID("PNP0F03")'
+#	TokenType = Expression
+#	TargetASL = Yes
+#End
+
+TOKEN
+    Name  = "IO_APIC_ID_READ_MASK"
+    Value  = "0xff000000"
+    Help  = "Mask used when auto-detecting I/O APIC id by reading from I/O APIC data register. Default - 0x0f000000 is for 4 bit IDs. Change to 0xff000000 when 8 bits IO APIC IDs supported."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ACPI_SPEC_VERSION"
+    Value  = "60"
+    Help  = "Highest Version of ACPI specification supported. For example 4.0 = 40; 5.0 = 50; 5.1 = 51"
+    TokenType = Integer
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+        Name  = "FACP_FLAG_P_LVL2_UP"
+        Value  = "1"
+        TokenType = Boolean
+        TargetH = Yes
+End
+
+TOKEN
+        Name  = "S4_WAKE_FROM_RTC_SUPPORTED"
+        Value  = "0"
+        TokenType = Boolean
+        TargetH = Yes
+End
+
+TOKEN
+        Name  = "REMOTE_POWER_ON_SUPPORTED"
+        Value  = "0"
+        TokenType = Boolean
+        TargetH = Yes
+End
+
+TOKEN
+	Name  = "===================== Adjust FV ver 0.0.1 =====================-======"
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "FLASH_SIZE"
+	Value  = "0x800000"
+	Help  = "Size of the Flash Device in bytes\0x100000, 0x200000, 0x400000, 0x800000"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "FLASH_BLOCK_SIZE"
+	Value  = "0x1000"
+	Help  = "Size of the Flash Device Block"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "AMD_EC_SIP1_LOC"
+#	Value  = "1F00h"
+#	Help  = "SIP location in Bootblock\0000h = not used"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "AMD_EC_SIP1_DATA"
+#	Value  = "0"
+#	Help  = "SIP data set defined as DWORD in BBEND.ASM\Could be data or pointers. Only available when SIP1_LOC!=0\Example:Value = '12345678h,00abcdefh,4a5b2eh'"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+TOKEN
+	Name  = "===================== FAST BOOT SUPPORT ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "FAST_BOOT_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+# <AAV> disable fast boot in default.
+#       wait Kernel update. otherwise CSM assert error when debug mode on
+#
+#
+
+TOKEN
+	Name  = "DEFAULT_FAST_BOOT"
+	Value  = "1"
+	Help  = "Default value of the Fast Boot option"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "COPY_ROM_TO_RAM_IN_PEI"
+#	Value  = "0"
+#	Help  = "Copy FV_BB and FV_MAIN to memory in PEI Phase"
+#	TokenType = Boolean
+#End
+
+TOKEN
+	Name  = "MAX_SATA_DEVICE_COUNT"
+	Value  = "2"
+	Help  = "Max count of Sata device are stored in LastBoot variable"
+	TokenType = Integer
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_SATA_SUPPORT_SETTING"
+	Value  = "0"
+	Help  = "Default value of SATA Support option"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "FLOPPY_CTRL_SUPPORT"
+#	Value  = "0"
+#	Help  = "Switch to enable ISA Floppy Controller support in Project\Change for fast Boot"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	Token = "SIO_SUPPORT" "=" "1"
+#	Token = "FAST_BOOT_SUPPORT" "=" "1"
+#	Token = "ACPI_IA_BOOT_ARCH" "&" "1"
+#End
+
+TOKEN
+	Name  = "BEEP_ENABLE"
+	Value  = "0"
+	Help  = "This flag enables/disables all firmware beeps"
+	TokenType = Boolean
+	Token = "FAST_BOOT_SUPPORT" "=" "1"
+End
+
+#TOKEN
+#	Name  = "CMOS_ADDR_PORT"
+#	Value  = "0x70"
+#	TokenType = Integer
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "CMOS_DATA_PORT"
+#	Value  = "0x71"
+#	TokenType = Integer
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "ShellBinPkg_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable Shell support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "BUILT_IN_SHELL_SUPPORT"
+    Value  = "0"
+    Help  = "This SDL token defines if built-in Shell is supported in the project.\It controls installation of the boot option for a built-in Shell."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "ShellBinPkg_SUPPORT" "=" "0"
+End
+
+#TOKEN
+#	Name  = "FLASH_UPDATE_BOOT_SUPPORTED"
+#	Value  = "1"
+#	Help  = "Enable Capsule flash support"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "CSLIB_WARM_RESET_SUPPORTED"
+	Value  = "1"
+	Help  = "1 - Chipset provides SBLib_ResetSystem(EfiResetWarm).\0 - Simulate Warm Reset via S3 & RTC resume."
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMD_PLATFROM_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FastBoot support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "STOP_USB_SUPPORT"
+#	Value  = "1"
+#	Help  = "Main switch to enable FastBoot support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "===================== WIN8 ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+
+TOKEN
+	Name  = "NO_MMIO_FLASH_ACCESS_DURING_UPDATE"
+	Value  = "1"
+	Help  = "This token should be set to 1 if flash part is not memory mapped while write enabled."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "TSEG_SIZE"
+	Value  = "0x1000000"
+	Help  = "Size of SMM TSEG area used (in bytes) \Default size 1MB for NCPU <= 24."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "PlatformGOPPolicy_SUPPORT"
+#	Value  = "1"
+#	Help  = "Main switch to enable PlatformGOPPolicy support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "DEFAULT_VIDEO_OPROM_POLICY"
+#	Value  = "1"
+#	Help  = "Default value of Launch Video OpROM policy setup control"
+#	TokenType = Integer
+#	TargetH = Yes
+#	Range  = "0 - Do not launch, 1 - Launch UEFI OpROM only, 2 - Launch Legacy OpROM only, 3 - Launch Legacy before UEFI, 4 - Launch Legacy after UEFI"
+#End
+
+
+TOKEN
+	Name  = "====== Mandolin Romlayout design inforamtion ======"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "====== Mandolin 1st part FCH Firmware Header area======"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "FCH_FIRMWARE_BASE"
+	Value  = "0xFFFFFFFF - $(FLASH_SIZE) + $(FCH_FIRMWARE_OFFSET) + 1"
+	Help  = "Fixed address of the AMD firmware area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "FCH_FIRMWARE_OFFSET"
+	Value  = "0x20000"
+	Help  = "Offset to the start of the AMD firmware area from the start of the ROM image"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "ROMSIG_SIZE"
+	Value  = "0x1000"
+	Help  = "16 bytes ROMSIG size.\ !!! must to use hexadecimal expression in Address for INSERT.exe. !!!"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "====== Mandolin 2nd part Xhci Firmware  area======"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "====== Mandolin 3rd part NVRAM/NVRAM_BACKUP ======"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "NVRAM_SIZE"
+	Value  = "0x20000"
+	Help  = "Size of NVRAM area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 1 To: FLASH_SIZE - FV_MAIN_BLOCKS*FLASH_BLOCK_SIZE"
+End
+
+
+TOKEN
+	Name  = "NVRAM_OFFSET"
+	Value  = "$(FCH_FIRMWARE_OFFSET)+$(FCH_FIRMWARE_SIZE)"
+	Help  = "Offset of NVRAM Area from the start of the rom image"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE"
+End
+
+TOKEN
+	Name  = "NVRAM_ADDRESS"
+	Value  = "$(FLASH_BASE) + $(NVRAM_OFFSET)"
+	Help  = "Starting address of the NVRAM flash area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 4G - FLASH_SIZE To: 4G"
+End
+
+TOKEN
+	Name  = "NVRAM_BACKUP_ADDRESS"
+	Value  = "$(NVRAM_ADDRESS) + $(NVRAM_SIZE)"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+End
+
+
+TOKEN
+	Name  = "====== Mandolin 4th part  Psp Firmware area (Please refer to AmiPspPkg.sdl) ======"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "====== Mandolin 5th part OEM NCB  ======"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "OEM_NCB_ADDRESS"
+	Value  = "$(PSP_BLOCK_START_ADDRESS)+$(TOTAL_PSP_DATA_SIZE)"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OEM_NCB_OFFSET"
+	Value  = "$(PSP_BLOCK_START_OFFSET)+$(TOTAL_PSP_DATA_SIZE)"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OEM_NCB_SIZE"
+	Value  = "0x10000"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OEM_NCB_BLOCKS"
+	Value  = "($(OEM_NCB_SIZE)/$(FLASH_BLOCK_SIZE))"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 1 To :FLASH_SIZE/FLASH_BLOCK_SIZE-1"
+End
+
+TOKEN
+	Name  = "OEM_ACTIVATION_TABLE_LOCATION"
+	Value  = "1"
+	Help  = "OEM Activation Table location: \0 = FID Table.\1 = Non-Critical Block."
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OEM_ACTIVATION_TABLE_SIZE"
+	Value  = "$(OEM_NCB_SIZE)"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "OEM_ACTIVATION_TABLE_LOCATION" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_ACTIVATION_TABLE_ADDRESS"
+	Value  = "$(OEM_NCB_ADDRESS)"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "OEM_ACTIVATION_TABLE_LOCATION" "=" "1"
+End
+
+
+TOKEN
+	Name  = "====== Mandolin 6th part FV_MAIN ======"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "FV_MAIN_OFFSET"
+	Value  = "$(OEM_NCB_OFFSET)+$(OEM_NCB_SIZE)"
+	Help  = "Offset to the start of the FV_MAIN area from the start of the ROM image"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+End
+
+TOKEN
+	Name  = "FV_MAIN_BASE"
+	Value  = "$(FLASH_BASE) + $(FV_MAIN_OFFSET)"
+	Help  = "Base Address of the FV_MAIN"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 4G - FLASH_SIZE To: 4G"
+End
+
+TOKEN
+    Name  = "FV_MAIN_SIZE"
+    Value  = "$(FLASH_SIZE) - $(FV_BB_SIZE) - $(FV_MAIN_OFFSET)"
+    Help  = "Size of the FV_MAIN area. if PSP on the NCB behind the PSP DATA"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "From: 0 To: FLASH_SIZE - FV_BB - FV_MAIN_OFFSET"
+End
+
+TOKEN
+    Name  = "FV_MAIN_SIZE"
+    Value  = "$(FLASH_SIZE) - $(FV_BB_SIZE) - $(FV_SMBIOS_SIZE) - $(FV_MAIN_OFFSET)"
+    Help  = "Size of the FV_MAIN area. if PSP on the NCB behind the PSP DATA"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "From: 0 To: FLASH_SIZE - FV_BB - FV_SMBIOS_SIZE - FV_MAIN_OFFSET"
+    Token = "SMBIOS_DMIEDIT_DATA_LOC" "=" "1"
+End
+
+TOKEN
+	Name  = "====== Mandolin 7th part FV_BB ======"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "FV_BB_BASE"
+	Value  = "0xFFFFFFFF - $(FV_BB_SIZE) + 1"
+	Help  = "Base Address of the FV_BB"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 4G - FLASH_SIZE To: 4G"
+End
+
+TOKEN
+	Name  = "FV_BB_SIZE"
+	Value  = "0x200000"
+	Help  = "Size of the FV_BB area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+End
+
+TOKEN
+    Name  = "PSP_FV_BB_COMPRESS"
+    Value  = "0"
+    Help  = "A feature to turn on FV_BB compression"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_FV_BB_ORIGINAL_SIZE"
+    Value  = "0x200000"
+    Help  = "The maximum FV_BB size to be compressed"
+    TokenType = Integer
+    TargetMAK = Yes
+    Token = "PSP_FV_BB_COMPRESS" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_FV_BB_AMD_FEATURE_SIZE"
+    Value  = "0x200000"
+    Help  = "The FV_BB size on AMI ROM when turn AMD feature on"
+    TokenType = Integer
+    TargetMAK = Yes
+    Token = "PSP_FV_BB_COMPRESS" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_FV_BB_COMPRESSED_SIZE"
+    Value  = "0x100000"
+    Help  = "(The value is the value be compressed change it if too small)"
+    TokenType = Integer
+    TargetMAK = Yes
+    Token = "PSP_FV_BB_COMPRESS" "=" "1"
+    Token = "PSP_FV_BB_ORIGINAL_SIZE" "=" "0x200000"
+End
+
+TOKEN
+    Name  = "FV_BB_SIZE"
+    Value  = "$(PSP_FV_BB_AMD_FEATURE_SIZE)"
+    Help  = "Size of the FV_BB area. The original BB + header for FVH"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+    Token = "PSP_FV_BB_COMPRESS" "=" "1"
+End
+
+#
+# Assign ROM Layout value for Recovery module 03.
+#
+TOKEN
+	Name  = "AMI_ROM_LAYOUT_FV_BB_ADDRESS"
+	Value  = "$(FV_BB_BASE)"
+	Help  = "Address of FV_BB area in flash"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_ROM_LAYOUT_FV_BB_OFFSET"
+	Value  = "$(AMI_ROM_LAYOUT_FV_BB_ADDRESS) - $(FLASH_ADDRESS)"
+	Help  = "Offset of FV_BB area in ROM file"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_ROM_LAYOUT_FV_BB_SIZE"
+	Value  = "$(FV_BB_SIZE)"
+	Help  = "Size of FV_BB area"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_ROM_LAYOUT_FV_MAIN_ADDRESS"
+	Value  = "$(FV_MAIN_BASE)"
+	Help  = "Address of FV_MAIN area in flash"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_ROM_LAYOUT_FV_MAIN_OFFSET"
+	Value  = "$(FV_MAIN_OFFSET)"
+	Help  = "Offset of FV_MAIN area in ROM file"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMI_ROM_LAYOUT_FV_MAIN_SIZE"
+	Value  = "$(FV_MAIN_SIZE)"
+	Help  = "Size of FV_MAIN area"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+
+#---------- NVRAM FV parameters are the same for all three cases
+TOKEN
+    Name  = "AMI_ROM_LAYOUT_NVRAM_ADDRESS"
+    Value  = "$(NVRAM_ADDRESS)"
+    Help  = "Address of NVRAM area in flash"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AMI_ROM_LAYOUT_NVRAM_OFFSET"
+    Value  = "$(NVRAM_OFFSET)"
+    Help  = "Offset of NVRAM area in ROM file"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AMI_ROM_LAYOUT_NVRAM_SIZE"
+    Value  = "$(NVRAM_SIZE)"
+    Help  = "Size of NVRAM area"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AMI_ROM_LAYOUT_NVRAM_BACKUP_ADDRESS"
+    Value  = "$(NVRAM_BACKUP_ADDRESS)"
+    Help  = "Address of NVRAM area in flash"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AMI_ROM_LAYOUT_NVRAM_BACKUP_OFFSET"
+    Value  = "$(NVRAM_OFFSET) + $(NVRAM_SIZE)"
+    Help  = "Offset of NVRAM area in ROM file"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "SmmOemActivation_SUPPORT"
+#	Value  = "1"
+#	Help  = "Switch to enable Update ACPI in the OS Runtime through the SW SMI for OEM Activation without rebooting the system."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "WIN8_FEATURE_SUPPORT"
+#	Value  = "1"
+#	Help  = "Main switch to enable or disable WIN 8 feature"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "SecureBoot_SUPPORT"
+#	Value  = "0"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	Token = "WIN8_FEATURE_SUPPORT" "=" "0"
+#End
+
+#TOKEN
+#	Name  = "SecureMod_SUPPORT"
+#	Value  = "0"
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Lock = Yes
+#	Token = "WIN8_FEATURE_SUPPORT" "=" "0"
+#End
+
+#TOKEN
+#	Name  = "CryptoAPI_SUPPORT"
+#	Value  = "0"
+#	Help  = "Main switch to enable CryptoAPI support in Project"
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "WIN8_FEATURE_SUPPORT" "=" "0"
+#End
+
+#TOKEN
+#	Name  = "CryptLib_SUPPORT"
+#	Value  = "0"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	Token = "WIN8_FEATURE_SUPPORT" "=" "0"
+#End
+
+#TOKEN
+#	Name  = "OemActivation_SUPPORT"
+#	Value  = "0"
+#	Help  = "Main switch to enable OemActivation support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "WIN8_FEATURE_SUPPORT" "=" "0"
+#End
+
+#TOKEN
+#	Name  = "SmmOemActivation_SUPPORT"
+#	Value  = "0"
+#	Help  = "Switch to enable Update ACPI in the OS Runtime through the SW SMI for OEM Activation without rebooting the system."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "WIN8_FEATURE_SUPPORT" "=" "0"
+#End
+
+#TOKEN
+#	Name  = "OpalSecurity_SUPPORT"
+#	Value  = "0"
+#	Help  = "Main switch to enable OpalSecurity support in Project"
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "WIN8_FEATURE_SUPPORT" "=" "0"
+#End
+
+#TOKEN
+#	Name  = "UefiNetworkStackII"
+#	Value  = "0"
+#	Help  = "Main switch to enable netwwork stack drivers support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "WIN8_FEATURE_SUPPORT" "=" "0"
+#End
+
+#TOKEN
+#	Name  = "OFBD_SUPPORT"
+#	Value  = "1"
+#	Help  = "Main switch to enable On Flash Block Description support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "SECURE_FLASH_SUPPORT"
+#	Value  = "1"
+#	Help  = "Main switch to enable Security Flash in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	Token = "SecSMIFlash_SUPPORT" "=" "1"
+#End
+
+#TOKEN
+#	Name  = "PRESERVE_SECURE_VARIABLES"
+#	Value  = "1"
+#	Help  = "1 - Preserve Keys through flash update. 0 - Do not preserve. SmiFlash module should take care of this task."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "SecureMod_SUPPORT" "=" "1"
+#End
+
+#TOKEN
+#	Name  = "FWCAPSULE_FILE_FORMAT"
+#	Value  = "0"
+#	Help  = "0 - Include Aptio FW Signature Block inside the AMI.ROM as a ROM Hole Ffs file\1 - Generate Signed Aptio FW Capsule file. The file will be used for Protected Flash Updates and as default Recovery image"
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "SecureMod_SUPPORT" "=" "1"
+#End
+
+#This is a patch for SecureFlash_19, please remove it if module upgrading to secureflash_20 or later.
+ELINK
+	Name  = "-m -r $(ROM_LAYOUT_EX)"
+	Parent  = "-y -m -r $(ROM_LAYOUT_EX)"
+	Help  = "EIP436805"
+	Token = "SecureMod_SUPPORT" "=" "1"
+	InvokeOrder = ReplaceParent
+End
+
+#TOKEN
+#	Name  = "FWSIG_SIGNHDR"
+#	Value  = "1"
+#	Help  = "Fw Signature Calculation scheme\0-Use in Secure Flash Module labels 000 to 008. Only Rom Image and RomMap are signed\1-Use in Secure Flash Module label 009 and onwards. Add FwCap hdr into a signature calculation"
+#	TokenType = Integer
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "TPer_LOCK_ON_RESET"
+#	Value  = "1"
+#	Help  = "Issue eDrive Lock On Reset"
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "TCG_SUPPORT" "=" "1"
+#End
+
+#TOKEN
+#
+#	Name  = "========== NetworkStackII private token =========="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+
+
+##<AAV>
+##<AAV>TOKEN
+##<AAV>	Name  = "BOOT_OPTION_NAME_PREFIX_FUNCTION"
+##<AAV>	Value  = "OemConstructUefiNetworkBootOptionNamePrefix"
+##<AAV>	Help  = "Name of the function of type CONSTRUCT_BOOT_OPTION_NAME.\The function is used to create boot option name suffix."
+##<AAV>	TokenType = Expression
+##<AAV>	TargetH = Yes
+##<AAV>	Token = "WIN8_FEATURE_SUPPORT" "=" "1"
+##<AAV>	Token = "ATHEROS_NIC_SUPPORT" "=" "1"
+##<AAV>End
+##<AAV>
+TOKEN
+	Name  = "========== PTT private token =========="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "FAST_BOOT_PCI_SKIP_LIST"
+	Value  = "{{0x01,0x01},{0x01,0x04},{0x01,0x06},{0x0c,0x03},{0x06,0x01},{0x03,0xff}}"
+	Help  = "Help  = '(EIP85135)When enabled XHCI support difficult into setup menu in fastboot mode'\{ClassCode,SubClassCode}\{0x01,0xFF}  Storage\{0x02,0xFF}  NetWrok\{0x03,0xFF}  VGA\{0x06,0xFF}  Bridge"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_USB_SUPPORT_SETTING"
+	Value  = "1"
+	Help  = "Default value of USB Support option"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "========== Windows 8 feature performence  =========="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "DEFAULT_QUIET_BOOT"
+	Value  = "1"
+	Help  = "Default value of the Quiet Boot option"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SUPPORT_ZERO_BOOT_TIMEOUT"
+	Value  = "1"
+	Help  = "Enables or disables possibility to set boot timeout to 0"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "========== Nested Firmware Volume Configuration =========="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "LZMA_SUPPORT"
+	Value  = "1"
+	Help  = "Enables/Disables LZMA compression support"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NESTED_FV_MAIN"
+	Value  = "1"
+	Help  = "Use this to turn on FV nesting for FV_MAIN"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "0: Disable FV_MAIN nesting; 1: Enable FV_MAIN nesting"
+End
+
+#TOKEN
+#	Name  = " "
+#	Value  = "0"
+#	TokenType = Integer
+#End
+
+TOKEN
+	Name  = "===================== board SET ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+#TOKEN
+#	Name  = "ONBOARD_NIC_DIDVID"
+#	Value  = "0x168714e4"
+#	Help  = "onboard device and verdor ID"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "CFLAGS_Fa"
+	Value  = "0"
+	Help  = "generate assembly listing file in \build"
+	TokenType = Boolean
+End
+
+###<AAV>
+TOKEN
+	Name  = "HOTPLUG_SUPPORT"
+	Value  = "0"
+	Help  = "Enables / Disables Pci Bus Driver Native PCI Hotplug support"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "ATIS"
+#	Value  = "0xB0"
+#	Help  = "ATI Software SMI"
+#	TokenType = Integer
+#	TargetASL = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "FORCE_RECOVERY"
+	Value  = "0"
+	Help  = "Force recovery execution by forcing BootMode = BOOT_IN_RECOVERY_MODE in SbPei.c"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OEM_CHIP_HOTPLUG_DEVICE"
+	Value  = "{ACPI,PCI(0x2,0x2),END},"
+	Help  = "Hot plug device list\Form:\{ACPI,PCI(DEV1,FUN1),END},{ACPI,PCI(DEV2,FUN2),END},"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "HOTPLUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "RSVD_EXT_BUS"
+	Value  = "2"
+	Help  = "Reserved Extra Bus"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "HOTPLUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "RSVD_PCI_MEM"
+	Value  = "1"
+	Help  = "Reserved PCE MEM"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "HOTPLUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "RSVD_PCI_IO"
+	Value  = "1"
+	Help  = "Reserved PCI IO"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "HOTPLUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SerialRecovery_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "FtRecovery_SUPPORT"
+	Value  = "0"
+	Help  = "Switch to enable Fault tolerant recovery support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CLEAR_NVRAM_IF_CMOS_BAD"
+	Value  = "1"
+	Help  = "When this flag is on, NVRAM is cleared and defaults are loaded\whenever CMOS is bad."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "CMOS_MANAGER_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "LOAD_DEFAULTS_IF_CMOS_BAD"
+	Value  = "1"
+	Help  = "When this flag is on, defaults will be loaded by drivers\whenever CMOS/NVRAM is bad."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "CMOS_MANAGER_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "MBEC"
+	Value  = "0"
+	Help  = "EC presence (0) or abssence (0xFFFF) in system. EC declare I/O port \ 62/66, also declared as MotherBoard Resources in rmisc.asl,\ as EC's resource. To avoid conflicts redefine \ to 0 in EC mopdule, if present"
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+#TOKEN
+#	Name  = "BRIEF"
+#	Value  = "0"
+#	Help  = "Brief build mode."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#End
+
+#TOKEN
+#	Name  = "NV_SIMULATION"
+#	Value  = "0"
+#	Help  = "Debug Switch. When the switch is on, NVRAM\variables are not stored in NVRAM"
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "PEI_XHCI_SUPPORT"
+#	Value  = "1"
+#	Help  = "Main switch to enable XhciPei support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "CRBCSPLib"
+	Value  = "$$(LIB_BUILD_DIR)\AmiCrbCSPLib.lib"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_PXE_OPROM_POLICY"
+	Value  = "0"
+	Help  = "Default value of Launch PXE OpROM policy setup control"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - Do not launch, 1 - Launch UEFI OpROM only, 2 - Launch Legacy OpROM only, 3 - Launch Legacy before UEFI, 4 - Launch Legacy after UEFI"
+	Token = "CSM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEFAULT_VIDEO_OPROM_POLICY"
+	Value  = "$(CSMSETUP_UEFI_ONLY_OPROMS)"
+	Help  = "Default value of Launch Video OpROM policy setup control"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "$(CSMSETUP_SKIP_OPROMS) - Do not launch\$(CSMSETUP_UEFI_ONLY_OPROMS) - Launch UEFI OpROM only\$(CSMSETUP_LEGACY_ONLY_OPROMS) - Launch Legacy OpROM only"
+    Token = "CSM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEFAULT_CSM_LAUNCH_POLICY"
+	Value  = "0"
+	Help  = "Controls default value of CSM Launch Policy setup control"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - do not launch CSM, 1 - launch CSM"
+	Token = "CSM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "EC_SUPPORT"
+	Value  = "1"
+	Help  = "AMD FP5 CRB EC Binary Support."
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "===================== EcPs2Kbd.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "EcPs2Kbd_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_DEV_NUMBER"
+	Value  = "0x14"
+	Help  = "South Bridge (LPC Bridge) PCI Device Number"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SB_FUN_NUMBER"
+	Value  = "0x03"
+	Help  = "South Bridge (LPC Bridge) PCI Function Number"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "===================== CORE_DXE.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+#
+#
+### <AAV> the following token is referred to Aptio4 but it cause exception-D when booting OS.  : find the root cause later.
+###TOKEN
+###	Name  = "GC_MODE0"
+###	Value  = "{ 0, 80, 25, 0, 0 }"
+###	Help  = "Parameters of the graphica console text mode 0.\NOTE: Text resolution of the mode 0 must be 80 by 25\Format: {ModeNumber, TextColomns,TextRows, HorizontalPixels,VerticalPixels}"
+###	TokenType = Expression
+###	TargetH = Yes
+###End
+##<AAV> sync Aptio4. To be check in the AptioV component.
+#TOKEN
+#	Name  = "START_IN_NATIVE_RESOLUTION"
+#	Value  = "0"
+#	Help  = "When this token is 'on', Graphics console will start in native resolution if available"
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+
+##<AAV> sync Aptio4. To be check in the AptioV component.
+#TOKEN
+#	Name  = "POWERON_BUSY_CLEAR_TIMEOUT"
+#	Value  = "30000"
+#	Help  = "The Poweron busy clear timeout value. Set to 10 sec."
+#	TokenType = Integer
+#	TargetH = Yes
+#End
+
+
+##<AAV> sync Aptio4. To be check in the AptioV component.
+#TOKEN
+#	Name  = "S3_BUSY_CLEAR_TIMEOUT"
+#	Value  = "30000"
+#	Help  = "Timeout value for S3 busy clear. Set to 10 sec."
+#	TokenType = Integer
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "===================== AMITSE.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "SETUP_BBS_POPUP_ENABLE"
+	Value  = "1"
+	Help  = "Enable or disable the SETUP_BBS_POPUP_ENABLE. CAUTION This works only if complete TSE sources are present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SHELL_TEXT_MODE"
+	Value  = "3"
+	Help  = "Assign the GC_MODE while boot to SHELL.\0xFF = ignored, 0/1/2/.. = GC_MODE0/GC_MODE1/GC_MODE2/.."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "Terminal_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name  = "GC_INITIAL_MODE"
+	Value  = "3"
+	Help  = "This value is an index into the the GC_MODE_LIST array token that indicates\ the text mode that the system will be in when the system starts"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "SETUP_PRINT_EVAL_MSG"
+    Value  = "1"
+    Help  = "Enable/Disable Evaluation message in Post screen"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "TSE_MULTILINE_CONTROLS"
+	Value  = "1"
+	Help  = "Turns on multi line controls. Currently subtitle and static text controls are supported. Default is DISABLE"
+	TokenType = Boolean
+	TargetH = Yes
+End
+## For tune posttime
+TOKEN
+    Name  = "SETUP_DELAY_LOGO_TILL_INPUT"
+    Value  = "1"
+    Help  = "DISABLE is default. 1 => delays logo display untill SIMPLE TEXT IN protocol is available.0 => logo is displayed as soon as UGA DRAW, CONSOLE SPLITTER & SIMPLE TEXT OUT IS AVAILABLE (Will increase code size)."
+    TokenType = Boolean
+    TargetH = Yes
+End
+## For tune posttime
+#TOKEN
+#	Name  = "===================== AmiOsb.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+#
+#TOKEN
+#	Name  = "AMIOSB_SUPPORT"
+#	Value  = "0"
+#	Help  = "Main switch to enable On Screen Branding support in Project."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#End
+
+TOKEN
+	Name  = "===================== Acoustic.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "ACOUSTIC_MANAGEMENT_DRIVER_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable Acoustic Management support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "===================== usbsrc.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+#
+#TOKEN
+#	Name  = "XHCI_COMPLIANCE_MODE_WORKAROUND"
+#	Value  = "1"
+#	Help  = "For some misbehaving USB 3.0 devices, we add the workaround that check the port link before reset the host controller, then a hot port reset is issued for that port while the link is in the compliance mode."
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+##TOKEN
+#	Name  = "===================== PeiRamBoot.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+
+#TOKEN
+#	Name  = "PRESERVE_NESTED_FV_IN_MEM"
+#	Value  = "1"
+#	Help  = "Switch to enable to preserve nested firmware volume in memory."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "PEI_RAM_BOOT_S3_SUPPORT" "=" "1"
+#	Token = "PeiRamBootSupport" "=" "1"
+#End
+#
+#TOKEN
+#	Name  = "SAVE_ENTIRE_FV_IN_MEM"
+#	Value  = "1"
+#	Help  = "Switch to enable to copy Entire Firmware Volume to Ram."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "PeiRamBootSupport" "=" "1"
+#End
+#
+#TOKEN
+#	Name  = "OPTIMIZE_BOOT_FV_COPY"
+#	Value  = "1"
+#	Help  = "Switch to enable to optimize(Minimumize) Boot FV copy."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "PEI_RAM_BOOT_S3_SUPPORT" "=" "1"
+#	Token = "PeiRamBootSupport" "=" "1"
+#End
+
+TOKEN
+	Name  = "===================== AmdSpiRomProtect.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "AMD_SPI_ROM_PROTECT"
+	Value  = "0"
+	Help  = "Main switch to enable AMD SPI Rom Protect support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "===================== NvramSmi.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+#
+#TOKEN
+#	Name  = "NvramSmiSupport"
+#	Value  = "0"
+#	Help  = "Main switch to enable NVRAM SMI support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "===================== SdioDriver.sdl ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "SDIO_DRIVER_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable SdioDriver support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SDIO_DRIVER_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SdioDriver support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+	Token = "CRB_EMMC_SUPPORT" "=" "1"
+End
+
+#TOKEN
+#	Name  = "===================== LegacyRegion.sdl ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+
+#TOKEN
+#	Name  = "LegacyRegion_SUPPORT"
+#	Value  = "0"
+#	Help  = "Main switch to enable LegacyRegion support in Project"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	Token = "CSM_SUPPORT" "=" "0"
+#End
+#
+#TOKEN
+#	Name  = "===================== AMD Performance and Power Optimization ====================="
+#	Value  = "==========================================================="
+#	TokenType = Expression
+#End
+#
+#TOKEN
+#	Name  = "GARDENIA_CRB_POWER_SAVING_SUPPORT"
+#	Value  = "0"
+#	Help  = "For AMD Performance and Power Optimization"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "SB_POWER_SAVING_SUPPORT"
+#	Value  = "1"
+#	Help  = "For AMD Performance and Power Optimization"
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetH = Yes
+#	Token = "GARDENIA_CRB_POWER_SAVING_SUPPORT" "=" "1"
+#End
+#
+#TOKEN
+#	Name  = "OEM_ABM_SUPPORT"
+#	Value  = "1"
+#	Help  = "This indicates whether to enable ABM support for display panel back light."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "GARDENIA_CRB_POWER_SAVING_SUPPORT" "=" "1"
+#End
+
+TOKEN
+	Name  = "====== CRB CUSTOM SSID TABLE ======================"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "CRB_CUSTOM_PPI_SUPPORT"
+	Value  = "0"
+	Help  = "0 - Off .\1 - On.\Support CRB CUSTOM SSID Table."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB1_SB_PCI_DEVICES_SSID_TABLE"
+    Value  = "{SB_FCH_DEV_SATA_AHCI, -1}, {SB_FCH_DEV_SMBUS, -1}, {SB_FCH_DEV_LPC, -1}, {SB_FCH_DEV_XHCI1, -1}, {SB_FCH_DEV_SD, -1}, {-1, -1}"
+    Help  = "List of PCI device's Sub-System ID in the following format:\{Device#1 SB_FCH_DEV emun type , Device#1 Sub-ID}, {Device#2 SB_FCH_DEV emun type, Device#2 Sub-ID}...\The format of SB_FCH_DEV emun type please refer to Sb.h.\If the value of Sub-ID is -1, that means BIOS will use PCI Vendor-ID and Device-ID instead.\The last structure {-1, -1} is end of the table, don't remove it!"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB1_GNB_PCI_DEVICES_SSID_TABLE"
+	Value  = "{GNB_DEV_PCIEBRIDGEx, -1},{GNB_DEV_ACG, -1},{GNB_DEV_DGPU, -1},{GNB_DEV_DGPU_AUDIO, -1},{-1, -1}"
+	Help  = "List of PCI device's Sub-System ID in the following format:\{Device#1 GNB_DEV_LIST emun type, Device#1 Sub-ID}, {Device#2 GNB_DEV_LIST emun type, Device#2 Sub-ID}...\Please refer to Gnb.h for the format of GNB_DEV_LIST emun type.\If the value of Sub-ID is -1, that means BIOS will use PCI Vendor-ID and Device-ID instead.\The last structure {-1, -1} is end of the table, don't remove it!"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB2_SB_PCI_DEVICES_SSID_TABLE"
+    Value  = "{SB_FCH_DEV_SATA_AHCI, -1}, {SB_FCH_DEV_SMBUS, -1}, {SB_FCH_DEV_LPC, -1}, {SB_FCH_DEV_XHCI1, -1}, {SB_FCH_DEV_SD, -1}, {-1, -1}"
+    Help  = "List of PCI device's Sub-System ID in the following format:\{Device#1 SB_FCH_DEV emun type , Device#1 Sub-ID}, {Device#2 SB_FCH_DEV emun type, Device#2 Sub-ID}...\The format of SB_FCH_DEV emun type please refer to Sb.h.\If the value of Sub-ID is -1, that means BIOS will use PCI Vendor-ID and Device-ID instead.\The last structure {-1, -1} is end of the table, don't remove it!"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CRB2_GNB_PCI_DEVICES_SSID_TABLE"
+	Value  = "{GNB_DEV_PCIEBRIDGEx, -1},{GNB_DEV_ACG, -1},{GNB_DEV_DGPU, -1},{GNB_DEV_DGPU_AUDIO, -1},{-1, -1}"
+	Help  = "List of PCI device's Sub-System ID in the following format:\{Device#1 GNB_DEV_LIST emun type, Device#1 Sub-ID}, {Device#2 GNB_DEV_LIST emun type, Device#2 Sub-ID}...\Please refer to Gnb.h for the format of GNB_DEV_LIST emun type.\If the value of Sub-ID is -1, that means BIOS will use PCI Vendor-ID and Device-ID instead.\The last structure {-1, -1} is end of the table, don't remove it!"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "===================== CPM module related ====================="
+	Value  = "==========================================================="
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "AmdCpmPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdCpmPkg support in the project"
+	TokenType = Boolean
+End
+
+#TOKEN
+#	Name  = "AmdCpmAcpiThermalFan_SUPPORT"
+#	Value  = "0"
+#	Help  = "Enable related function later."
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+#
+#TOKEN
+#	Name  = "AmdCpmBootTimeRecord_SUPPORT"
+#	Value  = "0"
+#	Help  = "Enable related function later."
+#	TokenType = Boolean
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#End
+
+TOKEN
+    Name  = "AmdCpmEcInit_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling AmdCpmEcInit support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "KBC_SUPPORT"
+    Value  = "1"
+    Help  = "Enable/Disable KBC support"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+#    Token = "AMDCRBEC_SUPPORT" "=" "1"
+    Token = "CIM_LEGACY_FREE" "=" "0"
+    Token = "ACPI_IA_BOOT_ARCH" "&" "2"
+End
+
+TOKEN
+    Name  = "UHCI_EMUL_SUPPORT"
+    Value  = "0"
+    Help  = "Switch to enable UHCI based Emulation support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "OHCI_EMUL_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to enable OHCI based Emulation support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "OHCI_EMUL_PCI_DEVICES"
+    Value  = "{FixedMemory, 0x80, 0xFED80040}"
+    Help  = "List of supported OHCI controllers in the following format: dev1, dev2,...,devN\dev represents the location of OHCI controller on PCI bus: dev = Bus << 8 + Dev << 3 + Func."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "OHCI_EMUL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "XHCI_EMUL_LEGACY_WIN_SUPPORT"
+    Value  = "0"
+    Help  = "For XHCI Emulation."
+    TokenType = Boolean
+    TargetH = Yes
+End 
+
+TOKEN
+    Name  = "USB_MOUSE_UPDATE_EBDA_DATA"
+    Value  = "0"
+    Help  = "Enables the direct update of EBDA from USB mouse driver. \Note that enabling this flag may cause a failure of those DOS mouse drivers that trap INT74 and do not use EBDA."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "XHCI_EMUL_LEGACY_WIN_SUPPORT" "=" "1"     
+End
+
+TOKEN
+    Name  = "DEFAULT_XHCI_HANDOFF_OPTION"
+    Value  = "0"
+    Help  = "Default value of the XHCI Hand-off option."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "XHCI_EMUL_LEGACY_WIN_SUPPORT" "=" "1"     
+End
+
+TOKEN
+    Name  = "KbcUhci_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling KbcUhci support in the project"
+    TokenType = Boolean
+End
+
+#TOKEN
+#    Name  = "CIM_LEGACY_FREE"
+#    Value  = "0"
+#    TokenType = Boolean
+#    TargetH = Yes
+#End
+
+TOKEN
+    Name  = "AMI_CPM_FIXED_PLATFORM_ID"
+    Value  = "1"
+    Help  = "Turn on fixed platform ID for CPM.\On : use table2 for OEM (Gardenia Rev.B)\Off : read ID from EC for CRB."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SILENT"
+    Value  = "0"
+    Help  = "Enables/disables silent build mode.\In silent build mode executed commands are not displayed, and certain auxiliary build process messages are suppressed or displayed in a condensed format.\In non-silent build mode executed command are displayed prior to execution, and all auxiliary messages are visible.\Silent build mode is typically faster because less information goes into a build log.\Non-silent mode is useful for debugging of the build issues."
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "CRB_RECOVERY_BIN_STRING"
+	Value  = '"$(FWCAPSULE_FILE_NAME)"'
+	Help  = "Redirect FWCAPSULE_FILE_NAME to DSC for string type PCD"
+	TokenType = Expression
+	TargetDSC = Yes
+	Section  = "Defines"
+	Token = "SecureMod_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CRB_RECOVERY_BIN_STRING"
+	Value  = '"$(RECOVERY_ROM)"'
+	Help  = "Redirect RECOVERY_ROM to DSC for string type PCD"
+	TokenType = Expression
+	TargetDSC = Yes
+	Section  = "Defines"
+	Token = "SecureMod_SUPPORT" "=" "0"
+End
+
+#TOKEN
+#    Name  = "CAPSULE_RESET_MODE"
+#    Value  = "0"
+#    Help  = "Capsule reset mode.\0 - RTC S3 wakeup .\1 - Warm reset. "
+#    TokenType = Boolean
+#    TargetEQU = Yes
+#    TargetH = Yes
+#    Lock = Yes
+#End
+#
+#TOKEN
+#	Name  = "COPY_TO_RAM_WHILE_DISPATCH"
+#	Value  = "1"
+#	Help  = "Switch to enable to copy Firmware Volume to Ram while PEI Dispatcher."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#End
+#
+#TOKEN
+#    Name  = "COPY_TO_RAM_WHILE_DISPATCH"
+#    Value  = "0"
+#    Help  = "Switch to enable to copy Firmware Volume to Ram while PEI Dispatcher."
+#    TokenType = Boolean
+#    TargetMAK = Yes
+#    TargetH = Yes
+#    Token = "DEBUG_MODE" "=" "1"
+#End
+
+
+PATH
+	Name  = "CRB_DIR"
+End
+
+PATH
+    Name  = "CRB_LIBRARY_DIR"
+    Path  = "$(PLATFORM_PKG_NAME)\Library"
+End
+
+PATH
+    Name  = "CRB_INCLUDE_DIR"
+    Path  = "$(PLATFORM_PKG_NAME)\Include"
+End
+
+MODULE
+	Help  = "Includes Crb.mak to Project"
+	File  = "Crb.mak"
+End
+
+ELINK
+	Name  = "/Fa$(BUILD_DIR)\$(B)"
+	Parent  = "CFLAGS"
+	Token = "CFLAGS_Fa" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "SecCrb_EarlyInit"
+	Parent  = "SECCoreAtPowerOn"
+	Help  = "CRB Early Init in SEC (before Cache as memory enabling)"
+	Token = "INCLUDE_CRB_ASM_FILE_IN_SEC" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CrbAcpiEnabled,"
+	Parent  = "AcpiEnableCallbackList"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CrbAcpiDisabled,"
+	Parent  = "AcpiDisableCallbackList"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CrbSbSetupOverride,"
+	Parent  = "SbConfigurationList"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{(UINT32) 0x10EC0899, (UINTN)&CrbHdaVerbTbl0[0]},"
+	Parent  = "OEM_HDA_VERB_TABLE"
+	Help  = "CRB HDA Verb Table context"
+	Token = "MANDOLIN_CRB_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{(UINT32) 0x10EC0899, (UINTN)&SampleVerbTbl[0]},"
+	Parent  = "OEM_HDA_VERB_TABLE"
+	Token = "SAMPLE_ELINK_HDA_VERBTABLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "UINT32 SampleVerbTbl[] = {0x00172050, 0x001721C9, 0x00172222, 0x00172310, 0x0017FF00, 0x0017FF00, 0x0017FF00, 0x0017FF00, 0x01171C00, 0x01171D00, 0x01171E33, 0x01171F40, 0x01271CF0, 0x01271D11, 0x01271E11, 0x01271F41, 0x01471C10, 0x01471D40, 0x01471E01, 0x01471F01, 0x01571C14, 0x01571D10, 0x01571E01, 0x01571F01, 0x01671C11, 0x01671D60, 0x01671E01, 0x01671F01, 0x01771CF0, 0x01771D11, 0x01771E11, 0x01771F41, 0x01871C40, 0x01871D90, 0x01871EA1, 0x01871F01, 0x01971C50, 0x01971D10, 0x01971EA1, 0x01971F02, 0x01A71C60, 0x01A71D30, 0x01A71E81, 0x01A71F01, 0x01B71C20, 0x01B71D10, 0x01B71E21, 0x01B71F02, 0x01C71CF0, 0x01C71D11, 0x01C71E11, 0x01C71F41, 0x01D71C01, 0x01D71DF6, 0x01D71E26, 0x01D71F40, 0x01E71C30, 0x01E71D11, 0x01E71E45, 0x01E71F01, 0x01F71CF0, 0x01F71D11, 0x01F71E11, 0x01F71F41, 0x02050007, 0x02040180, 0x02050001, 0x0204C7AA, 0x02050015, 0x0204026A, 0x02050008, 0x02040071, 0xffffffff};"
+	Parent  = "OEM_HDA_VERB_TABLE_CONTENT"
+	Help  = "CRB HDA Verb Table context"
+	Token = "SAMPLE_ELINK_HDA_VERBTABLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "RUNTIME(PeiDbgrSendDebugText),"
+	Parent  = "ReportStringStatus"
+	Help  = "For Rx message in DOS"
+	Token = "SEND_DEBUG_MESSAGE_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CRBRuntimeResetOverride,"
+	Parent  = "SbResetCallbackList"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "OemIsResetConfigMode,"
+	Parent  = "IsResetConfigMode"
+	Token = "CLEAR_NVRAM_IF_CMOS_BAD" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "OemIsDefaultConfigMode,"
+	Parent  = "IsDefaultConfigMode"
+	Token = "LOAD_DEFAULTS_IF_CMOS_BAD" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "EmbeddedControllerDisable,"
+	Parent  = "OemFlashWriteEnableList"
+	Token = "EC_FIRMWARE_UPDATE_INTERFACE_SUPPORT" "=" "1"
+	Disable = Yes
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "EmbeddedControllerEnable,"
+	Parent  = "OemFlashWriteDisableList"
+	Token = "EC_FIRMWARE_UPDATE_INTERFACE_SUPPORT" "=" "1"
+	Disable = Yes
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "ANY_PCI_DEV_CALLBACK(0xFFFF, 0xFFFF, PciDevXXX_Init),"
+    Parent  = "AMI_ANY_DEV_HOOK_PCI_DEVICE_GET_SETUP_CONFIG"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CrbSmiFlashPreUpdate,"
+	Parent  = "SMIFlashPreUpdateList"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CrbSmiFlashEndUpdate,"
+	Parent  = "SMIFlashEndUpdateList"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CrbLib"
+	Parent  = "AMI_CSP_LIBRARIES"
+	InvokeOrder = AfterParent
+End
+
+#ELINK
+#	Name  = "ProcessNestedFvBeforePublishing"
+#	Help  = "Called before publishing Nested FV"
+#	InvokeOrder = ReplaceParent
+#End
+#
+#ELINK
+#	Name  = "FV_MAIN_OUTSIDE_NESTED"
+#	Token = "LZMA_SUPPORT" "=" "1"
+#	InvokeOrder = ReplaceParent
+#End
+
+INFComponent
+	Name  = "CrbSecLib"
+	File  = "Library/CrbSecLib/CrbSecLib.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "SEC"
+End
+
+INFComponent
+	Name  = "CrbPei"
+	File  = "Pei/CrbPei.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+   Name  = "CrbSmbios"
+   File  = "CrbSmbios/CrbSmbios.inf"
+   Package  = "$(PLATFORM_PKG_NAME)"
+   ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "CrbDxe"
+	File  = "Dxe/CrbDxe.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "CrbSmi"
+	File  = "Smm/CrbSmi.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+	Name  = "CrbLib"
+	File  = "CrbLib/CrbLib.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	Path  = "CRB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "CrbSmmLib"
+	File  = "CrbSmmLib/CrbSmmLib.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Path  = "CRB_LIBRARY_DIR"
+End
+
+INFComponent
+    Name  = "CrbAmiPowerStateLib"
+    File  = "CrbAmiPowerStateLib/CrbAmiPowerStateLib.inf"
+    Package  = "$(PLATFORM_PKG_NAME)"
+    Path  = "CRB_LIBRARY_DIR"
+End
+
+LibraryMapping
+    Class  = "AmiPowerStateLib"
+    Instance  = "$(PLATFORM_PKG_NAME).CrbAmiPowerStateLib"
+End
+
+INFComponent
+	Name  = "CrbPciePei"
+	File  = "CrbPcie/CrbPciePei.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+	ModuleTypes  = "PEIM"
+	Token = "CRB_AMD_PCIE_CONTROL_SUPPORT" "=" "1" 
+End
+
+INFComponent
+	Name  = "CrbPciBoardDxeInitLib"
+	File  = "Library/CrbPciBoardDxeInitLib/CrbPciBoardDxeInitLib.inf"
+	Package  = "$(PLATFORM_PKG_NAME)"
+End
+
+INFComponent
+    Name  = "CrbAcpiLib"
+    File  = "CrbAcpiLib/CrbAcpiLib.inf"
+    Package  = "$(PLATFORM_PKG_NAME)"
+    Path  = "CRB_LIBRARY_DIR"
+End
+
+## Build pass for core 5008 while enable the debugRx. 
+LibraryMapping
+	Class  = "DebugAgentLib"
+	Instance  = "MdeModulePkg.DebugAgentLibNull"
+	Override  = "MdeModulePkg.CapsulePei"
+End
+
+LibraryMapping
+	Class  = "DebugAgentLib"
+	Instance  = "MdeModulePkg.DebugAgentLibNull"
+	Override  = "MdeModulePkg.CapsuleX64"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "$(PLATFORM_PKG_NAME).CrbSecLib"
+	ModuleTypes  = "SEC"
+	Override  = "AmiCpuPkg.SecCore"
+End
+
+LibraryMapping
+	Class  = "CrbLib"
+	Instance  = "$(PLATFORM_PKG_NAME).CrbLib"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "$(PLATFORM_PKG_NAME).CrbSmmLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Override  = "AmiModulePkg.SMIFlash"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "$(PLATFORM_PKG_NAME).CrbPciBoardDxeInitLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Override  = "AmiModulePkg.PciDxeInit"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "$(PLATFORM_PKG_NAME).CrbAcpiLib"
+    Override  = "AmiChipsetModulePkg.AcpiModeEnable"
+End
+
+LibraryMapping
+    Class  = "PlatformHookLib"
+    Instance  = "AmdCpmPkg.BasePlatformHookLibAmdSmsc1100"
+    Token = "CRB_EXT_SERIAL_PORT_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "SerialPortLib"
+    Instance  = "MdeModulePkg.BaseSerialPortLib16550"
+    Token = "CRB_EXT_SERIAL_PORT_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "SerialPortLib"
+    Instance  = "MdeModulePkg.BaseSerialPortLib16550"
+    Help  = "The AmdCpmPkg SerialPortLib library class (BaseSerialPortLib16550AmdFchUart) will do CheckCableConnection\ so you need to connect the UART cable otherwise ASSERT error occur.\Let's use MdeModulePkg instead."
+    Token = "FCH_UART_DEBUG_SELECT" "!=" "0"
+End
+
+#PcdMapping
+#	Name  = "PcdTSBounceEnable"
+#	GuidSpace  = "gAmiAmdCpuTokenSpaceGuid"
+#	PcdType  = "PcdsFixedAtBuild"
+#	DataType  = "Uint64"
+#	Value  = "0"
+#	Arch  = "X64"
+#	Offset  = 00h
+#	Length  = 08h
+#	Help  = "Enable TSEG bounce - change size and caching during SMM init phase\ to speed-up execution. Not compatible for with debuggers."
+#	TargetDSC = Yes
+#	Token = "DEBUG_MODE" "=" "1"
+#End
+
+PcdMapping
+	Name  = "PcdDebugPropertyMask"
+	GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "0x2f"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+	Token = "DEBUG_MODE" "=" "1"
+End
+
+PcdMapping
+	Name  = "PcdDebugPropertyMask"
+	GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 00h
+	Help  = "The value is a bit mask that is used to control DebugLib behavior.\Bit values:\1 - Enable asserts\2 - Enable debug messages\4 - Enable debug code\8 - Clear memory after deallocation\0x10 - Enable breakpoints\0x20 - Enable dead loops"
+	TargetDSC = Yes
+	Token = "DEBUG_MODE" "=" "0"
+End
+
+PcdMapping
+	Name  = "PcdDebugPrintErrorLevel"
+	GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "0x80000046"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+	Token = "DEBUG_MODE" "=" "1"
+End
+
+PcdMapping
+	Name  = "PcdPeiCoreMaxFvSupported"
+	GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "12"
+	Offset  = 00h
+	Length  = 00h
+	TargetDSC = Yes
+End
+
+PcdMapping
+	Name  = "PcdRecoveryImageName"
+	GuidSpace  = "gAmiModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Pointer"
+	Value  = "$(CRB_RECOVERY_BIN_STRING)"
+	Offset  = 00h
+	Length  = 01ah
+	TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdPeiCoreMaxPpiSupported"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "255"
+    Arch  = "IA32"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name = "PcdMaxPeiPerformanceLogEntries"
+    GuidSpace = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType = "PcdsFixedAtBuild"
+    DataType = "UINT8"
+    Value = "255"
+    Offset = 00h
+    Length = 01h
+    TargetDSC = Yes
+End
+
+FFS_FILE
+	Name  = "CrbPei"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "$(PLATFORM_PKG_NAME).CrbPei"
+	Apriori_Index  = "10"
+End
+
+FFS_FILE
+    Name  = "CrbSmbios"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "$(PLATFORM_PKG_NAME).CrbSmbios"
+End
+
+FFS_FILE
+	Name  = "CrbDxe"
+	FD_AREA  = "FV_MAIN"
+	INFComponent  = "$(PLATFORM_PKG_NAME).CrbDxe"
+	Apriori_Index  = "10"
+End
+
+TOKEN
+    Name  = "ASL_COMPILER"
+    Value  = "IASL5.exe"
+    Help  = "Possible values: 'ASL.exe' and 'IASL.exe'."
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "ROOT_BRIDGE_COUNT"
+    Value  = "1"
+    Help  = "Indicates how many root bridges (peer to peer) are in the system."
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "FCH_FIRMWARE_SIZE"
+#	Value  = "$(XHCI_FIRWARE_SIZE)+$(ROMSIG_SIZE)"
+#	Help  = "The firmware size of whole AMD firmware. (ROMSIG, XHCI , IMC , GEC, Etc....)\Default is 64K"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Lock = Yes
+#End
+
+#TOKEN
+#	Name  = "FCH_FIRMWARE_SIZE"
+#	Value  = "$(SB900_EC_SIZE)+$(XHCI_FIRWARE_SIZE)+$(ROMSIG_SIZE)"
+#	Help  = "The firmware size of whole AMD firmware. (ROMSIG, XHCI , IMC , GEC, Etc....)\Default is 64K"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Lock = Yes
+#	Token = "SB900_EC_SUPPORT" "=" "1"
+#End
+
+TOKEN
+	Name  = "CRB_AMD_PCIE_CONTROL_SUPPORT"
+	Value  = "1"
+	Help  = "Switch the CRB GNB PCIE Port configure"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SAMPLE_ELINK_HDA_VERBTABLE"
+	Value  = "0"
+	Help  = " Use Elink method to give verb table"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#TOKEN
+#       Name  = "SUPPORT_ESRT"
+#       Value  = "1"
+#       Help  = "Enable to support ESRT"
+#       TokenType = Boolean
+#       TargetH = Yes
+#       Token = "CORE_COMBINED_VERSION" ">=" "0x4028e"
+#End
+
+TOKEN
+	Name  = "OS_RESET_WORKAROUND"
+	Value  = "0"
+	Help  = "Triger SW SMI to do reset to workaround the issued that system hangs at 0x11 when do reset in Win7 and Ubuntu OS."
+	TokenType = Integer
+	TargetEQU = Yes
+End
+
+TOKEN
+	Name  = "BIOS_TAG"
+	Value  = "$(PROJECT_TAG)$(PROJECT_MAJOR_VERSION)$(PROJECT_MINOR_VERSION)"
+	Help  = "BIOS Tag inserted into Firmware ID structure.\9 characters. \5 characters of project tag followed by 3 characters of project version and terminating zero"
+	TokenType = Expression
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+#TOKEN
+#    Name  = "BIOS_VERSION_BACKWARD_COMPATIBILITY"
+#    Value  = "0"
+#    Help  = "Backward compatibility control token for Type 0 BIOS Version/System BIOS Major Release/System BIOS Minor Release\ON = Backward compatible\           BIOS Version = CORE_MAJOR_VERSION.CORE_MINOR_VERSION.CORE_REVISION\           System BIOS Major Release = CORE_MAJOR_VERSION\           System BIOS Minor Release = CORE_MINOR_VERSION\OFF = Not backward compatible\            BIOS Version = CORE_MAJOR_VERSION.CORE_BUILD_NUMBER\            System BIOS Major Release = CORE_MAJOR_VERSION\            System BIOS Minor Release = CORE_BUILD_NUMBER\            or OEM customized strings)"
+#    TokenType = Boolean
+#    TargetEQU = Yes
+#End
+#
+#TOKEN
+#    Name  = "CRB_XHCI_RECOVERY_WORKAROUND"
+#    Value  = "0"
+#    Help  = "This workaround only for the Gardenia Rev B the usb3.0 key image can't be loaded if use command :afudos xx.rom /p /b /n /recovery"
+#    TokenType = Boolean
+#    TargetH = Yes
+#End
+
+#TOKEN
+#	Name  = "USB30PORT_INIT"
+#	Value  = "0x08"
+#	Help  = "If the USB port is unremoveable,need Enable PortSC.DR bit.On CRB board,The port4 is realtek controller,is unremoveable,so default set USB30PORT_INIT=0x08(UINT8(1<<3)).OEM maybe need change this value refer to the XHCI port is removeable/unremoveable"
+#	TokenType = Boolean
+#	TargetH = Yes
+#	Token = "USB30PORT_INIT_SUPPORT" "=" "1"
+#End
+
+#TOKEN
+#    Name  = "USB30PORT_INIT_SUPPORT"
+#    Value  = "1"
+#    Help  = "PortSC.DR bit needs to be set according to Platform Configuration"
+#    TokenType = Boolean
+#    TargetH = Yes
+##End
+
+#TOKEN
+#    Name  = "CRB_WHCK_DEBUG_CAPABILITY_TEST"
+#    Value  = "1"
+#    Help  = "Turn on debug port for WHCK - Debug Capability Test item."
+#    TokenType = Boolean
+#    TargetH = Yes
+#    Token = "MANDOLIN_CRB_SUPPORT" "=" "1"
+#End
+
+#TOKEN
+#    Name  = "PCI_EHCI_DEV_FUNC_NUMBER"
+#    Value  = "0x90"
+#    Help  = "for USB DEBUGGER. \EHCI controller device and function number. \Bit 0-2 represents function number and\ Bit 3-7 represents device number \ For Hudson-3 No.1 EHCI = 0x90, No.2 EHCI = 0x98 \ Default 0x90 for Mullins Gardenia layout"
+#    TokenType = Integer
+#    TargetH = Yes
+#    Token = "CRB_WHCK_DEBUG_CAPABILITY_TEST" "=" "1"
+#End
+
+#TOKEN
+#    Name  = "EHCI_DEBUG_PORT_SELECT"
+#    Value  = "1"
+#    Help  = "for USB DEBUGGER. \EHCI Hub port select if Debug port(Port1) route\to port 0 Hub. \We can select one Hub port as debug port. \ 0: Disable \ 1: Port1 \ 2: Port2 \ 3: Port3 \ 4: Port4"
+#    TokenType = Integer
+#    TargetH = Yes
+#    Token = "CRB_WHCK_DEBUG_CAPABILITY_TEST" "=" "1"
+#End
+
+
+#TOKEN
+#	Name  = "NVRAM_SMI_FULL_PROTECTION"
+#	Value  = "1"
+#	Help  = "Switch to enable full SMI protection. If ON all NVRAM services will be handled through SMIs (maximum protection but slowest speed). If OFF only SetVariable will processed through SMI (minimum requirement for Secure Flash)."
+#	TokenType = Boolean
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Token = "NVRAM_SMI_SUPPORT" "=" "1"
+#End
+
+TOKEN
+	Name  = "DISABLE_PWR_BUTTON"
+	Value  = "1"
+	Help  = "1 - Disable PWR Button when flashing BIOS in DOS."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "NBTP"
+    Value  = "0xFEC00000"
+    Help  = "Same as APIC Base for ASL use "
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "===================== Promontory Chip related ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "FchPromontoryModulePkg_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling FchPromontoryModulePkg support in the project"
+    TokenType = Boolean
+    Token = "AmiPromontoryPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "AmiPromontoryPkg_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable Template - SouthBridge support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PTIO_BASE_ADDRESS"
+    Value  = "0xFEC30000"
+    Help  = "Same as SPI_BASE_ADDRESS for ASL use "
+    TokenType = Integer
+    Token = "AmiPromontoryPkg_SUPPORT" "=" "1"
+End
+
+RSVCHIPSET
+    Name  = "AMD Promontory GPIO Controller"
+    BASEADDR  = "$(PTIO_BASE_ADDRESS)"
+    LENGTH  = "0x1000"
+    TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+    ATTRIBUTES  = "0x8000000000000001"
+    Token = "AmiPromontoryPkg_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "NBTP"
+    Value  = "$(PTIO_BASE_ADDRESS)"
+    Help  = "Same as SPI_BASE_ADDRESS for ASL use "
+    TokenType = Integer
+    TargetASL = Yes
+    Token = "AmiPromontoryPkg_SUPPORT" "=" "1"
+End
+PcdMapping
+    Name  = "PcdS3BootScriptRuntimeTableReservePageNumber"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT16"
+    Value  = "0x8"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "S3 boot Script runtime page number"
+    TargetDSC = Yes
+End
+TOKEN
+    Name  = "===================== AHCI INT13 SMM SUPPORT ====================="
+    Value  = "==============================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AhciCspLib_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AhciCspLib support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AHCI_INT13_SMM_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SMM support for AHCI Int13/MMIO operations in Project. Currently only INT13 Read/Write functions are supported."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AINT13_AVOID_MULTIPLE_SMI"
+    Value  = "1"
+    Help  = "Execute INT13 Read/Write functions completely in SMM and avoid multiple SMI generation for single AHCI INT13 function/call."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "AhciSmm_SUPPORT" "=" "1"
+    Token = "AHCI_INT13_SMM_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "===================== Idebussrc SUPPORT ====================="
+    Value  = "==============================================================="
+    TokenType = Expression
+End
+
+#EIP386039:Some token values of AHCI will be overrided by the Idebussrc.sdl
+#Disable those token for IdeBus_08
+TOKEN
+    Name  = "ATAPI_BUSY_CLEAR_TIMEOUT"
+    Value  = "16000"
+    Help  = "Timeout value for ATAPI busy clear. Set to 16 second."
+    TokenType = Integer
+    TargetH = Yes
+    Disable = Yes
+End
+
+TOKEN
+    Name  = "DMA_ATA_COMMAND_COMPLETE_TIMEOUT"
+    Value  = "5000"
+    Help  = "Timeout value for completion of DMA ATA command. Set to 5 second."
+    TokenType = Integer
+    TargetH = Yes
+    Disable = Yes
+End
+
+TOKEN
+    Name  = "DMA_ATAPI_COMMAND_COMPLETE_TIMEOUT"
+    Value  = "16000"
+    Help  = "Timeout value for completion of DMA ATAPI command. Set to 16 second."
+    TokenType = Integer
+    TargetH = Yes
+    Disable = Yes
+End
+
+TOKEN
+    Name  = "===================== USB3.0 Debugger support  =================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+PcdMapping
+    Name  = "PcdUsbXhciPciAddress"
+    GuidSpace  = "gEfiAMIDebugRxPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "$(XHCI_PCI_ADDR)"
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+    Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "XHCI_PCI_ADDR"
+	Value  = "$(FIXED_XHCI_BUS_SANDSTONE) * 0x100000 + 0x3000"
+	Help  = "<PORTING REQUIRED: There are two XHCI controller on AMD-FCH-Sandstone. Please change PCI-function3 or 4.>/PCI Addr for Xhci Hc, default set for BDF[n,0,4]\ 0x4000 is function4"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "DBG_PEI_XHCI_CONTROLLER_PCI_ADDRESS"
+    Value  = "{FIXED_XHCI_BUS_SANDSTONE, 0x0, 0x3}, {FIXED_XHCI_BUS_SANDSTONE, 0x0, 0x4},"
+    Help  = "Default value if XHCI controllers are not supported, Set Pcd value of PcdUsbXhciPciAddress based on the values here"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FIXED_XHCI_BUS_SANDSTONE"
+    Value  = "0x2"
+    Help  = "Fixed XHCI bus number for Sandstone FCH. for XHCI Debugger. When fixed bus off : \you need to make sure the bus number be assigned by PciBus Driver.\ The 0x3 is for CRB setting."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+    Token = "PCI_FIXED_BUS_ASSIGNMENT" "=" "0"
+End
+
+TOKEN
+    Name  = "FCH_UART_DEBUG_SELECT"
+    Value  = "0"
+    Help  = "0: Disable,1:UART0,2:UART1. Select Fch Uart port as debug port. (You can turn on if you want to use two debug message interface)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "DBG_PEI_XHCI_MMIOBASE"
+    Value  = "0xFE700000"
+    Help  = "MMIO Base Address for first XHCI Controller during PEI phase"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "DBG_PEI_XHCI_MMIOSIZE"
+    Value  = "0x100000"
+    Help  = "MMIO size for XHCI Controller during PEI phase"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "===================== AmdAptioV.sdl ====================="
+    Value  = "==============================================================="
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "INTERRUPTS_TO_PRESERVE"
+	Value  = "{0x13, 0x15, 0x40, 0x08}"
+	Help  = "List of interrupts to be saved after CSM Init call and restored before LegacyBoot.\The default list is defined in CSM.SDL and contains three interrups: int13, int15, and int40."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+ELINK
+	Name  = "gEfiPciIoProtocolGuid"
+	Parent  = "AdditionalSetupProtocols"
+	InvokeOrder = AfterParent
+End
+
+
+PcdMapping
+	Name  = "PcdPeiCoreMaxPeimPerFv"
+	GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "120" 
+	Offset  = 00h
+	Length  = 04h
+	TargetDSC = Yes
+End
+
+#PcdMapping
+#	Name  = "PcdUdfSupport"
+#	GuidSpace  = "gAmiModulePkgTokenSpaceGuid"
+#	PcdType  = "PcdsFixedAtBuild"
+#	Value  = "FALSE"
+#	Offset  = 00h
+#	Length  = 00h
+#	TargetDSC = Yes
+#End
+
+RSVCHIPSET
+    Name  = "LocalApicSpace"
+    BASEADDR  = "$(LOCAL_APIC_BASE)"
+    LENGTH  = "0x100000"
+    TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+    ATTRIBUTES  = "0x8000000000000001"
+End
+
+RSVCHIPSET
+	Name  = "PCI Config Space Index Data"
+	BASEADDR  = "0xCF8"
+	LENGTH  = "0x8"
+	TYPE  = "EfiGcdIoTypeIo"
+	ATTRIBUTES  = "-1"
+End
+
+#TOKEN
+#	Name  = "DEFAULT_CONDITIONAL_EXPRESSION_SUPPORT"
+#	Value  = "1"
+#	Help  = "0 is Default. 0 => To skip evaluating default value for Conditional Expression 1=> To evaluating default value for Conditional Expression"
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+TOKEN
+    Name = "OEM_ESRT_FIRMWARE_GUID"
+    Value = "{0x00000000, 0x0000, 0x0000, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}"
+    Help = "This is an invalid GUID, it can't be used for Windows Logo certification.\IT MUST BE CLONED TO OEM/ODM PROJECT AND UPDATE IT!"
+    TokenType = Expression
+    TargetH = Yes
+    Range = "GUID"
+End
+
+FFS_FILE
+    Name  = "S3SaveStateDxe"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "MdeModulePkg.S3SaveStateDxe"
+    Apriori_Index  = "5"
+#    Token = "TCG2Support" "=" "1"
+End
+
+FFS_FILE
+    Name  = "TcgDxe"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "AmiModulePkg.TcgDxe"
+    Token = "TCG2Support" "=" "1"
+End
+
+FFS_FILE
+    Name  = "Tcg2Dxe"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "AmiModulePkg.Tcg2Dxe"
+    Token = "TCG2Support" "=" "1"
+End
+
+TOKEN
+    Name  = "===================== CRB Standard Modules ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "BcpBootOrder_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable BcpBootOrder support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "EMUL6064_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable KBC Emulation support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AMIUSB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "LEGACYSREDIR_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AMI Legacy Serial Redirection support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "CSM_SUPPORT" "=" "1"
+    Token = "Terminal_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "NvmeRecovery_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable Nvme device recovery support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "===================== Produce Symbol files (PDB files) ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "RELEASE_MODE_SYMBOL_SUPPORT"
+    Value  = "0"
+    Help  = "Support source level debug (PDB files) in release mode"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "RELEASE_MODE_SYMBOL_SUPPORT"
+    Value  = "0"
+    Help  = "Support source level debug (PDB files) in release mode"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+ELINK
+    Name  = "/Zi"
+    Parent  = "MSFT:*_*_*_CC_FLAGS"
+    Type  = "BuildOptions"
+    Token = "RELEASE_MODE_SYMBOL_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "/Zi"
+    Parent  = "MSFT:*_*_*_ASM_FLAGS"
+    Type  = "BuildOptions"
+    Token = "RELEASE_MODE_SYMBOL_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "/DEBUG /PDB:$(DEBUG_DIR)/$(BASE_NAME).pdb"
+    Parent  = "MSFT:*_*_IA32_DLINK_FLAGS"
+    Type  = "BuildOptions"
+    Token = "RELEASE_MODE_SYMBOL_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "/DEBUG"
+    Parent  = "MSFT:*_*_X64_DLINK_FLAGS"
+    Type  = "BuildOptions"
+    Token = "RELEASE_MODE_SYMBOL_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "MSFT:*_*_X64_DLINK_FLAGS"
+    Type  = "BuildOptions"
+    Token = "RELEASE_MODE_SYMBOL_SUPPORT" "=" "1"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "MSFT:*_*_IA32_DLINK_FLAGS"
+    Type  = "BuildOptions"
+    Token = "RELEASE_MODE_SYMBOL_SUPPORT" "=" "1"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "MSFT:*_*_*_ASM_FLAGS"
+    Type  = "BuildOptions"
+    Token = "RELEASE_MODE_SYMBOL_SUPPORT" "=" "1"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "MSFT:*_*_*_CC_FLAGS"
+    Type  = "BuildOptions"
+    Token = "RELEASE_MODE_SYMBOL_SUPPORT" "=" "1"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+
+###
+###  RVA9 : Temproary token set to disable WSMT. Wait AGESA PI update
+###
+#TOKEN
+#    Name  = "UPDATE_WSMT"
+#    Value  = "1"
+#    Help  = "Main Token to enable updating of WSMT table, based on PCD. Disable this token if Windows 10 Device Guard requirements is not targeted for your platform."
+#    TokenType = Boolean
+#    TargetH = Yes
+#End
+
+#TOKEN
+#    Name  = "BDS_START_PCI_BEFORE_END_OF_DXE"
+#    Value  = "0"
+#    Help  = "When this token is enabled, PCI bus enumeration,\creation of PCI I/O handles, and launch of OpROM for onboard devices\are performed before generation of the End-of-DXE event.\This feature requires PciBus_12 or newer."
+#    TokenType = Boolean
+#    Token = "UPDATE_WSMT" "=" "0"
+#End
+
+#PcdMapping
+#    Name  = "AmiPcdSmmMemLibProperties"
+#    GuidSpace  = "gAmiModulePkgTokenSpaceGuid"
+#    PcdType  = "PcdsFixedAtBuild"
+#    Value  = "7 & ( 0-($(BDS_START_PCI_BEFORE_END_OF_DXE)^1) )"
+#    Offset  = 00h
+#    Length  = 00h
+#    TargetDSC = Yes
+#    Token = "UPDATE_WSMT" "=" "0"
+#End
+
+TOKEN
+    Name  = "===================== HSTI support token and setting ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AMD_HSTI_SUPPORT"
+    Value  = "1"
+    Help  = "AMD HSTI Support"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AmiHstiPkg_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable MdePkg support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "AmiHstiPkg_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable MdePkg support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Token = "AMD_HSTI_SUPPORT" "=" "1"   
+End
+
+TOKEN
+    Name  = "ENABLE_IMAGE_EXEC_POLICY_OVERRIDE"
+    Value  = "0"
+    Help  = "Enable user override of Image Execution policy"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AMD_HSTI_SUPPORT" "=" "1" 
+End
+
+# Depend on project
+#TOKEN
+#    Name  = "AMD_SPI_ROM_PROTECT"
+#    Value  = "1"
+#    Help  = "Main switch to enable AMD SPI Rom Protect support in Project"
+#    TokenType = Boolean
+#    TargetEQU = Yes
+#    TargetMAK = Yes
+#    TargetH = Yes
+#    Token = "AMD_HSTI_SUPPORT" "=" "1"   
+#End
+
+TOKEN
+    Name  = "AmiHstiAmdFwProtectSpiImplementationBit"
+    Value  = "8"
+    Help  = " HSTI_AMD_FWCODE_PROTECT_PROTECT_SPI            Byte1 BIT0"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "HSTI_REVISION" "=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiNumSecurityBytes"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "0x06"
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+    Help  = "AMD  HSTI Total 6 bytes (Byte0-Byte5)"
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiImplementedTestBitmap"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint64"
+    Value  = "0x010003070501"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiCryptoStrengthImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "0"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Help  = " HSTI_AMD_CRYPTO_STRENGTH Bit0"
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiSignedFirmwareUpdateImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "10"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Help  = " HSTI_AMD_FWCODE_PROTECT_SIGNED_FW_CHECK         Byte1 BIT2"
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiSecureUpdateWithDefaultKeyImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "16"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Help  = "HSTI_AMD_SECURE_FW_UPDATE_DFT_TESTKEY  Byte2 Bit0"    
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiNoTestKeyImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "17"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Help  = "HSTI_AMD_SECURE_FW_UPDATE_CHECK_TESTKEY_IN_PRODUCTION   Byte2 BIT1"
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiFirmwareRollbackImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "18" 
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Help  = "HSTI_AMD_SECURE_FW_UPDATE_ROLLBACK_CHECK   Byte 2 Bit2"
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+ 
+PcdMapping
+    Name  = "AmiPcdHstiSecureBootBypassImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "24" 
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Help  = "HSTI_AMD_SECUREBOOT_BACKDOOR_INLINE_PROMPT_CHECK  Byte 3 Bit0 "
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiManufacturingModeImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "25"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Help  = "HSTI_AMD_SECUREBOOT_BACKDOOR_MANUFACTURE_CHECK  Byte 3 Bit1 "
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiSecureBootCsmDisableImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "40"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Help  = "HSTI_AMD_CSM_DISABLE_IF_SECUREBOOT_EN  Byte5 Bit1 "
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiMorSupportImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "0xFF"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdHstiExternalDeviceDmaImplementationBit"
+    GuidSpace  = "gAmiHstiPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint8"
+    Value  = "0xFF"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "HSTI_REVISION" "=" "0"
+    Token = "HstiAmi_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "===================== PeiGop ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "MCT_BOTTOM_IO_VALUE"
+    Value  = "0xE0"
+    Help  = "This is the hardcoded value for the Bottom IO (bits 31-24). "
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "FORCE_RECOVERY" "=" "1"
+    Token = "GNB_AMD_PEI_GOP_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "===================== ACDC function for non-modern standby ====================="
+    Value  = "==========================================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "CRB_ATAD_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable Crb ACPI Time and Alarm support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ATAD_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable ACPI Time and Alarm support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "CRB_ATAD_SUPPORT" "=" "1"
+End
+
+PCIDEVICE
+    Title = "AcpiTimeAndAlarmDev"
+    Parent = "PciHost (Virtual)"
+    Attribute = "0x0"
+    Dev_type = "Container"
+    Dev = 00h
+    Fun = 00h
+    SleepNum = 01h
+    ASLfile = "'MandolinPkg/Asl/CrbTimeAndAlarm.asl;After Pci Tree'"
+    Token = "CRB_ATAD_SUPPORT" "=" "1"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+End
+
+TOKEN
+    Name  = "ACPI_IA_BOOT_ARCH"
+    Value  = "0003h"
+    Help  = "IA Boot Architecture\this token may be 'ored' see renge field for details"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1 - IA_LEGACY; 2 - IA_8042; 4 - VGA Not Present; 8 - MSI Not Supported; 10h - PCIe ASPM Controls, 20h - CMOS RTC Not Present"
+    Token = "ACPI_BUILD_TABLES_2_0" "=" "1"
+    Token = "CRB_ATAD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "=========================================="
+    Value  = "==========================================="
+    TokenType = Expression
+End
+
+PcdMapping
+    Name  = "PcdGetRVFamilyOPN"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "UINT32"
+    Value  = "0x000015D8"
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "======== SA50072 for OA3=================================="
+    Value  = "==========================================="
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AMI_ACPI_TABLE_MIN_PAGE_SIZE"
+    Value  = "100"
+    Help  = "The minimum page size of ACPI table.\We always allocate AMI_ACPI_TABLE_MIN_PAGE_SIZE pages for ACPI table if the size is smaller then AMI_ACPI_TABLE_MIN_PAGE_SIZE pages, to prevent allocate different memory address."
+    TokenType = Integer
+    TargetH = Yes
+End
+#Avoid build failure, CRB turn-off ramdisk/sdio module to reduce FV_MAIN size for debugger support.
+TOKEN
+    Name  = "RamDisk_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable RamDisk support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "1"    
+    Token = "AMI_DEBUGGER_SUPPORT" "=" "1"   
+    Token = "AMIDEBUGGERPKG_SUPPORT" "=" "1"        
+End
+
+TOKEN
+    Name  = "SDIO_DRIVER_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable SDIO support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "1"    
+    Token = "AMI_DEBUGGER_SUPPORT" "=" "1"   
+    Token = "AMIDEBUGGERPKG_SUPPORT" "=" "1"        
+End

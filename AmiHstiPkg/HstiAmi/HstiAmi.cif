@@ -1,0 +1,12 @@
+<component>
+	name = "Hsti - AMI"
+	category = ModulePart
+	Rank = 30
+	LocalRoot = "AmiHstiPkg\HstiAmi\"
+	RefName = "HstiAmi"
+[INF]
+"HstiAmi.inf"
+[files]
+"HstiAmi.sdl"	
+"AmiHstiElinkList.txt"	
+<endComponent>

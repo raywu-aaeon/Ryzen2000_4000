@@ -1,0 +1,44 @@
+
+
+[Defines]
+  INF_VERSION                   = 0x00010015
+  VERSION_STRING                = 1.0
+  BASE_NAME                     = AmdSpiRomProtectPei
+  MODULE_TYPE                   = PEIM
+  FILE_GUID                      = 9d5fd24c-53df-44ac-a336-b4879cdb29d9
+  ENTRY_POINT                    = AmdSpiRomProtectPei_Entry
+  
+  [Sources]  
+  AmdSpiRomProtectPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiCpuPkg/AmiCpuPkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  AmiPeiLib
+  AmiCspLib
+  SbGetCapsuleFlagLib
+
+[Ppis]
+  gEfiEndOfPeiSignalPpiGuid
+  gAmiPeiPciTableInitPpiGuid 				#gPeiPciTableInitPpiGuid    
+  gEfiPeiMasterBootModePpiGuid   			# PPI ALWAYS_PRODUCED
+  gEfiPeiBootInRecoveryModePpiGuid
+  gEfiPeiStallPpiGuid
+ 
+[Pcd]
+
+[Depex]
+  gEfiPeiCpuIoPpiInstalledGuid AND    #MdePkg.dec
+  gEfiPciCfg2PpiGuid AND              #MdePkg.dec
+  gEfiPeiReadOnlyVariable2PpiGuid AND #MdePkg.dec 
+  gAmiPeiPciTableInitPpiGuid
+ 
+  

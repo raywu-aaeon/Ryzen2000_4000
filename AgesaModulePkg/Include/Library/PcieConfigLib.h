@@ -1,0 +1,268 @@
+/* $NoKeywords:$ */
+/**
+ * @file
+ *
+ * GNB function to create/locate PCIe configuration data area
+ *
+ * Contain code that create/locate and rebase configuration data area.
+ *
+ * @xrefitem bom "File Content Label" "Release Content"
+ * @e project:     AGESA
+ * @e sub-project: GNB
+ * @e \$Revision: 313706 $   @e \$Date: 2015-02-25 21:00:43 -0600 (Wed, 25 Feb 2015) $
+ *
+ */
+/*
+*****************************************************************************
+*
+* Copyright 2008 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+*
+* AMD is granting you permission to use this software and documentation (if
+* any) (collectively, the "Materials") pursuant to the terms and conditions of
+* the Software License Agreement included with the Materials.  If you do not
+* have a copy of the Software License Agreement, contact your AMD
+* representative for a copy.
+*
+* You agree that you will not reverse engineer or decompile the Materials, in
+* whole or in part, except as allowed by applicable law.
+*
+* WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+* ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+* INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+* MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+* CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+* OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+* exclusion of implied warranties, so the above exclusion may not apply to
+* You.
+*
+* LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+* NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+* INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+* THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+* ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+* liability to You for all damages, losses, and causes of action (whether in
+* contract, tort (including negligence) or otherwise) exceed the amount of
+* $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+* licensors, and any of their directors, officers, employees, affiliates or
+* agents from and against any and all loss, damage, liability and other
+* expenses (including reasonable attorneys' fees), resulting from Your use of
+* the Materials or violation of the terms and conditions of this Agreement.
+*
+* U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+* "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+* subject to the restrictions as set forth in FAR 52.227-14 and
+* DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+* Government constitutes acknowledgment of AMD's proprietary rights in them.
+*
+* EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+* stated in the Software License Agreement.
+*******************************************************************************
+*
+*/
+
+#ifndef _PCIECONFIGLIB_LIB_H_
+#define _PCIECONFIGLIB_LIB_H_
+
+typedef VOID (*PCIe_RUN_ON_ENGINE_CALLBACK) (
+  IN      PCIe_ENGINE_CONFIG                *Engine,
+  IN OUT  VOID                              *Buffer,
+  IN      PCIe_PLATFORM_CONFIG              *Pcie
+  );
+
+typedef AGESA_STATUS (*PCIe_RUN_ON_WRAPPER_CALLBACK) (
+  IN      PCIe_WRAPPER_CONFIG               *Wrapper,
+  IN OUT  VOID                              *Buffer,
+  IN      PCIe_PLATFORM_CONFIG              *Pcie
+  );
+
+typedef VOID (*PCIe_RUN_ON_ENGINE_CALLBACK2) (
+  IN      PCIe_ENGINE_CONFIG                *Engine,
+  IN OUT  VOID                              *Buffer,
+  IN      PCIe_WRAPPER_CONFIG               *Wrapper
+  );
+
+typedef VOID (*PCIe_RUN_ON_WRAPPER_CALLBACK2) (
+  IN      PCIe_WRAPPER_CONFIG               *Wrapper,
+  IN OUT  VOID                              *Buffer,
+  IN      GNB_HANDLE                        *GnbHandle
+  );
+
+typedef AGESA_STATUS (*PCIe_RUN_ON_DESCRIPTOR_CALLBACK) (
+  IN      PCIe_DESCRIPTOR_HEADER            *Descriptor,
+  IN OUT  VOID                              *Buffer,
+  IN      PCIe_PLATFORM_CONFIG              *Pcie
+  );
+
+UINT8
+PcieConfigGetPcieEngineMasterLane (
+  IN      PCIe_ENGINE_CONFIG                *Engine
+  );
+
+UINT8
+PcieConfigGetNumberOfCoreLane (
+  IN      PCIe_ENGINE_CONFIG                *Engine
+  );
+
+VOID
+PcieConfigDisableAllEngines (
+  IN      UINTN                             EngineTypeMask,
+  IN      PCIe_WRAPPER_CONFIG               *Wrapper
+  );
+
+VOID
+PcieConfigDisableEngine (
+  IN      PCIe_ENGINE_CONFIG                *Engine
+  );
+
+UINT32
+PcieConfigGetEnginePhyLaneBitMap (
+  IN      PCIe_ENGINE_CONFIG                *Engine
+  );
+
+UINT8
+PcieConfigGetNumberOfPhyLane (
+  IN      PCIe_ENGINE_CONFIG                *Engine
+  );
+
+UINT64
+PcieConfigGetConfigurationSignature (
+  IN      PCIe_WRAPPER_CONFIG               *Wrapper,
+  IN      UINT8                             CoreId
+  );
+
+BOOLEAN
+PcieConfigCheckPortStatus (
+  IN       PCIe_ENGINE_CONFIG               *Engine,
+  IN       UINT32                           PortStatus
+  );
+
+UINT16
+PcieConfigUpdatePortStatus (
+  IN       PCIe_ENGINE_CONFIG               *Engine,
+  IN       PCIe_ENGINE_INIT_STATUS          SetStatus,
+  IN       PCIe_ENGINE_INIT_STATUS          ResetStatus
+  );
+
+VOID
+PcieConfigRunProcForAllEngines (
+  IN       UINT32                           DescriptorFlags,
+  IN       PCIe_RUN_ON_ENGINE_CALLBACK      Callback,
+  IN OUT   VOID                             *Buffer,
+  IN       PCIe_PLATFORM_CONFIG             *Pcie
+  );
+
+VOID
+PcieConfigRunProcForAllEnginesInWrapper (
+  IN       UINT32                        DescriptorFlags,
+  IN       PCIe_RUN_ON_ENGINE_CALLBACK2  Callback,
+  IN OUT   VOID                          *Buffer,
+  IN       PCIe_WRAPPER_CONFIG           *Wrapper
+  );
+
+AGESA_STATUS
+PcieConfigRunProcForAllWrappers (
+  IN       UINT32                           DescriptorFlags,
+  IN       PCIe_RUN_ON_WRAPPER_CALLBACK     Callback,
+  IN OUT   VOID                             *Buffer,
+  IN       PCIe_PLATFORM_CONFIG             *Pcie
+  );
+
+VOID
+PcieConfigRunProcForAllWrappersInNbio (
+  IN       UINT32                        DescriptorFlags,
+  IN       PCIe_RUN_ON_WRAPPER_CALLBACK2 Callback,
+  IN OUT   VOID                          *Buffer,
+  IN       GNB_HANDLE                    *GnbHandle
+  );
+
+AGESA_STATUS
+PcieConfigRunProcForAllDescriptors (
+  IN       UINT32                           InDescriptorFlags,
+  IN       UINT32                           OutDescriptorFlags,
+  IN       UINT32                           TerminationFlags,
+  IN       PCIe_RUN_ON_DESCRIPTOR_CALLBACK  Callback,
+  IN OUT   VOID                             *Buffer,
+  IN       PCIe_PLATFORM_CONFIG             *Pcie
+  );
+
+PCIe_DESCRIPTOR_HEADER *
+PcieConfigGetParent (
+  IN       UINT32                           Type,
+  IN       PCIe_DESCRIPTOR_HEADER           *Descriptor
+  );
+
+PCIe_DESCRIPTOR_HEADER *
+PcieConfigGetChild (
+  IN       UINT32                           Type,
+  IN       PCIe_DESCRIPTOR_HEADER           *Descriptor
+  );
+
+PCIe_DESCRIPTOR_HEADER *
+PcieConfigGetPeer (
+  IN       UINT32                           Type,
+  IN       PCIe_DESCRIPTOR_HEADER           *Descriptor
+ );
+
+BOOLEAN
+PcieConfigIsActivePcieEngine (
+  IN      PCIe_ENGINE_CONFIG                *Engine
+  );
+
+PCIe_ENGINE_CONFIG *
+PcieConfigLocateSbEngine (
+  IN      PCIe_WRAPPER_CONFIG               *Wrapper
+  );
+
+VOID
+PcieConfigDebugDump (
+  IN      PCIe_PLATFORM_CONFIG              *Pcie
+  );
+
+VOID
+PcieConfigWrapperDebugDump (
+  IN      PCIe_WRAPPER_CONFIG               *WrapperList
+  );
+
+VOID
+PcieConfigEngineDebugDump (
+  IN      PCIe_ENGINE_CONFIG                *EngineList
+  );
+
+VOID
+PcieUserConfigConfigDump (
+  IN      PCIe_COMPLEX_DESCRIPTOR           *ComplexDescriptor
+  );
+
+VOID
+PcieUserDescriptorConfigDump (
+  IN      PCIe_ENGINE_DESCRIPTOR            *EngineDescriptor
+  );
+
+#define PcieConfigGetParentWrapper(Descriptor)    ((PCIe_WRAPPER_CONFIG *) PcieConfigGetParent (DESCRIPTOR_ALL_WRAPPERS, &((Descriptor)->Header)))
+#define PcieConfigGetParentSilicon(Descriptor)    ((PCIe_SILICON_CONFIG *) PcieConfigGetParent (DESCRIPTOR_SILICON, &((Descriptor)->Header)))
+#define PcieConfigGetParentComplex(Descriptor)    ((PCIe_COMPLEX_CONFIG *) PcieConfigGetParent (DESCRIPTOR_COMPLEX, &((Descriptor)->Header)))
+#define PcieConfigGetPlatform(Descriptor)         ((PCIe_PLATFORM_CONFIG *) PcieConfigGetParent (DESCRIPTOR_PLATFORM, &((Descriptor)->Header)))
+#define PcieConfigGetChildWrapper(Descriptor)     ((PCIe_WRAPPER_CONFIG *) PcieConfigGetChild (DESCRIPTOR_ALL_WRAPPERS, &((Descriptor)->Header)))
+#define PcieConfigGetChildEngine(Descriptor)      ((PCIe_ENGINE_CONFIG *) PcieConfigGetChild (DESCRIPTOR_ALL_ENGINES, &((Descriptor)->Header)))
+#define PcieConfigGetChildSilicon(Descriptor)     ((PCIe_SILICON_CONFIG *) PcieConfigGetChild (DESCRIPTOR_SILICON, &((Descriptor)->Header)))
+#define PcieConfigGetNextDescriptor(Descriptor)   ((((Descriptor->Header.DescriptorFlags & DESCRIPTOR_TERMINATE_LIST) != 0) ? NULL : (++Descriptor)))
+#define PcieConfigIsPcieEngine(Descriptor)        (Descriptor != NULL ? ((Descriptor->Header.DescriptorFlags & DESCRIPTOR_PCIE_ENGINE) != 0) : FALSE)
+#define PcieConfigIsDdiEngine(Descriptor)         (Descriptor != NULL ? ((Descriptor->Header.DescriptorFlags & DESCRIPTOR_DDI_ENGINE) != 0) : FALSE)
+#define PcieConfigIsPcieWrapper(Descriptor)       (Descriptor != NULL ? ((Descriptor->Header.DescriptorFlags & DESCRIPTOR_PCIE_WRAPPER) != 0) : FALSE)
+#define PcieConfigIsSbPcieEngine(Engine)          (Engine != NULL ? ((BOOLEAN) (Engine->Type.Port.PortData.MiscControls.SbLink)) : FALSE)
+#define PcieConfigIsDdiWrapper(Descriptor)        (Descriptor != NULL ? ((Descriptor->Header.DescriptorFlags & DESCRIPTOR_DDI_WRAPPER) != 0) : FALSE)
+#define PcieConfigIsEngineAllocated(Descriptor)   (Descriptor != NULL ? ((Descriptor->Header.DescriptorFlags & DESCRIPTOR_ALLOCATED) != 0) : FALSE)
+#define PcieConfigIsVirtualDesciptor(Descriptor)  (Descriptor != NULL ? ((Descriptor->Header.DescriptorFlags & DESCRIPTOR_VIRTUAL) != 0) : FALSE)
+#define PcieConfigSetDescriptorFlags(Descriptor, SetDescriptorFlags)   if (Descriptor != NULL) (Descriptor)->Header.DescriptorFlags |= SetDescriptorFlags
+#define PcieConfigResetDescriptorFlags(Descriptor, ResetDescriptorFlags) if (Descriptor != NULL) ((PCIe_DESCRIPTOR_HEADER *) Descriptor)->DescriptorFlags &= (~(ResetDescriptorFlags))
+#define PcieInputParsetGetNextDescriptor(Descriptor) (Descriptor != NULL ? ((((Descriptor->Flags & DESCRIPTOR_TERMINATE_LIST) != 0) ? NULL : ((Descriptor) + 1))) : NULL)
+#define PcieConfigGetNextTopologyDescriptor(Descriptor, Termination) (Descriptor != NULL ? (((((PCIe_DESCRIPTOR_HEADER *) Descriptor)->DescriptorFlags & Termination) != 0) ? NULL : ((UINT8 *) Descriptor + ((PCIe_DESCRIPTOR_HEADER *) Descriptor)->Peer)) : NULL)
+#define GnbGetNextHandle(Descriptor) (GNB_HANDLE *) PcieConfigGetNextTopologyDescriptor (Descriptor, DESCRIPTOR_TERMINATE_TOPOLOGY)
+#define PcieConfigGetNextDataDescriptor(Descriptor) ((Descriptor->Flags & DESCRIPTOR_TERMINATE_LIST) != 0 ? NULL : ++Descriptor)
+
+#define PcieConfigGetStdHeader(Descriptor)         ((AMD_CONFIG_PARAMS *)((PCIe_PLATFORM_CONFIG *) PcieConfigGetParent (DESCRIPTOR_PLATFORM, &((Descriptor)->Header)))->StdHeader)
+
+#endif
+
+

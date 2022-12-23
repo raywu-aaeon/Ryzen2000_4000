@@ -1,0 +1,12 @@
+<component>
+	name = "AMD Picasso CPU"
+	category = CPU
+	LocalRoot = "AmiCpuPkg\"
+	RefName = "AmiCpuPkg"
+[files]
+"AmiCpuPkg.chm"
+"AmiCpuPkg.sdl"	
+"AmiCpuPkg.dec"	
+[parts]
+"AMI_CPU"
+<endComponent>

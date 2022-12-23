@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "PlatformToDriver_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformToDriver support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+    Name  = "PlatformToDriver_DIR"
+    Path = "AmiModulePkg\PlatformToDriver"
+End
+
+INFComponent
+	Name  = "PlatformToDriver"
+	File  = "PlatformToDriver.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "UEFI_DRIVER"
+End

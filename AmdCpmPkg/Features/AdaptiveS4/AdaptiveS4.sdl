@@ -1,0 +1,85 @@
+TOKEN
+	Name  = "AmdCpmAdaptiveS4_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling AdaptiveS4 support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "CPM_ADAPTIVE_S4_SETUP_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable this feature SETUP item support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+	Lock = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmAdaptiveS4Asl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmAdaptiveS4Asl support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmAdaptiveS4Dxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmAdaptiveS4Dxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmAdaptiveS4Peim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmAdaptiveS4Peim support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmdCpmAdaptiveS4Smm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdCpmAdaptiveS4Smm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdCpmAdaptiveS4Asl"
+	File  = "Asl/AmdCpm3AdaptiveS4Asl.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "AmdCpmAdaptiveS4Asl_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmAdaptiveS4Dxe"
+	File  = "Dxe/AmdCpm3AdaptiveS4Dxe.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmdCpmAdaptiveS4Dxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmAdaptiveS4Peim"
+	File  = "Pei/AmdCpm3AdaptiveS4Peim.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmAdaptiveS4Peim_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdCpmAdaptiveS4Smm"
+	File  = "Smm/AmdCpm3AdaptiveS4Smm.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AmdCpmAdaptiveS4Smm_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "AmdCpmAdaptiveS4Peim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmdCpmPkg.AmdCpmAdaptiveS4Peim"
+	Index  = '"AFTER" "AmdCpmInitPeim"'
+	Help  = "refer to (AmdCpmPkg.pei.inc.fdf)"
+End
+

@@ -1,0 +1,21 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = AmiFlashPlatformLib
+    FILE_GUID       = 94A249BA-DE4A-4C87-B437-9BE100E7BF2E
+    MODULE_TYPE     = BASE
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = AmiFlashPlatformLib
+
+[Sources]
+    AmiFlashPlatformLib.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec

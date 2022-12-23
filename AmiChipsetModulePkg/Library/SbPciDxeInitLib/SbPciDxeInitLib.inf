@@ -1,0 +1,29 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbPciDxeInitLib
+  FILE_GUID                      = BE43597C-6D74-400c-B699-B5722CD547E1
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SbPciDxeInitLib|DXE_DRIVER
+
+[Sources]
+  SbPciDxeInitLib.c
+
+[LibraryClasses]
+  AmiDxeLib
+  AmiSdlLib
+  AmiPciBusLib
+
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gAmiBoardPciInitProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec

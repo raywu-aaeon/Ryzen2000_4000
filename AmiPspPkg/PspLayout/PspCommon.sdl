@@ -1,0 +1,297 @@
+TOKEN
+    Name  = "PSP_LAYOUT_STYLE"
+    Value  = "0"
+    Help  = "0:Raven Style, 1:Pinnacle Style."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PROTECT_PSP_FIXED_AREA_FROM_BEING_ERASED"
+    Value  = "0"
+    Help  = "When this token is enabled, it means that the FIXED area will not be updated on BIOS flashing."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_BLOCK_START_OFFSET"
+    Value  = "$(OEM_NCB_OFFSET) + $(OEM_NCB_SIZE)"
+    Help  = "The offset of PSP data. It's after Nvram by CRB design."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_BLOCK_START_OFFSET"
+    Value  = "$(NVRAM_OFFSET)+$(NVRAM_SIZE)+$(NVRAM_SIZE)"
+    Help  = "The offset of PSP data. This token is for change PSP layout back to Summit-Myrtle when ROMLAYOUT_SYNC_SUMMIT is enabled."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+    Token = "ROMLAYOUT_SYNC_SUMMIT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_BLOCK_START_OFFSET"
+    Value  = "$(NVRAM_OFFSET) + $(NVRAM_SIZE)"
+    Help  = "The offset of PSP data. It's after Nvram by CRB design."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_BLOCK_START_OFFSET"
+    Value  = "$(NVRAM_OFFSET) + $(NVRAM_SIZE) + $(NVRAM_SIZE)"
+    Help  = "The offset of PSP data. It's after Nvram by CRB design."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "PSP_BLOCK_START_ADDRESS"
+    Value  = "$(PSP_BLOCK_START_OFFSET) + $(FLASH_BASE)"
+    Help  = "Physical address of first PSP Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_FIRST_UPDATABLE_BLOCK_OFFSET"
+    Value  = "$(BLOCK_5_OFFSET)"
+    Help  = "First PSP updatable Data block offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_FIRST_UPDATABLE_BLOCK_OFFSET"
+    Value  = "$(BLOCK_2_OFFSET)"
+    Help  = "First PSP updatable Data block offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+    Name  = "TOTAL_PSP_DATA_SIZE"
+    Value  = "0x580000"
+    Help  = "The total size of PSP firmware. It's 5.5M as AMD provided for BR/SM/RV combined."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "TOTAL_PSP_DATA_SIZE"
+    Value  = "0x280000"
+    Help  = "The first PSP Data size, use RV here"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+ELINK
+    Name  = "PSP_FIXED_FV_ADDRESS_BR, PSP_COMBO_DIRECTORY_ADDRESS, BIOS_L1_DIRECTORY_ADDRESS_SM, BIOS_L1_DIRECTORY_ADDRESS_RV"
+    Parent  = "AmdPspFirmwareDirectoryList"
+    InvokeOrder = AfterParent
+    Token = "MULTI_CPU_SUPPORT" "=" "7"
+End
+
+ELINK
+    Name  = "0, PSP_L1_DIRECTORY_ADDRESS_RV, 0, BIOS_L1_DIRECTORY_ADDRESS_RV"
+    Parent  = "AmdPspFirmwareDirectoryList"
+    InvokeOrder = AfterParent
+    Token = "MULTI_CPU_SUPPORT" "=" "4"
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+ELINK
+    Name  = "PSP_MAK"
+    InvokeOrder = ReplaceParent
+End
+
+#********************************** APOB SHARED BLOCK **********************************#
+TOKEN
+    Name  = "PSP_APOB_SHARED_BLOCK_SUPPORT"
+    Value = "1"
+    Help  = "Reserve an area for save APOB data in PSP rom layout at start of PSP updateable area."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_APOB_SHARED_SIZE"
+    Value = "0x10000"
+    Help  = "Size of shared APOB."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "PSP_APOB_SHARED_BLOCK_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_APOB_SHARED_OFFSET"
+    Value = "$(BLOCK_5_OFFSET)"
+    Help  = "PSP shared APOB reserved area offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "PSP_APOB_SHARED_BLOCK_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_APOB_SHARED_ADDRESS"
+    Value  = "$(PSP_APOB_SHARED_OFFSET) + $(FLASH_BASE)"
+    Help  = "Physical address of the PSP shared APOB."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "PSP_APOB_SHARED_BLOCK_SUPPORT" "=" "1"
+End
+
+#*****************************************************************************************# 
+#                                                                                         #
+#                      PSP nvram Setting(Below should left unchanged)                     #
+#                                                                                         #
+#*****************************************************************************************#
+#********************************** Bristol **********************************#
+TOKEN
+    Name  = "PSP_NVRAM_SIZE_BR"
+    Value  = "0x10000"
+    Help  = "The PSP BR NVRAM size.Should be updated when file PSP_NVRAM_FILENAME_BR changed."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "ROMLAYOUT_SYNC_SUMMIT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_NVRAM_OFFSET_BR"
+    Value  = "$(PSP_BLOCK_START_OFFSET)"
+    Help  = "The PSP BR NVRAM block offset behind general nvram"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "ROMLAYOUT_SYNC_SUMMIT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_NVRAM_ADDRESS_BR" 
+    Value  = "$(PSP_NVRAM_OFFSET_BR) + $(FLASH_BASE)"
+    Help  = "Physical address of PSP BR NVRAM Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "ROMLAYOUT_SYNC_SUMMIT" "=" "1"
+End
+
+#********************************** Raven Summit (and Bristol if ROMLAYOUT_SYNC_SUMMIT disable) Nvram combined **********************************#
+TOKEN
+    Name  = "PSP_NVRAM_SIZE"
+    Value  = "0x20000"
+    Help  = "The PSP combined NVRAM size."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_NVRAM_OFFSET"
+    Value  = "$(PSP_BLOCK_START_OFFSET)"
+    Help  = "The PSP combined NVRAM block offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_NVRAM_OFFSET"
+    Value  = "$(PSP_NVRAM_OFFSET_BR) + $(PSP_NVRAM_SIZE_BR)"
+    Help  = "The PSP combined NVRAM block offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "ROMLAYOUT_SYNC_SUMMIT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_NVRAM_ADDRESS" 
+    Value  = "$(PSP_NVRAM_OFFSET) + $(FLASH_BASE)"
+    Help  = "Physical address of PSP combined NVRAM Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+#********************************** Auto Counting **********************************#
+TOKEN
+    Name  = "TOTAL_PSP_NVRAM_SIZE"
+    Value  = "$(PSP_NVRAM_SIZE)"
+    Help  = "The total size of PSP NVRAM."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TOTAL_PSP_NVRAM_SIZE"
+    Value  = "$(PSP_NVRAM_SIZE) + $(PSP_NVRAM_SIZE_BR)"
+    Help  = "The total size of PSP NVRAM."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "ROMLAYOUT_SYNC_SUMMIT" "=" "1"
+End
+
+TOKEN
+    Name  = "PSP_FIRST_UPDATABLE_BLOCK_ADDRESS"
+    Value  = "$(PSP_FIRST_UPDATABLE_BLOCK_OFFSET) + $(FLASH_BASE)"
+    Help  = "Physical address of first PSP updatable Data block offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End

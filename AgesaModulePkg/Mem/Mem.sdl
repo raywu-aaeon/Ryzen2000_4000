@@ -1,0 +1,246 @@
+TOKEN
+	Name  = "AMD_MEM_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AMD Mem support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AMD_MEM_AM4_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemAm4Dxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEM_AM4_ZP_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemAm4ZpPei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEM_CHANXLAT_ZP_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemChanXLatZpPei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEM_CZ_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemCzPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "AMD_MEM_DDR4_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdMemDdr4Pei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEM_FEAT_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemFeatPei support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "AMD_MEM_FP4_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdMemFp4Pei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEMORY_HOB_INFO_PEIM_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemoryHobInfoPeim support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEM_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdMemPei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEM_RESTORE_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemRestoreDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEM_RESTORE_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemRestorePei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEM_S3_CZ_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemS3CzDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "AMD_MEM_SMBIOS_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemSmbiosDxe support in Project"
+	TokenType = Boolean
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "AMD_MEM_SMBIOS_V2_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemSmbiosV2Dxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMD_MEM_SMBIOS_V2_RV_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmdMemSmbiosV2RvPei support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmdMemAm4Dxe"
+	File  = "AmdMemAm4Dxe\AmdMemAm4Dxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AMD_MEM_AM4_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemAm4ZpPei"
+	File  = "AmdMemAm4ZpPei\AmdMemAm4ZpPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_MEM_AM4_ZP_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemChanXLatZpPei"
+	File  = "AmdMemChanXLatZpPei\MemChanXLatZpPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_MEM_CHANXLAT_ZP_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemCzPei"
+	File  = "AmdMemCzPei\AmdMemCzPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_MEM_CZ_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemDdr4Pei"
+	File  = "AmdMemDdr4Pei\AmdMemDdr4Pei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_MEM_DDR4_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemFeatPei"
+	File  = "AmdMemFeatPei\AmdMemFeatPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_MEM_FEAT_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemFp4Pei"
+	File  = "AmdMemFp4Pei\AmdMemFp4Pei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_MEM_FP4_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemoryHobInfoPeim"
+	File  = "AmdMemoryHobInfoPeimRv\AmdMemoryHobInfoPeim.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_MEMORY_HOB_INFO_PEIM_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemPei"
+	File  = "AmdMemPei\AmdMemPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMD_MEM_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemRestoreDxe"
+	File  = "AmdMemRestoreDxe\MemRestoreDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_MEM_RESTORE_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemRestorePei"
+	File  = "AmdMemRestorePei\MemRestorePei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_MEM_RESTORE_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemS3CzDxe"
+	File  = "AmdMemS3CzDxe\AmdMemS3CzDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_MEM_S3_CZ_DXE_SUPPORT" "=" "1"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemSmbiosDxe"
+	File  = "AmdMemSmbiosDxe\AmdMemSmbiosDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_MEM_SMBIOS_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemSmbiosV2Dxe"
+	File  = "AmdMemSmbiosV2Dxe\AmdMemSmbiosV2Dxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Arch  = "X64"
+	Token = "AMD_MEM_SMBIOS_V2_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmdMemSmbiosV2RvPei"
+	File  = "AmdMemSmbiosV2RvPei\MemSmbiosV2Pei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Arch  = "IA32"
+	Token = "AMD_MEM_SMBIOS_V2_RV_PEI_SUPPORT" "=" "1"
+End
+

@@ -1,0 +1,27 @@
+<component>
+    name = "UefiNetworkStack"
+    category = eModule
+    LocalRoot = "AmiNetworkPkg\"
+    RefName = "AmiNetworkPkg.UefiNetworkStack"
+[files]
+"UefiNetworkStack.sdl"	
+"UefiNetworkStack.chm"	
+"UefiNetworkStackElink.txt"	
+[parts]
+"AmiNetworkPkg.Application"
+"NetworkStackSetupScreen"
+"AmiNetworkPkg.Common"
+"AmiNetworkPkg.Ipv4"
+"AmiNetworkPkg.Ipv6"
+[dependency]
+AmiModulePkg.Bds >= "SS: AptioV;$/AptioV/Source/Modules/Bds;Bds_15"
+CryptoPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/CryptoPkg;CryptoPkg_32.01"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_47"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_21"
+MdeModulePkg.Foundation >= "SS: AptioV;$/AptioV/Source/Modules/Foundation;Foundation_17"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_27"
+AmiNetworkPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiNetworkPkg;AmiNetworkPkg_37"
+[dependency.optional]
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;AMITSE_2_20_1270"
+AmiTsePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiTsePkg;AmiTsePkg_2_20_1270"
+<endComponent>

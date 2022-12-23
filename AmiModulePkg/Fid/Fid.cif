@@ -1,0 +1,12 @@
+<component>
+	name = "Fid"
+	category = eCore
+	LocalRoot = "AmiModulePkg\Fid\"
+	RefName = "AmiModulePkg.Fid"
+[INF]
+"Fid.inf"
+[files]
+"Fid.sdl"	
+"Fid.mak"	
+"Fid.chm"	
+<endComponent>

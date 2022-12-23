@@ -1,0 +1,11 @@
+<component>
+    name = "CrbModernStandby"
+    category = ModulePart
+    LocalRoot = "MandolinPkg\CrbModernStandby\"
+    RefName = "MandolinPkg.CrbModernStandby"
+[files]
+"CrbModernStandby.sdl"
+[INF]
+"CrbModernStandby.inf"
+
+<endComponent>

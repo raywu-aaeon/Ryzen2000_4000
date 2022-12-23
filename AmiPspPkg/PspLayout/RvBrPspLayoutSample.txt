@@ -1,0 +1,105 @@
+TOKEN
+    Name  = "MULTI_CPU_SUPPORT"
+    Value  = "0x5"
+    Help  = "The CPU supported. Bristol = 1, Summit/Pinnacle = 2, Raven = 4."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_FIRST_UPDATABLE_BLOCK_OFFSET"
+    Value  = "0x188000"
+    Help  = "First PSP updatable Data block offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TOTAL_PSP_DATA_SIZE"
+    Value  = "0x350000"
+    Help  = "The total size of PSP firmware. It's 5.5M as AMD provided for BR/SM/RV combined."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+ELINK
+    Name  = " PSP_FIXED_FV_ADDRESS_BR, PSP_COMBO_DIRECTORY_ADDRESS, 0, BIOS_L1_DIRECTORY_ADDRESS_RV"
+    Parent  = "AmdPspFirmwareDirectoryList"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "PSP_FIXED_FV_OFFSET_BR"
+    Value  = "0xA8000"
+    Help  = "The PSP BR FIX Data Block offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_1_OFFSET_RV"
+    Value  = "0xB8000"
+    Help  = "The RV PSP directory level 1 offset behind psp nvram"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_1_OFFSET_RV"
+    Value  = "0x168000"
+    Help  = "The RV BIOS directory level 1 offset after PSP RV L1 Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_UPDATABLE_FV_OFFSET_BR"
+    Value  = "0x188000"
+    Help  = "The PSP BR UPDATABLE Data Block offset"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PSP_DIRECTORY_LEVEL_2_OFFSET_RV"
+    Value  = "0x268000"
+    Help  = "The RV PSP directory level 2 offset."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_DIRECTORY_LEVEL_2_OFFSET_RV"
+    Value  = "0x3B7000"
+    Help  = "The RV BIOS directory level 2 offset after PSP RV L2 Data block"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SM_PSP_SUPPORT"
+    Value  = "0"
+    Help  = "Switch to set psp support for Summit CPU."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End

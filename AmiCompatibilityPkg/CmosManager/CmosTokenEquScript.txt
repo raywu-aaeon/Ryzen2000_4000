@@ -1,0 +1,28 @@
+BEGIN {
+    print "IFNDEF _TOKEN_SDL_EQU_"
+    print "_TOKEN_SDL_EQU_ EQU 1"
+} 
+{
+    # Allow only alphabets, numbers and underscore in token name
+    # Maximum allowable token name length is 76
+    if(($1 ~ /#define/) && ($2 ~ /^[A-Za-z0-9_]+$/) && (length($2) < 77)) {
+        if (($3 ~ /^0x[[:xdigit:]]+$/)) {         # Checks for Hexadecimal number. If any other character found, then skips it
+            $1 = "MKF_"$2; 
+            $2 = "EQU";
+            $3 = "0"substr($3,3,length($3));
+            
+            if (NF <= 3)
+               print "\t"$0"h"
+               
+        } else if (($3 ~ /^[[:digit:]]+$/)) {     # Checks for Decimal number. If any other character found, then skips it
+            $1 = "MKF_"$2; 
+            $2 = "EQU";
+            
+            if (NF <= 3)
+                print "\t"$0
+        }
+    }
+}
+END {
+    print "ENDIF"
+}

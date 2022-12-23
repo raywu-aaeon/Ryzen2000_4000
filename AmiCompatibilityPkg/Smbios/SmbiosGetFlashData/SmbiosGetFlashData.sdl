@@ -1,0 +1,17 @@
+TOKEN
+	Name  = "SmbiosGetFlashData_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SmbiosGetFlashData support in Project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "SmbiosDMIEdit_SUPPORT" "=" "1"
+    Token = "SMBIOS_DMIEDIT_DATA_LOC" "!=" "2"
+End
+
+INFComponent
+    Name  = "SmbiosGetFlashData"
+    File  = "SmbiosGetFlashData.inf"
+    Package  = "AmiCompatibilityPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SmbiosDMIEdit_SUPPORT" "=" "1"
+End

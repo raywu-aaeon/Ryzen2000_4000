@@ -1,0 +1,42 @@
+[Defines]
+  INF_VERSION          = 0x00010005
+  BASE_NAME            = AmdGopDriver
+  FILE_GUID            = F922DD8D-400C-43f6-951B-93673D73601F
+  MODULE_TYPE          = PEIM
+  VERSION_STRING       = 1.0
+  BINARY_VERSION       = 0.3.0.0
+
+[Sources]
+
+[Binaries]
+  PE32|AmdIa32GenericGop.efi|*
+  PEI_DEPEX|AmdIA32GenericGop.depex
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopConfigMemsize
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopVmFbOffset
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopVmFbLocationTop
+  
+[LibraryClasses]
+  AmdBaseLib
+  IdsLib
+  PeimEntryPoint
+  PeiServicesLib
+  PcdLib
+  HobLib
+  PeiServicesTablePointerLib
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+
+
+  
+  
+  

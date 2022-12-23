@@ -1,0 +1,34 @@
+TOKEN
+    Name  = "PerformanceMeasurementPei_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling PerformanceMeasurementPei support in the project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+INFComponent
+    Name  = "PerformanceMeasurementPei"
+    File  = "PerformanceMeasurementPei.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+    Token = "PerformanceMeasurementPei_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "GetS3Performance,"
+    Parent  = "PeiReportCheckpoint"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "PeiInitGetName,"
+    Parent  = "PeiReportCheckpoint"
+    InvokeOrder = AfterParent
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.PerformanceMeasurementPei"
+    Override  = "AmiModulePkg.StatusCodePei"
+End
+

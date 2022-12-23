@@ -1,0 +1,76 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file
+#   This driver installs ValidateFvDxe PPI. Invokes Verify DXE on entry point
+#   No global variables, links AmiPeiCryptLibTiny
+##
+
+[Defines]
+  INF_VERSION                = 0x00010005
+  BASE_NAME                  = FvDxeValidatePpi
+  FILE_GUID                  = 88D85513-6E66-405d-A8A9-56DA218FDFC3
+  MODULE_TYPE                = PEIM
+  VERSION_STRING             = 1.0
+  PI_SPECIFICATION_VERSION   = 0x0001000A
+  ENTRY_POINT                = ValidateFvDxeEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 AARCH64 X64
+#
+
+[Sources]
+ FvDxeValidatePpi1.c
+
+[Packages]
+ MdePkg/MdePkg.dec
+ AmiModulePkg/AmiModulePkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+ AmiTrustedFvPkg/AmiTrustedFvPkg.dec
+
+[LibraryClasses]
+ PeimEntryPoint
+ PeiServicesLib
+ MemoryAllocationLib
+ AmiPeiLib
+ AmiRomLayoutLib
+ AmiFvDxeFailLib
+# Only SHA256_RSA2048 signature is supported
+ AmiPeiCryptLibTiny
+# DBG
+ DebugLib
+ PerformanceLib
+
+[Guids]
+ gEfiCertSha256Guid
+ gEfiCertRsa2048Guid
+ gEfiCertTypeRsa2048Sha256Guid
+ gEfiHashAlgorithmSha256Guid
+ gPRKeyGuid
+ gFWCapsuleGuid
+ gPKeyFileSha256Guid
+
+[Ppis]
+#produce
+ gAmiFvDxeValidatePpiGuid
+ gAmiFvDigestPpiGuid
+#notify
+ gAmiPublishFvDxeValidatePpiGuid
+# gEfiPeiMemoryDiscoveredPpiGuid
+
+[Pcd]
+ gAmiTrustedFvPkgTokenSpaceGuid.AmiPcdTdxeFailedRecoveryPolicy 
+#
+# gAmiCryptoPkgTokenSpaceGuid.AmiPcdRsaExponent
+# gAmiCryptoPkgTokenSpaceGuid.AmiPcdPssSaltLen 
+
+[Depex]
+ TRUE

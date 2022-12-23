@@ -1,0 +1,213 @@
+//****************************************************************************
+//****************************************************************************
+//**                                                                        **
+//**             (C)Copyright 1985-2017, American Megatrends, Inc.          **
+//**                                                                        **
+//**                          All Rights Reserved.                          **
+//**                                                                        **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                        **
+//**                          Phone (770)-246-8600                          **
+//**                                                                        **
+//****************************************************************************
+//****************************************************************************
+
+#ifdef SETUP_DATA_DEFINITION
+//***********************************************************/
+//* Put NVRAM data definitions here.
+//* For example: UINT8 Data1;
+//* These definitions will be converted by the build process
+//* to a definitions of SETUP_DATA fields.
+//***********************************************************/
+#endif
+#ifdef FORM_SET_TYPEDEF
+#pragma pack(1)
+typedef struct{
+    UINT8  SdEmul;
+    UINT64 SdMmcAddress;
+}SDMMC_EMULATION;
+
+typedef struct {
+    UINT8           SdioMode;
+    UINT8           SdioMassDevNum;
+    UINT8           IoDeviceType[8];
+    SDMMC_EMULATION SdioEmu[8];
+} SDIO_DEV_CONFIGURATION;
+#pragma pack()
+#endif
+
+#ifdef FORM_SET_VARSTORE
+
+    varstore SDIO_DEV_CONFIGURATION,
+        key   = AUTO_ID(SDIO_DEV_CONFIGURATION_KEY),
+        name  = SdioDevConfiguration,
+        guid  = SETUP_GUID;
+
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+    #define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+    #define SDIO_ONEOF_ACCESS_MODES\
+        oneof varid     = SDIO_DEV_CONFIGURATION.SdioMode,\
+            prompt      = STRING_TOKEN(STR_SDIO_MODE),\
+            help        = STRING_TOKEN(STR_SDIO_MODE_HELP),\
+            option text = STRING_TOKEN(STR_SDIO_AUTO),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_SDIO_ADMA),  value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_SDIO_SDMA),  value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_SDIO_PIO),   value = 3, flags = RESET_REQUIRED;\
+        endoneof;
+        
+    #define SDIO_MASS_STORAGE_DEVICE \
+        text \
+            help   = STRING_TOKEN(STR_EMPTY),\
+            text   = STRING_TOKEN(STR_SDIO_EMULATION),\
+            text   = STRING_TOKEN(STR_EMPTY),\
+            flags  = 0,\
+            key    = 0;
+        
+    #define SDIO_INFO_DISPLAY(STR_IO_DEVICE_DETAILS,STR_SDIO_DEVICE_LOCATION)\
+        text \
+            help   = STRING_TOKEN(STR_EMPTY),\
+            text   = STR_IO_DEVICE_DETAILS,\
+            text   = STRING_TOKEN(STR_EMPTY),\
+            flags  = 0,\
+            key    = 0;\
+         text \
+            help   = STRING_TOKEN(STR_EMPTY),\
+            text   = STR_SDIO_DEVICE_LOCATION,\
+            text   = STRING_TOKEN(STR_EMPTY),\
+            flags  = 0,\
+            key    = 0;
+ 
+                     
+    #define SDIO_ONEOF_EMULATION_TYPE(STR_SDIO_DEVICE,INDEX)\
+        suppressif ideqvallist SDIO_DEV_CONFIGURATION.IoDeviceType[INDEX] == 1;\
+        grayoutif ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_USER;\
+            oneof varid     = SDIO_DEV_CONFIGURATION.SdioEmu[INDEX].SdEmul,\
+                prompt      = STR_SDIO_DEVICE,\
+                help        = STRING_TOKEN(STR_SDIO_EMULATION_TYPE_HELP),\
+                option text = STRING_TOKEN(STR_SDIO_AUTO),            value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_SDIO_EMUL_FLOPPY),     value = 1, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_SDIO_EMUL_FORCED_FDD), value = 2, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_SDIO_EMUL_HDD),        value = 3, flags = RESET_REQUIRED;\
+            endoneof;\
+        endif;\
+        endif;
+
+#endif // CONTROL_DEFINITION
+
+//**********************************************************************
+//                ADVANCED - Sdio Configuration Form
+//**********************************************************************
+#ifdef ADVANCED_FORM_SET
+        
+    #ifdef FORM_SET_ITEM
+        //
+        // Define controls to be added to the main page of the formset
+        //
+    #endif
+
+    #ifdef FORM_SET_GOTO
+        
+        //
+        // Define goto commands for the forms defined in this file
+        //
+        goto SDIO_CONFIG_FORM_ID,
+            prompt  = STRING_TOKEN(STR_SDIO_CONFIGURATION),
+            help    = STRING_TOKEN(STR_SDIO_CONFIGURATION_HELP);
+
+    #endif
+
+    #ifdef FORM_SET_FORM
+
+        #ifndef SDIO_FORM_SDIO_CONFIG
+        #define SDIO_FORM_SDIO_CONFIG
+            //
+            // Define forms
+            //
+            form formid = AUTO_ID(SDIO_CONFIG_FORM_ID),
+                title = STRING_TOKEN(STR_SDIO_CONFIGURATION);
+
+                SUBTITLE(STRING_TOKEN(STR_SDIO_CONFIGURATION))
+                SEPARATOR
+
+                grayoutif ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_USER;
+                    SDIO_ONEOF_ACCESS_MODES
+                endif;
+
+                SEPARATOR
+                suppressif ideqval SDIO_DEV_CONFIGURATION.SdioMassDevNum == 0;
+                    SDIO_MASS_STORAGE_DEVICE
+                endif;
+
+                SEPARATOR
+                SDIO_INFO_DISPLAY(STRING_TOKEN(STR_IO_DEVICE1_DETAILS),STRING_TOKEN(STR_SDIO_DEVICE1_LOCATION))
+                suppressif NOT ideqvallist SDIO_DEV_CONFIGURATION.SdioMassDevNum == 1 2 3 4 5 6 7 8;
+                    SDIO_ONEOF_EMULATION_TYPE(STRING_TOKEN(STR_SDIO_DEVICE1), 0)
+                endif;
+
+                SEPARATOR
+                SDIO_INFO_DISPLAY(STRING_TOKEN(STR_IO_DEVICE2_DETAILS),STRING_TOKEN(STR_SDIO_DEVICE2_LOCATION))
+                suppressif NOT ideqvallist SDIO_DEV_CONFIGURATION.SdioMassDevNum == 2 3 4 5 6 7 8;
+                    SDIO_ONEOF_EMULATION_TYPE(STRING_TOKEN(STR_SDIO_DEVICE2), 1)
+                endif;
+
+                SEPARATOR
+                SDIO_INFO_DISPLAY(STRING_TOKEN(STR_IO_DEVICE3_DETAILS),STRING_TOKEN(STR_SDIO_DEVICE3_LOCATION))\
+                suppressif NOT ideqvallist SDIO_DEV_CONFIGURATION.SdioMassDevNum == 3 4 5 6 7 8;
+                    SDIO_ONEOF_EMULATION_TYPE(STRING_TOKEN(STR_SDIO_DEVICE3), 2)
+                endif;
+
+                SEPARATOR
+                SDIO_INFO_DISPLAY(STRING_TOKEN(STR_IO_DEVICE4_DETAILS),STRING_TOKEN(STR_SDIO_DEVICE4_LOCATION))
+                suppressif NOT ideqvallist SDIO_DEV_CONFIGURATION.SdioMassDevNum == 4 5 6 7 8;
+                    SDIO_ONEOF_EMULATION_TYPE(STRING_TOKEN(STR_SDIO_DEVICE4), 3)
+                endif;
+
+                SEPARATOR
+                SDIO_INFO_DISPLAY(STRING_TOKEN(STR_IO_DEVICE5_DETAILS),STRING_TOKEN(STR_SDIO_DEVICE5_LOCATION))
+                suppressif NOT ideqvallist SDIO_DEV_CONFIGURATION.SdioMassDevNum == 5 6 7 8;
+                    SDIO_ONEOF_EMULATION_TYPE(STRING_TOKEN(STR_SDIO_DEVICE5), 4)
+                endif;
+
+                SEPARATOR
+                SDIO_INFO_DISPLAY(STRING_TOKEN(STR_IO_DEVICE6_DETAILS),STRING_TOKEN(STR_SDIO_DEVICE6_LOCATION))
+                suppressif NOT ideqvallist SDIO_DEV_CONFIGURATION.SdioMassDevNum == 6 7 8;
+                    SDIO_ONEOF_EMULATION_TYPE(STRING_TOKEN(STR_SDIO_DEVICE6), 5)
+                endif;
+
+                SEPARATOR
+                SDIO_INFO_DISPLAY(STRING_TOKEN(STR_IO_DEVICE7_DETAILS),STRING_TOKEN(STR_SDIO_DEVICE7_LOCATION))
+                suppressif NOT ideqvallist SDIO_DEV_CONFIGURATION.SdioMassDevNum == 7 8;
+                    SDIO_ONEOF_EMULATION_TYPE(STRING_TOKEN(STR_SDIO_DEVICE7), 6)
+                endif;
+                
+                SEPARATOR
+                SDIO_INFO_DISPLAY(STRING_TOKEN(STR_IO_DEVICE8_DETAILS),STRING_TOKEN(STR_SDIO_DEVICE8_LOCATION)) 
+                suppressif NOT ideqvallist SDIO_DEV_CONFIGURATION.SdioMassDevNum == 8;
+                    SDIO_ONEOF_EMULATION_TYPE(STRING_TOKEN(STR_SDIO_DEVICE8), 7)
+                endif;
+            endform;
+        #endif // SDIO_FORM_SDIO_CONFIG
+
+    #endif // FORM_SET_FORM
+
+#endif // ADVANCED_FORM_SET
+
+//****************************************************************************
+//****************************************************************************
+//**                                                                        **
+//**             (C)Copyright 1985-2017, American Megatrends, Inc.          **
+//**                                                                        **
+//**                          All Rights Reserved.                          **
+//**                                                                        **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                        **
+//**                          Phone (770)-246-8600                          **
+//**                                                                        **
+//****************************************************************************
+//****************************************************************************

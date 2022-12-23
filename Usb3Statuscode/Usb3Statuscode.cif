@@ -1,0 +1,22 @@
+<component>
+	name = "Usb3Statuscode"
+	category = eModule
+	LocalRoot = "Usb3Statuscode\"
+	RefName = "Usb3Statuscode"
+[files]
+"Usb3Statuscode.sdl"	
+"Usb3Statuscode.mak"	
+"Usb3Statuscode.chm"	
+"USB3DriverPkg.zip"	
+"XHCIDbgCapDetector.zip"	
+"Usb3StatuscodeHost.zip"	
+"Usb3Statuscode.dec"	
+[parts]
+"Usb3Statuscode.StatusCodeLib"
+"Usb3Statuscode.XhciHandler"
+[dependency]
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_20"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_09"
+[dependency.incompatible]
+Debugger <= "SS: AptioV;$/AptioV/Binary/Modules/Debugger;Debugger_3_04_32"
+<endComponent>

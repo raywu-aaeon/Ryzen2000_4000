@@ -1,0 +1,52 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file AmiTseHddSecurity.inf
+#   AMITSE module part of the HddSecurity 
+##
+
+[Defines]  
+  INF_VERSION                    = 0x00010015
+  BASE_NAME                      = AmiTseHddSecurity
+  FILE_GUID                      = B85C7FEA-AEBF-492b-96C6-42EA133BCF29
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiTseHddPasswordLib
+
+[Sources]
+  AmiTseHddSecurity.c
+  AmiTseHddSecurity.h
+  ForceHddPassword.c
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  ReportStatusCodeLib
+  PrintLib
+  BaseLib
+
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gAmiHddSecurityEndProtocolGuid
+  gAmiHddSecurityProtocolGuid
+  gAmiHddPasswordVerifiedGuid
+  gAmiAhciBusProtocolGuid
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiTsePkg/AmiTsePrivatePkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50  
+  GCC:*_*_*_CC_FLAGS = -DTSE_FOR_APTIO_4_50 

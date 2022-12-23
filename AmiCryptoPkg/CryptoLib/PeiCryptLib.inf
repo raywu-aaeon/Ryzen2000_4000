@@ -1,0 +1,89 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file
+#  CryptoLib library implementation
+#
+##
+
+[Defines]
+  INF_VERSION            = 0x00010005
+  BASE_NAME              = PeiCryptLib
+  FILE_GUID              = 9ECD2C5A-90F2-471B-8419-1DB62BD9CC27
+  MODULE_TYPE            = PEIM
+  VERSION_STRING         = 1.0
+  LIBRARY_CLASS          = AmiPeiCryptLib|BASE PEIM PEI_CORE
+  CONSTRUCTOR            = AmiPeiCryptLibConstructor
+
+#
+#  VALID_ARCHITECTURES   = IA32 ARM
+#
+
+[Sources]
+ PeiCryptLibInit.c
+ BaseCryptLib.c
+ RSAKeyImport.c
+ Pkcs1_sigDecode.c
+ Memalloc.c
+ Scrtlib.c
+ TimeWrapper.c
+ wpa_debug.c
+ wpa_debug.h
+ Pkcs7.c
+ Pkcs7.h
+ includes.h
+ build_config.h
+ common.h
+ os.h
+ crypto.h
+ libtommath.h
+ bignum.c
+ bignum.h
+ asn1.c
+ asn1.h
+ rsa.c
+ rsa.h
+ md5.h
+ md5.c
+ sha1.h
+ sha1.c
+ sha256.c
+ sha256.h
+ sha384.c
+ sha512.c
+ x509v3.c
+ x509v3.h
+
+[Packages]
+ MdePkg/MdePkg.dec
+ AmiModulePkg/AmiModulePkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+  
+[LibraryClasses]
+ PeiServicesLib
+ PrintLib
+
+[LibraryClasses.IA32]
+ AmiCryptIntrinsicLib
+
+[Ppis]
+ gEfiPeiMemoryDiscoveredPpiGuid
+
+[Pcd]
+ gAmiCryptoPkgTokenSpaceGuid.AmiPcdCpMaxHeapSize
+ gAmiCryptoPkgTokenSpaceGuid.AmiPcdCpHeapAddr
+
+[BuildOptions]
+# Override MSFT build option to remove code optimization /GL.
+# Causes build error only if instances of AmiCryptoPkg.PeiCryptLib.lib(built with /GL) and CryptoPkg.BaseCryptLib.lib(Intrinsics.lib, compiled with /GL-) are linked
+MSFT:DEBUG_*_IA32_CC_FLAGS   == $(AmiCryptoLib_GL) $(AmiCryptoLib_NO_PEI_PKCS7) $(AmiCryptoLib_LTM_FAST) /nologo /c /WX /GS- /W4 /Gs32768 /O1b2 /FIAutoGen.h /EHs-c- /GR- /GF /Gy /Zi /Gm
+MSFT:RELEASE_*_IA32_CC_FLAGS == $(AmiCryptoLib_GL) $(AmiCryptoLib_NO_PEI_PKCS7) $(AmiCryptoLib_LTM_FAST) /nologo /c /WX /GS- /W4 /Gs32768 /O1b2 /FIAutoGen.h /EHs-c- /GR- /GF /DMDEPKG_NDEBUG
+
+#GCC:*_*_IA32_CC_FLAGS  = $(AmiCryptoLib_NO_PEI_PKCS7) $(AmiCryptoLib_LTM_FAST)
+GCC:*_*_IA32_CC_FLAGS  = $(AmiCryptoLib_NO_PEI_PKCS7)
+GCC:*_*_AARCH64_CC_FLAGS = -D_MSC_VER $(AmiCryptoLib_NO_PEI_PKCS7)
+GCC:*_*_ARM_CC_FLAGS = $(AmiCryptoLib_NO_PEI_PKCS7)

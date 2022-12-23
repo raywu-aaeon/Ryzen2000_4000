@@ -1,0 +1,13 @@
+<component>
+	name = "ApcbRavenFp5Udimm"
+	category = ModulePart
+	LocalRoot = "AgesaPkg\Addendum\Apcb\RavenFp5Udimm\"
+	RefName = "AgesaPkg.Addendum.Apcb.RavenFp5Udimm"
+[files]
+"ApcbCreate.bat"
+"ApcbRvFp5Udimm.mak"
+"ApcbRvFp5Udimm.sdl"
+[parts]
+"AgesaPkg.Addendum.Apcb.RavenFp5Udimm.ApcbData"
+"AgesaPkg.Addendum.Apcb.RavenFp5Udimm.Include"
+<endComponent>

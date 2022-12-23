@@ -1,0 +1,9 @@
+<component>
+	name = "Xhc"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\FchBinaries\Kern\Rom\Xhc\"
+	RefName = "AgesaModulePkg.FchBinaries.Kern.Rom.Xhc"
+[files]
+"KernXhc.rom"	
+"readme.txt"	
+<endComponent>

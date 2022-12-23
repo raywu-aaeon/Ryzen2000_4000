@@ -1,0 +1,10 @@
+<component>
+	name = "Customer Reference Board - AMD CPM Oem Table Override"
+	category = ModulePart
+	LocalRoot = "MandolinPkg\CrbAmdCpmOemTableOverride\"
+	RefName = "MandolinPkg.CrbAmdCpmOemTableOverride"
+[INF]
+"AmiCpmOemTableLib.inf"
+[files]
+"CrbAmdCpmOemTableOverride.sdl"
+<endComponent>

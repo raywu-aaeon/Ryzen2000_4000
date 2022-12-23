@@ -1,0 +1,8 @@
+<component>
+	name = "Rsdp+ Includes"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Include\Protocol\"
+	RefName = "RSDP_INCLUDES"
+[files]
+"ManageShadowProtocol.h"	
+<endComponent>

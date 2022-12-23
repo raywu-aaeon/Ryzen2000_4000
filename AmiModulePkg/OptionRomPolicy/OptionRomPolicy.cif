@@ -1,0 +1,19 @@
+<component>
+    name = "OptionRomPolicy"
+    category = eModule
+    LocalRoot = "AmiModulePkg\OptionRomPolicy\"
+    RefName = "AmiModulePkg.OptionRomPolicy"
+[INF]
+"OptionRomPolicy.inf"
+[files]
+"OptionRomPolicy.sdl"	
+"OptionRomPolicy.chm"	
+"OptionRomPolicy.sd"	
+[dependency]
+AmiModulePkg.Bds >= "SS: AptioV;$/AptioV/Source/Modules/Bds;Bds_16"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_48"
+AmiModulePkg.PciBus >= "SS: AptioV;$/AptioV/Source/Modules/PCI;PciBus_20"
+[dependency.optional]
+CSM >= "SS: AptioV;$/AptioV/Source/Modules/Csm;Csm_7.80_10"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_31"
+<endComponent>

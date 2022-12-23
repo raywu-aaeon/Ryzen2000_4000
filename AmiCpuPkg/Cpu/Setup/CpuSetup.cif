@@ -1,0 +1,11 @@
+<component>
+	name = "AMD CPU Setup"
+	category = ModulePart
+	LocalRoot = "AmiCpuPkg\Cpu\Setup\"
+	RefName = "AMD_CPU_SETUP"
+[files]
+"CpuSetup.sdl"	
+"CpuSetup.c"	
+"Cpu.sd"	
+"Cpu.uni"	
+<endComponent>

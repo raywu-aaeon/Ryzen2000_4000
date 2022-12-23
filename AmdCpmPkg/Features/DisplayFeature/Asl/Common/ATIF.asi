@@ -1,0 +1,535 @@
+/*****************************************************************************
+ *
+ * Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ *
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ *
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ *
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ *
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ *
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+//***************************************************************************
+//
+//  ATIF.asi -  ATI DDI interface
+//
+//***************************************************************************
+
+    // The ATIB object creates the 256 byte buffer that will be returned
+    // to the OS as per the 256 byte size definition for ATIF spec.
+    Name(ATIB, Buffer(0x100){})
+
+    Method(ATIF, 2, Serialized)
+    {
+        If(LEqual(Arg0, 0))
+        {
+            Return (AF00)
+        }
+        If(LEqual(Arg0, 1))
+        {
+            Return (AF01)
+        }
+        If(LEqual(Arg0, 2))
+        {
+            Return (AF02)
+        }
+        If(LEqual(Arg0, 3))
+        {
+            Return (AF03 (DerefOf(Index(Arg1, 2)), DerefOf(Index(Arg1, 4)) ) )
+        }
+        If(LEqual(Arg0, 4))
+        {
+            Return (AF04)
+        }
+        If(LEqual(Arg0, 15))
+        {
+            Return (AF15)
+        }
+        If(LEqual(Arg0, 16))
+        {
+            Return (AF16 (DerefOf(Index(Arg1, 2))))
+        }
+        Else
+        {
+            // Return null structure as function not supported
+            CreateWordField(ATIB, 0, CpmStructureSize)                // Structure size = 8
+            CreateWordField(ATIB, 2, CpmInterfaceVersion)             // Interface version 1
+            CreateDWordField(ATIB, 4, CpmSupportedNotificationsMask)  // Supported Notifications Mask
+            CreateDWordField(ATIB, 8, CpmSupportedFunctionsBitVector)
+            Store(0, CpmStructureSize)
+            Store(0, CpmInterfaceVersion)
+            Store(0, CpmSupportedNotificationsMask)
+            Store(0x00000000, CpmSupportedFunctionsBitVector)         // no functions supported
+            Return(ATIB)
+        }
+    }
+
+    Method(AF00)
+    {
+        CreateWordField(ATIB, 0, CpmStructureSize)                    // Structure size = 8
+        CreateWordField(ATIB, 2, CpmInterfaceVersion)                 // Interface version 1
+        CreateDWordField(ATIB, 4, CpmSupportedNotificationsMask)      // Supported Notifications Mask
+        CreateDWordField(ATIB, 8, CpmSupportedFunctionsBitVector)
+
+        Store(12, CpmStructureSize)
+        Store(1, CpmInterfaceVersion)
+        Store(CpmAtifSupportedNotificationMask, CpmSupportedNotificationsMask)
+        If(LNot(CondRefOf(\_SB.LID._LID)))
+        {
+            And(CpmAtifFunctionBitVector, 0xFFFFFFF7, CpmAtifFunctionBitVector)
+        }
+
+        Store(CpmAtifFunctionBitVector, CpmSupportedFunctionsBitVector)
+
+        Return(ATIB)
+    }
+
+    Method(AF01)
+    {
+        CreateWordField(ATIB, 0, CpmStructureSize)      // Structure size = 10
+        CreateDWordField(ATIB, 2, CpmValidFlagsMask)    // Only bit 0 & 1 are valid
+        CreateDWordField(ATIB, 6, CpmFlags)             // This is hardcoded information given to BIOS
+        CreateByteField(ATIB, 10, CpmNotifyCommandCode) // This is hardcoded information given to BIOS
+
+        And(CpmAtifFlags,0xFF000000, Local0)
+        And(CpmAtifFlags,0x00000003, Local1)
+        If(LEqual(Local1, 0x00000002))
+        {
+            Store(11, CpmStructureSize)
+            Store(0x00000003, CpmValidFlagsMask)
+            Store(Local1, CpmFlags)
+            Store(Local0, CpmNotifyCommandCode)
+        } Else
+        {
+            Store(10, CpmStructureSize)
+            Store(0x00000003, CpmValidFlagsMask)
+            Store(CpmAtifFlags, CpmFlags)
+        }
+
+        Return(ATIB)
+    }
+
+
+    Name(CpmPendingSystemBIOSRequestBuffer, Buffer(0x4){0, 0, 0, 0})  // Pending System BIOS Requests. (these get cleared only when function 2 is called)
+    Name(CpmSaveExpansionMode, 0x00)                                  // Expansion Mode.(Bits 1-0)
+    Name(CpmSaveThermalStateTargetGraphicsController, 0x00)           // Thermal State:       Target Graphics Controller
+    Name(CpmSaveThermalStateStateId, 0x00)                            // Thermal State:       State Id
+    Name(CpmSaveForcedPowerStateTargetGraphicsController, 0x00)       // Forced Power State:  Target Graphics Controller
+    Name(CpmSaveForcedPowerStateStateId, 0x00)                        // Forced Power State:  State Id
+    Name(CpmSaveSystemPowerSource, 0x00)                              // System Power Source
+    Name(CpmSavePowerLimitTargetGraphicsController, 0x00)             // Power Limit:         Target Graphics Controller (BYTE)
+    Name(CpmSavePowerLimitValue, 0x00000000)                          // Power Limit:         Value (DWORD)
+
+    // These are intended for Display configuration change request (Bit 5)
+    // and Display Device Status Change (Bit 6) notifications
+    // Currently not supported
+    Name(SSDM, 0x000A)                          // Save Supported Displays mask
+    Name(SCDY, 0x0000)                          // Connected Displays
+
+    Method(AF02)
+    {
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer, 0, CpmDisplaySwitchRequest)                   // Display switch request
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer, 1, CpmExpansionModeChangeRequest)             // Expansion mode change request
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer, 2, CpmThermalStateChangeRequest)              // Thermal state change request
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer, 3, CpmForcedPowerStateChangeRequest)          // Forced power state change request
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer, 4, CpmSystemPowerStateChangeRequest)          // System power state change request
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer, 5, CpmDisplayConfigurationChangeRequest)      // Display configuration change request
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer, 6, CpmPowerXpressGraphicsSwitchToggleRequest) // Display device status change request
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer, 7, CpmPanelBrightnessLevelChangeRequest)      // Brightness level change request
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer, 8, CpmDgpuDisplayConnectStateChangeRequest)   // Discrete GPU display connect state change request
+        CreateBitField(CpmPendingSystemBIOSRequestBuffer,12, CpmPowerLimitRequest)                      // Power Limit Request
+
+        CreateWordField(ATIB, 0, CpmStructureSize)                            // Structure size = 12
+        CreateDWordField(ATIB, 2, CpmPendingSystemBIOSRequests)               // Pending System BIOS Requests
+        CreateByteField(ATIB, 6, CpmExpansionMode)                            // Expansion Mode
+        CreateByteField(ATIB, 7, CpmThermalStateTargetGraphicsController)     // Thermal State: Target Gfx controller
+        CreateByteField(ATIB, 8, CpmThermalStateStateId)                      // Thermal State: State Id
+        CreateByteField(ATIB, 9, CpmForcedPowerStateTargetGraphicsController) // Forced Power State: Target Gfx controller
+        CreateByteField(ATIB, 10, CpmForcedPowerStateStateId)                 // Forced Power State: State Id
+        CreateByteField(ATIB, 11, CpmSystemPowerSource)                       // System Power Source
+        CreateByteField(ATIB, 12, CpmPanelBrightnessBacklightLevel)           // Brightness Level
+        CreateByteField(ATIB, 13, CpmPowerLimitTargetGraphicsController)      // Power Limit:         Target Graphics Controller (BYTE)
+        CreateDWordField(ATIB, 14, CpmPowerLimitValue)                        // Power Limit:         Value (DWORD)
+
+        Store(13, CpmStructureSize)                                             // Size of ATIB structure
+        Store(CpmPendingSystemBIOSRequestBuffer, CpmPendingSystemBIOSRequests)  // Load current pending System
+                                                                                // BIOS request indicators
+
+        If(CpmDisplaySwitchRequest)
+        {
+            Store(Zero, CpmDisplaySwitchRequest)                              // Clear out pending indicator
+        }
+
+        If(CpmExpansionModeChangeRequest)
+        {
+            Store(CpmSaveExpansionMode, CpmExpansionMode)                     // Pass back panel expansion mode
+            Store(Zero, CpmSaveExpansionMode)
+            Store(Zero, CpmExpansionModeChangeRequest)                        // Clear out pending indicator
+        }
+
+        If(CpmThermalStateChangeRequest)
+        {
+            Store(CpmSaveThermalStateTargetGraphicsController, CpmThermalStateTargetGraphicsController)
+            Store(CpmSaveThermalStateStateId, CpmThermalStateStateId)
+            Store(Zero, CpmSaveThermalStateTargetGraphicsController)
+            Store(Zero, CpmSaveThermalStateStateId)
+            Store(Zero, CpmThermalStateChangeRequest)
+        }
+
+        If(CpmForcedPowerStateChangeRequest)
+        {
+            Store(CpmSaveForcedPowerStateTargetGraphicsController, CpmForcedPowerStateTargetGraphicsController)
+            Store(CpmSaveForcedPowerStateStateId, CpmForcedPowerStateStateId)
+            Store(Zero, CpmSaveForcedPowerStateTargetGraphicsController)
+            Store(Zero, CpmSaveForcedPowerStateStateId)
+            Store(Zero, CpmForcedPowerStateChangeRequest)
+        }
+
+        If(CpmSystemPowerStateChangeRequest)
+        {
+            Store(CpmSaveSystemPowerSource, CpmSystemPowerSource)
+            Store(Zero, CpmSystemPowerStateChangeRequest)
+        }
+
+        If(CpmPowerXpressGraphicsSwitchToggleRequest)
+        {
+            Store(Zero, CpmPowerXpressGraphicsSwitchToggleRequest)
+        }
+
+        If(CpmPanelBrightnessLevelChangeRequest) {
+            Store(Zero, CpmPanelBrightnessLevelChangeRequest)
+        }
+
+        If(CpmDgpuDisplayConnectStateChangeRequest) {
+            Store(Zero, CpmDgpuDisplayConnectStateChangeRequest)
+        }
+
+        If(CpmPowerLimitRequest) {
+            Store(CpmSavePowerLimitTargetGraphicsController, CpmPowerLimitTargetGraphicsController)
+            Store(CpmSavePowerLimitValue, CpmPowerLimitValue)
+            Store(Zero, CpmSavePowerLimitTargetGraphicsController)
+            Store(Zero, CpmSavePowerLimitValue)
+            Store(Zero, CpmPowerLimitRequest)
+        }
+
+        Return(ATIB)
+    }
+
+
+    Method(AF03, 2)
+    {
+        CreateWordField(ATIB, 0, CpmStructureSize)          // Structure size
+        CreateWordField(ATIB, 2, CpmSelectedDisplays)       // Selected (Active) Displays
+        CreateWordField(ATIB, 4, CpmConnectedDisplays)      // Connected Displays
+
+        Store (Arg0, CpmSelectedDisplays)
+        Store (Arg1, CpmConnectedDisplays)
+
+        Name(CpmNextDisplayOption, 0x06)                    // Init next display option to invalid index (0x06)
+        Name(CpmConnectorIndex, 0x06)
+        Name(CpmDeviceCombinationBuffer, Buffer(20) {0})
+        Name(CpmDeviceCombinationNumber, 0)
+
+        Store(CpmReadTable(CpmDisplayFeatureTable, CpmDisplayFeatureAtifDeviceCombinationNumber), CpmDeviceCombinationNumber)
+        Store(0, Local1)
+        While(LLess(Local1, CpmDeviceCombinationNumber))
+        {
+            Store(CpmReadTable(CpmDisplayFeatureTable, Add(CpmDisplayFeatureAtifDeviceCombinationBuffer, Local1)), Local2)
+            Store(Local2, Index(CpmDeviceCombinationBuffer, Local1))
+            Increment(Local1)
+        }
+
+        // Algorithm for EC-hotKey Display Switch
+        // Select order is CRT1->DFP1->DFP2 ->LCD1+CRT1->LCD1+DFP1->LCD1+DFP2->LCD1
+        // Find table index for current Active devices
+        // Increment index to next select option
+        // If devices in select option are all connected then exit
+        // otherwise increment index to next select option and keep searching
+        // If index not found then return 0 in CpmSelectedDisplays
+        // else for valid index, return this as next Active device option in ATIB buffer
+        Store(CpmSelectedDisplays, Local1)
+        And(Local1, 0x8B, Local1)               // mask out all but LCD1, CRT1, DFP1, DFP2
+        Store(CpmConnectedDisplays, Local2)
+        If(CondRefOf(\_SB.LID._LID))
+        {
+            Store(\_SB.LID._LID(), Local0)
+            And(Local2, Not(0x01), Local2)
+            Or(Local2, Local0, Local2)
+        }
+
+        Store(Zero, Local0)
+        While(LLess(Local0, CpmDeviceCombinationNumber))
+        {
+            Store(DerefOf(Index(CpmDeviceCombinationBuffer, Local0)), Local3)
+            If(LEqual(Local3, Local1))
+            {
+                Store(Local0, CpmConnectorIndex)
+                Store(CpmDeviceCombinationNumber, Local0)
+            }
+            Else
+            {
+                Increment(Local0)
+            }
+        }
+        Store(CpmConnectorIndex, Local0)
+        While(LLess(Local0, CpmDeviceCombinationNumber))
+        {
+            Increment(Local0)
+            If(LEqual(Local0, CpmDeviceCombinationNumber))
+            {
+                Store(0x00, Local0)
+            }
+            Store(DerefOf(Index(CpmDeviceCombinationBuffer, Local0)), Local3)
+            If(LEqual(And(Local3, Local2), Local3))
+            {
+                Store(Local0, CpmNextDisplayOption)
+                Store(CpmDeviceCombinationNumber, Local0)
+            }
+        }
+        If(LEqual(CpmNextDisplayOption, CpmDeviceCombinationNumber))
+        {
+            Store(Zero, CpmSelectedDisplays)
+        }
+        Else
+        {
+            Store(CpmNextDisplayOption, Local0)
+            Store(DerefOf(Index(CpmDeviceCombinationBuffer, Local0)), Local3)
+            And(CpmSelectedDisplays, Not(0x0B), CpmSelectedDisplays)
+            Or(CpmSelectedDisplays, Local3, CpmSelectedDisplays)
+        }
+        Store(0x04, CpmStructureSize)
+
+        Return(ATIB)
+    }
+
+    Method(AF04)
+    {
+        CreateWordField(ATIB, 0, CpmStructureSize)      // Structure size
+        CreateByteField(ATIB, 2, CpmLidState)           // Only bit 0 is valid
+        Store(0x03, CpmStructureSize)                   // Set the output structure size
+        Store(0x00, Local1)
+        If(CondRefOf(\_SB.LID._LID))
+        {
+            Store(\_SB.LID._LID(), Local0)
+            Xor(Local0, 0x01, Local1)
+        }
+        Store(Local1, CpmLidState)                      // Get LID object status, and convert it to ATIF's polarity
+        Return(ATIB)
+    }
+
+    Method(AF15)
+    {
+
+        Store(CpmAtifDeviceListBuffer, ATIB)
+
+        Return(ATIB)                                    // return the full 256 byte buffer
+    }
+
+    Method(AF16, 1)
+    {
+        Store(CpmReadMem32(CpmDisplayFeatureTable, CpmDisplayFeatureAtif16Buffer, 0, 16), Local0)
+        If(Local0)
+        {
+            Store(0, Local1)
+            While(LLess(Local1, Local0))
+            {
+                Store(CpmReadTable(CpmDisplayFeatureTable, Add(CpmDisplayFeatureAtif16Buffer, Local1)), Local2)
+                Store(Local2, Index(ATIB, Local1))
+                Increment(Local1)
+            }
+        }
+        Else
+        {
+            Store(CpmCallBack(CpmCallBackAtif16, Arg0, CPM_DISPLAY_FEATURE_DGPU), Local3)
+            If(LEqual(ObjectType(Local3), 3))
+            {
+                Store(Local3, ATIB)
+            }
+            Else
+            {
+                Store(0x05, Index(ATIB, 0))
+                Store(0x00, Index(ATIB, 1))
+                Store(0x00, Index(ATIB, 2))
+                Store(0x00, Index(ATIB, 3))
+                Store(0x02, Index(ATIB, 4))
+            }
+        }
+        Return(ATIB)                                    // return the full 256 byte buffer
+    }
+
+    // The following methods are intended to be called back from OEM/Customer EC based code
+    // in order to initiate a System BIOS request to the Display Driver.
+    // For example, the EC may implement a hot-key sequence that generates an SCI
+    // and the ASL handler for the specific SCI _Qxx would, for example, request a
+    // Display Switch by calling back to Method(AFN0).  The Display Driver will then
+    // call Method(ATIF, ...) with Arg0 = 2 (for executing Function AF02) followed
+    // by Method(ATIF, ...) with ARg0 = 3 (for executing Function AF03) will will
+    // return back to the driver the next SBIOS choice for Active Display device(s).
+
+    Method(AFN0, 0, Serialized)
+    {
+        If(And(CpmAtifSupportedNotificationMask, 0x01))
+        {
+            CreateBitField(CpmPendingSystemBIOSRequestBuffer, 0, CpmDisplaySwitchRequest)   // Display switch request
+            Store(One, CpmDisplaySwitchRequest)                                             // Set the request to pending state
+            Notify(VGA, 0x81)                                                               // Inform the display driver
+        }
+    }
+
+    Method(AFN1, 1, Serialized)                                                             // Arg0: Expansion mode
+    {
+        If(And(CpmAtifSupportedNotificationMask, 0x02))
+        {
+            Store(Arg0, Local0)
+            Store(Local0, CpmSaveExpansionMode)
+            CreateBitField(CpmPendingSystemBIOSRequestBuffer,0x01,CpmExpansionModeChangeRequest)
+            Store(One, CpmExpansionModeChangeRequest)
+            Notify(VGA, 0x81)
+        }
+    }
+
+    Method(AFN2, 2, Serialized)                                                             // Arg0: Thermal State: State Id
+    {                                                                                       // Arg1: Thermal State: Target Graphics Controller
+        If(And(CpmAtifSupportedNotificationMask, 0x04))
+        {
+            Store(Arg0, Local0)
+            Store(Local0, CpmSaveThermalStateStateId)
+            Store(Arg1, Local0)
+            Store(And(Local0, 0x03, Local0), CpmSaveThermalStateTargetGraphicsController)
+            CreateBitField(CpmPendingSystemBIOSRequestBuffer,0x02,CpmThermalStateChangeRequest)
+            Store(One, CpmThermalStateChangeRequest)
+            Notify(VGA, 0x81)
+        }
+    }
+
+    Method(AFN3, 2, Serialized)                                                             // Arg0: Forced Power State: State Id
+    {                                                                                       // Arg1: Forced Power State: Target Graphics Controller
+        If(And(CpmAtifSupportedNotificationMask, 0x08))
+        {
+            Store(Arg0, Local0)
+            Store(Local0, CpmSaveForcedPowerStateStateId)
+            Store(Arg1, Local0)
+            Store(And(Local0, 0x03, Local0), CpmSaveForcedPowerStateTargetGraphicsController)
+            CreateBitField(CpmPendingSystemBIOSRequestBuffer,0x03,CpmForcedPowerStateChangeRequest)
+            Store(One, CpmForcedPowerStateChangeRequest)
+            Notify(VGA, 0x81)
+        }
+    }
+
+    Method(AFN4, 1, Serialized)                                                             // Arg0: System Power Source
+    {
+        If(And(CpmAtifSupportedNotificationMask, 0x10))
+        {
+            Store(Arg0, Local0)
+            Store(CpmSaveSystemPowerSource, Local1)
+            Store(Local0, CpmSaveSystemPowerSource)
+            If(LEqual(Local0, Local1))
+            {
+            } Else
+            {
+                CreateBitField(CpmPendingSystemBIOSRequestBuffer,0x04,CpmSystemPowerStateChangeRequest)
+                Store(One, CpmSystemPowerStateChangeRequest)
+                Notify(VGA, 0x81)
+            }
+        }
+    }
+
+    Method(AFN5, 0, Serialized)
+    {
+        If(And(CpmAtifSupportedNotificationMask, 0x20))
+        {
+            CreateBitField(CpmPendingSystemBIOSRequestBuffer,0x05,CpmDisplayConfigurationChangeRequest)
+            Store(One, CpmDisplayConfigurationChangeRequest)
+            Notify(VGA, 0x81)
+        }
+    }
+
+    Method(AFN6, 0, Serialized)
+    {
+        If(And(CpmAtifSupportedNotificationMask, 0x40))
+        {
+            CreateBitField(CpmPendingSystemBIOSRequestBuffer, 6, CpmPowerXpressGraphicsSwitchToggleRequest) // PowerXpress graphics switch toggle request
+            Store(One, CpmPowerXpressGraphicsSwitchToggleRequest)                                           // Set the request to pending state
+            Notify(VGA, 0x81)                                                                               // Inform the display driver
+        }
+    }
+
+    Method(AFN7, 1, Serialized)                                                                             // Arg0: Panel Brightness: Backlight Level
+    {
+        If(And(CpmAtifSupportedNotificationMask, 0x80))                                                     // if notification supported (BIT7)
+        {
+            CreateBitField(CpmPendingSystemBIOSRequestBuffer, 7, CpmPanelBrightnessLevelChangeRequest)      // Brightness level change request
+            Store(One, CpmPanelBrightnessLevelChangeRequest)                                                // Pending brightness level request
+
+            CreateByteField(ATIB, 12, CpmPanelBrightnessBacklightLevel)                                     // Brightness Level
+            Store(Arg0, CpmPanelBrightnessBacklightLevel)                                                   // Brightness level
+            Notify(VGA, 0x81)
+        }
+    }
+
+    Method(AFN8, 0, Serialized)
+    {
+        If(And(CpmAtifSupportedNotificationMask, 0x100))                                                    // if notification supported (BIT8)
+        {
+            CreateBitField(CpmPendingSystemBIOSRequestBuffer, 8, CpmDgpuDisplayConnectStateChangeRequest)   // Discrete GPU display connect state change request
+            Store(One, CpmDgpuDisplayConnectStateChangeRequest)                                             // Discrete GPU display connect state change request
+            // Move Notify(VGA, 0x81) from ATIF AFN8() to General-Purpose Event \_GPE._Lxx in DisplayConnectEvent.asl.
+        }
+    }
+
+    // Arg0: Power Limit:   Target Graphics Controller (BYTE)
+    //                      0 - Undefined, used on single graphics controller platforms.
+    //                      1 - Integrated graphics controller, used on PX/HG enabled platforms.
+    //                      2 - Discrete graphics controller, used on PX/HG enabled platforms.
+    // Arg1: Power Limit:   Value (DWORD)
+    //                      Bits  7-0: fraction of a Watt
+    //                      Bits 31-8: Watts
+    Method(AFNC, 2, Serialized)
+    {
+        If(And(CpmAtifSupportedNotificationMask, 0x1000))                                                   // if notification supported (BIT12)
+        {
+            And(Arg0, 0x03, Local0)
+            Store(Local0, CpmSavePowerLimitTargetGraphicsController)
+            And(Arg1, 0xFFFFFFFF, Local0)
+            Store(Local0, CpmSavePowerLimitValue)
+            CreateBitField(CpmPendingSystemBIOSRequestBuffer, 12, CpmPowerLimitRequest)                     // Power limit request
+            Store(One, CpmPowerLimitRequest)                                                                // Power limit request
+            Notify(VGA, 0x81)
+        }
+    }

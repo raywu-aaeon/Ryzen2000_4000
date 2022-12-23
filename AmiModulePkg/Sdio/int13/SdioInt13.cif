@@ -1,0 +1,14 @@
+<component>
+    name = "SDIO Int13"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\Sdio\int13\"
+    RefName = "SDIOINT13"
+[INF]
+"SdioInt13.inf"
+"SdioBbs.inf"
+[files]
+"SdioInt13.sdl"	
+[parts]
+"SDIO_I13_BINARY"
+"SdioInt13Protocols"
+<endComponent>

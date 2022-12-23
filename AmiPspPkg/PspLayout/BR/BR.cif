@@ -1,0 +1,9 @@
+<component>
+	name = "BR"
+	category = ModulePart
+	LocalRoot = "AmiPspPkg\PspLayout\BR"
+	RefName = "AmiPspPkg.PspLayout.BR"
+[files]
+"BuildPspBr.txt"
+"PspLayoutBr.sdl"
+<endComponent>

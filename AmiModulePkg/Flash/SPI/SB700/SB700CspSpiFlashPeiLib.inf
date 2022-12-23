@@ -1,0 +1,30 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = SB700CspSpiFlashPeiLib
+    FILE_GUID       = 438973FD-812C-4ADF-82BD-03D57F022375
+    MODULE_TYPE     = PEIM
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = CspSpiFlashLib
+
+[Sources]
+    SPIFlash.c
+    SpiFlashInc.h
+    SpiFlashAsm.nasm
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    BaseLib
+    BaseMemoryLib
+    CacheMaintenanceLib
+    IoLib
+    SpiFlashAddressLib

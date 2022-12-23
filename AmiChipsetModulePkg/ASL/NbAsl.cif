@@ -1,0 +1,10 @@
+<component>
+	name = "NB ASL"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\ASL\"
+	RefName = "AmiChipsetModulePkg.NbAsl"
+[files]
+"Nb.asl"
+"Rb_Res.asl"
+"Rb_Res_Above_4G.asl"
+<endComponent>

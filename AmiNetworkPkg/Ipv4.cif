@@ -1,0 +1,12 @@
+<component>
+	name = "Ipv4"
+	category = ModulePart
+	LocalRoot = "AmiNetworkPkg\"
+	RefName = "AmiNetworkPkg.Ipv4"
+[INF]
+"Dhcp4Dxe\Dhcp4Dxe.inf"
+"Ip4Dxe\Ip4Dxe.inf"
+"Mtftp4Dxe\Mtftp4Dxe.inf"
+"Udp4Dxe\Udp4Dxe.inf"
+"PreserveIP4ConfigVariable\PreserveIP4ConfigVariable.inf"
+<endComponent>

@@ -1,0 +1,207 @@
+TOKEN
+	Name  = "AmdCpmCommonLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling CommonLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AmdCpmSerialPortLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdCpmPkg-SerialPortLib support in the project"
+	TokenType = Boolean
+	Token = "FCH_UART_DEBUG_SELECT" "!=" "0"
+End
+
+TOKEN
+	Name  = "AmdCpmPlatformHookLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmdCpmPkg-PlatformHookLib support in the project"
+	TokenType = Boolean
+	Token = "AmdCpmSerialPortLib_SUPPORT" "!=" "0"
+End
+
+INFComponent
+	Name  = "BasePlatformHookLibAmdFchUart"
+	File  = "BasePlatformHookLibAmdFchUart/BasePlatformHookLibAmdFchUart.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "BaseSerialPortLib16550AmdFchUart"
+	File  = "BaseSerialPortLib16550AmdFchUart/BaseSerialPortLib16550AmdFchUart.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "BasePlatformHookLibAmdIte8712"
+	File  = "BasePlatformHookLibAmdIte8712/BasePlatformHookLibAmdIte8712.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "BasePlatformHookLibAmdSmsc1100"
+	File  = "BasePlatformHookLibAmdSmsc1100/BasePlatformHookLibAmdSmsc1100.inf"
+	Package  = "AmdCpmPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "PlatformHookLib"
+	Instance  = "AmdCpmPkg.BasePlatformHookLibAmdFchUart"
+	Token = "AmdCpmPlatformHookLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "SerialPortLib"
+	Instance  = "AmdCpmPkg.BaseSerialPortLib16550AmdFchUart"
+	Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+End
+
+PcdMapping
+	Name  = "PcdFchUartPort"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "0"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+	Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+End
+
+PcdMapping
+	Name  = "PcdFchUartPort"
+	GuidSpace  = "gAmdCpmPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint8"
+	Value  = "$(FCH_UART_DEBUG_SELECT) - 1"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+	Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+	Token = "FCH_UART_DEBUG_SELECT" "!=" "0"
+End
+
+
+###
+### The following PcdMapping section to sync MdeModulePkg/AmdCpmPkg about UART.
+###     The SerialPortLib of MdeModulePkg is a generic library class.
+###     We can use MdeModulePkg-BaseSerialPortLib16550 to instead of BaseSerialPortLib16550AmdFchUart as well.
+###
+PcdMapping
+	Name  = "PcdSerialUseMmio"
+	GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Boolean"
+	Value  = "TRUE"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+	Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+End
+
+PcdMapping
+	Name  = "PcdSerialRegisterBase"
+	GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint64"
+	Value  = "0xFEDC9000"
+	Offset  = 00h
+	Length  = 08h
+	TargetDSC = Yes
+	Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+	Token = "FCH_UART_DEBUG_SELECT" "=" "1"
+End
+
+PcdMapping
+	Name  = "PcdSerialRegisterBase"
+	GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint64"
+	Value  = "0xFEDCA000"
+	Offset  = 00h
+	Length  = 08h
+	TargetDSC = Yes
+	Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+	Token = "FCH_UART_DEBUG_SELECT" "=" "2"
+End
+
+PcdMapping
+	Name  = "PcdSerialRegisterStride"
+	GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "4"
+	Offset  = 00h
+	Length  = 08h
+	TargetDSC = Yes
+	Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+End
+
+
+###
+### Let's sync AmdCpmPkg to MdeModulePkg.
+### gAmdCpmPkgTokenSpaceGuid.PcdSerialClock|48000000|UINT32|0x00000051
+### gEfiMdeModulePkgTokenSpaceGuid.PcdSerialClockRate|1843200|UINT32|0x00010066
+###
+PcdMapping
+	Name  = "PcdSerialClockRate"
+	GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint32"
+	Value  = "48000000"
+	Offset  = 00h
+	Length  = 08h
+	TargetDSC = Yes
+	Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+End
+
+
+###
+### IDS setting for FCH-UART.
+###
+PcdMapping
+	Name  = "PcdAmdIdsDebugPrintSerialPort"
+	GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Uint64"
+	Value  = "0xFEDC9000"
+	Offset  = 00h
+	Length  = 01h
+	Help  = "FCH-UART0 port for AMD-IDS."
+	TargetDSC = Yes
+	Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+	Token = "FCH_UART_DEBUG_SELECT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPort"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint64"
+    Value  = "0xFEDCA000"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "FCH-UART0 port for AMD-IDS."
+    TargetDSC = Yes
+    Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+    Token = "FCH_UART_DEBUG_SELECT" "=" "2"
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPortDetectCableConnection"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "AmdCpmSerialPortLib_SUPPORT" "=" "1"
+    Token = "FCH_UART_DEBUG_SELECT" "!=" "0"
+End

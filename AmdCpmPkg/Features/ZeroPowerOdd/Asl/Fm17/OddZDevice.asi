@@ -1,0 +1,244 @@
+/*****************************************************************************
+ *
+ * Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+Method (_ADR) {
+    Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddSataPortId), Local4)
+    Return(Local4)
+}
+
+// Status of ODD: 1: ON. 0: OFF
+Name(CpmOddStatus, 1)
+Name(ODPS, 0)
+// ODD boot up Flag
+Name(ODDB, 0)
+Name(WDSW, 0x01)
+
+Method(_INI) {
+    Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddSataPortId), Local4)
+    If (LNot(CpmIsWin8())) {
+        If (LNotEqual(PBAA(), 0)) {
+            If (LNotEqual(CpmReadMem32(PBAA(), Add(0x129, Multiply(Local4, 0x80)), 0, 4), 0)) {
+                Store(0x1, \_SB.PCI0.GP18.SATA.ODDZ.ODDB)
+            }
+        }
+        Store(0x1, \_SB.PCI0.GP18.SATA.SACB)
+    }
+}
+
+Method(ZSTA, 0) {
+    Store(CpmReadTable(CpmMainTable, CpmZeroPowerOddEn), Local0)
+    Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddDeviceId), Local1)
+    Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddEventPin2), Local3)
+    Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddEventSource2), Local6)
+    // ODD Zero Power is enabled
+    If (And(Local0, 1)) {
+        // ODD Hotplug is enabled
+        If (And(Local0, 2)) {
+            // Source of ODD_PLUGIN# - 0: FCH GPIO/GEVENT Pin
+            If (LEqual(Local6, 0)) {
+                If (CpmReadGevent(Local3)) {
+                    If (LEqual(\_SB.PCI0.GP18.SATA.SASS, 0x4)) {
+                        // Add delay when ODD is plug out at S4 resume
+                        Sleep(200)
+                    }
+                    Return(0x0)
+                } Else {
+                    If (And(Local0, 4)) {
+                        // pretend that _PS0 is called if boot without PS0
+                        Store(0x1, \_SB.PCI0.GP18.SATA.ODDZ.ODDB)
+                    }
+                    Return(0xF)
+                }
+            // Source of ODD_PLUGIN# - 1: KBC GPIO/QEVENT Pin, 2: ECRAM GPIO/QEVENT Pin
+            } Else {
+                If (LEqual(\_SB.PCI0.LPC0.EC0.OKEC, 0x01)) {
+                    If (CpmReadGpio(Add(Local3, ShiftLeft(Local6, 8)))) {
+                        If (LEqual(\_SB.PCI0.GP18.SATA.SACB, 0x1)) {
+                            Store(0x0, \_SB.PCI0.GP18.SATA.SACB)
+                            \_SB.PCI0.GP18.SATA.STPP(1)
+                            Sleep(40)
+                            CpmSetDevicePower(Local1, 1)
+                            Sleep(40)
+                            \_SB.PCI0.LPC0.EC0.XQ41()
+                        }
+                        If (LEqual(\_SB.PCI0.GP18.SATA.SASS, 0x4)) {
+                            // Add delay when ODD is plug out at S4 resume
+                            Sleep(200)
+                        }
+                        Return(0x0)
+                    } Else {
+                        Store(0x0, \_SB.PCI0.GP18.SATA.SACB)
+                        If (And(Local0, 4)) {
+                            // pretend that _PS0 is called if boot without PS0
+                            Store(0x1, \_SB.PCI0.GP18.SATA.ODDZ.ODDB)
+                        }
+                        Return(0xF)
+                    }
+                } Else {
+                    If (And(Local0, 4)) {
+                        // pretend that _PS0 is called if boot without PS0
+                        Store(0x1, \_SB.PCI0.GP18.SATA.ODDZ.ODDB)
+                    }
+                    Return(0xF)
+                }
+            }
+        } Else {
+            If (And(Local0, 4)) {
+                // pretend that _PS0 is called if boot without PS0
+                Store(0x1, \_SB.PCI0.GP18.SATA.ODDZ.ODDB)
+            }
+            Return(0xF)
+        }
+    // ODD Zero Power disabled
+    } Else {
+        Return(0x0)
+    }
+} // End of Method(ZSTA, 0)
+
+Method(_PSC) {
+    If (LNot(CpmIsWin8())) {
+        If (\_SB.PCI0.GP18.SATA.ODDZ.CpmOddStatus) {
+            Return(0)
+        } Else {
+            Return(3)
+        }
+    } Else {
+        Return(3)
+    }
+} // End of Method(_PSC)
+
+Method(_PS0) {
+    Store(CpmReadTable(CpmMainTable, CpmZeroPowerOddEn), Local0)
+    Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddDeviceId), Local1)
+    Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddEventPin2), Local3)
+    Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddEventSource2), Local6)
+    If (LNot(CpmIsWin8())) {
+        // Source of ODD_PLUGIN# - 0: FCH GPIO/GEVENT Pin
+        If (LEqual(Local6, 0)) {
+            Store(CpmReadGevent (Local3), Local7)
+            // Source of ODD_PLUGIN# - 1: KBC GPIO/QEVENT Pin, 2: ECRAM GPIO/QEVENT Pin
+        } Else {
+            If (LEqual(\_SB.PCI0.LPC0.EC0.OKEC, 0x01)) {
+                Store(CpmReadGpio (Add (Local3, ShiftLeft (Local6, 8))), Local7)
+            } Else {
+                Store(0, Local7)
+            }
+        }
+        If (LNot(LAnd(And(Local0, 2), Local7))) {
+            CpmSetPostCode(CpmTpZeroPowerOdd_PS0)
+            If (And(Local0, 1)) {
+                // Second or latter time call _PS0, or First time call and ODD connected
+                If (LOr(LEqual(\_SB.PCI0.GP18.SATA.ODDZ.ODDB, 0x1), LAnd(LEqual(\_SB.PCI0.GP18.SATA.ODDZ.ODDB, 0x0), LNotEqual(\_SB.PCI0.GP18.SATA.STPM, 0x0)))) {
+                    // Enable Port
+                    \_SB.PCI0.GP18.SATA.STPT(1)
+                    Sleep(40)
+                    CpmSetDevicePower(Local1, 1)
+                    Store(1, \_SB.PCI0.GP18.SATA.ODDZ.CpmOddStatus)
+                    Sleep(40)
+                }
+            }
+            // _PS0 is called
+            Store(0x1, \_SB.PCI0.GP18.SATA.ODDZ.ODDB)
+            Store(0x0, \_SB.PCI0.GP18.SATA.ODDZ.ODPS)
+        }
+    }
+} // End of Method(_PS0)
+
+Method(_PS3) {
+    Store(CpmReadTable(CpmMainTable, CpmZeroPowerOddEn), Local0)
+    Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddDeviceId), Local1)
+    If (LNot(CpmIsWin8())) {
+        CpmSetPostCode(CpmTpZeroPowerOdd_PS3)
+        If (And(Local0, 1)) {
+            If (LEqual(\_SB.PCI0.GP18.SATA.ODDZ.WDSW, 0x01)) {
+                Sleep(40)
+                // Power Off ODD
+                CpmSetDevicePower(Local1, 0)
+                Sleep(40)
+                Store(0, \_SB.PCI0.GP18.SATA.ODDZ.CpmOddStatus)
+                // Disable Port
+                \_SB.PCI0.GP18.SATA.STPT(0)
+                Sleep(40)
+            }
+        }
+        // _PS0 needs to be called
+        Store(0x1, \_SB.PCI0.GP18.SATA.ODDZ.ODDB)
+        Store(0x3, \_SB.PCI0.GP18.SATA.ODDZ.ODPS)
+    }
+} // End of Method(_PS3)
+
+Method(XEJ0, 1) {
+    If (LNot(CpmIsWin8())) {
+        \_SB.PCI0.GP18.SATA.ODDZ._PS3()
+        \_SB.PCI0.GP18.SATA.STPP(0)
+    }
+} // End of Method(XEJ0)
+
+Device(ODD) {
+    Name(_ADR, 0x00000000)
+    // Set Device Removable icon for MS hot-fix KB950186 Vista
+    Method(_RMV, 0) {
+        Return(0x01)
+    }
+
+    Method(_EJ0, 1) {
+        Store(CpmReadTable(CpmZeroPowerOddTable, CpmZeroPowerOddDeviceId), Local1)
+        If (LNot(CpmIsWin8())) {
+            CpmSetDevicePower(Local1, 0)
+            Store(0, \_SB.PCI0.GP18.SATA.ODDZ.CpmOddStatus)
+        }
+    }
+} // End of Device(ODD)
+
+Method(_STA, 0) {
+    If (LNot(CpmIsWin8())) {
+        Return(\_SB.PCI0.GP18.SATA.ODDZ.ZSTA())
+    } Else {
+        Return(0)
+    }
+}
+

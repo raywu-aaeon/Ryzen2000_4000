@@ -1,0 +1,48 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file
+#   PCD Recovery PEIM
+##
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PcdRecoveryPei
+  FILE_GUID                      = 1C98780A-C67D-4D9B-A9D8-4AC0487A6D6E
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PcdRecoveryPeiEntryPoint
+  
+[Sources]
+  PcdRecoveryPei.c
+  PcdRecovery.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  DebugLib
+  IoLib
+  HobLib
+  PcdLib
+
+[Ppis]
+  gEfiPeiBootInRecoveryModePpiGuid
+
+[FixedPcd]
+  gAmiModulePkgTokenSpaceGuid.PcdUseNewImageOnFlashUpdate
+
+[Depex]
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gEfiPeiMemoryDiscoveredPpiGuid
+

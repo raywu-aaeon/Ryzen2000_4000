@@ -1,0 +1,13 @@
+<component>
+	name = "AdaptiveS4"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\AdaptiveS4\"
+	RefName = "AmdCpmPkg.Features.AdaptiveS4"
+[INF]
+"Asl\AmdCpm3AdaptiveS4Asl.inf"
+"Dxe\AmdCpm3AdaptiveS4Dxe.inf"
+"Pei\AmdCpm3AdaptiveS4Peim.inf"
+"Smm\AmdCpm3AdaptiveS4Smm.inf"
+[files]
+"AdaptiveS4.sdl"	
+<endComponent>

@@ -1,0 +1,235 @@
+GopInfo AMD ver. 2.6. Generate Info for file AMDGenericGop.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver appears to be Authenticode signed.
+    Size Of Gop Image      65248 (63 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.8.0.0.0.Jul 26 2019.11:24:53
+    GOP AMD_Build          2218 
+    GOP AMD_CL             1974379 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+Changes from Gop 2.07:
+- Add RN support and remove APU PP table copy
+- Speed up Blt by mapping only once the blit buffer and using PciIo for small Blts
+
+GopInfo AMD ver. 2.6. Generate Info for file AMDGenericGop.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver appears to be Authenticode signed.
+    Size Of Gop Image      64928 (63 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.7.0.0.0.Apr 17 2019.15:28:12
+    GOP AMD_Build          2166 
+    GOP AMD_CL             1771245 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+Changes from Gop 2.06:
+- Blit function optimized (Use CPDMA with map/unmap).
+
+GopInfo AMD ver. 2.6. Generate Info for file AMDGenericGop.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver appears to be Authenticode signed.
+    Size Of Gop Image      64704 (63 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.6.0.0.0.Mar 15 2019.11:01:07
+    GOP AMD_Build          2154 
+    GOP AMD_CL             1757001 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+Changes from Gop 2.05:
+
+- fix DPCD_SUPPORTED_LINK_RATE[7] when eDP is DPCD1.4
+- fix start offset when get the display path encoder caps
+- added support for AI - Mi100, and Navi - Nv10, Nv14.
+- revise the logic to select the supported link rate for eDP V1.4 and up
+- display corruption when switch from 1600x900 to 1280x1024 resolution with CRT monitor
+
+
+GopInfo AMD ver. 2.6. Generate Info for file C:\ATOMSTG\uefi\UDK2014\ZOutFiles\bin\X64\GENGOP.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver appears to be Authenticode signed.
+    Size Of Gop Image      64448 (62 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.5.0.0.0.Dec  5 2018.17:13:17
+    GOP AMD_Build          2125 
+    GOP AMD_CL             1716681 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+Changes from Gop 2.4:
+- Introduce "USE_PRIVATE_GOP_GUID" compilation option
+- Add DUAL_CYCLE cap for ARM drivers, for computers with all Ram allocated above 4G
+- Fix the color issue in VideoFill.
+- Fix customer issues
+      TIC-36899: BIOS setup menu interface show black border
+    	TIC-35360: The resolution of boot manager is incorrect
+      TIC-37047: BIOS boot menu is not full screen
+      TIC-39296: The Top interface of BIOS Setup menu shows incomplete
+      TIC-36556: Black square in F10 at right corner
+      TIC-36992: Boot Menu show fail after upgrade to PI 1.1.0.6
+      TIC-39424: There black frame in boot manager and recovery page after disable SetupMouseDxe.inf
+      TIC-39663: Black bar in BIOS menu
+      TIC-38217: Lenovo E-Label APP display show abnormal when CSM is disabled
+      TIC-39936: EFI Shell Back ground color abnormally sets
+      IBVInsyde: Appear black frame in boot manager
+
+GopInfo AMD ver. 2.2. Generate Info for file C:\Atombios\staging\uefi\UDK2014\ZOutFiles\bin\x64\GENGOP.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver is not Authenticode signed.
+    Size Of Gop Image      63872 (62 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.4.0.0.0.May  9 2018.16:49:31
+    GOP AMD_Build          2046 
+    GOP AMD_CL             1552765 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+Changes from Gop 2.3:
+- 64-bit pciIo transfer adjusted
+- Blit Fill function accelerated
+
+
+GopInfo AMD ver. 2.2. Generate Info for file C:\Atombios\staging\uefi\UDK2014\ZOutFiles\bin\x64\GENGOP.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver is not Authenticode signed.
+    Size Of Gop Image      63776 (62 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.3.0.0.0.Apr 18 2018.16:19:53
+    GOP AMD_Build          2029 
+    GOP AMD_CL             1543189 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+Changes from Gop 2.2:
+- DPCD 0xE TRAINING_AUX_RD_INTERVAL adjusted to reduce the extra delay.
+- FB Read/Write using PciIo.Mem.
+- Return “EFI_SUCCESS” directly if Start is called with RDP display, the same as the one which already has the GOP.
+- Use GfxDMAControl Table for FB-FB blit and ClearScreeen.
+
+
+GopInfo AMD ver. 2.2. Generate Info for file C:\Atombios\staging\uefi\UDK2014\ZOutFiles\bin\arm64\GENGOP.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      AARCH64
+    The GOP Driver is not Authenticode signed.
+    Size Of Gop Image      91584 (89 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP ARM64 Release Driver, Rev. 2.2.0.0.0.Feb  6 2018.18:29:20
+    GOP AMD_Build          1979 
+    GOP AMD_CL             1513069 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+
+
+GopInfo AMD ver. 2.2. Generate Info for file C:\Atombios\staging\uefi\UDK2014\ZOutFiles\bin\x64\GENGOP.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver is not Authenticode signed.
+    Size Of Gop Image      64064 (62 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.1.0.0.0.Oct 10 2017.09:52:26
+    GOP AMD_Build          1868 
+    GOP AMD_CL             1467921 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+
+GopInfo AMD ver. 2.2. Generate Info for file C:\Atombios\staging\uefi\UDK2014\ZOutFiles\bin\x64\GENGOP.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver is not Authenticode signed.
+    Size Of Gop Image      63776 (62 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.0.6.0.0.Aug 22 2017.15:49:44
+    GOP AMD_Build          1849 
+    GOP AMD_CL             1450358 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+
+GopInfo AMD ver. 2.2. Generate Info for file C:\Atombios\staging\uefi\UDK2014\ZOutFiles\bin\x64\GENGOP.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver is not Authenticode signed.
+    Size Of Gop Image      63680 (62 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.0.4.0.0.Aug  3 2017.16:39:55
+    GOP AMD_Build          1810 
+    GOP AMD_CL             1442097 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+
+
+GopInfo AMD ver. 2.2. Generate Info for file C:\Atombios\staging\uefi\UDK2014\ZOutFiles\bin\x64\GENGOP.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver is not Authenticode signed.
+    Size Of Gop Image      63552 (62 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.0.2.0.0.Jun 30 2017.23:34:10
+    GOP AMD_Build          1740 
+    GOP AMD_CL             1429064 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+
+GopInfo AMD ver. 2.2. Generate Info for file C:\Atombios\staging\uefi\UDK2014\ZOutFiles\bin\x64\GENGOP.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver is not Authenticode signed.
+    Size Of Gop Image      63296 (61 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.0.1.0.0.Jun 10 2017.23:50:53
+    GOP AMD_Build          1694 
+    GOP AMD_CL             1420931 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!
+
+
+
+GopInfo AMD ver. 2.3. Generate Info for file GENGOP_x64.efi: (Gop Driver)
+==========================================
+
+  Dump Gop Driver Info:
+    Machine type code      X64
+    The GOP Driver is not Authenticode signed.
+    Size Of Gop Image      61824 (60 KB)
+    The Gop driver image has 4 sections.
+    GOP Driver Name: AMD GOP X64 Release Driver Rev.2.0.0.0.0.Jan 23 2017.09:46:55
+    GOP AMD_Build          607 
+    GOP AMD_CL             1364893 
+    GOP BIOS_IDTF          0xDEADBEEF 
+    GOP Driver does not carry tables!

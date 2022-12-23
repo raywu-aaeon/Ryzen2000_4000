@@ -1,0 +1,11 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Include\"
+	RefName = "AmdCbsPkg.Include"
+[parts]
+"AmdCbsPkg.Include.Guid"
+"AmdCbsPkg.Include.Library"
+"AmdCbsPkg.Include.Ppi"
+"AmdCbsPkg.Include.Protocol"
+<endComponent>

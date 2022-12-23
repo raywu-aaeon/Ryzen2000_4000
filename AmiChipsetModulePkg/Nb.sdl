@@ -1,0 +1,625 @@
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+#*************************************************************************
+#<AMI_FHDR_START>
+#
+# Name: NB.sdl
+#
+# Description:
+#  AMI SDL file for Raven NB module.
+#
+#<AMI_FHDR_END>
+#*************************************************************************
+PCIDEVICE
+    Title  = "PciRoot"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x7307f"
+    Dev_type  = "RootBridge"
+    Bus  = 00h
+    Dev  = 00h
+    Fun  = 00h
+    BridgeBusNum  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'AmiChipsetModulePkg/ASL/Nb.ASL','AmiChipsetModulePkg/ASL/Rb_Res_Above_4G.asl','AmiModulePkg/PCI/OSCM.ASL','AmiChipsetModulePkg/ASL/NAPE.asl'"
+    ASLdeviceName  = "PCI0"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    FixedBus = Yes
+    PCIExpress = Yes
+    ASL_PTS  = "Method;\_SB.PCI0.NPTS(Arg0)"
+    ASL_WAK  = "Method;ShiftLeft(Arg0, 4, DBG8)  \_SB.PCI0.NWAK(Arg0)"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+PCIDEVICE
+    Title  = "PciRoot"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x7307f"
+    Dev_type  = "RootBridge"
+    Bus  = 00h
+    Dev  = 00h
+    Fun  = 00h
+    BridgeBusNum  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'AmiChipsetModulePkg/ASL/Nb.ASL','AmiChipsetModulePkg/ASL/Rb_Res_Above_4G.asl','AmiModulePkg/PCI/OSCM.ASL','AmiChipsetModulePkg/ASL/NAPE.asl'"
+    ASLdeviceName  = "PCI0"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    FixedBus = Yes
+    PCIExpress = Yes
+    ASL_PTS  = "Method;\_SB.PCI0.NPTS(Arg0)"
+    ASL_WAK  = "Method;ShiftLeft(Arg0, 4, DBG8)  \_SB.PCI0.NWAK(Arg0)"
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "NB_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Template - NorthBridge support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+    Name  = "PICASSO_NB_VERSION"
+    Value  = "10"
+    Help  = "Current NB label version"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "TSEG_SIZE"
+	Value  = "0x00800000"
+	Help  = "Size of SMM TSEG area used (in bytes) \Default size 1MB for NCPU <= 24."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "NCPU" "<=" "24"
+End
+
+TOKEN
+	Name  = "DIMM_SLOTS_PER_CHNL"
+	Value  = "1"
+	Help  = "Number of DIMM slots per Channel, 1 for Fam15 Trinity Comal."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+	Name  = "DIMM_SLOTS_PER_CHNL"
+	Value  = "2"
+	Help  = "Number of DIMM slots per Channel, 2 for Myrtle board."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "CHNLS_PER_NODE"
+	Value  = "2"
+	Help  = "Number of DIMM channels per node"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIMM_SLOTS_PER_SCKT"
+	Value  = "$(CHNLS_PER_NODE)*$(DIMM_SLOTS_PER_CHNL)"
+	Help  = "Number of DIMM slots per socket."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+#TOKEN
+#    Name  = "DIMM_SLOTS_PER_NODE"
+#    Value  = "$(DIMM_SLOTS_PER_SCKT)"
+#    Help  = "Number of DIMM slots per socket."
+#    TokenType = Integer
+#    TargetH = Yes
+#End
+
+TOKEN
+    Name  = "MEMORY_ARRAY_NUM"
+    Value  = "1"
+    Help  = "Number of memory array in the system."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DIMM_SLOT_NUM"
+    Value  = "$(DIMM_SLOTS_PER_SCKT)"
+    Help  = "Number of DIMM slots per socket."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "NB_DYNAMIC_MEMORY_CEILING"
+	Value  = "1"
+	Help  = "Enables dynamic updation of MemCeil variable. \When enabled system might reset based on PCI MMIO configuration change"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "MCT_BOTTOM_IO_VALUE"
+	Value  = "0xC0"
+	Help  = "This is the default hardcoded value for the Bottom IO (bits 31-24). If system display blurred screen under recovery mode please adjust this value."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NB_SHOW_EXTENDED_SETUP_INFO"
+	Value  = "1"
+	Help  = "Enables/disables display of extended memory information in setup"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "AMI_NB_DEBUG_MESSAGES"
+    Value  = "1"
+    Help  = "Enables/disables debug messages of drivers in NbPkg."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiChipsetModulePkg.NbPei"
+    Help  = "Disables all debug messages based on AMI_NB_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "AMI_NB_DEBUG_MESSAGES" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiChipsetModulePkg.NbDxe"
+    Help  = "Disables all debug messages based on AMI_NB_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "AMI_NB_DEBUG_MESSAGES" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0"
+    Override  = "AmiChipsetModulePkg.MemDetect"
+    Help  = "Disables all debug messages based on AMI_NB_DEBUG_MESSAGES token value"
+    TargetDSC = Yes
+    Token = "AMI_NB_DEBUG_MESSAGES" "=" "0"
+End
+
+TOKEN
+	Name  = "    SPD SMBUS Platform Configurations/Options ------------"
+	Value  = "---------------------------------------------------------"
+	TokenType = Expression
+End
+
+TOKEN
+    Name  = "CHANNEL_A_DIMM_0_ADDRESS"
+    Value  = "0xA0"
+    Help  = "Smbus address of channel A DIMM 0"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHANNEL_A_DIMM_1_ADDRESS"
+    Value  = "0xA4"
+    Help  = "Smbus address of channel A DIMM 1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHANNEL_B_DIMM_0_ADDRESS"
+    Value  = "0xA2"
+    Help  = "Smbus address of channel B DIMM 0"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHANNEL_B_DIMM_1_ADDRESS"
+    Value  = "0xA6"
+    Help  = "Smbus address of channel B DIMM 1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIMM_SPD_MAP"
+	Value  = "{0, 0, CHANNEL_A_DIMM_0_ADDRESS},{1, 0, CHANNEL_B_DIMM_0_ADDRESS}"
+	Help  = "List of DIMM SPD addresses, each entry has\three byte values - Channel, Dimm and SMBUS \address. Entries must be ordered.\"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+TOKEN
+	Name  = "DIMM_SPD_MAP"
+	Value  = "{0, 0, CHANNEL_A_DIMM_0_ADDRESS},{0, 1, CHANNEL_A_DIMM_1_ADDRESS},{1, 0, CHANNEL_B_DIMM_0_ADDRESS},{1, 1, CHANNEL_B_DIMM_1_ADDRESS}"
+	Help  = "List of DIMM SPD addresses, each entry has\three byte values - Channel, Dimm and SMBUS \address. Entries must be ordered.\"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SOLUTION_TYPE" "=" "1"
+End
+
+TOKEN
+	Name  = "AMI_ROOT_BRIDGE_SUPPORT"
+	Value  = "1"
+	Help  = "The switch to include/exclude AMI Native PCI Root Bridge Implementation.\Set this switch to 'OFF' when using 3rd party PCI Root Bridgr Driver."
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+
+### this token copy form Aptio 4 kernel.
+TOKEN
+	Name  = "MM_LEGACY_RESERVE_MEM"
+	Value  = "0x1000000"
+	Help  = "DXE memory manager will try to keep memory in the range 0 - MM_LEGACY_RESERVE_MEM unallocated. \The memory in the range may still get allocated if the addresses in the range are specifically requested by \the AllocatePages calls, or if there is not enough free memory outside of the region to satisfy the request.\"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "NBTP"
+    Value  = "0xFED40000"
+    Help  = "Same as SPI_BASE_ADDRESS for ASL use "
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "NBTS"
+    Value  = "0x5000"
+    Help  = "Same as SPI_BASE_ADDRESS for ASL use "
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "NBTP"
+    Value  = "$(PORT_TPM_IOMEMBASE)"
+    Help  = "Same as SPI_BASE_ADDRESS for ASL use "
+    TokenType = Integer
+    TargetASL = Yes
+    Token = "TCG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "NBTS"
+    Value  = "$(TPM_IOMEMSZ)"
+    Help  = "Same as SPI_BASE_ADDRESS for ASL use "
+    TokenType = Integer
+    TargetASL = Yes
+    Token = "TCG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "NBTP"
+    Value  = "$(PORT_TPM_IOMEMBASE)"
+    Help  = "Same as SPI_BASE_ADDRESS for ASL use "
+    TokenType = Integer
+    TargetASL = Yes
+    Token = "TCG2Support" "=" "1"
+End
+
+TOKEN
+    Name  = "NBTS"
+    Value  = "$(TPM_IOMEMSZ)"
+    Help  = "Same as SPI_BASE_ADDRESS for ASL use "
+    TokenType = Integer
+    TargetASL = Yes
+    Token = "TCG2Support" "=" "1"
+End
+
+TOKEN
+    Name  = "FORCE_RB_MTRR_UC"
+    Value  = "1"
+    Help  = "Force prefetchable RB resource memory type to be uncacheable."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+PATH
+	Name  = "NB_DIR"
+End
+
+PATH
+	Name  = "NB_LIBRARY_DIR"
+	Path  = "AmiChipsetModulePkg/Library"
+End
+
+PATH
+	Name  = "NB_INCLUDE_DIR"
+	Path  = "AmiChipsetModulePkg/Include"
+End
+
+PATH
+	Name  = "NB_ASL_DIR"
+	Path  = "AmiChipsetModulePkg/ASL"
+End
+
+MODULE
+	Help  = "Includes Nb.mak to Project"
+	File  = "Nb.mak"
+End
+
+ELINK
+	Name  = "$(NB_LIBRARY_DIR)/AmiCspLib/NbGeneric.c"
+	Parent  = "AMI_CSP_PEI_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(NB_LIBRARY_DIR)/AmiCspLib/NbGeneric.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(NB_LIBRARY_DIR)/AmiCspLib/NbPciCsp.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiS3SaveStateProtocolGuid"
+    Parent  = "AMI_CSP_DXE_PROTOCOLS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmdApcbDxeServiceProtocolGuid"
+    Parent  = "AMI_CSP_DXE_PROTOCOLS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "MdePkg/MdePkg.dec"
+    Parent  = "AMI_CSP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AgesaPkg/AgesaPkg.dec"
+    Parent  = "AMI_CSP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AgesaModulePkg/AgesaCommonModulePkg.dec"
+    Parent  = "AMI_CSP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiAgesaWrapperPkg/AmiAgesaWrapperPkg.dec"
+    Parent  = "AMI_CSP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(NB_LIBRARY_DIR)/AmiCspLib/NbDxeMemFeat.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+#ELINK for PeiRamBoot
+# PeiRamBootList E-Link head in PEI Ram Boot has removed. (CheckPeiFvCopyToRam)
+#ELINK
+#	Name  = "CheckPeiFvCopyToRam,"
+#	Parent  = "PeiRamBootList"
+#	Token = "PeiRamBootSupport" "=" "1"
+#	InvokeOrder = AfterParent
+#End
+
+#ELINK for MemDetect.inf
+ELINK
+    Name  = "MEM_DETECT_DEC"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "MEM_DETECT_DEPENDENCY"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AgesaModulePkg/Fch/Promontory/FchPromontory.dec"
+    Parent  = "MEM_DETECT_DEC"
+    InvokeOrder = AfterParent
+    Token = "PROMONTORY_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "gEfiPeiPromotoryGpioPpiGuid AND"
+    Parent  = "MEM_DETECT_DEPENDENCY"
+    InvokeOrder = AfterParent
+    Token = "PROMONTORY_SUPPORT" "=" "1"
+End
+
+#ELINK for miscellaneous
+ELINK
+	Name  = "$(NB_INCLUDE_DIR)"
+	Parent  = "PLATFORM_DSC_INCLUDE_PATHS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(NB_LIBRARY_DIR)"
+	Parent  = "PLATFORM_DSC_INCLUDE_PATHS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "NbConfigurationList"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress"
+    Parent  = "AMI_CSP_PCD"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiModulePkgTokenSpaceGuid.AmiPcdPcieBaseAddressBuffer"
+    Parent  = "AMI_CSP_PCD"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiModulePkgTokenSpaceGuid.AmiPcdMaxSegmentSupported"
+    Parent  = "AMI_CSP_PCD"
+    InvokeOrder = AfterParent
+End
+
+#Elink for AmiShadowLib
+ELINK
+    Name  = "AmiShadowLib"
+    Parent  = "AMI_CSP_LIBRARIES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AMI_CSP_LIB_INCLUDE_FILES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "$(NB_INCLUDE_DIR)/Library/AmiShadowLib.h"
+    Parent  = "AMI_CSP_LIB_INCLUDE_FILES"
+    InvokeOrder = AfterParent
+End
+
+OUTPUTREGISTER
+	Name  = "NbElinkList"
+	Path  = "Build/"
+	File  = "NbElinks.h"
+	Template  = "Elink/NbElinks.txt"
+End
+
+INFComponent
+	Name  = "NbPei"
+	File  = "NB/NbInit/NbPei.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "NbDxe"
+	File  = "NB/NbInit/NbDxe.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "MemDetect"
+	File  = "NB/NbInit/MemDetect.inf"
+	Package  = "AmiChipsetModulePkg"
+	ModuleTypes  = "PEIM"
+	PreProcess = Yes
+End
+
+INFComponent
+	Name  = "NbGetSetupData"
+	File  = "NbGetSetupData/NbGetSetupData.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "NB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "NbPeiGetSetupData"
+	File  = "NbGetSetupData/NbPeiGetSetupData.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "NB_LIBRARY_DIR"
+End
+
+INFComponent
+	Name  = "NbGeneric"
+	File  = "AmiCspLib/NbGeneric.inf"
+	Package  = "AmiChipsetModulePkg"
+	Path  = "NB_LIBRARY_DIR"
+End
+
+INFComponent
+    Name  = "AmiShadowLib"
+    File  = "AmiShadowLib/AmiShadowLib.inf"
+    Package  = "AmiChipsetModulePkg"
+    Path  = "NB_LIBRARY_DIR"
+End
+
+LibraryMapping
+	Class  = "NbGetSetupData"
+	Instance  = "AmiChipsetModulePkg.NbGetSetupData"
+	ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "NbGetSetupData"
+	Instance  = "AmiChipsetModulePkg.NbPeiGetSetupData"
+	ModuleTypes  = "PEIM"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiChipsetModulePkg.NbGeneric"
+	Override  = "AmiModulePkg.PeiRamBootPei"
+End
+
+LibraryMapping
+    Class  = "AmiShadowLib"
+    Instance  = "AmiChipsetModulePkg.AmiShadowLib"
+End
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+

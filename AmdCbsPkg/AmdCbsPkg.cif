@@ -1,0 +1,37 @@
+<component>
+	name = "AmdCbsPkg - R2000"
+	category = eModule
+	LocalRoot = "AmdCbsPkg\"
+	RefName = "AmdCbsPkg"
+[INF]
+"CbsBaseDxe\CbsBaseDxeZP.inf"
+"CbsBaseDxe\CbsBaseDxeRV.inf"
+"CbsBaseDxe\CbsBaseDxeSSP.inf"
+"CbsBaseDxe\CbsBaseDxe.inf"
+"CbsBasePei\CbsBasePeiZP.inf"
+"CbsBasePei\CbsBasePeiRV.inf"
+"CbsBasePei\CbsBasePeiSSP.inf"
+"CbsBasePei\CbsBasePei.inf"
+"CbsSetupDxe\CbsSetupDxeZP.inf"
+"CbsSetupDxe\CbsSetupDxeRV.inf"
+"CbsSetupDxe\CbsSetupDxeSSP.inf"
+"CbsSetupDxe\CbsSetupDxe.inf"
+"BctBaseSmm\BctBaseSmmZP.inf"
+"BctBaseSmm\BctBaseSmmRV.inf"
+"BctBaseSmm\BctBaseSmmSSP.inf"
+"BctBaseSmm\BctBaseSmm.inf"
+[files]
+"AmdCbsPkg.dec"	
+"AmdCbsPkg.sdl"	
+"AmdCbsPkg.mak"	
+"Tools\CBSgenerate.exe"	
+"Tools\CBSgenerate.pl"
+"Tools\CommonGen.pm"	
+"Tools\IdsIdGen.exe"	
+"Tools\IdsIdGen.pl"
+"Tools\IdsIdGen.bat"
+"Tools\IdsIdGenExe.bat"	
+[parts]
+"AmdCbsPkg.Include"
+"AmdCbsPkg.Library"
+<endComponent>

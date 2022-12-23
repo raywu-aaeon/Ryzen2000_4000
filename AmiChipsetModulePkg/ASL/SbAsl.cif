@@ -1,0 +1,28 @@
+<component>
+	name = "SB ASL"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\ASL\"
+	RefName = "AmiChipsetModulePkg.SbAsl"
+[files]
+"Speaker.asl"	
+"Timer.asl"	
+"Dma.asl"	
+"Pic.asl"	
+"Rtc0.asl"	
+"IrqLink.asl"	
+"Ide.asl"	
+"Sb.asl"	
+"SB_RRIOrDMA.asl"	
+"SBFRHD.asl"	
+"AmdSb.asl"	
+"azalia.asl"	
+"SbImc.asl"	
+"Hptimer.asl"	
+"Pci0_ini.asl"
+"Sata.asl"
+"Usb.asl"	
+"AmdImc.asl"	
+"AmdCir.asl"	
+"SDIO.asl"
+"AmdASLLIB.asl"
+<endComponent>

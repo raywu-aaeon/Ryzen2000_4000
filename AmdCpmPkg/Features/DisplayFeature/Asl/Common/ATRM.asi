@@ -1,0 +1,140 @@
+/*****************************************************************************
+ *
+ * Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+ *
+ * AMD is granting you permission to use this software and documentation (if
+ * any) (collectively, the "Materials") pursuant to the terms and conditions of
+ * the Software License Agreement included with the Materials.  If you do not
+ * have a copy of the Software License Agreement, contact your AMD
+ * representative for a copy.
+ * 
+ * You agree that you will not reverse engineer or decompile the Materials, in
+ * whole or in part, except as allowed by applicable law.
+ * 
+ * WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+ * ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+ * INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+ * MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+ * CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+ * OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+ * exclusion of implied warranties, so the above exclusion may not apply to
+ * You.
+ * 
+ * LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+ * NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+ * INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+ * THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+ * liability to You for all damages, losses, and causes of action (whether in
+ * contract, tort (including negligence) or otherwise) exceed the amount of
+ * $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+ * licensors, and any of their directors, officers, employees, affiliates or
+ * agents from and against any and all loss, damage, liability and other
+ * expenses (including reasonable attorneys' fees), resulting from Your use of
+ * the Materials or violation of the terms and conditions of this Agreement.
+ * 
+ * U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+ * "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+ * subject to the restrictions as set forth in FAR 52.227-14 and
+ * DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+ * Government constitutes acknowledgment of AMD's proprietary rights in them.
+ * 
+ * EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+ * stated in the Software License Agreement.
+ ******************************************************************************
+ */
+
+//***************************************************************************
+//
+//  ATRM.asi
+//
+//***************************************************************************
+
+    // This reserved memory is used for ATRM method access to the special pre-posted
+    // pcie discrete Gfx device video BIOS image for PowerXpress
+    // OperationRegion REVD is modified by the BIOS POST code.
+    // BIOS POST code updates the OFFSET and length of this operationRegion
+    // with the Video ROM image address and length respectively.
+    //
+
+    // Due to some problem found in Vista OS with accessing the Methods under VGA
+    // Device object for Secondary Graphics, AMD PowerXpress team decided
+    // to implement our own special private method (which Vista allows under VGA Device)
+    // that emulates the OS defined _ROM method. It is private Method(ATRM, ...)
+    // due to the OS version would expect the Video Rom image for THIS device
+    // rather than (in this case) the secondary (Discrete PCIE) device.
+    // This control method returns the special pre-posted Discrete PCIE Gfx
+    // BIOS ROM image to the OS Video Driver.
+    // Note that XTRM will get renamed to ATRM only when cmosGraphicsFeatures ==
+    // PowerXpress or HCF-iGPU is enabled. When either of those features is not enabled,
+    // then this method is default named to unrecognized XTRM.
+
+    Method (XTRM, 2, Serialized) {
+        If (LEqual (CpmAtrmRomSize, 0)) {
+            Return (Buffer(1) {0})
+        }
+        Store (CpmAtrmRomSize, Local4)
+        If (LGreater (Local4, 0x10000)) {
+            Store (0x10000, Local4)
+        }
+        Store (Arg0, Local5)
+        Store (Arg1, Local6)
+        If (LGreater (Local6, 0x1000)) {
+            Store (0x1000, Local6)
+        }
+        If (LGreater (Local5, Local4)) {
+            Return (Buffer(Local6) {0})
+        }
+        If (LGreater (Add (And (Local5, 0xFFF), Local6), 0x1000)) {
+            Subtract (0x1000, And (Local5, 0xFFF), Local6)
+        }
+
+        Name (CpmVbiosBuffer, Buffer(0x1000) {0})
+        If (LEqual (And (Local5, 0xF000), 0)) {
+            Store (CpmAtrmRomImage, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0x1000)) {
+            Store (CpmAtrmRomImage1, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0x2000)) {
+            Store (CpmAtrmRomImage2, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0x3000)) {
+            Store (CpmAtrmRomImage3, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0x4000)) {
+            Store (CpmAtrmRomImage4, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0x5000)) {
+            Store (CpmAtrmRomImage5, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0x6000)) {
+            Store (CpmAtrmRomImage6, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0x7000)) {
+            Store (CpmAtrmRomImage7, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0x8000)) {
+            Store (CpmAtrmRomImage8, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0x9000)) {
+            Store (CpmAtrmRomImage9, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0xA000)) {
+            Store (CpmAtrmRomImageA, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0xB000)) {
+            Store (CpmAtrmRomImageB, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0xC000)) {
+            Store (CpmAtrmRomImageC, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0xD000)) {
+            Store (CpmAtrmRomImageD, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0xE000)) {
+            Store (CpmAtrmRomImageE, CpmVbiosBuffer)
+        } ElseIf (LEqual (And (Local5, 0xF000), 0xF000)) {
+            Store (CpmAtrmRomImageF, CpmVbiosBuffer)
+        }
+
+        If (LLessEqual (Add (Local5, Local6), Local4)) {
+            If (LEqual (Local6, 0x1000)) {
+                Return (CpmVbiosBuffer)
+            }
+        } Else {
+            // Total bytes to return in this case = SROM - Local5.
+            Subtract (Local4, Local5, Local6)
+        }
+        Name (CpmVbiosBuffer1, Buffer(Local6) {0})
+        CreateField (CpmVbiosBuffer, Multiply (And (Local5, 0xFFF), 8), Multiply (Local6, 8), CpmVbiosBuffer2)
+        Store (CpmVbiosBuffer2, CpmVbiosBuffer1)
+        Return (CpmVbiosBuffer1)
+    } // END of ATI Special ROM method implementation (ATRM)

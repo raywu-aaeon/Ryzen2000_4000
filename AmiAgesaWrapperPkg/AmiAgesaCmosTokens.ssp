@@ -1,0 +1,63 @@
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************
+
+
+NvramField (AGESA_AP_BYTE0)
+	OptionBits  = 8
+    Default     = 00h
+    Location    = 080h, 0FFh
+	Checksum    = NO
+EndNvramField
+
+NvramField (AGESA_AP_BYTE1)
+	OptionBits  = 8
+    Default     = 00h
+    Location    = 081h, 0FFh
+	Checksum    = NO
+EndNvramField
+
+NvramField (AGESA_AP_BYTE2)
+	OptionBits  = 8
+    Default     = 00h
+    Location    = 082h, 0FFh
+	Checksum    = NO
+EndNvramField
+
+NvramField (AGESA_AP_BYTE3)
+	OptionBits  = 8
+    Default     = 00h
+    Location    = 083h, 0FFh
+	Checksum    = NO
+EndNvramField
+
+NvramField (AGESA_SPECIFIED)
+	OptionBits  = 8
+    Default     = 00h
+    Location    = MKF_CMOS_AGESA_SPECIFIED, 0FFh
+	Checksum    = NO
+EndNvramField
+
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************

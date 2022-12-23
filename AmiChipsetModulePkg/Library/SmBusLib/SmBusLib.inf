@@ -1,0 +1,32 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiSmBusLib
+  FILE_GUID                      = 40F8DEBC-FA0D-4229-ABD4-E2B4FB9149FD
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiSmBusLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+#
+
+[Sources]
+  SmBusCommon.c
+  SmBusPorting.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+[LibraryClasses]
+  IoLib
+  AmiCspLib
+  AmiChipsetIoLib
+
+

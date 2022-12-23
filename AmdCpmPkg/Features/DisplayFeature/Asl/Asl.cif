@@ -1,0 +1,23 @@
+<component>
+	name = "Asl"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\DisplayFeature\Asl\"
+	RefName = "AmdCpmPkg.Features.DisplayFeature.Asl"
+[INF]
+"DisplayConnectEvent\AmdCpm3DisplayFeatureDisplayConnectEventAsl.inf"
+"DisplayFeatureD\AmdCpm3DisplayFeatureDAsl.inf"
+"DisplayFeatureD2\AmdCpm3DisplayFeatureD2Asl.inf"
+"DisplayFeatureI\AmdCpm3DisplayFeatureIAsl.inf"
+"DisplayFeatureI2\AmdCpm3DisplayFeatureI2Asl.inf"
+"DisplayFeatureNoI\AmdCpm3DisplayFeatureNoIAsl.inf"
+"MxmOverT\AmdCpm3DisplayFeatureMxmOverTAsl.inf"
+"DGpuD3Cold\AmdCpm3DGpuD3ColdAsl.inf"
+"DisplayAtpxDgpu\AmdCpm3DisplayAtpxDgpuAsl.inf"
+"DisplayAtpxDgpu2\AmdCpm3DisplayAtpxDgpu2Asl.inf"
+"DisplayAtpxIgpu\AmdCpm3DisplayAtpxIgpuAsl.inf"
+"DisplayAtpxIgpu2\AmdCpm3DisplayAtpxIgpu2Asl.inf"
+[files]
+"Asl.sdl"	
+[parts]
+"AmdCpmPkg.Features.DisplayFeature.Asl.Common"
+<endComponent>

@@ -1,0 +1,36 @@
+<component>
+	name = "Apcb"
+	category = ModulePart
+	LocalRoot = "AgesaPkg\Addendum\Apcb\"
+	RefName = "AgesaPkg.Addendum.Apcb"
+[files]
+"Inc\Common\ApcbV2.h"
+"Inc\Common\MiscMemDefines.h"
+"Inc\Common\MyIntrinsics.h"
+"Inc\Common\MyPorting.h"
+"Inc\RV\APCB.h"	
+"Inc\RV\APOB.h"	
+"Inc\RV\APPB.h"	
+"Inc\SSP\APCB.h"
+"Inc\SSP\APOB.h"
+"Inc\SSP\APPB.h"
+"Inc\ZP\APCB.h"	
+"Inc\ZP\APOB.h"	
+"Inc\ZP\APPB.h"	
+"Inc\ZPMcm\APCB.h"
+"Inc\ZPMcm\APOB.h"
+"Inc\ZPMcm\APPB.h"
+"Inc\Apcb.h"	
+"Inc\ApcbV2.h"
+"Inc\APOBCMN.h"	
+"Inc\MiscMemDefines.h"	
+"Inc\MyIntrinsics.h"	
+"Inc\MyPorting.h"	
+"ApcbTool.sdl"	
+[parts]
+
+"AgesaPkg.Addendum.Apcb.RavenFp5Dramdown"
+"AgesaPkg.Addendum.Apcb.RavenFp5Sodimm"
+"AgesaPkg.Addendum.Apcb.RavenFp5Udimm"
+
+<endComponent>

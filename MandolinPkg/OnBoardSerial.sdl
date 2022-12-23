@@ -1,0 +1,208 @@
+TOKEN
+	Name  = "OnBoardSerial_SUPPORT"
+	Value  = "1"
+	Help  = "For use of SoC UART."
+	TokenType = Boolean
+	Master = Yes
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPortEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "TRUE"	#this only goes to ext. sio card 
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "AmiSerialUart0_SUPPORT"
+    Value  = "1"
+    Help  = "Serial Protocol"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AmiSerialUart1_SUPPORT"
+    Value  = "1"
+    Help  = "Serial Protocol"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FCH_UART_DEBUG_SELECT"
+    Value  = "1"
+    Help  = "0: Disable,1:UART0,2:UART1. Select Fch Uart port as debug port."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FCH_UART_BASE_ADDRESS"
+#ZP address changed from Carrizo location
+#    Value  = "0xFEDC6000"
+    Value  = "0xFEDC9000"
+    Help  = "UART0 BASE ADDRESS"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+LibraryMapping
+    Class  = "SerialPortLib"
+    Instance  = "AmiChipsetModulePkg.SbSerialPortLib"
+    Help  = "Use FCH UART to trace message."
+    Token = "FCH_UART_DEBUG_SELECT" "!=" "0"
+End
+
+RSVCHIPSET
+	Name  = "FCH UART0 Configuration Space"
+	BASEADDR  = "0xFEDC9000"
+	LENGTH  = "0x1000"
+	TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+    ATTRIBUTES  = "0x8000000000000001"
+End
+
+TOKEN
+    Name  = "SERIALIO_PCI_SERIAL_SUPPORT"
+    Value  = "1"
+    Help  = "0-Serial IO doesnt support the PCI serial Devices.1- Serial Io Driver installs the Serial IO for PCI serial Device."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PCI_SERIAL_MMIO_WIDTH"
+    Value  = "4"
+    Help  = "Com device width size. 1- Byte, 2- Word, 4-Dword. Default Set to Dword"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1...4h"
+End
+
+TOKEN
+    Name  = "PCI_UART_INPUT_CLOCK"
+    Value  = "47923200"
+    Help  = "This is PCI UART input clock. The default value is (24000000/13) = 1843200 MHz"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PCI0_DEFAULT_CONSOLE_REDIRECTION_ENABLE"
+    Value  = "1"
+    Help  = ""
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PCI1_DEFAULT_CONSOLE_REDIRECTION_ENABLE"
+    Value  = "1"
+    Help  = "Specifies the Setup default value for PCI port #1 redirection."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+#This is for legacy serial redirection. to be added later once re-enable CSM.
+TOKEN
+    Name  = "COM_MMIO_WIDTH"
+    Value  = "4"
+    Help  = "Com device width size. 1- Byte, 2- Word, 4-Dword. Default Set to Dword"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1...4h"
+End
+
+TOKEN
+    Name  = "TOTAL_PCI_SERIAL_PORTS"
+    Value  = "2"
+    Help  = "**PORTING NEEDED** Total number of PCI serial ports present."
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "0-4"
+End
+
+TOKEN
+    Name  = "TOTAL_SIO_SERIAL_PORTS"
+    Value  = "0"
+    Help  = "**PORTING NEEDED**Total number of Super IO serial ports present."
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "0-10"
+End
+
+#[END] Enable ZP SoC UART0
+
+#[START] Enable ZP SoC UART1 
+
+TOKEN
+    Name  = "FCH_UART1_BASE_ADDRESS"
+    Value  = "0xFEDCA000"
+    Help  = "UART1 BASE ADDRESS"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+RSVCHIPSET
+	Name  = "FCH UART1 Configuration Space"
+	BASEADDR  = "0xFEDCA000"
+	LENGTH  = "0x1000"
+	TYPE  = "EfiGcdMemoryTypeMemoryMappedIo"
+    ATTRIBUTES  = "0x8000000000000001"
+End
+
+TOKEN
+	Name  = "ISA_IRQ_MASK"
+	Value  = "0xE31D"
+	Help  = "This is an IRQ mask which may be used by ISA devices\ If BIT == 0 IRQ Available BIT == 1 IRQ Used.\DEFAULT VALUE == 0xE305."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0...0FFFFh"
+End
+
+#enable UART0 and UART1
+TOKEN
+	Name  = "FchRTDeviceEnableMapToken"
+	Value  = "0x1800"
+	Help  = "1=Enabled on platform 0=disabled on platform\ UART0=bit11, UART1=bit12, UART2=bit16, UART3=bit26."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0...0FFFFh"
+End
+
+#set Uart0=0x3F8
+TOKEN
+	Name  = "FchUart0LegacyEnableToken"
+	Value  = "0"
+	Help  = "0=Disabled 1=0x2E8 (COM4), 2=0x2F8 (COM2), 3=0x3E8 (COM3), 4=0x3F8 (COM1)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0...0FFFFh"
+End
+
+#set Uart1=0x2F8
+TOKEN
+	Name  = "FchUart1LegacyEnableToken"
+	Value  = "0"
+	Help  = "0=Disabled 1=0x2E8 (COM4), 2=0x2F8 (COM2), 3=0x3E8 (COM3), 4=0x3F8 (COM1)"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0...0FFFFh"
+End
+
+TOKEN
+    Name  = "CIM_LEGACY_FREE"
+    Value  = "1"
+    TokenType = Boolean
+    TargetH = Yes
+End
+#[END] Enable ZP SoC UART1

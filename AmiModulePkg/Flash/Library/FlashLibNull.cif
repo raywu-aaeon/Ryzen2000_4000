@@ -1,0 +1,10 @@
+<component>
+    name = "Flash Null Libraries"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg/Flash/Library/"
+    RefName = "FLASH_NULL_LIBS"
+[INF]
+"AmiCspFlashLibNull.inf"
+[files]
+"FlashLibNull.sdl"
+<endComponent>

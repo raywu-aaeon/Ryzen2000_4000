@@ -1,0 +1,44 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FlashDriverSmm
+  FILE_GUID                      = 0C375A90-4C4C-4428-8EA0-531BE8959BF7
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = FlashDriverSmmInit
+
+[Sources]
+  FlashSmm.c  
+  Flash.c
+  FlashCommon.h
+
+[Packages]
+  MdePkg/MdePkg.dec   
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  AmiFlashLib
+  AmiRomLayoutLib
+  UefiBootServicesTableLib
+  SmmServicesTableLib
+  DebugLib
+  UefiDriverEntryPoint
+  AmiCriticalSectionLib
+  BaseMemoryLib
+  PcdLib
+	
+[Protocols]
+  gAmiSmmFlashProtocolGuid       ## PRODUCES
+
+[Pcd]
+  gAmiModulePkgTokenSpaceGuid.AmiPcdFlashPropertyMask
+
+[Depex]
+  TRUE

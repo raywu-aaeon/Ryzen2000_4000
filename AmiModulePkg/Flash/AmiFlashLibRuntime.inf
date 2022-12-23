@@ -1,0 +1,34 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = AmiFlashLibRuntime
+    FILE_GUID       = DA7CAF76-CB17-4D80-AE21-2BD3AE421C76
+    MODULE_TYPE     = DXE_DRIVER
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = AmiFlashLib | DXE_RUNTIME_DRIVER
+    CONSTRUCTOR     = RuntimeAmiFlashLibConstructor
+    DESTRUCTOR      = RuntimeAmiFlashLibDestructor
+
+[Sources]
+    AmiFlashLibCommon.c
+    AmiFlashLibCommon.h
+    AmiFlashLibRuntime.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    BaseLib
+    BaseMemoryLib
+    UefiBootServicesTableLib
+    UefiRuntimeServicesTableLib
+    AmiCspFlashLib
+    SpiFlashLib
+    $(AmiFlashLibOemLibClasses)

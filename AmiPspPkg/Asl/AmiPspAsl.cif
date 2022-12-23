@@ -1,0 +1,8 @@
+<component>
+	name = "PSP ASL"
+	category = ModulePart
+	LocalRoot = "AmiPspPkg\Asl\"
+	RefName = "AmiPspPkg.Asl"
+[files]
+"AmiPsp.asl"
+<endComponent>

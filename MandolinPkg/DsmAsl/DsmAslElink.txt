@@ -1,0 +1,40 @@
+
+
+DefinitionBlock (
+    "CrbDsmAsl.aml",                // Output file
+    "SSDT",                         // Signature
+    0x02,                           // DSDT Revision
+    "AMICRB",                       // OEM ID
+    "CRBDSM",                       // OEM Table ID
+    0x1                             // OEM Revision
+    )
+{
+
+#define PCI_SLOT_DSM(MacroParameter1, MacroParameter2, MacroParameter3) External (MacroParameter3, DeviceObj)
+
+@Elink(CrbPciSlotDsmAsl, "@Child", "%n", "%n")
+
+#undef PCI_SLOT_DSM
+#define PCI_SLOT_DSM(MacroParameter1, MacroParameter2, MacroParameter3) \
+    Scope(MacroParameter3) { \
+        Method ( _DSM, 4, NotSerialized, 0, UnknownObj, {BuffObj, IntObj, IntObj, PkgObj}) \
+        { \
+            If (LEqual(Arg0, ToUUID ("E5C937D0-3553-4d7a-9117-EA4D19C3434D"))) { \
+                If (Land( Lequal(Arg1, 2 ), Lequal(Arg2,0 ))) { \
+                    return (Buffer() {0x80}) \
+                } \
+                If (Land( Lequal(Arg1, 2), Lequal(Arg2,7 ))) { \
+                    Return ( Package(2) { \
+                        MacroParameter1, \
+                        Unicode(#MacroParameter2) \
+                        } \
+                    ) \
+                } \
+            } \
+            return(Buffer(){0}) \
+        } \
+    } \
+
+@Elink(CrbPciSlotDsmAsl, "@Child", "%n", "%n")
+
+}

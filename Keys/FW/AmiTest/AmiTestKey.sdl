@@ -1,0 +1,74 @@
+TOKEN
+	Name  = "AmiTestKey_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "FWpub"
+	Value  = "$(AmiTestKey_DIR)$(PATH_SLASH)pubKey"
+	Help  = "n-Modulus of RSA2048 Key. Included into Flash RTU (FV_BB), used for new flash image verification during flash update"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "FWCAPSULE_CERT_FORMAT" "=" "0"
+End
+
+TOKEN
+	Name  = "FWpriv"
+	Value  = "$(AmiTestKey_DIR)$(PATH_SLASH)priKey"
+	Help  = "full RSA2048 Key used for signing FwCapsule package"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "FWCAPSULE_CERT_FORMAT" "=" "0"
+End
+
+TOKEN
+	Name  = "FWrootKey"
+	Value  = "$(AmiTestKey_DIR)$(PATH_SLASH)priKey"
+	Help  = "full RSA2048 Key used for signing FwCapsule package"
+	TokenType = Expression
+	TargetMAK = Yes
+    Token = "FWCAPSULE_CERT_FORMAT" "=" "0"
+End
+
+TOKEN
+	Name  = "FWpub"
+	Value  = "$(AmiTestKey_DIR)$(PATH_SLASH)FW_pubKey.cer"
+	Help  = "X.509 Certificate with Public key"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "FWCAPSULE_CERT_FORMAT" "=" "1"
+End
+
+TOKEN
+	Name  = "FWpriv"
+	Value  = "$(AmiTestKey_DIR)$(PATH_SLASH)FW_priKey.pfx"
+	Help  = "File name(.pfx) Pkcs#12 key container with the private key used for signing FwCapsule package"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "FWCAPSULE_CERT_FORMAT" "=" "1"
+End
+
+TOKEN
+    Name  = "FWrootKey"
+    Value  = "$(AmiTestKey_DIR)$(PATH_SLASH)FW_pubKey.cer"
+    Help  = "X.509 Certificate with Public key"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FWCAPSULE_CERT_FORMAT" "=" "1"
+End
+
+TOKEN
+	Name  = "FW_PFX_Password"
+	Value  = "abcd"
+	Help  = "Specifies the password to use when opening a PFX - Private Key container file."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+PATH
+	Name  = "AmiTestKey_DIR"
+	Help  = "Path to default Platform FW Signing Key.\User may change this path to point to another location of FW Key."
+End
+

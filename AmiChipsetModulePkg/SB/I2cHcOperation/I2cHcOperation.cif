@@ -1,0 +1,10 @@
+<component>
+	name = "I2cHcOperation"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\SB\I2cHcOperation\"
+	RefName = "AmiChipsetModulePkg.I2cHcOperation"
+[INF]
+"I2cHcOperation.inf"
+[files]
+"I2cHcOperation.sdl"
+<endComponent>

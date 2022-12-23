@@ -1,0 +1,17 @@
+<component>
+	name = "Features"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Features\"
+	RefName = "AmdCpmPkg.Features"
+[parts]
+"AmdCpmPkg.Features.AcpPowerGating"
+"AmdCpmPkg.Features.AdaptiveS4"
+"AmdCpmPkg.Features.AOD"
+"AmdCpmPkg.Features.DisplayFeature"
+"AmdCpmPkg.Features.EcInit"
+"AmdCpmPkg.Features.GpioInit"
+"AmdCpmPkg.Features.PcieInit"
+"AmdCpmPkg.Features.ZeroPowerOdd"
+"AmdCpmPkg.Features.Ucsi"
+"AmdCpmPkg.Features.SensorFusion"
+<endComponent>

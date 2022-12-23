@@ -1,0 +1,32 @@
+<component>
+	name = "ResetVector"
+	category = ModulePart
+	LocalRoot = "UefiCpuPkg\ResetVector\"
+	RefName = "UefiCpuPkg.ResetVector"
+[INF]
+"FixupVtf\Vtf.inf"
+"Vtf0\Vtf0.inf"
+"Vtf0\Bin\ResetVector.inf"
+[files]
+"Vtf0\Build.py"
+"Vtf0\CommonMacros.inc"
+"Vtf0\DebugDisabled.asm"
+"Vtf0\Main.asm"
+"Vtf0\Port80Debug.asm"
+"Vtf0\PostCodes.inc"
+"Vtf0\ReadMe.txt"
+"Vtf0\SerialDebug.asm"
+"Vtf0\Bin\ResetVector.ia32.port80.raw"
+"Vtf0\Bin\ResetVector.ia32.serial.raw"
+"Vtf0\Bin\ResetVector.x64.port80.raw"
+"Vtf0\Bin\ResetVector.x64.serial.raw"
+"Vtf0\Ia16\Init16.asm"
+"Vtf0\Ia16\Real16ToFlat32.asm"
+"Vtf0\Ia16\ResetVectorVtf0.asm"
+"Vtf0\Ia32\Flat32ToFlat64.asm"
+"Vtf0\Ia32\PageTables64.asm"
+"Vtf0\Ia32\SearchForBfvBase.asm"
+"Vtf0\Ia32\SearchForSecEntry.asm"
+"Vtf0\Tools\FixupForRawSection.py"
+"Vtf0\X64\PageTables.asm"
+<endComponent>

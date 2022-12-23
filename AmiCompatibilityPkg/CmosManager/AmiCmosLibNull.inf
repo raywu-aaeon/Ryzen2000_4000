@@ -1,0 +1,27 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  BASE_NAME               = AmiCmosLibNull
+  FILE_GUID               = 4DBDDCE0-3D6F-48AF-B4AC-EE29CA1BC575
+  MODULE_TYPE             = BASE
+  VERSION_STRING          = 1.0
+  LIBRARY_CLASS           = AmiCmosLib
+
+[Sources]
+  AmiCmosLibNull.c
+  AmiCmosLib.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  
+[LibraryClasses]
+  DebugLib

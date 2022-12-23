@@ -1,0 +1,13 @@
+<component>
+    name = "CrbPostTime"
+    category = ModulePart
+    LocalRoot = "MandolinPkg\CrbPostTime\"
+    RefName = "MandolinPkg.CrbPostTime"
+[files]
+"CrbPostTime.sdl"
+"FvCrbSkippableFfsFdfFileStatement.txt"
+[INF]
+"CrbSkippableFv.inf"
+[parts]
+"TcgCoreFvOverride"
+<endComponent>

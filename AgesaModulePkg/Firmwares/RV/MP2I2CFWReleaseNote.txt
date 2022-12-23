@@ -1,0 +1,554 @@
++-----------------------------------------+
+| MP2 I2C Firmware Release Notes - RAVEN1X
++-----------------------------------------+
+| Version 1.0.0
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           21/04/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|
+|
+|   * Limitation
+|               - MP2 firmware is expected to run at S4 state. But it's not yet clear
+|                 if XTAL clock is supplied at S4. Currently MP2 firmware doesn't run
+|                 post S4-resume. PLAT-18270.
++---------------------------------------------------------------------------------------------
+| Version 1.0.1
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           04/05/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|
+|   * Change:
+|              - Burst Write to DRAM fixed
+|              - MP2, SOC Deep sleep enabled
+|              - S3 Exit verified
+|
+|   * Limitation
+|               - MP2 firmware is expected to run at S4 state. But it's not yet clear
+|                 if XTAL clock is supplied at S4. Currently MP2 firmware doesn't run
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.1
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           04/05/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|
+|   * Change:
+|              - Burst from DRAM fixed
+|   * Limitation
+|               - MP2 firmware is expected to run at S4 state. But it's not yet clear
+|                 if XTAL clock is supplied at S4. Currently MP2 firmware doesn't run
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.2
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           14/05/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|
+|   * Change:
+|              - Set Speed according to device
+|              - Git Change-Id: Ie0f928f774a131fd91801b4cd67d2e3ad1a19ddc
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.3
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           15/05/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|
+|   * Change:
+|              - Add MP2 Diag Support
+|              - Fix MP2 Dram Cache value
+|              - Git Change-Id: Ie09ccb05d9aed02782ab361aeb103e17464355b9
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.4
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           29/05/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|
+|   * Change:
+|              - Use DRAM only to read/write for supporting Multiple devices
+|              - Fix MP2 Dram Cache value
+|              - Support Dynamic Connection Speed for different device
+|              - Git Change-Id: I06bf3657834358e1cd963c58fd8965c25a70d96d
+|              - Gerrit ID: 90431
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.5
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           30/05/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|
+|   * Change:
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Git Change-Id: Id01011b4655a618c797044756282e953f1a38a8a
+|              - Gerrit ID: 90509
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.6
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           02/06/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|
+|   * Change:
+|              - Changed HCNT and LCNT
+|              - Reduced MP2I2C Fw Sleep time to 100us
+|              - Read data passed in C2P Msg if requested by the Driver
+|              - Git Change-Id: I5810316617386d72aa37c9790791b6a6f0019dda
+|              - Gerrit ID: 91056
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.7
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           16/06/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|
+|   * Change:
+|              - Add Lock after each 32 byte read and write
+|              - Git Change-Id: I9d0645efb9528da084a55ef63f775b9b50ea2076
+|              - Gerrit ID: 93202
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.8
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           19/06/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|
+|   * Change:
+|              - Git Change-Id: I7d56911b15dc4ed8cb325b73601ec4c8ec4c59ff
+|              - Gerrit ID: 93237
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.9
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           05/07/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|
+|   * Change:
+|              - MP2 I2C PCIe Device Id changed to 0x15E6 from 0x15E4
+|              - Git Change-Id: I30af6824dd95ad0ee76d0db2c136b18b172e9afc
+|              - Gerrit ID: 94796
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.10
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           20/07/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|
+|   * Change:
+|              - [SWDEV-126795] Device id getting changed to 15E4 for KMDFI2C driver, after disabling and entering into sleep mode
+|              - Git Change-Id: I957a0ab1c03fe09a2fe38bdd39104da47fcfa7cd
+|              - Gerrit ID: 97650
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.11
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           07/08/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|
+|   * Change:
+|              - PLAT-23677: TouchPad Responsive is very poor on BIOS WMD7727
+|              - Enable MP2 I2C Deep Sleep with 25Mhz min clock 
+|              - Git Change-Id: I2527ff76c1b8d31366a6066b2364b0e33aa2e7a7
+|              - Gerrit ID: 100469
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.12
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           10/08/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep and S0i2 support
+|
+|   * Change:
+|              - PLAT-24034: Add Support for S0i2 and Deep Sleep
+|              - Git Change-Id: Ifd7edf6fabd4ddeac824de8a133a0edfe1803ea3 
+|              - Gerrit ID: 101556
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.13
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           01/09/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep and S0i2 support
+|
+|   * Change:
+|              - PLAT-24704: MP2 Firmware S0i2 behavior should be same S3
+|              - Git Change-Id: Iee94682bf2419d36241cb0d7bd06e7817d0b59a1
+|              - Gerrit ID: 104858
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.14
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           27/11/17
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep
+|              - MP2 S0i2 support (Available and Disabled)
+|
+|   * Change:
+|              - S0i2 Support Disabled in Release Branch
+|              - PLAT-26964 : Disable S0i2 in MP2 I2C Fw Release Branch
+|              - Git Change-Id: I7a7660d117f9c25839fa03fc55b6b844bba2749c
+|              - Gerrit ID: 118187
+|              - Commit Id: 5ba751119d96db355fc96fd5b0a6ef664087dc3e
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.16
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           09/3/18
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep
+|              - MP2 S0i2 support (Available and Disabled)
+|              - Enable 48Mhz S3 clock for LP MP2, Doesn't interact with SMU for LP
+|
+|   * Change:
+|              - PLAT-26964 : Disable S0i2 in MP2 I2C Fw Release Branch
+|              - Git Change-Id: I3834136fbfd9badddb18f3c13bcc93d6a83e6e5b
+|              - Gerrit ID: 121538
+|              - Commit Id: ac8c41a28b0deb4a6cc045b78d3bb1712badd314
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.17
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           20/3/18
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep
+|              - MP2 S0i2 support (Available and Disabled)
+|              - Enable 48Mhz S3 clock for LP MP2, Doesn't interact with SMU for LP
+|
+|   * Change:
+|              - PLAT-29986 : Touch pad lost after S3/S4 with MP2 firmware 1.0.16
+|              - Git Change-Id: Iaeb46c3046c762cca1cdc4291e898b900464f897
+|              - Gerrit ID: 139218
+|              - Commit Id: ef86305f4dab7ae87f0ec940bc67319169354cb6
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.18
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           22/3/18
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep
+|              - MP2 S0i2 support (Available and Disabled)
+|              - Enable 48Mhz S3 clock for LP MP2, Doesn't interact with SMU for LP
+|              - Read when read fifo size is more than 2 bytes
+|              - increase delay before sleep to 2 seconds and sleep
+|                after 10 seconds of boot or S3 Exit, S4 Resume.
+|
+|   * Change:
+|              - PLAT-30038 : MP2 Firmware read less data than requested
+|              - Git Change-Id: Icf6c5577701165dc9018d72957e79fc15059ca3b
+|              - Gerrit ID: 139230
+|              - Commit Id: 2e72a6f17bc5b9002de13fd94512d421a6d5526b
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.19
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           27/3/18
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep
+|              - MP2 S0i2 support (Available and Disabled)
+|              - Enable 48Mhz S3 clock for LP MP2, Doesn't interact with SMU for LP
+|              - Read when read fifo size is more than 2 bytes
+|              - increase delay before sleep to 2 seconds and sleep
+|                after 10 seconds of boot or S3 Exit, S4 Resume.
+|              - Re-init I2C bus if there is no I2C Enable Request from Driver
+|              - Add 100us delay before checking write response for NFC
+|
+|   * Change:
+|              - [PLAT-30114] NFC YB issue observed in some platform
+|              - Git Change-Id: I944ead853870bc22a33817f4d1705eda567b5011
+|              - Gerrit ID: 139750
+|              - Commit Id: 5f7c6d07552f8e6fd97fbb3c518e2ccf542dd56e
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.20
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           30/3/18
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep
+|              - MP2 S0i2 support (Available and Disabled)
+|              - Enable 48Mhz S3 clock for LP MP2, Doesn't interact with SMU for LP
+|              - Read when read fifo size is more than 2 bytes
+|              - increase delay before sleep to 2 seconds and sleep
+|                after 10 seconds of boot or S3 Exit, S4 Resume.
+|              - Re-init I2C bus if there is no I2C Enable Request from Driver
+|              - Add 100us delay before checking write response for NFC
+|              - Write fake data in DRAM for first 64 byte so to get it refreshed
+|
+|   * Change:
+|              - [PLAT-30265] Touch pad lost after S3/S4 with MP2 firmware 1.0.19
+|              - Git Change-Id: Ifd3067b5df38f662b7e8523c843d3ea7db3922d0
+|              - Gerrit ID: 140786
+|              - Commit Id: 9b94d2fe233aad4170978cf2a892572478804a28
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.22
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           12/4/18
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep
+|              - MP2 S0i2 support (Available and Disabled)
+|              - Enable 48Mhz S3 clock for LP MP2, Doesn't interact with SMU for LP
+|              - Read when read fifo size is more than 2 bytes
+|              - increase delay before sleep to 2 seconds and sleep
+|                after 10 seconds of boot or S3 Exit, S4 Resume.
+|              - Re-init I2C bus if there is no I2C Enable Request from Driver
+|              - Add 100us delay before checking write response for NFC
+|              - Set MP2 200Mhz reference clock always when firmware is loaded
+|              - Set minimum sleep duration to 100us down from 1ms
+|              - Diabled MP2 Low Power
+|              - Increase I2C Bus speed by 12 percent, 9 percent performance improvement
+|
+|   * Change:
+|              - [PLAT-30727] TP Slow on Cold boot and TP YB,NFC YB
+|              - Git Change-Id: I54343c0d6f7427115b8f437863ada859ad112a68
+|              - Gerrit ID: 143241
+|              - Commit Id: 96b367757f639d26fb87340f684f5e91dcfe5e29
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.23
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           02/5/18
+|   * Features enabled
+|              - Enable I2C Read/Write for devices connected with i2c0,1
+|              - Max Read supported 2k bytes
+|              - Max write supported 32 bytes
+|              - Add Support for NFC and Touch Pad on I2Cx
+|              - Add MP2 Diag Support
+|              - Read DRAM data in the main thread instead of Interrupt Thread
+|              - Add Lock after each 32 byte read and write
+|              - MP2 I2C PCIe Device Id 0x15E6.
+|              - MP2 Deep Sleep
+|              - MP2 S0i2 support (Available and Disabled)
+|              - Enable 48Mhz S3 clock for LP MP2, Doesn't interact with SMU for LP
+|              - Read when read fifo size is more than 2 bytes
+|              - increase delay before sleep to 2 seconds and sleep
+|                after 10 seconds of boot or S3 Exit, S4 Resume.
+|              - Re-init I2C bus if there is no I2C Enable Request from Driver
+|              - Add 100us delay before checking write response for NFC
+|              - Set MP2 200Mhz reference clock always when firmware is loaded
+|              - Set minimum sleep duration to 100us down from 1ms
+|              - Diabled MP2 Low Power
+|              - Increase I2C Bus speed by 12 percent, 9 percent performance improvement
+|
+|   * Change:
+|              - [PLAT-30716] [Raven1] New Header Field, FW Type for MP2 Fw Version 1.0.23
+|              - Changed FwType to 0x25 (No source code change)
+|              - Git Change-Id: I54343c0d6f7427115b8f437863ada859ad112a68
+|              - Gerrit ID: 143241
+|              - Commit Id: 96b367757f639d26fb87340f684f5e91dcfe5e29
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+| Version 1.0.24.3
++---------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           07/04/18
+|   * Features enabled
+|              - Added support for firmware version information.
+|
+|   * Change:
+|              - [PLAT-33588] Version information support in the mp2 firmware
+|              - Git Change-Id: Ib5ac616d68f650967e5cbde4142e3aae194649d3
+|              - Gerrit ID: 159700
+|              - Commit Id: 60b219138cc4b7969f10f569b7d6bed003c5d8ce
+|   * Limitation
+|
++---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+

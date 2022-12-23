@@ -1,0 +1,53 @@
+################################################################################
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+################################################################################
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiHstiPkg
+  PACKAGE_GUID                   = 1F1491FC-C365-492b-BFFA-113E23AF7F1A
+  PACKAGE_VERSION                = 0.1
+
+################################################################################
+#
+# Include Section - list of Include Paths that are provided by this package.
+#                   Comments are used for Keywords and Module Types.
+#
+# Supported Module Types: 
+#  DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_SAL_DRIVER UEFI_DRIVER
+#
+################################################################################
+[Includes]
+  Include
+  ../Build
+
+[LibraryClasses]
+  
+[Protocols]
+
+[Ppis]
+  
+[Guids]
+  gAmiHstiPkgTokenSpaceGuid = { 0xcb2c0d12, 0x8e6a, 0x4b12, { 0x94, 0xf4, 0x1b, 0xc4, 0x9e, 0xc4, 0x60, 0xb1 } }
+
+  
+[PcdsFixedAtBuild]
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiNumSecurityBytes|2|UINT32|0x00000000
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiImplementedTestBitmap|0x0001FF|UINT64|0x00000001
+  
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiCryptoStrengthImplementationBit|0|UINT8|0x00000002
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiFirmwareRollbackImplementationBit|1|UINT8|0x00000003
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiSecureBootBypassImplementationBit|2|UINT8|0x00000004
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiNoTestKeyImplementationBit|3|UINT8|0x00000005
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiExternalDeviceDmaImplementationBit|4|UINT8|0x00000006
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiMorSupportImplementationBit|5|UINT8|0x00000007
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiSecureBootCsmDisableImplementationBit|6|UINT8|0x0000000A
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiManufacturingModeImplementationBit|7|UINT8|0x0000000B
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiSignedFirmwareUpdateImplementationBit|8|UINT8|0x0000000C
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdHstiSecureUpdateWithDefaultKeyImplementationBit|9|UINT8|0x0000000D
+
+[PcdsFixedAtBuild, PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdFirmwareRollbackProtection|FALSE|BOOLEAN|0x00000008
+  gAmiHstiPkgTokenSpaceGuid.AmiPcdSecureBootBypass|FALSE|BOOLEAN|0x00000009
+

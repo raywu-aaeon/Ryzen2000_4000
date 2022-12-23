@@ -1,0 +1,27 @@
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = CrbDsmAslDxe
+  FILE_GUID             = 7EBC0CED-F094-402c-B30B-6B2AC09ED972
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = CrbDsmAslDxeEntry
+
+[Sources.common]
+  CrbDsmAslDxe.c
+  $(CRB_DSM_ASL_FILE)
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DxeServicesLib
+  DebugLib
+
+[Protocols]
+  gEfiAcpiTableProtocolGuid
+
+[Depex]
+  gEfiAcpiTableProtocolGuid

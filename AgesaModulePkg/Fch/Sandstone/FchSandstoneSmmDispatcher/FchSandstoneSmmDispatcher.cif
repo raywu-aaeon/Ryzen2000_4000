@@ -1,0 +1,12 @@
+<component>
+	name = "FchSandstoneSmmDispatcher"
+	category = ModulePart
+	LocalRoot = "AgesaModulePkg\Fch\Sandstone\FchSandstoneSmmDispatcher\"
+	RefName = "AgesaModulePkg.FchSandstoneSmmDispatcher"
+[INF]
+"FchSmmDiagDispatcher.inf"
+"FchSmmDispatcher.inf"
+[files]
+"FchSmmDiagDispatcher.h"	
+"FchSandstoneSmmDispatcher.sdl"	
+<endComponent>

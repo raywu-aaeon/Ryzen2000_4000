@@ -1,0 +1,8 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "AmdCbsPkg\Include\Guid\"
+	RefName = "AmdCbsPkg.Include.Guid"
+[files]
+"AmdCbsConfig.h"	
+<endComponent>

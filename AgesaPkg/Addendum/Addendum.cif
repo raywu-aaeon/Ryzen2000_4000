@@ -1,0 +1,22 @@
+<component>
+
+	name = "Addendum"
+	category = ModulePart
+	LocalRoot = "AgesaPkg\Addendum\"
+	RefName = "AgesaPkg.Addendum"
+[parts]
+"AgesaPkg.Addendum.Apcb"
+[INF]
+"Ccx\OemAgesaCcxPlatformLibNull\OemAgesaCcxPlatformLibNull.inf"
+"Nbio\OemGpioResetControlLibNull\OemGpioResetControlLibNull.inf"
+"Nbio\OemPcieResetControlLibNull\OemPcieResetControlLibNull.inf"
+"Nbio\PcieComplexFm15Pei\PcieComplexFm15Pei.inf"
+"Nbio\PcieComplexPei\PcieComplexPei.inf"
+"Nbio\ServerHotplugDxe\ServerHotplugDxe.inf"
+"Psp\AmdPspFlashAccLibSmm\AmdPspFlashAccLibSmm.inf"
+"Psp\fTPMAcpi\fTPMAcpi.inf"
+"Soc\AmdAgesaParameterGroupPei.inf"
+[files]
+"Addendum.sdl"
+"Soc\AmdAgesaParameterGroupPei.dec"
+<endComponent>

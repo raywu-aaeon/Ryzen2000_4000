@@ -1,0 +1,65 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file
+# AmiPspPkg
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiPspPkg
+  PACKAGE_GUID                   = 52283FED-0960-48ed-9C85-44C36D68B617
+  PACKAGE_VERSION                = 0.1
+################################################################################
+#
+# Include Section - list of Include Paths that are provided by this package.
+#                   Comments are used for Keywords and Module Types.
+#
+# Supported Module Types:
+#  SEC PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_SAL_DRIVER UEFI_DRIVER
+#
+################################################################################
+[Includes]
+  Include
+  
+[LibraryClasses]
+  PspSecLib|Include/Library/PspSecLib.h
+  PeiAmiPspFvHook|Include/Library/PeiAmiPspFvHook.h
+
+[Guids]
+  ## Include/Guid/AmiPsp.h
+  gDxeSigFfsGuid = {0xDD9D5D5E,0xA5DD,0x4402,{0x9F,0x7C,0xF0,0x52,0xFC,0xDC,0xEA,0x36}}
+  gDxeSigSectionGuid = {0x5AAEBF51,0x1414,0x47e8,{0xB6,0x62,0x2D,0x20,0x9D,0xCA,0xDF,0xE7}}
+  gAmiPspS3SmmCommunicationGuid = {0x0BEC2DB1,0x9403,0x424C,{0x87,0x51,0x21,0x5C,0x48,0xBF,0x2C,0x7B}}
+  gAmiPspFtpmHobGuid = {0x465F8A7F,0xFF6F,0x4581,{0xA3,0x71,0xCA,0x7C,0xC4,0x9D,0xAF,0x05}}
+  gAmiPspFtpmSmmCommunicationGuid = {0xD7AF3BFC,0x7463,0x47F4,{0x9E,0xE3,0xEA,0x2C,0x20,0xBF,0xCF,0x97}}
+  gAmiPspPkgTokenSpaceGuid = {0x6C0525E9, 0xF189, 0x44C0, {0xA0, 0x5C, 0xD0, 0x98, 0x82, 0x16, 0x1D, 0x22}}
+  gAmiPspFvBbFirmwareVolumeGuid = { 0x61C0F511, 0xA691, 0x4F54, { 0x97, 0x4F, 0xB9, 0xA4, 0x21, 0x72, 0xCE, 0x53 } } ## 61C0F511-A691-4F54-974F-B9A42172CE53
+  
+[Protocols]
+  gAmiMpSyncDataProtocolGuid = {0xE225B17D, 0x54A0, 0x415B, {0x8B, 0x20, 0xBA, 0x4C, 0x4F, 0xDF, 0x67, 0x7E}}
+
+[PcdsDynamicEx]
+  gAmiPspPkgTokenSpaceGuid.PcdFtpmSmmCommunicateBuffer|0x00|UINT32|0x00010000
+  gAmiPspPkgTokenSpaceGuid.PcdFtpmSmmCommunicateBufferSize|0x00|UINT32|0x00010001
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

@@ -1,0 +1,33 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GnbEdidOverrideProtocol
+  FILE_GUID                      = 3FCEBA10-2D9D-4a1e-9C2B-2B625F7E8556
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+
+[Sources]
+  GnbEdidOverrideProtocol.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiDriverEntryPoint
+  DebugLib
+  DevicePathLib
+[Protocols] 
+  gEfiEdidOverrideProtocolGuid
+  
+  

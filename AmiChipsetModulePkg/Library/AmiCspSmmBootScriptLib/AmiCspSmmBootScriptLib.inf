@@ -1,0 +1,30 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiCspSmmBootScriptLib
+  FILE_GUID                      = 0B04112B-2C28-4754-ADBF-5E9EEEE8932D
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiCspSmmBootScriptLib|DXE_DRIVER DXE_RUNTIME_DRIVER
+  CONSTRUCTOR                    = AmiCspSmmBootScriptLibConstructor
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiLib
+  DebugLib
+
+[Protocols]
+  gEfiDxeSmmReadyToLockProtocolGuid
+  gEfiSmmCommunicationProtocolGuid
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Sources]
+  AmiCspSmmBootScriptLib.c

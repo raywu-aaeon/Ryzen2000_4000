@@ -1,0 +1,11 @@
+#include <AmiCertificate.h>
+#include "token.h"
+#pragma pack(1)
+// Dummy Capsule Hdr
+EFI_CAPSULE_HEADER dummyHdr = 
+    {   APTIO_FW_CAPSULE_GUID,
+        sizeof(EFI_CAPSULE_HEADER), 
+        CAPSULE_FLAGS_PERSIST_ACROSS_RESET, 
+        FWCAPSULE_MAX_HDR_SIZE
+    };
+char dummy[FWCAPSULE_MAX_HDR_SIZE-sizeof(EFI_CAPSULE_HEADER)-4] = {0};

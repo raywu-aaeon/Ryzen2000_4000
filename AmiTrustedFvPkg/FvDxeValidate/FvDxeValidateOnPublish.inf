@@ -1,0 +1,41 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file
+#   This  driver installs EFI Flash Upd PPI, SecureBoot PPI, RecoveryPPI
+##
+[Defines]
+  INF_VERSION            = 0x00010005
+  BASE_NAME              = FvDxeValidateOnPublish
+  FILE_GUID              = 3513B87F-F0BC-41F7-A895-4A1916B39E79
+  MODULE_TYPE            = PEIM
+  VERSION_STRING         = 1.0
+  LIBRARY_CLASS          = NULL|PEIM PEI_CORE
+
+[Sources]
+ FvDxeValidateOnPublish.c
+
+[Packages]
+ AmiModulePkg/AmiModulePkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ MdePkg/MdePkg.dec
+ MdeModulePkg/MdeModulePkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+ AmiTrustedFvPkg/AmiTrustedFvPkg.dec
+
+[LibraryClasses]
+ AmiPeiLib
+ MemoryAllocationLib
+ DebugLib
+ 
+[Ppis]
+ gAmiPublishFvDxeValidatePpiGuid
+
+[Pcd]
+ gAmiModulePkgTokenSpaceGuid.PcdUseNewImageOnFlashUpdate
+ gAmiTrustedFvPkgTokenSpaceGuid.AmiPcdTdxeShadowFvBeforePublish

@@ -1,0 +1,45 @@
+#
+# This file contains code for North Bridge initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PowerButton
+  FILE_GUID                      = E566B097-4378-485f-91D0-1C097C190CE2
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = PowerButtonEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+#
+
+[Sources]
+   PowerButton.c
+
+[Packages]
+   MdePkg/MdePkg.dec
+   AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+
+   AmdCpmPkg/AmdCpmPkg.dec
+   AmdCpmPkg/Addendum/Oem/Bilby/AmdCpmOemPkg.dec
+   
+[LibraryClasses]
+  UefiDriverEntryPoint
+  AmiCspSmmServicesLib
+  PcdLib
+  
+[Protocols]
+  gEfiSmmPowerButtonDispatch2ProtocolGuid
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareEnable
+
+[Depex]
+  gEfiSmmPowerButtonDispatch2ProtocolGuid
+

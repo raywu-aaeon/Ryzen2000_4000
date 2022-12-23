@@ -1,0 +1,46 @@
+
+
+#
+# This file contains code for South Bridge initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SbCmos
+  FILE_GUID                      = 7721929A-D56A-450d-2501-8EA51FA61974
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SbCmosEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+
+[Sources]  
+  SbCmos.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec       # Optional. should use Mde Library instead.
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiLib
+  IoLib
+  ##PciLib # Default DXE_DRIVER PciLib should depend on gEfiPciRootBridgeIoProtocolGuid.
+
+
+
+  AmiDxeLib # Optional. should use Mde Library instead.
+  AmiCspLib # Optional. should use Mde Library instead.
+
+[Depex]
+  TRUE

@@ -1,0 +1,27 @@
+#***********************************************************************
+#*                                                                     *
+#*                      Copyright (c) 1985-2021, AMI.                  *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = FlashLibPei
+    FILE_GUID       = 475E5882-916D-4842-9AC4-05055B4F92C3
+    MODULE_TYPE     = PEIM
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = FlashLib | PEIM
+
+[Sources]
+    FlashLibWrapper.c
+    FlashLibWrapper.h
+
+[Packages]
+    MdePkg/MdePkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    AmiFlashLib
+    AmiPeiLib

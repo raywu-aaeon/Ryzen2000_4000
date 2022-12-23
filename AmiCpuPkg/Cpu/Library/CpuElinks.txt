@@ -1,0 +1,2 @@
+#define CPU_OEM_SETUP_CALLBACK_LIST @Elink(CpuConfigurationList, "@Child", " ", "%n")
+

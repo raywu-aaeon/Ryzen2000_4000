@@ -1,0 +1,167 @@
+#;*****************************************************************************
+#;
+#; Copyright 2012 - 2019 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+#;
+#; AMD is granting you permission to use this software and documentation (if
+#; any) (collectively, the "Materials") pursuant to the terms and conditions of
+#; the Software License Agreement included with the Materials.  If you do not
+#; have a copy of the Software License Agreement, contact your AMD
+#; representative for a copy.
+#; 
+#; You agree that you will not reverse engineer or decompile the Materials, in
+#; whole or in part, except as allowed by applicable law.
+#; 
+#; WARRANTY DISCLAIMER:  THE MATERIALS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF
+#; ANY KIND.  AMD DISCLAIMS ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY,
+#; INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY,
+#; FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, THAT THE
+#; MATERIALS WILL RUN UNINTERRUPTED OR ERROR-FREE OR WARRANTIES ARISING FROM
+#; CUSTOM OF TRADE OR COURSE OF USAGE.  THE ENTIRE RISK ASSOCIATED WITH THE USE
+#; OF THE MATERIAL IS ASSUMED BY YOU.  Some jurisdictions do not allow the
+#; exclusion of implied warranties, so the above exclusion may not apply to
+#; You.
+#; 
+#; LIMITATION OF LIABILITY AND INDEMNIFICATION:  AMD AND ITS LICENSORS WILL
+#; NOT, UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU FOR ANY PUNITIVE, DIRECT,
+#; INCIDENTAL, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF
+#; THE MATERIALS OR THIS AGREEMENT EVEN IF AMD AND ITS LICENSORS HAVE BEEN
+#; ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no event shall AMD's total
+#; liability to You for all damages, losses, and causes of action (whether in
+#; contract, tort (including negligence) or otherwise) exceed the amount of
+#; $100 USD. You agree to defend, indemnify and hold harmless AMD and its
+#; licensors, and any of their directors, officers, employees, affiliates or
+#; agents from and against any and all loss, damage, liability and other
+#; expenses (including reasonable attorneys' fees), resulting from Your use of
+#; the Materials or violation of the terms and conditions of this Agreement.
+#; 
+#; U.S. GOVERNMENT RESTRICTED RIGHTS:  The Materials are provided with
+#; "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is
+#; subject to the restrictions as set forth in FAR 52.227-14 and
+#; DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the
+#; Government constitutes acknowledgment of AMD's proprietary rights in them.
+#; 
+#; EXPORT RESTRICTIONS: The Materials may be subject to export restrictions as
+#; stated in the Software License Agreement.
+#;*****************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = CpmPkg
+  PACKAGE_GUID          = ABE128BA-1061-4A53-A1B8-D07329AA7A67
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include/EDKII
+  Include
+  Library
+  Library/Proc/Base
+  Library/Proc/Cpu
+  Library/Proc/Fch
+  Kernel/Asl
+  Features/DisplayFeature/Asl/Common
+
+[LibraryClasses]
+
+[Guids]
+  gAmdCpmTableHobGuid            = { 0x8DC90853, 0x5793, 0x4244, {0xA2, 0xF1, 0xE3, 0xB8, 0x2, 0x40, 0xB7, 0x68 }}
+  gAmdBootTimeRecordHobGuid      = { 0xd0800033, 0xc743, 0x4565, {0xa1, 0xe3, 0x11, 0x1a, 0x37, 0x1f, 0x2a, 0x4b }}
+  gAmdCpmPkgTokenSpaceGuid       = { 0x916e0ddd, 0x2bd2, 0x4704, {0x93, 0xb9, 0x59, 0x4b, 0x1, 0xa5, 0xfa, 0x9f }}
+  gAmdPbsSystemConfigurationGuid = { 0xa339d746, 0xf678, 0x49b3, {0x9f, 0xc7, 0x54, 0xce, 0xf, 0x9d, 0xf2, 0x26 }}
+
+[Protocols]
+  gAmdCpmAllPciIoProtocolsInstalledProtocolGuid = { 0x676D7012, 0x139B, 0x485A, {0x96, 0xF1, 0x98, 0x6F, 0xC4, 0x8A, 0x86, 0x4B }}
+  gAmdCpmDisplayFeatureProtocolGuid = { 0xdb4a79ac, 0x5bbb, 0x4625, {0x6a, 0x9e, 0xfe, 0xbf, 0x9d, 0x6d, 0x95, 0xeb }}
+  gAmdCpmNvDataProtocolGuid = { 0xdb4a79ac, 0x87ba, 0x4625, {0x6a, 0x9e, 0xfe, 0xbf, 0x9d, 0x6d, 0x95, 0xeb }}
+  gAmdCpmOemTableProtocolGuid = { 0x38d91956, 0xd5f1, 0x40fc, {0x8e, 0x61, 0xcb, 0x5e, 0x1a, 0xa9, 0x5c, 0xb7 }}
+  gAmdCpmTableProtocolGuid = { 0x3724cf01, 0x00c2, 0x9762, {0x11, 0xb3, 0x0e, 0xa8, 0xaa, 0x89, 0x72, 0x00 }}
+  gAmdCpmTableSmmProtocolGuid = { 0xaf6efacf, 0x7a13, 0x45a3, {0xb1, 0xa5, 0xaa, 0xfc, 0x06, 0x1c, 0x4b, 0x79 }}
+  gBootTimeRecordProtocolGuid = { 0x91599780, 0x50b0, 0x43d0, {0x9f, 0x21, 0x42, 0xd1, 0xeb, 0x0c, 0x00, 0x3f }}
+  gAodNvAreaUpdatedProtocolGuid = { 0xab776607, 0x6169, 0x44e8, { 0xb8, 0xf1, 0x50, 0x12, 0x9d, 0x4a, 0x25, 0xdb }}
+
+
+[Ppis]
+  gBootTimeRecordPpiGuid = { 0x90599780, 0x50b0, 0x43d1, {0x9f, 0x22, 0x43, 0xd1, 0xeb, 0xc, 0x0, 0x3f }}
+  gPeiLastS3RestorePointPpiGuid = { 0x90599782, 0x50c0, 0x63d1, {0x9f, 0x22, 0x48, 0xd6, 0xeb, 0xc, 0x0, 0x3f }}
+  gAmdCpmGpioInitFinishedPpiGuid = { 0xfd4e6776, 0x2482, 0x48ba, {0xbf, 0x3e, 0x27, 0x65, 0xf2, 0xd6, 0x7d, 0xcb }}
+  gAmdCpmOemTablePpiGuid = { 0xfd1fe103, 0x40f1, 0x459c, {0x98, 0x3e, 0x11, 0x0b, 0x69, 0x5e, 0xd1, 0x1a }}
+  gAmdCpmTableHobPpiGuid = { 0xc02c596b, 0xcd04, 0x486e, {0x86, 0x66, 0x30, 0x3e, 0x55, 0x67, 0xc0, 0x48 }}
+  gAmdCpmTablePpiGuid = { 0xd71cf893, 0xa8b5, 0x49d3, {0xa2, 0x1b, 0x31, 0xe2, 0xf5, 0xc4, 0xa7, 0x47 }}
+  gAmdCpmOverrideTablePpiGuid = { 0x25d79807, 0x7b43, 0x4767, {0xb9, 0xfa, 0x72, 0x62, 0xa7, 0x4f, 0x85, 0xc3 }}
+  gPcieTopologyTablePpiGuid = { 0x433f54b5, 0x50ed, 0x48a8, {0xa0, 0xe7, 0xa7, 0x85, 0x0c, 0x4b, 0x32, 0xfe }}
+
+[PcdsFixedAtBuild]
+  gAmdCpmPkgTokenSpaceGuid.Cpu0AslName|0x00000000|UINT32|0x00000001
+  gAmdCpmPkgTokenSpaceGuid.EcAslName|0x00000000|UINT32|0x00000002
+  gAmdCpmPkgTokenSpaceGuid.EcMutexAslName|0x00000000|UINT32|0x00000003
+  gAmdCpmPkgTokenSpaceGuid.OemCallBackAslName|0x00000000|UINT32|0x00000004
+  gAmdCpmPkgTokenSpaceGuid.ApuSupportMask|0xFFFFFFFF|UINT32|0x00000005
+  gAmdCpmPkgTokenSpaceGuid.OemMLibAslName|0x00000000|UINT32|0x00000006
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx0AslName|0x00000000|UINT32|0x00000010
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx1AslName|0x00000000|UINT32|0x00000011
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx2AslName|0x00000000|UINT32|0x00000012
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx3AslName|0x00000000|UINT32|0x00000013
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx4AslName|0x00000000|UINT32|0x00000014
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp0AslName|0x00000000|UINT32|0x00000020
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp1AslName|0x00000000|UINT32|0x00000021
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp2AslName|0x00000000|UINT32|0x00000022
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp3AslName|0x00000000|UINT32|0x00000023
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp4AslName|0x00000000|UINT32|0x00000024
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp5AslName|0x00000000|UINT32|0x00000025
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp6AslName|0x00000000|UINT32|0x00000026
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp7AslName|0x00000000|UINT32|0x00000027
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp8AslName|0x00000000|UINT32|0x00000028
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp9AslName|0x00000000|UINT32|0x00000029
+  gAmdCpmPkgTokenSpaceGuid.PcieGppAAslName|0x00000000|UINT32|0x0000002A
+  gAmdCpmPkgTokenSpaceGuid.PcieGppBAslName|0x00000000|UINT32|0x0000002B
+  gAmdCpmPkgTokenSpaceGuid.PcieGppCAslName|0x00000000|UINT32|0x0000002C
+  gAmdCpmPkgTokenSpaceGuid.PcieGppDAslName|0x00000000|UINT32|0x0000002D
+  gAmdCpmPkgTokenSpaceGuid.PcieGppEAslName|0x00000000|UINT32|0x0000002E
+  gAmdCpmPkgTokenSpaceGuid.PcieGppFAslName|0x00000000|UINT32|0x0000002F
+  gAmdCpmPkgTokenSpaceGuid.FchPcieGpp0AslName|0x00000000|UINT32|0x00000030
+  gAmdCpmPkgTokenSpaceGuid.FchPcieGpp1AslName|0x00000000|UINT32|0x00000031
+  gAmdCpmPkgTokenSpaceGuid.FchPcieGpp2AslName|0x00000000|UINT32|0x00000032
+  gAmdCpmPkgTokenSpaceGuid.FchPcieGpp3AslName|0x00000000|UINT32|0x00000033
+  gAmdCpmPkgTokenSpaceGuid.AcpiRestoreSwSmi|0xE3|UINT8|0x00000040
+  gAmdCpmPkgTokenSpaceGuid.AcpiEnableSwSmi|0xA0|UINT8|0x00000041
+  gAmdCpmPkgTokenSpaceGuid.PlatformIdOverride|0xFFFF|UINT16|0x00000042
+  gAmdCpmPkgTokenSpaceGuid.PcdSimpleSltSupport|0x0|UINT8|0x00000043
+  gAmdCpmPkgTokenSpaceGuid.EcRamBaseAddr|0x0062|UINT16|0x00000044
+  gAmdCpmPkgTokenSpaceGuid.EcRamGpioOffset|0xAB|UINT8|0x00000045
+  gAmdCpmPkgTokenSpaceGuid.X86IoRemapBase|0x000000FDFC000000|UINT64|0x00000046
+  gAmdCpmPkgTokenSpaceGuid.PciMmioBase|0x0000000080000000|UINT64|0x00000047
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdSetAutoUmaMode|0xDF|UINT8|0x00000048
+  gAmdCpmPkgTokenSpaceGuid.LpcAslName|0x00000000|UINT32|0x00000049
+  gAmdCpmPkgTokenSpaceGuid.OkEcAslName|0x00000000|UINT32|0x00000050
+  gAmdCpmPkgTokenSpaceGuid.PcdSerialClock|48000000|UINT32|0x00000051
+  gAmdCpmPkgTokenSpaceGuid.PcdFchUartPort|2|UINT8|0x00000052
+  gAmdCpmPkgTokenSpaceGuid.PcieGp17AslName|0x00000000|UINT32|0x00000060
+  gAmdCpmPkgTokenSpaceGuid.PcieGp18AslName|0x00000000|UINT32|0x00000061
+  gAmdCpmPkgTokenSpaceGuid.PcieGp28AslName|0x00000000|UINT32|0x00000062
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdAodUpdateMemClkTimings|0x9D|UINT8|0x00000063
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdAodUpdateMemOnboardVoltages|0x9E|UINT8|0x00000064
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdAodHeaderOemTableId|"AMD AOD"|VOID*|0x00000065   # Less than or equal to 8 bytes
+  gAmdCpmPkgTokenSpaceGuid.AcpiDisableDgpuAudioSwSmi|0xE9|UINT8|0x00000066
+  gAmdCpmPkgTokenSpaceGuid.AcpAslName|0x00000000|UINT32|0x00000067
+  gAmdCpmPkgTokenSpaceGuid.AzaliaAslName|0x00000000|UINT32|0x00000068
+  gAmdCpmPkgTokenSpaceGuid.LanAslName|0x00000000|UINT32|0x00000069
+  gAmdCpmPkgTokenSpaceGuid.WLanAslName|0x00000000|UINT32|0x0000006A
+  gAmdCpmPkgTokenSpaceGuid.PcdSwSmiCmdtoBuildContext|0xDD|UINT8|0x00000070
+  gAmdCpmPkgTokenSpaceGuid.PcdBspStackSize|0x40000|UINT32|0x00000071
+  gAmdCpmPkgTokenSpaceGuid.PcdApStackSize|0x4000|UINT32|0x00000072
+  gAmdCpmPkgTokenSpaceGuid.PcieGp38AslName|0x00000000|UINT32|0x00000073
+  gAmdCpmPkgTokenSpaceGuid.PcieGppGAslName|0x00000000|UINT32|0x00000074
+  gAmdCpmPkgTokenSpaceGuid.PcieGppHAslName|0x00000000|UINT32|0x00000075
+# gAmdCpmPkgTokenSpaceGuid.PcdIoPort80LpcDecodeEn|0x01|UINT8|0x00000076           # D14F3x048_Bit[21]   IOPortEnable4   1: Enable   0: Disable
+
+[PcdsDynamic]
+  gAmdCpmPkgTokenSpaceGuid.CurrentPlatformId|0x0000|UINT16|0x10000000
+  gAmdCpmPkgTokenSpaceGuid.OriginalPlatformId|0x0000|UINT16|0x10000001
+  gAmdCpmPkgTokenSpaceGuid.CpmBootModeOverride|0x00|UINT8|0x10000002
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmDgpuSsid|0x00000000|UINT32|0x10000003
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmDgpuAudioSsid|0x00000000|UINT32|0x10000004
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmIgnoreOemTableId|0x0000000000000000|UINT64|0x10000005
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVddioMin|0x00|UINT16|0x10000019
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVddioMax|0x00|UINT16|0x10000020
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVddioStepping|0x00|UINT16|0x10000021
+  gAmdCpmPkgTokenSpaceGuid.PcdIoPort80LpcDecodeEn|0x01|UINT8|0x10000022           # D14F3x048_Bit[21]   IOPortEnable4   1: Enable   0: Disable
+

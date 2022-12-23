@@ -1,0 +1,13 @@
+<component>
+	name = "CommonLib"
+	category = ModulePart
+	LocalRoot = "AmdCpmPkg\Library\CommonLib\"
+	RefName = "AmdCpmPkg.Library.CommonLib"
+[INF]
+"BasePlatformHookLibAmdFchUart\BasePlatformHookLibAmdFchUart.inf"
+"BasePlatformHookLibAmdIte8712\BasePlatformHookLibAmdIte8712.inf"
+"BasePlatformHookLibAmdSmsc1100\BasePlatformHookLibAmdSmsc1100.inf"
+"BaseSerialPortLib16550AmdFchUart\BaseSerialPortLib16550AmdFchUart.inf"
+[files]
+"CommonLib.sdl"	
+<endComponent>

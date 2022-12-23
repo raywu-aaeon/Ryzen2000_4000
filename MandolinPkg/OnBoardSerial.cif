@@ -1,0 +1,8 @@
+<component>
+	name = "OnBoardSerial"
+	category = ModulePart
+	LocalRoot = "MandolinPkg\"
+	RefName = "MandolinPkg.OnBoardSerial"
+[files]
+"OnBoardSerial.sdl"	
+<endComponent>

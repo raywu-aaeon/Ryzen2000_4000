@@ -1,0 +1,223 @@
+TOKEN
+	Name  = "SANDSTONE_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Sandstone support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+	Name  = "SANDSTONE_CF9RESET_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable Cf9Reset support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "SANDSTONE_SATA_D3COLD_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchSSSataD3ColdSmm support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchSandstoneDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_I2C_DXE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchSandstoneI2cDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_I2C_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchSandstoneI2cPei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_AML_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable FchSandstoneAml support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_SSDT_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable FchSandstoneSsdt support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_AMD_LEGACY_INTERRUPT_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AmdLegacyInterrupt support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchSandstonePei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_SMBUS_DXE_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable FchSmbusDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_SMBUS_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable FchSmbusPei support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_SMMINIT_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchSandstoneSmmInit support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "FCH_SANDSTONE_SMM_CONTROL_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FchSandstoneSmmControlDxe support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "FchSandstoneCf9ResetDxe"
+	File  = "FchSandstoneCf9ResetDxe\Cf9Reset.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+	Token = "SANDSTONE_CF9RESET_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSSSataD3ColdSmm"
+	File  = "FchSandstoneComplement\FchSSSataD3Cold\FchSSSataD3ColdSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Arch  = "X64"
+	Token = "SANDSTONE_SATA_D3COLD_SUPPORT" "=" "1"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+INFComponent
+	Name  = "FchSandstoneDxe"
+	File  = "FchSandstoneDxe\FchDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "FCH_SANDSTONE_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSandstoneI2cDxe"
+	File  = "FchSandstoneI2cDxe\Mp2I2cLibDxe.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "FCH_SANDSTONE_I2C_DXE_SUPPORT" "=" "1"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+INFComponent
+	Name  = "FchSandstoneI2cPei"
+	File  = "FchSandstoneI2cPei\Mp2I2cLibPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "BASE"
+	Token = "FCH_SANDSTONE_I2C_PEI_SUPPORT" "=" "1"
+	Token = "SOLUTION_TYPE" "=" "0"
+End
+
+INFComponent
+	Name  = "FchSandstoneAml"
+	File  = "FchSandstoneDxe\FchSandstoneAml.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "FCH_SANDSTONE_AML_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSandstoneSsdt"
+	File  = "FchSandstoneDxe\FchSandstoneSsdt.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "FCH_SANDSTONE_SSDT_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSandstoneLegacyInterruptDxe"
+	File  = "FchSandstoneLegacyInterruptDxe\LegacyInterrupt.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "FCH_SANDSTONE_AMD_LEGACY_INTERRUPT_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSandstonePei"
+	File  = "FchSandstonePei\FchPei.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "FCH_SANDSTONE_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSandstoneSmbusDxe"
+	File  = "FchSandstoneSmbusDxe\SmbusLight.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "FCH_SANDSTONE_SMBUS_DXE_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSandstoneSmbusPei"
+	File  = "FchSandstoneSmbusPei\Smbus.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "FCH_SANDSTONE_SMBUS_PEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSandstoneSmmInit"
+	File  = "FchSandstoneSmm\FchSmm.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "FCH_SANDSTONE_SMMINIT_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "FchSandstoneSmmControlDxe"
+	File  = "FchSandstoneSmmControlDxe\SmmControl.inf"
+	Package  = "AgesaModulePkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+	Token = "FCH_SANDSTONE_SMM_CONTROL_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "Mp2I2cLibPei"
+    Instance  = "AgesaModulePkg.FchSandstoneI2cPei"
+    ModuleTypes  = "PEIM"
+    Token = "FCH_SANDSTONE_I2C_PEI_SUPPORT" "=" "1"
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
+LibraryMapping
+    Class  = "Mp2I2cLibDxe"
+    Instance  = "AgesaModulePkg.FchSandstoneI2cDxe"
+    Token = "FCH_SANDSTONE_I2C_DXE_SUPPORT" "=" "1"
+    Token = "SOLUTION_TYPE" "=" "0"
+End
+
