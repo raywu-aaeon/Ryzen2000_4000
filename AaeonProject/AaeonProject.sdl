@@ -237,12 +237,13 @@ TOKEN
 End
 
 TOKEN
-	Name  = "AaeonDefaultPwd_SUPPORT"
+	Name  = "AAEON_BIOS_ROBOT_SUPPORT"
 	Value  = "0"
-	Help  = "Main switch to enable OEMTSEHook support in Project"
+	Help  = "Main switch to enable AaeonBiosRobot support in Project"
 	TokenType = Boolean
 	TargetEQU = Yes
 	TargetMAK = Yes
+	TargetH = Yes
 End
 
 TOKEN
