@@ -1,0 +1,134 @@
+# Using AaeonRemoteBuildPkg only. Mask this section if you want to use own project local .yml
+include:
+  - project: 'AAEON/Utility/AaeonRemoteBuildPkg'
+    file: '.gitlab-ci-project.yml'
+
+# Use project local .yml only. Unmask if you want to use it.
+#include:
+#  - local: '.gitlab-ci-project.yml'
+
+variables:
+  ## Build variables for ########################################################
+  ## AaeonRemoteBuild.bat %1 %2 %3 %4 %5:
+  ##   %1 PROJECT_REBUILD=BUILD_ALL
+  ##        1: Build all; 0: Build; 2: Skip Build process[Test Only]
+  ##   %2 PROJECT_SHA=SHA_FOLDER=not used any more. Reserved for compatibility.
+  ##   %3 PROJECT_VEB_FILE=VEB=file name (w/o extension)
+  ##   %4 PROJECT_VEB_TOOL=AptioV_DIR=VEB tool version
+  ##        Veb Support List:
+  ##          4.5.5_TOOLS_41
+  ##          Aptio_5.x_TOOLS_24_6
+  ##          Aptio_5.x_TOOLS_27
+  ##          Aptio_5.x_TOOLS_28
+  ##          Aptio_5.x_TOOLS_30_7
+  ##          Aptio_5.x_TOOLS_31_1
+  ##          Aptio_5.x_TOOLS_32_1
+  ##          Aptio_5.x_TOOLS_34_1
+  ##          Aptio_5.x_TOOLS_35
+  ##          Aptio_5.x_TOOLS_35_1
+  ##          Aptio_5.x_TOOLS_35_2
+  ##          Aptio_5.x_TOOLS_37_1
+  ##          Aptio_5.x_TOOLS_37_1_x64
+  ##          Aptio_5.x_TOOLS_JRE_34_1
+  ##          Aptio_5.x_TOOLS_40
+  ##   %5 PROJECT_BUILD_BATCH=batch file name (w/ .bat) used for compiling
+  ##      instead of using build commands defined in .veb.
+  ##      Optional, give un-exist file name to disable.
+  ## And for
+  ## AaeonRemoteDeploy.bat %1 %2:
+  ##   %1 COPY_OPTION
+  ##        0: For Gitlab remote deploy, copy all; 1: For local use, copy file listed; 2: Skip
+  ##   %2 PROJECT_SHA=SHA_FOLDER
+  ##        Name: Create SHA and Output folder; 0: Create Output folder only; 1: Create with short SHA
+  ##        Name example:
+  ##          $CI_COMMIT_SHORT_SHA: 8 chars
+  ##          $CI_COMMIT_SHA: Full sha
+  PROJECT_REBUILD: 1
+  PROJECT_SHA: $CI_COMMIT_SHA
+  PROJECT_VEB_FILE: CB4000
+  PROJECT_VEB_TOOL: Aptio_5.x_TOOLS_35_2
+  PROJECT_BUILD_BATCH: N/A  ## Set to build.bat if project uses build.bat instead of make
+
+  ## Patching NameTooLong issue. Optional, unmask if needed to change for project -
+  ##GIT_CLONE_PATH: $CI_BUILDS_DIR\Build\$CI_CONCURRENT_ID\$GITLAB_USER_ID\$CI_PROJECT_ID
+
+  ## Release variables for ####################################################
+  ## AaeonRemotePreRelease.bat via environment
+  ##   PROJECT_RELEASE_DIR: Path to release folder
+  ##   PROJECT_CHANGELOG: Path to CHANGELOG file
+  ##   PROJECT_HISTORY: Path to History file
+  ##   PROJECT_FORMAL_HISTORY: Select to include internal commit message in History
+  ##     true/false - Show/hide internal messages [Test only]
+  ##     auto - Include internal messages only for beta version (refer to PROJECT_FORMAL_VERSION)
+  ##   PROJECT_FORMAL_VERSION: First formal release version in form of Major.Minor (ex: '1.0')
+  ##     When releasing a version - History.txt will be
+  ##       Same as formal      - reset as first release
+  ##       Smaller than formal - appended with internal changes
+  ##       Larger than formal  - appended w/o internal changes
+  PROJECT_RELEASE_DIR: AaeonRelease
+  PROJECT_CHANGELOG: CHANGELOG.md
+  PROJECT_HISTORY: $PROJECT_RELEASE_DIR\History.txt
+  PROJECT_FORMAL_HISTORY: auto
+  PROJECT_FORMAL_VERSION: '1.0'
+  ##   PROJECT_ONEDRIVE_RELATIVE_FOLDER: Folder name on Onedrive to release BIOS.
+  ##     Useful for ODM project's name is different with Onedrive folder name. This happens when -
+  ##       Project's name is too short, or conflict with other project's name
+  ##       Project's name is changed, but for some reason Onedrive folder is not changed accordingly
+  ##PROJECT_ONEDRIVE_RELATIVE_FOLDER: 'Some fixed string'
+  ##   PROJECT_SIGN_ON_FORM: Form to dynamically generate sign-on message in History.txt
+  ##     Possible phrases
+  ##       $(TOKEN) - To be replaced by parsed token. Support AAEON_MODEL_NAME, SYSTEM_PRODUCT_NAME, PROJECT_NAME
+  ##       {{signon_tag}} - To be replaced by BIOS tag. Ex: K860AM10
+  ##       {{signon_major}} - To be replaced by major version parsed from BIOS tag. Ex: 1
+  ##       {{signon_minor}} - To be replaced by minor version parsed from BIOS tag. Ex: 0
+  ## Optional, unmask if needed to change for customizing -
+  ##PROJECT_SIGN_ON_FORM: '$$(AAEON_MODEL_NAME) R{{signon_major}}.{{signon_minor}}({{signon_tag}}) ({{signon_date}})'
+
+  ## ReleaseDbg variables ####################################################
+  ## This feature will be enabled when either one of following files presents in project:
+  ## - AaeonPlatformDebugger\AaeonPlatformDebugger.sdl
+  ## - DebugEnable.sdl
+  ##
+  ##   PROJECT_DEBUG_CIF_PATH: Path to a .cif containing file name of .sdl file.
+  ##                           Default use one in AaeonRemoteBuildPkg with DebugEnable.sdl
+  ##   PROJECT_DEBUG_SDL_PATH: Path to a .sdl containing AMI SDL tokens to enable debug mode.
+  ##                           Default use one in AaeonRemoteBuildPkg
+  ## Optional, unmask if needed to change for project -
+  ##PROJECT_DEBUG_CIF_PATH: %REMOTE_BUILD_PATH%\DebugEnable\DebugEnable.cif
+  ##PROJECT_DEBUG_SDL_PATH: %REMOTE_BUILD_PATH%\DebugEnable\DebugEnable.sdl
+  ##PROJECT_DEBUG_SDL_PATH: DebugEnable.sdl  ## (Example for using one added in project root)
+
+# Overriding other configurations
+# Refer to https://docs.gitlab.com/ee/ci/yaml/includes.html#override-included-configuration-values for more detail
+
+# Example - Overriding deployed file list
+.build_files:
+  extends:
+    - .build_template  # To obtain "script" key which is required in all job.
+  artifacts:
+    paths:
+      - '*.[Bb][Aa][Tt]'
+      - '*.[Bb][Ii][Nn]'
+      - 'build.log'
+      - '_Aaeon_Release\*.[Bb][Ii][Nn]'
+      - 'Build\*.[Bb][Aa][Tt]'
+      - 'Build\Token.*'
+      - 'Build\Platform.*'
+      - 'Build\GSIOSETUPVAR.*'
+      - 'Build\*.inf'
+      - 'Build\PCIBRDSDL.*'
+      - 'Build\SIOBRDSDL.*'
+      - 'Build\*.hfr'
+      - 'Build\*.vfr'
+      - 'Build\*.asl'
+      - 'Build\*.uni'
+      - 'Build\*.sd'
+      - 'Build\*.mak'
+      - 'Build\*.h'
+      - 'Build\git-cliff\*'  ## for PreRelease result
+      - 'Build\AmiCrbMeRoms\*'  ## for AMI CRB Binary
+      - 'AmiFspBinaryBuildTemp\Token.*'
+      - 'AmiFspBinaryBuildTemp\Platform.*'
+      - 'AmiFspBinaryBuildTemp\*.mak'
+    expire_in: 1day
+    when: always
