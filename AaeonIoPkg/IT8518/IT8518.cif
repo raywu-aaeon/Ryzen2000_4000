@@ -1,0 +1,21 @@
+<component>
+	name = "SuperI/O - IT8518/IT8519"
+	category = IO
+	LocalRoot = "AaeonIoPkg\IT8518\"
+	RefName = "AaeonIoPkg.IT8518"
+[INF]
+"IT8518DxeInit.inf"
+"IT8518PeiInit.inf"
+"IT8518PlatformHookSerialPortLib.inf"
+[files]
+"IT8518.sdl"
+"IT8518.mak"
+"IT8518.chm"
+"EcApiProtocol.h"
+"EcApiProtocol.c"
+"AfterG3\IT85xx_AfterG3.c"
+[parts]
+"AaeonIoPkg.IT8518.IT8518Asl"
+"AaeonIoPkg.IT8518.IT8518Setup"
+"AaeonIoPkg.IT8518.IT85XX_EC1_Bfpi"
+<endComponent>

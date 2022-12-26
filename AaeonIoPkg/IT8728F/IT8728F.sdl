@@ -1,0 +1,3808 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+#*************************************************************************
+#<AMI_FHDR_START>
+#
+# Name:  <IT8728F.sdl>
+#
+# Description:     SDL file to define SIO functions
+#
+#<AMI_FHDR_END>
+#*************************************************************************
+############################################################
+#==============================================================================
+#1.SIO Global Control Tokens
+#==============================================================================
+
+TOKEN
+	Name  = "====== SIO Global Control Tokens ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specfy global control tokens."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "IT8728F_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable IT8728F support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+End
+##RayWu, REMOVE 2015/04/23 >>
+##TOKEN
+##	Name  = "SIO_SUPPORT"
+##	Value  = "1"
+##	Help  = "Main switch to enable SIO support in Project"
+##	TokenType = Boolean
+##	TargetEQU = Yes
+##	TargetMAK = Yes
+##	TargetH = Yes
+##End
+##RayWu, REMOVE 2015/04/23 <<
+TOKEN
+	Name  = "IT8728F_DBG_SUPPORT"
+	Value  = "0" ##RayWu, MODIFY 1->0, 2014/07/28
+	Help  = "Switch to enable SIO serial port debug function support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+End
+
+
+#==============================================================================
+#2.Override AMI SIO Core Settings
+#==============================================================================
+TOKEN
+	Name  = "====== SIO For Debug Setting =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "The debug Serial Port Setting."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "DEBUG_COM_PORT_ADDR"
+	Value  = "$(IT8728F_SERIAL_PORT1_BASE_ADDRESS)"
+	Help  = "Debug Address from Serial Port x."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_LDN_UART"
+	Value  = "$(IT8728F_LDN_UART1)"
+	Help  = "UARTx Login Devive for Debugger."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_SERIAL_PORT1_BASE_ADDRESS"
+	Value  = "0x03F8"
+	Help  = "Base Address of Serial Port 1 (COMA / UART1)."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+
+#==============================================================================
+#3.SIO Logic Device Present Settings
+#==============================================================================
+TOKEN
+	Name  = "=== SIO Logic Device Present Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "All Logic Device Present / Not Present."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "IT8728F_FLOPPY_PORT_PRESENT"
+	Value  = "0" ##RayWu, 1->0, 2015/04/23
+	Help  = "Floppy Port Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_SERIAL_PORT1_PRESENT"
+	Value  = "1"
+	Help  = "Serial Port 1 (COMA / UART1) Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_SERIAL_PORT2_PRESENT"
+	Value  = "1"
+	Help  = "Serial Port 2 (COMB / UART2) Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_PARALLEL_PORT_PRESENT"
+	Value  = "1"
+	Help  = "LPT Port Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_KEYBOARD_PRESENT"
+	Value  = "1"
+	Help  = "Keyboard Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_MOUSE_PRESENT"
+	Value  = "1"
+	Help  = "Mouse Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_GPIO_PORT_PRESENT"
+	Value  = "1"
+	Help  = "GPIO Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_ENV_CONTROLLER_PRESENT"
+	Value  = "1"
+	Help  = "Environment Controller Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_HWM_PRESENT"
+	Value  = "1"
+	Help  = "HWM Port Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_HWM_PRESENT"
+	Value  = "0"
+	Help  = "HWM Port Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8728F_ENV_CONTROLLER_PRESENT" "=" "0"
+End
+
+TOKEN
+	Name  = "IT8728F_CIR_PORT_PRESENT"
+	Value  = "0" ##RayWu, 1->0, 2015/04/23
+	Help  = "CIR Port Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+##RayWu, ADD 2015/07/28 >>
+TOKEN
+	Name  = "IT8728F_BUS_SELECTION"
+	Value  = "1"
+	Help  = "0: Enabled, 1: Disabled"
+	TokenType = Boolean
+	TargetH = Yes
+End
+##RayWu, ADD 2015/07/28 <<
+
+#==============================================================================
+#4.SIO Registers Layout
+#==============================================================================
+TOKEN
+	Name  = "====== SIO Registers Layout =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specfy Register address inside SIO Chip."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "IT8728F_CONFIG_INDEX"
+	Value  = "0x2E"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_CONFIG_DATA"
+	Value  = "0x2F"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_SEL_REGISTER"
+	Value  = "0x07"
+	Help  = "Logical Device Select Register Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_ACTIVATE_REGISTER"
+	Value  = "0x30"
+	Help  = "Device Identification Register Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_BASE1_HI_REGISTER"
+	Value  = "0x60"
+	Help  = "Device BaseAddres Register#1 MSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_BASE1_LO_REGISTER"
+	Value  = "0x61"
+	Help  = "Device BaseAddres Register#1 LSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_BASE2_HI_REGISTER"
+	Value  = "0x62"
+	Help  = "Device BaseAddres Register#2 MSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_BASE2_LO_REGISTER"
+	Value  = "0x63"
+	Help  = "Device BaseAddres Register#2 LSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_IRQ1_REGISTER"
+	Value  = "0x70"
+	Help  = "Device IRQ Register#1 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_IRQ2_REGISTER"
+	Value  = "0x72"
+	Help  = "Device IRQ Register#2 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_DMA1_REGISTER"
+	Value  = "0x74"
+	Help  = "Device DMA Register#1 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_DMA2_REGISTER"
+	Value  = "0x75"
+	Help  = "Device DMA Register#2 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+
+#==============================================================================
+#5. SIO Logical Devices Numbers 
+#==============================================================================
+TOKEN
+	Name  = "====== SIO Logical Devices Numbers ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specfy Devices Logical Number."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_FDC"
+	Value  = "0x00"
+	Help  = "LDN for Floppy Disk Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_UART1"
+	Value  = "0x01"
+	Help  = "LDN for Serial1 Port Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_UART2"
+	Value  = "0x02"
+	Help  = "LDN for Serial2 Port Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_LPT"
+	Value  = "0x03"
+	Help  = "LDN for Serial Port Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_PS2K"
+	Value  = "0x05"
+	Help  = "LDN for PS2 Keyboard Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_PS2M"
+	Value  = "0x06"
+	Help  = "LDN for PS2 Mouse Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_ENV"
+	Value  = "0x04"
+	Help  = "LDN for Environment Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_HWM"
+	Value  = "0x04"
+	Help  = "LDN for Hardware Monitor Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_GPIO"
+	Value  = "0x07"
+	Help  = "LDN for GPIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_LDN_CIR"
+	Value  = "0x0A"
+	Help  = "LDN for Consumer IR Register"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+
+#==============================================================================
+#6. Register value setting
+#==============================================================================
+TOKEN
+	Name  = "=== SIO Global Registers Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO Global Registers Setting"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "IT8728F_CLOCK"
+	Value  = "0"
+	Help  = "0/1 for 48Mhz/24MHz"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_WDT_CLK_SRC"
+	Value  = "1"
+	Help  = "Clock Source Select of Watch Dog Timer.\0 - Internal oscillating clock (Default)\1 - External CLKIN"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_KBC_CLOCK"
+	Value  = "1"
+	Help  = "0/1 for 12Mhz/8MHz"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_PS2_SWAP"
+	Value  = "1"
+	Help  = "Enable/Disable PS/2 swap function"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_JP4"
+	Value  = "0"
+	Help  = "JP4 strap pin value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PWRGD"
+	Value  = "0"
+	Help  = "PWRGD1/2/3 reset by RSTCONIN 0/1 Disable/Enable"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_AMD_PWRGD"
+	Value  = "0"
+	Help  = "0/1:Intel/AMD platform. If some platform is not needed and set PWRGD 1 and then set 0 will cause AMD CPU can not enter OS."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "THERMAL_SENSOR_INTERFACE"
+	Value  = "1"
+	Help  = "00:disable,01:SST slave device,10:PECI,11:SST host"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "=== Hardware monitor Registers Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Hardware monitor Registers Settings"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "IT8728F_TEMP_RESISTOR_MODE_1_ENABLE"
+	Value  = "1"
+	Help  = "1 for Tempin1 are enabled in Thermal Resistor mode \Tempin1 cannot be enabled in both Thermal Resistor and Thermal Diode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_TEMP_DIODE_MODE_1_ENABLE"
+	Value  = "0"
+	Help  = "1 for Tempin1 are enabled in Thermal Diode mode \Tempin1 cannot be enabled in both Thermal Resistor and Thermal Diode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_TEMP_RESISTOR_MODE_2_ENABLE"
+	Value  = "1"
+	Help  = "1 for Tempin2 are enabled in Thermal Resistor mode \Tempin2 cannot be enabled in both Thermal Resistor and Thermal Diode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_TEMP_DIODE_MODE_2_ENABLE"
+	Value  = "0"
+	Help  = "1 for Tempin2 are enabled in Thermal Diode mode \Tempin2 cannot be enabled in both Thermal Resistor and Thermal Diode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_TEMP_RESISTOR_MODE_3_ENABLE"
+	Value  = "1"
+	Help  = "1 for Tempin3 are enabled in Thermal Resistor mode \Tempin3 cannot be enabled in both Thermal Resistor and Thermal Diode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_TEMP_DIODE_MODE_3_ENABLE"
+	Value  = "0"
+	Help  = "1 for Tempin3 are enabled in Thermal Diode mode \Tempin3 cannot be enabled in both Thermal Resistor and Thermal Diode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_TEMP_SST_PECI_HTRR"
+	Value  = "0"
+	Help  = "SST/PECI Host Temperature Reading Report Register Selection \0: None\1: TMPIN1 Temperature Reading Register.(Index 29h)\2: TMPIN2 Temperature Reading Register.(Index 2Ah)\3: TMPIN3 Temperature Reading Register.(Index 2Bh)"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN_PWM_SMOOTH_FREQ_SEL"
+	Value  = "3"
+	Help  = "FAN PWM Smoothing Step Frequency Selection. \0: 1Hz\1: 16Hz\2: 8Hz\3: 4Hz"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN_CTL4_SEL"
+	Value  = "3"
+	Help  = "FAN_CTL4 Selection. \0: The same as FAN_CTL1\1: The same as FAN_CTL2\2: The same as FAN_CTL3\3: None"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN_CTL5_SEL"
+	Value  = "3"
+	Help  = "FAN_CTL5 Selection. \0: The same as FAN_CTL1\1: The same as FAN_CTL2\2: The same as FAN_CTL3\3: None"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN_TAC4_EN"
+	Value  = "0"
+	Help  = "FAN_TAC4 Enable. \0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "FAN_TAC5_EN"
+	Value  = "0"
+	Help  = "FAN_TAC5 Enable. \0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "TMPIN1_ENHANCED_INT_MODE_EN"
+	Value  = "0"
+	Help  = "TMPIN1 Enhanced Interrupt Mode Enable. \0: Original mode\1: The interrupt will be generated when TMPIN1is higher than the high limit or lower than the low limit."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "TMPIN2_ENHANCED_INT_MODE_EN"
+	Value  = "0"
+	Help  = "TMPIN2 Enhanced Interrupt Mode Enable. \0: Original mode\1: The interrupt will be generated when TMPIN1is higher than the high limit or lower than the low limit."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "TMPIN3_ENHANCED_INT_MODE_EN"
+	Value  = "0"
+	Help  = "TMPIN3 Enhanced Interrupt Mode Enable. \0: Original mode\1: The interrupt will be generated when TMPIN1is higher than the high limit or lower than the low limit."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN_CTL1_TEMP_INTERVAL"
+	Value  = "4"
+	Help  = "FAN1 Temperature Interval. \Range: 0 ~ 31"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN_CTL2_TEMP_INTERVAL"
+	Value  = "4"
+	Help  = "FAN2 Temperature Interval. \Range: 0 ~ 31"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN_CTL3_TEMP_INTERVAL"
+	Value  = "4"
+	Help  = "FAN3 Temperature Interval. \Range: 0 ~ 31"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN1_FULL_ON_AS_THERMAL_REACHED"
+	Value  = "0"
+	Help  = "FAN1 Full Limit Control as Thermal out Reached. \0: Disable\1: Enable"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN2_FULL_ON_AS_THERMAL_REACHED"
+	Value  = "0"
+	Help  = "FAN2 Full Limit Control as Thermal out Reached. \0: Disable\1: Enable"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN3_FULL_ON_AS_THERMAL_REACHED"
+	Value  = "0"
+	Help  = "FAN3 Full Limit Control as Thermal out Reached. \0: Disable\1: Enable"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN1_DIRECT_DOWN_CTRL"
+	Value  = "0"
+	Help  = "FAN1 Direct-Down Control. \0: Slow decreasing mode\1: Direct decreasing mode"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN2_DIRECT_DOWN_CTRL"
+	Value  = "0"
+	Help  = "FAN2 Direct-Down Control. \0: Slow decreasing mode\1: Direct decreasing mode"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FAN3_DIRECT_DOWN_CTRL"
+	Value  = "0"
+	Help  = "FAN3 Direct-Down Control. \0: Slow decreasing mode\1: Direct decreasing mode"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "PECI_TEMP_ADJUST_FOR_INTEL_CPU"
+	Value  = "0"
+	Help  = "Enable PECI temperature adjust based on Intel CPU Tjmax feature.\Please select the Thermal Diode Zero Degree Adjust register which is corresponding to the PECI mapping TMPIN.\0: Disabled\1: Thermal Diode Zero Degree Adjust 1 Register.(Index 56h)\2: Thermal Diode Zero Degree Adjust 2 Register.(Index 57h)\3: Thermal Diode Zero Degree Adjust 3 Register.(Index 59h)"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_Secondary_Floppy"
+	Value  = "0"
+	Help  = "On:\EC register Index 0Ah bit 6 must be 0 for secondary floppy\Off:\External Thermal Sensor Host Selection"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_ETSHS_MODE"
+	Value  = "0"
+	Help  = "External Thermal Sensor Host Selection(ETSHS)\0: Disable; 5: SST Slave Device; 6: PECI; 7: SST Host; Others: Reserved"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "====== PECI Basic Setting ========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "The debug Serial Port Setting."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "Host_Target_Address"
+	Value  = "30h"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-100"
+#	Token = "IT8728F_SMF_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "Host_Write_Length"
+	Value  = "01h"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "Host_Read_Length"
+	Value  = "02h"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "Host_Command"
+	Value  = "01h"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "=== SIO Activation Values =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specfy Logical Device Activation Value."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "IT8728F_ACTIVATE_VALUE"
+	Value  = "0x01"
+	Help  = "Value to activate Device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_DEACTIVATE_VALUE"
+	Value  = "0x00"
+	Help  = "Value to deactivate Device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "====== SIO BASE ADDRESS Setting =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO some base address setting "
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "IT8728F_TOTAL_BASE_ADDRESS"
+	Value  = "0xA00"
+	Help  = "It's used for IODecode, System will open TOTAL_BASE_ADDRESS+TOTAL_LENGTH IODecode for GPIO+PME+..."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_GPIO_BASE_ADDRESS"
+	Value  = "$(IT8728F_TOTAL_BASE_ADDRESS)"
+	Help  = "Base Address of GPIO. If changed, please update PeiSetLpcDeviceDecoding() in IT8728FPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_GPIO_LENGTH"
+	Value  = "0x30"
+	Help  = "Base Address's length of GPIO. If changed, please update PeiSetLpcDeviceDecoding() in IT8728FPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO1B"
+	Value  = "$(IT8728F_GPIO_BASE_ADDRESS)"
+	Help  = "Base Address of GPIO Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO1L"
+	Value  = "$(IT8728F_GPIO_LENGTH)"
+	Help  = "Length of GPIO Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_PME_BASE_ADDRESS"
+	Value  = "$(IT8728F_TOTAL_BASE_ADDRESS)+$(IO1L)"
+	Help  = "Base Address of PME Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in IT8728FPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_PME_LENGTH"
+	Value  = "0x10"
+	Help  = "Base Address's length of PME Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in IT8728FPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO2B"
+	Value  = "$(IT8728F_PME_BASE_ADDRESS)"
+	Help  = "Base Address of PME Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO2L"
+	Value  = "$(IT8728F_PME_LENGTH)"
+	Help  = "Length of PME Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_HWM_BASE_ADDRESS"
+	Value  = "$(IT8728F_TOTAL_BASE_ADDRESS)+$(IO1L)+$(IO2L)"
+	Help  = "Base Address of HWM Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in IT8728FPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_HWM_LENGTH"
+	Value  = "0x10"
+	Help  = "Base Address's length of HWM Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in IT8728FPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_HWM_INDEX_PORT"
+	Value  = "($(IT8728F_HWM_BASE_ADDRESS)&0XFFF0)+5"
+	Help  = "HWM Index Port."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_HWM_DATA_PORT"
+	Value  = "$(IT8728F_HWM_INDEX_PORT)+1"
+	Help  = "HWM Index Port."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO3B"
+	Value  = "$(IT8728F_HWM_BASE_ADDRESS)"
+	Help  = "Base Address of HWM Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO3L"
+	Value  = "$(IT8728F_HWM_LENGTH)"
+	Help  = "Length of HWM Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_TOTAL_LENGTH"
+	Value  = "$(IO1L)+$(IO2L)+$(IO3L)"
+	Help  = "IODecode base address 's length. 0xFF >= TOTAL_LENGTH >= GPIO_LENGTH + PME_LENGTH + ..."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "===== SIO token only been used in ASL  ====="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Provide Resource properties."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "SP1O"
+	Value  = "$(IT8728F_CONFIG_INDEX)"
+	Help  = "Super IO Index/Data configuration port for ASL."
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "KBFG"
+	Value  = "0"
+	Help  = "Keyboard wake-up flag."
+	TokenType = Integer
+	TargetASL = Yes
+	Token = "IT8728F_KEYBOARD_PRESENT" "=" "0"
+End
+
+TOKEN
+	Name  = "MSFG"
+	Value  = "0"
+	Help  = "Mouse wake-up flag."
+	TokenType = Integer
+	TargetASL = Yes
+	Token = "IT8728F_MOUSE_PRESENT" "=" "0"
+End
+
+TOKEN
+	Name  = "IOES"
+	Value  = "0x00"
+	Help  = "It is used similar to IOST, when Device's DCAT > 0x0F , then it will be used."
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "====== SIO COM Mode Select Tokens ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO COM Mode Select Tokens."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "IT8728F_SERIAL_PORT1_Clock_Value"
+	Value  = "0x00"
+	Help  = "Bits 1-0,Select the clock source for UART1. 00: 24MHz/13 01: 24MHz/12 10: Reserved 11: Reserved  "
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728F_SERIAL_PORT2_Clock_Value"
+	Value  = "0x00"
+	Help  = "Bits 1-0,Select the clock source for UART1. 00: 24MHz/13 01: 24MHz/12 10: Reserved 11: Reserved  "
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "===== SIO Module Setting   ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO Module Setting"
+	TokenType = Expression
+End
+
+PATH
+	Name  = "IT8728F_DIR"
+End
+
+MODULE
+	Help  = "Includes IT8728F.MAK to Project"
+	File  = "IT8728F.MAK"
+End
+
+ELINK
+	Name  = "$(IT8728F_DIR)\IT8728FSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	Priority  = 40
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "-i $(IT8728F_DIR)"
+	Parent  = "SETUP_VFR_INCLUDES"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsFDC, 0x00, STR_FLOPPY_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsUART,0x00, STR_SERIAL1_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsUART,0x01, STR_SERIAL2_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsLPT, 0x00, STR_PARALLEL_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsCIR, 0x00, STR_IT8728F_CIR_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(IT8728F_DIR)\IT8728FSetup.c"
+	Parent  = "SetupCallbackFiles"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "OemInitIT8728FSetupStrings,"
+	Parent  = "SetupStringInit"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(IT8728F_DIR)\IT8728FSetup.uni"
+	Parent  = "SetupStringFiles"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "*_*_*_ASLPP_FLAGS"
+    Type  = "BuildOptions"
+    Arch  = "COMMON"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "-D SIO_PTS=\_SB.PCI0.SBRG.SIO1.SIOS"
+    Parent  = "*_*_*_ASLPP_FLAGS"
+    Type  = "BuildOptions"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "-D SIO_WAK=\_SB.PCI0.SBRG.SIO1.SIOW"
+    Parent  = "*_*_*_ASLPP_FLAGS"
+    Type  = "BuildOptions"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "IT8728FDxeInit"
+	File  = "IT8728FDxeInit.inf"
+	Package  = "AmiModulePkg"
+End
+
+INFComponent
+	Name  = "IT8728FPeiInit"
+	File  = "IT8728FPeiInit.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "IT8728F_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "IT8728FPlatformHookSerialPortLib"
+	File  = "IT8728FPlatformHookSerialPortLib.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "IT8728F_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PlatformHookLib"
+	Instance  = "AmiModulePkg.IT8728FPlatformHookSerialPortLib"
+	ModuleTypes  = "PEIM PEI_CORE SEC"
+	Token = "IT8728F_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiModulePkg.IT8728FDxeInit"
+	Override  = "AmiModulePkg.SioDxeInit"
+	Token = "IT8728F_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiModulePkg.IT8728FDxeInit"
+	Override  = "AmiModulePkg.SmmGenericSio"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "SMM_SUPPORT" "=" "1"
+	Token = "AMI_SIO_MINOR_VERSION" ">=" "6"
+End
+
+SIODEVICE
+	Name  = "IT8728F"
+	Parent  = "LpcBridge"
+	IndexPort  = 02eh
+	DataPort  = 02fh
+	StdSioType  = "Yes"
+	DevSelReg  = 07h
+	ActivateReg  = 030h
+	ActivateVal  = 01h
+	DeActivateVal  = 00h
+	BaseHiReg1  = 060h
+	BaseLoReg1  = 061h
+	BaseHiReg2  = 062h
+	BaseLoReg2  = 063h
+	Irq1Reg  = 070h
+	Irq2Reg  = 072h
+	Dma1Reg  = 074h
+	Dma2Reg  = 075h
+	GblRegFlag  = "0x1fff00000000"
+	LocalRegFlag  = "0xffff00000000000000000000000000000033000f000000000000000000000000"
+	EnterConfig  = "Script,'Index;Write;87h','Index;Write;1h','Index;Write;55h','Index;Write;55h'"
+	ExitConfig  = "Script,'Index;Write;2h','Data;Write;2h'"
+	SMBIOSStr  = "Test String"
+	GPEbit  = 01dh
+	SleepNum  = 03h
+	##ASLfile  = "'AmiModulePkg\IO\IT8728F\IT8728FDEV.asl','AmiModulePkg\IO\IT8728F\IT8728FEVT.asl'" ##RayWu, REMOVE 2015/04/23
+	ASLfile  = "'AaeonIoPkg\IT8728F\IT8728FDEV.asl','AaeonIoPkg\IT8728F\IT8728FEVT.asl'" ##RayWu, ADD 2015/04/23
+	ASLdeviceName  = "SIO1"
+# >> AAEON_OVERRIDE
+#	ASL_PTS  = "Method;\_SB.PCI0.SBRG.SIO1.SIOS(Arg0)"
+#	ASL_WAK  = "Method;\_SB.PCI0.SBRG.SIO1.SIOW(Arg0)"
+    	ASL_PTS  = "Method;SIO_PTS(Arg0)"
+    	ASL_WAK  = "Method;SIO_WAK(Arg0)"
+# << AAEON_OVERRIDE
+End
+
+SIODEVICE
+	Name  = "IT8728F"
+	Parent  = "LpcBridge"
+	IndexPort  = 02eh
+	DataPort  = 02fh
+	StdSioType  = "Yes"
+	DevSelReg  = 07h
+	ActivateReg  = 030h
+	ActivateVal  = 01h
+	DeActivateVal  = 00h
+	BaseHiReg1  = 060h
+	BaseLoReg1  = 061h
+	BaseHiReg2  = 062h
+	BaseLoReg2  = 063h
+	Irq1Reg  = 070h
+	Irq2Reg  = 072h
+	Dma1Reg  = 074h
+	Dma2Reg  = 075h
+	GblRegFlag  = "0x1fff00000000"
+	LocalRegFlag  = "0xffff00000000000000000000000000000033000f000000000000000000000000"
+	EnterConfig  = "Script,'Index;Write;87h','Index;Write;1h','Index;Write;55h','Index;Write;55h'"
+	ExitConfig  = "Script,'Index;Write;2h','Data;Write;2h'"
+	SMBIOSStr  = "Test String"
+	GPEbit  = 01dh
+	SleepNum  = 03h
+	ASLfile  = "'AaeonIoPkg\IT8728F\IT8728FDEV.asl','AaeonIoPkg\IT8728F\IT8728FEVT.asl','AaeonIoPkg\IT8728F\IT8728FBfpi.asl'"
+	ASLdeviceName  = "SIO1"
+    	ASL_PTS  = "Method;SIO_PTS(Arg0)"
+    	ASL_WAK  = "Method;SIO_WAK(Arg0)"
+    	Token = "AAEON_BFPI_SUPPORT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Fdc"
+	SioDevice  = "IT8728F"
+	Dev_Type  = "dsFDC"
+	LDev_Num  = "00h"
+	UID  = "00h"
+	PnPID  = "0700h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "IT8728F_FDC_Init"
+	GPEbit  = 01dh
+	SleepNum  = 01h
+	ASLfile  = "'AmiModulePkg\GenericSio\FDC.asl'"
+	ASLdeviceName  = "FDC_"
+	Token = "IT8728F_FLOPPY_PORT_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Lpt"
+	SioDevice  = "IT8728F"
+	Dev_Type  = "dsLPT"
+	LDev_Num  = "03h"
+	UID  = "00h"
+	PnPID  = "0400h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "IT8728F_LPT_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AmiModulePkg\GenericSio\LPTE.asl'"
+	ASLdeviceName  = "LPTE"
+	Token = "IT8728F_PARALLEL_PORT_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Ps2Kb"
+	SioDevice  = "IT8728F"
+	Dev_Type  = "dsPS2K"
+	LDev_Num  = "05h"
+	UID  = "00h"
+	PnPID  = "0303h"
+	SIO_RES_Flag  = "0x0"
+	##HasSetup = Yes ##FINETUNE_092_RayWu, REMOVE 2015/02/09
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "IT8728F_KBC_Init"
+	GPEbit  = 01dh
+	SleepNum  = 03h
+	##ASLfile  = "'AmiModulePkg\GenericSio\PS2_KB.asl'" ##RayWu, REMOVE 2015/09/04
+	ASLfile  = "'AaeonIoPkg\ACPI\PS2_KB.asl'" ##RayWu, ADD 2015/09/04
+	ASLdeviceName  = "PS2K"
+	PWRBnotify = Yes
+	WakeEnabled = Yes
+	ASL_HID = Yes ##RayWu, ADD 2014/07/28
+	Token = "IT8728F_KEYBOARD_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Ps2Ms"
+	SioDevice  = "IT8728F"
+	Dev_Type  = "dsPS2M"
+	LDev_Num  = "06h"
+	UID  = "00h"
+	PnPID  = "0f03h"
+	SIO_RES_Flag  = "0x3"
+	##HasSetup = Yes ##FINETUNE_092_RayWu, REMOVE 2015/02/09
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	GPEbit  = 01dh
+	SleepNum  = 03h
+	##ASLfile  = "'AmiModulePkg\GenericSio\PS2_MS.asl'" ##RayWu, REMOVE 2015/09/04
+	ASLfile  = "'AaeonIoPkg\ACPI\PS2_MS.asl'" ##RayWu, ADD 2015/09/04
+	ASLdeviceName  = "PS2M"
+	PWRBnotify = Yes
+	WakeEnabled = Yes
+	ASL_HID = Yes ##RayWu, ADD 2014/07/28
+	Token = "IT8728F_MOUSE_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com1"
+    SioDevice  = "IT8728F"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "01h"
+    ##UID  = "00h" ##RayWu, REMOVE 2015/04/23
+    UID  = "01h" ##RayWu, ADD 2015/04/23
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "IT8728F_COM_Init"
+    SleepNum  = 01h
+    ##ASLfile  = "'AmiModulePkg\GenericSio\UART1.asl'" ##RayWu, REMOVE 2015/04/23
+    ASLfile  = "'AaeonIoPkg\ACPI\UART1.ASL'" ##RayWu, ADD 2015/04/23
+    ASLdeviceName  = "UAR1"
+    Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com2"
+    SioDevice  = "IT8728F"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "02h"
+    ##UID  = "01h" ##RayWu, REMOVE 2015/04/23
+    UID  = "02h" ##RayWu, ADD 2015/04/23
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "IT8728F_COM_Init"
+    SleepNum  = 01h
+    ##ASLfile  = "'AmiModulePkg\GenericSio\UART2.asl'" ##RayWu, REMOVE 2015/04/23
+    ASLfile  = "'AaeonIoPkg\ACPI\UART2.ASL'"
+    ASLdeviceName  = "UAR2"
+    Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Cir"
+	SioDevice  = "IT8728F"
+	Dev_Type  = "dsCIR"
+	LDev_Num  = "0Ah"
+	UID  = "00h"
+	PnPID  = "0510h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "IT8728F_CIR_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AmiModulePkg\IO\IT8728F\CIR.asl'"
+	ASLdeviceName  = "CIR_"
+	Token = "IT8728F_CIR_PORT_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "HwMonitor"
+	SioDevice  = "IT8728F"
+	Dev_Type  = "dsHwMon"
+	LDev_Num  = "04h"
+	UID  = "00h"
+	PnPID  = "0c08h"
+	SIO_RES_Flag  = "0x0"
+	ResBaseAddr1  = "$(IO3B)"
+	ResLength1  = "$(IO3L)"
+	ResBaseAddr2  = "$(IO2B)"
+	ResLength2  = "$(IO2L)"
+	InitRoutine  = "IT8728F_HWM_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AmiModulePkg\GenericSio\NO_RES_STA.asl'"
+	ASLdeviceName  = "HHMD"
+	Token = "IT8728F_HWM_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Gpio"
+	SioDevice  = "IT8728F"
+	Dev_Type  = "dsGPIO"
+	LDev_Num  = "07h"
+	UID  = "01h"
+	PnPID  = "0c08h"
+	SIO_RES_Flag  = "0x0"
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "$(IO1B)"
+	ResLength2  = "$(IO1L)"
+	InitRoutine  = "IT8728F_GPIO_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AmiModulePkg\GenericSio\NO_RES_STA.asl'"
+	ASLdeviceName  = "SGPI"
+	Token = "IT8728F_GPIO_PORT_PRESENT" "=" "1"
+End
+##RayWu, ADD 2014/07/28 >>
+#==============================================================================
+#elink DXE Initialization Source file
+#==============================================================================
+ELINK
+	Name  = "../$(IT8728F_DIR)/IT8728FDxeInit.c"
+	Parent  = "SIOLINK_LIB_SRC"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "../../$(IT8728F_DIR)/IT8728FDxeInit.h"
+	Parent  = "SIOLINK_LIB_H"
+	InvokeOrder = AfterParent
+End
+
+# >> 2015/08/25 Eric
+TOKEN
+	Name = "SMB_SLAVE_0_EN"
+	Value  = "0"
+	Help  = "En/Disable IT8728F/FX SMBUS Slave 0 Enable bit.\0: Disabled, 1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "SMB_SLAVE_1_EN"
+	Value  = "0"
+	Help  = "En/Disable IT8728FX SMBUS Slave 1 Enable bit.\0: Disabled, 1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+# << 2015/08/25 Eric
+##RayWu, ADD 2015/05/05 >>
+TOKEN
+	Name = "GP10"
+	Value  = "1"
+	Help  = "0: PCIRST3#, 1: GP10"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP11"
+	Value  = "1"
+	Help  = "0: PCIRST2#, 1: GP11"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP12"
+	Value  = "1"
+	Help  = "0: PCIRST1#, 1: GP12"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP14"
+	Value  = "1"
+	Help  = "0: PCH_C1 if 0x2A[2] = 1, 1: GP14"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP15"
+	Value  = "1"
+	Help  = "0: PCIRSTIN# if 0x2C[2] = 1, 1: GP15"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP16"
+	Value  = "1"
+	Help  = "0: FAN_CTL5 if EC_INDEX 0x0B[3:2] != 11b, 1: GP16"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP17"
+	Value  = "0"
+	Help  = "0: RI2#, 1: GP17"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP17"
+	Value  = "1"
+	Help  = "0: RI2#, 1: GP17"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP20"
+	Value  = "0"
+	Help  = "0: CTS2#, 1: GP20"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP20"
+	Value  = "1"
+	Help  = "0: CTS2#, 1: GP20"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP21"
+	Value  = "0"
+	Help  = "0: DCD2#, 1: GP21"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP21"
+	Value  = "1"
+	Help  = "0: DCD2#, 1: GP21"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP22"
+	Value  = "1"
+	Help  = "0: Reserved, 1: GP22"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP23"
+	Value  = "1"
+	Help  = "0: CPU_PG, 1: GP23"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP24"
+	Value  = "0"
+	Help  = "0: RTS2#, 1: GP24 / FAN_TAC5"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP24"
+	Value  = "1"
+	Help  = "0: RTS2#, 1: GP24 / FAN_TAC5"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP25"
+	Value  = "0"
+	Help  = "0: DSR2#, 1: GP25 / FAN_TAC4"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP25"
+	Value  = "1"
+	Help  = "0: DSR2#, 1: GP25 / FAN_TAC4"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP26"
+	Value  = "0"
+	Help  = "0: SOUT2, 1: GP26"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP26"
+	Value  = "1"
+	Help  = "0: SOUT2, 1: GP26"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP27"
+	Value  = "0"
+	Help  = "0: SIN2, 1: GP27"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP27"
+	Value  = "1"
+	Help  = "0: SIN2, 1: GP27"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP30"
+	Value  = "0"
+	Help  = "0: ATXPG, 1: GP30"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP31"
+	Value  = "0"
+	Help  = "0: CTS1# if UART1 enabled, 1: GP31"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP31"
+	Value  = "1"
+	Help  = "0: CTS1#, 1: GP31"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP32"
+	Value  = "0"
+	Help  = "0: RI1# if UART1 enabled, 1: GP32"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP32"
+	Value  = "1"
+	Help  = "0: RI1# if UART1 enabled, 1: GP32"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP33"
+	Value  = "0"
+	Help  = "0: DCD1# if UART1 enabled, 1: GP33"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP33"
+	Value  = "1"
+	Help  = "0: DCD1#, 1: GP33"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP34"
+	Value  = "1"
+	Help  = "0: Reserved, 1: GP34"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP35"
+	Value  = "1"
+	Help  = "0: Reserved, 1: GP35"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP36"
+	Value  = "0"
+	Help  = "0: FAN_CTL3, 1: GP36"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728_SMF3_SUPPORT" "=" "1"
+End
+TOKEN
+	Name = "GP36"
+	Value  = "1"
+	Help  = "0: FAN_CTL3, 1: GP36"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728_SMF3_SUPPORT" "=" "0"
+End
+TOKEN
+	Name = "GP37"
+	Value  = "0"
+	Help  = "0: FAN_TAC3, 1: GP37"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FAN_TAC_3" "=" "1"
+End
+TOKEN
+	Name = "GP37"
+	Value  = "1"
+	Help  = "0: FAN_TAC3, 1: GP37"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FAN_TAC_3" "=" "0"
+End
+TOKEN
+	Name = "GP40"
+	Value  = "0"
+	Help  = "0: 3VSBSW#, 1: GP40"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP41"
+	Value  = "0"
+	Help  = "0: SIN1, 1: GP41"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP41"
+	Value  = "1"
+	Help  = "0: SIN1, 1: GP41"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP42"
+	Value  = "0"
+	Help  = "0: PSON#, 1: GP42"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP43"
+	Value  = "0"
+	Help  = "0: PANSWH#, 1: GP43"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP44"
+	Value  = "0"
+	Help  = "0: PWRON#, 1: GP44"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP45"
+	Value  = "0"
+	Help  = "0: DSR1#, 1: GP45"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "1"
+End
+TOKEN
+	Name = "GP45"
+	Value  = "1"
+	Help  = "0: DSR1#, 1: GP45"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_SERIAL_PORT1_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP47"
+	Value  = "1"
+	Help  = "0: Reserved, 1: GP47"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP51"
+	Value  = "0"
+	Help  = "0: FAN_CTL2, 1: GP51"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+	Name = "GP51"
+	Value  = "1"
+	Help  = "0: FAN_CTL2, 1: GP51"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728_SMF2_SUPPORT" "=" "0"
+End
+TOKEN
+	Name = "GP52"
+	Value  = "0"
+	Help  = "0: FAN_TAC2, 1: GP52"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FAN_TAC_2" "=" "1"
+End
+TOKEN
+	Name = "GP52"
+	Value  = "1"
+	Help  = "0: FAN_TAC2, 1: GP52"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FAN_TAC_2" "=" "0"
+End
+TOKEN
+	Name = "GP53"
+	Value  = "0"
+	Help  = "0: SUSC#, 1: GP53"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP54"
+	Value  = "1"
+	Help  = "0: PME#, 1: GP54"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP55"
+	Value  = "0"
+	Help  = "0: CIRRX1 / RSMRST#, 1: GP55"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP56_57_60_61_62"
+	Value  = "0"
+	Help  = "0: MCLK/MDAT/KCLK/KDAT/KRST#, 1: GP56_57_60_61_62"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "GP56_57_60_61_62"
+	Value  = "1"
+	Help  = "0: MCLK/MDAT/KCLK/KDAT/KRST#, 1: GP56_57_60_61_62"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "IT8728F_KEYBOARD_PRESENT" "=" "0"
+	Token = "IT8728F_MOUSE_PRESENT" "=" "0"
+End
+TOKEN
+	Name = "GP65"
+	Value  = "1"
+	Help  = "0: VLDT_EN, 1: GP65"
+	TokenType = Integer
+	TargetH = Yes
+End
+##RayWu, ADD 2015/05/05 <<
+
+##RayWu, REMOVE 2015/05/05 >>
+##TOKEN
+##	Name = "GPIO_1X_IN_OUT"
+##	Value  = "0x00"
+##	Help  = "GPIO Input: 0/Output: 1 register 0xC8"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_2X_IN_OUT"
+##	Value  = "0x00"
+##	Help  = "GPIO Input: 0/Output: 1 register 0xC9"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_3X_IN_OUT"
+##	Value  = "0x00"
+##	Help  = "GPIO Input: 0/Output: 1 register 0xCA"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_4X_IN_OUT"
+##	Value  = "0x00"
+##	Help  = "GPIO Input: 0/Output: 1 register 0xCB"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_5X_IN_OUT"
+##	Value  = "0x00"
+##	Help  = "GPIO Input: 0/Output: 1 register 0xCC"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_6X_IN_OUT"
+##	Value  = "0x00"
+##	Help  = "GPIO Input: 0/Output: 1 register 0xCD"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_7X_IN_OUT"
+##	Value  = "0x00"
+##	Help  = "GPIO Input: 0/Output: 1 register 0xCE"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_8X_IN_OUT"
+##	Value  = "0x00"
+##	Help  = "GPIO Input: 0/Output: 1 register 0xCF"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_1X_PULL_UP"
+##	Value  = "0x00"
+##	Help  = "GPIO Internal Pull Up Enable register 0xB8"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_2X_PULL_UP"
+##	Value  = "0x00"
+##	Help  = "GPIO Internal Pull Up Enable register 0xB9"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_3X_PULL_UP"
+##	Value  = "0x00"
+##	Help  = "GPIO Internal Pull Up Enable register 0xBA"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_4X_PULL_UP"
+##	Value  = "0x00"
+##	Help  = "GPIO Internal Pull Up Enable register 0xBB"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_5X_PULL_UP"
+##	Value  = "0x00"
+##	Help  = "GPIO Internal Pull Up Enable register 0xBC"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_6X_PULL_UP"
+##	Value  = "0x00"
+##	Help  = "GPIO Internal Pull Up Enable register 0xBD"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_1X_OUTPUT_DEFAULT"
+##	Value  = "0x00"
+##	Help  = "If GPIO Set 1 is output, default output value"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_2X_OUTPUT_DEFAULT"
+##	Value  = "0x00"
+##	Help  = "If GPIO Set 2 is output, default output value"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_3X_OUTPUT_DEFAULT"
+##	Value  = "0x00"
+##	Help  = "If GPIO Set 3 is output, default output value"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_4X_OUTPUT_DEFAULT"
+##	Value  = "0x00"
+##	Help  = "If GPIO Set 4 is output, default output value"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_5X_OUTPUT_DEFAULT"
+##	Value  = "0x00"
+##	Help  = "If GPIO Set 5 is output, default output value"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_6X_OUTPUT_DEFAULT"
+##	Value  = "0x00"
+##	Help  = "If GPIO Set 6 is output, default output value"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_7X_OUTPUT_DEFAULT"
+##	Value  = "0x00"
+##	Help  = "If GPIO Set 7 is output, default output value"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_8X_OUTPUT_DEFAULT"
+##	Value  = "0x00"
+##	Help  = "If GPIO Set 8 is output, default output value"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##RayWu, REMOVE 2015/05/05 <<
+
+TOKEN
+	Name  = "---------------------- Hardware Monitor - Temperature ----------------------"
+	Value  = "---------------------- Hardware Monitor - Temperature ----------------------"
+	TokenType = Expression
+End
+# >> 2017/03/22 Eric
+TOKEN
+	Name = "AAEON_CPU_CORE_TEMP_DETECTION"
+	Value  = "0"
+	Help = "Main token for show CPU DTS Temperature in Super I/O Hardware Monitor setup page."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "INTEL_DTS_SUPPORT"
+	Value  = "1"
+	Help = "Enable for support Intel CPU DTS Temperature reading by Super I/O Hardware Monitor setup page"
+	TokenType = Integer
+	TargetH = Yes
+End
+# << 2017/03/22 Eric
+TOKEN
+	Name = "TEMP_ADJUST_1"
+	Value  = "0x00"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "TEMP_ADJUST_2"
+	Value  = "0x00"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "TEMP_ADJUST_3"
+	Value  = "0x00"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "---------------------- Hardware Monitor - Voltage ----------------------"
+	Value  = "---------------------- Hardware Monitor - Voltage ----------------------"
+	TokenType = Expression
+End
+TOKEN
+	Name = "VIN0_7_SUPPORT"
+	Value  = "0x7F"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+	Help = "VIN7 is reserved for IT8728"
+End
+TOKEN
+	Name = "VIN0_RA"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN0_RB"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN1_RA"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN1_RB"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN2_RA"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN2_RB"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN3_RA"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN3_RB"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN4_RA"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN4_RB"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN5_RA"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN5_RB"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN6_RA"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "VIN6_RB"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "---------------------- Hardware Monitor - FAN ----------------------"
+	Value  = "---------------------- Hardware Monitor - FAN ----------------------"
+	TokenType = Expression
+End
+TOKEN
+	Name = "FAN_TAC_1"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name = "FAN_TAC_2"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name = "FAN_TAC_3"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name = "FAN_CTL_POLARITY"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+##TOKEN
+##	Name  = "IT8728F_SMART_FAN_SUPPORT"
+##	Value  = "0"
+##	Help  = "Switch for support IT8728 Smart FAN contorl"
+##	TokenType = Boolean
+##	TargetH = Yes
+##	TargetMAK = Yes
+##End
+TOKEN
+	Name  = "IT8728_SMF1_SUPPORT"
+	Value  = "0"
+	Help  = "Support IT8728 FAN1 Smart Conrtol"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "IT8728_SMF2_SUPPORT"
+	Value  = "0"
+	Help  = "Support IT8728 FAN2 Smart Conrtol"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "IT8728_SMF3_SUPPORT"
+	Value  = "0"
+	Help  = "Support IT8728 FAN3 Smart Conrtol"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+# >> 2017/03/22 Eric
+TOKEN
+	Name  = "IT8728_SMF4_SUPPORT"
+	Value  = "0"
+	Help  = "Support IT8728 FAN4 Smart Conrtol"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "IT8728_SMF5_SUPPORT"
+	Value  = "0"
+	Help  = "Support IT8728 FAN5 Smart Conrtol"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+# << 2017/03/22 Eric
+TOKEN
+	Name  = "IT8728SMF1CONTROL_DEFAULT"
+	Value  = "0"
+	Help  = "Default value of the <CPU FAN1 Smart Control> option\0x00: Disabled\0x01: Enabled\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF1MODE_DEFAULT"
+	Value  = "0"
+	Help  = "Default value of the <CPU FAN1 Control Mode> option\0x00: Manual Mode\0x01: Automatic Mode\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF1PWMDUTY_DEFAULT"
+	Value  = "200"
+	Help  = "Default value of the <CPU FAN1 PWM Duty> option\decimalism 0-255\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF1SPINPWMDUTY_DEFAULT"
+	Value  = "100"
+	Help  = "Default value of the <Spin PWM> option\decimalism 0-255\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF1TEMPSRC_DEFAULT"
+	Value  = "0x00"
+	Help  = "Default value of the CPU FAN1 <Temperature Source> option\0x00 - TMPIN1\0x01 - TMPIN2\0x02 - TMPIN3"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF1OFFTEMP_DEFAULT"
+	Value  = "30"
+	Help  = "Default value of the <Off Control Temperature> option\decimalism 0-127\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF1STARTTEMP_DEFAULT"
+	Value  = "50"
+	Help  = "Default value of the <Start Control Temperature> option\decimalism 0-127\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF1FULLTEMP_DEFAULT"
+	Value  = "80"
+	Help  = "Default value of the <Full Speed Temperature> option\decimalism 0-127\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF1PWMSLOPE_DEFAULT"
+	Value  = "5"
+	Help  = "Default value of the <PWM Slope> option\decimalism 1-15\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF2CONTROL_DEFAULT"
+	Value  = "0"
+	Help  = "Default value of the <SYS FAN1 Smart Control> option\0x00: Disabled\0x01: Enabled\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF2MODE_DEFAULT"
+	Value  = "0"
+	Help  = "Default value of the <SYS FAN1 Control Mode> option\0x00: Manual Mode\0x01: Automatic Mode\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF2PWMDUTY_DEFAULT"
+	Value  = "200"
+	Help  = "Default value of the <SYS FAN1 PWM Duty> option\decimalism 0-255\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF2SPINPWMDUTY_DEFAULT"
+	Value  = "100"
+	Help  = "Default value of the <Spin PWM> option\decimalism 0-255\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF2TEMPSRC_DEFAULT"
+	Value  = "0x01"
+	Help  = "Default value of the SYS FAN1 <Temperature Source> option\0x00 - TMPIN1\0x01 - TMPIN2\0x02 - TMPIN3"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF2OFFTEMP_DEFAULT"
+	Value  = "30"
+	Help  = "Default value of the <Off Control Temperature> option\decimalism 0-127\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF2STARTTEMP_DEFAULT"
+	Value  = "50"
+	Help  = "Default value of the <Start Control Temperature> option\decimalism 0-127\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF2FULLTEMP_DEFAULT"
+	Value  = "80"
+	Help  = "Default value of the <Full Speed Temperature> option\decimalism 0-127\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF2PWMSLOPE_DEFAULT"
+	Value  = "5"
+	Help  = "Default value of the <PWM Slope> option\decimalism 1-15\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+##RayWu, ADD 2014/07/28 <<
+# >> 2015/08/25 Eric
+TOKEN
+	Name  = "IT8728SMF3CONTROL_DEFAULT"
+	Value  = "0"
+	Help  = "Default value of the <SYS FAN2 Smart Control> option\0x00: Disabled\0x01: Enabled\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF3MODE_DEFAULT"
+	Value  = "0"
+	Help  = "Default value of the <SYS FAN2 Control Mode> option\0x00: Manual Mode\0x01: Automatic Mode\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF3PWMDUTY_DEFAULT"
+	Value  = "200"
+	Help  = "Default value of the <SYS FAN2 PWM Duty> option\decimalism 0-255\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF3SPINPWMDUTY_DEFAULT"
+	Value  = "100"
+	Help  = "Default value of the <Spin PWM> option\decimalism 0-255\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF3TEMPSRC_DEFAULT"
+	Value  = "0x02"
+	Help  = "Default value of the SYS FAN2 <Temperature Source> option\0x00 - TMPIN1\0x01 - TMPIN2\0x02 - TMPIN3"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF3OFFTEMP_DEFAULT"
+	Value  = "30"
+	Help  = "Default value of the <Off Control Temperature> option\decimalism 0-127\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF3STARTTEMP_DEFAULT"
+	Value  = "50"
+	Help  = "Default value of the <Start Control Temperature> option\decimalism 0-127\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF3FULLTEMP_DEFAULT"
+	Value  = "80"
+	Help  = "Default value of the <Full Speed Temperature> option\decimalism 0-127\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728SMF3PWMSLOPE_DEFAULT"
+	Value  = "5"
+	Help  = "Default value of the <PWM Slope> option\decimalism 1-15\:OEMSETUP.sd"
+	TokenType = Integer
+	TargetH = Yes
+End
+# << 2015/08/25 Eric
+
+ELINK
+	Name  = "$(IT8728F_DIR)\IT8728FMiscSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(IT8728F_DIR)\IT8728FMiscSetup.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name = "ONEOF_IT8728FRESTOREACPOWERLOSS_DEFAULT"
+	Value = "0"
+	Help = "0: Last State\1: Always On\2: Always Off\3: ByPass"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IT8728FGPIO10_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO11_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO12_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO13_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO14_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO15_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO16_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO17_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO10_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO11_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO12_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO13_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO14_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO15_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO16_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO17_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO10_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO11_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO12_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO13_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO14_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO15_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO16_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO17_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO20_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO21_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO22_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO23_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO24_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO25_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO26_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO27_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO20_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO21_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO22_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO23_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO24_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO25_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO26_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO27_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO20_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO21_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO22_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO23_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO24_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO25_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO26_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO27_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO30_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO31_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO32_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO33_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO34_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO35_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO36_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO37_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO30_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO31_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO32_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO33_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO34_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO35_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO36_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO37_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO30_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO31_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO32_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO33_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO34_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO35_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO36_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO37_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO40_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO41_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO42_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO43_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO44_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO45_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO46_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO47_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO40_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO41_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO42_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO43_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO44_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO45_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO46_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO47_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO40_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO41_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO42_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO43_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO44_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO45_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO46_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO47_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO50_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO51_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO52_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO53_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO54_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO55_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO56_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO57_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO50_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO51_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO52_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO53_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO54_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO55_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO56_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO57_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO50_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO51_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO52_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO53_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO54_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO55_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO56_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO57_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO60_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO61_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO62_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO63_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO64_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO65_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO66_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO67_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO60_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO61_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO62_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO63_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO64_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO65_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO66_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO67_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO60_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO61_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO62_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO63_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO64_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO65_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO66_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO67_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO70_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO71_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO72_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO73_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO74_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO75_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO76_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO77_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO70_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO71_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO72_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO73_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO74_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO75_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO76_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO77_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO70_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO71_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO72_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO73_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO74_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO75_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO76_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO77_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO80_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO81_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO82_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO83_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO84_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO85_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO86_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO87_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO80_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO81_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO82_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO83_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO84_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO85_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO86_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO87_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO80_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO81_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO82_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO83_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO84_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO85_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO86_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728FGPIO87_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**       (C)Copyright 1985-2013, American Megatrends, Inc.          **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+
+##RayWu, REMOVE 2015/05/05 >>
+##TOKEN
+##	Name = "GPIO_1X_SEL"
+##	Value  = "0x7F"
+##	Help  = "Global register 0x25"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_2X_SEL"
+##	Value  = "0x00"
+##	Help  = "Global register 0x26"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_3X_SEL"
+##	Value  = "0xF0"
+##	Help  = "Global register 0x27"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_4X_SEL"
+##	Value  = "0x00"
+##	Help  = "Global register 0x28"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_50_55_SEL"
+##	Value  = "0x07"
+##	Help  = "Global register 0x29, GP50 - GP55: [5:0]"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_5X_6X_PS2_SEL"
+##	Value  = "0x00"
+##	Help  = "Global register 0x29, GP56/GP57/GP60/GP61/GP62: [6]"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name = "GPIO_65_SEL"
+##	Value  = "0x80"
+##	Help  = "Global register 0x29, GP65: [7]"
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##RayWu, REMOVE 2015/05/05 <<

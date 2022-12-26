@@ -1,0 +1,13 @@
+<component>
+	name = "NCT5538DHwMonitor"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\NCT5538D\"
+	RefName = "AaeonIoPkg.NCT5538D.NCT5538DHwMonitor"
+[files]
+"NCT5538DHwmSetup.sdl"
+"NCT5538DHwmSetup.c"
+"NCT5538DHwmSetup.sd"
+"NCT5538DHwmSetup.uni"
+<endComponent>
+
+

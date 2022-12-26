@@ -1,0 +1,35 @@
+################################################################################
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+################################################################################
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AaeonIoPkg
+  PACKAGE_GUID                   = 46FD2824-90DC-4e37-87E7-34DE3D21FD24
+  PACKAGE_VERSION                = 0.1
+
+################################################################################
+#
+# Include Section - list of Include Paths that are provided by this package.
+#                   Comments are used for Keywords and Module Types.
+#
+# Supported Module Types: 
+#  SEC PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_SAL_DRIVER UEFI_DRIVER
+#
+################################################################################
+[Includes]
+
+[LibraryClasses]
+	##  @libraryclass  Provides a library function to get a DXE driver name
+	##
+
+[Protocols]
+
+[Ppis]
+
+[Guids]
+
+[PcdsFixedAtBuild]
+  

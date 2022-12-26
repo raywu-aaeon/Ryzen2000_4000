@@ -1,0 +1,10 @@
+<component>
+	name = "IT8728FBfpi"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\IT8728F\"
+	RefName = "AaeonIoPkg.IT8728F.IT8728FBfpi"
+[files]
+"IT8728FBfpi.sdl"
+"IT8728FBfpi.asl"
+"IT8728FBfpi.mak"
+<endComponent>

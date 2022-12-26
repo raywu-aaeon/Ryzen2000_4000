@@ -1,0 +1,332 @@
+#**********************************************************************
+#<AAEON_FHDR_START>
+#
+# Name:  <IT8625Bfpi.sdl>
+#
+# Description:     SDL file to define AAEON BFPI functions
+#
+#
+#<AAEON_FHDR_END>
+#**********************************************************************
+TOKEN
+	Name  = "IT8625_BFPI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AAEON IT8625 BFPI support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+	Token = "AAEON_BFPI_SUPPORT" "=" "1"
+End
+
+PATH
+	Name  = "IT8625_BFPI_DIR"
+End
+
+TOKEN
+	Name  = "=== Hardware monitor Report Capabilities =========="
+	Value  = "!!!DO NOT CHANGE!!!"
+	Help  = "Tokens in this section basically needs no porting between projects.\Tokens here are for generating information automatically to report capability in BFPI. "
+	TokenType = Expression
+End
+TOKEN
+	Name  = "IT8625_TEMP_SENSOR_NUMBER"
+	Value  = "$(IT8625_TMPIN1_SUPPORT) + $(IT8625_TMPIN2_SUPPORT) + $(IT8625_TMPIN3_SUPPORT) + $(IT8625_TMPIN4_SUPPORT) + $(IT8625_TMPIN5_SUPPORT) + $(IT8625_TMPIN6_SUPPORT)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8625_FAN_SENSOR_NUMBER"
+	Value  = "$(FAN_TAC1) + $(FAN_TAC2) + $(FAN_TAC3) + $(FAN_TAC4) + $(FAN_TAC5) + $(FAN_TAC6)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8625_VOLT_SENSOR_NUMBER"
+	Value  = "$(IT8625_VIN0_SUPPORT) + $(IT8625_VIN1_SUPPORT) + $(IT8625_VIN2_SUPPORT) + $(IT8625_VIN3_SUPPORT) + $(IT8625_VIN4_SUPPORT) + $(IT8625_VIN5_SUPPORT) + $(IT8625_VIN6_SUPPORT) + $(IT8625_3VSB_SUPPORT) + $(IT8625_VBAT_SUPPORT) + $(IT8625_AVCC3_SUPPORT)"
+	Help  = "Voltage sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8625_TMPIN1_STRING"
+	Value  = '"$(IT8625_TMPIN1_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_TMPIN1_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_TMPIN2_STRING"
+	Value  = '"$(IT8625_TMPIN2_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_TMPIN2_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_TMPIN3_STRING"
+	Value  = '"$(IT8625_TMPIN3_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_TMPIN3_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_TMPIN4_STRING"
+	Value  = '"$(IT8625_TMPIN4_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_TMPIN4_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_TMPIN5_STRING"
+	Value  = '"$(IT8625_TMPIN5_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_TMPIN5_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_TMPIN6_STRING"
+	Value  = '"$(IT8625_TMPIN6_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_TMPIN6_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_FAN_1_STRING"
+	Value  = '"$(IT8625_FAN_1_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC1" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_FAN_2_STRING"
+	Value  = '"$(IT8625_FAN_2_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC2" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_FAN_3_STRING"
+	Value  = '"$(IT8625_FAN_3_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC3" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_FAN_4_STRING"
+	Value  = '"$(IT8625_FAN_4_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC4" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_FAN_5_STRING"
+	Value  = '"$(IT8625_FAN_5_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC5" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_FAN_6_STRING"
+	Value  = '"$(IT8625_FAN_6_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC6" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_VIN0_STRING"
+	Value  = '"$(IT8625_VIN0_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_VIN0_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_VIN1_STRING"
+	Value  = '"$(IT8625_VIN1_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_VIN1_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_VIN2_STRING"
+	Value  = '"$(IT8625_VIN2_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_VIN2_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_VIN3_STRING"
+	Value  = '"$(IT8625_VIN3_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_VIN3_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_VIN4_STRING"
+	Value  = '"$(IT8625_VIN4_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_VIN4_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_VIN5_STRING"
+	Value  = '"$(IT8625_VIN5_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_VIN5_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_VIN6_STRING"
+	Value  = '"$(IT8625_VIN6_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_VIN6_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_3VSB_STRING"
+	Value  = '"$(IT8625_3VSB_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_3VSB_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_VBAT_STRING"
+	Value  = '"$(IT8625_VBAT_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_VBAT_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_AVCC3_STRING"
+	Value  = '"$(IT8625_AVCC3_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_AVCC3_SUPPORT" "=" "1"
+End
+
+#==============================================================================
+# Smart Fan Configurations
+#==============================================================================
+TOKEN
+	Name  = "======= Smart FAN Report Capabilities ======="
+	Value  = "!!!DO NOT CHANGE!!!"
+	Help  = "Tokens in this section basically needs no porting between projects. Tokens here are for generate information automatically to report capability in BFPI."
+	TokenType = Expression
+End
+TOKEN
+	Name  = "IT8625_SMF_PRESENT"
+	Value  = "1"
+	Help  = "IT8625 SmartFan control support"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8625_SMF_NUMBER"
+	Value  = "$(IT8625_SMF1_SUPPORT) + $(IT8625_SMF2_SUPPORT) + $(IT8625_SMF3_SUPPORT) + $(IT8625_SMF4_SUPPORT) + $(IT8625_SMF5_SUPPORT) + $(IT8625_SMF6_SUPPORT)"
+	Help  = "Smart FAN controller number from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8625_SMF_MAX_DUTY"
+	Value  = "255"
+	Help  = "Maximum PWM duty cycle value supported by IT8625 SIO"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8625_SMFC_FAN_1_PREFIX"
+	Value  = '"{\"Name\":\"$(IT8625_FAN_1_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_SMFC_FAN_2_PREFIX"
+	Value  = '"{\"Name\":\"$(IT8625_FAN_2_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_SMFC_FAN_3_PREFIX"
+	Value  = '"{\"Name\":\"$(IT8625_FAN_3_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_SMF3_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_SMFC_FAN_4_PREFIX"
+	Value  = '"{\"Name\":\"$(IT8625_FAN_4_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_SMF4_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_SMFC_FAN_5_PREFIX"
+	Value  = '"{\"Name\":\"$(IT8625_FAN_5_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_SMF5_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_SMFC_FAN_6_PREFIX"
+	Value  = '"{\"Name\":\"$(IT8625_FAN_6_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8625_SMF6_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8625_SMFC_FANOUT_SUFFIX"
+	Value  = '"\",\"Maximum PWM\": $(IT8625_SMF_MAX_DUTY),\"Supported Mode\":[\"Manual\",\"Slope-Linear\"],\"Maximum Slop\":15,\"Slope Type\":\"Step\",\"Slope Step\":0.125}"'
+	Help  = "Detail capability for FAN controller.\Suffix only, should be concatenate after PREFIX and 'Temperature Target'."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+#==============================================================================
+# WDT Configurations
+#==============================================================================
+TOKEN
+	Name  = "IT8625_WDT_BFPI_SUPPORT"
+	Value  = "1"
+	Help  = "Watch Dog Time Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SIO_WDT_MAX_TIMEOUT"
+	Value  = "3932100000"
+	Help  = "Maximum time-out value in ms supported by this SIO"
+	TokenType = Integer
+	TargetH = Yes
+End

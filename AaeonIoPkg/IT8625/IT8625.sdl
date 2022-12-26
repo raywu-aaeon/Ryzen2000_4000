@@ -1,0 +1,5387 @@
+TOKEN
+    Name  = "====== SIO Global Control Tokens ======"
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify global control tokens."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "IT8625_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable IT8625 support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+# >> 2020/05/12 AAEON_REMOVE
+#TOKEN
+#    Name  = "SIO_SUPPORT"
+#    Value  = "1"
+#    Help  = "Main switch to enable SIO support in Project"
+#    TokenType = Boolean
+#    TargetEQU = Yes
+#    TargetMAK = Yes
+#    TargetH = Yes
+#End
+#
+#TOKEN
+#    Name  = "KBC_SUPPORT"
+#    Value  = "1"
+#    Help  = "Enable/Disable KBC support"
+#    TokenType = Boolean
+#    TargetEQU = Yes
+#    TargetMAK = Yes
+#    TargetH = Yes
+#End
+# <<  2020/05/12 AAEON_REMOVE
+
+TOKEN
+    Name  = "IT8625_DBG_SUPPORT"
+    Value  = "0"    # AAEON_OVERRIDE, MODIFY 1->0, 2020/05/12
+    Help  = "Switch to enable SIO serial port debug function support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_RECOVERY_SUPPORT"
+    Value  = "0"    # AAEON_OVERRIDE, MODIFY 1->0, 2020/05/12
+    Help  = "Switch to enable SIO recovery support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "====== SIO For Debug Setting =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "The Debug Serial Port Setting."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "DEBUG_COM_PORT_ADDR"
+    Value  = "0x3F8"
+    Help  = "COM Port address the debugger uses. "
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_DBG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "DEBUG_LDN_UART"
+    Value  = "$(IT8625_LDN_UART1)"
+    Help  = "UARTx Logical Devive for Debugger."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "DEBUG_COM_PORT_ADDR" "=" "0x3F8"
+End
+
+TOKEN
+    Name  = "DEBUG_LDN_UART"
+    Value  = "$(IT8625_LDN_UART2)"
+    Help  = "UARTx Logical Devive for Debugger."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "DEBUG_COM_PORT_ADDR" "=" "0x2F8"
+End
+
+TOKEN
+    Name  = "====== SIO For Recovery Setting =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "The Recovery Serial Port Setting."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "RECOVERY_COM_PORT_ADDR"
+    Value  = "0x3F8"
+    Help  = "COM Port address the recovery uses."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_RECOVERY_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "RECOVERY_LDN_UART"
+    Value  = "$(IT8625_LDN_UART1)"
+    Help  = "UARTx Logical Devive for recovery."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "RECOVERY_COM_PORT_ADDR" "=" "0x3F8"
+End
+
+TOKEN
+    Name  = "RECOVERY_LDN_UART"
+    Value  = "$(IT8625_LDN_UART2)"
+    Help  = "UARTx Logical Devive for recovery."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "RECOVERY_COM_PORT_ADDR" "=" "0x2F8"
+End
+
+TOKEN
+    Name  = "=== SIO Logic Device Present Settings =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "All Logic Device Present / Not Present."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "IT8625_PARALLEL_PORT_PRESENT"
+    Value  = "1"
+    Help  = "LPT Port Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_KEYBOARD_PRESENT"
+    Value  = "1"
+    Help  = "Keyboard Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "KBC_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "IT8625_MOUSE_PRESENT"
+    Value  = "1"
+    Help  = "Mouse Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "KBC_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "IT8625_SERIAL_PORT1_PRESENT"
+    Value  = "1"
+    Help  = "Serial Port 1 (COMA / UART1) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_SERIAL_PORT2_PRESENT"
+    Value  = "1"
+    Help  = "Serial Port 2 (COMB / UART2) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_GPIO_PORT_PRESENT"
+    Value  = "1"
+    Help  = "GPIO Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_ENV_CONTROLLER_PRESENT"
+    Value  = "1"
+    Help  = "Environment Controller Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_HWM_PRESENT"
+    Value  = "1"
+    Help  = "HWM Port Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_HWM_PRESENT"
+    Value  = "0"
+    Help  = "HWM Port Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "IT8625_ENV_CONTROLLER_PRESENT" "=" "0"
+End
+
+TOKEN
+    Name  = "IT8625_CIR_PORT_PRESENT"
+    Value  = "0"    # AAEON_OVERRIDE, MODIFY 1->0, 2020/05/12
+    Help  = "CIR Port Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "====== SIO Registers Layout =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify Register address inside SIO Chip."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "IT8625_CONFIG_INDEX"
+    Value  = "0x2E"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_CONFIG_DATA"
+    Value  = "0x2F"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_MB_PNP_MODE_KEY"
+    Value  = "{0x87, 0x01, 0x55, 0x55}"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "IT8625_CONFIG_INDEX" "=" "0x2E"
+End
+
+TOKEN
+    Name  = "IT8625_MB_PNP_MODE_KEY"
+    Value  = "{0x87, 0x01, 0x55, 0xAA}"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "IT8625_CONFIG_INDEX" "=" "0x4E"
+End
+
+TOKEN
+    Name  = "IT8625_LDN_SEL_REGISTER"
+    Value  = "0x07"
+    Help  = "Logical Device Select Register Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_ACTIVATE_REGISTER"
+    Value  = "0x30"
+    Help  = "Device Identification Register Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_BASE1_HI_REGISTER"
+    Value  = "0x60"
+    Help  = "Device BaseAddres Register#1 MSB Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_BASE1_LO_REGISTER"
+    Value  = "0x61"
+    Help  = "Device BaseAddres Register#1 LSB Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_BASE2_HI_REGISTER"
+    Value  = "0x62"
+    Help  = "Device BaseAddres Register#2 MSB Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_BASE2_LO_REGISTER"
+    Value  = "0x63"
+    Help  = "Device BaseAddres Register#2 LSB Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_IRQ1_REGISTER"
+    Value  = "0x70"
+    Help  = "Device IRQ Register#1 Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_IRQ2_REGISTER"
+    Value  = "0x72"
+    Help  = "Device IRQ Register#2 Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_DMA1_REGISTER"
+    Value  = "0x74"
+    Help  = "Device DMA Register#1 Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_DMA2_REGISTER"
+    Value  = "0x75"
+    Help  = "Device DMA Register#2 Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "====== SIO Logical Devices Numbers ======"
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify Devices Logical Number."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "IT8625_LDN_LPT"
+    Value  = "0x03"
+    Help  = "LDN for Serial Port Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_LDN_PS2K"
+    Value  = "0x05"
+    Help  = "LDN for PS2 Keyboard Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_LDN_PS2M"
+    Value  = "0x06"
+    Help  = "LDN for PS2 Mouse Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_LDN_ENV"
+    Value  = "0x04"
+    Help  = "LDN for Environment Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_LDN_GPIO"
+    Value  = "0x07"
+    Help  = "LDN for GPIO."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_LDN_UART1"
+    Value  = "0x01"
+    Help  = "LDN for Serial Port 1 Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_LDN_UART2"
+    Value  = "0x02"
+    Help  = "LDN for Serial Port 2 Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_LDN_CIR"
+    Value  = "0x0A"
+    Help  = "LDN for Consumer IR Register"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "=== SIO Global Registers Settings =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "SIO Global Registers Setting"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "IT8625_CLK_SELECT"
+    Value  = "1"    # AAEON_OVERRIDE, MODIFY 0->1, 2020/05/12
+    Help  = "0/1 for CLK Select: Internal DLL_CLK/External CLK_IN."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_CLK_IN_SELECT"
+    Value  = "0"
+    Help  = "0/1 for CLK_IN Select: CLKIN/PCICLK"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_CLOCK"
+    Value  = "1"    # AAEON_OVERRIDE, MODIFY 0->1, 2020/05/12
+    Help  = "0/1 for CLKIN Frequence: 48Mhz/24MHz"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_WDT_LED_CLOCK_SRC"
+    Value  = "1"
+    Help  = "0/1 for Clock Source Select of Watch Dog Timer and LED Blinking: Internal oscillating clock/External CLKIN"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_PCICLK"
+    Value  = "0"
+    Help  = "0/1 for PCICLK Select: 33Mhz/25MHz"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_DPLL_RESET"
+    Value  = "0"
+    Help  = "0/1 for DPLL Reset: Disable/Enable. BX/DX version please keep default value 0"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_KBC_CLOCK"
+    Value  = "1"
+    Help  = "0/1 for 12Mhz/8MHz"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_PS2_SWAP"
+    Value  = "1"
+    Help  = "0/1 for Enable/Disable PS/2 swap function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "JP4"
+    Value  = "0"
+    Help  = "JP4 strap pin value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "=== Hardware monitor Registers Settings =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Hardware monitor Registers Settings"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "TMPIN1_SRC_SEL"
+    Value  = "0"
+    Help  = "TMPIN1 (29h) Source Selection\0: TMPIN1 Pin (TD1 or TR1)\1: TMPIN2 Pin (TD2 or TR2)\2: TMPIN3 Pin (TD3 or TR3)\4: PECI1(0x30) Domain0.\Please refer to TMPIN Source Selection Table in IT8625 datahseet"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "TMPIN2_SRC_SEL"
+    Value  = "1"
+    Help  = "TMPIN2 (2Ah) Source Selection\0: TMPIN1 Pin (TD1 or TR1)\1: TMPIN2 Pin (TD2 or TR2)\2: TMPIN3 Pin (TD3 or TR3)\4: PECI1(0x30) Domain0.\Please refer to TMPIN Source Selection Table in IT8625 datahseet"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "TMPIN3_SRC_SEL"
+    Value  = "2"
+    Help  = "TMPIN3 (2Bh) Source Selection\0: TMPIN1 Pin (TD1 or TR1)\1: TMPIN2 Pin (TD2 or TR2)\2: TMPIN3 Pin (TD3 or TR3)\4: PECI1(0x30) Domain0.\Please refer to TMPIN Source Selection Table in IT8625 datahseet"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "TMPIN4_SRC_SEL"
+    Value  = "4"
+    Help  = "TMPIN4 (2Ch) Source Selection\0: TMPIN1 Pin (TD1 or TR1)\1: TMPIN2 Pin (TD2 or TR2)\2: TMPIN3 Pin (TD3 or TR3)\4: PECI1(0x30) Domain0.\Please refer to TMPIN Source Selection Table in IT8625 datahseet"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "TMPIN5_SRC_SEL"
+    Value  = "0"
+    Help  = "TMPIN5 (2Dh) Source Selection\0: TMPIN1 Pin (TD1 or TR1)\1: TMPIN2 Pin (TD2 or TR2)\2: TMPIN3 Pin (TD3 or TR3)\4: PECI1(0x30) Domain0.\Please refer to TMPIN Source Selection Table in IT8625 datahseet"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "TMPIN6_SRC_SEL"
+    Value  = "0"
+    Help  = "TMPIN6 (2Eh) Source Selection\0: TMPIN1 Pin (TD1 or TR1)\1: TMPIN2 Pin (TD2 or TR2)\2: TMPIN3 Pin (TD3 or TR3)\4: PECI1(0x30) Domain0.\Please refer to TMPIN Source Selection Table in IT8625 datahseet"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_TEMP_RESISTOR_MODE_1_ENABLE"
+    Value  = "1"
+    Help  = "1 for Tempin1 are enabled in Thermal Resistor mode \Tempin1 cannot be enabled in both Thermal Resistor and Thermal Diode"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_TEMP_DIODE_MODE_1_ENABLE"
+    Value  = "0"
+    Help  = "1 for Tempin1 are enabled in Thermal Diode mode \Tempin1 cannot be enabled in both Thermal Resistor and Thermal Diode"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_TEMP_RESISTOR_MODE_2_ENABLE"
+    Value  = "1"
+    Help  = "1 for Tempin2 are enabled in Thermal Resistor mode \Tempin2 cannot be enabled in both Thermal Resistor and Thermal Diode"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_TEMP_DIODE_MODE_2_ENABLE"
+    Value  = "0"
+    Help  = "1 for Tempin2 are enabled in Thermal Diode mode \Tempin2 cannot be enabled in both Thermal Resistor and Thermal Diode"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_TEMP_RESISTOR_MODE_3_ENABLE"
+    Value  = "1"
+    Help  = "1 for Tempin3 are enabled in Thermal Resistor mode \Tempin3 cannot be enabled in both Thermal Resistor and Thermal Diode"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_TEMP_DIODE_MODE_3_ENABLE"
+    Value  = "0"
+    Help  = "1 for Tempin3 are enabled in Thermal Diode mode \Tempin3 cannot be enabled in both Thermal Resistor and Thermal Diode"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FAN_TAC1"
+    Value  = "1"
+    Help  = "0/1 for Disable/Enable Fan Tachometer 1"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FAN_TAC2"
+    Value  = "1"
+    Help  = "0/1 for Disable/Enable Fan Tachometer 2"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "FAN_TAC3"
+    Value  = "1"
+    Help  = "0/1 for Disable/Enable Fan Tachometer 3"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FAN_TAC4"
+    Value  = "1"
+    Help  = "0/1 for Disable/Enable Fan Tachometer 4"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FAN_TAC5"
+    Value  = "1"
+    Help  = "0: CTS1# if UART1 enabled or GP31 if UART1 disabled\1: Fan Tachometer 5"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "FAN_TAC5"
+    Value  = "0"
+    Help  = "0: CTS1# if UART1 enabled or GP31 if UART1 disabled\1: Fan Tachometer 5"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+TOKEN
+    Name  = "FAN_TAC6"
+    Value  = "1"
+    Help  = "0/1 for Disable/Enable Fan Tachometer 6"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_SMF1_SUPPORT"
+    Value  = "0"
+    Help  = "Support IT8625 FAN1 Smart Conrtol"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_SMF2_SUPPORT"
+    Value  = "0"
+    Help  = "Support IT8625 FAN2 Smart Conrtol"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_SMF3_SUPPORT"
+    Value  = "0"
+    Help  = "Support IT8625 FAN3 Smart Conrtol"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_SMF4_SUPPORT"
+    Value  = "0"
+    Help  = "Support IT8625 FAN4 Smart Conrtol"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_SMF5_SUPPORT"
+    Value  = "0"
+    Help  = "Support IT8625 FAN5 Smart Conrtol"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_SMF6_SUPPORT"
+    Value  = "0"
+    Help  = "Support IT8625 FAN6 Smart Conrtol"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "IT8625_PECI"
+    Value  = "1"
+    Help  = "0/1 for Disable/Enable PECI"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "PECI_TEMP_ADJUST_FOR_INTEL_CPU"
+    Value  = "0"
+    Help  = "Enable PECI temperature adjust based on Intel CPU Tjmax feature.\Please select the Zero Degree Adjust register which is corresponding to the PECI mapping TMPIN.\0: Disabled\1: TMPIN1 Zero Degree Adjust Register.(Index 56h)\2: TMPIN2 Zero Degree Adjust Register.(Index 57h)\3: TMPIN3 Zero Degree Adjust Register.(Index 59h)\4: TMPIN4 Zero Degree Adjust Register.(Index 5Ah)\5: TMPIN5 Zero Degree Adjust Register.(Index 90h)\6: TMPIN6 Zero Degree Adjust Register.(Index 91h)"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "=== SIO Activation Values =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify Logical Device Activation Value."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "IT8625_ACTIVATE_VALUE"
+    Value  = "0x01"
+    Help  = "Value to activate Device."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_DEACTIVATE_VALUE"
+    Value  = "0x00"
+    Help  = "Value to deactivate Device."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "====== SIO BASE ADDRESS Setting =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "SIO some base address setting "
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "IT8625_TOTAL_BASE_ADDRESS"
+    Value  = "0xA00"
+    Help  = "It's used for IODecode, System will open TOTAL_BASE_ADDRESS+TOTAL_LENGTH IODecode for GPIO+PME+..."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_GPIO_BASE_ADDRESS"
+    Value  = "$(IT8625_TOTAL_BASE_ADDRESS)"
+    Help  = "Base Address of GPIO. If changed, please update PeiSetLpcDeviceDecoding() in IT8625PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_GPIO_LENGTH"
+    Value  = "0x10"
+    Help  = "Base Address's length of GPIO. If changed, please update PeiSetLpcDeviceDecoding() in IT8625PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO1B"
+    Value  = "$(IT8625_GPIO_BASE_ADDRESS)"
+    Help  = "Base Address of GPIO Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO1L"
+    Value  = "$(IT8625_GPIO_LENGTH)"
+    Help  = "Length of GPIO Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_PME_BASE_ADDRESS"
+    Value  = "$(IT8625_TOTAL_BASE_ADDRESS)+$(IO1L)"
+    Help  = "Base Address of PME Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in IT8625PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_PME_LENGTH"
+    Value  = "0x10"
+    Help  = "Base Address's length of PME Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in IT8625PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO2B"
+    Value  = "$(IT8625_PME_BASE_ADDRESS)"
+    Help  = "Base Address of PME Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO2L"
+    Value  = "$(IT8625_PME_LENGTH)"
+    Help  = "Length of PME Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_HWM_BASE_ADDRESS"
+    Value  = "$(IT8625_TOTAL_BASE_ADDRESS)+$(IO1L)+$(IO2L)"
+    Help  = "Base Address of HWM Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in IT8625PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_HWM_LENGTH"
+    Value  = "0x10"
+    Help  = "Base Address's length of HWM Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in IT8625PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_HWM_INDEX_PORT"
+    Value  = "($(IT8625_HWM_BASE_ADDRESS)&0XFFF0)+5"
+    Help  = "HWM Index Port."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_HWM_DATA_PORT"
+    Value  = "$(IT8625_HWM_INDEX_PORT)+1"
+    Help  = "HWM Index Port."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO3B"
+    Value  = "$(IT8625_HWM_BASE_ADDRESS)"
+    Help  = "Base Address of HWM Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO3L"
+    Value  = "$(IT8625_HWM_LENGTH)"
+    Help  = "Length of HWM Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IT8625_TOTAL_LENGTH"
+    Value  = "$(IO1L)+$(IO2L)+$(IO3L)"
+    Help  = "IODecode base address 's length. 0xFF >= TOTAL_LENGTH >= GPIO_LENGTH + PME_LENGTH + ..."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "===== SIO token only been used in ASL  ====="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Provide Resource properties."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "SP1O"
+    Value  = "$(IT8625_CONFIG_INDEX)"
+    Help  = "Super IO Index/Data configuration port for ASL."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "KBFG"
+    Value  = "0"
+    Help  = "Keyboard wake-up flag."
+    TokenType = Integer
+    TargetASL = Yes
+    Token = "IT8625_KEYBOARD_PRESENT" "=" "0"
+End
+
+TOKEN
+    Name  = "MSFG"
+    Value  = "0"
+    Help  = "Mouse wake-up flag."
+    TokenType = Integer
+    TargetASL = Yes
+    Token = "IT8625_MOUSE_PRESENT" "=" "0"
+End
+
+TOKEN
+    Name  = "IOES"
+    Value  = "0x00"
+    Help  = "It is used similar to IOST, when Device's DCAT > 0x0F , then it will be used."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "===== SIO Module Setting   ======"
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "SIO Module Setting"
+    TokenType = Expression
+End
+
+PATH
+    Name  = "IT8625_DIR"
+End
+
+MODULE
+    Help  = "Includes IT8625.MAK to Project"
+    File  = "IT8625.mak"
+End
+
+ELINK
+    Name  = "$(IT8625_DIR)\IT8625Setup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    Priority  = 40
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "-i $(IT8625_DIR)"
+    Parent  = "SETUP_VFR_INCLUDES"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "{dsUART,0x00, STR_SERIAL1_CONFIG_VALUE},"
+    Parent  = "SetupStrTableList"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "{dsUART,0x01, STR_SERIAL2_CONFIG_VALUE},"
+    Parent  = "SetupStrTableList"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "{dsLPT, 0x00, STR_PARALLEL_CONFIG_VALUE},"
+    Parent  = "SetupStrTableList"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "{dsCIR, 0x00, STR_IT8625_CIR_CONFIG_VALUE},"
+    Parent  = "SetupStrTableList"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "$(IT8625_DIR)/IT8625Setup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "OemInitIT8625SetupStrings,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "$(IT8625_DIR)/IT8625Setup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "*_*_*_ASLPP_FLAGS"
+    Type  = "BuildOptions"
+    Arch  = "COMMON"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "-D SIO_PTS=\_SB.PCI0.SBRG.SIO1.SIOS"
+    Parent  = "*_*_*_ASLPP_FLAGS"
+    Type  = "BuildOptions"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "-D SIO_WAK=\_SB.PCI0.SBRG.SIO1.SIOW"
+    Parent  = "*_*_*_ASLPP_FLAGS"
+    Type  = "BuildOptions"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "IT8625DxeInit"
+    File  = "IT8625DxeInit.inf"
+    Package  = "AmiModulePkg"
+End
+
+INFComponent
+    Name  = "IT8625PeiInit"
+    File  = "IT8625PeiInit.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+    Token = "IT8625_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "IT8625PlatformHookSerialPortLib"
+    File  = "IT8625PlatformHookSerialPortLib.inf"
+    Package  = "AmiModulePkg"
+    Token = "IT8625_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "PlatformHookLib"
+    Instance  = "AmiModulePkg.IT8625PlatformHookSerialPortLib"
+    ModuleTypes  = "PEIM PEI_CORE SEC"
+    Token = "IT8625_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.IT8625DxeInit"
+    Override  = "AmiModulePkg.SioDxeInit"
+    ModuleTypes  = "DXE_DRIVER"     
+    Token = "IT8625_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.IT8625DxeInit"
+    Override  = "AmiModulePkg.SmmGenericSio"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "IT8625_SUPPORT" "=" "1"
+    Token = "SMM_SUPPORT" "=" "1"
+    Token = "AMI_SIO_MINOR_VERSION" ">=" "6"
+End
+
+# >> AAEON_OVERRIDE - To avoid system hangs up when GetVariable in IT8625MiscSetupFunction()
+#FFS_FILE
+#    Name  = "IT8625PeiInit"
+#    FD_AREA  = "FV_BB"
+#    INFComponent  = "AmiModulePkg.IT8625PeiInit"
+#    Apriori_Index  = "0"
+#End
+# << AAEON_OVERRIDE - Apriori_Index = 0 will perform before the NvramPei.inf (NVRAM Init) to cause the issue
+
+SIODEVICE
+    Name  = "IT8625"
+    Parent  = "LpcBridge"
+    IndexPort  = 02eh
+    DataPort  = 02fh
+    StdSioType  = "Yes"
+    DevSelReg  = 07h
+    ActivateReg  = 030h
+    ActivateVal  = 01h
+    DeActivateVal  = 00h
+    BaseHiReg1  = 060h
+    BaseLoReg1  = 061h
+    BaseHiReg2  = 062h
+    BaseLoReg2  = 063h
+    Irq1Reg  = 070h
+    Irq2Reg  = 072h
+    Dma1Reg  = 074h
+    Dma2Reg  = 075h
+    GblRegFlag  = "0x3ff800000000"
+    LocalRegFlag  = "0x3fff101f000fffffffff000000000000003f000f000000000001000000000000"
+    EnterConfig  = "Script,'Index;Write;87h','Index;Write;1h','Index;Write;55h','Index;Write;55h'"
+    ExitConfig  = "Script,'Index;Write;2h','Data;Write;2h'"
+    SMBIOSStr  = "Test String"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg/IT8625/IT8625Dev.asl','AaeonIoPkg/IT8625/IT8625Evt.asl'"
+    ASLdeviceName  = "SIO1"
+    ASL_PTS  = "Method;SIO_PTS(Arg0)"
+    ASL_WAK  = "Method;SIO_WAK(Arg0)"
+End
+SIODEVICE
+    Name  = "IT8625"
+    Parent  = "LpcBridge"
+    IndexPort  = 02eh
+    DataPort  = 02fh
+    StdSioType  = "Yes"
+    DevSelReg  = 07h
+    ActivateReg  = 030h
+    ActivateVal  = 01h
+    DeActivateVal  = 00h
+    BaseHiReg1  = 060h
+    BaseLoReg1  = 061h
+    BaseHiReg2  = 062h
+    BaseLoReg2  = 063h
+    Irq1Reg  = 070h
+    Irq2Reg  = 072h
+    Dma1Reg  = 074h
+    Dma2Reg  = 075h
+    GblRegFlag  = "0x3ff800000000"
+    LocalRegFlag  = "0x3fff101f000fffffffff000000000000003f000f000000000001000000000000"
+    EnterConfig  = "Script,'Index;Write;87h','Index;Write;1h','Index;Write;55h','Index;Write;55h'"
+    ExitConfig  = "Script,'Index;Write;2h','Data;Write;2h'"
+    SMBIOSStr  = "Test String"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg/IT8625/IT8625Dev.asl','AaeonIoPkg/IT8625/IT8625Evt.asl','AaeonIoPkg\IT8625\IT8625Bfpi.asl'"
+    ASLdeviceName  = "SIO1"
+    ASL_PTS  = "Method;SIO_PTS(Arg0)"
+    ASL_WAK  = "Method;SIO_WAK(Arg0)"
+    Token = "AAEON_BFPI_SUPPORT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Lpt"
+    SioDevice  = "IT8625"
+    Dev_Type  = "dsLPT"
+    LDev_Num  = "03h"
+    UID  = "00h"
+    PnPID  = "0400h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "IT8625_LPT_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg/IT8625/Lpte.asl'"
+    ASLdeviceName  = "LPTE"
+    ASL_HID = Yes
+    Token = "IT8625_PARALLEL_PORT_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Ps2Kb"
+    SioDevice  = "IT8625"
+    Dev_Type  = "dsPS2K"
+    LDev_Num  = "05h"
+    UID  = "00h"
+    PnPID  = "0303h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "IT8625_KBC_Init"
+    GPEbit  = 01dh
+    SleepNum  = 03h
+    ASLfile  = "'AmiModulePkg/GenericSio/PS2_KB.ASL'"
+    ASLdeviceName  = "PS2K"
+    WakeEnabled = Yes
+    Token = "IT8625_KEYBOARD_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Ps2Ms"
+    SioDevice  = "IT8625"
+    Dev_Type  = "dsPS2M"
+    LDev_Num  = "06h"
+    UID  = "00h"
+    PnPID  = "0f03h"
+    SIO_RES_Flag  = "0x3"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    GPEbit  = 01dh
+    SleepNum  = 03h
+    ASLfile  = "'AmiModulePkg/GenericSio/PS2_MS.ASL'"
+    ASLdeviceName  = "PS2M"
+    WakeEnabled = Yes
+    Token = "IT8625_MOUSE_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com1"
+    SioDevice  = "IT8625"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "01h"
+    UID  = "00h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "IT8625_COM_Init"
+    SleepNum  = 01h
+    ##ASLfile  = "'AmiModulePkg/GenericSio/UART1.ASL'"
+    ASLfile  = "'AaeonIoPkg\ACPI\UART1.asl'"
+    ASLdeviceName  = "UAR1"
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com2"
+    SioDevice  = "IT8625"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "02h"
+    UID  = "01h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "IT8625_COM_Init"
+    SleepNum  = 01h
+    ##ASLfile  = "'AmiModulePkg/GenericSio/UART2.ASL'"
+    ASLfile  = "'AaeonIoPkg\ACPI\UART2.ASL'"
+    ASLdeviceName  = "UAR2"
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Cir"
+    SioDevice  = "IT8625"
+    Dev_Type  = "dsCIR"
+    LDev_Num  = "0Ah"
+    UID  = "00h"
+    PnPID  = "0510h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "IT8625_CIR_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg/IT8625/Cir.asl'"
+    ASLdeviceName  = "CIR_"
+    Token = "IT8625_CIR_PORT_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "HwMonitor"
+    SioDevice  = "IT8625"
+    Dev_Type  = "dsHwMon"
+    LDev_Num  = "04h"
+    UID  = "00h"
+    PnPID  = "0c08h"
+    SIO_RES_Flag  = "0x0"
+    ResBaseAddr1  = "$(IO3B)"
+    ResLength1  = "$(IO3L)"
+    ResBaseAddr2  = "$(IO2B)"
+    ResLength2  = "$(IO2L)"
+    InitRoutine  = "IT8625_HWM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+    ASLdeviceName  = "HHMD"
+    Token = "IT8625_HWM_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Gpio"
+    SioDevice  = "IT8625"
+    Dev_Type  = "dsGPIO"
+    LDev_Num  = "07h"
+    UID  = "01h"
+    PnPID  = "0c08h"
+    SIO_RES_Flag  = "0x0"
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "$(IO1B)"
+    ResLength2  = "$(IO1L)"
+    InitRoutine  = "IT8625_GPIO_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+    ASLdeviceName  = "SGPI"
+    Token = "IT8625_GPIO_PORT_PRESENT" "=" "1"
+End
+
+###########################################################
+#                   IT8625 Misc Function
+###########################################################
+ELINK
+    Name  = "$(IT8625_DIR)\IT8625MiscSetup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+ELINK
+    Name  = "$(IT8625_DIR)\IT8625MiscSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "---------------------- IT8625 Multi-Function Configuration ----------------------"
+    Value  = "---------------------- IT8625 Multi-Function Configuration ----------------------"
+    TokenType = Expression
+End
+TOKEN
+    Name = "PIN_81_FUN_SEL"
+    Value  = "1"
+    Help  = "0: PCIRST3#, 1: GP10"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_31_FUN_SEL"
+    Value  = "1"
+    Help  = "0: PCIRST2#, 1: GP11"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_30_FUN_SEL"
+    Value  = "1"
+    Help  = "0: PCIRST1# / PCH_C0A (if 2Ah[6]=1), 1: GP12"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_13_FUN_SEL"
+    Value  = "1"
+    Help  = "0: 5VSB_CTRL# if EUP enabled (LDN4\FAh[1]=1), 1: GP13"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_28_FUN_SEL"
+    Value  = "1"
+    Help  = "0: CHARGP14 (if 24h[0]=0), 1: GP14"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_128_FUN_SEL"
+    Value  = "0"
+    Help  = "0: PCIRSTIN# if bit2 of index 2C is 1 / CIRTX2 if bit7 of CIR IER = 1 (Default) / FAN_CTL4 if FAN4 enabled, 1: GP15"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SMF4_SUPPORT" "=" "1"
+End
+TOKEN
+    Name = "PIN_128_FUN_SEL"
+    Value  = "1"
+    Help  = "0: PCIRSTIN# if bit2 of index 2C is 1 / CIRTX2 if bit7 of CIR IER = 1 (Default) / FAN_CTL4 if FAN4 enabled, 1: GP15"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SMF4_SUPPORT" "=" "0"
+End
+TOKEN
+    Name = "PIN_127_FUN_SEL"
+    Value  = "0"
+    Help  = "0: CIRRX2 (if bit6 of CIR IER = 1) / FAN_TAC4, 1: GP16"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "FAN_TAC4" "=" "1"
+End
+TOKEN
+    Name = "PIN_127_FUN_SEL"
+    Value  = "1"
+    Help  = "0: CIRRX2 (if bit6 of CIR IER = 1) / FAN_TAC4, 1: GP16"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "FAN_TAC4" "=" "0"
+End
+TOKEN
+    Name = "PIN_25_FUN_SEL"
+    Value  = "0"
+    Help  = "0: RI2#, 1: GP17"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_25_FUN_SEL"
+    Value  = "1"
+    Help  = "0: RI2#, 1: GP17"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_24_FUN_SEL"
+    Value  = "0"
+    Help  = "0: CTS2#, 1: GP20"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_24_FUN_SEL"
+    Value  = "1"
+    Help  = "0: CTS2#, 1: GP20"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_23_FUN_SEL"
+    Value  = "0"
+    Help  = "0: DCD2#, 1: GP21"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_23_FUN_SEL"
+    Value  = "1"
+    Help  = "0: DCD2#, 1: GP21"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_22_FUN_SEL"
+    Value  = "1"
+    Help  = "0: PCH_D0B if 2Ah[3]=0 and 2Bh[5]=0 (Default) / THERMTRIP# (please refer to LDN7 Index E7h[0] for the detail), 1: GP22"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_21_FUN_SEL"
+    Value  = "1"
+    Help  = "0: DPWROK (Default), 1: GP23"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_20_FUN_SEL"
+    Value  = "0"
+    Help  = "0: RTS2#, 1: GP24"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_20_FUN_SEL"
+    Value  = "1"
+    Help  = "0: RTS2#, 1: GP24"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_19_FUN_SEL"
+    Value  = "0"
+    Help  = "0: DSR2#, 1: GP25"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_19_FUN_SEL"
+    Value  = "1"
+    Help  = "0: DSR2#, 1: GP25"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_18_FUN_SEL"
+    Value  = "0"
+    Help  = "0: SOUT2 / IO80_OUT2 (if LDN2 Index F0h[5]=1), 1: GP26"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_18_FUN_SEL"
+    Value  = "1"
+    Help  = "0: SOUT2 / IO80_OUT2 (if LDN2 Index F0h[5]=1), 1: GP26"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_17_FUN_SEL"
+    Value  = "0"
+    Help  = "0: SIN2, 1: GP27"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_17_FUN_SEL"
+    Value  = "1"
+    Help  = "0: SIN2, 1: GP27"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT2_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_16_FUN_SEL"
+    Value  = "0"
+    Help  = "0: ATXPG (Default), 1: GP30"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_126_FUN_SEL"
+    Value  = "1"
+    Help  = "0: CTS1# if UART1 enabled and FAN_TAC5 disable or FAN_TAC5 if UART1 disabled\1: GP31"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_126_FUN_SEL"
+    Value  = "0"
+    Help  = "0: CTS1# if UART1 enabled and FAN_TAC5 disable or FAN_TAC5 if UART1 disabled\1: GP31"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_125_FUN_SEL"
+    Value  = "0"
+    Help  = "0: RI1# if UART1 enabled, 1: GP32"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_125_FUN_SEL"
+    Value  = "1"
+    Help  = "0: RI1# if UART1 enabled, 1: GP32"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_124_FUN_SEL"
+    Value  = "0"
+    Help  = "0: DCD1# if UART1 enabled / FAN_CTL5, 1: GP33"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "|" "$(IT8625_SMF5_SUPPORT)"
+End
+TOKEN
+    Name = "PIN_124_FUN_SEL"
+    Value  = "1"
+    Help  = "0: DCD1# if UART1 enabled / FAN_CTL5, 1: GP33"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "0"
+    Token = "IT8625_SMF5_SUPPORT" "=" "0"
+End
+TOKEN
+    Name = "PIN_11_FUN_SEL"
+    Value  = "1"
+    Help  = "0: RSTCONIN, 1: GP34"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_10_FUN_SEL"
+    Value  = "1"
+    Help  = "0: RSTCONOUT, 1: GP35"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_9_FUN_SEL"
+    Value  = "0"
+    Help  = "0: FAN_CTL3, 1: GP36"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SMF3_SUPPORT" "=" "1"
+End
+TOKEN
+    Name = "PIN_9_FUN_SEL"
+    Value  = "1"
+    Help  = "0: FAN_CTL3, 1: GP36"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SMF3_SUPPORT" "=" "0"
+End
+TOKEN
+    Name = "PIN_8_FUN_SEL"
+    Value  = "0"
+    Help  = "0: FAN_TAC3, 1: GP37"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "FAN_TAC3" "=" "1"
+End
+TOKEN
+    Name = "PIN_8_FUN_SEL"
+    Value  = "1"
+    Help  = "0: FAN_TAC3, 1: GP37"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "FAN_TAC3" "=" "0"
+End
+TOKEN
+    Name = "PIN_76_FUN_SEL"
+    Value  = "1"
+    Help  = "0: 3VSBSW# / SCL0, 1: GP40"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_122_FUN_SEL"
+    Value  = "0"
+    Help  = "0: SIN1, 1: GP41"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_122_FUN_SEL"
+    Value  = "1"
+    Help  = "0: SIN1, 1: GP41"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_118_FUN_SEL"
+    Value  = "1"
+    Help  = "0: PCH_C0B if 2Ah[6]=0 and 2Ah[2]=0 / S0_IDLE# if S0ix enabled (2Dh[2]=1), 1: GP42"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_51_FUN_SEL"
+    Value  = "1"
+    Help  = "0: SB-TSI_D, PCH_D1 if 2Ah[3]=1, 1: GP43"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_53_FUN_SEL"
+    Value  = "1"
+    Help  = "0: PECI, SB-TSI_C1, 1: GP44"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_120_FUN_SEL"
+    Value  = "0"
+    Help  = "0: DSR1# if COM1 enabled / PCH_D0A if 2Ah[3]=0 and 2Bh[5]=1, 1: GP45"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_120_FUN_SEL"
+    Value  = "1"
+    Help  = "0: DSR1# if COM1 enabled / PCH_D0A if 2Ah[3]=0 and 2Bh[5]=1, 1: GP45"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SERIAL_PORT1_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_67_FUN_SEL"
+    Value  = "1"
+    Help  = "0: WUE# if LDN4 Index F0h[1]=1, 1: GP47"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_45_FUN_SEL"
+    Value  = "1"
+    Help  = "0: CLKRUN#, 1: GP50"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_7_FUN_SEL"
+    Value  = "0"
+    Help  = "0: FAN_CTL2, 1: GP51"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name = "PIN_7_FUN_SEL"
+    Value  = "1"
+    Help  = "0: FAN_CTL2, 1: GP51"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_SMF2_SUPPORT" "=" "0"
+End
+TOKEN
+    Name = "PIN_6_FUN_SEL"
+    Value  = "0"
+    Help  = "0: FAN_TAC2, 1: GP52"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "FAN_TAC2" "=" "1"
+End
+TOKEN
+    Name = "PIN_6_FUN_SEL"
+    Value  = "1"
+    Help  = "0: FAN_TAC2, 1: GP52"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "FAN_TAC2" "=" "0"
+End
+TOKEN
+    Name = "PIN_74_FUN_SEL"
+    Value  = "0"
+    Help  = "0: SUSC#, 1: GP53"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_70_FUN_SEL"
+    Value  = "1"
+    Help  = "0: PME# / SLP_S0# if LDN7 Index 2Dh[2]=1, 1: GP54"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_82_FUN_SEL"
+    Value  = "0"
+    Help  = "0: RSMRST#, 1: GP55"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_78_77_42_FUN_SEL"
+    Value  = "0"
+    Help  = "0: KCLK / KDAT / KRST#, 1: GP60 / GP61 / GP62"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_KEYBOARD_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_78_77_42_FUN_SEL"
+    Value  = "1"
+    Help  = "0: KCLK / KDAT / KRST#, 1: GP60 / GP61 / GP62"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_KEYBOARD_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PIN_80_79_FUN_SEL"
+    Value  = "0"
+    Help  = "0: MCLK / MDAT, 1: GP56 / GP57"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_MOUSE_PRESENT" "=" "1"
+End
+TOKEN
+    Name = "PIN_80_79_FUN_SEL"
+    Value  = "1"
+    Help  = "0: MCLK / MDAT, 1: GP56 / GP57"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "IT8625_MOUSE_PRESENT" "=" "0"
+End
+TOKEN
+    Name = "PWRGD_SRC_BY_VIN3"
+    Value  = "0"
+    Help  = "0: Enable (Default), 1: Disable"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_3_FUN_SEL"
+    Value  = "0"
+    Help  = "0: SLP_SUS# if JP4=0 or LDN7\E7h[4]=0, 1: GP63"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_2_FUN_SEL"
+    Value  = "1"
+    Help  = "0: Reserved, 1: GP64"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_117_FUN_SEL"
+    Value  = "1"
+    Help  = "0: Reserved, 1: GP65"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_116_FUN_SEL"
+    Value  = "1"
+    Help  = "0: SCL1 if SMBUS Slave enabled, 1: GP66"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "PIN_115_FUN_SEL"
+    Value  = "1"
+    Help  = "0: SDA1 if SMBUS Slave is Enable (Default), 1: GP67"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "---------------------- IT8625 Setup Item Default Configuration ----------------------"
+    Value  = "---------------------- IT8625 Setup Item Default Configuration ----------------------"
+    TokenType = Expression
+End
+TOKEN
+    Name = "ONEOF_IT8625RESTOREACPOWERLOSS_DEFAULT"
+    Value = "0"
+    Help = "0: Last State\1: Always On\2: Always Off\3: ByPass"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "ONEOF_IT8625_SMBUS_SLAVE_0_DEFAULT"
+    Value = "0"
+    Help = "IT8625 SMBUS Slave 0\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "ONEOF_IT8625_SMBUS_SLAVE_1_DEFAULT"
+    Value = "0"
+    Help = "IT8625 SMBUS Slave 1\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "ONEOF_IT8625_UART1_IRQ_TYPE_DEFAULT"
+    Value = "1"
+    Help = "IT8625 UART 1 IRQ Type\0: Normal\1: IRQ sharing"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "ONEOF_IT8625_UART2_IRQ_TYPE_DEFAULT"
+    Value = "1"
+    Help = "IT8625 UART 2 IRQ Type\0: Normal\1: IRQ sharing"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "ONEOF_IT8625_UART1_AUTO_FLOW_CTRL_DEFAULT"
+    Value = "0"
+    Help = "IT8625 UART 1 RS485 Enable Control\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "ONEOF_IT8625_UART_RTS_INVERT_0_DEFAULT"
+    Value = "0"
+    Help = "IT8625 UART 1 RTS# Invert Control\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "ONEOF_IT8625_UART2_AUTO_FLOW_CTRL_DEFAULT"
+    Value = "0"
+    Help = "IT8625 UART 2 RS485 Enable Control\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "ONEOF_IT8625_UART_RTS_INVERT_1_DEFAULT"
+    Value = "0"
+    Help = "IT8625 UART 2 RTS# Invert Control\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "IT8625_WDT_RSTCONOUT_DEFAULT"
+    Value = "0"
+    Help = "0: Disable\1: Enable"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "IT8625_WDT_TIMEOUT_VAL_SEL_DEFAULT"
+    Value = "1"
+    Help = "0: Minute\1: Second"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "IT8625_WDT_KRST_DEFAULT"
+    Value = "0"
+    Help = "0: Disable\1: Enable"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "IT8625_WDT_VAL_EX_SEL_DEFAULT"
+    Value = "0"
+    Help = "0: Determined by WDT Time-out value select\1: 62.5ms x WDT Timer-out value"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "IT8625_WDT_PWRGD_DEFAULT"
+    Value = "1"
+    Help = "0: Disable\1: Enable"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "---------------------- GPIO Configuration ----------------------"
+    Value  = "---------------------- GPIO Configuration ----------------------"
+    TokenType = Expression
+End
+TOKEN
+    Name  = "IT8625GPIO10_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO11_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO12_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO13_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO14_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO15_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO16_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO17_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO10_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO11_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO12_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO13_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO14_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO15_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO16_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO17_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO10_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO11_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO12_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO13_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO14_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO15_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO16_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO17_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO10_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO11_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO12_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO13_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO14_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO15_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO16_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO17_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO20_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO21_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO22_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO23_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO24_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO25_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO26_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO27_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO20_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO21_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO22_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO23_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO24_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO25_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO26_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO27_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO20_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO21_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO22_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO23_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO24_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO25_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO26_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO27_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO30_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO31_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO32_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO33_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO34_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO35_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO36_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO37_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO30_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO31_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO32_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO33_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO34_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO35_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO36_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO37_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO30_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO31_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO32_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO33_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO34_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO35_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO36_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO37_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO30_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO31_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO32_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO33_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO34_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO35_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO36_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO37_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO40_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO41_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO42_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO43_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO44_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO45_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO46_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO47_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO40_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO41_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO42_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO43_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO44_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO45_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO46_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO47_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO40_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO41_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO42_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO43_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO44_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO45_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO46_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO47_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO40_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO41_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO42_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO43_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO44_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO45_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO46_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO47_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO50_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO51_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO52_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO53_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO54_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO55_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO56_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO57_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO50_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO51_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO52_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO53_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO54_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO55_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO56_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO57_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO50_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO51_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO52_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO53_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO54_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO55_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO56_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO57_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO50_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO51_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO52_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO53_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO54_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO55_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO56_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO57_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO60_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO61_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO62_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO63_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO64_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO65_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO66_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO67_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO60_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO61_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO62_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO63_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO64_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO65_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO66_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO67_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO60_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO61_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO62_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO63_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO64_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO65_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO66_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO67_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO70_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO71_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO72_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO73_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO74_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO75_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO76_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO77_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO70_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO71_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO72_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO73_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO74_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO75_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO76_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO77_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO80_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO81_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO82_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO83_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO84_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO85_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO86_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO87_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO80_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO81_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO82_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO83_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO84_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO85_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO86_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO87_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO90_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO91_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO92_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO93_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO94_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO95_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO96_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO97_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO90_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO91_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO92_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO93_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO94_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO95_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO96_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO97_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO90_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO91_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO92_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO93_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO94_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO95_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO96_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO97_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO90_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO91_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO92_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO93_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO94_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO95_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO96_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIO97_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA0_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA1_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA2_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA3_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA4_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA5_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA6_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA7_SE_DEFAULT"
+    Value  = "1"
+    Help  = "0: Alternate function\1: Simple I/O function"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA0_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA1_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA2_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA3_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA4_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA5_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA6_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA7_OE_DEFAULT"
+    Value  = "0"
+    Help  = "0: Input\1: Output"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA0_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA1_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA2_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA3_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA4_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA5_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA6_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA7_VAL_DEFAULT"
+    Value  = "1"
+    Help  = "0: Low\1: High"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA0_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA1_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA2_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA3_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA4_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA5_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA6_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625GPIOA7_IPU_DEFAULT"
+    Value  = "0"
+    Help  = "0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "---------------------- Hardware Monitor - Voltage ----------------------"
+    Value  = "---------------------- Hardware Monitor - Voltage ----------------------"
+    TokenType = Expression
+End
+TOKEN
+    Name = "VIN0_RA"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN0_RB"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN1_RA"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN1_RB"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN2_RA"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN2_RB"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN3_RA"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN3_RB"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN4_RA"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN4_RB"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN5_RA"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN5_RB"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN6_RA"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name = "VIN6_RB"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "---------------------- GP LED Configuration ----------------------"
+    Value  = "---------------------- GP LED Configuration ----------------------"
+    TokenType = Expression
+End
+TOKEN
+    Name  = "GP_LED1_LOCATION_DEFAULT"
+    Value  = "0"
+    Help  = "Define IT8625 GP LED Blinking 1 Location"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-57."
+End
+TOKEN
+    Name  = "IT8625_GP_LED1_OUT_LOW_DEFAULT"
+    Value  = "0"
+    Help  = "GP LED Blinking 1 Output Low Enable\0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_GP_LED1_FREQ_CTRL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of GP LED 1 Frequency Control\0: 4Hz, 50% Duty\1: 1Hz, 50% Duty\2: 0.25Hz, 50% Duty\3: 2Hz, 50% Duty\4: 0.25Hz, 25% Duty\5: 0.25Hz, 75% Duty\6: 0.125Hz, 25% Duty\7: 0.125Hz 75% Duty\8: 0.4Hz, 20% Duty\16: 0.5 Hz, 50% Duty\24: 0.125Hz, 50% Duty"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "GP_LED2_LOCATION_DEFAULT"
+    Value  = "0"
+    Help  = "Define IT8625 GP LED Blinking 2 Location"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-57."
+End
+TOKEN
+    Name  = "IT8625_GP_LED2_OUT_LOW_DEFAULT"
+    Value  = "0"
+    Help  = "GP LED Blinking 2 Output Low Enable\0: Disabled\1: Enabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_GP_LED2_FREQ_CTRL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of GP LED 2 Frequency Control\0: 4Hz, 50% Duty\1: 1Hz, 50% Duty\2: 0.25Hz, 50% Duty\3: 2Hz, 50% Duty\4: 0.25Hz, 25% Duty\5: 0.25Hz, 75% Duty\6: 0.125Hz, 25% Duty\7: 0.125Hz 75% Duty\8: 0.4Hz, 20% Duty\16: 0.5 Hz, 50% Duty\24: 0.125Hz, 50% Duty"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "---------------------- Smart Fan Configuration ----------------------"
+    Value  = "---------------------- Smart Fan Configuration ----------------------"
+    TokenType = Expression
+End
+TOKEN
+    Name  = "IT8625_FAN_POLARITY_DEFAULT"
+    Value  = "1"
+    Help  = "FAN_CTL Polarity (for all FANs)\0: Active low\1: Active high"
+    TokenType = Boolean
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN1_MODE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Smart Fan 1 Mode\0: Software Mode\1: Automatic Mode"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN1_PWM_CTRL_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 1 Manual PWM Setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN1_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Type\0: PWM\1: RPM"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN1_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN1_OFF_TEMP_LIMIT_DEFAULT"
+    Value  = "16"
+    Help  = "Default value of Fan 1 off temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN1_START_TEMP_LIMIT_DEFAULT"
+    Value  = "32"
+    Help  = "Default value of Fan 1 start temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN1_FULL_TEMP_LIMIT_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 1 full speed temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN1_START_PWM_DEFAULT"
+    Value  = "128"
+    Help  = "Default value of Fan 1 start PWM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN1_START_RPM_DEFAULT"
+    Value  = "4096"
+    Help  = "Default value of Fan 1 start RPM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-8160."
+End
+TOKEN
+    Name  = "IT8625_FAN1_PWM_SLOPE_DEFAULT"
+    Value  = "5"
+    Help  = "Default value of Fan 1 PWM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-15."
+End
+TOKEN
+    Name  = "IT8625_FAN1_RPM_SLOPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 RPM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN1_TARGET_ZONE_DEFAULT"
+    Value  = "120"
+    Help  = "Default value of Fan 1 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-120."
+End
+TOKEN
+    Name  = "IT8625_FAN1_TEMP_INTERVAL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-31."
+End
+TOKEN
+    Name  = "IT8625_FAN1_SMOOTH_DEFAULT"
+    Value  = "62"
+    Help  = "Default value of Fan 1 Smoothing control\60: 1Hz\61: 16Hz\62: 8Hz\63: 4Hz"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "60-63."
+End
+TOKEN
+    Name  = "IT8625_FAN1_CURVE_COUNT_DEFAULT"
+    Value  = "1"
+    Help  = "Default value of Fan 1 curve count"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1-4."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_A_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-A Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_A_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-A Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_A_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-A Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_A_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-A Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_A_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-A Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_B_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-B Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_B_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-B Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_B_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-B Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_B_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-B Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_B_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-B Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_C_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-C Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_C_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-C Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_C_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-C Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_C_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-C Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN1_EX_C_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 1 Ex-C Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN2_MODE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Smart Fan 2 Mode\0: Software Mode\1: Automatic Mode"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN2_PWM_CTRL_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 2 Manual PWM Setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN2_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Type\0: PWM\1: RPM"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN2_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN2_OFF_TEMP_LIMIT_DEFAULT"
+    Value  = "16"
+    Help  = "Default value of Fan 2 off temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN2_START_TEMP_LIMIT_DEFAULT"
+    Value  = "32"
+    Help  = "Default value of Fan 2 start temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN2_FULL_TEMP_LIMIT_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 2 full speed temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN2_START_PWM_DEFAULT"
+    Value  = "128"
+    Help  = "Default value of Fan 2 start PWM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN2_START_RPM_DEFAULT"
+    Value  = "4096"
+    Help  = "Default value of Fan 2 start RPM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-8160."
+End
+TOKEN
+    Name  = "IT8625_FAN2_PWM_SLOPE_DEFAULT"
+    Value  = "5"
+    Help  = "Default value of Fan 2 PWM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-15."
+End
+TOKEN
+    Name  = "IT8625_FAN2_RPM_SLOPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 RPM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN2_TARGET_ZONE_DEFAULT"
+    Value  = "120"
+    Help  = "Default value of Fan 2 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-120."
+End
+TOKEN
+    Name  = "IT8625_FAN2_TEMP_INTERVAL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-31."
+End
+TOKEN
+    Name  = "IT8625_FAN2_SMOOTH_DEFAULT"
+    Value  = "62"
+    Help  = "Default value of Fan 2 Smoothing control\60: 1Hz\61: 16Hz\62: 8Hz\63: 4Hz"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "60-63."
+End
+TOKEN
+    Name  = "IT8625_FAN2_CURVE_COUNT_DEFAULT"
+    Value  = "1"
+    Help  = "Default value of Fan 2 curve count"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1-4."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_A_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-A Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_A_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-A Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_A_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-A Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_A_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-A Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_A_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-A Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_B_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-B Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_B_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-B Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_B_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-B Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_B_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-B Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_B_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-B Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_C_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-C Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_C_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-C Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_C_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-C Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_C_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-C Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN2_EX_C_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 2 Ex-C Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN3_MODE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Smart Fan 3 Mode\0: Software Mode\1: Automatic Mode"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN3_PWM_CTRL_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 3 Manual PWM Setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN3_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Type\0: PWM\1: RPM"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN3_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN3_OFF_TEMP_LIMIT_DEFAULT"
+    Value  = "16"
+    Help  = "Default value of Fan 3 off temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN3_START_TEMP_LIMIT_DEFAULT"
+    Value  = "32"
+    Help  = "Default value of Fan 3 start temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN3_FULL_TEMP_LIMIT_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 3 full speed temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN3_START_PWM_DEFAULT"
+    Value  = "128"
+    Help  = "Default value of Fan 3 start PWM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN3_START_RPM_DEFAULT"
+    Value  = "4096"
+    Help  = "Default value of Fan 3 start RPM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-8160."
+End
+TOKEN
+    Name  = "IT8625_FAN3_PWM_SLOPE_DEFAULT"
+    Value  = "5"
+    Help  = "Default value of Fan 3 PWM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-15."
+End
+TOKEN
+    Name  = "IT8625_FAN3_RPM_SLOPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 RPM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN3_TARGET_ZONE_DEFAULT"
+    Value  = "120"
+    Help  = "Default value of Fan 3 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-120."
+End
+TOKEN
+    Name  = "IT8625_FAN3_TEMP_INTERVAL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-31."
+End
+TOKEN
+    Name  = "IT8625_FAN3_SMOOTH_DEFAULT"
+    Value  = "62"
+    Help  = "Default value of Fan 3 Smoothing control\60: 1Hz\61: 16Hz\62: 8Hz\63: 4Hz"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "60-63."
+End
+TOKEN
+    Name  = "IT8625_FAN3_CURVE_COUNT_DEFAULT"
+    Value  = "1"
+    Help  = "Default value of Fan 3 curve count"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1-4."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_A_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-A Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_A_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-A Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_A_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-A Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_A_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-A Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_A_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-A Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_B_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-B Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_B_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-B Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_B_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-B Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_B_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-B Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_B_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-B Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_C_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-C Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_C_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-C Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_C_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-C Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_C_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-C Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN3_EX_C_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 3 Ex-C Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN4_MODE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Smart Fan 4 Mode\0: Software Mode\1: Automatic Mode"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN4_PWM_CTRL_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 4 Manual PWM Setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN4_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Type\0: PWM\1: RPM"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN4_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN4_OFF_TEMP_LIMIT_DEFAULT"
+    Value  = "16"
+    Help  = "Default value of Fan 4 off temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN4_START_TEMP_LIMIT_DEFAULT"
+    Value  = "32"
+    Help  = "Default value of Fan 4 start temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN4_FULL_TEMP_LIMIT_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 4 full speed temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN4_START_PWM_DEFAULT"
+    Value  = "128"
+    Help  = "Default value of Fan 4 start PWM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN4_START_RPM_DEFAULT"
+    Value  = "4096"
+    Help  = "Default value of Fan 4 start RPM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-8160."
+End
+TOKEN
+    Name  = "IT8625_FAN4_PWM_SLOPE_DEFAULT"
+    Value  = "5"
+    Help  = "Default value of Fan 4 PWM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-15."
+End
+TOKEN
+    Name  = "IT8625_FAN4_RPM_SLOPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 RPM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN4_TARGET_ZONE_DEFAULT"
+    Value  = "120"
+    Help  = "Default value of Fan 4 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-120."
+End
+TOKEN
+    Name  = "IT8625_FAN4_TEMP_INTERVAL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-31."
+End
+TOKEN
+    Name  = "IT8625_FAN4_SMOOTH_DEFAULT"
+    Value  = "62"
+    Help  = "Default value of Fan 4 Smoothing control\60: 1Hz\61: 16Hz\62: 8Hz\63: 4Hz"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "60-63."
+End
+TOKEN
+    Name  = "IT8625_FAN4_CURVE_COUNT_DEFAULT"
+    Value  = "1"
+    Help  = "Default value of Fan 4 curve count"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1-4."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_A_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-A Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_A_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-A Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_A_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-A Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_A_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-A Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_A_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-A Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_B_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-B Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_B_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-B Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_B_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-B Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_B_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-B Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_B_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-B Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_C_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-C Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_C_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-C Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_C_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-C Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_C_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-C Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN4_EX_C_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 4 Ex-C Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN5_MODE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Smart Fan 5 Mode\0: Software Mode\1: Automatic Mode"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN5_PWM_CTRL_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 5 Manual PWM Setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN5_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Type\0: PWM\1: RPM"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN5_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN5_OFF_TEMP_LIMIT_DEFAULT"
+    Value  = "16"
+    Help  = "Default value of Fan 5 off temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN5_START_TEMP_LIMIT_DEFAULT"
+    Value  = "32"
+    Help  = "Default value of Fan 5 start temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN5_FULL_TEMP_LIMIT_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 5 full speed temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN5_START_PWM_DEFAULT"
+    Value  = "128"
+    Help  = "Default value of Fan 5 start PWM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN5_START_RPM_DEFAULT"
+    Value  = "4096"
+    Help  = "Default value of Fan 5 start RPM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-8160."
+End
+TOKEN
+    Name  = "IT8625_FAN5_PWM_SLOPE_DEFAULT"
+    Value  = "5"
+    Help  = "Default value of Fan 5 PWM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-15."
+End
+TOKEN
+    Name  = "IT8625_FAN5_RPM_SLOPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 RPM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN5_TARGET_ZONE_DEFAULT"
+    Value  = "120"
+    Help  = "Default value of Fan 5 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-120."
+End
+TOKEN
+    Name  = "IT8625_FAN5_TEMP_INTERVAL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-31."
+End
+TOKEN
+    Name  = "IT8625_FAN5_SMOOTH_DEFAULT"
+    Value  = "62"
+    Help  = "Default value of Fan 5 Smoothing control\60: 1Hz\61: 16Hz\62: 8Hz\63: 4Hz"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "60-63."
+End
+TOKEN
+    Name  = "IT8625_FAN5_CURVE_COUNT_DEFAULT"
+    Value  = "1"
+    Help  = "Default value of Fan 5 curve count"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1-4."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_A_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-A Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_A_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-A Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_A_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-A Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_A_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-A Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_A_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-A Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_B_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-B Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_B_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-B Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_B_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-B Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_B_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-B Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_B_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-B Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_C_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-C Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_C_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-C Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_C_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-C Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_C_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-C Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN5_EX_C_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 5 Ex-C Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN6_MODE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Smart Fan 6 Mode\0: Software Mode\1: Automatic Mode"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN6_PWM_CTRL_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 6 Manual PWM Setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN6_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Type\0: PWM\1: RPM"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN6_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN6_OFF_TEMP_LIMIT_DEFAULT"
+    Value  = "16"
+    Help  = "Default value of Fan 6 off temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN6_START_TEMP_LIMIT_DEFAULT"
+    Value  = "32"
+    Help  = "Default value of Fan 6 start temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN6_FULL_TEMP_LIMIT_DEFAULT"
+    Value  = "127"
+    Help  = "Default value of Fan 6 full speed temperature limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN6_START_PWM_DEFAULT"
+    Value  = "128"
+    Help  = "Default value of Fan 6 start PWM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN6_START_RPM_DEFAULT"
+    Value  = "4096"
+    Help  = "Default value of Fan 6 start RPM"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-8160."
+End
+TOKEN
+    Name  = "IT8625_FAN6_PWM_SLOPE_DEFAULT"
+    Value  = "5"
+    Help  = "Default value of Fan 6 PWM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-15."
+End
+TOKEN
+    Name  = "IT8625_FAN6_RPM_SLOPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 RPM Slope setting"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN6_TARGET_ZONE_DEFAULT"
+    Value  = "120"
+    Help  = "Default value of Fan 6 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-120."
+End
+TOKEN
+    Name  = "IT8625_FAN6_TEMP_INTERVAL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Target Zone"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-31."
+End
+TOKEN
+    Name  = "IT8625_FAN6_SMOOTH_DEFAULT"
+    Value  = "62"
+    Help  = "Default value of Fan 6 Smoothing control\60: 1Hz\61: 16Hz\62: 8Hz\63: 4Hz"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "60-63."
+End
+TOKEN
+    Name  = "IT8625_FAN6_CURVE_COUNT_DEFAULT"
+    Value  = "1"
+    Help  = "Default value of Fan 6 curve count"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1-4."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_A_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-A Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_A_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-A Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_A_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-A Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_A_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-A Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_A_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-A Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_B_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-B Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_B_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-B Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_B_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-B Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_B_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-B Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_B_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-B Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_C_START_LIMIT_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-C Start Limit"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-255."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_C_TEMP_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-C Temperature select\0: TMPIN1\1: TMPIN2\2: TMPIN3\3: TMPIN4\4: TMPIN5\5: TMPIN6"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-5."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_C_SLOPE_TYPE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-C Slope Type\0: Postive\1: Negative"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_C_RANGE_SEL_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-C Range Selection"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-127."
+End
+TOKEN
+    Name  = "IT8625_FAN6_EX_C_SLOPE_VALUE_DEFAULT"
+    Value  = "0"
+    Help  = "Default value of Fan 6 Ex-C Slope Value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-504."
+End

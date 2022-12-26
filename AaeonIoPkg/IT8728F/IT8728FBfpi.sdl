@@ -1,0 +1,524 @@
+#**********************************************************************
+#<AAEON_FHDR_START>
+#
+# Name:  <IT8728FBfpi.sdl>
+#
+# Description:     SDL file to define AAEON BFPI functions
+#
+#
+#<AAEON_FHDR_END>
+#**********************************************************************
+TOKEN
+	Name  = "IT8728F_BFPI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AAEON IT8728F BFPI support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "IT8728F_BFPI_DIR"
+End
+
+MODULE
+	Help  = "Includes IT8728FBfpi.MAK to Project"
+	File  = "IT8728FBfpi.MAK"
+End
+
+#==============================================================================
+# HWM Configurations
+#==============================================================================
+TOKEN
+	Name  = "IT8728F_TMPIN1_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if TMPIN1 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "IT8728F_TMPIN1_NAME"
+	Value  = "$(STD_SYS_TEMP)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_TMPIN1_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_TMPIN2_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if TMPIN2 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "IT8728F_TMPIN2_NAME"
+	Value  = "$(STD_SYS_TEMP2)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_TMPIN2_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_TMPIN3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if TMPIN3 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "IT8728F_TMPIN3_NAME"
+	Value  = "$(STD_SYS_TEMP3)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_TMPIN3_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_1_NAME"
+	Value  = "$(STD_CPU_FAN)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "FAN_TAC_1" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_2_NAME"
+	Value  = "$(STD_SYS_FAN)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "FAN_TAC_2" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_3_NAME"
+	Value  = "$(STD_SYS_FAN2)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "FAN_TAC_3" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_4_NAME"
+	Value  = "$(STD_SYS_FAN3)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "FAN_TAC4_EN" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_5_NAME"
+	Value  = "$(STD_SYS_FAN4)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "FAN_TAC5_EN" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN0_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN0 is designed and is used.\Register Offset : 0x20"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "VIN0_7_SUPPORT" "&" "0x01"
+End
+TOKEN
+	Name  = "IT8728F_VIN0_NAME"
+	Value  = "$(STD_VCORE)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_VIN0_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN1_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN1 is designed and is used.\Register Offset : 0x21"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "VIN0_7_SUPPORT" "&" "0x02"
+End
+TOKEN
+	Name  = "IT8728F_VIN1_NAME"
+	Value  = "$(STD_VMEM)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_VIN1_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN2_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN2 is designed and is used.\Register Offset : 0x22"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "VIN0_7_SUPPORT" "&" "0x04"
+End
+TOKEN
+	Name  = "IT8728F_VIN2_NAME"
+	Value  = "$(STD_12V)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_VIN2_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN3 is designed and is used.\Register Offset : 0x23"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "VIN0_7_SUPPORT" "&" "0x08"
+End
+TOKEN
+	Name  = "IT8728F_VIN3_NAME"
+	Value  = "$(STD_5V)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_VIN3_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN4_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN4 is designed and is used.\Register Offset : 0x24"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "VIN0_7_SUPPORT" "&" "0x10"
+End
+TOKEN
+	Name  = "IT8728F_VIN4_NAME"
+	Value  = "$(STD_1V8)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_VIN4_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN5_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN5 is designed and is used.\Register Offset : 0x25"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "VIN0_7_SUPPORT" "&" "0x20"
+End
+TOKEN
+	Name  = "IT8728F_VIN5_NAME"
+	Value  = "$(STD_5VSB)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_VIN5_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN6_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN6 is designed and is used.\Register Offset : 0x26"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "VIN0_7_SUPPORT" "&" "0x40"
+End
+TOKEN
+	Name  = "IT8728F_VIN6_NAME"
+	Value  = "$(STD_3V3)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_VIN6_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_3VSB_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if 3VSB is designed and is used.\Register Offset : 0x27"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "IT8728F_3VSB_NAME"
+	Value  = "$(STD_3VSB)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_3VSB_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VBAT_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VBAT is designed and is used.\Register Offset : 0x28"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "IT8728F_VBAT_NAME"
+	Value  = "$(STD_VBAT)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "IT8728F_VBAT_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "=== Hardware monitor Report Capabilities =========="
+	Value  = "!!!DO NOT CHANGE!!!"
+	Help  = "Tokens in this section basically needs no porting between projects.\Tokens here are for generating information automatically to report capability in BFPI. "
+	TokenType = Expression
+End
+TOKEN
+	Name  = "IT8728F_TEMP_SENSOR_NUMBER"
+	Value  = "$(IT8728F_TMPIN1_SUPPORT) + $(IT8728F_TMPIN2_SUPPORT) + $(IT8728F_TMPIN3_SUPPORT)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728F_FAN_SENSOR_NUMBER"
+	Value  = "$(FAN_TAC_1) + $(FAN_TAC_2) + $(FAN_TAC_3) + $(FAN_TAC4_EN) + $(FAN_TAC5_EN)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728F_VOLT_SENSOR_NUMBER"
+	Value  = "$(IT8728F_VIN0_SUPPORT) + $(IT8728F_VIN1_SUPPORT) + $(IT8728F_VIN2_SUPPORT) + $(IT8728F_VIN3_SUPPORT) + $(IT8728F_VIN4_SUPPORT) + $(IT8728F_VIN5_SUPPORT) + $(IT8728F_VIN6_SUPPORT) + $(IT8728F_3VSB_SUPPORT) + $(IT8728F_VBAT_SUPPORT)"
+	Help  = "Voltage sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728F_TMPIN1_STRING"
+	Value  = '"$(IT8728F_TMPIN1_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_TMPIN1_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_TMPIN2_STRING"
+	Value  = '"$(IT8728F_TMPIN2_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_TMPIN2_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_TMPIN3_STRING"
+	Value  = '"$(IT8728F_TMPIN3_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_TMPIN3_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_1_STRING"
+	Value  = '"$(IT8728F_FAN_1_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC_1" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_2_STRING"
+	Value  = '"$(IT8728F_FAN_2_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC_2" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_3_STRING"
+	Value  = '"$(IT8728F_FAN_3_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC_3" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_4_STRING"
+	Value  = '"$(IT8728F_FAN_4_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC4_EN" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_FAN_5_STRING"
+	Value  = '"$(IT8728F_FAN_5_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "FAN_TAC5_EN" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN0_STRING"
+	Value  = '"$(IT8728F_VIN0_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_VIN0_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN1_STRING"
+	Value  = '"$(IT8728F_VIN1_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_VIN1_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN2_STRING"
+	Value  = '"$(IT8728F_VIN2_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_VIN2_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN3_STRING"
+	Value  = '"$(IT8728F_VIN3_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_VIN3_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN4_STRING"
+	Value  = '"$(IT8728F_VIN4_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_VIN4_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN5_STRING"
+	Value  = '"$(IT8728F_VIN5_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_VIN5_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VIN6_STRING"
+	Value  = '"$(IT8728F_VIN6_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_VIN6_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_3VSB_STRING"
+	Value  = '"$(IT8728F_3VSB_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_3VSB_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_VBAT_STRING"
+	Value  = '"$(IT8728F_VBAT_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728F_VBAT_SUPPORT" "=" "1"
+End
+
+#==============================================================================
+# Smart Fan Configurations
+#==============================================================================
+TOKEN
+	Name  = "======= Smart FAN Report Capabilities ======="
+	Value  = "!!!DO NOT CHANGE!!!"
+	Help  = "Tokens in this section basically needs no porting between projects. Tokens here are for generate information automatically to report capability in BFPI."
+	TokenType = Expression
+End
+TOKEN
+	Name  = "IT8728F_SMF_PRESENT"
+	Value  = "1"
+	Help  = "IT8728F SmartFan control support"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728F_SMF_NUMBER"
+	Value  = "$(IT8728_SMF1_SUPPORT) + $(IT8728_SMF2_SUPPORT) + $(IT8728_SMF3_SUPPORT)"
+	Help  = "Smart FAN controller number from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728_SMF_MAX_DUTY"
+	Value  = "255"
+	Help  = "Maximum PWM duty cycle value supported by IT8728 SIO"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "IT8728F_SMFC_FAN_1_PREFIX"
+	Value  = '"{\"Name\":\"$(IT8728F_FAN_1_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_SMFC_FAN_2_PREFIX"
+	Value  = '"{\"Name\":\"$(IT8728F_FAN_2_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_SMFC_FAN_3_PREFIX"
+	Value  = '"{\"Name\":\"$(IT8728F_FAN_3_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "IT8728_SMF3_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "IT8728F_SMFC_FANOUT_SUFFIX"
+	Value  = '"\",\"Maximum PWM\": $(IT8728_SMF_MAX_DUTY),\"Supported Mode\":[\"Manual\",\"Slope-Linear\"],\"Maximum Slop\":15,\"Slope Type\":\"Step\",\"Slope Step\":0.125}"'
+	Help  = "Detail capability for FAN controller.\Suffix only, should be concatenate after PREFIX and 'Temperature Target'."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+#==============================================================================
+# WDT Configurations
+#==============================================================================
+TOKEN
+	Name  = "IT8728F_WDT_BFPI_SUPPORT"
+	Value  = "1"
+	Help  = "Watch Dog Time Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SIO_WDT_MAX_TIMEOUT"
+	Value  = "3932100000"
+	Help  = "Maximum time-out value in ms supported by this SIO"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+#==============================================================================
+# For .mak to build setup strings from .sdl to .uni
+#==============================================================================
+ELINK
+	Name  = "$(BUILD_DIR)\IT8728HwmStrings.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End

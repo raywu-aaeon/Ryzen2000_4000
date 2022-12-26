@@ -1,0 +1,13 @@
+<component>
+	name = "IT8518Setup"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\IO\IT8518\"
+	RefName = "AaeonIoPkg.IT8518.IT8518Setup"
+[files]
+"IT8518Setup.sd"
+"IT8518Setup.uni"
+"IT8518Setup.c"
+"IT8518Setup.h"
+"IT851XHWM.C"
+"IT851XHWM.H"
+<endComponent>

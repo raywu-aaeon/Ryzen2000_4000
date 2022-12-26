@@ -1,0 +1,333 @@
+#**********************************************************************
+#<AAEON_FHDR_START>
+#
+# Name:  <IT85XX_EC1_Bfpi.sdl>
+#
+# Description:     SDL file to define AAEON BFPI functions
+#
+#
+#<AAEON_FHDR_END>
+#**********************************************************************
+TOKEN
+	Name  = "IT85XX_EC1_BFPI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AAEON IT8728F BFPI support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+End
+MODULE
+	Help  = "Includes IT85XX_EC1_Bfpi.MAK to Project"
+	File  = "IT85XX_EC1_Bfpi.MAK"
+End
+#**************************************************************
+#  AAEON BFPI >>
+#**************************************************************
+TOKEN
+    Name  = "B1RM"
+    Value  = "$(IT8518_TOTAL_BASE_ADDRESS) + 0x04"
+    Help  = "Super IO Index/Data configuration port for ASL."
+    TokenType = Integer
+    TargetASL = Yes
+End
+#**************************************************************
+#  AAEON IT85XX_EC1 BFPI-WDT >>
+#**************************************************************
+TOKEN
+    Name  = "EC1_WDT_MAX_TIMEOUT"
+    Value  = "15300000"
+    Help  = "Maximum time-out value in ms supported by this SIO"
+    TokenType = Integer
+    TargetH = Yes
+End
+#**************************************************************
+#  AAEON IT85XX_EC1 BFPI-WDT <<
+#**************************************************************
+#**************************************************************
+#  AAEON IT85XX_EC1 BFPI-HWM >>
+#**************************************************************
+TOKEN
+	Name  = "EC1_IT85XX_TEMP_SENSOR_NUMBER"
+	Value  = "$(IT851X_PECI_ENABLE) + $(IT851X_TEMP1_ENABLE) + $(IT851X_TEMP2_ENABLE)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "EC1_IT85XX_FAN_SENSOR_NUMBER"
+	Value  = "$(IT851X_TACH1_ENABLE) + $(IT851X_TACH2_ENABLE)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "EC1_IT85XX_VOLT_SENSOR_NUMBER"
+	Value  = "$(IT851X_VIN0_ENABLE) + $(IT851X_VIN1_ENABLE) + $(IT851X_VIN2_ENABLE) + $(IT851X_VIN3_ENABLE) + $(IT851X_VIN4_ENABLE) + $(IT851X_VIN5_ENABLE) + $(IT851X_VIN6_ENABLE) + $(IT851X_VIN7_ENABLE)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+#**************************************************************
+#  AAEON IT85XX_EC1 BFPI-HWM Name
+#**************************************************************
+TOKEN
+    Name  = "EC1_IT85XX_THRM_SEN0_NAME"
+    Value  = "$(STD_CPU_TEMP)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_PECI_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_THRM_SEN1_NAME"
+    Value  = "$(STD_SYS_TEMP)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_TEMP1_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_THRM_SEN2_NAME"
+    Value  = "$(STD_SYS_TEMP2)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_TEMP2_ENABLE" "=" "1"
+End
+
+TOKEN
+    Name  = "EC1_IT85XX_FAN0_NAME"
+    Value  = "$(STD_SYS_FAN)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_TACH1_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_FAN1_NAME"
+    Value  = "$(STD_SYS_FAN2)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_TACH2_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_VIN0_NAME"
+    Value  = "VIN0"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_VIN0_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_VIN1_NAME"
+    Value  = "VIN1"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_VIN1_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_VIN2_NAME"
+    Value  = "VIN2"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_VIN2_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_VIN3_NAME"
+    #Value  = "VIN3"
+    Value  = "$(STD_5VSB)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_VIN3_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_VIN4_NAME"
+    #Value  = "VIN4"
+    Value  = "$(STD_12V)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_VIN4_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_VIN5_NAME"
+    Value  = "VIN5"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_VIN5_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_VIN6_NAME"
+    #Value  = "VIN6"
+    Value  = "$(STD_VMEM)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_VIN6_ENABLE" "=" "1"
+End
+TOKEN
+    Name  = "EC1_IT85XX_VIN7_NAME"
+    Value  = "VIN7"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT851X_VIN7_ENABLE" "=" "1"
+End
+#**************************************************************
+#  AAEON IT85XX_EC1 BFPI-HWM String
+#**************************************************************
+TOKEN
+  Name  = "EC1_IT85XX_THRM_SEN0_STRING"
+  Value  = '"$(EC1_IT85XX_THRM_SEN0_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_THRM_SEN1_STRING"
+  Value  = '"$(EC1_IT85XX_THRM_SEN1_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_THRM_SEN2_STRING"
+  Value  = '"$(EC1_IT85XX_THRM_SEN2_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_FAN0_STRING"
+  Value  = '"$(EC1_IT85XX_FAN0_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_FAN1_STRING"
+  Value  = '"$(EC1_IT85XX_FAN1_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_VIN0_STRING"
+  Value  = '"$(EC1_IT85XX_VIN0_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_VIN1_STRING"
+  Value  = '"$(EC1_IT85XX_VIN1_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_VIN2_STRING"
+  Value  = '"$(EC1_IT85XX_VIN2_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_VIN3_STRING"
+  Value  = '"$(EC1_IT85XX_VIN3_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_VIN4_STRING"
+  Value  = '"$(EC1_IT85XX_VIN4_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_VIN5_STRING"
+  Value  = '"$(EC1_IT85XX_VIN5_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_VIN6_STRING"
+  Value  = '"$(EC1_IT85XX_VIN6_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+TOKEN
+  Name  = "EC1_IT85XX_VIN7_STRING"
+  Value  = '"$(EC1_IT85XX_VIN7_NAME)"'
+  Help  = "Name for the temperature sensor."
+  TokenType = Expression
+  TargetH = Yes
+End
+#**************************************************************
+#  AAEON IT85XX_EC1 BFPI-HWM <<
+#**************************************************************
+#**************************************************************
+#  AAEON IT85XX_EC1 BFPI-SMF >>
+#**************************************************************
+TOKEN
+    Name  = "EC1_SMF_MAX_DUTY"
+    Value  = "100"
+    Help  = "Maximum duty cycle value supported by EC"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+	Name  = "EC1_IT85XX_SMF_NUMBER"
+	Value  = "$(IT851X_FAN1_ENABLE) + $(IT851X_FAN2_ENABLE)"
+	Help  = "Smart FAN controller number from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+    Name  = "EC1_IT85XX_FANOUT0_PREFIX"
+    Value  = '"{\"Name\":\"$(EC1_IT85XX_FAN0_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+    Help  = "Detail capability for FAN controller."
+    TokenType = Expression
+    TargetH = Yes
+End
+TOKEN
+    Name  = "EC1_IT85XX_FANOUT1_PREFIX"
+    Value  = '"{\"Name\":\"$(EC1_IT85XX_FAN1_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+    Help  = "Detail capability for FAN controller."
+    TokenType = Expression
+    TargetH = Yes
+End
+TOKEN
+	Name  = "EC1_IT85XX_FANOUT_SUFFIX"
+	Value  = '"\",\"Maximum PWM\": \"$(EC1_SMF_MAX_DUTY)\",\"Supported Mode\":[\"Manual\",\"Slop-Linear\"],\"Maxumum Slope\": \"64\",\"Slope Type\":\"2n\"}"'
+	Help  = "Detail capability for FAN controller.\Suffix only, should be concatenate after PREFIX and 'Temperature Target'."
+	TokenType = Expression
+	TargetH = Yes
+End
+#**************************************************************
+#  AAEON IT85XX_EC1 BFPI-SMF <<
+#**************************************************************
+#**************************************************************
+#  AAEON IT85XX_EC1 .sdl to .uni >>
+#**************************************************************
+ELINK
+	Name  = "$(BUILD_DIR)\It85xxEc1HwmStrings.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+#**************************************************************
+#  AAEON IT85XX_EC1 .sdl to .uni <<
+#**************************************************************
+#**************************************************************
+#  AAEON BFPI <<
+#**************************************************************

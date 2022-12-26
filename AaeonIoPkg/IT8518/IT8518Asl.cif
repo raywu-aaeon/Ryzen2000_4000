@@ -1,0 +1,12 @@
+<component>
+	name = "IT8518Asl"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\IO\IT8518\"
+	RefName = "AaeonIoPkg.IT8518.IT8518Asl"
+[files]
+"ACPI\UART1.asl"
+"ACPI\UART2.asl"
+"CIR.asl"
+"IT8518EVT.asl"
+"IT8518DEV.asl"
+<endComponent>

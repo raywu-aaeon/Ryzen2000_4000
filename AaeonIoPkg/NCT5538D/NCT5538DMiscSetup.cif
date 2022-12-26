@@ -1,0 +1,13 @@
+<component>
+	name = "NCT5538DGpio"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\NCT5538D\"
+	RefName = "AaeonIoPkg.NCT5538D.NCT5538DMisc"
+[files]
+"NCT5538DMiscSetup.sdl"
+"NCT5538DMiscSetup.sd"	
+"NCT5538DMiscSetup.uni"	
+<endComponent>
+
+
+

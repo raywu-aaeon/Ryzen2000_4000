@@ -1,0 +1,11 @@
+<component>
+	name = "F81966HwMonitor"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\F81966\"
+	RefName = "AaeonIoPkg.F81966.F81966HwMonitor"
+[files]
+"F81966HwmSetup.sdl"
+"F81966HwmSetup.c"
+"F81966HwmSetup.sd"
+"F81966HwmSetup.uni"
+<endComponent>

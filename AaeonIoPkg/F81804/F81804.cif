@@ -1,0 +1,22 @@
+<component>
+	name = "F81804"
+	category = IO
+	LocalRoot = "AaeonIoPkg\F81804\"
+	RefName = "AaeonIoPkg.F81804"
+[INF]
+"F81804DxeInit.inf"
+"F81804PeiInit.inf"
+"F81804PlatformHookSerialPortLib.inf"
+[files]
+"F81804.sdl"
+"F81804.mak"
+"F81804.chm"
+"F81804MiscSetup.sd"
+"F81804MiscSetup.uni"
+"F81804OemReadyToBootCallback.c"
+[parts]
+"AaeonIoPkg.F81804.F81804Asl"
+"AaeonIoPkg.F81804.F81804Setup"
+"AaeonIoPkg.F81804.F81804HwMonitor"
+<endComponent>
+

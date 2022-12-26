@@ -1,0 +1,9 @@
+<component>
+	name = "SioDynamicSetupLoadDefaults"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\SioDynamicSetupLoadDefaults_Mod\"
+	RefName = "AaeonIoPkg.SioDynamicSetupLoadDefaults"
+[files]
+"SioDynamicSetupLoadDefaults.sdl"
+"SioDynamicSetupLoadDefaults.c"
+<endComponent>

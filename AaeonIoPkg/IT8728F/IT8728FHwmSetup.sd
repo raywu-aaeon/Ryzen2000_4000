@@ -1,0 +1,669 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <IT8728F.sd>
+//
+// Description: HWM form template, setup screen definition file.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+//RayWu, ADD 2014/07/28 >>
+//	#if defined(IT8728F_SMART_FAN_SUPPORT) && (IT8728F_SMART_FAN_SUPPORT == 1)
+	#if defined(IT8728_SMF1_SUPPORT) && (IT8728_SMF1_SUPPORT == 1)
+	UINT8	IT8728SMF1Control;
+	UINT8	IT8728SMF1Mode;
+	UINT8	IT8728SMF1PWMDuty;
+	UINT8	IT8728SMF1SPinPWMDuty;
+	UINT8	IT8728SMF1TempSrc;	// 2015/08/26 Eric +
+	UINT8	IT8728SMF1OffTemp;
+	UINT8	IT8728SMF1StartTemp;
+	UINT8	IT8728SMF1FullTemp;
+	UINT8	IT8728SMF1PWMSlope;
+	#endif
+	#if defined(IT8728_SMF2_SUPPORT) && (IT8728_SMF2_SUPPORT == 1)
+	UINT8	IT8728SMF2Control;
+	UINT8	IT8728SMF2Mode;
+	UINT8	IT8728SMF2PWMDuty;
+	UINT8	IT8728SMF2SPinPWMDuty;
+	UINT8	IT8728SMF2TempSrc;	// 2015/08/26 Eric +
+	UINT8	IT8728SMF2OffTemp;
+	UINT8	IT8728SMF2StartTemp;
+	UINT8	IT8728SMF2FullTemp;
+	UINT8	IT8728SMF2PWMSlope;
+	#endif
+	// >> 2015/08/25 Eric
+	#if defined(IT8728_SMF3_SUPPORT) && (IT8728_SMF3_SUPPORT == 1)
+	UINT8	IT8728SMF3Control;
+	UINT8	IT8728SMF3Mode;
+	UINT8	IT8728SMF3PWMDuty;
+	UINT8	IT8728SMF3SPinPWMDuty;
+	UINT8	IT8728SMF3TempSrc;	// 2015/08/26 Eric +
+	UINT8	IT8728SMF3OffTemp;
+	UINT8	IT8728SMF3StartTemp;
+	UINT8	IT8728SMF3FullTemp;
+	UINT8	IT8728SMF3PWMSlope;
+	#endif
+	// << 2015/08/25 Eric
+	// >> 2017/03/22 Eric
+	#if defined(IT8728_SMF4_SUPPORT) && (IT8728_SMF4_SUPPORT == 1)
+	UINT8	IT8728SMF4Mode;
+	#endif // IT8728_SMF4_SUPPORT
+	#if defined(IT8728_SMF5_SUPPORT) && (IT8728_SMF5_SUPPORT == 1)
+	UINT8	IT8728SMF5Mode;
+	#endif // IT8728_SMF5_SUPPORT
+	// << 2017/03/22 Eric
+//	#endif //IT8728F_SMART_FAN_SUPPORT
+//RayWu, ADD 2014/07/28 <<
+#endif //SETUP_DATA_DEFINITION
+
+//RayWu, ADD 2014/07/28 >>
+#ifdef CONTROL_DEFINITION
+	// >> 2017/03/22 Eric
+	#if defined(AAEON_CPU_CORE_TEMP_DETECTION) && (AAEON_CPU_CORE_TEMP_DETECTION)
+	#define HWM_TEXT_CPU_DTS_TEMP \
+	  text\
+	  help   = STRING_TOKEN(STR_EMPTY),\
+	  text   = STRING_TOKEN(STR_HWM_CPU_DTS),\
+	  text   = STRING_TOKEN(STR_HWM_CPU_DTS_VALUE),\
+	  flags  = 0,\
+	  key    = 0;
+	#endif //AAEON_CPU_CORE_TEMP_DETECTION
+	// << 2017/03/22 Eric
+//	#if defined(IT8728F_SMART_FAN_SUPPORT) && (IT8728F_SMART_FAN_SUPPORT == 1)
+	#if defined(IT8728_SMF1_SUPPORT) && (IT8728_SMF1_SUPPORT == 1)
+	#define IT8728SMF1CONTROL\
+	  oneof varid = SETUP_DATA.IT8728SMF1Control,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMF1CONTROL),\
+	    help        = STRING_TOKEN(STR_IT8728SMF1CONTROL_HELP),\
+	    default	= IT8728SMF1CONTROL_DEFAULT,\
+	    default     = IT8728SMF1CONTROL_DEFAULT, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+	  endoneof;
+	#define IT8728SMF1MODE\
+	  oneof varid = SETUP_DATA.IT8728SMF1Mode,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMFMODE),\
+	    help        = STRING_TOKEN(STR_IT8728SMF1MODE_HELP),\
+	    default	= IT8728SMF1MODE_DEFAULT,\
+	    default     = IT8728SMF1MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_MANUAL_MODE), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_AUTO_MODE), value = 1, flags = RESET_REQUIRED;\
+	  endoneof;
+	#define IT8728SMF1PWMDUTY\
+	  numeric varid = SETUP_DATA.IT8728SMF1PWMDuty,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFPWMDUTY),\
+	    help         = STRING_TOKEN (STR_IT8728SMFPWMDUTY_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 255,\
+	    step         = 1,\
+	    default      = IT8728SMF1PWMDUTY_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF1SPINPWMDUTY\
+	  numeric varid = SETUP_DATA.IT8728SMF1SPinPWMDuty,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFSPINPWMDUTY),\
+	    help         = STRING_TOKEN (STR_IT8728SMFSPINPWMDUTY_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 255,\
+	    step         = 1,\
+	    default      = IT8728SMF1SPINPWMDUTY_DEFAULT,\
+	  endnumeric;
+	// >> 2015/08/26 Eric
+	#define IT8728SMF1TEMPSRC\
+	  oneof varid = SETUP_DATA.IT8728SMF1TempSrc,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMFTEMPSRC),\
+	    help        = STRING_TOKEN(STR_IT8728SMFTEMPSRC_HELP),\
+	    default	= IT8728SMF1TEMPSRC_DEFAULT,\
+	    default     = IT8728SMF1TEMPSRC_DEFAULT, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_TMPIN1), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_TMPIN2), value = 1, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_TMPIN3), value = 2, flags = RESET_REQUIRED;\
+	  endoneof;
+	// << 2015/08/26 Eric
+	#define IT8728SMF1OFFTEMP\
+	  numeric varid = SETUP_DATA.IT8728SMF1OffTemp,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFOFFTEMP),\
+	    help         = STRING_TOKEN (STR_IT8728SMFOFFTEMP_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 127,\
+	    step         = 1,\
+	    default      = IT8728SMF1OFFTEMP_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF1STARTTEMP\
+	  numeric varid = SETUP_DATA.IT8728SMF1StartTemp,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFSTARTTEMP),\
+	    help         = STRING_TOKEN (STR_IT8728SMFSTARTTEMP_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 127,\
+	    step         = 1,\
+	    default      = IT8728SMF1STARTTEMP_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF1FULLTEMP\
+	  numeric varid = SETUP_DATA.IT8728SMF1FullTemp,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFFULLTEMP),\
+	    help         = STRING_TOKEN (STR_IT8728SMFFULLTEMP_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 127,\
+	    step         = 1,\
+	    default      = IT8728SMF1FULLTEMP_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF1PWMSLOPE\
+	  numeric varid = SETUP_DATA.IT8728SMF1PWMSlope,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFPWMSLOPE),\
+	    help         = STRING_TOKEN (STR_IT8728SMFPWMSLOPE_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 1,\
+	    maximum      = 15,\
+	    step         = 1,\
+	    default      = IT8728SMF1PWMSLOPE_DEFAULT,\
+	  endnumeric;
+	#endif //IT8728_SMF1_SUPPORT
+	#if defined(IT8728_SMF2_SUPPORT) && (IT8728_SMF2_SUPPORT == 1)
+	#define IT8728SMF2CONTROL\
+	  oneof varid = SETUP_DATA.IT8728SMF2Control,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMF2CONTROL),\
+	    help        = STRING_TOKEN(STR_IT8728SMF2CONTROL_HELP),\
+	    default	= IT8728SMF2CONTROL_DEFAULT,\
+	    default     = IT8728SMF2CONTROL_DEFAULT, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+	  endoneof;
+	#define IT8728SMF2MODE\
+	  oneof varid = SETUP_DATA.IT8728SMF2Mode,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMFMODE),\
+	    help        = STRING_TOKEN(STR_IT8728SMF2MODE_HELP),\
+	    default	= IT8728SMF2MODE_DEFAULT,\
+	    default     = IT8728SMF2MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_MANUAL_MODE), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_AUTO_MODE), value = 1, flags = RESET_REQUIRED;\
+	  endoneof;
+	#define IT8728SMF2PWMDUTY\
+	  numeric varid = SETUP_DATA.IT8728SMF2PWMDuty,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFPWMDUTY),\
+	    help         = STRING_TOKEN (STR_IT8728SMFPWMDUTY_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 255,\
+	    step         = 1,\
+	    default      = IT8728SMF2PWMDUTY_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF2SPINPWMDUTY\
+	  numeric varid = SETUP_DATA.IT8728SMF2SPinPWMDuty,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFSPINPWMDUTY),\
+	    help         = STRING_TOKEN (STR_IT8728SMFSPINPWMDUTY_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 255,\
+	    step         = 1,\
+	    default      = IT8728SMF2SPINPWMDUTY_DEFAULT,\
+	  endnumeric;
+	// >> 2015/08/26 Eric
+	#define IT8728SMF2TEMPSRC\
+	  oneof varid = SETUP_DATA.IT8728SMF2TempSrc,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMFTEMPSRC),\
+	    help        = STRING_TOKEN(STR_IT8728SMFTEMPSRC_HELP),\
+	    default	= IT8728SMF2TEMPSRC_DEFAULT,\
+	    default     = IT8728SMF2TEMPSRC_DEFAULT, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_TMPIN1), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_TMPIN2), value = 1, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_TMPIN3), value = 2, flags = RESET_REQUIRED;\
+	  endoneof;
+	// << 2015/08/26 Eric
+	#define IT8728SMF2OFFTEMP\
+	  numeric varid = SETUP_DATA.IT8728SMF2OffTemp,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFOFFTEMP),\
+	    help         = STRING_TOKEN (STR_IT8728SMFOFFTEMP_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 127,\
+	    step         = 1,\
+	    default      = IT8728SMF2OFFTEMP_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF2STARTTEMP\
+	  numeric varid = SETUP_DATA.IT8728SMF2StartTemp,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFSTARTTEMP),\
+	    help         = STRING_TOKEN (STR_IT8728SMFSTARTTEMP_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 127,\
+	    step         = 1,\
+	    default      = IT8728SMF2STARTTEMP_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF2FULLTEMP\
+	  numeric varid = SETUP_DATA.IT8728SMF2FullTemp,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFFULLTEMP),\
+	    help         = STRING_TOKEN (STR_IT8728SMFFULLTEMP_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 127,\
+	    step         = 1,\
+	    default      = IT8728SMF2FULLTEMP_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF2PWMSLOPE\
+	  numeric varid = SETUP_DATA.IT8728SMF2PWMSlope,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFPWMSLOPE),\
+	    help         = STRING_TOKEN (STR_IT8728SMFPWMSLOPE_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 1,\
+	    maximum      = 15,\
+	    step         = 1,\
+	    default      = IT8728SMF2PWMSLOPE_DEFAULT,\
+	  endnumeric;
+	#endif
+	// >> 2015/08/25 Eric
+	#if defined(IT8728_SMF2_SUPPORT) && (IT8728_SMF2_SUPPORT == 1)
+	#define IT8728SMF3CONTROL\
+	  oneof varid = SETUP_DATA.IT8728SMF3Control,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMF3CONTROL),\
+	    help        = STRING_TOKEN(STR_IT8728SMF3CONTROL_HELP),\
+	    default	= IT8728SMF3CONTROL_DEFAULT,\
+	    default 	= IT8728SMF3CONTROL_DEFAULT, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+	  endoneof;
+	#define IT8728SMF3MODE\
+	  oneof varid = SETUP_DATA.IT8728SMF3Mode,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMFMODE),\
+	    help        = STRING_TOKEN(STR_IT8728SMF3MODE_HELP),\
+	    default	= IT8728SMF3MODE_DEFAULT,\
+	    default 	= IT8728SMF3MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_MANUAL_MODE), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_AUTO_MODE), value = 1, flags = RESET_REQUIRED;\
+	  endoneof;
+	#define IT8728SMF3PWMDUTY\
+	  numeric varid = SETUP_DATA.IT8728SMF3PWMDuty,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFPWMDUTY),\
+	    help         = STRING_TOKEN (STR_IT8728SMFPWMDUTY_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 255,\
+	    step         = 1,\
+	    default      = IT8728SMF3PWMDUTY_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF3SPINPWMDUTY\
+	  numeric varid = SETUP_DATA.IT8728SMF3SPinPWMDuty,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFSPINPWMDUTY),\
+	    help         = STRING_TOKEN (STR_IT8728SMFSPINPWMDUTY_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 255,\
+	    step         = 1,\
+	    default      = IT8728SMF3SPINPWMDUTY_DEFAULT,\
+	  endnumeric;
+	// >> 2015/08/26 Eric
+	#define IT8728SMF3TEMPSRC\
+	  oneof varid = SETUP_DATA.IT8728SMF3TempSrc,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMFTEMPSRC),\
+	    help        = STRING_TOKEN(STR_IT8728SMFTEMPSRC_HELP),\
+	    default	= IT8728SMF3TEMPSRC_DEFAULT,\
+	    default 	= IT8728SMF3TEMPSRC_DEFAULT, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_TMPIN1), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_TMPIN2), value = 1, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_TMPIN3), value = 2, flags = RESET_REQUIRED;\
+	  endoneof;
+	// << 2015/08/26 Eric
+	#define IT8728SMF3OFFTEMP\
+	  numeric varid = SETUP_DATA.IT8728SMF3OffTemp,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFOFFTEMP),\
+	    help         = STRING_TOKEN (STR_IT8728SMFOFFTEMP_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 127,\
+	    step         = 1,\
+	    default      = IT8728SMF3OFFTEMP_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF3STARTTEMP\
+	  numeric varid = SETUP_DATA.IT8728SMF3StartTemp,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFSTARTTEMP),\
+	    help         = STRING_TOKEN (STR_IT8728SMFSTARTTEMP_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 127,\
+	    step         = 1,\
+	    default      = IT8728SMF3STARTTEMP_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF3FULLTEMP\
+	  numeric varid = SETUP_DATA.IT8728SMF3FullTemp,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFFULLTEMP),\
+	    help         = STRING_TOKEN (STR_IT8728SMFFULLTEMP_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 0,\
+	    maximum      = 127,\
+	    step         = 1,\
+	    default      = IT8728SMF3FULLTEMP_DEFAULT,\
+	  endnumeric;
+	#define IT8728SMF3PWMSLOPE\
+	  numeric varid = SETUP_DATA.IT8728SMF3PWMSlope,\
+	    prompt       = STRING_TOKEN (STR_IT8728SMFPWMSLOPE),\
+	    help         = STRING_TOKEN (STR_IT8728SMFPWMSLOPE_HELP),\
+	    flags	 = RESET_REQUIRED,\
+	    minimum      = 1,\
+	    maximum      = 15,\
+	    step         = 1,\
+	    default      = IT8728SMF3PWMSLOPE_DEFAULT,\
+	  endnumeric;
+	#endif
+	// << 2015/08/25 Eric
+	// >> 2017/03/22 Eric
+	#if defined(IT8728_SMF4_SUPPORT) && (IT8728_SMF4_SUPPORT == 1)
+	#define IT8728SMF4MODE\
+	  oneof varid = SETUP_DATA.IT8728SMF4Mode,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMF4MODE),\
+	    help        = STRING_TOKEN(STR_IT8728SMF4MODE_HELP),\
+	    default	= FAN_CTL4_SEL,\
+	    default	= FAN_CTL4_SEL, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_SAME_WITH_FAN1), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_SAME_WITH_FAN2), value = 1, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_SAME_WITH_FAN3), value = 2, flags = RESET_REQUIRED;\
+	  endoneof;
+	#endif // IT8728_SMF4_SUPPORT
+	#if defined(IT8728_SMF5_SUPPORT) && (IT8728_SMF5_SUPPORT == 1)
+	#define IT8728SMF5MODE\
+	  oneof varid = SETUP_DATA.IT8728SMF5Mode,\
+	    prompt      = STRING_TOKEN(STR_IT8728SMF5MODE),\
+	    help        = STRING_TOKEN(STR_IT8728SMF5MODE_HELP),\
+	    default	= FAN_CTL5_SEL,\
+	    default	= FAN_CTL5_SEL, defaultstore = AmiMfgDefault,\
+	    option text = STRING_TOKEN(STR_SAME_WITH_FAN1), value = 0, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_SAME_WITH_FAN2), value = 1, flags = RESET_REQUIRED;\
+	    option text = STRING_TOKEN(STR_SAME_WITH_FAN3), value = 2, flags = RESET_REQUIRED;\
+	  endoneof;
+	#endif // IT8728_SMF5_SUPPORT
+	// << 2017/03/22 Eric
+//	#endif //IT8728F_SMART_FAN_SUPPORT
+#endif //CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+//	#if defined(IT8728F_SMART_FAN_SUPPORT) && (IT8728F_SMART_FAN_SUPPORT == 1)
+	#if defined(IT8728_SMF1_SUPPORT) && (IT8728_SMF1_SUPPORT == 1)
+	IT8728SMF1CONTROL
+	IT8728SMF1MODE
+	IT8728SMF1PWMDUTY
+	IT8728SMF1SPINPWMDUTY
+	IT8728SMF1TEMPSRC	// 2015/08/26 Eric +
+	IT8728SMF1OFFTEMP
+	IT8728SMF1STARTTEMP
+	IT8728SMF1FULLTEMP
+	IT8728SMF1PWMSLOPE
+	#endif
+	#if defined(IT8728_SMF2_SUPPORT) && (IT8728_SMF2_SUPPORT == 1)
+	IT8728SMF2CONTROL
+	IT8728SMF2MODE
+	IT8728SMF2PWMDUTY
+	IT8728SMF2SPINPWMDUTY
+	IT8728SMF2TEMPSRC	// 2015/08/26 Eric +
+	IT8728SMF2OFFTEMP
+	IT8728SMF2STARTTEMP
+	IT8728SMF2FULLTEMP
+	IT8728SMF2PWMSLOPE
+	#endif
+//	#endif //IT8728F_SMART_FAN_SUPPORT
+	// >> 2015/08/25 Eric
+	#if defined(IT8728_SMF3_SUPPORT) && (IT8728_SMF3_SUPPORT == 1)
+	IT8728SMF3CONTROL
+	IT8728SMF3MODE
+	IT8728SMF3PWMDUTY
+	IT8728SMF3SPINPWMDUTY
+	IT8728SMF3TEMPSRC
+	IT8728SMF3OFFTEMP
+	IT8728SMF3STARTTEMP
+	IT8728SMF3FULLTEMP
+	IT8728SMF3PWMSLOPE
+	#endif
+	// << 2015/08/25 Eric
+	// >> 2017/03/22 Eric
+	#if defined(IT8728_SMF4_SUPPORT) && (IT8728_SMF4_SUPPORT == 1)
+	IT8728SMF4MODE
+	#endif
+	#if defined(IT8728_SMF5_SUPPORT) && (IT8728_SMF5_SUPPORT == 1)
+	IT8728SMF5MODE
+	#endif
+	// << 2017/03/22 Eric
+#endif //CONTROLS_WITH_DEFAULTS
+//RayWu, ADD 2014/07/28 <<
+//-------------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//-------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//-------------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+    #include "Token.h"
+#endif
+
+//-------------------------------------------------------------------------
+//If you need custom varstore's define them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+#endif
+
+//-------------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+
+//-------------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+
+    #if IT8728F_HWM_PRESENT
+    goto HMM_CONFIG_FORM_ID,
+    prompt  = STRING_TOKEN(STR_IT8728F_HMM_CONFIGURATION),
+    help    = STRING_TOKEN(STR_IT8728F_HMM_CONFIGURATION_HELP);
+    #endif
+
+#endif
+
+//-------------------------------------------------------------------------
+// Define forms
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define HWM formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if IT8728F_HWM_PRESENT
+    //Define HWM formset form
+    form formid = AUTO_ID(HMM_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8728F_HMM_CONFIGURATION);
+     
+        SUBTITLE(STRING_TOKEN(STR_PC_HEALTH))
+     
+        SEPARATOR
+
+        // Null line for generate interactive key ID automatically
+        #if EFI_SPECIFICATION_VERSION>0x20000
+                INTERACTIVE_TEXT(STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_EMPTY),  AUTO_ID(IT8728F_INTERACTIVE_KEY))
+        #else
+                text
+                help   = STRING_TOKEN(STR_EMPTY),
+                text   = STRING_TOKEN(STR_EMPTY),
+                text   = STRING_TOKEN(STR_EMPTY),
+                flags  = INTERACTIVE | NV_ACCESS,
+                key    = IT8728F_INTERACTIVE_KEY;
+        #endif
+
+	//
+	// CPU DTS Temp
+	#if defined(AAEON_CPU_CORE_TEMP_DETECTION) && (AAEON_CPU_CORE_TEMP_DETECTION)
+	  HWM_TEXT_CPU_DTS_TEMP
+	#endif //AAEON_CPU_CORE_TEMP_DETECTION
+        //
+        // TMPIN1 Temperature
+	#if IT8728F_TMPIN1_SUPPORT
+          HWM1_TEXT_TEMP1
+        #endif // IT8728F_TMPIN1_SUPPORT
+        //
+        // TMPIN2 Temperature
+        #if IT8728F_TMPIN2_SUPPORT
+          HWM1_TEXT_TEMP2
+        #endif // IT8728F_TMPIN2_SUPPORT
+        //
+        // TMPIN3 Temperature
+        #if IT8728F_TMPIN3_SUPPORT
+          HWM1_TEXT_TEMP3
+        #endif // IT8728F_TMPIN3_SUPPORT
+
+	#if FAN_TAC_1
+          HWM1_TEXT_FAN1_SPEED
+        #endif // FAN_TAC_1
+        #if FAN_TAC_2
+          HWM1_TEXT_FAN2_SPEED
+        #endif // FAN_TAC_2
+        #if FAN_TAC_3
+          HWM1_TEXT_FAN3_SPEED
+        #endif // FAN_TAC_3
+        #if FAN_TAC4_EN
+          HWM1_TEXT_FAN4_SPEED
+        #endif // FAN_TAC4_EN
+        #if FAN_TAC5_EN
+          HWM1_TEXT_FAN5_SPEED
+        #endif // FAN_TAC5_EN
+
+        //
+        // VIN0
+        #if IT8728F_VIN0_SUPPORT
+          text\
+          help   = STRING_TOKEN(STR_EMPTY),\
+          text   = STRING_TOKEN(STR_IT8728F_HMM_VIN0),\
+          text   = STRING_TOKEN(STR_IT8728F_HMM_VIN0_VALUE),\
+          flags  = 0,\
+          key    = 0;
+        #endif // IT8728F_VIN0_SUPPORT
+	#if IT8728F_VIN1_SUPPORT
+          HWM1_TEXT_VIN1
+        #endif // IT8728F_VIN1_SUPPORT
+        #if IT8728F_VIN2_SUPPORT
+          HWM1_TEXT_VIN2
+        #endif // IT8728F_VIN2_SUPPORT
+        #if IT8728F_VIN3_SUPPORT
+          HWM1_TEXT_VIN3
+        #endif // IT8728F_VIN3_SUPPORT
+        #if IT8728F_VIN4_SUPPORT
+          HWM1_TEXT_VIN4
+        #endif // IT8728F_VIN4_SUPPORT
+        #if IT8728F_VIN5_SUPPORT
+          HWM1_TEXT_VIN5
+        #endif // IT8728F_VIN5_SUPPORT
+        #if IT8728F_VIN6_SUPPORT
+          HWM1_TEXT_VIN6
+        #endif // IT8728F_VIN6_SUPPORT
+        #if IT8728F_3VSB_SUPPORT
+          HWM1_TEXT_VIN7
+        #endif // IT8728F_3VSB_SUPPORT
+        #if IT8728F_VBAT_SUPPORT
+          HWM1_TEXT_VBAT
+        #endif // IT8728F_VBAT_SUPPORT
+//RayWu, ADD 2014/07/28 >>
+//	#if defined(IT8728F_SMART_FAN_SUPPORT) && (IT8728F_SMART_FAN_SUPPORT == 1)
+	#if defined(IT8728_SMF1_SUPPORT) && (IT8728_SMF1_SUPPORT == 1)
+	IT8728SMF1CONTROL
+	suppressif ideqval SETUP_DATA.IT8728SMF1Control == 0;
+	IT8728SMF1MODE
+	suppressif ideqval SETUP_DATA.IT8728SMF1Mode == 1;
+	IT8728SMF1PWMDUTY
+	endif; //IT8728SMF1Mode == 1
+	suppressif ideqval SETUP_DATA.IT8728SMF1Mode == 0;
+	IT8728SMF1SPINPWMDUTY
+	IT8728SMF1TEMPSRC
+	IT8728SMF1OFFTEMP
+	IT8728SMF1STARTTEMP
+	IT8728SMF1FULLTEMP
+	IT8728SMF1PWMSLOPE
+	endif; //IT8728SMF1Mode == 0
+	endif; //IT8728SMF1Control == 0
+	#endif
+	#if defined(IT8728_SMF2_SUPPORT) && (IT8728_SMF2_SUPPORT == 1)
+	IT8728SMF2CONTROL
+	suppressif ideqval SETUP_DATA.IT8728SMF2Control == 0;
+	IT8728SMF2MODE
+	suppressif ideqval SETUP_DATA.IT8728SMF2Mode == 1;
+	IT8728SMF2PWMDUTY
+	endif; //IT8728SMF2Mode == 1
+	suppressif ideqval SETUP_DATA.IT8728SMF2Mode == 0;
+	IT8728SMF2SPINPWMDUTY
+	IT8728SMF2TEMPSRC
+	IT8728SMF2OFFTEMP
+	IT8728SMF2STARTTEMP
+	IT8728SMF2FULLTEMP
+	IT8728SMF2PWMSLOPE
+	endif; //IT8728SMF2Mode == 0
+	endif; //IT8728SMF2Control == 0
+	#endif
+	// >> 2015/08/26 Eric
+	#if defined(IT8728_SMF3_SUPPORT) && (IT8728_SMF3_SUPPORT == 1)
+	IT8728SMF3CONTROL
+	suppressif ideqval SETUP_DATA.IT8728SMF3Control == 0;
+	IT8728SMF3MODE
+	suppressif ideqval SETUP_DATA.IT8728SMF3Mode == 1;
+	IT8728SMF3PWMDUTY
+	endif; //IT8728SMF3Mode == 1
+	suppressif ideqval SETUP_DATA.IT8728SMF3Mode == 0;
+	IT8728SMF3SPINPWMDUTY
+	IT8728SMF3TEMPSRC
+	IT8728SMF3OFFTEMP
+	IT8728SMF3STARTTEMP
+	IT8728SMF3FULLTEMP
+	IT8728SMF3PWMSLOPE
+	endif; //IT8728SMF3Mode == 0
+	endif; //IT8728SMF3Control == 0
+	#endif
+	// << 2015/08/26 Eric
+	// >> 2017/03/22 Eric
+	#if defined(IT8728_SMF4_SUPPORT) && (IT8728_SMF4_SUPPORT == 1)
+	IT8728SMF4MODE
+	#endif
+	#if defined(IT8728_SMF5_SUPPORT) && (IT8728_SMF5_SUPPORT == 1)
+	IT8728SMF5MODE
+	#endif
+	// << 2017/03/22 Eric
+//	#endif //IT8728F_SMART_FAN_SUPPORT
+//RayWu, ADD 2014/07/28 <<
+    endform;//HWM form
+    #endif//End of #if IT8728F_HWM_PRESENT
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

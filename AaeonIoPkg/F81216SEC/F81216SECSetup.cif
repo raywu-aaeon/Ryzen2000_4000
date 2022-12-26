@@ -1,0 +1,13 @@
+<component>
+	name = "F81216SECSetup"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\F81216SEC\"
+	RefName = "AaeonIoPkg.F81216SEC.F81216SECSetup"
+[files]
+"F81216SECSetup.sd"
+"F81216SECSetup.uni"
+"F81216SECSetup.c"
+"F81216SECSetup.h"
+<endComponent>
+
+

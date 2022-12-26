@@ -1,0 +1,24 @@
+<component>
+	name = "SuperI/O - F81966"
+	category = IO
+	LocalRoot = "AaeonIoPkg\F81966\"
+	RefName = "AaeonIoPkg.F81966"
+[INF]
+"F81966DxeInit.inf"
+"F81966PeiInit.inf"
+"F81966PlatformHookSerialPortLib.inf"
+
+[files]
+"F81966.sdl"
+"F81966.mak"
+"F81966.chm"
+"F81966MiscSetup.sd"
+"F81966MiscSetup.uni"
+"F81966OemReadyToBootCallback.c"
+
+[parts]
+"AaeonIoPkg.F81966.F81966Asl"
+"AaeonIoPkg.F81966.F81966Setup"
+"AaeonIoPkg.F81966.F81966HwMonitor"
+"AaeonIoPkg.F81966.F81966Bfpi"
+<endComponent>

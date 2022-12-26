@@ -1,0 +1,3156 @@
+TOKEN
+    Name  = "====== SIO Global Control Tokens ======"
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify global control tokens."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable F81804 support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+##AAEON_OVERRIDE, REMOVE >>
+##TOKEN
+##	Name  = "SIO_SUPPORT"
+##	Value  = "1"
+##	Help  = "Main switch to enable SIO support in Project"
+##	TokenType = Boolean
+##	TargetEQU = Yes
+##	TargetMAK = Yes
+##	TargetH = Yes
+##End
+##AAEON_OVERRIDE, REMOVE <<
+
+TOKEN
+    Name  = "F81804_DBG_SUPPORT"
+    Value  = "0"
+    Help  = "Switch to enable SIO serial port debug function support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_RECOVERY_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to enable SIO recovery support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "====== SIO For Debug Setting =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "The Debug Serial Port Setting."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "DEBUG_COM_PORT_ADDR"
+    Value  = "0x3F8"
+    Help  = "COM Port address the debugger uses. "
+    TokenType = Integer
+    TargetH = Yes
+    Token = "F81804_DBG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "DEBUG_LDN_UART"
+    Value  = "$(F81804_LDN_UART1)"
+    Help  = "UARTx Logical Device for Debugger."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "DEBUG_COM_PORT_ADDR" "=" "0x3F8"
+End
+
+TOKEN
+    Name  = "DEBUG_LDN_UART"
+    Value  = "$(F81804_LDN_UART2)"
+    Help  = "UARTx Logical Device for Debugger."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "DEBUG_COM_PORT_ADDR" "=" "0x2F8"
+End
+
+TOKEN
+    Name  = "====== SIO For Recovery Setting =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "The Recovery Serial Port Setting."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "RECOVERY_COM_PORT_ADDR"
+    Value  = "0x3F8"
+    Help  = "COM Port address the recovery uses."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "F81804_RECOVERY_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "RECOVERY_LDN_UART"
+    Value  = "$(F81804_LDN_UART1)"
+    Help  = "UARTx Logical Device for recovery."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "RECOVERY_COM_PORT_ADDR" "=" "0x3F8"
+End
+
+TOKEN
+    Name  = "RECOVERY_LDN_UART"
+    Value  = "$(F81804_LDN_UART2)"
+    Help  = "UARTx Logical Device for recovery."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "RECOVERY_COM_PORT_ADDR" "=" "0x2F8"
+End
+
+TOKEN
+    Name  = "=== SIO Logic Device Present Settings =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "All Logic Device Present / Not Present."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_KEYBOARD_PRESENT"
+    Value  = "1"
+    Help  = "Keyboard Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "KBC_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_MOUSE_PRESENT"
+    Value  = "1"
+    Help  = "Mouse Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "KBC_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_SERIAL_PORT1_PRESENT"
+    Value  = "1"
+    Help  = "Serial Port 1 (COMA / UART1) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_SERIAL_PORT2_PRESENT"
+    Value  = "1"
+    Help  = "Serial Port 2 (COMB / UART2) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81804_SERIAL_PORT2_IR_SUPPORT"
+	Value  = "0"
+	Help  = "0: No IR support (default).\1: Enable IR support."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_GPIO_PORT_PRESENT"
+    Value  = "1"
+    Help  = "GPIO Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_WDT_PRESENT"
+    Value  = "1"
+    Help  = "Watch Dog Time Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_PME_CONTROLLER_PRESENT"
+    Value  = "1"
+    Help  = "Power Management Controller Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_HWM_PRESENT"
+    Value  = "1"
+    Help  = "HWM Port Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_E2L_PRESENT"
+    Value  = "1"
+    Help  = "eSPI to LPC (E2L) Device Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_SPI_PRESENT"
+    Value  = "0"
+    Help  = "SPI Master Device Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81804_SMF_SUPPORT"
+	Value  = "1"
+	Help  = "F81804 SmartFan control support"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81804_SMF_SUPPORT"
+	Value  = "0"
+	Help  = "F81804 SmartFan control support"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81804_HWM_PRESENT" "=" "0"
+End
+
+TOKEN
+    Name  = "====== SIO Registers Layout =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify Register address inside SIO Chip."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_CONFIG_INDEX"
+    Value  = "0x2E"
+    Help  = "SIO index port."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_CONFIG_DATA"
+    Value  = "0x2F"
+    Help  = "SIO data port."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_SEL_REGISTER"
+    Value  = "0x07"
+    Help  = "Logical Device Select Register Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_ACTIVATE_REGISTER"
+    Value  = "0x30"
+    Help  = "Device Identification Register Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_BASE1_HI_REGISTER"
+    Value  = "0x60"
+    Help  = "Device BaseAddres Register#1 MSB Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_BASE1_LO_REGISTER"
+    Value  = "0x61"
+    Help  = "Device BaseAddres Register#1 LSB Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_BASE2_HI_REGISTER"
+    Value  = "0x62"
+    Help  = "Device BaseAddres Register#2 MSB Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_BASE2_LO_REGISTER"
+    Value  = "0x63"
+    Help  = "Device BaseAddres Register#2 LSB Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_IRQ1_REGISTER"
+    Value  = "0x70"
+    Help  = "Device IRQ Register#1 Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_IRQ2_REGISTER"
+    Value  = "0x72"
+    Help  = "Device IRQ Register#2 Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_DMA1_REGISTER"
+    Value  = "0x74"
+    Help  = "Device DMA Register#1 Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_DMA2_REGISTER"
+    Value  = "0x75"
+    Help  = "Device DMA Register#2 Address"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "====== SIO Logical Devices Numbers ======"
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify Devices Logical Number."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_LDN_HWM"
+    Value  = "0x04"
+    Help  = "LDN for Hardware Monitor Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_PS2K"
+    Value  = "0x05"
+    Help  = "LDN for PS2 Keyboard Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_PS2M"
+    Value  = "0x05"
+    Help  = "LDN for PS2 Mouse Controller. (it is same as PS2K specify same value)"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_GPIO"
+    Value  = "0x06"
+    Help  = "LDN for GPIO."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_WDT"
+    Value  = "0x07"
+    Help  = "LDN for Watch Dog Timer"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_PME"
+    Value  = "0x0A"
+    Help  = "LDN for PME and ACPI"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_E2L"
+    Value  = "0x0E"
+    Help  = "LDN for ESPI to LPC"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_SPI"
+    Value  = "0x0F"
+    Help  = "LDN for SPI"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_UART1"
+    Value  = "0x10"
+    Help  = "LDN for Serial Port 1 Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_LDN_UART2"
+    Value  = "0x15"
+    Help  = "LDN for Serial Port 2 Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "=== SIO Global Registers Settings =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "SIO Global Registers Setting"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_CLOCK"
+    Value  = "0"
+    Help  = "0/1/2 for 48Mhz/Programmable/24MHz"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "=== SIO Activation Values =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify Logical Device Activation Value."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_CONFIG_MODE_ENTER_VALUE"
+    Value  = "0x87"
+    Help  = "Value to enter the SIO Configuration Mode."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_CONFIG_MODE_EXIT_VALUE"
+    Value  = "0xAA"
+    Help  = "Value to enter the SIO Configuration Mode."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ENTK"
+    Value  = "$(F81804_CONFIG_MODE_ENTER_VALUE)"
+    Help  = "ASL alias for SIO Config Mode Enter Value."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "EXTK"
+    Value  = "$(F81804_CONFIG_MODE_EXIT_VALUE)"
+    Help  = "ASL alias for SIO Config Mode Exit Value."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "F81804_ACTIVATE_VALUE"
+    Value  = "0x01"
+    Help  = "Value to activate Device."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_DEACTIVATE_VALUE"
+    Value  = "0x00"
+    Help  = "Value to deactivate Device."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "====== SIO BASE ADDRESS Setting =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "SIO some base address setting "
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_TOTAL_BASE_ADDRESS"
+    Value  = "0xA00"
+    Help  = "It's used for IODecode, System will open TOTAL_BASE_ADDRESS+TOTAL_LENGTH IODecode for GPIO+PME+..."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_GPIO_BASE_ADDRESS"
+    Value  = "$(F81804_TOTAL_BASE_ADDRESS)"
+    Help  = "Base Address of GPIO. If changed, please update PeiSetLpcDeviceDecoding() in F81804PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_GPIO_LENGTH"
+    Value  = "0x10"
+    Help  = "Base Address's length of GPIO. If changed, please update PeiSetLpcDeviceDecoding() in F81804PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO1B"
+    Value  = "$(F81804_GPIO_BASE_ADDRESS)"
+    Help  = "Base Address of GPIO Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO1L"
+    Value  = "$(F81804_GPIO_LENGTH)"
+    Help  = "Length of GPIO Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_WDT_BASE_ADDRESS"
+    Value  = "$(F81804_TOTAL_BASE_ADDRESS)+$(IO1L)"
+    Help  = "Base Address of WDT Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in F81804PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_WDT_LENGTH"
+    Value  = "0x10"
+    Help  = "Base Address's length of WDT Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in F81804PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO2B"
+    Value  = "$(F81804_WDT_BASE_ADDRESS)"
+    Help  = "Base Address of WDT Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO2L"
+    Value  = "$(F81804_WDT_LENGTH)"
+    Help  = "Length of WDT Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_HWM_BASE_ADDRESS"
+    Value  = "$(F81804_TOTAL_BASE_ADDRESS)+$(IO1L)+$(IO2L)"
+    Help  = "Base Address of HWM Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in F81804PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_HWM_LENGTH"
+    Value  = "0x10"
+    Help  = "Base Address's length of HWM Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in F81804PEI.c too."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_HWM_INDEX_PORT"
+    Value  = "($(F81804_HWM_BASE_ADDRESS)&0XFFF0)+5"
+    Help  = "HWM Index Port."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_HWM_DATA_PORT"
+    Value  = "$(F81804_HWM_INDEX_PORT)+1"
+    Help  = "HWM Index Port."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO3B"
+    Value  = "$(F81804_HWM_BASE_ADDRESS)"
+    Help  = "Base Address of HWM Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO3L"
+    Value  = "$(F81804_HWM_LENGTH)"
+    Help  = "Length of HWM Controller."
+    TokenType = Integer
+    TargetASL = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_TOTAL_LENGTH"
+    Value  = "$(IO1L)+$(IO2L)+$(IO3L)"
+    Help  = "IODecode base address 's length. 0xFF >= TOTAL_LENGTH >= GPIO_LENGTH + PME_LENGTH + ..."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "===== SIO token only been used in ASL  ====="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Provide Resource properties."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "SP1O"
+    Value  = "$(F81804_CONFIG_INDEX)"
+    Help  = "Super IO Index/Data configuration port for ASL."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+TOKEN
+    Name  = "KBFG"
+    Value  = "0"
+    Help  = "Keyboard wake-up flag."
+    TokenType = Integer
+    TargetASL = Yes
+    Token = "F81804_KEYBOARD_PRESENT" "=" "0"
+End
+
+TOKEN
+    Name  = "MSFG"
+    Value  = "0"
+    Help  = "Mouse wake-up flag."
+    TokenType = Integer
+    TargetASL = Yes
+    Token = "F81804_MOUSE_PRESENT" "=" "0"
+End
+
+TOKEN
+    Name  = "IOES"
+    Value  = "0x00"
+    Help  = "It is used similar to IOST, when Device's DCAT > 0x0F , then it will be used."
+    TokenType = Integer
+    TargetASL = Yes
+End
+
+#==============================================================================
+# WDT Configurations
+#==============================================================================
+TOKEN
+	Name  = "SIO_WDT_MAX_TIMEOUT"
+	Value  = "15300000"
+	Help  = "Maximum time-out value in ms supported by this SIO"
+	TokenType = Integer
+	TargetH = Yes
+End
+#==============================================================================
+# HWM Configurations
+#==============================================================================
+TOKEN
+	Name  = "=== Hardware monitor Configurations =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Hardware monitor Settings besides registers"
+	TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_TEMPERATURE_1_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if Temperature 1 is designed and is used.\Register Offset : 0x72(Kernel Default)"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "F81804_TEMPERATURE_1_NAME"
+    Value  = "$(STD_SYS_TEMP)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no   matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "F81804_TEMPERATURE_1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_TEMPERATURE_1_STRING"
+    Value  = '"$(F81804_TEMPERATURE_1_NAME)"'
+    Help  = "Name for the temperature sensor."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81804_TEMPERATURE_1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_TEMPERATURE_2_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if Temperature 2 is designed and is used.\Register Offset : 0x74(Kernel Default)"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "F81804_TEMPERATURE_2_NAME"
+    Value  = "$(STD_SYS_TEMP2)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no   matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "F81804_TEMPERATURE_2_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_TEMPERATURE_2_STRING"
+    Value  = '"$(F81804_TEMPERATURE_2_NAME)"'
+    Help  = "Name for the temperature sensor."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81804_TEMPERATURE_2_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_TEMPERATURE_3_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if Temperature 3 is designed and is used.\Register Offset : 0x7E(Kernel Default), Only available if PECI interface is enabled"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "F81804_TEMPERATURE_3_NAME"
+    Value  = "CPU Temperature"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no   matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "F81804_TEMPERATURE_3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_TEMPERATURE_3_STRING"
+    Value  = '"$(F81804_TEMPERATURE_3_NAME)"'
+    Help  = "Name for the temperature sensor."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81804_TEMPERATURE_3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_FAN_1_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if FAN1 is designed and is used.\Register Offset : 0xA0 ~ 0xA1"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+    Token = "GPIO95_EN" "=" "0"
+End
+
+TOKEN
+    Name  = "F81804_FAN_1_SUPPORT"
+    Value  = "0"
+    Help  = "Switch on if FAN1 is designed and is used.\Register Offset : 0xA0 ~ 0xA1"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+    Token = "GPIO95_EN" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_FAN_1_NAME"
+    Value  = "$(STD_SYS_FAN)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "F81804_FAN_1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_FAN_1_STRING"
+    Value  = '"$(F81804_FAN_1_NAME)"'
+    Help  = "Name for the fan sensor."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81804_FAN_1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_FAN_2_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if FAN2 is designed and is used.\Register Offset : 0xC0 ~ 0xC1"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+    Token = "GPIO97_EN" "=" "0"
+End
+
+TOKEN
+    Name  = "F81804_FAN_2_SUPPORT"
+    Value  = "0"
+    Help  = "Switch on if FAN2 is designed and is used.\Register Offset : 0xC0 ~ 0xC1"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+    Token = "GPIO97_EN" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_FAN_2_NAME"
+    Value  = "$(STD_SYS_FAN2)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "F81804_FAN_2_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_FAN_2_STRING"
+    Value  = '"$(F81804_FAN_2_NAME)"'
+    Help  = "Name for the fan sensor."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81804_FAN_2_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_3VCC_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if 3VCC is designed and is used.\Register Offset : 0x20"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "F81804_3VCC_NAME"
+    Value  = "$(STD_3V3)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes                                                                                                                                                                     
+    Token = "F81804_3VCC_SUPPORT" "=" "1"
+End
+
+
+TOKEN
+	Name  = "F81804_VCORE_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VCORE is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81804_VCORE_NAME"
+	Value  = "$(STD_VCORE)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81804_VCORE_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VIN0_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN0 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81804_VIN0_NAME"
+	Value  = "VIN0"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81804_VIN0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VIN1_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN1 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81804_VIN1_NAME"
+	Value  = "VCORE"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81804_VIN1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VIN2_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN2 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81804_VIN2_NAME"
+	Value  = "VMEM"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81804_VIN2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VIN3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN3 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81804_VIN3_NAME"
+	Value  = "VIN3"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81804_VIN3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VCC3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VCC3 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81804_VCC3_NAME"
+	Value  = "$(STD_3V3)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81804_VCC3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_AVCC_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if AVCC is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81804_AVCC_NAME"
+	Value  = "AVCC"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81804_AVCC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VSB3V_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if 3VSB is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81804_VSB3V_NAME"
+	Value  = "$(STD_3VSB)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81804_VSB3V_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VBAT_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VBAT is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81804_VBAT_NAME"
+	Value  = "$(STD_VBAT)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81804_VBAT_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "F81804_5VSB_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if 5VSB is designed and is used.\Register Offset : 0x27"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "F81804_5VSB_NAME"
+    Value  = "$(STD_5VSB)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "F81804_5VSB_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "F81804_VIN0_RA"
+	Value  = "15"
+	Help  = "RA resistor in K-Ohm from voltage sensor VIN0 to target power. If sensor is connected to target power without RB, this value should be set to zero."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - 255"
+End
+
+TOKEN
+	Name  = "F81804_VIN0_RB"
+	Value  = "1"
+	Help  = "RB resistor in K-Ohm from voltage sensor VIN0 to GND."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1 - 255"
+End
+
+TOKEN
+	Name  = "F81804_VIN1_RA"
+	Value  = "0"
+	Help  = "RA resistor in K-Ohm from voltage sensor VIN1 to target power. If sensor is connected to target power without RB, this value should be set to zero."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - 255"
+End
+
+TOKEN
+	Name  = "F81804_VIN1_RB"
+	Value  = "1"
+	Help  = "RB resistor in K-Ohm from voltage sensor VIN0 to GND."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1 - 255"
+End
+
+TOKEN
+	Name  = "F81804_VIN2_RA"
+	Value  = "0"
+	Help  = "RA resistor in K-Ohm from voltage sensor VIN2 to target power. If sensor is connected to target power without RB, this value should be set to zero."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - 255"
+End
+
+TOKEN
+	Name  = "F81804_VIN2_RB"
+	Value  = "1"
+	Help  = "RB resistor in K-Ohm from voltage sensor VIN0 to GND."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1 - 255"
+End
+
+TOKEN
+	Name  = "F81804_VIN3_RA"
+	Value  = "1"
+	Help  = "RA resistor in K-Ohm from voltage sensor VIN3 to target power. If sensor is connected to target power without RB, this value should be set to zero."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81804_VIN3_RB"
+	Value  = "1"
+	Help  = "RB resistor in K-Ohm from voltage sensor VIN0 to GND."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1 - 255"
+End
+
+TOKEN
+	Name  = "=== Hardware monitor Report Capabilities =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Tokens for generate information automatically to report capability in BFPI. Tokens in this section basically needs no porting between projects."
+	TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_TEMP_SENSOR_NUMBER"
+    Value  = "$(F81804_TEMPERATURE_1_SUPPORT) + $(F81804_TEMPERATURE_2_SUPPORT) + $(F81804_TEMPERATURE_3_SUPPORT)"
+    Help  = "Temperature sensor number for from this SIO."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81804_FAN_SENSOR_NUMBER"
+    Value  = "$(F81804_FAN_1_SUPPORT) + $(F81804_FAN_2_SUPPORT)"
+    Help  = "Temperature sensor number for from this SIO."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81804_VOLT_SENSOR_NUMBER"
+	Value  = "$(F81804_VCORE_SUPPORT) + $(F81804_VIN0_SUPPORT) + $(F81804_VIN1_SUPPORT) + $(F81804_VIN2_SUPPORT) + $(F81804_VIN3_SUPPORT) + $(F81804_VCC3_SUPPORT) + $(F81804_AVCC_SUPPORT) + $(F81804_VSB3V_SUPPORT) + $(F81804_VBAT_SUPPORT)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+End
+
+TOKEN
+	Name  = "F81804_TEMP_SENSOR_NAME_LIST"
+	Value  = "$(F81804_TEMPERATURE_1_STRING)$(F81804_TEMPERATURE_2_STRING)$(F81804_TEMPERATURE_3_STRING)
+	Help  = "Temperature sensor name list for this type. Should be overriden in corresponded module."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_FAN_SENSOR_NAME_LIST"
+	Value  = "$(F81804_FAN_1_STRING)$(F81804_FAN_2_STRING)"
+	Help  = "Fan sensor name list for this type. Should be overriden in corresponded module."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_VOLT_SENSOR_NAME_LIST"
+	Value  = "$(F81804_HWMC_VCORE)$(F81804_HWMC_VIN0)$(F81804_HWMC_VIN1)$(F81804_HWMC_VIN2)$(F81804_HWMC_VIN3)$(F81804_HWMC_VCC3)$(F81804_HWMC_AVCC)$(F81804_HWMC_VSB3)$(F81804_HWMC_VBAT)"
+	Help  = "Voltage sensor name list for this type. Should be overriden in corresponded module."
+	TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_3VCC_STRING"
+    Value  = '"$(F81804_3VCC_NAME)"'
+    Help  = "Name for the voltage sensor."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81804_3VCC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VCORE_STRING"
+	Value  = '"$(F81804_VCORE_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81804_VCORE_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VIN0_STRING"
+	Value  = '"$(F81804_VIN0_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81804_VIN0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VIN1_STRING"
+	Value  = '"$(F81804_VIN1_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81804_VIN1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VIN2_STRING"
+	Value  = '"$(F81804_VIN2_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81804_VIN2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VIN3_STRING"
+	Value  = '"$(F81804_VIN3_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81804_VIN3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VCC3_STRING"
+	Value  = '"$(F81804_VCC3_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81804_VCC3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_AVCC_STRING"
+	Value  = '"$(F81804_AVCC_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81804_AVCC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VSB3V_STRING"
+	Value  = '"$(F81804_VSB3V_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81804_VSB3V_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_5VSB_STRING"
+    Value  = '"$(F81804_5VSB_NAME)"'
+    Help  = "Name for the voltage sensor."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81804_5VSB_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_VBAT_STRING"
+	Value  = '"$(F81804_VBAT_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81804_VBAT_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_TEMPERATURE_1"
+	Value  = ""
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_TEMPERATURE_2"
+	Value  = ""
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_TEMPERATURE_3"
+	Value  = ""
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VCORE"
+	Value  = ""
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VIN0"
+	Value  = ""
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VIN1"
+	Value  = ""
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VIN2"
+	Value  = ""
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VIN3"
+	Value  = ""
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VCC3"
+	Value  = ""
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_AVCC"
+	Value  = ""
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VSB3"
+	Value  = ""
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VBAT"
+	Value  = ""
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81804_HWMC_TEMPERATURE_1"
+	Value  = '\"$(F81804_TEMPERATURE_1_NAME)\",'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	Token = "F81804_TEMPERATURE_1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_TEMPERATURE_2"
+	Value  = '\"$(F81804_TEMPERATURE_2_NAME)\",'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	Token = "F81804_TEMPERATURE_3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_TEMPERATURE_3"
+	Value  = '\"$(F81804_TEMPERATURE_3_NAME)\",'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	Token = "F81804_TEMPERATURE_3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VCORE"
+	Value  = '\"$(F81804_VCORE_NAME)\",'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	Token = "F81804_VCORE_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VIN0"
+	Value  = '\"$(F81804_VIN0_NAME)\",'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	Token = "F81804_VIN0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VIN1"
+	Value  = '\"$(F81804_VIN1_NAME)\",'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	Token = "F81804_VIN1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VIN2"
+	Value  = '\"$(F81804_VIN2_NAME)\",'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	Token = "F81804_VIN2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VIN3"
+	Value  = '\"$(F81804_VIN3_NAME)\",'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	Token = "F81804_VIN3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VCC3"
+	Value  = '\"$(F81804_VCC3_NAME)\",'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	Token = "F81804_VCC3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_AVCC"
+	Value  = '\"$(F81804_AVCC_NAME)\",'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	Token = "F81804_AVCC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VSB3V"
+	Value  = '\"$(F81804_VSB3V_NAME)\",'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	Token = "F81804_VSB3V_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81804_HWMC_VBAT"
+	Value  = '\"$(F81804_VBAT_NAME)\",'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	Token = "F81804_VBAT_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_SMFC_FAN_1_PREFIX"
+    Value  = '"{\"Name\":\"$(F81804_FAN_1_NAME)\",\"Temperature Point\":4,\"Temperature Target\":\""'
+    Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_SMFC_FAN_2_PREFIX"
+    Value  = '"{\"Name\":\"$(F81804_FAN_2_NAME)\",\"Temperature Point\":4,\"Temperature Target\":\""'
+    Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_SMFC_FANOUT_SUFFIX"
+    Value  = '"\",\"Maxumum PWM\": 255,\"Supported Mode\":[\"Manual\",\"Linear\"]}"'
+    Help  = "Detail capability for FAN controller.\Suffix only, should be concatenate after PREFIX and 'Temperature Target'."
+    TokenType = Expression
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "$(F81804_DIR)\F81804OemReadyToBootCallback.c"
+    Parent  = "AMI_CSP_DXE_SOURCES"
+    InvokeOrder = AfterParent
+End
+ELINK
+    Name  = "F81804OemReadyToBootCallback,"
+    Parent  = "AAEON_READY_TO_BOOT_INIT_FUNCTIONS"
+    InvokeOrder = BeforeParent
+End
+TOKEN
+    Name  = "===== SIO Module Setting   ======"
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "SIO Module Setting"
+    TokenType = Expression
+End
+
+PATH
+    Name  = "F81804_DIR"
+End
+
+MODULE
+    Help  = "Includes F81804.MAK to Project"
+    File  = "F81804.mak"
+End
+
+ELINK
+    Name  = "$(F81804_DIR)/F81804Setup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    Priority  = 40
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "{dsUART,0x00, STR_SERIAL1_CONFIG_VALUE},"
+    Parent  = "SetupStrTableList"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "{dsUART,0x01, STR_SERIAL2_CONFIG_VALUE},"
+    Parent  = "SetupStrTableList"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "$(F81804_DIR)/F81804Setup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "OemInitF81804SetupStrings,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "$(F81804_DIR)/F81804Setup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+    Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+End
+
+ELINK
+    Name  = "$(F81804_DIR)\F81804SmartFanSetup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    Priority  = 40
+    InvokeOrder = AfterParent
+    Token = "F81804_SMF_PRESENT" "=" "1"
+End
+
+ELINK
+    Name  = "$(F81804_DIR)\F81804SmartFanSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+    Token = "F81804_SMF_PRESENT" "=" "1"
+End
+
+ELINK
+    Name  = "*_*_*_ASLPP_FLAGS"
+    Type  = "BuildOptions"
+    Arch  = "COMMON"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "-D SIO_PTS=\_SB.PCI0.SBRG.SIO1.SIOS"
+    Parent  = "*_*_*_ASLPP_FLAGS"
+    Type  = "BuildOptions"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "-D SIO_WAK=\_SB.PCI0.SBRG.SIO1.SIOW"
+    Parent  = "*_*_*_ASLPP_FLAGS"
+    Type  = "BuildOptions"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "F81804DxeInit"
+    File  = "F81804DxeInit.inf"
+    Package  = "AmiModulePkg"
+End
+
+INFComponent
+    Name  = "F81804PeiInit"
+    File  = "F81804PeiInit.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+    Token = "F81804_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "F81804PlatformHookSerialPortLib"
+    File  = "F81804PlatformHookSerialPortLib.inf"
+    Package  = "AmiModulePkg"
+    Token = "F81804_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "PlatformHookLib"
+    Instance  = "AmiModulePkg.F81804PlatformHookSerialPortLib"
+    ModuleTypes  = "PEIM PEI_CORE SEC"
+    Token = "F81804_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.F81804DxeInit"
+    Override  = "AmiModulePkg.SioDxeInit"
+    ModuleTypes  = "DXE_DRIVER"     
+    Token = "F81804_SUPPORT" "=" "1"
+End
+#Wythe remove->> Fixed 81804 hang issue, when get setup variable at F81804PeiInitEntryPoint().
+#FFS_FILE
+#    Name  = "F81804PeiInit"
+#    FD_AREA  = "FV_BB"
+#    INFComponent  = "AmiModulePkg.F81804PeiInit"
+#    Apriori_Index  = "0"
+#End
+#Wythe remove-<<
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.F81804DxeInit"
+    Override  = "AmiModulePkg.SmmGenericSio"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "SMM_SUPPORT" "=" "1"
+    Token = "AMI_SIO_MINOR_VERSION" ">=" "6"
+End
+
+SIODEVICE
+    Name  = "F81804"
+    Parent  = "LpcBridge"
+    IndexPort  = 02eh
+    DataPort  = 02fh
+    StdSioType  = "Yes"
+    DevSelReg  = 07h
+    ActivateReg  = 030h
+    ActivateVal  = 01h
+    DeActivateVal  = 00h
+    BaseHiReg1  = 060h
+    BaseLoReg1  = 061h
+    BaseHiReg2  = 062h
+    BaseLoReg2  = 063h
+    Irq1Reg  = 070h
+    Irq2Reg  = 072h
+    Dma1Reg  = 074h
+    Dma2Reg  = 075h
+    GblRegFlag  = "0x3fe000000000"
+    LocalRegFlag  = "0xffffffff0000000000000000000000000033000f000000000001000000000000"
+    EnterConfig  = "Script,'Index;Write;87h','Index;Write;87h'"
+    ExitConfig  = "Script,'Index;Write;AAh'"
+    SMBIOSStr  = "Test String"
+    GPEbit  = 01dh
+    SleepNum  = 03h
+    ASLfile  = "'AaeonIoPkg/F81804/F81804Dev.asl','AaeonIoPkg/F81804/F81804Evt.asl'"
+    ASLdeviceName  = "SIO1"
+    ASL_PTS  = "Method;SIO_PTS(Arg0)"
+    ASL_WAK  = "Method;SIO_WAK(Arg0)"
+    WakeEnabled = Yes
+End
+
+LDEVICE
+    Name  = "Ps2Kb"
+    SioDevice  = "F81804"
+    Dev_Type  = "dsPS2CK"
+    LDev_Num  = "05h"
+    UID  = "00h"
+    PnPID  = "0303h"
+    SIO_RES_Flag  = "0x0"
+    ##AAEON_OVERRIDE-- HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81804_KBC_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\ACPI\PS2_KB.asl'" ##AAEON_OVERRIDE
+    ASLdeviceName  = "PS2K"
+    ASL_HID = Yes ##AAEON_OVERRIDE
+    Token = "F81804_KEYBOARD_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Ps2Ms"
+    SioDevice  = "F81804"
+    Dev_Type  = "dsPS2CM"
+    LDev_Num  = "05h"
+    UID  = "00h"
+    PnPID  = "0f03h"
+    SIO_RES_Flag  = "0x3"
+    ##AAEON_OVERRIDE-- HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\ACPI\PS2_MS.asl'" ##AAEON_OVERRIDE
+    ASLdeviceName  = "PS2M"
+    ASL_HID = Yes ##AAEON_OVERRIDE
+    Token = "F81804_MOUSE_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com1"
+    SioDevice  = "F81804"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "010h"
+    UID  = "01h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81804_COM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\ACPI\UART1.ASL'"  ##AAEON_OVERRIDE
+    ASLdeviceName  = "UAR1"
+    Token = "F81804_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com2"
+    SioDevice  = "F81804"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "015h"
+    UID  = "02h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81804_COM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\ACPI\UART2.ASL'"  ##AAEON_OVERRIDE
+    ASLdeviceName  = "UAR2"
+    Token = "F81804_SERIAL_PORT2_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Pme"
+    SioDevice  = "F81804"
+    Dev_Type  = "dsPME"
+    LDev_Num  = "0ah"
+    UID  = "00h"
+    PnPID  = "0c08h"
+    SIO_RES_Flag  = "0x80"
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81804_PME_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+    ASLdeviceName  = "PMED"
+    Token = "F81804_PME_CONTROLLER_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "HwMonitor"
+    SioDevice  = "F81804"
+    Dev_Type  = "dsHwMon"
+    LDev_Num  = "04h"
+    UID  = "01h"
+    PnPID  = "0c08h"
+    SIO_RES_Flag  = "0x0"
+    ResBaseAddr1  = "$(IO3B)"
+    ResLength1  = "$(IO3L)"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81804_HWM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+    ASLdeviceName  = "HHMD"
+    Token = "F81804_HWM_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Gpio"
+    SioDevice  = "F81804"
+    Dev_Type  = "dsGPIO"
+    LDev_Num  = "06h"
+    UID  = "02h"
+    PnPID  = "0c08h"
+    SIO_RES_Flag  = "0x0"
+    ResBaseAddr1  = "$(IO1B)"
+    ResLength1  = "$(IO1L)"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81804_GPIO_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+    ASLdeviceName  = "SGPI"
+    Token = "F81804_GPIO_PORT_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "WdtDevice"
+    SioDevice  = "F81804"
+    Dev_Type  = "dsNone"
+    LDev_Num  = "07h"
+    UID  = "03h"
+    PnPID  = "0c08h"
+    SIO_RES_Flag  = "0x0"
+    ResBaseAddr1  = "$(IO2B)"
+    ResLength1  = "$(IO2L)"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+    ASLdeviceName  = "SWDT"
+    Token = "F81804_WDT_PRESENT" "=" "1"
+End
+
+#==============================================================================
+#elink DXE Initialization Source file
+#==============================================================================
+ELINK
+    Name  = "../$(F81804_DIR)/F81804DxeInit.c"
+    Parent  = "SIOLINK_LIB_SRC"
+    InvokeOrder = AfterParent
+End
+ELINK
+    Name  = "../../$(F81804_DIR)/F81804DxeInit.h"
+    Parent  = "SIOLINK_LIB_H"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name  = "---------------------- Multi Function Setting ----------------------"
+	Value  = "---------------------- Multi Function Setting ----------------------"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "DPORT_EN"
+	Value  = "0"
+	Help  = "0: Disable 0x80 port.\1: Enable 0x80 port."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "PECI_PIN_EN"
+	Value  = "1"
+	Help  = "0: GPIO17\1: PECI."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DPORT_MODE"
+	Value  = "0"
+	Help  = "0: Debug port output 0x80 port value which is converted into 7-segment LED.\1: Debug port output 0x80 port value directly."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SIRQ_PWR_SEL"
+	Value  = "0"
+	Help  = "0: SIRQ pin is powered by IFVCC.\1: SIRQ pin is powered by internal 1.8V."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO14_FUNC_SEL"
+	Value  = "0"
+	Help  = "0: GPIO.\1: PME#.\2: CLKOUT.\3: BEEP.\4: LED_VCC.\5: LED_VSB.\6: WDTRST#.\7: ALERT#."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO15_FUNC_SEL"
+	Value  = "6"
+	Help  = "0: GPIO.\1: PME#.\2: CLKOUT.\3: BEEP.\4: LED_VCC.\5: LED_VSB.\6: WDTRST#.\7: ALERT#."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO16_FUNC_SEL"
+	Value  = "0"
+	Help  = "0: GPIO.\1: PME#.\2: CLKOUT.\3: BEEP.\4: LED_VCC.\5: LED_VSB.\6: WDTRST#.\7: ALERT#."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO17_FUNC_SEL"
+	Value  = "0"
+	Help  = "0: GPIO.\1: PME#.\2: CLKOUT.\3: BEEP.\4: LED_VCC.\5: LED_VSB.\6: WDTRST#.\7: ALERT#."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO67_EN"
+	Value  = "0"
+	Help  = "0: S5#\1: GPIO67"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO66_EN"
+	Value  = "1"
+	Help  = "0: DPWROK\1: GPIO66"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FANIN3_EN"
+	Value  = "$(F81804_FAN2_PRESENT)"
+	Help  = "0: GPIO97\1: FANIN3"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FANCTRL3_EN"
+	Value  = "$(F81804_FAN2_PRESENT)"
+	Help  = "0: GPIO70/PE\1: FANCTRL3"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO00_EN"
+	Value  = "1"
+	Help  = "0: ERP_CTRL0#\1: GPIO00"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO04_EN"
+	Value  = "1"
+	Help  = "0: SLP_SUS#\1: GPIO04"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SMBUS_EN"
+	Value  = "0"
+	Help  = "Set “1” to enable pin 22’s SCL and pin 23’s SDA."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SDA2_PIN_EN"
+	Value  = "0"
+	Help  = "Set “1” to enable pin 30’s SDA."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SCL0_PIN_EN"
+	Value  = "0"
+	Help  = "Set “1” to enable pin 26’s SCL."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO22_EN"
+	Value  = "0"
+	Help  = "0: PWSIN#\1: GPIO22"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO23_EN"
+	Value  = "0"
+	Help  = "0: PWSOUT#\1: GPIO23"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO24_EN"
+	Value  = "0"
+	Help  = "0: S3#\1: GPIO24"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO25_EN"
+	Value  = "0"
+	Help  = "0: PSON#\1: GPIO25"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO26_EN"
+	Value  = "0"
+	Help  = "0: PWOK\1: GPIO26"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO27_EN"
+	Value  = "0"
+	Help  = "0: RSMRST#\1: GPIO27"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO91_EN"
+	Value  = "1"
+	Help  = "0: KBRST#.\1: GPIO91"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO92_EN"
+	Value  = "1"
+	Help  = "0: GA20.\1: GPIO92"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO93_EN"
+	Value  = "1"
+	Help  = "0: MDATA.\1: GPIO93"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO94_EN"
+	Value  = "1"
+	Help  = "0: MCLK.\1: GPIO94"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO95_EN"
+	Value  = "1"
+	Help  = "0: FANIN1.\1: GPIO95"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO97_EN"
+	Value  = "1"
+	Help  = "0: SLCT.\1: GPIO97"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "CLK_Source_SEL"
+	Value  = "0"
+	Help  = "0: CLKIN pin.\ 1: PCICLK pin."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "---------------------- ACPI Setting ----------------------"
+    Value  = "---------------------- ACPI Setting ----------------------"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "LAST_ST_MODE"
+	Value  = "0"
+	Help  = "0: Last state is sampled by PWROK and RSMRST#.\ 1: Last state is sampled 1 second before AC lost."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "BOOT_FAIL_PD_DIS"
+	Value  = "1"
+	Help  = "Set Set “1” to disable power down when boot fail."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "PWSIN_4S_PD_EN"
+	Value  = "1"
+	Help  = "Set Set ”1” to enable power down by pressing PWSIN# over 4 second."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "---------------------- GPIO Setting ----------------------"
+    Value  = "---------------------- GPIO Setting ----------------------"
+    TokenType = Expression
+End
+TOKEN
+	Name  = "GPIO_DEC_RANGE"
+	Value  = "1"
+	Help  = "0: The GPIO I/O space is 8 byte\1: The GPIO I/O space is 16 byte"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81804GPIO00_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO04_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO00_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO04_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO00_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO04_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO12_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO14_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO15_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO16_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO17_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO12_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO14_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO15_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO16_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO17_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO12_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO14_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO15_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO16_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO17_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO22_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO23_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO24_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO25_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO26_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO27_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO22_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO23_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO24_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO25_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO26_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO27_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO50_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO51_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO52_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO53_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO54_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO55_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO56_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO57_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO50_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO51_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO52_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO53_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO54_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO55_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO56_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO57_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO66_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO67_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO66_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO67_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO66_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO67_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO70_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO70_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO70_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO91_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO92_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO93_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO94_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO95_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO97_OE_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO91_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO92_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO93_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO94_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO95_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO97_VAL_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO91_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO92_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO93_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO94_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO95_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804GPIO97_DRVEN_DEFAULT"
+	Value  = "0"
+	Help  = "0: Open Drain\1: Push Pull"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "---------------------- HWM Setting ----------------------"
+	Value  = "---------------------- HWM Setting ----------------------"
+	TokenType = Expression
+End
+TOKEN
+	Name  = "F81804_T1_MODE"
+	Value  = "1"
+	Help  = "0: TEMP1 is connected to a thermistor\1: TEMP1 is connected to a BJT.(default)"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804_T2_MODE"
+	Value  = "1"
+	Help  = "0: TEMP2 is connected to a thermistor.\1: TEMP2 is connected to a BJT. (default)"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804_HWM_PECI_SUPPORT"
+	Value  = "0"
+	Help  = "0: No PECI support (default).\1: Enable PECI support."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81804_HWM_PECI_TCC"
+	Value  = "0x64"
+	Help  = "CPU_TEMP = TCC_TEMP + PECI Reading"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+    Name  = "VIN1_RA"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "VIN1_RB"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "VIN2_RA"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+TOKEN
+    Name  = "VIN2_RB"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81804_FAN2_PRESENT"
+	Value  = "0"
+	Help  = "0: Not Present\1: Present"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====== SIO SMF Control Tokens ======"
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Smart Fan control tokens."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81804_SMF1_SUPPORT"
+    Value  = "0"
+    Help  = "F81804 SmartFan 1 control support"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "F81804_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81804_SMF2_SUPPORT"
+    Value  = "0"
+    Help  = "F81804 SmartFan 2 control support"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "F81804_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FAN1_TYPE"
+    Value  = "0"
+    Help  = "FAN1 output type\00: Output PWM mode (push pull) to control fans.\01: Use linear fan application circuit to control fan speed by fan's power terminal.\10: Output PWM mode (open drain) to control Intel 4-wire fans."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "F81804_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FAN2_TYPE"
+    Value  = "0"
+    Help  = "FAN1 output type\00: Output PWM mode (push pull) to control fans.\01: Use linear fan application circuit to control fan speed by fan's power terminal.\10: Output PWM mode (open drain) to control Intel 4-wire fans."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "F81804_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FAN1_FIXED_RPM"
+    Value  = "3000"
+    Help  = "FAN1 FIXED RPM value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "500-10000"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_FIXED_DUTY"
+    Value  = "60"
+    Help  = "FAN1 FIXED DUTY-Cycle value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_RPM_T1"
+    Value  = "60"
+    Help  = "FAN1 FIXED Auto RPM setting T1"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_RPM_T2"
+    Value  = "50"
+    Help  = "FAN1 FIXED Auto RPM setting T2"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_RPM_T3"
+    Value  = "40"
+    Help  = "FAN1 FIXED Auto RPM setting T3"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_RPM_T4"
+    Value  = "30"
+    Help  = "FAN1 FIXED Auto RPM setting T4"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_RPM_F1"
+    Value  = "85"
+    Help  = "FAN1 FIXED Auto RPM setting F1"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_RPM_F2"
+    Value  = "70"
+    Help  = "FAN1 FIXED Auto RPM setting F2"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_RPM_F3"
+    Value  = "60"
+    Help  = "FAN1 FIXED Auto RPM setting F3"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_RPM_F4"
+    Value  = "50"
+    Help  = "FAN1 FIXED Auto RPM setting F4"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_RPM_F5"
+    Value  = "40"
+    Help  = "FAN1 FIXED Auto RPM setting F5"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FAN1_AUTO_DUTY_T1"
+    Value  = "60"
+    Help  = "FAN1 FIXED Auto DUTY setting T1"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_DUTY_T2"
+    Value  = "50"
+    Help  = "FAN1 FIXED Auto DUTY setting T2"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_DUTY_T3"
+    Value  = "40"
+    Help  = "FAN1 FIXED Auto DUTY setting T3"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_DUTY_T4"
+    Value  = "30"
+    Help  = "FAN1 FIXED Auto DUTY setting T4"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_DUTY_F1"
+    Value  = "85"
+    Help  = "FAN1 FIXED Auto DUTY setting F1"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_DUTY_F2"
+    Value  = "70"
+    Help  = "FAN1 FIXED Auto DUTY setting F2"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_DUTY_F3"
+    Value  = "60"
+    Help  = "FAN1 FIXED Auto DUTY setting F3"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN1_AUTO_DUTY_F4"
+    Value  = "50"
+    Help  = "FAN1 FIXED Auto DUTY setting F4"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FAN1_AUTO_DUTY_F5"
+    Value  = "40"
+    Help  = "FAN1 FIXED Auto DUTY setting F5"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FAN2_FIXED_RPM"
+    Value  = "3000"
+    Help  = "FAN2 FIXED RPM value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "500-10000"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_FIXED_DUTY"
+    Value  = "60"
+    Help  = "FAN2 FIXED DUTY-Cycle value"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_RPM_T1"
+    Value  = "60"
+    Help  = "FAN2 FIXED Auto RPM setting T1"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_RPM_T2"
+    Value  = "50"
+    Help  = "FAN2 FIXED Auto RPM setting T2"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_RPM_T3"
+    Value  = "40"
+    Help  = "FAN2 FIXED Auto RPM setting T3"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_RPM_T4"
+    Value  = "30"
+    Help  = "FAN2 FIXED Auto RPM setting T4"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_RPM_F1"
+    Value  = "85"
+    Help  = "FAN2 FIXED Auto RPM setting F1"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_RPM_F2"
+    Value  = "70"
+    Help  = "FAN2 FIXED Auto RPM setting F2"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_RPM_F3"
+    Value  = "60"
+    Help  = "FAN2 FIXED Auto RPM setting F3"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_RPM_F4"
+    Value  = "50"
+    Help  = "FAN2 FIXED Auto RPM setting F4"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_RPM_F5"
+    Value  = "40"
+    Help  = "FAN2 FIXED Auto RPM setting F5"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FAN2_AUTO_DUTY_T1"
+    Value  = "60"
+    Help  = "FAN2 FIXED Auto DUTY setting T1"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_DUTY_T2"
+    Value  = "50"
+    Help  = "FAN2 FIXED Auto DUTY setting T2"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_DUTY_T3"
+    Value  = "40"
+    Help  = "FAN2 FIXED Auto DUTY setting T3"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_DUTY_T4"
+    Value  = "30"
+    Help  = "FAN2 FIXED Auto DUTY setting T4"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_DUTY_F1"
+    Value  = "85"
+    Help  = "FAN2 FIXED Auto DUTY setting F1"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_DUTY_F2"
+    Value  = "70"
+    Help  = "FAN2 FIXED Auto DUTY setting F2"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_DUTY_F3"
+    Value  = "60"
+    Help  = "FAN2 FIXED Auto DUTY setting F3"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_DUTY_F4"
+    Value  = "50"
+    Help  = "FAN2 FIXED Auto DUTY setting F4"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "FAN2_AUTO_DUTY_F5"
+    Value  = "40"
+    Help  = "FAN2 FIXED Auto DUTY setting F5"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-100"
+    Token = "F81804_SMF2_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "$(F81804_DIR)\F81804MiscSetup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+ELINK
+    Name  = "$(F81804_DIR)\F81804MiscSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_DEFAULT"
+    Value  = "0"
+    Help  = "1: Enabled, RTS# is driven high automatically\0: Disabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "ONEOF_F81804RESTOREACPOWERLOSS_DEFAULT"
+    Value = "0"
+    Help = "0: Last State\1: Always On\2: Always Off"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "$(F81804_DIR)\F81804OemReadyToBootCallback.c"
+    Parent  = "AMI_CSP_DXE_SOURCES"
+    InvokeOrder = AfterParent
+End
+ELINK
+    Name  = "F81804OemReadyToBootCallback,"
+    Parent  = "AAEON_READY_TO_BOOT_INIT_FUNCTIONS"
+    InvokeOrder = BeforeParent
+End
+
+TOKEN
+    Name  = "AAEON_CPU_CORE_TEMP_DETECTION"
+    Value  = "0"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "INTEL_DTS_SUPPORT"
+    Value  = "1"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End

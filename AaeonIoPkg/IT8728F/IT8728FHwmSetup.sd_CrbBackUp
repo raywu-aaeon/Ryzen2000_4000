@@ -1,0 +1,143 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <IT8728F.sd>
+//
+// Description: HWM form template, setup screen definition file.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+#endif //SETUP_DATA_DEFINITION
+
+//-------------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//-------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//-------------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+    #include "Token.h"
+#endif
+
+//-------------------------------------------------------------------------
+//If you need custom varstore's define them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+#endif
+
+//-------------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+
+//-------------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+
+    #if IT8728F_HWM_PRESENT
+    goto HMM_CONFIG_FORM_ID,
+    prompt  = STRING_TOKEN(STR_IT8728F_HMM_CONFIGURATION),
+    help    = STRING_TOKEN(STR_IT8728F_HMM_CONFIGURATION_HELP);
+    #endif
+
+#endif
+
+//-------------------------------------------------------------------------
+// Define forms
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define HWM formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if IT8728F_HWM_PRESENT
+    //Define HWM formset form
+    form formid = AUTO_ID(HMM_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8728F_HMM_CONFIGURATION);
+     
+        SUBTITLE(STRING_TOKEN(STR_PC_HEALTH))
+     
+        SEPARATOR
+        //
+        // System Temperature1
+        #if EFI_SPECIFICATION_VERSION>0x20000
+        INTERACTIVE_TEXT(STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1), STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1_VALUE),  AUTO_ID(IT8728F_INTERACTIVE_KEY))
+        #else
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1),
+        text   = STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1_VALUE),
+        flags  = INTERACTIVE,
+        key    = IT8728F_INTERACTIVE_KEY;
+        #endif
+
+
+        HWM1_TEXT_TEMP2
+        HWM1_TEXT_TEMP3
+
+        HWM1_TEXT_FAN1_SPEED
+        HWM1_TEXT_FAN2_SPEED
+        HWM1_TEXT_FAN3_SPEED
+        HWM1_TEXT_FAN4_SPEED
+        HWM1_TEXT_FAN5_SPEED
+
+        //
+        // VIN0
+        text\
+        help   = STRING_TOKEN(STR_EMPTY),\
+        text   = STRING_TOKEN(STR_IT8728F_HMM_VIN0),\
+        text   = STRING_TOKEN(STR_IT8728F_HMM_VIN0_VALUE),\
+        flags  = 0,\
+        key    = 0;	
+
+        HWM1_TEXT_VIN1
+        HWM1_TEXT_VIN2
+        HWM1_TEXT_VIN3
+        HWM1_TEXT_VIN4
+        HWM1_TEXT_VIN5
+        HWM1_TEXT_VIN6
+        HWM1_TEXT_VBAT
+    endform;//HWM form
+    #endif//End of #if IT8728F_HWM_PRESENT
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

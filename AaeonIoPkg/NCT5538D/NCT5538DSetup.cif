@@ -1,0 +1,13 @@
+<component>
+	name = "NCT5538DSetup"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\NCT5538D\"
+	RefName = "AaeonIoPkg.NCT5538D.NCT5538DSetup"
+[files]
+"NCT5538DSetup.sd"
+"NCT5538DSetup.uni"
+"NCT5538DSetup.c"
+"NCT5538DSetup.h"
+<endComponent>
+
+

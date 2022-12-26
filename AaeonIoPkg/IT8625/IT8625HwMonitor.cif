@@ -1,0 +1,13 @@
+<component>
+	name = "IT8625HwMonitor"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\IT8625\"
+	RefName = "AaeonIoPkg.IT8625.IT8625HwMonitor"
+[files]
+"IT8625HwmSetup.sdl"	
+"IT8625HwmSetup.c"	
+"IT8625HwmSetup.sd"	
+"IT8625HwmSetup.uni"	
+"IT8625SmartFansSetup.h"	
+"IT8625HwmStrings.mak"
+<endComponent>

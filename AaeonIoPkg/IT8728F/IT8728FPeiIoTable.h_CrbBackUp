@@ -1,0 +1,337 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <IT8728FPeiIoTable.h>
+//
+// Description:
+//  SIO init table in PEI phase. Any customers have to review below tables
+//  for themselves platform and make sure each initialization is necessary.
+//
+// Notes:
+//  In all tables, only fill with necessary setting. Don't fill with default
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+//-------------------------------------------------------------------------
+// Include Files
+//-------------------------------------------------------------------------
+#include "token.h"
+#include <Library/AmiSioPeiLib.h>
+
+IO_DECODE_DATA IT8728FPeiDecodeTable[]= {
+    // -----------------------------
+    //|  BaseAdd | UID  | Type |
+    // -----------------------------
+    {IT8728F_CONFIG_INDEX, 2, 0xFF},
+    //Below decode is for recovery mode
+#if (defined(Recovery_SUPPORT) && (SerialRecovery_SUPPORT))
+#if (IT8728F_SERIAL_PORT1_PRESENT)
+    {IT8728F_SERIAL_PORT1_BASE_ADDRESS, 0x01, dsUART},
+#endif
+#endif //#if (defined(Recovery_SUPPORT) && (SerialRecovery_SUPPORT))
+#if defined(Recovery_SUPPORT) && (Recovery_SUPPORT)
+#if (IT8728F_KEYBOARD_PRESENT)
+    {0x60, 0, dsPS2K},                                  // KBC decode
+#endif
+#if (IT8728F_FLOPPY_PORT_PRESENT)
+    {0x3F0, 0, dsFDC},                                  // FDC decode
+#endif
+#endif //#if defined(Recovery_SUPPORT) && (Recovery_SUPPORT)
+    //Below decode is for SIO generic IO decode
+#if defined(IT8728F_TOTAL_BASE_ADDRESS) && (IT8728F_TOTAL_BASE_ADDRESS != 0)
+    {IT8728F_TOTAL_BASE_ADDRESS, IT8728F_TOTAL_LENGTH, 0xFF},
+#endif
+    // !!!!Attention!!!!This is necessary
+    //OEM_TODO//OEM_TODO//OEM_TODO//OEM_TODO
+    // If your com port number > 2 , you'd add more table for more com ports.
+    // Add more OEM IO decode below.
+#if (IT8728F_CIR_PORT_PRESENT)
+    {0x3E0, 0x10, 0xFF}, // For CIR
+#endif
+};
+
+SIO_DEVICE_INIT_DATA IT8728FPeiInitTable[]= {
+    // -----------------------------
+    //|  Addr | DataMask  | DataValue |
+    // -----------------------------
+
+    //---------------------------------------------------------------------
+    // Enter Configuration Mode.
+    //---------------------------------------------------------------------
+    {IT8728F_CONFIG_INDEX, 0x00, 0x87},
+    {IT8728F_CONFIG_INDEX, 0x00, 0x01},
+    {IT8728F_CONFIG_INDEX, 0x00, 0x55},
+#if (IT8728F_CONFIG_INDEX == 0x2E)
+    {IT8728F_CONFIG_INDEX, 0x00, 0x55},
+#else
+    {IT8728F_CONFIG_INDEX, 0x00, 0xAA},
+#endif
+    //---------------------------------------------------------------------
+    // Before init all logical devices, program Global register if needed.
+    //---------------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    // >>ITE AP Workaround Start:Early I/O initialization before POST
+    //--------------------------------------------------------------------------
+    //-----------IO Config Registers---------------------------------------------------
+    //>>AP V1.0,IT8728F_IT8772E_BIOSAp10022v1 0.pdf
+    //CR23[7,6,5]=000
+    {IT8728F_CONFIG_INDEX, 0x00, 0x23},
+    {IT8728F_CONFIG_DATA,  0x1F, 0x00},
+    //Index 24 don't write any value.(If SPI function Enable)
+    //Select LDN EC 04h
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_ENV},
+    //CRF0=0x00
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF0},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},
+    //clear status, Bit6 don't clear
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF1},
+    {IT8728F_CONFIG_DATA,  0x00, 0xBF},
+    //CRF2=0x00
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF2},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},
+    //CRF3=0x00
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF3},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},
+    //CRF4=0x00
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF4},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},
+    //CRF5[7:6]=00
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF5},
+    {IT8728F_CONFIG_DATA,  0x3F, 0x00},
+    //>>AP V1.3,IT8728F_23_7x_BIOSAp10022v1 3.pdf---Modify
+    //CRFA[3:2]=00->CRFA=0x00
+    {IT8728F_CONFIG_INDEX, 0x00, 0xFA},
+    //-{IT8728F_CONFIG_DATA,  0xF3, 0x00},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},
+    //CRFA[3:2]=00,write 1 to clear status
+    {IT8728F_CONFIG_INDEX, 0x00, 0xFB},
+    {IT8728F_CONFIG_DATA,  0xF3, 0x0C},
+    //Select LDN 03h
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x03},
+    //CRF0[3]=1
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF0},
+    {IT8728F_CONFIG_DATA,  0xF7, 0x08},
+    //Select LDN07h
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_GPIO},
+    //CR28[6]=0
+    {IT8728F_CONFIG_INDEX, 0x00, 0x28},
+    {IT8728F_CONFIG_DATA,  0xBF, 0x00},
+    //>>AP V1.5, Index 2B/ bit[7..3] is Reserved, don¡¯t write any value
+    //>>AP V1.3,IT8728F_23_7x_BIOSAp10022v1 3.pdf---Modify:bit3 use default value
+    //CR2B[7-3]=00-> CR2B[7-4]=00,bit3 use default
+    //{IT8728F_CONFIG_INDEX, 0x00, 0x2B},
+    //{IT8728F_CONFIG_DATA,  0x07, 0x00},
+    //CR72[4]=0,disable wdt
+    {IT8728F_CONFIG_INDEX, 0x00, 0x72},
+    {IT8728F_CONFIG_DATA,  0xEF, 0x00},
+#if (IT8728F_JP4==1)
+    //When disable AMD Power Sequence function(JP4=1),
+    //CR2C[6]=1
+    {IT8728F_CONFIG_INDEX, 0x00, 0x2C},
+    {IT8728F_CONFIG_DATA,  0xBF, 0x40},
+#endif
+    //-----------Runtime Registers---------------------------------------------------
+    //>>AP V1.0,IT8728F_IT8772E_BIOSAp10022v1 0.pdf
+#if IT8728F_HWM_SUPPORT
+    //select EC
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_ENV},
+    // Program Base Addr
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE1_LO_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, (UINT8)(IT8728F_HWM_BASE_ADDRESS & 0xFF)},
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE1_HI_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, (UINT8)(IT8728F_HWM_BASE_ADDRESS >> 8)},
+    // Program PME base address
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE2_HI_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, (UINT8)((UINT16)IT8728F_PME_BASE_ADDRESS >> 8)},
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE2_LO_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, (UINT8)((UINT16)IT8728F_PME_BASE_ADDRESS & 0x00FF)},
+    // Activate Device
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_ACTIVATE_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_ACTIVATE_VALUE},
+    //enable voltage channel
+    {IT8728F_HWM_BASE_ADDRESS+0x05, 0x00, 0x50},
+    {IT8728F_HWM_BASE_ADDRESS+0x06, 0x00, 0xFF},
+    //enable temperature channel
+    {IT8728F_HWM_BASE_ADDRESS+0x05, 0x00, 0x51},
+    {IT8728F_HWM_BASE_ADDRESS+0x06, 0x00, 0x38},
+    //index00h[0]=1,start monitor
+    {IT8728F_HWM_BASE_ADDRESS+0x05, 0x00, 0x00},
+    {IT8728F_HWM_BASE_ADDRESS+0x06, 0x00, 0x01},
+    //Index 4A don't write any value
+#if (THERMAL_SENSOR_INTERFACE==2)//select PECI interface
+    //index0Ah=64h
+    {IT8728F_HWM_BASE_ADDRESS + 5,  0x00, 0x0A},
+    {IT8728F_HWM_BASE_ADDRESS + 6,  0x00, 0x64},
+    //index8Eh[7,6]=11
+    //When Intel PECI support, set 0x8E register bit6,7 = 1,1
+    {IT8728F_HWM_BASE_ADDRESS+0x05, 0x00, 0x8E},
+    {IT8728F_HWM_BASE_ADDRESS+0x06, 0x3F, 0xC0},
+#endif
+    //index00h[6]=1, Update VBAT Voltage Reading again
+    {IT8728F_HWM_BASE_ADDRESS+0x05, 0x00, 0x00},
+    {IT8728F_HWM_BASE_ADDRESS+0x06, 0x00, 0x40},
+#endif
+    //<<AP V1.0,IT8728F_IT8772E_BIOSAp10022v1 0.pdf
+    //--------------------------------------------------------------------------
+    // <<ITE AP Workaround End
+    //--------------------------------------------------------------------------
+    // Program clock setting in global registers
+    // Bit0: 0/1 for CLKIN is 48Mhz/24MHz .
+    {IT8728F_CONFIG_INDEX, 0x00, 0x23},
+    {IT8728F_CONFIG_DATA,  0xFE, 0x00 | IT8728F_CLOCK},
+    //---------------------------------------------------------------------
+    // Before init all logical devices, program GPIO Multi-Pin if needed.
+    //---------------------------------------------------------------------
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_GPIO},
+    {IT8728F_CONFIG_INDEX, 0x00, 0x25},
+    {IT8728F_CONFIG_DATA,  0x08, 0x00},// GPIO Set 1 Multi-Function Pin Selection Register (Index=25h, Default=00h)
+    //config as uart2
+    {IT8728F_CONFIG_INDEX, 0x00, 0x26},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},// GPIO Set 2 Multi-Function Pin Selection Register (Index=26h, Default=FFh)
+    {IT8728F_CONFIG_INDEX, 0x00, 0x27},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},// GPIO Set 3 Multi-Function Pin Selection Register (Index=27h, Default=00h)
+    {IT8728F_CONFIG_INDEX, 0x00, 0x28},
+    {IT8728F_CONFIG_DATA,  0x40, 0x00},// GPIO Set 4 Multi-Function Pin Selection Register (Index=28h, Default=00h)
+    {IT8728F_CONFIG_INDEX, 0x00, 0x29},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},// GPIO Set 5 Multi-Function Pin Selection Register (Index=29h, Default=00h)
+    //>>EIP76867: ITE APNote,set PWRGD 1 and then set 0 will cause AMD CPU can not enter OS
+#if (IT8728F_AMD_PWRGD==0)//it is intel platform,AMD platform will skipt
+    {IT8728F_CONFIG_INDEX, 0x00, 0x2A},
+    {IT8728F_CONFIG_DATA,  0xDF, 0x00 | (PWRGD<<5)},// Extended 1 Multi-Function Pin Selection Register (Index=2Ah, Default=00h)
+#endif
+    //<<EIP76867 End
+    {IT8728F_CONFIG_INDEX, 0x00, 0x2B},
+    {IT8728F_CONFIG_DATA,  0xF8, 0x00},// PANSW# Mask timer Register (Index=2Bh, Default=00h)
+    {IT8728F_CONFIG_INDEX, 0x00, 0x2C},
+    {IT8728F_CONFIG_DATA,  0x62, 0x01},// Extended 2 Multi-Function Pin Selection Register (Index=2Ch, Default=03h)
+    //---------------------------------------------------------------------
+    // Initialize the Serial Port for debug useage. Default is COMA
+    //---------------------------------------------------------------------
+#if (defined(Recovery_SUPPORT) && (SerialRecovery_SUPPORT))
+#if (IT8728F_SERIAL_PORT1_PRESENT)
+    // Select device
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_UART1},
+    // Program Base Addr
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE1_LO_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, (UINT8)(IT8728F_SERIAL_PORT1_BASE_ADDRESS & 0xFF)},
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE1_HI_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, (UINT8)(IT8728F_SERIAL_PORT1_BASE_ADDRESS >> 8)},
+    // Activate Device
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_ACTIVATE_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_ACTIVATE_VALUE},
+#endif
+#endif
+    //---------------------------------------------------------------------
+    // Initialize the KeyBoard and floppy controller for Recovery
+    //---------------------------------------------------------------------
+#if defined(Recovery_SUPPORT) && (Recovery_SUPPORT)
+#if (IT8728F_KEYBOARD_PRESENT)
+    // Seclect device KEYBOARD
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_PS2K},
+    // Program Base Addr
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE1_HI_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE1_LO_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x60},
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE2_HI_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE2_LO_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x64},
+    // Program Interrupt
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_IRQ1_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x01},
+    // Activate Device
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_ACTIVATE_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_ACTIVATE_VALUE},
+#else
+    // Deactivate Device
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_PS2K},
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_ACTIVATE_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_DEACTIVATE_VALUE},
+#endif //IT8728F_KEYBOARD_PRESENT
+#if (IT8728F_FLOPPY_PORT_PRESENT)
+    // Seclect device FLOPPY
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_FDC},
+    // Program Base Addr
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE1_HI_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x03},
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_BASE1_LO_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0xF0},
+    // Program Interrupt
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_IRQ1_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x06},
+    // Activate Device
+    {IT8728F_CONFIG_INDEX, 0xFF, IT8728F_ACTIVATE_REGISTER},
+    {IT8728F_CONFIG_DATA,  0xFF, IT8728F_ACTIVATE_VALUE},
+#endif //IT8728F_FLOPPY_PORT_PRESENT
+#endif //#if defined(Recovery_SUPPORT) && (Recovery_SUPPORT == 1)
+    //---------------------------------------------------------------------
+    // Program and initialize some logical device if needed.
+    //---------------------------------------------------------------------
+#if (IT8728F_PARALLEL_PORT_PRESENT)
+    //Select LDN 03h
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x03},
+    //Set parallel port mode to EPP+ECP mode
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF0},
+    {IT8728F_CONFIG_DATA,  0xFC, 0x03},
+#endif// IT8728F_PARALLEL_PORT_PRESENT
+
+    // Seclect device KEYBOARD
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_PS2K},
+    // config
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF0},
+    {IT8728F_CONFIG_DATA,  0xF7, 0x00 | (IT8728F_KBC_CLOCK << 3)},
+    // Seclect device EC
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_LDN_SEL_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, IT8728F_LDN_ENV},
+    // config
+    {IT8728F_CONFIG_INDEX, 0x00, 0xF4}, //Auto-swap of KCLK/KDAT and MCLK/MDAT
+    {IT8728F_CONFIG_DATA,  0x7F, IT8728F_PS2_SWAP << 7},
+    // Clear Interrupt
+    {IT8728F_CONFIG_INDEX, 0x00, IT8728F_IRQ1_REGISTER},
+    {IT8728F_CONFIG_DATA,  0x00, 0x00},
+
+    //---------------------------------------------------------------------
+    // After init all logical devices,  Exit Configuration Mode.
+    //---------------------------------------------------------------------
+    {IT8728F_CONFIG_INDEX, 0x00, 0x02},
+    {IT8728F_CONFIG_DATA,  0x00, 0x02},
+};
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

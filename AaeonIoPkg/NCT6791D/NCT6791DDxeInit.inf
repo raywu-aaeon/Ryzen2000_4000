@@ -1,0 +1,64 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#*        (C)Copyright 1985-2013, American Megatrends, Inc.          **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  INF_VERSION 		= 0x00010005
+  VERSION_STRING 	= 1.0
+  BASE_NAME 		= NCT6791DDxeInit
+  FILE_GUID 		= 19DBBDC1-DEDF-4DED-8684-2476B99FAC91
+  MODULE_TYPE 		= DXE_DRIVER
+  LIBRARY_CLASS     = NULL	  
+
+[Sources]
+  NCT6791DDxeInit.c
+  NCT6791DDxeIoTable.h
+
+[LibraryClasses]
+  AmiDxeLib
+  AmiSioDxeLib
+  UefiDriverEntryPoint
+
+[Protocols]
+  gEfiAmiSioProtocolGuid
+  gAmiBoardSioInitProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiSimpleTextOutProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gEfiUgaDrawProtocolGuid
+  gEfiHiiFontProtocolGuid
+  gEfiHiiDatabaseProtocolGuid
+  gEfiDriverBindingProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#*        (C)Copyright 1985-2013, American Megatrends, Inc.          **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+
+

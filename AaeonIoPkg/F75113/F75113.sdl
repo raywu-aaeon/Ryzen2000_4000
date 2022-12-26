@@ -1,0 +1,169 @@
+TOKEN
+	Name  = "F75113_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable F75113 support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "=== SIO Logic Device Present Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "All Logic Device Present / Not Present."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F75113_GPIO_PORT_PRESENT"
+	Value  = "1"
+	Help  = "GPIO Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "====== SIO Registers Layout =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specify Register address inside SIO Chip."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F75113_CONFIG_INDEX"
+	Value  = "0x2E"
+	Help  = "SIO index port."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F75113_CONFIG_DATA"
+	Value  = "0x2F"
+	Help  = "SIO data port."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F75113_LDN_SEL_REGISTER"
+	Value  = "0x07"
+	Help  = "Logical Device Select Register Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F75113_ACTIVATE_REGISTER"
+	Value  = "0x30"
+	Help  = "Device Identification Register Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "====== SIO Logical Devices Numbers ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specify Devices Logical Number."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F75113_LDN_GLOBLE"
+	Value  = "0x00"
+	Help  = "LDN for Global control registers"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F75113_LDN_GPIO"
+	Value  = "0x01"
+	Help  = "LDN for GPIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "=== SIO Global Registers Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO Global Registers Setting"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "=== SIO Activation Values =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specify Logical Device Activation Value."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F75113_CONFIG_MODE_ENTER_VALUE"
+	Value  = "0x50"
+	Help  = "Value to enter the SIO Configuration Mode."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F75113_CONFIG_MODE_EXIT_VALUE"
+	Value  = "0xAA"
+	Help  = "Value to enter the SIO Configuration Mode."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F75113_ACTIVATE_VALUE"
+	Value  = "0x01"
+	Help  = "Value to activate Device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F75113_DEACTIVATE_VALUE"
+	Value  = "0x00"
+	Help  = "Value to deactivate Device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "====== SIO BASE ADDRESS Setting =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO some base address setting "
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F75113_TOTAL_BASE_ADDRESS"
+	Value  = "0xA00"
+	Help  = "It's used for IODecode, System will open TOTAL_BASE_ADDRESS+TOTAL_LENGTH IODecode for GPIO+PME+..."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F75113_GPIO_BASE_ADDRESS"
+	Value  = "$(F75113_TOTAL_BASE_ADDRESS)"
+	Help  = "Base Address of GPIO. If changed, please update PeiSetLpcDeviceDecoding() in F75113PEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+PATH
+	Name  = "F75113_DIR"
+End
+
+INFComponent
+	Name  = "F75113PeiInit"
+	File  = "F75113PeiInit.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "F75113_SUPPORT" "=" "1"
+End
+

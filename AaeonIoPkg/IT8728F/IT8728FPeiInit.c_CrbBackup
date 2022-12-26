@@ -1,0 +1,135 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <IT8728FPeiInit.c>
+//
+// Description: Porting for PEI phase.Just for necessary devices porting.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+//-------------------------------------------------------------------------
+// Include Files
+//-------------------------------------------------------------------------
+#include <AmiPeiLib.h>
+#include <IT8728FPeiIoTable.h>
+//-------------------------------------------------------------------------
+// internal funtion declare; these funtions are only used by this file.
+//-------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------
+// global funtion declare ; these funtions are used for other files.
+//-------------------------------------------------------------------------
+
+//*************************************************************************
+// belows are functions defined
+//*************************************************************************
+// <AMI_PHDR_START>
+//-------------------------------------------------------------------------
+//
+// Procedure: IT8728F_PeiClearDevResource
+//
+// Description:
+//  This function will Clear SIO resource
+//
+// Input:
+//  SIO_DEV2* dev
+// Output:
+//  NONE
+//
+//-------------------------------------------------------------------------
+// <AMI_PHDR_END>
+VOID IT8728F_PeiClearDevResource(
+    IN  UINT8    Ldn
+)
+{
+    // Seclect device LDN
+    IoWrite8(IT8728F_CONFIG_INDEX, IT8728F_LDN_SEL_REGISTER);
+    IoWrite8(IT8728F_CONFIG_DATA, Ldn);
+    // Deactivate Device
+    IoWrite8(IT8728F_CONFIG_INDEX, IT8728F_ACTIVATE_REGISTER);
+    IoWrite8(IT8728F_CONFIG_DATA,  IT8728F_DEACTIVATE_VALUE);
+    // Clear Base Address
+    IoWrite8(IT8728F_CONFIG_INDEX, IT8728F_BASE1_HI_REGISTER);
+    IoWrite8(IT8728F_CONFIG_DATA,  0);
+    IoWrite8(IT8728F_CONFIG_INDEX, IT8728F_BASE1_LO_REGISTER);
+    IoWrite8(IT8728F_CONFIG_DATA,  0);
+    // Clear Interrupt
+    IoWrite8(IT8728F_CONFIG_INDEX, IT8728F_IRQ1_REGISTER);
+    IoWrite8(IT8728F_CONFIG_DATA,  0);
+    return;
+}
+// <AMI_PHDR_START>
+//-------------------------------------------------------------------------
+//
+// Procedure: IT8728FPeiInitEntryPoint
+//
+// Description:
+//  This function provide PEI phase SIO initialization
+//
+// Input:
+//  IN  EFI_FFS_FILE_HEADER    *FfsHeader - Logical Device's information
+//  IN  EFI_PEI_SERVICES       **PeiServices  - Read/Write PCI config space
+//
+// Output:    None
+//
+// Modified:  Nothing
+//
+// Referrals: None
+//
+// Note:
+//-------------------------------------------------------------------------
+// <AMI_PHDR_END>
+EFI_STATUS IT8728FPeiInitEntryPoint(
+    IN       EFI_PEI_FILE_HANDLE  FileHandle,
+    IN CONST EFI_PEI_SERVICES     **PeiServices
+)
+{
+    UINT8 index;
+
+    for(index=0; index<sizeof(IT8728FPeiDecodeTable)/sizeof(IO_DECODE_DATA); index++)
+        AmiSioLibSetLpcDeviceDecoding(NULL, IT8728FPeiDecodeTable[index].BaseAdd, IT8728FPeiDecodeTable[index].UID, IT8728FPeiDecodeTable[index].Type);
+
+    ProgramRtRegisterTable(0, IT8728FPeiInitTable, sizeof(IT8728FPeiInitTable)/sizeof(SIO_DEVICE_INIT_DATA));
+    // Enter Configuration Mode.
+    IoWrite8(IT8728F_CONFIG_INDEX, 0x87);
+    IoWrite8(IT8728F_CONFIG_INDEX, 0x01);
+    IoWrite8(IT8728F_CONFIG_INDEX, 0x55);
+#if (IT8728F_CONFIG_INDEX == 0x2E)
+    IoWrite8(IT8728F_CONFIG_INDEX, 0x55);
+#else
+    IoWrite8(IT8728F_CONFIG_INDEX, 0xAA);
+#endif
+    // Disable Non-Used Device in Pei Phase,if its default value is actived.
+    IT8728F_PeiClearDevResource(IT8728F_LDN_CIR);
+    // Exit Configuration Mode
+    IoWrite8(IT8728F_CONFIG_INDEX, 0x02);
+    IoWrite8(IT8728F_CONFIG_DATA,  0x02);
+    return EFI_SUCCESS;
+}
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

@@ -1,0 +1,14 @@
+<component>
+	name = "NCT6791DHwMonitor"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\NCT6791D\"
+	RefName = "AaeonIoPkg.NCT6791D.NCT6791DHwMonitor"
+[files]
+"NCT6791DHwmSetup.sdl"
+"NCT6791DHwmSetup.c"	
+"NCT6791DHwmSetup.sd"	
+"NCT6791DHwmSetup.uni"	
+<endComponent>
+
+
+

@@ -1,0 +1,915 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+#*************************************************************************
+#<AMI_FHDR_START>
+#
+# Name:  <F81216SEC.sdl>
+#
+# Description: SDL file to define SIO functions
+#
+#<AMI_FHDR_END>
+#*************************************************************************
+############################################################
+#==============================================================================
+#1.SIO Global Control Tokens
+#==============================================================================
+
+TOKEN
+	Name  = "====== SIO Global Control Tokens ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specfy global control tokens."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81216SEC_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable F81216SEC support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+End
+##RayWu, REMOVE 2015/04/23 >>
+##TOKEN
+##	Name  = "SIO_SUPPORT"
+##	Value  = "1"
+##	Help  = "Main switch to enable SIO support in Project"
+##	TokenType = Boolean
+##	TargetEQU = Yes
+##	TargetMAK = Yes
+##	TargetH = Yes
+##End
+##RayWu, REMOVE 2015/04/23 <<
+
+#==============================================================================
+#2.Override AMI SIO Core Settings
+#==============================================================================
+#==============================================================================
+#3.SIO Logic Device Present Settings
+#==============================================================================
+TOKEN
+	Name  = "=== SIO Logic Device Present Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "All Logic Device Present / Not Present."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81216SEC_SERIAL_PORT1_PRESENT"
+	Value  = "1"
+	Help  = "Serial Port 1 (COMA / UART1) Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_SERIAL_PORT2_PRESENT"
+	Value  = "1"
+	Help  = "Serial Port 2 (COMB / UART2) Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_SERIAL_PORT3_PRESENT"
+	Value  = "1"
+	Help  = "Serial Port 3 (COMC / UART3) Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_SERIAL_PORT4_PRESENT"
+	Value  = "1"
+	Help  = "Serial Port 4 (COMD / UART4) Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#==============================================================================
+#4.SIO Registers Layout
+#==============================================================================
+TOKEN
+	Name  = "====== SIO Registers Layout =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specfy Register address inside SIO Chip."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81216SEC_CONFIG_INDEX_DATA_DEFAULT"
+	Value  = "0"
+	Help  = "0: index to 0x2E and data to 0x2F / 1: index to 0x4E and data to 0x4F"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_CONFIG_INDEX"
+	Value  = "0x2E"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "F81216SEC_CONFIG_INDEX_DATA_DEFAULT" "=" "0"
+End
+
+TOKEN
+	Name  = "F81216SEC_CONFIG_DATA"
+	Value  = "0x2F"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "F81216SEC_CONFIG_INDEX_DATA_DEFAULT" "=" "0"
+End
+
+TOKEN
+	Name  = "F81216SEC_CONFIG_INDEX"
+	Value  = "0x4E"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "F81216SEC_CONFIG_INDEX_DATA_DEFAULT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81216SEC_CONFIG_DATA"
+	Value  = "0x4F"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Token = "F81216SEC_CONFIG_INDEX_DATA_DEFAULT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81216SEC_LDN_SEL_REGISTER"
+	Value  = "0x07"
+	Help  = "Logical Device Select Register Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_ACTIVATE_REGISTER"
+	Value  = "0x30"
+	Help  = "Device Identification Register Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_BASE1_HI_REGISTER"
+	Value  = "0x60"
+	Help  = "Device BaseAddres Register#1 MSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_BASE1_LO_REGISTER"
+	Value  = "0x61"
+	Help  = "Device BaseAddres Register#1 LSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_BASE2_HI_REGISTER"
+	Value  = "0x62"
+	Help  = "Device BaseAddres Register#2 MSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_BASE2_LO_REGISTER"
+	Value  = "0x63"
+	Help  = "Device BaseAddres Register#2 LSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_IRQ1_REGISTER"
+	Value  = "0x70"
+	Help  = "Device IRQ Register#1 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_IRQ2_REGISTER"
+	Value  = "0x72"
+	Help  = "Device IRQ Register#2 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_DMA1_REGISTER"
+	Value  = "0x74"
+	Help  = "Device DMA Register#1 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_DMA2_REGISTER"
+	Value  = "0x75"
+	Help  = "Device DMA Register#2 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+
+#==============================================================================
+#5. SIO Logical Devices Numbers 
+#==============================================================================
+TOKEN
+	Name  = "====== SIO Logical Devices Numbers ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specfy Devices Logical Number."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81216SEC_URIRQ_MODE"
+	Value  = "0"
+	Help  = "IRQ sharing mode. 0: PCI \ 1: ISA."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_URIRQ_SHAR"
+	Value  = "1"
+	Help  = "0: IRQ is not sharing with other device. \ 1: IRQ is sharing with other device."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_LDN_WDT"
+	Value  = "0x08"
+	Help  = "LDN for Watch Dog Timer"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_LDN_UART1"
+	Value  = "0x00"
+	Help  = "LDN for Serial Port 1 Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_LDN_UART2"
+	Value  = "0x01"
+	Help  = "LDN for Serial Port 2 Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_LDN_UART3"
+	Value  = "0x02"
+	Help  = "LDN for Serial Port 3 Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_LDN_UART4"
+	Value  = "0x03"
+	Help  = "LDN for Serial Port 4 Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_F81216SECUARTAUTOFLOWCONTROLENABLE_DEFAULT"
+    Value  = "0"
+    Help  = "1: Enabled, auto assert RTS# (RTS# is low) when receiving is required\0: Disabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+#==============================================================================
+#6. Register value setting
+#==============================================================================
+TOKEN
+	Name  = "=== SIO Global Registers Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO Global Registers Setting"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81216SEC_CLOCK"
+	Value  = "0"
+	Help  = "0/1 for 24Mhz/48MHz"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "=== SIO Multi-Pin Device Select Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO Multi-Pin Device Select Setting"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "=== Hardware monitor Registers Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Hardware monitor Registers Settings"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "=== SIO Activation Values =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specfy Logical Device Activation Value."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81216SEC_CONFIG_MODE_ENTER_VALUE"
+	Value  = "0x77"
+	Help  = "Value to enter the SIO Configuration Mode."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_CONFIG_MODE_EXIT_VALUE"
+	Value  = "0xAA"
+	Help  = "Value to enter the SIO Configuration Mode."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ENT2"
+	Value  = "$(F81216SEC_CONFIG_MODE_ENTER_VALUE)"
+	Help  = "ASL alias for SIO Config Mode Enter Value."
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "EXT2"
+	Value  = "$(F81216SEC_CONFIG_MODE_EXIT_VALUE)"
+	Help  = "ASL alias for SIO Config Mode Exit Value."
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_ACTIVATE_VALUE"
+	Value  = "0x01"
+	Help  = "Value to activate Device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81216SEC_DEACTIVATE_VALUE"
+	Value  = "0x00"
+	Help  = "Value to deactivate Device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "====== SIO BASE ADDRESS Setting =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO some base address setting "
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "===== SIO token only been used in ASL  ====="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Provide Resource properties."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "SP2O"
+	Value  = "$(F81216SEC_CONFIG_INDEX)"
+	Help  = "Super IO Index/Data configuration port for ASL."
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "====== SIO COM Mode Select Tokens ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO COM Mode Select Tokens."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "====== SIO SMF Control Tokens ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Smart Fan control tokens."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "===== SIO Module Setting   ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO Module Setting"
+	TokenType = Expression
+End
+
+PATH
+	Name  = "F81216SEC_DIR"
+End
+
+MODULE
+	Help  = "Includes F81216SEC.MAK to Project"
+	File  = "F81216SEC.MAK"
+End
+
+ELINK
+	Name  = "$(F81216SEC_DIR)\F81216SECSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	Priority  = 40
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "-i $(F81216SEC_DIR)"
+	Parent  = "SETUP_VFR_INCLUDES"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsUART,0x10, STR_F81216SEC_SERIAL1_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsUART,0x11, STR_F81216SEC_SERIAL2_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsUART,0x12, STR_F81216SEC_SERIAL3_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsUART,0x13, STR_F81216SEC_SERIAL4_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(F81216SEC_DIR)\F81216SECSetup.c"
+	Parent  = "SetupCallbackFiles"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "OemInitF81216SECSetupStrings,"
+	Parent  = "SetupStringInit"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(F81216SEC_DIR)\F81216SECSetup.uni"
+	Parent  = "SetupStringFiles"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(F81216SEC_DIR)\F81216SECMiscSetup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+ELINK
+    Name  = "$(F81216SEC_DIR)\F81216SECMiscSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "F81216SECDxeInit"
+	File  = "F81216SECDxeInit.inf"
+	Package  = "AmiModulePkg"
+End
+
+INFComponent
+	Name  = "F81216SECPeiInit"
+	File  = "F81216SECPeiInit.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "F81216SEC_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "F81216SECPlatformHookSerialPortLib"
+	File  = "F81216SECPlatformHookSerialPortLib.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "F81216SEC_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PlatformHookLib"
+	Instance  = "AmiModulePkg.F81216SECPlatformHookSerialPortLib"
+	ModuleTypes  = "PEIM PEI_CORE SEC"
+	Token = "F81216SEC_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiModulePkg.F81216SECDxeInit"
+	Override  = "AmiModulePkg.SioDxeInit"
+	Token = "F81216SEC_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.F81216SECDxeInit"
+    Override  = "AmiModulePkg.SmmGenericSio"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "SMM_SUPPORT" "=" "1"
+    Token = "AMI_SIO_MINOR_VERSION" ">=" "6"
+End
+
+SIODEVICE
+	Name  = "F81216SEC"
+	Parent  = "LpcBridge"
+	IndexPort  = 02eh
+	DataPort  = 02fh
+	StdSioType  = "Yes"
+	DevSelReg  = 07h
+	ActivateReg  = 030h
+	ActivateVal  = 01h
+	DeActivateVal  = 00h
+	BaseHiReg1  = 060h
+	BaseLoReg1  = 061h
+	BaseHiReg2  = 062h
+	BaseLoReg2  = 063h
+	Irq1Reg  = 070h
+	Irq2Reg  = 072h
+	Dma1Reg  = 074h
+	Dma2Reg  = 075h
+	GblRegFlag  = "0xa000000000"
+	LocalRegFlag  = "0xffffffff0000000000000000000000000033000f000000000001000000000000"
+	EnterConfig  = "Script,'Index;Write;77h','Index;Write;77h'"
+	ExitConfig  = "Script,'Index;Write;aah'"
+	SMBIOSStr  = "Test String"
+	GPEbit  = 01dh
+	SleepNum  = 03h
+	ASLfile  = "'AaeonIoPkg\F81216SEC\F81216SECDEV.asl'"
+	ASLdeviceName  = "SIO2"
+	Token = "F81216SEC_CONFIG_INDEX_DATA_DEFAULT" "=" "0"
+End
+
+SIODEVICE
+	Name  = "F81216SEC"
+	Parent  = "LpcBridge"
+	IndexPort  = 04eh
+	DataPort  = 04fh
+	StdSioType  = "Yes"
+	DevSelReg  = 07h
+	ActivateReg  = 030h
+	ActivateVal  = 01h
+	DeActivateVal  = 00h
+	BaseHiReg1  = 060h
+	BaseLoReg1  = 061h
+	BaseHiReg2  = 062h
+	BaseLoReg2  = 063h
+	Irq1Reg  = 070h
+	Irq2Reg  = 072h
+	Dma1Reg  = 074h
+	Dma2Reg  = 075h
+	GblRegFlag  = "0xa000000000"
+	LocalRegFlag  = "0xffffffff0000000000000000000000000033000f000000000001000000000000"
+	EnterConfig  = "Script,'Index;Write;77h','Index;Write;77h'"
+	ExitConfig  = "Script,'Index;Write;aah'"
+	SMBIOSStr  = "Test String"
+	GPEbit  = 01dh
+	SleepNum  = 03h
+	ASLfile  = "'AaeonIoPkg\F81216SEC\F81216SECDEV.asl'"
+	ASLdeviceName  = "SIO2"
+	Token = "F81216SEC_CONFIG_INDEX_DATA_DEFAULT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Com11"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "00h"
+	##UID  = "10h"
+	UID  = "03h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	##ASLfile  = "'AmiModulePkg\IO\F81216SEC\UART1.asl'"
+	ASLfile  = "'AaeonIoPkg\ACPI\UART3.asl'"
+	ASLdeviceName  = "UR11"
+	Token = "F81216SEC_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Com12"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "01h"
+	##UID  = "11h"
+	UID  = "04h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x4"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	##ASLfile  = "'AmiModulePkg\IO\F81216SEC\UART2.asl'"
+	ASLfile  = "'AaeonIoPkg\ACPI\UART4.asl'"
+	ASLdeviceName  = "UR12"
+	Token = "F81216SEC_SERIAL_PORT2_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Com13"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "02h"
+	##UID  = "12h"
+	UID  = "05h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x4"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	##ASLfile  = "'AmiModulePkg\IO\F81216SEC\UART3.asl'"
+	ASLfile  = "'AaeonIoPkg\ACPI\UART5.asl'"
+	ASLdeviceName  = "UR13"
+	Token = "F81216SEC_SERIAL_PORT3_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Com14"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "03h"
+	##UID  = "13h"
+	UID  = "06h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x4"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	##ASLfile  = "'AmiModulePkg\IO\F81216SEC\UART4.asl'"
+	ASLfile  = "'AaeonIoPkg\ACPI\UART6.asl'"
+	ASLdeviceName  = "UR14"
+	Token = "F81216SEC_SERIAL_PORT4_PRESENT" "=" "1"
+End
+
+##RayWu, ADD 2015/03/06 >>
+ELINK
+	Name  = "../$(F81216SEC_DIR)/F81216SECDxeInit.c"
+	Parent  = "SIOLINK_LIB_SRC"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "../../$(F81216SEC_DIR)/F81216SECDxeInit.h"
+	Parent  = "SIOLINK_LIB_H"
+	InvokeOrder = AfterParent
+End
+##RayWu, ADD 2015/03/06 <<
+
+## FOR Second SIO UART3 ~ UART6
+LDEVICE
+	Name  = "Com11"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "00h"
+	##UID  = "10h"
+	UID  = "03h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AaeonIoPkg\ACPI\SIO2UART3.asl'"
+	ASLdeviceName  = "UR11"
+	Token = "F81216SEC_SERIAL_PORT1_PRESENT" "=" "1"
+	Token = "F81216SEC_URIRQ_MODE" "=" "0"
+End
+LDEVICE
+	Name  = "Com11"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "00h"
+	##UID  = "10h"
+	UID  = "03h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AaeonIoPkg\F81216SEC\SIO2UART3_Edge.asl'"
+	ASLdeviceName  = "UR11"
+	Token = "F81216SEC_SERIAL_PORT1_PRESENT" "=" "1"
+	Token = "F81216SEC_URIRQ_MODE" "=" "1"
+End
+LDEVICE
+	Name  = "Com12"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "01h"
+	##UID  = "11h"
+	UID  = "04h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x4"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AaeonIoPkg\ACPI\SIO2UART4.asl'"
+	ASLdeviceName  = "UR12"
+	Token = "F81216SEC_SERIAL_PORT2_PRESENT" "=" "1"
+	Token = "F81216SEC_URIRQ_MODE" "=" "0"
+End
+LDEVICE
+	Name  = "Com12"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "01h"
+	##UID  = "11h"
+	UID  = "04h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x4"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AaeonIoPkg\F81216SEC\SIO2UART4_Edge.asl'"
+	ASLdeviceName  = "UR12"
+	Token = "F81216SEC_SERIAL_PORT2_PRESENT" "=" "1"
+	Token = "F81216SEC_URIRQ_MODE" "=" "1"
+End
+LDEVICE
+	Name  = "Com13"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "02h"
+	##UID  = "12h"
+	UID  = "05h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x4"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	##ASLfile  = "'AmiModulePkg\IO\F81216SEC\UART3.asl'"
+	ASLfile  = "'AaeonIoPkg\ACPI\SIO2UART5.asl'"
+	ASLdeviceName  = "UR13"
+	Token = "F81216SEC_SERIAL_PORT3_PRESENT" "=" "1"
+	Token = "F81216SEC_URIRQ_MODE" "=" "0"
+End
+LDEVICE
+	Name  = "Com13"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "02h"
+	##UID  = "12h"
+	UID  = "05h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x4"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AaeonIoPkg\F81216SEC\SIO2UART5_Edge.asl'"
+	ASLdeviceName  = "UR13"
+	Token = "F81216SEC_SERIAL_PORT3_PRESENT" "=" "1"
+	Token = "F81216SEC_URIRQ_MODE" "=" "1"
+End
+LDEVICE
+	Name  = "Com14"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "03h"
+	##UID  = "13h"
+	UID  = "06h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x4"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AaeonIoPkg\ACPI\SIO2UART6.asl'"
+	ASLdeviceName  = "UR14"
+	Token = "F81216SEC_SERIAL_PORT4_PRESENT" "=" "1"
+	Token = "F81216SEC_URIRQ_MODE" "=" "0"
+End
+LDEVICE
+	Name  = "Com14"
+	SioDevice  = "F81216SEC"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "03h"
+	##UID  = "13h"
+	UID  = "06h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x4"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "F81216SEC_COM_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AaeonIoPkg\F81216SEC\SIO2UART6_Edge.asl'"
+	ASLdeviceName  = "UR14"
+	Token = "F81216SEC_SERIAL_PORT4_PRESENT" "=" "1"
+	Token = "F81216SEC_URIRQ_MODE" "=" "1"
+End
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#*        (C)Copyright 1985-2013, American Megatrends, Inc.          **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+

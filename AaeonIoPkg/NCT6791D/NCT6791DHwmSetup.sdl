@@ -1,0 +1,778 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#*        (C)Copyright 1985-2013, American Megatrends, Inc.          **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+#**********************************************************************
+#<AMI_FHDR_START>
+#
+# Name:  <NCT6791DHwmSetup.sdl>
+#
+# Description:     SDL file to define SIO setup functions
+#
+#
+#<AMI_FHDR_END>
+#**********************************************************************
+
+TOKEN
+    Name  = "NCT6791D_Hardware_monitor_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable NCT6791D hardware monitor support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_CPUVCORE_PRESENT"
+    Value  = "1"
+    Help  = "CPUVCORE Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VIN0_PRESENT"
+    Value  = "1"
+    Help  = "VIN0 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VIN1_PRESENT"
+    Value  = "1"
+    Help  = "VIN1 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VIN2_PRESENT"
+    Value  = "1"
+    Help  = "VIN2 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VIN3_PRESENT"
+    Value  = "1"
+    Help  = "VIN3 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VIN4_PRESENT"
+    Value  = "1"
+    Help  = "VIN4 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VIN5_PRESENT"
+    Value  = "1"
+    Help  = "VIN5 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VIN6_PRESENT"
+    Value  = "1"
+    Help  = "VIN6 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VIN7_PRESENT"
+    Value  = "1"
+    Help  = "VIN7 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_AVCC_PRESENT"
+    Value  = "1"
+    Help  = "AVCC Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VCC3_PRESENT"
+    Value  = "1"
+    Help  = "VCC3 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VSB3_PRESENT"
+    Value  = "1"
+    Help  = "VSB3 Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VBAT_PRESENT"
+    Value  = "1"
+    Help  = "VBAT Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VTT_PRESENT"
+    Value  = "1"
+    Help  = "VTT Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NCT6791D_VCOREREFIN_PRESENT"
+    Value  = "1"
+    Help  = "VCOREREFIN Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CPUVCORE_R1"
+    Value  = "1"
+    Help  = "CPUVCORE R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CPUVCORE_R2"
+    Value  = "1"
+    Help  = "CPUVCORE R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN0_R1"
+    Value  = "0"
+    Help  = "VIN0 R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN0_R2"
+    Value  = "1"
+    Help  = "VIN0 R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN1_R1"
+    Value  = "0"
+    Help  = "VIN1 R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN1_R2"
+    Value  = "1"
+    Help  = "VIN1 R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN2_R1"
+    Value  = "0"
+    Help  = "VIN2 R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN2_R2"
+    Value  = "1"
+    Help  = "VIN2 R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN3_R1"
+    Value  = "0"
+    Help  = "VIN3 R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN3_R2"
+    Value  = "1"
+    Help  = "VIN3 R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN4_R1"
+    Value  = "0"
+    Help  = "VIN4 R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN4_R2"
+    Value  = "1"
+    Help  = "VIN4 R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN5_R1"
+    Value  = "0"
+    Help  = "VIN5 R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN5_R2"
+    Value  = "1"
+    Help  = "VIN5 R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN6_R1"
+    Value  = "0"
+    Help  = "VIN6 R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN6_R2"
+    Value  = "1"
+    Help  = "VIN6 R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN7_R1"
+    Value  = "0"
+    Help  = "VIN7 R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VIN7_R2"
+    Value  = "1"
+    Help  = "VIN7 R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VCOREREF_R1"
+    Value  = "28"
+    Help  = "VCOREREFIN R1 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "VCOREREF_R2"
+    Value  = "41"
+    Help  = "VCOREREFIN R2 resistor value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "=== SIO Smart Fan Settings =========="
+    Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "SIO Smart Fan Settings"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "NCT6791D_CPUFAN_CTRL_SUPPORT"
+    Value  = "1"
+    Help  = "NCT6791D CPU Smart Fan support."
+    TokenType = BOOLEAN
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_CPUFAN_CTRL_DEFAULT"
+    Value  = "0"
+    Help  = "CPU Smart Fan Control default.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_CPUFAN_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CPUFAN_CTRL_TYPE_DEFAULT"
+    Value  = "4"
+    Help  = "CPU Fan Control Mode default.\0: Manual Mode\1: Thermal Cruise Mode\2: Speed Cruise Mode\4: SMART FAN IV Mode"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_CPUFAN_CTRL_SUPPORT" "=" "1"
+End
+
+# >> 2015/11/03 Eric +
+TOKEN
+    Name  = "CPUFAN_TEMP_SRC_DEFAULT"
+    Value  = "16"
+    Help  = "CPUFAN Temperature monitoring source select default.\1: SYSTIN\2: CPUTIN\3: AUXTIN0\4: AUXTIN1\5: AUXTIN2\6: AUXTIN3\8: SMBUSMASTER 0\9: SMBUSMASTER 1\10: SMBUSMASTER 2\11: SMBUSMASTER 3\12: SMBUSMASTER 4\13: SMBUSMASTER 5\14: SMBUSMASTER 6\15: SMBUSMASTER 7\16: PECI Agent 0\17: PECI Agent 1\18: PCH_CHIP_CPU_MAX_TEMP\19: PCH_CHIP_TEMP\20: PCH_CPU_TEMP\21: PCH_MCH_TEMP\22: PCH_DIM0_TEMP\23: PCH_DIM1_TEMP\24: PCH_DIM2_TEMP\25: PCH_DIM3_TEMP\26: BYTE_TEMP\31: Virtual_TEMP"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_CPUFAN_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CPUFAN_STOP_DUTY_DEFAULT"
+    Value  = "0"
+    Help  = "0: FANOUT will decrease to zero value at most if necessary.\1: FANOUT will decrease to CPUFANOUT Stop Value (Bank2, index05h) at most if necessary.\(This function is for Thermal Cruise mode.)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_CPUFAN_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CPUFAN_COUNT_UP_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of CPU Fan count UP unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_CPUFAN_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CPUFAN_COUNT_DOWN_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of CPU Fan count DOWN unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_CPUFAN_CTRL_SUPPORT" "=" "1"
+End
+# << 2015/11/03 Eric +
+
+TOKEN
+    Name  = "NCT6791D_SYSFAN_CTRL_SUPPORT"
+    Value  = "1"
+    Help  = "NCT6791D System Smart Fan support."
+    TokenType = BOOLEAN
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_SYSFAN_CTRL_DEFAULT"
+    Value  = "0"
+    Help  = "System Smart Fan Control default.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_SYSFAN_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SYSFAN_CTRL_TYPE_DEFAULT"
+    Value  = "4"
+    Help  = "System Fan Control Mode default.\0: Manual Mode\1: Thermal Cruise Mode\2: Speed Cruise Mode\4: SMART FAN IV Mode"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_SYSFAN_CTRL_SUPPORT" "=" "1"
+End
+
+# >> 2015/12/07 Eric
+TOKEN
+    Name  = "SYSFAN_OUTPUT_MODE_DEFAULT"
+    Value  = "0"
+    Help  = "SYSFANOUT Output Mode Selection default.\0: PWM duty cycle output\1: DC output"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_SYSFAN_CTRL_SUPPORT" "=" "1"
+End
+# << 2015/12/07 Eric
+
+# >> 2015/11/03 Eric +
+TOKEN
+    Name  = "SYSFAN_TEMP_SRC_DEFAULT"
+    Value  = "1"
+    Help  = "SYSFAN Temperature monitoring source select default.\1: SYSTIN\2: CPUTIN\3: AUXTIN0\4: AUXTIN1\5: AUXTIN2\6: AUXTIN3\8: SMBUSMASTER 0\9: SMBUSMASTER 1\10: SMBUSMASTER 2\11: SMBUSMASTER 3\12: SMBUSMASTER 4\13: SMBUSMASTER 5\14: SMBUSMASTER 6\15: SMBUSMASTER 7\16: PECI Agent 0\17: PECI Agent 1\18: PCH_CHIP_CPU_MAX_TEMP\19: PCH_CHIP_TEMP\20: PCH_CPU_TEMP\21: PCH_MCH_TEMP\22: PCH_DIM0_TEMP\23: PCH_DIM1_TEMP\24: PCH_DIM2_TEMP\25: PCH_DIM3_TEMP\26: BYTE_TEMP\31: Virtual_TEMP"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_SYSFAN_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SYSFAN_STOP_DUTY_DEFAULT"
+    Value  = "0"
+    Help  = "0: FANOUT will decrease to zero value at most if necessary.\1: FANOUT will decrease to SYSFANOUT Stop Value (Bank2, index05h) at most if necessary.\(This function is for Thermal Cruise mode.)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_SYSFAN_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SYSFAN_COUNT_UP_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of System Fan count UP unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_SYSFAN_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SYSFAN_COUNT_DOWN_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of System Fan count DOWN unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_SYSFAN_CTRL_SUPPORT" "=" "1"
+End
+# << 2015/11/03 Eric +
+
+TOKEN
+    Name  = "NCT6791D_AUXFAN0_CTRL_SUPPORT"
+    Value  = "0"
+    Help  = "NCT6791D Aux 0 Smart Fan support."
+    TokenType = BOOLEAN
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_AUX0FAN_CTRL_DEFAULT"
+    Value  = "0"
+    Help  = "Aux 0 Smart Fan Control default.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN0_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX0FAN_CTRL_TYPE_DEFAULT"
+    Value  = "4"
+    Help  = "Aux 0 Fan Control Mode default.\0: Manual Mode\1: Thermal Cruise Mode\2: Speed Cruise Mode\4: SMART FAN IV Mode"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN0_CTRL_SUPPORT" "=" "1"
+End
+
+# >> 2015/11/03 Eric +
+TOKEN
+    Name  = "AUX0FAN_TEMP_SRC_DEFAULT"
+    Value  = "3"
+    Help  = "AUX0FAN Temperature monitoring source select default.\1: SYSTIN\2: CPUTIN\3: AUXTIN0\4: AUXTIN1\5: AUXTIN2\6: AUXTIN3\8: SMBUSMASTER 0\9: SMBUSMASTER 1\10: SMBUSMASTER 2\11: SMBUSMASTER 3\12: SMBUSMASTER 4\13: SMBUSMASTER 5\14: SMBUSMASTER 6\15: SMBUSMASTER 7\16: PECI Agent 0\17: PECI Agent 1\18: PCH_CHIP_CPU_MAX_TEMP\19: PCH_CHIP_TEMP\20: PCH_CPU_TEMP\21: PCH_MCH_TEMP\22: PCH_DIM0_TEMP\23: PCH_DIM1_TEMP\24: PCH_DIM2_TEMP\25: PCH_DIM3_TEMP\26: BYTE_TEMP\31: Virtual_TEMP"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN0_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX0FAN_STOP_DUTY_DEFAULT"
+    Value  = "0"
+    Help  = "0: FANOUT will decrease to zero value at most if necessary.\1: FANOUT will decrease to AUX0FANOUT Stop Value (Bank2, index05h) at most if necessary.\(This function is for Thermal Cruise mode.)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN0_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX0FAN_COUNT_UP_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of Aux 0 Fan count UP unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_AUXFAN0_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX0FAN_COUNT_DOWN_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of Aux 0 Fan count DOWN unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_AUXFAN0_CTRL_SUPPORT" "=" "1"
+End
+# << 2015/11/03 Eric +
+
+TOKEN
+    Name  = "NCT6791D_AUXFAN1_CTRL_SUPPORT"
+    Value  = "0"
+    Help  = "NCT6791D Aux 1 Smart Fan support."
+    TokenType = BOOLEAN
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_AUX1FAN_CTRL_DEFAULT"
+    Value  = "0"
+    Help  = "Aux 1 Smart Fan Control default.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN1_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX1FAN_CTRL_TYPE_DEFAULT"
+    Value  = "4"
+    Help  = "Aux 1 Fan Control Mode default.\0: Manual Mode\1: Thermal Cruise Mode\2: Speed Cruise Mode\4: SMART FAN IV Mode"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN1_CTRL_SUPPORT" "=" "1"
+End
+
+# >> 2015/11/03 Eric +
+TOKEN
+    Name  = "AUX1FAN_TEMP_SRC_DEFAULT"
+    Value  = "4"
+    Help  = "AUX1FAN Temperature monitoring source select default.\1: SYSTIN\2: CPUTIN\3: AUXTIN0\4: AUXTIN1\5: AUXTIN2\6: AUXTIN3\8: SMBUSMASTER 0\9: SMBUSMASTER 1\10: SMBUSMASTER 2\11: SMBUSMASTER 3\12: SMBUSMASTER 4\13: SMBUSMASTER 5\14: SMBUSMASTER 6\15: SMBUSMASTER 7\16: PECI Agent 0\17: PECI Agent 1\18: PCH_CHIP_CPU_MAX_TEMP\19: PCH_CHIP_TEMP\20: PCH_CPU_TEMP\21: PCH_MCH_TEMP\22: PCH_DIM0_TEMP\23: PCH_DIM1_TEMP\24: PCH_DIM2_TEMP\25: PCH_DIM3_TEMP\26: BYTE_TEMP\31: Virtual_TEMP"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN1_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX1FAN_STOP_DUTY_DEFAULT"
+    Value  = "0"
+    Help  = "0: FANOUT will decrease to zero value at most if necessary.\1: FANOUT will decrease to AUX1FANOUT Stop Value (Bank2, index05h) at most if necessary.\(This function is for Thermal Cruise mode.)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN1_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX1FAN_COUNT_UP_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of Aux 1 Fan count UP unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_AUXFAN1_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX1FAN_COUNT_DOWN_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of Aux 1 Fan count DOWN unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_AUXFAN1_CTRL_SUPPORT" "=" "1"
+End
+# << 2015/11/03 Eric +
+
+TOKEN
+    Name  = "NCT6791D_AUXFAN2_CTRL_SUPPORT"
+    Value  = "0"
+    Help  = "NCT6791D Aux 2 Smart Fan support."
+    TokenType = BOOLEAN
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_AUX2FAN_CTRL_DEFAULT"
+    Value  = "0"
+    Help  = "Aux 2 Smart Fan Control default.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN2_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX2FAN_CTRL_TYPE_DEFAULT"
+    Value  = "4"
+    Help  = "Aux 2 Fan Control Mode default.\0: Manual Mode\1: Thermal Cruise Mode\2: Speed Cruise Mode\4: SMART FAN IV Mode"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN2_CTRL_SUPPORT" "=" "1"
+End
+
+# >> 2015/11/03 Eric +
+TOKEN
+    Name  = "AUX2FAN_TEMP_SRC_DEFAULT"
+    Value  = "5"
+    Help  = "AUX2FAN Temperature monitoring source select default.\1: SYSTIN\2: CPUTIN\3: AUXTIN0\4: AUXTIN1\5: AUXTIN2\6: AUXTIN3\8: SMBUSMASTER 0\9: SMBUSMASTER 1\10: SMBUSMASTER 2\11: SMBUSMASTER 3\12: SMBUSMASTER 4\13: SMBUSMASTER 5\14: SMBUSMASTER 6\15: SMBUSMASTER 7\16: PECI Agent 0\17: PECI Agent 1\18: PCH_CHIP_CPU_MAX_TEMP\19: PCH_CHIP_TEMP\20: PCH_CPU_TEMP\21: PCH_MCH_TEMP\22: PCH_DIM0_TEMP\23: PCH_DIM1_TEMP\24: PCH_DIM2_TEMP\25: PCH_DIM3_TEMP\26: BYTE_TEMP\31: Virtual_TEMP"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN2_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX2FAN_STOP_DUTY_DEFAULT"
+    Value  = "0"
+    Help  = "0: FANOUT will decrease to zero value at most if necessary.\1: FANOUT will decrease to AUX2FANOUT Stop Value (Bank2, index05h) at most if necessary.\(This function is for Thermal Cruise mode.)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN2_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX2FAN_COUNT_UP_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of Aux 2 Fan count UP unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_AUXFAN2_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX2FAN_COUNT_DOWN_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of Aux 2 Fan count DOWN unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_AUXFAN2_CTRL_SUPPORT" "=" "1"
+End
+# << 2015/11/03 Eric +
+
+TOKEN
+    Name  = "NCT6791D_AUXFAN3_CTRL_SUPPORT"
+    Value  = "0"
+    Help  = "NCT6791D Aux 3 Smart Fan support."
+    TokenType = BOOLEAN
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_AUX3FAN_CTRL_DEFAULT"
+    Value  = "0"
+    Help  = "Aux 3 Smart Fan Control default.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN3_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX3FAN_CTRL_TYPE_DEFAULT"
+    Value  = "4"
+    Help  = "Aux 3 Fan Control Mode default.\0: Manual Mode\1: Thermal Cruise Mode\2: Speed Cruise Mode\4: SMART FAN IV Mode"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN3_CTRL_SUPPORT" "=" "1"
+End
+
+# >> 2015/11/03 Eric +
+TOKEN
+    Name  = "AUX3FAN_TEMP_SRC_DEFAULT"
+    Value  = "6"
+    Help  = "AUX3FAN Temperature monitoring source select default.\1: SYSTIN\2: CPUTIN\3: AUXTIN0\4: AUXTIN1\5: AUXTIN2\6: AUXTIN3\8: SMBUSMASTER 0\9: SMBUSMASTER 1\10: SMBUSMASTER 2\11: SMBUSMASTER 3\12: SMBUSMASTER 4\13: SMBUSMASTER 5\14: SMBUSMASTER 6\15: SMBUSMASTER 7\16: PECI Agent 0\17: PECI Agent 1\18: PCH_CHIP_CPU_MAX_TEMP\19: PCH_CHIP_TEMP\20: PCH_CPU_TEMP\21: PCH_MCH_TEMP\22: PCH_DIM0_TEMP\23: PCH_DIM1_TEMP\24: PCH_DIM2_TEMP\25: PCH_DIM3_TEMP\26: BYTE_TEMP\31: Virtual_TEMP"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN3_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX3FAN_STOP_DUTY_DEFAULT"
+    Value  = "0"
+    Help  = "0: FANOUT will decrease to zero value at most if necessary.\1: FANOUT will decrease to AUX3FANOUT Stop Value (Bank2, index05h) at most if necessary.\(This function is for Thermal Cruise mode.)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "NCT6791D_AUXFAN3_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX3FAN_COUNT_UP_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of Aux 3 Fan count UP unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_AUXFAN3_CTRL_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "AUX3FAN_COUNT_DOWN_DEFAULT"
+    Value  = "1"
+    Help  = "The default value of Aux 3 Fan count DOWN unit.\WARNING: If the value other than 1, it will cause not to rise PWM steps when surplus steps less than FAN COUNT STEP register setting value"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Token = "NCT6791D_AUXFAN3_CTRL_SUPPORT" "=" "1"
+End
+# << 2015/11/03 Eric +
+
+PATH
+    Name  = "NCT6791D_HWM_DIR"
+End
+
+#==============================================================================
+#elink Setup Source file and table
+#==============================================================================
+ELINK
+    Name  = "$(NCT6791D_HWM_DIR)\NCT6791DHwmSetup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    Priority  = 40
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(NCT6791D_HWM_DIR)\NCT6791DHwmSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(NCT6791D_HWM_DIR)/NCT6791DHwmSetup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+#==============================================================================
+#Below elink will be linked into Setup INF component
+#==============================================================================
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,NCT6791D_INTERACTIVE_KEY,NCT6791D_HWM_CallBack),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#*        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+

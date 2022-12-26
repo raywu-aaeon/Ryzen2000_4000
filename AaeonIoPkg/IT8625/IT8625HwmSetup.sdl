@@ -1,0 +1,374 @@
+TOKEN
+    Name  = "IT8625_Hardware_monitor_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable IT8625 hardware monitor support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+PATH
+    Name  = "IT8625_HWM_DIR"
+End
+
+#==============================================================================
+# Hardware Monitor Setup String definitions
+#==============================================================================
+TOKEN
+    Name = "AAEON_CPU_DTS_READING"
+    Value  = "0"
+    Help = "Enable for support Intel CPU DTS Temperature reading by Super I/O Hardware Monitor setup page"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_TMPIN1_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if TMPIN1 is designed and is used."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_TMPIN1_NAME"
+    Value  = "$(STD_SYS_TEMP)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_TMPIN1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_TMPIN2_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if TMPIN2 is designed and is used."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_TMPIN2_NAME"
+    Value  = "$(STD_SYS_TEMP2)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_TMPIN2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_TMPIN3_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if TMPIN3 is designed and is used."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_TMPIN3_NAME"
+    Value  = "$(STD_SYS_TEMP3)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_TMPIN3_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_TMPIN4_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if TMPIN4 is designed and is used."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_TMPIN4_NAME"
+    Value  = "$(STD_SYS_TEMP4)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_TMPIN4_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_TMPIN5_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if TMPIN5 is designed and is used."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_TMPIN5_NAME"
+    Value  = "$(STD_SYS_TEMP5)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_TMPIN5_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_TMPIN6_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if TMPIN6 is designed and is used."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_TMPIN6_NAME"
+    Value  = "$(STD_SYS_TEMP6)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_TMPIN6_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_FAN_1_NAME"
+    Value  = "$(STD_CPU_FAN)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FAN_TAC1" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_FAN_2_NAME"
+    Value  = "$(STD_SYS_FAN)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FAN_TAC2" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_FAN_3_NAME"
+    Value  = "$(STD_SYS_FAN2)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FAN_TAC3" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_FAN_4_NAME"
+    Value  = "$(STD_SYS_FAN3)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FAN_TAC4" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_FAN_5_NAME"
+    Value  = "$(STD_SYS_FAN4)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FAN_TAC5" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_FAN_6_NAME"
+    Value  = "$(STD_SYS_FAN5)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FAN_TAC6" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_VIN0_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if VIN0 is designed and is used.\Register Offset : 0x20"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_VIN0_NAME"
+    Value  = "$(STD_VCORE)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_VIN0_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_VIN1_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if VIN1 is designed and is used.\Register Offset : 0x21"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_VIN1_NAME"
+    Value  = "$(STD_VMEM)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_VIN1_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_VIN2_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if VIN2 is designed and is used.\Register Offset : 0x22"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_VIN2_NAME"
+    Value  = "$(STD_12V)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_VIN2_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_VIN3_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if VIN3 is designed and is used.\Register Offset : 0x23"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_VIN3_NAME"
+    Value  = "$(STD_5V)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_VIN3_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_VIN4_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if VIN4 is designed and is used.\Register Offset : 0x24"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_VIN4_NAME"
+    Value  = "$(STD_1V8)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_VIN4_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_VIN5_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if VIN5 is designed and is used.\Register Offset : 0x25"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_VIN5_NAME"
+    Value  = "$(STD_5VSB)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_VIN5_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_VIN6_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if VIN6 is designed and is used.\Register Offset : 0x26"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_VIN6_NAME"
+    Value  = "$(STD_3V3)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_VIN6_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_3VSB_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if 3VSB is designed and is used.\Register Offset : 0x27"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_3VSB_NAME"
+    Value  = "$(STD_3VSB)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_3VSB_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_VBAT_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if VBAT is designed and is used.\Register Offset : 0x28"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_VBAT_NAME"
+    Value  = "$(STD_VBAT)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_VBAT_SUPPORT" "=" "1"
+End
+TOKEN
+    Name  = "IT8625_AVCC3_SUPPORT"
+    Value  = "1"
+    Help  = "Switch on if AVCC3 is designed and is used.\Register Offset : 0x2F"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+TOKEN
+    Name = "STD_AVCC3"
+    Value = "AVCC3"
+    Help = "Standard name for AVCC3 voltage sensor"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+TOKEN
+    Name  = "IT8625_AVCC3_NAME"
+    Value  = "$(STD_AVCC3)"
+    Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "IT8625_AVCC3_SUPPORT" "=" "1"
+End
+
+#==============================================================================
+# For .mak to build setup strings from .sdl to .uni
+#==============================================================================
+MODULE
+    Help  = "Includes IT8625HwmStrings.mak to Project"
+    File  = "IT8625HwmStrings.mak"
+End
+ELINK
+    Name  = "$(BUILD_DIR)\IT8625HwmStrings.uni"
+    Parent  = "$(SioStaticSetup_DIR)/SioStaticSetup.uni"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(IT8625_HWM_DIR)/IT8625HwmSetup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    Priority  = 40
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(IT8625_HWM_DIR)/IT8625HwmSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(IT8625_HWM_DIR)/IT8625HwmSetup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,IT8625_INTERACTIVE_KEY,IT8625_HWM_CallBack),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End

@@ -1,0 +1,11 @@
+<component>
+	name = "IT8625Asl"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\IT8625\"
+	RefName = "AaeonIoPkg.IT8625.IT8625Asl"
+[files]
+"Cir.asl"
+"Lpte.asl"
+"IT8625Evt.asl"
+"IT8625Dev.asl"
+<endComponent>

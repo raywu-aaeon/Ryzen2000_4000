@@ -1,0 +1,1264 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <F81966HwmSetup.sd>
+//
+// Description: HWM form template, setup screen definition file.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+	//INTERNAL_085_RayWu, ADD 2015/01/28 >>
+	#if defined(F81966_SMF_SUPPORT) && (F81966_SMF_SUPPORT == 1)
+	UINT8   SmartFanEnable;
+
+	#if defined(F81966_SMF1_SUPPORT) && (F81966_SMF1_SUPPORT == 1)
+	UINT8   Fan1SmartFanMode;
+	UINT8   Fan1TempSrc;
+	UINT16  Fan1Mode0FixedSpeed;
+	UINT8   Fan1Mode1FixedDuty;
+	UINT8   Fan1Mode2AutoRpmT1;
+	UINT8   Fan1Mode2AutoRpmT2;
+	UINT8   Fan1Mode2AutoRpmT3;
+	UINT8   Fan1Mode2AutoRpmT4;
+	UINT8   Fan1Mode2AutoRpmF1;
+	UINT8   Fan1Mode2AutoRpmF2;
+	UINT8   Fan1Mode2AutoRpmF3;
+	UINT8   Fan1Mode2AutoRpmF4;
+   	UINT8   Fan1Mode2AutoRpmF5;
+	UINT8   Fan1Mode3AutoDutyT1;
+	UINT8   Fan1Mode3AutoDutyT2;
+	UINT8   Fan1Mode3AutoDutyT3;
+	UINT8   Fan1Mode3AutoDutyT4;
+	UINT8   Fan1Mode3AutoDutyF1;
+	UINT8   Fan1Mode3AutoDutyF2;
+	UINT8   Fan1Mode3AutoDutyF3;
+	UINT8   Fan1Mode3AutoDutyF4;
+   	UINT8   Fan1Mode3AutoDutyF5;
+	UINT8   Fan1OutputType; //Wythe_81966_Add_Fan_output_type+
+	#endif //F81966_SMF1_SUPPORT == 1
+
+	#if defined(F81966_SMF2_SUPPORT) && (F81966_SMF2_SUPPORT == 1)
+	UINT8   Fan2SmartFanMode;
+	UINT8   Fan2TempSrc;
+	UINT16  Fan2Mode0FixedSpeed;
+	UINT8   Fan2Mode1FixedDuty;
+	UINT8   Fan2Mode2AutoRpmT1;
+	UINT8   Fan2Mode2AutoRpmT2;
+	UINT8   Fan2Mode2AutoRpmT3;
+	UINT8   Fan2Mode2AutoRpmT4;
+	UINT8   Fan2Mode2AutoRpmF1;
+	UINT8   Fan2Mode2AutoRpmF2;
+	UINT8   Fan2Mode2AutoRpmF3;
+	UINT8   Fan2Mode2AutoRpmF4;
+   	UINT8   Fan2Mode2AutoRpmF5;
+	UINT8   Fan2Mode3AutoDutyT1;
+	UINT8   Fan2Mode3AutoDutyT2;
+	UINT8   Fan2Mode3AutoDutyT3;
+	UINT8   Fan2Mode3AutoDutyT4;
+	UINT8   Fan2Mode3AutoDutyF1;
+	UINT8   Fan2Mode3AutoDutyF2;
+	UINT8   Fan2Mode3AutoDutyF3;
+	UINT8   Fan2Mode3AutoDutyF4;
+   	UINT8   Fan2Mode3AutoDutyF5;
+	UINT8   Fan2OutputType; //Wythe_81966_Add_Fan_output_type+
+	#endif //F81966_SMF2_SUPPORT == 1
+
+	#if defined(F81966_SMF3_SUPPORT) && (F81966_SMF3_SUPPORT == 1)
+	UINT8   Fan3SmartFanMode;
+	UINT8   Fan3TempSrc;
+	UINT16  Fan3Mode0FixedSpeed;
+	UINT8   Fan3Mode1FixedDuty;
+	UINT8   Fan3Mode2AutoRpmT1;
+	UINT8   Fan3Mode2AutoRpmT2;
+	UINT8   Fan3Mode2AutoRpmT3;
+	UINT8   Fan3Mode2AutoRpmT4;
+	UINT8   Fan3Mode2AutoRpmF1;
+	UINT8   Fan3Mode2AutoRpmF2;
+	UINT8   Fan3Mode2AutoRpmF3;
+	UINT8   Fan3Mode2AutoRpmF4;
+   	UINT8   Fan3Mode2AutoRpmF5;
+	UINT8   Fan3Mode3AutoDutyT1;
+	UINT8   Fan3Mode3AutoDutyT2;
+	UINT8   Fan3Mode3AutoDutyT3;
+	UINT8   Fan3Mode3AutoDutyT4;
+	UINT8   Fan3Mode3AutoDutyF1;
+	UINT8   Fan3Mode3AutoDutyF2;
+	UINT8   Fan3Mode3AutoDutyF3;
+	UINT8   Fan3Mode3AutoDutyF4;
+   	UINT8   Fan3Mode3AutoDutyF5;
+	UINT8   Fan3OutputType; //Wythe_81966_Add_Fan_output_type+
+	#endif //F81966_SMF3_SUPPORT == 1
+	#endif //F81966_SMF_SUPPORT == 1
+	//INTERNAL_085_RayWu, ADD 2015/01/28 <<
+#endif //SETUP_DATA_DEFINITION
+
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+        #if defined(F81966_SMF_SUPPORT) && (F81966_SMF_SUPPORT == 1)
+		#define GOTO_SIO_SMARTFAN_FORM \
+			goto SIO_SMARTFAN_FORM_ID, \
+			prompt  = STRING_TOKEN(STR_F81966_SMARTFAN_FORM), \
+			help    = STRING_TOKEN(STR_F81966_SMARTFAN_FORM_HELP);
+	
+        	#define SMARTFANENABLE\
+    			checkbox varid  = SETUP_DATA.SmartFanEnable, \
+        			prompt      = STRING_TOKEN(STR_F81966_SMARTFAN_PROMPT), \
+        			help        = STRING_TOKEN(STR_F81966_SMARTFAN_PROMPT_HELP), \
+					flags       = RESET_REQUIRED,\
+        			default     = 1, \
+    			endcheckbox;
+
+		#if defined(F81966_SMF1_SUPPORT) && (F81966_SMF1_SUPPORT == 1)
+		#define FAN1SMARTFANMODE\
+			oneof varid     = SETUP_DATA.Fan1SmartFanMode,\
+				prompt      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN1),\
+				help        = STRING_TOKEN(STR_F81966_SMARTFAN_CONFIG_HELP),\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE0), value = 0, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE1), value = 1, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2), value = 2, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3), value = 3, flags = DEFAULT |RESET_REQUIRED;\
+			endoneof;
+
+		#define FAN1SMARTFANSRC\
+			oneof varid     = SETUP_DATA.Fan1TempSrc,\
+				prompt      = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC),\
+				help        = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_HELP),\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_T3), value = 0, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_T1), value = 1, flags = DEFAULT | RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_T2), value = 2, flags = RESET_REQUIRED;\
+			endoneof;
+
+		#define FAN1MODE0FIXEDSPEED\
+			numeric varid = SETUP_DATA.Fan1Mode0FixedSpeed,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE0),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE0_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 500,\
+				maximum   = 10000,\
+				step      = 1,\
+        			default   = FAN1_FIXED_RPM, \
+			endnumeric;
+
+		#define FAN1MODE1FIXEDDUTY\
+			numeric varid = SETUP_DATA.Fan1Mode1FixedDuty,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE1_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+  				default   = FAN1_FIXED_DUTY, \
+			endnumeric;
+        
+		#define FAN1MODE2AUTORPMT1\
+			numeric varid = SETUP_DATA.Fan1Mode2AutoRpmT1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_RPM_T1, \
+    			endnumeric;
+
+		#define FAN1MODE2AUTORPMT2\
+			numeric varid = SETUP_DATA.Fan1Mode2AutoRpmT2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_RPM_T2, \
+    endnumeric;
+
+		#define FAN1MODE2AUTORPMT3\
+			numeric varid = SETUP_DATA.Fan1Mode2AutoRpmT3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_RPM_T3, \
+    endnumeric;
+
+		#define FAN1MODE2AUTORPMT4\
+			numeric varid = SETUP_DATA.Fan1Mode2AutoRpmT4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_RPM_T4, \
+			endnumeric;
+
+		#define FAN1MODE2AUTORPMF1\
+			numeric varid = SETUP_DATA.Fan1Mode2AutoRpmF1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_RPM_F1, \
+    endnumeric;
+
+		#define FAN1MODE2AUTORPMF2\
+			numeric varid = SETUP_DATA.Fan1Mode2AutoRpmF2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_RPM_F2, \
+    endnumeric;
+
+		#define FAN1MODE2AUTORPMF3\
+			numeric varid = SETUP_DATA.Fan1Mode2AutoRpmF3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_RPM_F3, \
+    endnumeric;
+
+		#define FAN1MODE2AUTORPMF4\
+			numeric varid = SETUP_DATA.Fan1Mode2AutoRpmF4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_RPM_F4, \
+    			endnumeric;
+
+		#define FAN1MODE2AUTORPMF5 \
+    			numeric varid = SETUP_DATA.Fan1Mode2AutoRpmF5, \
+        			prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F5), \
+        			help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP), \
+        			flags     = RESET_REQUIRED, \
+        			minimum   = 1, \
+        			maximum   = 100, \
+        			step      = 1, \
+        			default   = FAN1_AUTO_RPM_F5, \
+			endnumeric;
+
+		#define FAN1MODE3AUTODUTYT1\
+			numeric varid = SETUP_DATA.Fan1Mode3AutoDutyT1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_DUTY_T1, \
+			endnumeric;
+
+		#define FAN1MODE3AUTODUTYT2\
+			numeric varid = SETUP_DATA.Fan1Mode3AutoDutyT2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_DUTY_T2, \
+			endnumeric;
+
+		#define FAN1MODE3AUTODUTYT3\
+			numeric varid = SETUP_DATA.Fan1Mode3AutoDutyT3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_DUTY_T3, \
+			endnumeric;
+
+		#define FAN1MODE3AUTODUTYT4\
+			numeric varid = SETUP_DATA.Fan1Mode3AutoDutyT4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_DUTY_T4, \
+    			endnumeric;
+
+		#define FAN1MODE3AUTODUTYF1\
+			numeric varid = SETUP_DATA.Fan1Mode3AutoDutyF1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_DUTY_F1, \
+    			endnumeric;
+
+		#define FAN1MODE3AUTODUTYF2\
+			numeric varid = SETUP_DATA.Fan1Mode3AutoDutyF2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_DUTY_F2, \
+    			endnumeric;
+
+		#define FAN1MODE3AUTODUTYF3\
+			numeric varid = SETUP_DATA.Fan1Mode3AutoDutyF3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_DUTY_F3, \
+    			endnumeric;
+
+		#define FAN1MODE3AUTODUTYF4\
+			numeric varid = SETUP_DATA.Fan1Mode3AutoDutyF4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN1_AUTO_DUTY_F4, \
+    			endnumeric;
+
+		#define FAN1MODE3AUTODUTYF5 \
+    			numeric varid = SETUP_DATA.Fan1Mode3AutoDutyF5, \
+        			prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F5), \
+        			help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP), \
+        			flags     = RESET_REQUIRED, \
+        			minimum   = 1, \
+        			maximum   = 100, \
+        			step      = 1, \
+        			default   = FAN1_AUTO_DUTY_F5, \
+    			endnumeric;
+
+
+//Wythe_81966_Add_Fan_output_type+>>
+
+		#define FAN1_output_type\
+            oneof varid     = SETUP_DATA.Fan1OutputType,\
+                prompt      = STRING_TOKEN(STR_AAEON_FAN1_OUTPUT_MODE_FORM),\
+                help        = STRING_TOKEN(STR_AAEON_FAN_OUTPUT_MODE_FORM_HELP),\
+                default = FAN1_TYPE,\
+                default = FAN1_TYPE, defaultstore = AmiMfgDefault,\
+                option text = STRING_TOKEN(STR_AAEON_OUTPUT_PWM_MODE_O), value = 2, flags =  RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_AAEON_LINEAR_FAN_APPLICATION), value = 1, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_AAEON_OUTPUT_PWM_MODE_P), value = 0, flags =  RESET_REQUIRED;\
+            endoneof;
+
+//Wythe_81966_Add_Fan_output_type+<<
+		#endif //F81966_SMF1_SUPPORT == 1
+
+		#if defined(F81966_SMF2_SUPPORT) && (F81966_SMF2_SUPPORT == 1)
+		#define FAN2SMARTFANMODE\
+			oneof varid     = SETUP_DATA.Fan2SmartFanMode,\
+				prompt      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN2),\
+				help        = STRING_TOKEN(STR_F81966_SMARTFAN_CONFIG_HELP),\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE0), value = 0, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE1), value = 1, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2), value = 2, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3), value = 3, flags = DEFAULT |RESET_REQUIRED;\
+			endoneof;
+
+		#define FAN2SMARTFANSRC\
+			oneof varid     = SETUP_DATA.Fan2TempSrc,\
+				prompt      = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC),\
+				help        = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_HELP),\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_T3), value = 0, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_T1), value = 1, flags = DEFAULT | RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_T2), value = 2, flags = RESET_REQUIRED;\
+			endoneof;
+
+		#define FAN2MODE0FIXEDSPEED\
+			numeric varid = SETUP_DATA.Fan2Mode0FixedSpeed,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE0),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE0_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 500,\
+				maximum   = 10000,\
+				step      = 1,\
+        			default   = FAN2_FIXED_RPM, \
+			endnumeric;
+
+		#define FAN2MODE1FIXEDDUTY\
+			numeric varid = SETUP_DATA.Fan2Mode1FixedDuty,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE1_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_FIXED_DUTY, \
+    			endnumeric;
+
+		#define FAN2MODE2AUTORPMT1\
+			numeric varid = SETUP_DATA.Fan2Mode2AutoRpmT1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_RPM_T1, \
+    			endnumeric;
+
+		#define FAN2MODE2AUTORPMT2\
+			numeric varid = SETUP_DATA.Fan2Mode2AutoRpmT2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_RPM_T2, \
+    			endnumeric;
+    
+		#define FAN2MODE2AUTORPMT3\
+			numeric varid = SETUP_DATA.Fan2Mode2AutoRpmT3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_RPM_T3, \
+    			endnumeric;
+
+		#define FAN2MODE2AUTORPMT4\
+			numeric varid = SETUP_DATA.Fan2Mode2AutoRpmT4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_RPM_T4, \
+    			endnumeric;
+
+		#define FAN2MODE2AUTORPMF1\
+			numeric varid = SETUP_DATA.Fan2Mode2AutoRpmF1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_RPM_F1, \
+    			endnumeric;
+
+		#define FAN2MODE2AUTORPMF2\
+			numeric varid = SETUP_DATA.Fan2Mode2AutoRpmF2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_RPM_F1, \
+    			endnumeric;
+
+		#define FAN2MODE2AUTORPMF3\
+			numeric varid = SETUP_DATA.Fan2Mode2AutoRpmF3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_RPM_F4, \
+    			endnumeric;
+
+		#define FAN2MODE2AUTORPMF4\
+			numeric varid = SETUP_DATA.Fan2Mode2AutoRpmF4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_RPM_F4, \
+    			endnumeric;
+
+		#define FAN2MODE2AUTORPMF5 \
+    			numeric varid = SETUP_DATA.Fan2Mode2AutoRpmF5, \
+        			prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F5), \
+        			help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP), \
+        			flags     = RESET_REQUIRED, \
+        			minimum   = 1, \
+        			maximum   = 100, \
+        			step      = 1, \
+        			default   = FAN2_AUTO_RPM_F5, \
+    			endnumeric;
+
+		#define FAN2MODE3AUTODUTYT1\
+			numeric varid = SETUP_DATA.Fan2Mode3AutoDutyT1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_DUTY_T1, \
+    			endnumeric;
+
+		#define FAN2MODE3AUTODUTYT2\
+			numeric varid = SETUP_DATA.Fan2Mode3AutoDutyT2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_DUTY_T2, \
+    			endnumeric;
+
+		#define FAN2MODE3AUTODUTYT3\
+			numeric varid = SETUP_DATA.Fan2Mode3AutoDutyT3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_DUTY_T3, \
+    			endnumeric;
+
+		#define FAN2MODE3AUTODUTYT4\
+			numeric varid = SETUP_DATA.Fan2Mode3AutoDutyT4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_DUTY_T4, \
+    			endnumeric;
+
+		#define FAN2MODE3AUTODUTYF1\
+			numeric varid = SETUP_DATA.Fan2Mode3AutoDutyF1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_DUTY_F1, \
+    			endnumeric;
+
+		#define FAN2MODE3AUTODUTYF2\
+			numeric varid = SETUP_DATA.Fan2Mode3AutoDutyF2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_DUTY_F2, \
+    			endnumeric;
+
+		#define FAN2MODE3AUTODUTYF3\
+			numeric varid = SETUP_DATA.Fan2Mode3AutoDutyF3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_DUTY_F3, \
+    			endnumeric;
+
+		#define FAN2MODE3AUTODUTYF4\
+			numeric varid = SETUP_DATA.Fan2Mode3AutoDutyF4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN2_AUTO_DUTY_F4, \
+    			endnumeric;
+
+		#define FAN2MODE3AUTODUTYF5 \
+    			numeric varid = SETUP_DATA.Fan2Mode3AutoDutyF5, \
+        			prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F5), \
+        			help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP), \
+        			flags     = RESET_REQUIRED, \
+        			minimum   = 1, \
+        			maximum   = 100, \
+        			step      = 1, \
+        			default   = FAN2_AUTO_DUTY_F5, \
+    			endnumeric;
+
+
+//Wythe_81966_Add_Fan_output_type+>>
+
+		#define FAN2_output_type\
+            oneof varid     = SETUP_DATA.Fan2OutputType,\
+                prompt      = STRING_TOKEN(STR_AAEON_FAN2_OUTPUT_MODE_FORM),\
+                help        = STRING_TOKEN(STR_AAEON_FAN_OUTPUT_MODE_FORM_HELP),\
+                default = FAN2_TYPE,\
+                default = FAN2_TYPE, defaultstore = AmiMfgDefault,\
+                option text = STRING_TOKEN(STR_AAEON_OUTPUT_PWM_MODE_O), value = 2, flags =  RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_AAEON_LINEAR_FAN_APPLICATION), value = 1, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_AAEON_OUTPUT_PWM_MODE_P), value = 0, flags =  RESET_REQUIRED;\
+            endoneof;
+
+//Wythe_81966_Add_Fan_output_type+<<
+		#endif //F81966_SMF2_SUPPORT == 1
+		
+		#if defined(F81966_SMF3_SUPPORT) && (F81966_SMF3_SUPPORT == 1)
+		#define FAN3SMARTFANMODE\
+			oneof varid     = SETUP_DATA.Fan3SmartFanMode,\
+				prompt      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN3),\
+				help        = STRING_TOKEN(STR_F81966_SMARTFAN_CONFIG_HELP),\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE0), value = 0, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE1), value = 1, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2), value = 2, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3), value = 3, flags = DEFAULT |RESET_REQUIRED;\
+			endoneof;
+
+		#define FAN3SMARTFANSRC\
+			oneof varid     = SETUP_DATA.Fan3TempSrc,\
+				prompt      = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC),\
+				help        = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_HELP),\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_T3), value = 0, flags = RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_T1), value = 1, flags = DEFAULT | RESET_REQUIRED;\
+				option text = STRING_TOKEN(STR_F81966_SMARTFAN_TMPSRC_T2), value = 2, flags = RESET_REQUIRED;\
+			endoneof;
+
+		#define FAN3MODE0FIXEDSPEED\
+			numeric varid = SETUP_DATA.Fan3Mode0FixedSpeed,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE0),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE0_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 500,\
+				maximum   = 10000,\
+				step      = 1,\
+        			default   = FAN3_FIXED_RPM, \
+			endnumeric;
+
+		#define FAN3MODE1FIXEDDUTY\
+			numeric varid = SETUP_DATA.Fan3Mode1FixedDuty,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE1_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_FIXED_DUTY, \
+			endnumeric;
+
+		#define FAN3MODE2AUTORPMT1\
+			numeric varid = SETUP_DATA.Fan3Mode2AutoRpmT1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_RPM_T1, \
+			endnumeric;
+    
+		#define FAN3MODE2AUTORPMT2\
+			numeric varid = SETUP_DATA.Fan3Mode2AutoRpmT2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_RPM_T2, \
+			endnumeric;
+
+		#define FAN3MODE2AUTORPMT3\
+			numeric varid = SETUP_DATA.Fan3Mode2AutoRpmT3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+			        default   = FAN3_AUTO_RPM_T3, \
+			endnumeric;
+
+		#define FAN3MODE2AUTORPMT4\
+			numeric varid = SETUP_DATA.Fan3Mode2AutoRpmT4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_T4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_RPM_T4, \
+			endnumeric;
+
+		#define FAN3MODE2AUTORPMF1\
+			numeric varid = SETUP_DATA.Fan3Mode2AutoRpmF1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_RPM_F1, \
+    			endnumeric;
+
+		#define FAN3MODE2AUTORPMF2\
+			numeric varid = SETUP_DATA.Fan3Mode2AutoRpmF2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_RPM_F2, \
+    			endnumeric;
+
+		#define FAN3MODE2AUTORPMF3\
+			numeric varid = SETUP_DATA.Fan3Mode2AutoRpmF3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_RPM_F3, \
+    			endnumeric;
+
+		#define FAN3MODE2AUTORPMF4\
+			numeric varid = SETUP_DATA.Fan3Mode2AutoRpmF4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_RPM_F4, \
+    			endnumeric;
+
+		#define FAN3MODE2AUTORPMF5 \
+    			numeric varid = SETUP_DATA.Fan3Mode2AutoRpmF5, \
+        			prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_RPM_F5), \
+        			help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE2_HELP), \
+        			flags     = RESET_REQUIRED, \
+        			minimum   = 1, \
+        			maximum   = 100, \
+        			step      = 1, \
+        			default   = FAN3_AUTO_RPM_F5, \
+    			endnumeric;
+
+		#define FAN3MODE3AUTODUTYT1\
+			numeric varid = SETUP_DATA.Fan3Mode3AutoDutyT1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_DUTY_T1, \
+    			endnumeric;
+
+		#define FAN3MODE3AUTODUTYT2\
+			numeric varid = SETUP_DATA.Fan3Mode3AutoDutyT2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_DUTY_T2, \
+    			endnumeric;
+
+		#define FAN3MODE3AUTODUTYT3\
+			numeric varid = SETUP_DATA.Fan3Mode3AutoDutyT3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_DUTY_T3, \
+    			endnumeric;
+
+		#define FAN3MODE3AUTODUTYT4\
+			numeric varid = SETUP_DATA.Fan3Mode3AutoDutyT4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_T4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+				default   = FAN3_AUTO_DUTY_T4,\
+    			endnumeric;
+
+		#define FAN3MODE3AUTODUTYF1\
+			numeric varid = SETUP_DATA.Fan3Mode3AutoDutyF1,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F1),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_DUTY_F1, \
+    			endnumeric;
+
+		#define FAN3MODE3AUTODUTYF2\
+			numeric varid = SETUP_DATA.Fan3Mode3AutoDutyF2,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F2),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_DUTY_F2, \
+    			endnumeric;
+
+		#define FAN3MODE3AUTODUTYF3\
+			numeric varid = SETUP_DATA.Fan3Mode3AutoDutyF3,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F3),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_DUTY_F3, \
+    			endnumeric;
+
+		#define FAN3MODE3AUTODUTYF4\
+			numeric varid = SETUP_DATA.Fan3Mode3AutoDutyF4,\
+				prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F4),\
+				help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP),\
+				flags     = RESET_REQUIRED,\
+				minimum   = 1,\
+				maximum   = 100,\
+				step      = 1,\
+        			default   = FAN3_AUTO_DUTY_F4, \
+    			endnumeric;
+
+		#define FAN3MODE3AUTODUTYF5 \
+    			numeric varid = SETUP_DATA.Fan3Mode3AutoDutyF5, \
+        			prompt    = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_AUTO_DUTY_F5), \
+        			help      = STRING_TOKEN(STR_F81966_SMARTFAN_FAN_MODE3_HELP), \
+        			flags     = RESET_REQUIRED, \
+        			minimum   = 1, \
+        			maximum   = 100, \
+        			step      = 1, \
+        			default   = FAN3_AUTO_DUTY_F5, \
+    			endnumeric;
+				
+//Wythe_81966_Add_Fan_output_type+>>
+
+		#define FAN3_output_type\
+            oneof varid     = SETUP_DATA.Fan3OutputType,\
+                prompt      = STRING_TOKEN(STR_AAEON_FAN3_OUTPUT_MODE_FORM),\
+                help        = STRING_TOKEN(STR_AAEON_FAN_OUTPUT_MODE_FORM_HELP),\
+                default = FAN3_TYPE,\
+                default = FAN3_TYPE, defaultstore = AmiMfgDefault,\
+                option text = STRING_TOKEN(STR_AAEON_OUTPUT_PWM_MODE_O), value = 2, flags =  RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_AAEON_LINEAR_FAN_APPLICATION), value = 1, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_AAEON_OUTPUT_PWM_MODE_P), value = 0, flags =  RESET_REQUIRED;\
+            endoneof;
+
+//Wythe_81966_Add_Fan_output_type+<<
+#endif //F81966_SMF3_SUPPORT == 1
+#endif //F81966_SMF_SUPPORT == 1
+#endif //CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+	#if defined(F81966_SMF_SUPPORT) && (F81966_SMF_SUPPORT == 1)
+	SMARTFANENABLE
+	#if defined(F81966_SMF1_SUPPORT) && (F81966_SMF1_SUPPORT == 1)
+	FAN1SMARTFANMODE
+	FAN1MODE0FIXEDSPEED
+	FAN1MODE1FIXEDDUTY
+	FAN1MODE2AUTORPMT1
+	FAN1MODE2AUTORPMT2
+	FAN1MODE2AUTORPMT3
+	FAN1MODE2AUTORPMT4
+	FAN1MODE2AUTORPMF1
+	FAN1MODE2AUTORPMF2
+	FAN1MODE2AUTORPMF3
+	FAN1MODE2AUTORPMF4
+	FAN1MODE2AUTORPMF5
+	FAN1MODE3AUTODUTYT1
+	FAN1MODE3AUTODUTYT2
+	FAN1MODE3AUTODUTYT3
+	FAN1MODE3AUTODUTYT4
+	FAN1MODE3AUTODUTYF1
+	FAN1MODE3AUTODUTYF2
+	FAN1MODE3AUTODUTYF3
+	FAN1MODE3AUTODUTYF4
+	FAN1MODE3AUTODUTYF5
+	#endif //F81966_SMF1_SUPPORT == 1
+	#if defined(F81966_SMF2_SUPPORT) && (F81966_SMF2_SUPPORT == 1)
+	FAN2SMARTFANMODE
+	FAN2MODE0FIXEDSPEED
+	FAN2MODE1FIXEDDUTY
+	FAN2MODE2AUTORPMT1
+	FAN2MODE2AUTORPMT2
+	FAN2MODE2AUTORPMT3
+	FAN2MODE2AUTORPMT4
+	FAN2MODE2AUTORPMF1
+	FAN2MODE2AUTORPMF2
+	FAN2MODE2AUTORPMF3
+	FAN2MODE2AUTORPMF4
+	FAN2MODE2AUTORPMF5
+	FAN2MODE3AUTODUTYT1
+	FAN2MODE3AUTODUTYT2
+	FAN2MODE3AUTODUTYT3
+	FAN2MODE3AUTODUTYT4
+	FAN2MODE3AUTODUTYF1
+	FAN2MODE3AUTODUTYF2
+	FAN2MODE3AUTODUTYF3
+	FAN2MODE3AUTODUTYF4
+	FAN2MODE3AUTODUTYF5
+	#endif //F81966_SMF2_SUPPORT == 1
+	#if defined(F81966_SMF3_SUPPORT) && (F81966_SMF3_SUPPORT == 1)
+	FAN3SMARTFANMODE
+	FAN3MODE0FIXEDSPEED
+	FAN3MODE1FIXEDDUTY
+	FAN3MODE2AUTORPMT1
+	FAN3MODE2AUTORPMT2
+	FAN3MODE2AUTORPMT3
+	FAN3MODE2AUTORPMT4
+	FAN3MODE2AUTORPMF1
+	FAN3MODE2AUTORPMF2
+	FAN3MODE2AUTORPMF3
+	FAN3MODE2AUTORPMF4
+	FAN3MODE2AUTORPMF5
+	FAN3MODE3AUTODUTYT1
+	FAN3MODE3AUTODUTYT2
+	FAN3MODE3AUTODUTYT3
+	FAN3MODE3AUTODUTYT4
+	FAN3MODE3AUTODUTYF1
+	FAN3MODE3AUTODUTYF2
+	FAN3MODE3AUTODUTYF3
+	FAN3MODE3AUTODUTYF4
+	FAN3MODE3AUTODUTYF5
+	#endif //F81966_SMF3_SUPPORT == 1
+	#endif //F81966_SMF_SUPPORT
+#endif //CONTROLS_WITH_DEFAULTS
+//----------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//----------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//----------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+
+#endif
+
+//----------------------------------------------------------------------
+//If you need custom varstore's define them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+#endif
+
+//----------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//----------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+
+//----------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//----------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+
+    #if F81966_HWM_PRESENT
+    goto HMM_CONFIG_FORM_ID,
+    prompt  = STRING_TOKEN(STR_F81966_HMM_CONFIGURATION),
+    help    = STRING_TOKEN(STR_F81966_HMM_CONFIGURATION_HELP);
+    #endif
+
+#endif
+
+//----------------------------------------------------------------------
+// Define forms
+//----------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define HWM formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81966_HWM_PRESENT
+    //Define HWM formset form
+    form formid = AUTO_ID(HMM_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_F81966_HMM_CONFIGURATION);
+     
+        SUBTITLE(STRING_TOKEN(STR_PC_HEALTH))
+     
+        SEPARATOR
+        // Null line for generate interactive key ID automatically
+        #if EFI_SPECIFICATION_VERSION>0x20000
+                INTERACTIVE_TEXT(STRING_TOKEN(STR_NULL), STRING_TOKEN(STR_NULL), STRING_TOKEN(STR_NULL),  AUTO_ID(F81966_INTERACTIVE_KEY))
+        #else
+                text
+                help   = STRING_TOKEN(STR_NULL),
+                text   = STRING_TOKEN(STR_NULL),
+                text   = STRING_TOKEN(STR_NULL),
+                flags  = INTERACTIVE | NV_ACCESS,
+                key    = F81966_INTERACTIVE_KEY;
+        #endif
+
+        //
+        // System Temperature1, 2
+        #if F81966_TEMPERATURE_1_SUPPORT
+        HWM1_TEXT_TEMP1
+        #endif
+        #if F81966_TEMPERATURE_2_SUPPORT
+        HWM1_TEXT_TEMP2
+        #endif
+
+        //
+        // System Temperature3
+        #if (F81966_HWM_PECI_SUPPORT)
+        HWM1_TEXT_TEMP3
+        #endif
+        //
+        // System Temperature4/5/6
+        #if (F81966_IBEX_SUPPORT)
+        HWM1_TEXT_TEMP4
+        HWM1_TEXT_TEMP5
+        HWM1_TEXT_TEMP6
+        #endif
+        
+        #if F81966_FAN_1_SUPPORT
+        HWM1_TEXT_FAN1_SPEED
+        #endif
+        #if F81966_FAN_2_SUPPORT
+        HWM1_TEXT_FAN2_SPEED
+        #endif
+        #if F81966_FAN_3_SUPPORT
+        HWM1_TEXT_FAN3_SPEED
+        #endif
+
+        #if F81966_VIN1_VCORE_SUPPORT
+        HWM1_TEXT_VIN1
+        #endif
+        #if F81966_VIN2_SUPPORT
+        HWM1_TEXT_VIN2
+        #endif
+        #if F81966_VIN3_SUPPORT
+        HWM1_TEXT_VIN3
+        #endif
+        #if F81966_VIN4_SUPPORT
+        HWM1_TEXT_VIN4
+        #endif
+        
+        #if F81966_3VCC_SUPPORT
+        HWM1_TEXT_VCC3V
+        #endif
+        #if F81966_VSB3V_SUPPORT
+        HWM1_TEXT_VSB3V
+        #endif
+        #if F81966_5VSB_SUPPORT
+        HWM1_TEXT_VSB5V
+        #endif
+        #if F81966_VBAT_SUPPORT
+        HWM1_TEXT_VBAT
+        #endif
+
+	//INTERNAL_085_RayWu, ADD 2015/01/28 >>
+        #if defined(F81966_SMF_SUPPORT) && (F81966_SMF_SUPPORT == 1)
+        SEPARATOR
+
+	SMARTFANENABLE
+	//Goto Smart Fan Form
+	suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00;
+		GOTO_SIO_SMARTFAN_FORM
+	endif;
+        #endif //F81966_SMF_SUPPORT == 1
+	//INTERNAL_085_RayWu, ADD 2015/01/28 <<
+
+    endform;//HWM form
+
+	//INTERNAL_085_RayWu, ADD 2015/01/28 >>
+        #if defined(F81966_SMF_SUPPORT) && (F81966_SMF_SUPPORT == 1)
+	form formid = AUTO_ID(SIO_SMARTFAN_FORM_ID),
+		title = STRING_TOKEN(STR_F81966_SMARTFAN_FORM);
+		SUBTITLE(STRING_TOKEN(STR_F81966_SMARTFAN_FORM))
+		SEPARATOR
+
+		#if defined(F81966_SMF1_SUPPORT) && (F81966_SMF1_SUPPORT == 1)
+		FAN1_output_type //Wythe_81966_Add_Fan_output_type+
+		suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN1SMARTFANMODE
+		endif;
+		
+		suppressif NOT ideqval SETUP_DATA.Fan1SmartFanMode == 0x00 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN1MODE0FIXEDSPEED
+        	endif;
+		suppressif NOT ideqval SETUP_DATA.Fan1SmartFanMode == 0x01 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN1MODE1FIXEDDUTY
+		endif;
+		suppressif NOT ideqval SETUP_DATA.Fan1SmartFanMode == 0x02 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN1SMARTFANSRC
+			FAN1MODE2AUTORPMT1
+			FAN1MODE2AUTORPMT2
+			FAN1MODE2AUTORPMT3
+			FAN1MODE2AUTORPMT4
+			FAN1MODE2AUTORPMF1
+			FAN1MODE2AUTORPMF2
+			FAN1MODE2AUTORPMF3
+			FAN1MODE2AUTORPMF4
+			FAN1MODE2AUTORPMF5
+		endif;
+
+		suppressif NOT ideqval SETUP_DATA.Fan1SmartFanMode == 0x03 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN1SMARTFANSRC
+			FAN1MODE3AUTODUTYT1
+			FAN1MODE3AUTODUTYT2
+			FAN1MODE3AUTODUTYT3
+			FAN1MODE3AUTODUTYT4
+			FAN1MODE3AUTODUTYF1
+			FAN1MODE3AUTODUTYF2
+			FAN1MODE3AUTODUTYF3
+			FAN1MODE3AUTODUTYF4
+			FAN1MODE3AUTODUTYF5
+		endif;
+		#endif //F81966_SMF1_SUPPORT == 1
+
+		SEPARATOR
+
+		#if defined(F81966_SMF2_SUPPORT) && (F81966_SMF2_SUPPORT == 1)
+		FAN2_output_type //Wythe_81966_Add_Fan_output_type+
+		suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN2SMARTFANMODE
+		endif;
+
+		suppressif NOT ideqval SETUP_DATA.Fan2SmartFanMode == 0x00 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN2MODE0FIXEDSPEED
+		endif;
+
+		suppressif NOT ideqval SETUP_DATA.Fan2SmartFanMode == 0x01 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN2MODE1FIXEDDUTY
+		endif;
+		suppressif NOT ideqval SETUP_DATA.Fan2SmartFanMode == 0x02 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN2SMARTFANSRC
+			FAN2MODE2AUTORPMT1
+			FAN2MODE2AUTORPMT2
+			FAN2MODE2AUTORPMT3
+			FAN2MODE2AUTORPMT4
+			FAN2MODE2AUTORPMF1
+			FAN2MODE2AUTORPMF2
+			FAN2MODE2AUTORPMF3
+			FAN2MODE2AUTORPMF4
+			FAN2MODE2AUTORPMF5
+		endif;
+		suppressif NOT ideqval SETUP_DATA.Fan2SmartFanMode == 0x03 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN2SMARTFANSRC
+			FAN2MODE3AUTODUTYT1
+			FAN2MODE3AUTODUTYT2
+			FAN2MODE3AUTODUTYT3
+			FAN2MODE3AUTODUTYT4
+			FAN2MODE3AUTODUTYF1
+			FAN2MODE3AUTODUTYF2
+			FAN2MODE3AUTODUTYF3
+			FAN2MODE3AUTODUTYF4
+			FAN2MODE3AUTODUTYF5
+		endif;
+		#endif //F81966_SMF2_SUPPORT == 1
+		#if defined(F81966_SMF3_SUPPORT) && (F81966_SMF3_SUPPORT == 1)
+		SEPARATOR
+		FAN3_output_type //Wythe_81966_Add_Fan_output_type+
+		suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN3SMARTFANMODE
+		endif;
+		suppressif NOT ideqval SETUP_DATA.Fan3SmartFanMode == 0x00 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN3MODE0FIXEDSPEED
+		endif;
+		suppressif NOT ideqval SETUP_DATA.Fan3SmartFanMode == 0x01 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN3MODE1FIXEDDUTY
+		endif;
+		suppressif NOT ideqval SETUP_DATA.Fan3SmartFanMode == 0x02 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN3SMARTFANSRC
+			FAN3MODE2AUTORPMT1
+			FAN3MODE2AUTORPMT2
+			FAN3MODE2AUTORPMT3
+			FAN3MODE2AUTORPMT4
+			FAN3MODE2AUTORPMF1
+			FAN3MODE2AUTORPMF2
+			FAN3MODE2AUTORPMF3
+			FAN3MODE2AUTORPMF4
+			FAN3MODE2AUTORPMF5
+		endif;
+		suppressif NOT ideqval SETUP_DATA.Fan3SmartFanMode == 0x03 OR ideqval SETUP_DATA.SmartFanEnable == 0x00;
+			FAN3SMARTFANSRC
+			FAN3MODE3AUTODUTYT1
+			FAN3MODE3AUTODUTYT2
+			FAN3MODE3AUTODUTYT3
+			FAN3MODE3AUTODUTYT4
+			FAN3MODE3AUTODUTYF1
+			FAN3MODE3AUTODUTYF2
+			FAN3MODE3AUTODUTYF3
+			FAN3MODE3AUTODUTYF4
+			FAN3MODE3AUTODUTYF5
+		endif;
+		#endif //F81966_SMF3_SUPPORT == 1
+	endform;
+        #endif //F81966_SMF_SUPPORT == 1
+	//INTERNAL_085_RayWu, ADD 2015/01/28 <<
+    #endif//End of #if F81966_HWM_PRESENT
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

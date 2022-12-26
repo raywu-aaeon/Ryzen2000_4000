@@ -1,0 +1,69 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file
+#  IT8625PeiInit.inf
+#
+# SIO library common types and macro definitions. The basic idea is this
+#  library only includes the SIO definitions, other ISA related definitions,
+#  such as Floppy runtime registers and UART registers, are not included in
+#  this library.
+#  The SIO configuration port is 0x2E, this library does not support relocate 
+#  configuration port base address to other location.
+# 
+# 
+
+[Defines]
+  INF_VERSION = 0x00010005
+  VERSION_STRING = 1.0
+  BASE_NAME = IT8625PeiInit
+  MODULE_TYPE = PEIM
+# >> AAEON_OVERRIDE
+#  FILE_GUID = 9029F23E-E1EE-40d1-9382-36DD61A63EAA
+  FILE_GUID = 9029F23E-E1EE-40d1-9382-36DD61A68625
+# << AAEON_OVERRIDE
+  ENTRY_POINT = IT8625PeiInitEntryPoint
+
+[Sources]
+  IT8625PeiInit.c
+  OemPeiIoTable.c
+    
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+
+[LibraryClasses]
+  AmiPeiLib
+  AmiSioPeiLib
+  PeimEntryPoint
+
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid       # 2020/05/19 AAEON_OVERRIDE +
+
+[Depex]
+  TRUE
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

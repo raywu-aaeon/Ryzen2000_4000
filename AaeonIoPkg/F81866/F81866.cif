@@ -1,0 +1,23 @@
+<component>
+	name = "SuperI/O - F81866"
+	category = IO
+	LocalRoot = "AaeonIoPkg\F81866\"
+	RefName = "AaeonIoPkg.F81866"
+[INF]
+"F81866DxeInit.inf"
+"F81866PeiInit.inf"
+"F81866PlatformHookSerialPortLib.inf"
+
+[files]
+"F81866.sdl"
+"F81866.mak"
+"F81866.chm"
+"F81866MiscSetup.sd"
+"F81866MiscSetup.uni"
+"F81866OemReadyToBootCallback.c"
+
+[parts]
+"AaeonIoPkg.F81866.F81866Asl"
+"AaeonIoPkg.F81866.F81866Setup"
+"AaeonIoPkg.F81866.F81866HwMonitor"
+<endComponent>

@@ -1,0 +1,10 @@
+<component>
+	name = "F81966Bfpi"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\F81966\"
+	RefName = "AaeonIoPkg.F81966.F81966Bfpi"
+[files]
+"F81966Bfpi.sdl"
+"F81966Bfpi.asl"
+"F81966Bfpi.mak"
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "IT85XX_EC1_Bfpi"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\IT8518\BFPI"
+	RefName = "AaeonIoPkg.IT8518.IT85XX_EC1_Bfpi"
+[files]
+"IT85XX_EC1_Bfpi.sdl"
+"IT85XX_EC1_Bfpi.asl"
+"IT85XX_EC1_Bfpi.mak"
+"IT85XX_EC1_Bfpi.cif"
+<endComponent>

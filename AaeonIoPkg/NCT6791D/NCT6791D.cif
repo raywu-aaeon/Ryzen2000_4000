@@ -1,0 +1,19 @@
+<component>
+	name = "SuperI/O - NCT6791D"
+	category = IO
+	LocalRoot = "AaeonIoPkg\NCT6791D\"
+	RefName = "AaeonIoPkg.NCT6791D"
+[INF]
+"NCT6791DDxeInit.inf"
+"NCT6791DPeiInit.inf"
+"NCT6791DPlatformHookSerialPortLib.inf"
+[files]
+"NCT6791D.sdl"	
+"NCT6791D.mak"	
+"NCT6791D.chm"	
+[parts]
+"AaeonIoPkg.NCT6791D.NCT6791DAsl"
+"AaeonIoPkg.NCT6791D.NCT6791DSetup"
+"AaeonIoPkg.NCT6791D.NCT6791DHwMonitor"
+"AaeonIoPkg.NCT6791D.NCT6791DMisc"
+<endComponent>

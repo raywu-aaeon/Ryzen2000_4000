@@ -1,0 +1,22 @@
+<component>
+	name = "SuperI/O - W83627DHG"
+	category = IO
+	LocalRoot = "AaeonIoPkg\W83627DHG\"
+	RefName = "AaeonIoPkg.W83627DHG"
+[INF]
+"W83627DHGDxeInit.inf"
+"W83627DHGPeiInit.inf"
+"W83627DHGPlatformHookSerialPortLib.inf"
+
+[files]
+"W83627DHG.sdl"	
+"W83627DHG.mak"	
+"W83627DHG.chm"	
+"W83627DHGMiscSetup.sd"
+"W83627DHGMiscSetup.uni"
+
+[parts]
+"AaeonIoPkg.W83627DHG.W83627DHGAsl"
+"AaeonIoPkg.W83627DHG.W83627DHGSetup"
+"AaeonIoPkg.W83627DHG.W83627DHGHwMonitor"
+<endComponent>

@@ -1,0 +1,19 @@
+<component>
+	name = "SuperI/O - IT8625"
+	category = IO
+	LocalRoot = "AaeonIoPkg\IT8625\"
+	RefName = "AaeonIoPkg.IT8625"
+[INF]
+"IT8625DxeInit.inf"
+"IT8625PeiInit.inf"
+"IT8625PlatformHookSerialPortLib.inf"
+[files]
+"IT8625.sdl"
+"IT8625.mak"
+"IT8625.chm"
+[parts]
+"AaeonIoPkg.IT8625.IT8625Asl"
+"AaeonIoPkg.IT8625.IT8625Setup"
+"AaeonIoPkg.IT8625.IT8625HwMonitor"
+"AaeonIoPkg.IT8625.IT8625BFPI"
+<endComponent>

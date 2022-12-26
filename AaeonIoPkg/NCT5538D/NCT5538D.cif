@@ -1,0 +1,21 @@
+<component>
+	name = "NCT5538D"
+	category = IO
+	LocalRoot = "AaeonIoPkg\NCT5538D\"
+	RefName = "AaeonIoPkg.NCT5538D"
+[INF]
+"NCT5538DDxeInit.inf"
+"NCT5538DPeiInit.inf"
+"NCT5538DPlatformHookSerialPortLib.inf"
+[files]
+"NCT5538D.sdl"
+"NCT5538D.mak"
+"NCT5538D.chm"
+[parts]
+"AaeonIoPkg.NCT5538D.NCT5538DAsl"
+"AaeonIoPkg.NCT5538D.NCT5538DSetup"
+"AaeonIoPkg.NCT5538D.NCT5538DHwMonitor"
+"AaeonIoPkg.NCT5538D.NCT5538DMisc"
+<endComponent>
+
+

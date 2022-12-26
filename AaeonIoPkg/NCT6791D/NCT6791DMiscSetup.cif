@@ -1,0 +1,13 @@
+<component>
+	name = "NCT6791DGpio"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\NCT6791D\"
+	RefName = "AaeonIoPkg.NCT6791D.NCT6791DMisc"
+[files]
+"NCT6791DMiscSetup.sdl"
+"NCT6791DMiscSetup.sd"	
+"NCT6791DMiscSetup.uni"	
+<endComponent>
+
+
+

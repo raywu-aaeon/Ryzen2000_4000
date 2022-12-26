@@ -1,0 +1,15 @@
+<component>
+	name = "F75113"
+	category = IO
+	LocalRoot = "AaeonIoPkg\F75113\"
+	RefName = "AaeonIoPkg.F75113"
+[INF]
+"F75113PeiInit.inf"
+[files]
+"F75113.sdl"	
+"F75113.chm"
+"F75113PeiInit.c"	
+"F75113PeiIoTable.h"
+[parts]
+"F75113Misc"
+<endComponent>

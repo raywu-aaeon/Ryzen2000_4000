@@ -1,0 +1,14 @@
+<component>
+	name = "NCT6791DSetup"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\NCT6791D\"
+	RefName = "AaeonIoPkg.NCT6791D.NCT6791DSetup"
+[files]
+"NCT6791DSetup.sd"
+"NCT6791DSetup.uni"	
+"NCT6791DSetup.c"	
+"NCT6791DSetup.h"	
+<endComponent>
+
+
+

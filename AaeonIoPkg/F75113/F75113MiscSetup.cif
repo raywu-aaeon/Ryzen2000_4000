@@ -1,0 +1,13 @@
+<component>
+	name = "F75113Gpio"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\F75113\"
+	RefName = "F75113Misc"
+[files]
+"F75113MiscSetup.sdl"
+"F75113MiscSetup.sd"	
+"F75113MiscSetup.uni"	
+<endComponent>
+
+
+

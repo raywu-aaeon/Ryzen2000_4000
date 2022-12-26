@@ -1,0 +1,11 @@
+<component>
+	name = "W83627DHGSetup"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\W83627DHG\"
+	RefName = "AaeonIoPkg.W83627DHG.W83627DHGSetup"
+[files]
+"W83627DHGSetup.sd"
+"W83627DHGSetup.uni"	
+"W83627DHGSetup.c"	
+"W83627DHGSetup.h"	
+<endComponent>

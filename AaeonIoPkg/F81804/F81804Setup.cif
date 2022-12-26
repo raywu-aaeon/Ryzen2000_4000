@@ -1,0 +1,12 @@
+<component>
+	name = "F81804Setup"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\F81804\"
+	RefName = "AaeonIoPkg.F81804.F81804Setup"
+[files]
+"F81804Setup.sd"
+"F81804Setup.uni"
+"F81804Setup.c"
+"F81804Setup.h"
+<endComponent>
+

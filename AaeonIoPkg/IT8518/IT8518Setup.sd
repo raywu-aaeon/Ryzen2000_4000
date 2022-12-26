@@ -1,0 +1,774 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <IT8518Setup.sd>
+//
+// Description: SIO form template, setup screen definition file.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+        UINT8	IT851xRestoreACPowerLoss;
+        #if defined(IT851X_FAN1_ENABLE) && (IT851X_FAN1_ENABLE == 1)
+                UINT8   IT851XFan1SmartFanMode;
+                UINT8   Fan1ManualPWM;
+		UINT8	Fan1MonitorTher;
+                UINT8   Fan1StartTemp;
+                UINT8   Fan1OffTemp;
+                UINT8   Fan1StartPWM;
+                UINT8   Fan1Slope;
+		UINT8	Fan1Invert;  
+        #endif //IT851X_FAN1_ENABLE
+        #if defined(IT851X_FAN2_ENABLE) && (IT851X_FAN2_ENABLE == 1)
+                UINT8   IT851XFan2SmartFanMode;
+		UINT8	Fan2MonitorTher;
+                UINT8   Fan2ManualPWM;
+                UINT8   Fan2StartTemp;
+                UINT8   Fan2OffTemp;
+                UINT8   Fan2StartPWM;
+                UINT8   Fan2Slope;
+		UINT8	Fan2Invert;   	
+        #endif //IT851X_FAN2_ENABLE
+
+	#if defined(IT851X_DIO_SUPPORT) && (IT851X_DIO_SUPPORT == 1)
+                UINT8    GPI0Type;
+                UINT8    GPI1Type;
+                UINT8    GPI2Type;
+                UINT8    GPI3Type;
+                UINT8    GPO0Type;
+                UINT8    GPO1Type;
+                UINT8    GPO2Type;
+                UINT8    GPO3Type;
+                UINT8    GPI0Level;
+                UINT8    GPI1Level;
+                UINT8    GPI2Level;
+                UINT8    GPI3Level;
+                UINT8    GPO0Level;
+                UINT8    GPO1Level;
+                UINT8    GPO2Level;
+                UINT8    GPO3Level;
+	#endif //IT851X_DIO_SUPPORT
+          
+         	UINT8	FLEXIO_INT[32];		//Variable
+	#if defined(IT851X_BL_CONTROL_SUPPORT) && (IT851X_BL_CONTROL_SUPPORT == 1)
+	       	UINT8	EcBacklightEn;
+		UINT8	EcBrcMode;
+		UINT8	EcBrcLevel;
+		UINT8	EcBrcInv;
+	#endif	        
+       
+       		UINT8	EcBatteryManagement;
+       	
+#endif //SETUP_DATA_DEFINITION
+
+#ifdef CONTROL_DEFINITION
+
+	#define GOTO_AAEON_FEATURES_FORM\
+		goto AAEON_FEATURES_FORM_ID,\
+		  prompt = STRING_TOKEN(STR_AAEON_FEATURES),\
+		  help = STRING_TOKEN(STR_AAEON_FEATURES);
+
+
+	#define ONEOF_EC_BATTERY_MANAGEMENT\
+		oneof varid    = SETUP_DATA.EcBatteryManagement,\
+		  prompt       = STRING_TOKEN (STR_BATTERY_MANAGEMENT),\
+		  help         = STRING_TOKEN (STR_BATTERY_MANAGEMENT_HELP),\
+		  option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_ONE_BATTERY), value = 1, flags = RESET_REQUIRED;\
+		endoneof;
+
+	#define ONEOF_IT851XRESTOREACPOWERLOSS\
+		oneof varid    = SETUP_DATA.IT851xRestoreACPowerLoss,\
+		prompt       = STRING_TOKEN (STR_IT851XRESTOREACPOWERLOSS),\
+		help         = STRING_TOKEN (STR_IT851XRESTOREACPOWERLOSS_HELP),\
+		default = ONEOF_IT851XRESTOREACPOWERLOSS_DEFAULT,\
+		default = ONEOF_IT851XRESTOREACPOWERLOSS_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_IT851XRESTOREACPOWERLOSS_ALWAYSOFF), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_IT851XRESTOREACPOWERLOSS_ALWAYSON), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_IT851XRESTOREACPOWERLOSS_LASTSTATE), value = 2, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_IT851XRESTOREACPOWERLOSS_BYPASS), value = 3, flags = RESET_REQUIRED;\
+		endoneof;
+
+#if defined(IT851X_BL_CONTROL_SUPPORT) && (IT851X_BL_CONTROL_SUPPORT == 1)
+	#define GOTO_EC_BRIGHTNESS_CONFIG_FORM\
+		goto EC_BRIGHTNESS_CONFIG_FORM_ID,\
+		  prompt = STRING_TOKEN(STR_EC_BRIGHTNESS_CONFIG_FORM),\
+		  help = STRING_TOKEN(STR_EC_BRIGHTNESS_FORM_HELP);
+
+	#define ONEOF_EC_BACKLIGHT_ENABLE\
+		oneof varid    = SETUP_DATA.EcBacklightEn,\
+		  prompt       = STRING_TOKEN (STR_BRC_CONTROL),\
+		  help         = STRING_TOKEN (STR_BRC_CONTROL_HELP),\
+		  option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+		endoneof;
+		
+	#define ONEOF_EC_BRIGHTNESS_MODE\
+		oneof varid    = SETUP_DATA.EcBrcMode,\
+		  prompt   = STRING_TOKEN(STR_BRC_MODE),\
+		  help     = STRING_TOKEN(STR_BRC_MODE_HELP),\
+		  option text = STRING_TOKEN(STR_BRC_PWM), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_BRC_DAC), value = 1, flags = RESET_REQUIRED;\
+		endoneof;  
+
+	#define ONEOF_EC_BRIGHTNESS_LV\
+		numeric varid = SETUP_DATA.EcBrcLevel,\
+	    	  prompt    = STRING_TOKEN(STR_BRC_LEVEL),\
+		  help      = STRING_TOKEN(STR_BRC_LEVEL_HELP),\
+		  flags     = RESET_REQUIRED,\
+		  minimum   = 0,\
+		  maximum   = 100,\
+		  step      = 1,\
+		  default   = 70,\
+		endnumeric;
+
+	#define ONEOF_EC_BRIGHTNESS_INV\
+		oneof varid    = SETUP_DATA.EcBrcInv,\
+		  prompt   = STRING_TOKEN(STR_BRC_INVERT),\
+		  help     = STRING_TOKEN(STR_BRC_INVERT_HELP),\
+		  option text = STRING_TOKEN(STR_BRC_NONINVERT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_BRC_INVERT), value = 1, flags = RESET_REQUIRED;\
+		endoneof;  	
+#endif //#if defined(IT851X_BL_CONTROL_SUPPORT) && (IT851X_BL_CONTROL_SUPPORT == 1)		
+#endif //CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+	ONEOF_IT851XRESTOREACPOWERLOSS
+//------------------------------------------------------------
+// Define Macro
+//------------------------------------------------------------
+#define FLEXIO_INT(PIN_NUM, PIN_DEFAULT) \
+		oneof varid     = SETUP_DATA.FLEXIO_INT[PIN_NUM], \
+				prompt  = STRING_TOKEN(STR_FLEXIO_INT_PROMPT), \
+				help    = STRING_TOKEN(STR_FLEXIO_INT_HELP), \
+				default = PIN_DEFAULT,\
+	                        default = PIN_DEFAULT, defaultstore = AmiMfgDefault,\
+				option text = STRING_TOKEN(STR_COMMON_DISABLED), value = 0, flags = RESET_REQUIRED; \
+   	 	        	option text = STRING_TOKEN(STR_COMMON_ENABLED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+//------------------------------------------------------------	
+#endif //CONTROLS_WITH_DEFAULTS
+
+//-------------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//-------------------------------------------------------------------------
+
+#ifdef MAIN_FORM_SET
+        #ifdef AAEON_FORM_SET_ITEM
+                SUBTITLE(STRING_TOKEN(STR_EC1_INFO))
+                SUBTITLE(STRING_TOKEN(STR_EC1_VERSION_VALUE))
+        #endif //AAEON_FORM_SET_ITEM
+	//#endif //AAEON_EC_FORM_SET_ITEM
+#endif //MAIN_FORM_SET
+
+#ifdef ADVANCED_FORM_SET
+
+//-------------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+    #include "IT8518Setup.h"
+    #include "Token.h"
+#endif
+//-------------------------------------------------------------------------
+//If you need custom varstore's define them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+
+    #ifdef SETUP_DATA_DEFINITION
+    AUTO_ID(COMA_V_DATA_KEY)
+    AUTO_ID(COMA_NV_DATA_KEY)
+    AUTO_ID(COMB_V_DATA_KEY)
+    AUTO_ID(COMB_NV_DATA_KEY)
+    AUTO_ID(CIR_V_DATA_KEY)
+    AUTO_ID(CIR_NV_DATA_KEY)
+    #endif //#ifdef SETUP_DATA_DEFINITION
+    AMI_SIO_VARSTORE(CIR, PNP0510_0)
+    AMI_SIO_VARSTORE(COMA, PNP0501_0)
+    AMI_SIO_VARSTORE(COMB, PNP0501_1)
+
+#endif
+//-------------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+//-------------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+        goto IT8518_FORM_ID,
+        prompt  = STRING_TOKEN(STR_IT8518_SIO_FORM),
+        help    = STRING_TOKEN(STR_IT8518_SIO_FORM_HELP);
+
+        #if defined(IT851X_HWM_SUPPORT) && (IT851X_HWM_SUPPORT == 1)
+        goto EC_HMM_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_EC_HMM_CONFIGURATION),
+        help    = STRING_TOKEN(STR_EC_HMM_CONFIGURATION_HELP);
+        #endif    //IT851X_HWM_SUPPORT
+        
+        
+        GOTO_AAEON_FEATURES_FORM
+        
+	#if defined(IT851X_BL_CONTROL_SUPPORT) && (IT851X_BL_CONTROL_SUPPORT == 1)        
+            GOTO_EC_BRIGHTNESS_CONFIG_FORM
+        #endif
+#endif
+//-------------------------------------------------------------------------
+// Define forms
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
+	#ifdef FORM_SET_FORM
+	// Define forms
+        #ifndef EC_BRIGHTNESS_FORM_MAIN
+        #define EC_BRIGHTNESS_FORM_MAIN
+
+		#if defined(IT851X_BL_CONTROL_SUPPORT) && (IT851X_BL_CONTROL_SUPPORT == 1)
+		    form formid = AUTO_ID(EC_BRIGHTNESS_CONFIG_FORM_ID),
+                      title = STRING_TOKEN(STR_EC_BRIGHTNESS_CONFIG_FORM);
+                  
+              ONEOF_EC_BACKLIGHT_ENABLE
+		      ONEOF_EC_BRIGHTNESS_MODE
+		      ONEOF_EC_BRIGHTNESS_LV
+		      ONEOF_EC_BRIGHTNESS_INV
+		      
+		    endform;  // EC_BRIGHTNESS_CONFIG_FORM_ID
+		#endif
+
+        #endif // EC_BRIGHTNESS_FORM_MAIN
+	#endif  // FORM_SET_FORM
+	
+//-------------------------------------------------------------------------
+
+#ifdef FORM_SET_FORM
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SIO formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    form formid = AUTO_ID(IT8518_FORM_ID),
+        title = STRING_TOKEN(STR_IT8518_SIO_FORM);
+        SUBTITLE(STRING_TOKEN(STR_IT8518_SIO_FORM))
+    
+        SEPARATOR
+    
+        text
+        help   = STRING_TOKEN(STR_IT8518_SIO_FORM_HELP),
+        text   = STRING_TOKEN(STR_IT8518_SIO_PROMPT),
+        text   = STRING_TOKEN(STR_IT8518),
+        flags  = 0,
+        key    = 0;
+
+        //Goto Serial 1 Form
+        #if IT8518_SERIAL_PORT1_PRESENT
+	  #if SIO_SETUP_USE_APTIO_4_STYLE == 1
+            suppressif ideqval COMA_V_DATA.DevImplemented == 0x00;
+            	goto IT8518_SERIAL1_FORM_ID,
+            	prompt  = STRING_TOKEN(STR_SERIAL1_FORM),
+            	help    = STRING_TOKEN(STR_SERIAL1_FORM_HELP);
+            endif;
+          #endif
+        #endif
+    
+        //Goto Serial 2 Form
+        #if IT8518_SERIAL_PORT2_PRESENT
+          #if SIO_SETUP_USE_APTIO_4_STYLE == 1
+            suppressif ideqval COMB_V_DATA.DevImplemented == 0x00;
+                goto IT8518_SERIAL2_FORM_ID,
+                prompt  = STRING_TOKEN(STR_SERIAL2_FORM),
+                help    = STRING_TOKEN(STR_SERIAL2_FORM_HELP);
+            endif;
+          #endif
+        #endif
+
+        //Goto CIR Form
+        #if IT8518_CIR_PORT_PRESENT
+        suppressif ideqval CIR_V_DATA.DevImplemented == 0x00;
+            goto IT8518_CIR_FORM_ID,
+            prompt  = STRING_TOKEN(STR_IT8518_CIR_FORM),
+            help    = STRING_TOKEN(STR_IT8518_CIR_FORM_HELP);
+        endif;
+        #endif
+    
+      endform;//SIO Form
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SP1 formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if IT8518_SERIAL_PORT1_PRESENT
+    #if SIO_SETUP_USE_APTIO_4_STYLE == 1
+    form formid = AUTO_ID(IT8518_SERIAL1_FORM_ID),
+        title = STRING_TOKEN(STR_SERIAL1_FORM);
+        SUBTITLE(STRING_TOKEN(STR_SERIAL1_FORM))
+    
+        SEPARATOR
+    
+        COMA_CHECKBOX_DEVEN
+    
+        suppressif ideqval COMA_NV_DATA.DevEnable == 0x00;
+        COMA_TEXT_CURRENT
+        endif;    // suppressif SIO_SETUP_VAR.ComAEnable == 0x00;
+    
+        SEPARATOR
+    
+        suppressif ideqval COMA_NV_DATA.DevEnable == 0x00;
+        COMA_ONEOF_PRSID
+        endif;    // suppressif SIO_SETUP_VAR.ComAEnable == 0x00;
+
+    endform;  //Serial 1 Form
+    #endif
+    #endif //#if IT8518_SERIAL_PORT1_PRESENT
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SP2 formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if IT8518_SERIAL_PORT2_PRESENT
+    #if SIO_SETUP_USE_APTIO_4_STYLE == 1
+    form formid = AUTO_ID(IT8518_SERIAL2_FORM_ID),
+        title = STRING_TOKEN(STR_SERIAL2_FORM);
+        SUBTITLE(STRING_TOKEN(STR_SERIAL2_FORM))
+    
+        SEPARATOR
+        COMB_CHECKBOX_DEVEN    
+    
+        suppressif ideqval COMB_NV_DATA.DevEnable == 0x00;
+        COMB_TEXT_CURRENT
+        endif;    // suppressif SIO_SETUP_VAR.ComBEnable == 0x00;
+    
+        SEPARATOR
+    
+        suppressif ideqval COMB_NV_DATA.DevEnable == 0x00;
+        COMB_ONEOF_PRSID
+        endif;    // suppressif SIO_SETUP_VAR.ComBEnable == 0x00;
+
+    endform;  // Serial 2 Form
+    #endif
+    #endif //#if IT8518_SERIAL_PORT2_PRESENT
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define CIR formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if IT8518_CIR_PORT_PRESENT
+    form formid = AUTO_ID(IT8518_CIR_FORM_ID),
+        title = STRING_TOKEN(STR_IT8518_CIR_FORM);
+        SUBTITLE(STRING_TOKEN(STR_IT8518_CIR_FORM))
+    
+        SEPARATOR
+    
+        checkbox varid    = CIR_NV_DATA.DevEnable,
+            prompt    = STRING_TOKEN(STR_IT8518_CIR_PROMPT),
+            help    = STRING_TOKEN(STR_IT8518_CIR_PROMPT_HELP),
+            flags    = CHECKBOX_DEFAULT | RESET_REQUIRED,
+        endcheckbox;
+    
+        suppressif ideqval CIR_NV_DATA.DevEnable == 0x0;
+            text
+            help   = STRING_TOKEN(STR_IT8518_CIR_PROMPT_HELP),
+            text   = STRING_TOKEN(STR_CURRENT_CONFIG),
+            text   = STRING_TOKEN(STR_IT8518_CIR_CONFIG_VALUE),
+            flags  = 0,
+            key    = 0;
+        endif;    // suppressif SIO_SETUP_VAR.CirEnable == 0x0;
+    
+        SEPARATOR
+    
+        suppressif ideqval CIR_NV_DATA.DevEnable == 0x0;
+            oneof varid = CIR_NV_DATA.DevPrsId,
+                prompt        = STRING_TOKEN(STR_CHANGE_CONFIG),
+                help        = STRING_TOKEN(STR_SETTINGS_HELP),
+                option text = STRING_TOKEN(STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_IT8518_CIR_SETTINGS0), value = 1, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_IT8518_CIR_SETTINGS1), value = 2, flags = RESET_REQUIRED;
+            endoneof;
+        endif;    // suppressif SIO_SETUP_VAR.CirEnable == 0x0;
+    
+    endform;  // CIR Form
+    #endif //#if IT8518_CIR_PORT_PRESENT
+
+//RayWu, ADD 2014/07/17 >>
+#if defined(IT851X_HWM_SUPPORT) && (IT851X_HWM_SUPPORT == 1)
+        form formid = AUTO_ID(EC_HMM_CONFIG_FORM_ID),
+                title = STRING_TOKEN(STR_EC_HMM_CONFIGURATION);
+                SUBTITLE(STRING_TOKEN(STR_PC_HEALTH))
+
+                // Null line for generate interactive key ID automatically
+                #if EFI_SPECIFICATION_VERSION>0x20000
+                        INTERACTIVE_TEXT(STRING_TOKEN(STR_NULL), STRING_TOKEN(STR_NULL), STRING_TOKEN(STR_NULL),  AUTO_ID(IT851XHWM_INTERACTIVE_KEY))
+                #else
+                        text
+                        help   = STRING_TOKEN(STR_NULL),
+                        text   = STRING_TOKEN(STR_NULL),
+                        text   = STRING_TOKEN(STR_NULL),
+                        flags  = INTERACTIVE | NV_ACCESS,
+                        key    = IT851XHWM_INTERACTIVE_KEY;
+                #endif
+                #if defined(AAEON_CPU_CORE_TEMP_DETECTION) && (AAEON_CPU_CORE_TEMP_DETECTION)
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_ON_MODULE_CPU_DTS_TEMP),
+                        text   = STRING_TOKEN(STR_ON_MODULE_CPU_DTS_TEMP_VALUE),
+                        flags  = 0,
+                        key    = 0;
+                #endif //AAEON_CPU_CORE_TEMP_DETECTION
+                #if defined(SMBUS_G781_HWM_SUPPORT) && (SMBUS_G781_HWM_SUPPORT == 1)
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_G781_TEMP),
+                        flags  = 0,
+                        key    = 0;
+                #endif //SMBUS_G781_HWM_SUPPORT
+                
+                #if defined(IT851X_PECI_ENABLE) && (IT851X_PECI_ENABLE)
+                        // System Temperature1
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_THRM_SEN0),
+                        text   = STRING_TOKEN(STR_IT851X_DTS_TEMP1_VALUE),
+                        flags  = 0,
+                        key    = 0;
+                #endif                      
+                
+                #if defined(IT851X_TEMP1_ENABLE) && (IT851X_TEMP1_ENABLE == 1)
+                        // System Temperature1
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_THRM_SEN1),
+                        text   = STRING_TOKEN(STR_IT851X_SYS_TEMP1_VALUE),
+                        flags  = 0,
+                        key    = 0;
+                #endif
+                #if IT851X_TEMP2_ENABLE
+                        // System Temperature2
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_THRM_SEN2),
+                        text   = STRING_TOKEN(STR_IT851X_SYS_TEMP2_VALUE),
+                        flags  = 0,
+                        key    = 0;
+                #endif 
+                #if IT851X_TEMP1_ENABLE|IT851X_TEMP2_ENABLE
+                    SEPARATOR
+                #endif
+
+                #if IT851X_TACH1_ENABLE
+                        // System FAN1 Speed
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_FAN0),
+                        text   = STRING_TOKEN(STR_IT851X_FAN1_SPEED_VALUE),
+                        flags  = 0,
+                        key    = 0;
+                #endif
+                #if IT851X_TACH2_ENABLE
+                        // System FAN2 Speed
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_FAN1),
+                        text   = STRING_TOKEN(STR_IT851X_FAN2_SPEED_VALUE),
+                        flags  = 0,
+                        key    = 0;
+                #endif
+                #if IT851X_TACH1_ENABLE|IT851X_TACH2_ENABLE
+                    SEPARATOR
+                #endif
+
+                #if IT851X_VIN0_ENABLE
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN0),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN0_VALUE),
+                        flags  = 0,
+                        key    = 0;    
+                #endif
+                #if IT851X_VIN1_ENABLE
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN1),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN1_VALUE),
+                        flags  = 0,
+                        key    = 0;    
+                #endif
+                #if IT851X_VIN2_ENABLE
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN2),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN2_VALUE),
+                        flags  = 0,
+                        key    = 0;    
+                #endif
+                #if IT851X_VIN3_ENABLE
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN3),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN3_VALUE),
+                        flags  = 0,
+                        key    = 0;    
+                #endif
+                #if IT851X_VIN4_ENABLE
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN4),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN4_VALUE),
+                        flags  = 0,
+                        key    = 0;    
+                #endif
+                #if IT851X_VIN5_ENABLE
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN5),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN5_VALUE),
+                        flags  = 0,
+                        key    = 0;    
+                #endif
+                #if IT851X_VIN6_ENABLE
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN6),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN6_VALUE),
+                        flags  = 0,
+                        key    = 0;    
+                #endif
+                #if IT851X_VIN7_ENABLE
+                        text
+                        help   = STRING_TOKEN(STR_EMPTY),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN7),
+                        text   = STRING_TOKEN(STR_EC1_IT85XX_VIN7_VALUE),
+                        flags  = 0,
+                        key    = 0;    
+                #endif
+                SEPARATOR
+
+                #if defined(IT851X_FAN1_ENABLE) && (IT851X_FAN1_ENABLE == 1)
+                        // Define goto commands for the forms defined in this file
+                        goto  IT851X_FAN1_CONFIG_FORM_ID,
+                          prompt  = STRING_TOKEN(STR_IT851X_CPU_SMARTFAN_FORM),
+                          help    = STRING_TOKEN(STR_IT851X_FAN_CONFIG_HELP);
+                #endif
+                #if defined(IT851X_FAN2_ENABLE) && (IT851X_FAN2_ENABLE == 1)
+                        // Define goto commands for the forms defined in this file
+                        goto  IT851X_FAN2_CONFIG_FORM_ID,
+                          prompt  = STRING_TOKEN(STR_IT851X_SYS_SMARTFAN_FORM),
+                          help    = STRING_TOKEN(STR_IT851X_FAN_CONFIG_HELP);
+                #endif
+                               
+        endform;
+
+#if defined(IT851X_FAN1_ENABLE) && (IT851X_FAN1_ENABLE == 1)
+        #ifdef FORM_SET_FORM  
+        form formid = AUTO_ID(IT851X_FAN1_CONFIG_FORM_ID),
+                title = STRING_TOKEN(STR_IT851X_SMARTFAN_FORM);
+                oneof varid  = SETUP_DATA.IT851XFan1SmartFanMode,
+                  prompt = STRING_TOKEN(STR_EC1_IT85XX_FAN0),
+                  help = STRING_TOKEN(STR_EMPTY),
+                  option text = STRING_TOKEN(STR_FULL_MODE), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+                  option text = STRING_TOKEN(STR_MANUAL_MODE_PWM), value = 1, flags = RESET_REQUIRED;
+                  option text = STRING_TOKEN(STR_AUTO_MODE_PWM), value = 2, flags = RESET_REQUIRED;
+                endoneof;
+
+                oneof varid  = SETUP_DATA.Fan1Invert,
+        	    prompt = STRING_TOKEN(STR_PWM_INVERT),
+        	    help = STRING_TOKEN(STR_PWM_INVERT_HELP),
+        	    option text = STRING_TOKEN(STR_PWM_NONINVERTING),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+		    option text = STRING_TOKEN(STR_PWM_INVERTING),  value = 1, flags = RESET_REQUIRED;
+		endoneof;
+                
+                //Manual Mode by PWM
+                suppressif NOT ideqval SETUP_DATA.IT851XFan1SmartFanMode == 1; 
+                        numeric varid = SETUP_DATA.Fan1ManualPWM,
+                          prompt    = STRING_TOKEN(STR_MANUAL_SETTING),
+                          help      = STRING_TOKEN(STR_MANUAL_HELP_PWM),
+                          flags     = RESET_REQUIRED,
+                          minimum   = 0,
+                          maximum   = 100,
+                          step      = 1,
+                          default   = 70,
+                        endnumeric;
+                endif;                        
+                //Auto Mode by PWM
+                suppressif NOT ideqval SETUP_DATA.IT851XFan1SmartFanMode == 2; 
+		        oneof varid  = SETUP_DATA.Fan1MonitorTher,
+		          prompt = STRING_TOKEN(STR_MONITOR_THER),
+		          help = STRING_TOKEN(STR_MONITOR_THER_HELP),
+		          option text = STRING_TOKEN(STR_EC1_IT85XX_THRM_SEN0),   value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+		          option text = STRING_TOKEN(STR_EC1_IT85XX_THRM_SEN1),  value = 1, flags = RESET_REQUIRED;
+        		  option text = STRING_TOKEN(STR_EC1_IT85XX_THRM_SEN2),  value = 2, flags = RESET_REQUIRED;
+        		  //option text = STRING_TOKEN(STR_IT851X_SYS2_TEMP),  value = 2, flags = RESET_REQUIRED;
+		        endoneof;
+                
+                        numeric varid = SETUP_DATA.Fan1StartTemp,
+                          prompt    = STRING_TOKEN(STR_STARTTEMP),
+                          help      = STRING_TOKEN(STR_STARTTEMP),
+                          flags     = RESET_REQUIRED,
+                          minimum   = 0,
+                          maximum   = 100,
+                          step      = 1,
+                          default   = 30,
+                        endnumeric;
+                
+                        numeric varid = SETUP_DATA.Fan1OffTemp,
+                          prompt    = STRING_TOKEN(STR_OFFTEMP),
+                          help      = STRING_TOKEN(STR_OFFTEMP),
+                          flags     = RESET_REQUIRED,
+                          minimum   = 0,
+                          maximum   = 100,
+                          step      = 1,
+                          default   = 20,
+                        endnumeric;
+                
+                        numeric varid = SETUP_DATA.Fan1StartPWM,
+                          prompt    = STRING_TOKEN(STR_STARTPWM),
+                          help      = STRING_TOKEN(STR_STARTPWM),
+                          flags     = RESET_REQUIRED,
+                          minimum   = 0,
+                          maximum   = 100,
+                          step      = 1,
+                          default   = 40,
+                        endnumeric;
+                        oneof varid  = SETUP_DATA.Fan1Slope,
+                          prompt = STRING_TOKEN(STR_SLOPE),
+                          help = STRING_TOKEN(STR_SLOPE),
+                          option text = STRING_TOKEN(STR_PWM0),  value = 0, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM1),  value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM2),  value = 2, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM4),  value = 3, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM8),  value = 4, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM16), value = 5, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM32), value = 6, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM64), value = 7, flags = RESET_REQUIRED;
+                        endoneof;
+                endif;
+        endform; //IT851X_FAN2_CONFIG_FORM_ID
+        #endif
+#endif //IT851X_FAN1_ENABLE
+
+#if defined(IT851X_FAN2_ENABLE) && (IT851X_FAN2_ENABLE == 1)
+        #ifdef FORM_SET_FORM  
+                form formid = AUTO_ID( IT851X_FAN2_CONFIG_FORM_ID),
+                title = STRING_TOKEN(STR_IT851X_SMARTFAN_FORM);
+                oneof varid  = SETUP_DATA.IT851XFan2SmartFanMode,
+                  prompt = STRING_TOKEN(STR_EC1_IT85XX_FAN1),
+                  help = STRING_TOKEN(STR_EMPTY),
+                  option text = STRING_TOKEN(STR_FULL_MODE), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+                  option text = STRING_TOKEN(STR_MANUAL_MODE_PWM), value = 1, flags = RESET_REQUIRED;
+                  option text = STRING_TOKEN(STR_AUTO_MODE_PWM), value = 2, flags = RESET_REQUIRED;
+                endoneof;
+		
+                oneof varid  = SETUP_DATA.Fan2Invert,
+        	    prompt = STRING_TOKEN(STR_PWM_INVERT),
+        	    help = STRING_TOKEN(STR_PWM_INVERT_HELP),
+        	    option text = STRING_TOKEN(STR_PWM_NONINVERTING),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+		    option text = STRING_TOKEN(STR_PWM_INVERTING),  value = 1, flags = RESET_REQUIRED;
+		endoneof;
+		
+                //Manual Mode by PWM
+                suppressif NOT ideqval SETUP_DATA.IT851XFan2SmartFanMode == 1; 
+                        numeric varid = SETUP_DATA.Fan2ManualPWM,
+                          prompt    = STRING_TOKEN(STR_MANUAL_SETTING),
+                          help      = STRING_TOKEN(STR_MANUAL_HELP_PWM),
+                          flags     = RESET_REQUIRED,
+                          minimum   = 0,
+                          maximum   = 100,
+                          step      = 1,
+                          default   = 70,
+                        endnumeric;
+                endif;                      
+
+                //Auto Mode by PWM
+                suppressif NOT ideqval SETUP_DATA.IT851XFan2SmartFanMode == 2; 
+		        oneof varid  = SETUP_DATA.Fan2MonitorTher,
+		          prompt = STRING_TOKEN(STR_MONITOR_THER),
+		          help = STRING_TOKEN(STR_MONITOR_THER_HELP),
+		          option text = STRING_TOKEN(STR_EC1_IT85XX_THRM_SEN0),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        		  option text = STRING_TOKEN(STR_EC1_IT85XX_THRM_SEN1),  value = 1, flags = RESET_REQUIRED;
+        		  option text = STRING_TOKEN(STR_EC1_IT85XX_THRM_SEN2),  value = 2, flags = RESET_REQUIRED;
+		        endoneof;
+		
+                        numeric varid = SETUP_DATA.Fan2StartTemp,
+                          prompt    = STRING_TOKEN(STR_STARTTEMP),
+                          help      = STRING_TOKEN(STR_STARTTEMP),
+                          flags     = RESET_REQUIRED,
+                          minimum   = 0,
+                          maximum   = 100,
+                          step      = 1,
+                          default   = 30,
+                        endnumeric;
+                        numeric varid = SETUP_DATA.Fan2OffTemp,
+                          prompt    = STRING_TOKEN(STR_OFFTEMP),
+                          help      = STRING_TOKEN(STR_OFFTEMP),
+                          flags     = RESET_REQUIRED,
+                          minimum   = 0,
+                          maximum   = 100,
+                          step      = 1,
+                          default   = 20,
+                        endnumeric;
+                        numeric varid = SETUP_DATA.Fan2StartPWM,
+                          prompt    = STRING_TOKEN(STR_STARTPWM),
+                          help      = STRING_TOKEN(STR_STARTPWM),
+                          flags     = RESET_REQUIRED,
+                          minimum   = 0,
+                          maximum   = 100,
+                          step      = 1,
+                          default   = 40,
+                        endnumeric;
+                        oneof varid  = SETUP_DATA.Fan2Slope,
+                          prompt = STRING_TOKEN(STR_SLOPE),
+                          help = STRING_TOKEN(STR_SLOPE),
+                          option text = STRING_TOKEN(STR_PWM0),  value = 0, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM1),  value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM2),  value = 2, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM4),  value = 3, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM8),  value = 4, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM16), value = 5, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM32), value = 6, flags = RESET_REQUIRED;
+                          option text = STRING_TOKEN(STR_PWM64), value = 7, flags = RESET_REQUIRED;
+                        endoneof;
+                endif;
+        endform;
+        #endif
+#endif //IT851X_FAN2_ENABLE
+#endif //IT851X_HWM_SUPPORT
+//-------------------------------------------------------------------------
+//        #define EC_AAEON_FEATURES_FORM_MAIN
+//		#if defined(IT851X_BL_CONTROL_SUPPORT) && (IT851X_BL_CONTROL_SUPPORT == 1)
+		    form formid = AUTO_ID(AAEON_FEATURES_FORM_ID),
+                      title = STRING_TOKEN(STR_AAEON_FEATURES);
+
+			ONEOF_EC_BATTERY_MANAGEMENT
+			
+		      
+		    endform;  // EC_BRIGHTNESS_CONFIG_FORM_ID
+//		#endif
+//        #endif // EC_AAEON_FEATURES_FORM_MAIN
+//-------------------------------------------------------------------------
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

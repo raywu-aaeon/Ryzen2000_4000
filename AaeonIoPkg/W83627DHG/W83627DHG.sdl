@@ -1,0 +1,2244 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#*        (C)Copyright 1985-2013, American Megatrends, Inc.          **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+#**********************************************************************
+#<AMI_FHDR_START>
+#
+# Name:  <W83627DHG.sdl>
+#
+# Description:     SDL file to define SIO functions
+#
+#
+#<AMI_FHDR_END>
+#**********************************************************************
+############################################################
+#==============================================================================
+#1.SIO Global Control Tokens
+#==============================================================================
+
+TOKEN
+	Name  = "====== SIO Global Control Tokens ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Specfy global control tokens."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable W83627DHG support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SIO_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SIO support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_DBG_SUPPORT"
+	Value  = "0" 
+	Help  = "Wwitch to enable SIO serial port debug function support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+End
+
+
+#==============================================================================
+#2.Override AMI Sio Core setting
+#==============================================================================
+TOKEN
+	Name  = "====== SIO For Debug Setting =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "The debug Serial Port Setting."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "DEBUG_COM_PORT_ADDR"
+	Value  = "$(W83627DHG_SERIAL_PORT1_BASE_ADDRESS)"
+	Help  = "Debug Address from Serial Port x."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "W83627DHG_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "DEBUG_LDN_UART"
+	Value  = "$(W83627DHG_LDN_UART1)"
+	Help  = "UARTx Login Devive for Debugger."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SERIAL_PORT1_BASE_ADDRESS"
+	Value  = "0x03F8"
+	Help  = "Base Address of Serial Port 1 (COMA / UART1)."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "W83627DHG_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+
+#==============================================================================
+#3.SIO Logic Device Present Settings
+#==============================================================================
+TOKEN
+	Name  = "=== SIO Logic Device Present Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "All Logic Device Present / Not Present."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_FLOPPY_PORT_PRESENT"
+	Value  = "0"
+	Help  = "Floppy Port Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_PARALLEL_PORT_PRESENT"
+	Value  = "1"
+	Help  = "LPT Port Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SERIAL_PORT1_PRESENT"
+	Value  = "1"
+	Help  = "Serial Port 0 (COMA / UART1) Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SERIAL_PORT2_PRESENT"
+	Value  = "1"
+	Help  = "Serial Port 1 (COMB / UART2) Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_KEYBOARD_PRESENT"
+	Value  = "1"
+	Help  = "Keyboard Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_MOUSE_PRESENT"
+	Value  = "1"
+	Help  = "Mouse Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SPI_PORT_PRESENT"
+	Value  = "0"
+	Help  = "SPI Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_GPIO6_PORT_PRESENT"
+	Value  = "1"
+	Help  = "GPIO Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_WDT_PRESENT"
+	Value  = "1"
+	Help  = "Watch Dog Time Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_GPIO2_PORT_PRESENT"
+	Value  = "1"
+	Help  = "GPIO Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_ACPI_PRESENT"
+	Value  = "1"
+	Help  = "ACPI Controller Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_HWM_PRESENT"
+	Value  = "1"
+	Help  = "HWM Port Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_PECI_PRESENT"
+	Value  = "1"
+	Help  = "PECI Present / Not Present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+
+#==============================================================================
+#4.SIO Registers Layout
+#==============================================================================
+TOKEN
+	Name  = "====== SIO Registers Layout =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify Register address inside SIO Chip."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_CONFIG_INDEX"
+	Value  = "0x2E"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_CONFIG_DATA"
+	Value  = "0x2F"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_SEL_REGISTER"
+	Value  = "0x07"
+	Help  = "Logical Device Select Register Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_ACTIVATE_REGISTER"
+	Value  = "0x30"
+	Help  = "Device Identification Register Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_BASE1_HI_REGISTER"
+	Value  = "0x60"
+	Help  = "Device BaseAddres Register#1 MSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_BASE1_LO_REGISTER"
+	Value  = "0x61"
+	Help  = "Device BaseAddres Register#1 LSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_BASE2_HI_REGISTER"
+	Value  = "0x62"
+	Help  = "Device BaseAddres Register#2 MSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_BASE2_LO_REGISTER"
+	Value  = "0x63"
+	Help  = "Device BaseAddres Register#2 LSB Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_IRQ1_REGISTER"
+	Value  = "0x70"
+	Help  = "Device IRQ Register#1 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_IRQ2_REGISTER"
+	Value  = "0x72"
+	Help  = "Device IRQ Register#2 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_DMA1_REGISTER"
+	Value  = "0x74"
+	Help  = "Device DMA Register#1 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_DMA2_REGISTER"
+	Value  = "0x75"
+	Help  = "Device DMA Register#2 Address"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+
+#==============================================================================
+#5. SIO Logical Devices Numbers 
+#==============================================================================
+TOKEN
+	Name  = "====== SIO Logical Devices Numbers ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify Devices Logical Number."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_FDC"
+	Value  = "0x00"
+	Help  = "LDN for Floppy Disk Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_LPT"
+	Value  = "0x01"
+	Help  = "LDN for Serial Port Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_UART1"
+	Value  = "0x02"
+	Help  = "LDN for Serial1 Port Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_UART2"
+	Value  = "0x03"
+	Help  = "LDN for Serial2 Port Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_PS2K"
+	Value  = "0x05"
+	Help  = "LDN for PS2 Keyboard Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_PS2M"
+	Value  = "0x05"
+	Help  = "LDN for PS2 Mouse Controller. (it is same as PS2K specify same value)"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_SPI"
+	Value  = "0x06"
+	Help  = "LDN for SPI Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_GPIO6"
+	Value  = "0x07"
+	Help  = "LDN for GPIO Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_WDT"
+	Value  = "0x08"
+	Help  = "LDN for Watch Dog Timer"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_GPIO2"
+	Value  = "0x09"
+	Help  = "LDN for GPIO Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_ACPI"
+	Value  = "0x0A"
+	Help  = "LDN for ACPI Controller."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_HWM"
+	Value  = "0x0B"
+	Help  = "LDN for Hardware Monitor Controller"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_LDN_PECI"
+	Value  = "0x0C"
+	Help  = "LDN for PECI Controller."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+
+#==============================================================================
+#5. Register value setting
+#==============================================================================
+TOKEN
+	Name  = "=== SIO Global Registers Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO Global Registers Setting"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_CLOCK"
+	Value  = "1"
+	Help  = "0/1 for 24Mhz/48MHz"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_PS2_SWAP"
+	Value  = "0"
+	Help  = "Enable/Disable PS/2 swap function"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_KBC_CLOCK"
+	Value  = "2"
+	Help  = "0/1/2/3 for 6MHz/8MHz/12MHz/16MHz"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_KBC_PORT92"
+	Value  = "0"
+	Help  = "Set Port92 0/1 for Disable/Enable"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_KBC_GATE20"
+	Value  = "1"
+	Help  = "Set Gate20 0/1 for Software/Hardware"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_KBC_KBRST"
+	Value  = "1"
+	Help  = "Set KBRST 0/1 for Software/Hardware"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_AC_POWER_LOSS"
+	Value  = "0"
+	Help  = "0/1 for enable/disable power loss"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AC_POWER_LOSS_DEFINED"
+	Value  = "1"
+	Help  = "1->Defined in IO module \0->Defined in SB module"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "W83627DHG_AC_POWER_LOSS" "=" "1"
+End
+
+TOKEN
+	Name  = "=== Hardware monitor Registers Settings =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Hardware monitor Registers Settings"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "CPUFANOUT_SEL"
+	Value  = "0"
+	Help  = "0-PWM mode,1-DC mode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SYSFANOUT_SEL"
+	Value  = "1"
+	Help  = "0-PWM mode,1-DC mode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CPUTIN_SENSOR_TYPE"
+	Value  = "1"
+	Help  = "1-Diode sensor,0-Thermistor sensor"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SYSTIN_SENSOR_TYPE"
+	Value  = "0"
+	Help  = "1-Diode sensor,0-Thermistor sensor"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AUXTIN_SENSOR_TYPE"
+	Value  = "0"
+	Help  = "1-Diode sensor,0-Thermistor sensor"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SYSTIN_OFFSET"
+	Value  = "0x00"
+	Help  = "SYSTIN sensor temperature read offset"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CPUTIN_OFFSET"
+	Value  = "0x00"
+	Help  = "CPUTIN sensor temperature read offset"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AUXTIN_OFFSET"
+	Value  = "0x00"
+	Help  = "CPUTIN sensor temperature read offset"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "=== SIO Activation Values =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+    Help  = "Specify Logical Device Activation Value."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_CONFIG_MODE_ENTER_VALUE"
+	Value  = "0x87"
+	Help  = "Value to enter the SIO Configuration Mode."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_CONFIG_MODE_EXIT_VALUE"
+	Value  = "0xAA"
+	Help  = "Value to enter the SIO Configuration Mode."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ENTK"
+	Value  = "$(W83627DHG_CONFIG_MODE_ENTER_VALUE)"
+	Help  = "ASL alias for SIO Config Mode Enter Value."
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "EXTK"
+	Value  = "$(W83627DHG_CONFIG_MODE_EXIT_VALUE)"
+	Help  = "ASL alias for SIO Config Mode Exit Value."
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_ACTIVATE_VALUE"
+	Value  = "0x01"
+	Help  = "Value to activate Device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_DEACTIVATE_VALUE"
+	Value  = "0x00"
+	Help  = "Value to deactivate Device."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "====== SIO BASE ADDRESS Setting =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO some base address setting "
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_TOTAL_BASE_ADDRESS"
+	Value  = "0xA00"
+	Help  = "It's used for IODecode, System will open TOTAL_BASE_ADDRESS+TOTAL_LENGTH IODecode for GPIO+PME+..."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_HWM_BASE_ADDRESS"
+	Value  = "$(W83627DHG_TOTAL_BASE_ADDRESS)"
+	Help  = "Base Address of HWM Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in W83627DHGPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_HWM_LENGTH"
+	Value  = "0x10"
+	Help  = "Base Address's length of HWM Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in W83627DHGPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_HWM_INDEX_PORT"
+	Value  = "($(W83627DHG_HWM_BASE_ADDRESS)&0XFFF0)+5"
+	Help  = "HWM Index Port."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_HWM_DATA_PORT"
+	Value  = "$(W83627DHG_HWM_INDEX_PORT)+1"
+	Help  = "HWM Index Port."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO1B"
+	Value  = "$(W83627DHG_HWM_BASE_ADDRESS)"
+	Help  = "Base Address of HWM Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO1L"
+	Value  = "$(W83627DHG_HWM_LENGTH)"
+	Help  = "Length of HWM Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SPI_BASE_ADDRESS"
+	Value  = "$(W83627DHG_TOTAL_BASE_ADDRESS)+$(IO1L)"
+	Help  = "Base Address of SPI Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in W83627DHGPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SPI_LENGTH"
+	Value  = "0x10"
+	Help  = "Base Address's length of SPI Direct Access. If changed, please update PeiSetLpcDeviceDecoding() in W83627DHGPEI.c too."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO2B"
+	Value  = "$(W83627DHG_SPI_BASE_ADDRESS)"
+	Help  = "Base Address of SPI Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "IO2L"
+	Value  = "$(W83627DHG_SPI_LENGTH)"
+	Help  = "Length of SPI Controller."
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_TOTAL_LENGTH"
+	Value  = "$(IO1L)+$(IO2L)"
+	Help  = "IODecode base address 's length. 0xFF >= TOTAL_LENGTH >= GPIO_LENGTH + PME_LENGTH + ..."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "===== SIO token only been used in ASL  ====="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Provide Resource properties."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "SP1O"
+	Value  = "$(W83627DHG_CONFIG_INDEX)"
+	Help  = "Super IO Index/Data configuration port for ASL."
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "KBFG"
+	Value  = "0"
+	Help  = "Keyboard wake-up flag."
+	TokenType = Integer
+	TargetASL = Yes
+	Token = "W83627DHG_KEYBOARD_PRESENT" "=" "0"
+End
+
+TOKEN
+	Name  = "MSFG"
+	Value  = "0"
+	Help  = "Mouse wake-up flag."
+	TokenType = Integer
+	TargetASL = Yes
+	Token = "W83627DHG_MOUSE_PRESENT" "=" "0"
+End
+
+TOKEN
+	Name  = "IOES"
+	Value  = "0x00"
+	Help  = "It is used similar to IOST, when Device's DCAT > 0x0F , then it will be used."
+	TokenType = Integer
+	TargetASL = Yes
+End
+
+##RayWu, REMOVE 2015/08/07 >>
+##TOKEN
+##	Name  = "====== SIO COM Mode Select Tokens ======"
+##	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+##	Help  = "SIO COM Mode Select Tokens."
+##	TokenType = Expression
+##End
+##
+##TOKEN
+##	Name  = "W83627DHG_SERIAL_PORT1_Clock_Value"
+##	Value  = "0x00"
+##	Help  = "Bits 1-0,Select the clock source for UART1. 00: 24MHz/13 01: 24MHz/12 10: 24MHz 11: 24MHz/1.625  "
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##
+##TOKEN
+##	Name  = "W83627DHG_SERIAL_PORT2_Clock_Value"
+##	Value  = "0x00"
+##	Help  = "Bits 1-0,Select the clock source for IRDA. 00: 24MHz/13 01: 24MHz/12 10: 24MHz 11: 24MHz/1.625  "
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##
+##TOKEN
+##	Name  = "W83627DHG_SERIAL_PORT3_Clock_Value"
+##	Value  = "0x00"
+##	Help  = "Bits 1-0,Select the clock source for UART1. 00: 24MHz/13 01: 24MHz/12 10: 24MHz 11: 24MHz/1.625  "
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##
+##TOKEN
+##	Name  = "W83627DHG_SERIAL_PORT4_Clock_Value"
+##	Value  = "0x00"
+##	Help  = "Bits 1-0,Select the clock source for IRDA. 00: 24MHz/13 01: 24MHz/12 10: 24MHz 11: 24MHz/1.625  "
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##
+##TOKEN
+##	Name  = "W83627DHG_SERIAL_PORT5_Clock_Value"
+##	Value  = "0x00"
+##	Help  = "Bits 1-0,Select the clock source for UART1. 00: 24MHz/13 01: 24MHz/12 10: 24MHz 11: 24MHz/1.625  "
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##
+##TOKEN
+##	Name  = "W83627DHG_SERIAL_PORT6_Clock_Value"
+##	Value  = "0x00"
+##	Help  = "Bits 1-0,Select the clock source for IRDA. 00: 24MHz/13 01: 24MHz/12 10: 24MHz 11: 24MHz/1.625  "
+##	TokenType = Integer
+##	TargetH = Yes
+##End
+##RayWu, REMOVE 2015/08/07 <<
+
+#==============================================================================
+# WDT Configurations
+#==============================================================================
+TOKEN
+	Name  = "SIO_WDT_MAX_TIMEOUT"
+	Value  = "15300000"
+	Help  = "Maximum time-out value in ms supported by this SIO"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+#==============================================================================
+# HWM Configurations
+#==============================================================================
+TOKEN
+	Name  = "=== Hardware monitor Configurations =========="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Hardware monitor Settings besides registers"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_CPU_DTS_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if CPU DTS from MSR should be shown in setup, instead of SIO temperature sensor CPUTIN.\nEnabling this token should not disable W83627DHG_CPUTIN_SUPPORT because Smart Fan controlling may still need CPUTIN."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SYSTIN_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if SYSTIN is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SYSTIN_NAME"
+	Value  = "$(STD_SYS_TEMP)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_SYSTIN_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUTIN_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if CPUTIN/PECI is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUTIN_NAME"
+	Value  = "$(STD_CPU_TEMP)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_CPUTIN_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXTIN_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if AUXTIN is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXTIN_NAME"
+	Value  = "$(STD_SYS_TEMP2)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_AUXTIN_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_SYSFANIN_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if SYSFANIN is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SYSFANIN_NAME"
+	Value  = "$(STD_SYS_FAN)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_SYSFANIN_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUFANIN0_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if CPUFANIN0 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUFANIN0_NAME"
+	Value  = "$(STD_CPU_FAN)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_CPUFANIN0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXFANIN0_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if AUXFANIN1 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXFANIN0_NAME"
+	Value  = "$(STD_SYS_FAN2)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_AUXFANIN0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUFANIN1_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if CPUFANIN1 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUFANIN1_NAME"
+	Value  = "$(STD_CPU_FAN2)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_CPUFANIN1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXFANIN1_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if AUXFANIN1 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXFANIN1_NAME"
+	Value  = "$(STD_SYS_FAN3)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_AUXFANIN1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VCORE_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VCORE is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VCORE_NAME"
+	Value  = "$(STD_VCORE)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_VCORE_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN0_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN0 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN0_NAME"
+	Value  = "VIN0"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_VIN0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN1_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN1 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN1_NAME"
+	Value  = "VIN1"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_VIN1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN2_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN2 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN2_NAME"
+	Value  = "VIN2"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_VIN2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN3 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN3_NAME"
+	Value  = "VIN3"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_VIN3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VCC3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VCC3 is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VCC3_NAME"
+	Value  = "$(STD_3V3)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_VCC3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_AVCC_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if AVCC is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_AVCC_NAME"
+	Value  = "AVCC"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_AVCC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VSB3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if 3VSB is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VSB3_NAME"
+	Value  = "$(STD_3VSB)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_VSB3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VBAT_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VBAT is designed and is used."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VBAT_NAME"
+	Value  = "$(STD_VBAT)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "W83627DHG_VBAT_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN0_RA"
+	Value  = "15"
+	Help  = "RA resistor in K-Ohm from voltage sensor VIN0 to target power. If sensor is connected to target power without RB, this value should be set to zero."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - 255"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN0_RB"
+	Value  = "1"
+	Help  = "RB resistor in K-Ohm from voltage sensor VIN0 to GND."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1 - 255"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN1_RA"
+	Value  = "1"
+	Help  = "RA resistor in K-Ohm from voltage sensor VIN1 to target power. If sensor is connected to target power without RB, this value should be set to zero."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - 255"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN1_RB"
+	Value  = "1"
+	Help  = "RB resistor in K-Ohm from voltage sensor VIN0 to GND."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1 - 255"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN2_RA"
+	Value  = "1"
+	Help  = "RA resistor in K-Ohm from voltage sensor VIN2 to target power. If sensor is connected to target power without RB, this value should be set to zero."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - 255"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN2_RB"
+	Value  = "1"
+	Help  = "RB resistor in K-Ohm from voltage sensor VIN0 to GND."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1 - 255"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN3_RA"
+	Value  = "1"
+	Help  = "RA resistor in K-Ohm from voltage sensor VIN3 to target power. If sensor is connected to target power without RB, this value should be set to zero."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN3_RB"
+	Value  = "1"
+	Help  = "RB resistor in K-Ohm from voltage sensor VIN0 to GND."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "1 - 255"
+End
+
+TOKEN
+	Name  = "=== Hardware monitor Report Capabilities =========="
+	Value  = "!!!DO NOT CHANGE!!!"
+	Help  = "Tokens in this section basically needs no porting between projects.\Tokens here are for generating information automatically to report capability in BFPI. "
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_TEMP_SENSOR_NUMBER"
+	Value  = "$(W83627DHG_SYSTIN_SUPPORT) + $(W83627DHG_CPUTIN_SUPPORT) + $(W83627DHG_AUXTIN_SUPPORT)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_FAN_SENSOR_NUMBER"
+	Value  = "$(W83627DHG_SYSFANIN_SUPPORT) + $(W83627DHG_CPUFANIN0_SUPPORT) + $(W83627DHG_AUXFANIN0_SUPPORT) + $(W83627DHG_CPUFANIN1_SUPPORT) + $(W83627DHG_AUXFANIN1_SUPPORT)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_VOLT_SENSOR_NUMBER"
+	Value  = "$(W83627DHG_VCORE_SUPPORT) + $(W83627DHG_VIN0_SUPPORT) + $(W83627DHG_VIN1_SUPPORT) + $(W83627DHG_VIN2_SUPPORT) + $(W83627DHG_VIN3_SUPPORT) + $(W83627DHG_VCC3_SUPPORT) + $(W83627DHG_AVCC_SUPPORT) + $(W83627DHG_VSB3_SUPPORT) + $(W83627DHG_VBAT_SUPPORT)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SYSTIN_STRING"
+	Value  = '"$(W83627DHG_SYSTIN_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_SYSTIN_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUTIN_STRING"
+	Value  = '"$(W83627DHG_CPUTIN_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_CPUTIN_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXTIN_STRING"
+	Value  = '"$(W83627DHG_AUXTIN_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_AUXTIN_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_SYSFANIN_STRING"
+	Value  = '"$(W83627DHG_SYSFANIN_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_SYSFANIN_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUFANIN0_STRING"
+	Value  = '"$(W83627DHG_CPUFANIN0_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_CPUFANIN0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXFANIN0_STRING"
+	Value  = '"$(W83627DHG_AUXFANIN0_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_AUXFANIN0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUFANIN1_STRING"
+	Value  = '"$(W83627DHG_CPUFANIN1_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_CPUFANIN1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXFANIN1_STRING"
+	Value  = '"$(W83627DHG_AUXFANIN1_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_AUXFANIN1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VCORE_STRING"
+	Value  = '"$(W83627DHG_VCORE_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_VCORE_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN0_STRING"
+	Value  = '"$(W83627DHG_VIN0_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_VIN0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN1_STRING"
+	Value  = '"$(W83627DHG_VIN1_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_VIN1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN2_STRING"
+	Value  = '"$(W83627DHG_VIN2_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_VIN2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VIN3_STRING"
+	Value  = '"$(W83627DHG_VIN3_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_VIN3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VCC3_STRING"
+	Value  = '"$(W83627DHG_VCC3_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_VCC3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_AVCC_STRING"
+	Value  = '"$(W83627DHG_AVCC_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_AVCC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VSB3_STRING"
+	Value  = '"$(W83627DHG_VSB3_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_VSB3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_VBAT_STRING"
+	Value  = '"$(W83627DHG_VBAT_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_VBAT_SUPPORT" "=" "1"
+End
+
+#==============================================================================
+# SMF Configurations
+#==============================================================================
+TOKEN
+	Name  = "===============Smart Fan Settings ==============="
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "Set default value for Smart Fan Settings.\note: FANCTRL5, FANCTRL6 are currently not supported by this module."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_SmartFan_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SmartFan support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_HWM_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_SYSFANOUT_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if FANCTRL1 logic is used for controlling SYSFANOUT."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUFANOUT0_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if FANCTRL2 logic is used for controlling CPUFANOUT0."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_AUXFANOUT_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if FANCTRL3 logic is used for controlling AUXFANOUT."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_CPUFANOUT1_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if FANCTRL4 logic is used for controlling CPUFANOUT1."
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AUXFANOUT_TEMP_SEL"
+	Value  = "0x00"
+	Help  = "CPUFANOUT0/AUXFANOUT Monitor Temperature Source Select Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFANOUT0_TEMP_SEL"
+	Value  = "0x00"
+	Help  = "CPUFANOUT0/AUXFANOUT Monitor Temperature Source Select Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFANOUT1_TEMP_SEL"
+	Value  = "0x00"
+	Help  = "CPUFANOUT1 Monitor Temperature Source Select Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "FAN_STEPDOWN_TIME_VALUE"
+	Value  = "0x0A"
+	Help  = "The Value of Fan Output Step Down Time Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "FAN_STEPUP_TIME_VALUE"
+	Value  = "0x0A"
+	Help  = "The Value of Fan Output Step Down Time Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SYSFAN_STOP_VALUE"
+	Value  = "0x20"
+	Help  = "The Value of SYSFANOUT Stop Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SYSFAN_START_UP_VALUE"
+	Value  = "0x10"
+	Help  = "The Value of SYSFANOUT Start Up Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SYSFAN_STOP_TIME_VALUE"
+	Value  = "0x3C"
+	Help  = "The Value of SYSFANOUT Stop Time Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SYSFANOUT_MIN_VALUE"
+	Value  = "0x01"
+	Help  = "0: SYSFANOUT value decreases to zero; 1: SYSFANOUT value decreases to the value specified"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN0_STOP_VALUE"
+	Value  = "0x20"
+	Help  = "The Value of CPUFANOUT0 Stop Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN0_START_UP_VALUE"
+	Value  = "0x10"
+	Help  = "The Value of CPUFANOUT0 Start-up Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN0_STOP_TIME_VALUE"
+	Value  = "0x3C"
+	Help  = "The Value of CPUFANOUT0 Stop Time Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFANOUT0_MIN_VALUE"
+	Value  = "0x01"
+	Help  = "0: CPUFANOUT0 value decreases to zero; 1: CPUFANOUT0 value decreases to the value specified"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN0_MAX_OUTPUT_VALUE"
+	Value  = "0xFF"
+	Help  = "The Value of CPUFANOUT0 Maximum Output Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN0_OUTPUT_STEP_VALUE"
+	Value  = "0x01"
+	Help  = "The Value of CPUFANOUT0 Output Step Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AUXFAN_STOP_VALUE"
+	Value  = "0x20"
+	Help  = "The Value of AUXFANOUT Stop Value Register"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AUXFAN_START_UP_VALUE"
+	Value  = "0x10"
+	Help  = "The Value of AUXFANOUT Start-up Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AUXFAN_STOP_TIME_VALUE"
+	Value  = "0x3C"
+	Help  = "The Value of AUXFANOUT Stop Time Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AUXFANOUT_MIN_VALUE"
+	Value  = "0x01"
+	Help  = "0: AUXFANOUT value decreases to zero; 1: AUXFANOUT value decreases to the value specified"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN1_STOP_VALUE"
+	Value  = "0x20"
+	Help  = "The Value of CPUFANOUT1 Stop Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN1_START_UP_VALUE"
+	Value  = "0x10"
+	Help  = "The Value of CPUFANOUT1 Start-up Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN1_STOP_TIME_VALUE"
+	Value  = "0x3C"
+	Help  = "The Value of CPUFANOUT1 Stop Time Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFANOUT1_MIN_VALUE"
+	Value  = "0x01"
+	Help  = "0: CPUFANOUT1 value decreases to zero; 1: CPUFANOUT1 value decreases to the value specified"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN1_MAX_OUTPUT_VALUE"
+	Value  = "0xFF"
+	Help  = "The Value of CPUFANOUT1 Maximum Output Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "CPUFAN1_OUTPUT_STEP_VALUE"
+	Value  = "0x01"
+	Help  = "The Value of CPUFANOUT1 Output Step Value Register."
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "=== Smart FAN Report Capabilities =========="
+	Value  = "!!!DO NOT CHANGE!!!"
+	Help  = "Tokens in this section basically needs no porting between projects. Tokens here are for generate information automatically to report capability in BFPI."
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "W83627DHG_SMF_NUMBER"
+	Value  = "$(W83627DHG_SYSFANOUT_SUPPORT) + $(W83627DHG_CPUFANOUT0_SUPPORT) + $(W83627DHG_AUXFANOUT_SUPPORT) + $(W83627DHG_CPUFANOUT1_SUPPORT)"
+	Help  = "Smart FAN controller number from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "W83627DHG_SMFC_SYSFANOUT"
+	Value  = '"{\"Name\":\"$(W83627DHG_SYSFANIN_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\"$(W83627DHG_SYSTIN_NAME)\",\"Supported Mode\":[\"Manual\",\"Linear\"]}"'
+	Help  = "Detail capability for FAN controller."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_SYSFANOUT_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_SMFC_CPUFANOUT0_PREFIX"
+	Value  = '"{\"Name\":\"$(W83627DHG_CPUFANIN0_NAME)\",\"Temperature Point\":2,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_CPUFANOUT0_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_SMFC_AUXFANOUT_PREFIX"
+	Value  = '"{\"Name\":\"$(W83627DHG_AUXFANIN0_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_AUXFANOUT_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_SMFC_CPUFANOUT1_PREFIX"
+	Value  = '"{\"Name\":\"$(W83627DHG_CPUFANIN1_NAME)\",\"Temperature Point\":1,\"Temperature Target\":\""'
+	Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "W83627DHG_CPUFANOUT1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "W83627DHG_SMFC_FANOUT_SUFFIX"
+	Value  = '"\",\"Maximum PWM\": 255,\"Supported Mode\":[\"Manual\",\"Linear\"]}"'
+	Help  = "Detail capability for FAN controller.\Suffix only, should be concatenate after PREFIX and 'Temperature Target'."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "===== SIO Module Setting   ======"
+	Value  = "!!!DO NOT CHANGE NAMES JUST VALUES!!!"
+	Help  = "SIO Module Setting"
+	TokenType = Expression
+End
+
+PATH
+	Name  = "W83627DHG_DIR"
+End
+
+MODULE
+	Help  = "Includes W83627DHG.MAK to Project"
+	File  = "W83627DHG.MAK"
+End
+
+ELINK
+	Name  = "$(W83627DHG_DIR)/W83627DHGSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	Priority  = 40
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "-i $(W83627DHG_DIR)"
+	Parent  = "SETUP_VFR_INCLUDES"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsUART,0x00, STR_SERIAL1_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsUART,0x01, STR_SERIAL2_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsFDC, 0x00, STR_FLOPPY_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{dsLPT, 0x00, STR_PARALLEL_CONFIG_VALUE},"
+	Parent  = "SetupStrTableList"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(W83627DHG_DIR)/W83627DHGSetup.c"
+	Parent  = "SetupCallbackFiles"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "OemInitW83627DHGSetupStrings,"
+	Parent  = "SetupStringInit"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(W83627DHG_DIR)/W83627DHGSetup.uni"
+	Parent  = "SetupStringFiles"
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "*_*_*_ASLPP_FLAGS"
+	Type  = "BuildOptions"
+	Arch  = "COMMON"
+	InvokeOrder = ReplaceParent
+	OutDSC = Yes
+End
+
+ELINK
+	Name  = "-D SIO_PTS=\_SB.PCI0.SBRG.SIO1.SIOS"
+	Parent  = "*_*_*_ASLPP_FLAGS"
+	Type  = "BuildOptions"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "-D SIO_WAK=\_SB.PCI0.SBRG.SIO1.SIOW"
+	Parent  = "*_*_*_ASLPP_FLAGS"
+	Type  = "BuildOptions"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "W83627DHGDxeInit"
+	File  = "W83627DHGDxeInit.inf"
+	Package  = "AmiModulePkg"
+End
+
+INFComponent
+	Name  = "W83627DHGPeiInit"
+	File  = "W83627DHGPeiInit.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "W83627DHGPlatformHookSerialPortLib"
+	File  = "W83627DHGPlatformHookSerialPortLib.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "PEIM"
+	Token = "W83627DHG_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PlatformHookLib"
+	Instance  = "AmiModulePkg.W83627DHGPlatformHookSerialPortLib"
+	ModuleTypes  = "PEIM PEI_CORE SEC"
+	Token = "W83627DHG_DBG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiModulePkg.W83627DHGDxeInit"
+	Override  = "AmiModulePkg.SioDxeInit"
+    	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiModulePkg.W83627DHGDxeInit"
+	Override  = "AmiModulePkg.SmmGenericSio"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "SMM_SUPPORT" "=" "1"
+	Token = "AMI_SIO_MINOR_VERSION" ">=" "6"
+End
+
+FFS_FILE
+	Name  = "W83627DHGPeiInit"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmiModulePkg.W83627DHGPeiInit"
+	Apriori_Index  = "0"
+End
+
+SIODEVICE
+	Name  = "W83627DHG"
+	Parent  = "LpcBridge"
+	IndexPort  = 02eh
+	DataPort  = 02fh
+	StdSioType  = "Yes"
+	DevSelReg  = 07h
+	ActivateReg  = 030h
+	ActivateVal  = 01h
+	DeActivateVal  = 00h
+	BaseHiReg1  = 060h
+	BaseLoReg1  = 061h
+	BaseHiReg2  = 062h
+	BaseLoReg2  = 063h
+	Irq1Reg  = 070h
+	Irq2Reg  = 072h
+	Dma1Reg  = 074h
+	Dma2Reg  = 075h
+	GblRegFlag  = "0xf7ff00000000"
+	LocalRegFlag  = "0xffffffff0000000000000000000000000033000f000000000001000000000000"
+	EnterConfig  = "Script,'Index;Write;87h','Index;Write;87h'"
+	ExitConfig  = "Script,'Index;Write;aah'"
+	SMBIOSStr  = "Test String"
+	GPEbit  = 01dh
+	SleepNum  = 03h
+	##ASLfile  = "'AmiModulePkg\IO\W83627DHG\W83627DHGDEV.asl','AmiModulePkg\IO\W83627DHG\W83627DHGEVT.asl'"
+	ASLfile  = "'AaeonIoPkg\W83627DHG\W83627DHGDEV.asl','AaeonIoPkg\W83627DHG\W83627DHGEVT.asl'"
+	ASLdeviceName  = "SIO1"
+    	ASL_PTS  = "Method;SIO_PTS(Arg0)"
+    	ASL_WAK  = "Method;SIO_WAK(Arg0)"
+End
+
+LDEVICE
+	Name  = "Fdc"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsFDC"
+	LDev_Num  = "00h"
+	UID  = "00h"
+	PnPID  = "0700h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "W83627DHG_FDC_Init"
+	GPEbit  = 01dh
+	SleepNum  = 01h
+    	ASLfile  = "'AmiModulePkg/GenericSio/FDC.ASL'"
+	ASLdeviceName  = "FDC_"
+	Token = "W83627DHG_FLOPPY_PORT_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Lpt"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsLPT"
+	LDev_Num  = "01h"
+	UID  = "00h"
+	PnPID  = "0400h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "W83627DHG_LPT_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AmiModulePkg\GenericSio\LPTE.asl'"
+	ASLdeviceName  = "LPTE"
+	Token = "W83627DHG_PARALLEL_PORT_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Com1"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "02h"
+	##UID  = "00h"
+	UID  = "01h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "W83627DHG_COM_Init"
+	SleepNum  = 01h
+	##ASLfile  = "'AmiModulePkg\GenericSio\UART1.asl'"
+	ASLfile  = "'AaeonIoPkg\ACPI\UART1.ASL'"
+	ASLdeviceName  = "UAR1"
+	Token = "W83627DHG_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Com2"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsUART"
+	LDev_Num  = "03h"
+	##UID  = "01h"
+	UID  = "02h"
+	PnPID  = "0501h"
+	SIO_RES_Flag  = "0x0"
+	HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "W83627DHG_COM_Init"
+	SleepNum  = 01h
+	##ASLfile  = "'AmiModulePkg\GenericSio\UART2.asl'"
+	ASLfile  = "'AaeonIoPkg\ACPI\UART2.ASL'"
+	ASLdeviceName  = "UAR2"
+	Token = "W83627DHG_SERIAL_PORT2_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Ps2Kb"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsPS2CK"
+	LDev_Num  = "05h"
+	UID  = "00h"
+	PnPID  = "0303h"
+	SIO_RES_Flag  = "0x0"
+	##HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "W83627DHG_KBC_Init"
+	##GPEbit  = 01dh
+	##SleepNum  = 03h
+	##ASLfile  = "'AmiModulePkg\GenericSio\PS2_KB.asl'" ##RayWu, REMOVE 2015/09/04
+	ASLfile  = "'AaeonIoPkg\ACPI\PS2_KB.asl'" ##RayWu, ADD 2015/09/04
+	ASLdeviceName  = "PS2K"
+	##PWRBnotify = Yes
+	##WakeEnabled = Yes
+	ASL_HID = Yes ##RayWu, ADD 2015/08/07
+	Token = "W83627DHG_KEYBOARD_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Ps2Ms"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsPS2CM"
+	LDev_Num  = "05h"
+	UID  = "00h"
+	PnPID  = "0f03h"
+	SIO_RES_Flag  = "0x3"
+	##HasSetup = Yes
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	##GPEbit  = 01dh
+	##SleepNum  = 03h
+	##ASLfile  = "'AmiModulePkg\GenericSio\PS2_MS.asl'" ##RayWu, REMOVE 2015/09/04
+	ASLfile  = "'AaeonIoPkg\ACPI\PS2_MS.asl'" ##RayWu, ADD 2015/09/04
+	ASLdeviceName  = "PS2M"
+	##PWRBnotify = Yes
+	##WakeEnabled = Yes
+	ASL_HID = Yes ##RayWu, ADD 2015/08/07
+	Token = "W83627DHG_MOUSE_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Spi"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsNone"
+	LDev_Num  = "06h"
+	UID  = "00h"
+	PnPID  = "0c08h"
+	SIO_RES_Flag  = "0x0"
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "$(IO2B)"
+	ResLength2  = "$(IO2L)"
+	InitRoutine  = "W83627DHG_SPI_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+	ASLdeviceName  = "SSPI"
+	Token = "W83627DHG_SPI_PORT_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Gpio"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsGPIO"
+	LDev_Num  = "0Ch"
+	UID  = "01h"
+	PnPID  = "0c08h"
+	SIO_RES_Flag  = "0x80"
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "W83627DHG_GPIO_Init"
+	SleepNum  = 01h
+    	ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+	ASLdeviceName  = "SGPI"
+End
+
+LDEVICE
+	Name  = "Hwm"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsHwMon"
+	LDev_Num  = "0Bh"
+	UID  = "02h"
+	PnPID  = "0c08h"
+	SIO_RES_Flag  = "0x0"
+	ResBaseAddr1  = "$(IO1B)"
+	ResLength1  = "$(IO1L)"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "W83627DHG_HWM_Init"
+	SleepNum  = 01h
+	ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+	ASLdeviceName  = "SHWM"
+	Token = "W83627DHG_HWM_PRESENT" "=" "1"
+End
+
+LDEVICE
+	Name  = "Acpi"
+	SioDevice  = "W83627DHG"
+	Dev_Type  = "dsACPI"
+	LDev_Num  = "0Ah"
+	UID  = "03h"
+	PnPID  = "0c08h"
+	SIO_RES_Flag  = "0x80"
+	ResBaseAddr1  = "00h"
+	ResLength1  = "00h"
+	ResBaseAddr2  = "00h"
+	ResLength2  = "00h"
+	InitRoutine  = "W83627DHG_ACPI_Init"
+	SleepNum  = 01h
+    	ASLfile  = "'AmiModulePkg/GenericSio/NO_RES_STA.asl'"
+	ASLdeviceName  = "SCPI"
+	Token = "W83627DHG_ACPI_PRESENT" "=" "1"
+End
+
+#==============================================================================
+#elink DXE Initialization Source file
+#==============================================================================
+ELINK
+	Name  = "../$(W83627DHG_DIR)/W83627DHGDxeInit.c"
+	Parent  = "SIOLINK_LIB_SRC"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "../../$(W83627DHG_DIR)/W83627DHGDxeInit.h"
+	Parent  = "SIOLINK_LIB_H"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(W83627DHG_DIR)\W83627DHGMiscSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(W83627DHG_DIR)\W83627DHGMiscSetup.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+#==============================================================================
+# For .mak to build setup strings from .sdl to .uni
+#==============================================================================
+ELINK
+	Name  = "$(BUILD_DIR)\W83627HwmStrings.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#*        (C)Copyright 1985-2013, American Megatrends, Inc.          **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

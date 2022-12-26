@@ -1,0 +1,9 @@
+<component>
+	name = "W83627DHGAsl"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\W83627DHG\"
+	RefName = "AaeonIoPkg.W83627DHG.W83627DHGAsl"
+[files]
+"W83627DHGEVT.asl"
+"W83627DHGDEV.asl"	
+<endComponent>

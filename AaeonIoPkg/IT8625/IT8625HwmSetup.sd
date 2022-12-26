@@ -1,0 +1,3043 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <IT8625HwmSetup.sd>
+//
+// Description: HWM form template, setup screen definition file.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+
+#endif //SETUP_DATA_DEFINITION
+
+#ifdef CONTROL_DEFINITION
+
+        #if defined(AAEON_CPU_DTS_READING) && (AAEON_CPU_DTS_READING)
+        #define HWM_TEXT_CPU_DTS_TEMP \
+          text\
+          help   = STRING_TOKEN(STR_EMPTY),\
+          text   = STRING_TOKEN(STR_HWM_CPU_DTS),\
+          text   = STRING_TOKEN(STR_HWM_CPU_DTS_VALUE),\
+          flags  = 0,\
+          key    = 0;
+        #endif //AAEON_CPU_DTS_READING
+
+        #define IT8625_FAN_POLARITY \
+          oneof varid     = IT8625_SMF_CONTROL.FanPolarity,\
+              prompt      = STRING_TOKEN(STR_IT8625_SMARTFAN_POLARITY),\
+              help        = STRING_TOKEN(STR_IT8625_SMARTFAN_POLARITY_HELP),\
+              default     = IT8625_FAN_POLARITY_DEFAULT,\
+              default     = IT8625_FAN_POLARITY_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_LOW), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_HIGH), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+      #if defined(IT8625_SMF1_SUPPORT) && (IT8625_SMF1_SUPPORT == 1)
+        #define IT8625_FAN1_MODE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1SmartMode,\
+              prompt      = STRING_TOKEN(STR_IT8625_SMARTFAN1_CONFIG),\
+              help        = STRING_TOKEN(STR_IT8625_SMARTFAN_CONFIG_HELP),\
+              default     = IT8625_FAN1_MODE_DEFAULT,\
+              default     = IT8625_FAN1_MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_PWM_CTRL \
+          numeric varid = IT8625_SMF_CONTROL.Fan1PwmControl,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_PWM_CONTROL),\
+              help      = STRING_TOKEN(STR_IT8625_FAN_PWM_CONTROL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN1_PWM_CTRL_DEFAULT, \
+              default   = IT8625_FAN1_PWM_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1Type,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN1_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_FAN_TYPE_HELP),\
+              default     = IT8625_FAN1_TYPE_DEFAULT,\
+              default     = IT8625_FAN1_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1Tempin,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN1_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_TEMP_IN_HELP),\
+              default     = IT8625_FAN1_TEMP_SEL_DEFAULT,\
+              default     = IT8625_FAN1_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_OFF_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan1TempOffLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_OFF_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_OFF_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN1_OFF_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN1_OFF_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_START_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan1TempStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_START_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_START_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN1_START_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN1_START_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_FULL_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan1TempFullSpeedLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_FULL_SPEED_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_FULL_SPEED_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN1_FULL_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN1_FULL_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_START_PWM \
+          numeric varid = IT8625_SMF_CONTROL.Fan1StartPwm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_START_PWM),\
+              help      = STRING_TOKEN(STR_IT8625_START_PWM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN1_START_PWM_DEFAULT, \
+              default   = IT8625_FAN1_START_PWM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_START_RPM \
+          numeric varid = IT8625_SMF_CONTROL.Fan1StartRpm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_START_RPM),\
+              help      = STRING_TOKEN(STR_IT8625_START_RPM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 8160,\
+              step      = 1,\
+              default   = IT8625_FAN1_START_RPM_DEFAULT, \
+              default   = IT8625_FAN1_START_RPM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_PWM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan1PwmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_PWM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_PWM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 15,\
+              step      = 1,\
+              default   = IT8625_FAN1_PWM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN1_PWM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_RPM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan1RpmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_RPM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_RPM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = IT8625_FAN1_RPM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN1_RPM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_TARGET_ZONE \
+          numeric varid = IT8625_SMF_CONTROL.Fan1TargetZone,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_TARGET_ZONE),\
+              help      = STRING_TOKEN(STR_IT8625_TARGET_ZONE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 120,\
+              step      = 1,\
+              default   = IT8625_FAN1_TARGET_ZONE_DEFAULT, \
+              default   = IT8625_FAN1_TARGET_ZONE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_TEMP_INTERVAL \
+          numeric varid = IT8625_SMF_CONTROL.Fan1TempInterval,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_TEMP_INTERVAL),\
+              help      = STRING_TOKEN(STR_IT8625_TEMP_INTERVAL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 31,\
+              step      = 1,\
+              default   = IT8625_FAN1_TEMP_INTERVAL_DEFAULT, \
+              default   = IT8625_FAN1_TEMP_INTERVAL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_SMOOTH \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1Smooth,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN1_SMOOTH),\
+              help        = STRING_TOKEN(STR_IT8625_SMOOTH_HELP),\
+              default     = IT8625_FAN1_SMOOTH_DEFAULT, \
+              default     = IT8625_FAN1_SMOOTH_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_1HZ), value = 60, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_16HZ), value = 61, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_8HZ), value = 62, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_4HZ), value = 63, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_CURVE_COUNT \
+          numeric varid = IT8625_SMF_CONTROL.Fan1CurveCount,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_CURVE_COUNT),\
+              help      = STRING_TOKEN(STR_IT8625_CURVE_COUNT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 1,\
+              maximum   = 4,\
+              step      = 1,\
+              default     = IT8625_FAN1_CURVE_COUNT_DEFAULT, \
+              default     = IT8625_FAN1_CURVE_COUNT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_EX_A_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan1ExtraAStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_A_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN1_EX_A_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN1_EX_A_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_EX_A_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1ExtraATempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN1_A_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN1_EX_A_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN1_EX_A_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_EX_A_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1ExtraASlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN1_A_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN1_EX_A_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN1_EX_A_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_EX_A_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan1ExtraARange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_A_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN1_EX_A_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN1_EX_A_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_EX_A_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan1ExtraASlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_A_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN1_EX_A_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN1_EX_A_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_EX_B_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan1ExtraBStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_B_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN1_EX_B_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN1_EX_B_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_EX_B_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1ExtraBTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN1_B_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN1_EX_B_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN1_EX_B_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_EX_B_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1ExtraBSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN1_B_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN1_EX_B_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN1_EX_B_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_EX_B_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan1ExtraBRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_B_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN1_EX_B_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN1_EX_B_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_EX_B_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan1ExtraBSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_B_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default   = IT8625_FAN1_EX_B_SLOPE_VALUE_DEFAULT, \
+              default   = IT8625_FAN1_EX_B_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_EX_C_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan1ExtraCStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_C_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN1_EX_C_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN1_EX_C_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_EX_C_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1ExtraCTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN1_C_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN1_EX_C_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN1_EX_C_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_EX_C_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan1ExtraCSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN1_C_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN1_EX_C_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN1_EX_C_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN1_EX_C_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan1ExtraCRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_C_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN1_EX_C_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN1_EX_C_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN1_EX_C_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan1ExtraCSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN1_C_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN1_EX_C_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN1_EX_C_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+      #endif  // IT8625_SMF1_SUPPORT
+
+      #if defined(IT8625_SMF2_SUPPORT) && (IT8625_SMF2_SUPPORT == 1)
+        #define IT8625_FAN2_MODE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2SmartMode,\
+              prompt      = STRING_TOKEN(STR_IT8625_SMARTFAN2_CONFIG),\
+              help        = STRING_TOKEN(STR_IT8625_SMARTFAN_CONFIG_HELP),\
+              default     = IT8625_FAN2_MODE_DEFAULT,\
+              default     = IT8625_FAN2_MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_PWM_CTRL \
+          numeric varid = IT8625_SMF_CONTROL.Fan2PwmControl,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_PWM_CONTROL),\
+              help      = STRING_TOKEN(STR_IT8625_FAN_PWM_CONTROL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN2_PWM_CTRL_DEFAULT, \
+              default   = IT8625_FAN2_PWM_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2Type,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN2_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_FAN_TYPE_HELP),\
+              default     = IT8625_FAN2_TYPE_DEFAULT,\
+              default     = IT8625_FAN2_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2Tempin,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN2_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_TEMP_IN_HELP),\
+              default     = IT8625_FAN2_TEMP_SEL_DEFAULT,\
+              default     = IT8625_FAN2_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_OFF_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan2TempOffLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_OFF_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_OFF_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN2_OFF_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN2_OFF_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_START_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan2TempStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_START_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_START_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN2_START_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN2_START_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_FULL_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan2TempFullSpeedLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_FULL_SPEED_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_FULL_SPEED_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN2_FULL_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN2_FULL_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_START_PWM \
+          numeric varid = IT8625_SMF_CONTROL.Fan2StartPwm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_START_PWM),\
+              help      = STRING_TOKEN(STR_IT8625_START_PWM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN2_START_PWM_DEFAULT, \
+              default   = IT8625_FAN2_START_PWM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_START_RPM \
+          numeric varid = IT8625_SMF_CONTROL.Fan2StartRpm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_START_RPM),\
+              help      = STRING_TOKEN(STR_IT8625_START_RPM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 8160,\
+              step      = 1,\
+              default   = IT8625_FAN2_START_RPM_DEFAULT, \
+              default   = IT8625_FAN2_START_RPM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_PWM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan2PwmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_PWM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_PWM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 15,\
+              step      = 1,\
+              default   = IT8625_FAN2_PWM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN2_PWM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_RPM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan2RpmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_RPM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_RPM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = IT8625_FAN2_RPM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN2_RPM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_TARGET_ZONE \
+          numeric varid = IT8625_SMF_CONTROL.Fan2TargetZone,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_TARGET_ZONE),\
+              help      = STRING_TOKEN(STR_IT8625_TARGET_ZONE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 120,\
+              step      = 1,\
+              default   = IT8625_FAN2_TARGET_ZONE_DEFAULT, \
+              default   = IT8625_FAN2_TARGET_ZONE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_TEMP_INTERVAL \
+          numeric varid = IT8625_SMF_CONTROL.Fan2TempInterval,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_TEMP_INTERVAL),\
+              help      = STRING_TOKEN(STR_IT8625_TEMP_INTERVAL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 31,\
+              step      = 1,\
+              default   = IT8625_FAN2_TEMP_INTERVAL_DEFAULT, \
+              default   = IT8625_FAN2_TEMP_INTERVAL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_SMOOTH \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2Smooth,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN2_SMOOTH),\
+              help        = STRING_TOKEN(STR_IT8625_SMOOTH_HELP),\
+              default     = IT8625_FAN2_SMOOTH_DEFAULT, \
+              default     = IT8625_FAN2_SMOOTH_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_1HZ), value = 60, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_16HZ), value = 61, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_8HZ), value = 62, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_4HZ), value = 63, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_CURVE_COUNT \
+          numeric varid = IT8625_SMF_CONTROL.Fan2CurveCount,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_CURVE_COUNT),\
+              help      = STRING_TOKEN(STR_IT8625_CURVE_COUNT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 1,\
+              maximum   = 4,\
+              step      = 1,\
+              default     = IT8625_FAN2_CURVE_COUNT_DEFAULT, \
+              default     = IT8625_FAN2_CURVE_COUNT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_EX_A_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan2ExtraAStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_A_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN2_EX_A_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN2_EX_A_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_EX_A_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2ExtraATempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN2_A_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN2_EX_A_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN2_EX_A_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_EX_A_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2ExtraASlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN2_A_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN2_EX_A_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN2_EX_A_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_EX_A_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan2ExtraARange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_A_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN2_EX_A_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN2_EX_A_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_EX_A_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan2ExtraASlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_A_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN2_EX_A_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN2_EX_A_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_EX_B_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan2ExtraBStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_B_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN2_EX_B_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN2_EX_B_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_EX_B_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2ExtraBTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN2_B_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN2_EX_B_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN2_EX_B_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_EX_B_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2ExtraBSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN2_B_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN2_EX_B_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN2_EX_B_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_EX_B_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan2ExtraBRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_B_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN2_EX_B_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN2_EX_B_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_EX_B_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan2ExtraBSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_B_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default   = IT8625_FAN2_EX_B_SLOPE_VALUE_DEFAULT, \
+              default   = IT8625_FAN2_EX_B_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_EX_C_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan2ExtraCStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_C_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN2_EX_C_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN2_EX_C_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_EX_C_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2ExtraCTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN2_C_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN2_EX_C_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN2_EX_C_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_EX_C_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan2ExtraCSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN2_C_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN2_EX_C_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN2_EX_C_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN2_EX_C_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan2ExtraCRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_C_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN2_EX_C_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN2_EX_C_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN2_EX_C_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan2ExtraCSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN2_C_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN2_EX_C_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN2_EX_C_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+      #endif  // IT8625_SMF2_SUPPORT
+
+      #if defined(IT8625_SMF3_SUPPORT) && (IT8625_SMF3_SUPPORT == 1)
+        #define IT8625_FAN3_MODE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3SmartMode,\
+              prompt      = STRING_TOKEN(STR_IT8625_SMARTFAN3_CONFIG),\
+              help        = STRING_TOKEN(STR_IT8625_SMARTFAN_CONFIG_HELP),\
+              default     = IT8625_FAN3_MODE_DEFAULT,\
+              default     = IT8625_FAN3_MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_PWM_CTRL \
+          numeric varid = IT8625_SMF_CONTROL.Fan3PwmControl,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_PWM_CONTROL),\
+              help      = STRING_TOKEN(STR_IT8625_FAN_PWM_CONTROL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN3_PWM_CTRL_DEFAULT, \
+              default   = IT8625_FAN3_PWM_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3Type,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN3_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_FAN_TYPE_HELP),\
+              default     = IT8625_FAN3_TYPE_DEFAULT,\
+              default     = IT8625_FAN3_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3Tempin,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN3_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_TEMP_IN_HELP),\
+              default     = IT8625_FAN3_TEMP_SEL_DEFAULT,\
+              default     = IT8625_FAN3_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_OFF_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan3TempOffLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_OFF_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_OFF_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN3_OFF_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN3_OFF_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_START_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan3TempStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_START_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_START_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN3_START_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN3_START_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_FULL_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan3TempFullSpeedLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_FULL_SPEED_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_FULL_SPEED_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN3_FULL_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN3_FULL_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_START_PWM \
+          numeric varid = IT8625_SMF_CONTROL.Fan3StartPwm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_START_PWM),\
+              help      = STRING_TOKEN(STR_IT8625_START_PWM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN3_START_PWM_DEFAULT, \
+              default   = IT8625_FAN3_START_PWM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_START_RPM \
+          numeric varid = IT8625_SMF_CONTROL.Fan3StartRpm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_START_RPM),\
+              help      = STRING_TOKEN(STR_IT8625_START_RPM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 8160,\
+              step      = 1,\
+              default   = IT8625_FAN3_START_RPM_DEFAULT, \
+              default   = IT8625_FAN3_START_RPM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_PWM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan3PwmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_PWM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_PWM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 15,\
+              step      = 1,\
+              default   = IT8625_FAN3_PWM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN3_PWM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_RPM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan3RpmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_RPM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_RPM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = IT8625_FAN3_RPM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN3_RPM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_TARGET_ZONE \
+          numeric varid = IT8625_SMF_CONTROL.Fan3TargetZone,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_TARGET_ZONE),\
+              help      = STRING_TOKEN(STR_IT8625_TARGET_ZONE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 120,\
+              step      = 1,\
+              default   = IT8625_FAN3_TARGET_ZONE_DEFAULT, \
+              default   = IT8625_FAN3_TARGET_ZONE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_TEMP_INTERVAL \
+          numeric varid = IT8625_SMF_CONTROL.Fan3TempInterval,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_TEMP_INTERVAL),\
+              help      = STRING_TOKEN(STR_IT8625_TEMP_INTERVAL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 31,\
+              step      = 1,\
+              default   = IT8625_FAN3_TEMP_INTERVAL_DEFAULT, \
+              default   = IT8625_FAN3_TEMP_INTERVAL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_SMOOTH \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3Smooth,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN3_SMOOTH),\
+              help        = STRING_TOKEN(STR_IT8625_SMOOTH_HELP),\
+              default     = IT8625_FAN3_SMOOTH_DEFAULT, \
+              default     = IT8625_FAN3_SMOOTH_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_1HZ), value = 60, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_16HZ), value = 61, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_8HZ), value = 62, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_4HZ), value = 63, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_CURVE_COUNT \
+          numeric varid = IT8625_SMF_CONTROL.Fan3CurveCount,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_CURVE_COUNT),\
+              help      = STRING_TOKEN(STR_IT8625_CURVE_COUNT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 1,\
+              maximum   = 4,\
+              step      = 1,\
+              default     = IT8625_FAN3_CURVE_COUNT_DEFAULT, \
+              default     = IT8625_FAN3_CURVE_COUNT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_EX_A_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan3ExtraAStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_A_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN3_EX_A_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN3_EX_A_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_EX_A_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3ExtraATempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN3_A_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN3_EX_A_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN3_EX_A_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_EX_A_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3ExtraASlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN3_A_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN3_EX_A_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN3_EX_A_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_EX_A_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan3ExtraARange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_A_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN3_EX_A_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN3_EX_A_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_EX_A_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan3ExtraASlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_A_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN3_EX_A_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN3_EX_A_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_EX_B_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan3ExtraBStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_B_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN3_EX_B_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN3_EX_B_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_EX_B_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3ExtraBTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN3_B_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN3_EX_B_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN3_EX_B_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_EX_B_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3ExtraBSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN3_B_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN3_EX_B_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN3_EX_B_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_EX_B_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan3ExtraBRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_B_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN3_EX_B_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN3_EX_B_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_EX_B_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan3ExtraBSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_B_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default   = IT8625_FAN3_EX_B_SLOPE_VALUE_DEFAULT, \
+              default   = IT8625_FAN3_EX_B_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_EX_C_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan3ExtraCStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_C_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN3_EX_C_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN3_EX_C_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_EX_C_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3ExtraCTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN3_C_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN3_EX_C_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN3_EX_C_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_EX_C_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan3ExtraCSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN3_C_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN3_EX_C_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN3_EX_C_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN3_EX_C_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan3ExtraCRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_C_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN3_EX_C_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN3_EX_C_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN3_EX_C_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan3ExtraCSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN3_C_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN3_EX_C_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN3_EX_C_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+      #endif  // IT8625_SMF3_SUPPORT
+
+      #if defined(IT8625_SMF4_SUPPORT) && (IT8625_SMF4_SUPPORT == 1)
+        #define IT8625_FAN4_MODE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4SmartMode,\
+              prompt      = STRING_TOKEN(STR_IT8625_SMARTFAN4_CONFIG),\
+              help        = STRING_TOKEN(STR_IT8625_SMARTFAN_CONFIG_HELP),\
+              default     = IT8625_FAN4_MODE_DEFAULT,\
+              default     = IT8625_FAN4_MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_PWM_CTRL \
+          numeric varid = IT8625_SMF_CONTROL.Fan4PwmControl,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_PWM_CONTROL),\
+              help      = STRING_TOKEN(STR_IT8625_FAN_PWM_CONTROL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN4_PWM_CTRL_DEFAULT, \
+              default   = IT8625_FAN4_PWM_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4Type,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN4_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_FAN_TYPE_HELP),\
+              default     = IT8625_FAN4_TYPE_DEFAULT,\
+              default     = IT8625_FAN4_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4Tempin,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN4_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_TEMP_IN_HELP),\
+              default     = IT8625_FAN4_TEMP_SEL_DEFAULT,\
+              default     = IT8625_FAN4_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_OFF_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan4TempOffLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_OFF_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_OFF_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN4_OFF_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN4_OFF_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_START_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan4TempStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_START_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_START_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN4_START_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN4_START_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_FULL_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan4TempFullSpeedLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_FULL_SPEED_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_FULL_SPEED_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN4_FULL_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN4_FULL_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_START_PWM \
+          numeric varid = IT8625_SMF_CONTROL.Fan4StartPwm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_START_PWM),\
+              help      = STRING_TOKEN(STR_IT8625_START_PWM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN4_START_PWM_DEFAULT, \
+              default   = IT8625_FAN4_START_PWM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_START_RPM \
+          numeric varid = IT8625_SMF_CONTROL.Fan4StartRpm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_START_RPM),\
+              help      = STRING_TOKEN(STR_IT8625_START_RPM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 8160,\
+              step      = 1,\
+              default   = IT8625_FAN4_START_RPM_DEFAULT, \
+              default   = IT8625_FAN4_START_RPM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_PWM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan4PwmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_PWM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_PWM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 15,\
+              step      = 1,\
+              default   = IT8625_FAN4_PWM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN4_PWM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_RPM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan4RpmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_RPM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_RPM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = IT8625_FAN4_RPM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN4_RPM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_TARGET_ZONE \
+          numeric varid = IT8625_SMF_CONTROL.Fan4TargetZone,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_TARGET_ZONE),\
+              help      = STRING_TOKEN(STR_IT8625_TARGET_ZONE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 120,\
+              step      = 1,\
+              default   = IT8625_FAN4_TARGET_ZONE_DEFAULT, \
+              default   = IT8625_FAN4_TARGET_ZONE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_TEMP_INTERVAL \
+          numeric varid = IT8625_SMF_CONTROL.Fan4TempInterval,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_TEMP_INTERVAL),\
+              help      = STRING_TOKEN(STR_IT8625_TEMP_INTERVAL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 31,\
+              step      = 1,\
+              default   = IT8625_FAN4_TEMP_INTERVAL_DEFAULT, \
+              default   = IT8625_FAN4_TEMP_INTERVAL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_SMOOTH \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4Smooth,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN4_SMOOTH),\
+              help        = STRING_TOKEN(STR_IT8625_SMOOTH_HELP),\
+              default     = IT8625_FAN4_SMOOTH_DEFAULT, \
+              default     = IT8625_FAN4_SMOOTH_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_1HZ), value = 60, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_16HZ), value = 61, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_8HZ), value = 62, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_4HZ), value = 63, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_CURVE_COUNT \
+          numeric varid = IT8625_SMF_CONTROL.Fan4CurveCount,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_CURVE_COUNT),\
+              help      = STRING_TOKEN(STR_IT8625_CURVE_COUNT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 1,\
+              maximum   = 4,\
+              step      = 1,\
+              default     = IT8625_FAN4_CURVE_COUNT_DEFAULT, \
+              default     = IT8625_FAN4_CURVE_COUNT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_EX_A_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan4ExtraAStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_A_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN4_EX_A_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN4_EX_A_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_EX_A_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4ExtraATempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN4_A_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN4_EX_A_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN4_EX_A_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_EX_A_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4ExtraASlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN4_A_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN4_EX_A_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN4_EX_A_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_EX_A_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan4ExtraARange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_A_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN4_EX_A_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN4_EX_A_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_EX_A_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan4ExtraASlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_A_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN4_EX_A_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN4_EX_A_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_EX_B_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan4ExtraBStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_B_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN4_EX_B_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN4_EX_B_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_EX_B_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4ExtraBTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN4_B_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN4_EX_B_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN4_EX_B_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_EX_B_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4ExtraBSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN4_B_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN4_EX_B_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN4_EX_B_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_EX_B_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan4ExtraBRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_B_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN4_EX_B_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN4_EX_B_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_EX_B_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan4ExtraBSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_B_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default   = IT8625_FAN4_EX_B_SLOPE_VALUE_DEFAULT, \
+              default   = IT8625_FAN4_EX_B_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_EX_C_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan4ExtraCStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_C_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN4_EX_C_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN4_EX_C_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_EX_C_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4ExtraCTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN4_C_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN4_EX_C_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN4_EX_C_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_EX_C_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan4ExtraCSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN4_C_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN4_EX_C_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN4_EX_C_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN4_EX_C_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan4ExtraCRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_C_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN4_EX_C_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN4_EX_C_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN4_EX_C_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan4ExtraCSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN4_C_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN4_EX_C_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN4_EX_C_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+      #endif  // IT8625_SMF4_SUPPORT
+
+      #if defined(IT8625_SMF5_SUPPORT) && (IT8625_SMF5_SUPPORT == 1)
+        #define IT8625_FAN5_MODE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5SmartMode,\
+              prompt      = STRING_TOKEN(STR_IT8625_SMARTFAN5_CONFIG),\
+              help        = STRING_TOKEN(STR_IT8625_SMARTFAN_CONFIG_HELP),\
+              default     = IT8625_FAN5_MODE_DEFAULT,\
+              default     = IT8625_FAN5_MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_PWM_CTRL \
+          numeric varid = IT8625_SMF_CONTROL.Fan5PwmControl,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_PWM_CONTROL),\
+              help      = STRING_TOKEN(STR_IT8625_FAN_PWM_CONTROL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN5_PWM_CTRL_DEFAULT, \
+              default   = IT8625_FAN5_PWM_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5Type,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN5_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_FAN_TYPE_HELP),\
+              default     = IT8625_FAN5_TYPE_DEFAULT,\
+              default     = IT8625_FAN5_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5Tempin,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN5_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_TEMP_IN_HELP),\
+              default     = IT8625_FAN5_TEMP_SEL_DEFAULT,\
+              default     = IT8625_FAN5_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_OFF_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan5TempOffLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_OFF_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_OFF_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN5_OFF_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN5_OFF_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_START_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan5TempStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_START_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_START_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN5_START_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN5_START_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_FULL_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan5TempFullSpeedLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_FULL_SPEED_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_FULL_SPEED_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN5_FULL_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN5_FULL_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_START_PWM \
+          numeric varid = IT8625_SMF_CONTROL.Fan5StartPwm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_START_PWM),\
+              help      = STRING_TOKEN(STR_IT8625_START_PWM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN5_START_PWM_DEFAULT, \
+              default   = IT8625_FAN5_START_PWM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_START_RPM \
+          numeric varid = IT8625_SMF_CONTROL.Fan5StartRpm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_START_RPM),\
+              help      = STRING_TOKEN(STR_IT8625_START_RPM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 8160,\
+              step      = 1,\
+              default   = IT8625_FAN5_START_RPM_DEFAULT, \
+              default   = IT8625_FAN5_START_RPM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_PWM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan5PwmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_PWM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_PWM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 15,\
+              step      = 1,\
+              default   = IT8625_FAN5_PWM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN5_PWM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_RPM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan5RpmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_RPM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_RPM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = IT8625_FAN5_RPM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN5_RPM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_TARGET_ZONE \
+          numeric varid = IT8625_SMF_CONTROL.Fan5TargetZone,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_TARGET_ZONE),\
+              help      = STRING_TOKEN(STR_IT8625_TARGET_ZONE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 120,\
+              step      = 1,\
+              default   = IT8625_FAN5_TARGET_ZONE_DEFAULT, \
+              default   = IT8625_FAN5_TARGET_ZONE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_TEMP_INTERVAL \
+          numeric varid = IT8625_SMF_CONTROL.Fan5TempInterval,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_TEMP_INTERVAL),\
+              help      = STRING_TOKEN(STR_IT8625_TEMP_INTERVAL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 31,\
+              step      = 1,\
+              default   = IT8625_FAN5_TEMP_INTERVAL_DEFAULT, \
+              default   = IT8625_FAN5_TEMP_INTERVAL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_SMOOTH \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5Smooth,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN5_SMOOTH),\
+              help        = STRING_TOKEN(STR_IT8625_SMOOTH_HELP),\
+              default     = IT8625_FAN5_SMOOTH_DEFAULT, \
+              default     = IT8625_FAN5_SMOOTH_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_1HZ), value = 60, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_16HZ), value = 61, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_8HZ), value = 62, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_4HZ), value = 63, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_CURVE_COUNT \
+          numeric varid = IT8625_SMF_CONTROL.Fan5CurveCount,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_CURVE_COUNT),\
+              help      = STRING_TOKEN(STR_IT8625_CURVE_COUNT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 1,\
+              maximum   = 4,\
+              step      = 1,\
+              default     = IT8625_FAN5_CURVE_COUNT_DEFAULT, \
+              default     = IT8625_FAN5_CURVE_COUNT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_EX_A_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan5ExtraAStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_A_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN5_EX_A_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN5_EX_A_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_EX_A_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5ExtraATempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN5_A_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN5_EX_A_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN5_EX_A_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_EX_A_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5ExtraASlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN5_A_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN5_EX_A_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN5_EX_A_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_EX_A_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan5ExtraARange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_A_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN5_EX_A_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN5_EX_A_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_EX_A_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan5ExtraASlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_A_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN5_EX_A_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN5_EX_A_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_EX_B_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan5ExtraBStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_B_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN5_EX_B_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN5_EX_B_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_EX_B_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5ExtraBTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN5_B_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN5_EX_B_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN5_EX_B_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_EX_B_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5ExtraBSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN5_B_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN5_EX_B_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN5_EX_B_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_EX_B_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan5ExtraBRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_B_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN5_EX_B_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN5_EX_B_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_EX_B_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan5ExtraBSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_B_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default   = IT8625_FAN5_EX_B_SLOPE_VALUE_DEFAULT, \
+              default   = IT8625_FAN5_EX_B_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_EX_C_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan5ExtraCStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_C_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN5_EX_C_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN5_EX_C_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_EX_C_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5ExtraCTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN5_C_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN5_EX_C_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN5_EX_C_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_EX_C_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan5ExtraCSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN5_C_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN5_EX_C_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN5_EX_C_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN5_EX_C_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan5ExtraCRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_C_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN5_EX_C_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN5_EX_C_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN5_EX_C_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan5ExtraCSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN5_C_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN5_EX_C_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN5_EX_C_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+      #endif  // IT8625_SMF5_SUPPORT
+
+      #if defined(IT8625_SMF6_SUPPORT) && (IT8625_SMF6_SUPPORT == 1)
+        #define IT8625_FAN6_MODE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6SmartMode,\
+              prompt      = STRING_TOKEN(STR_IT8625_SMARTFAN6_CONFIG),\
+              help        = STRING_TOKEN(STR_IT8625_SMARTFAN_CONFIG_HELP),\
+              default     = IT8625_FAN6_MODE_DEFAULT,\
+              default     = IT8625_FAN6_MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMARTFAN_MODE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_PWM_CTRL \
+          numeric varid = IT8625_SMF_CONTROL.Fan6PwmControl,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_PWM_CONTROL),\
+              help      = STRING_TOKEN(STR_IT8625_FAN_PWM_CONTROL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN6_PWM_CTRL_DEFAULT, \
+              default   = IT8625_FAN6_PWM_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6Type,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN6_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_FAN_TYPE_HELP),\
+              default     = IT8625_FAN6_TYPE_DEFAULT,\
+              default     = IT8625_FAN6_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE0), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_FAN_TYPE1), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6Tempin,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN6_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_TEMP_IN_HELP),\
+              default     = IT8625_FAN6_TEMP_SEL_DEFAULT,\
+              default     = IT8625_FAN6_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_OFF_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan6TempOffLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_OFF_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_OFF_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN6_OFF_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN6_OFF_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_START_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan6TempStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_START_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_START_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN6_START_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN6_START_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_FULL_TEMP_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan6TempFullSpeedLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_FULL_SPEED_LIMIT_TEMP),\
+              help      = STRING_TOKEN(STR_IT8625_FULL_SPEED_LIMIT_TEMP_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default   = IT8625_FAN6_FULL_TEMP_LIMIT_DEFAULT, \
+              default   = IT8625_FAN6_FULL_TEMP_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_START_PWM \
+          numeric varid = IT8625_SMF_CONTROL.Fan6StartPwm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_START_PWM),\
+              help      = STRING_TOKEN(STR_IT8625_START_PWM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default   = IT8625_FAN6_START_PWM_DEFAULT, \
+              default   = IT8625_FAN6_START_PWM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_START_RPM \
+          numeric varid = IT8625_SMF_CONTROL.Fan6StartRpm,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_START_RPM),\
+              help      = STRING_TOKEN(STR_IT8625_START_RPM_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 8160,\
+              step      = 1,\
+              default   = IT8625_FAN6_START_RPM_DEFAULT, \
+              default   = IT8625_FAN6_START_RPM_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_PWM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan6PwmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_PWM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_PWM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 15,\
+              step      = 1,\
+              default   = IT8625_FAN6_PWM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN6_PWM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_RPM_SLOPE \
+          numeric varid = IT8625_SMF_CONTROL.Fan6RpmSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_RPM_SLOPE_CONFIG),\
+              help      = STRING_TOKEN(STR_IT8625_RPM_SLOPE_CONFIG_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = IT8625_FAN6_RPM_SLOPE_DEFAULT, \
+              default   = IT8625_FAN6_RPM_SLOPE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_TARGET_ZONE \
+          numeric varid = IT8625_SMF_CONTROL.Fan6TargetZone,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_TARGET_ZONE),\
+              help      = STRING_TOKEN(STR_IT8625_TARGET_ZONE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 120,\
+              step      = 1,\
+              default   = IT8625_FAN6_TARGET_ZONE_DEFAULT, \
+              default   = IT8625_FAN6_TARGET_ZONE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_TEMP_INTERVAL \
+          numeric varid = IT8625_SMF_CONTROL.Fan6TempInterval,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_TEMP_INTERVAL),\
+              help      = STRING_TOKEN(STR_IT8625_TEMP_INTERVAL_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 31,\
+              step      = 1,\
+              default   = IT8625_FAN6_TEMP_INTERVAL_DEFAULT, \
+              default   = IT8625_FAN6_TEMP_INTERVAL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_SMOOTH \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6Smooth,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN6_SMOOTH),\
+              help        = STRING_TOKEN(STR_IT8625_SMOOTH_HELP),\
+              default     = IT8625_FAN6_SMOOTH_DEFAULT, \
+              default     = IT8625_FAN6_SMOOTH_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_1HZ), value = 60, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_16HZ), value = 61, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_8HZ), value = 62, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SMOOTH_4HZ), value = 63, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_CURVE_COUNT \
+          numeric varid = IT8625_SMF_CONTROL.Fan6CurveCount,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_CURVE_COUNT),\
+              help      = STRING_TOKEN(STR_IT8625_CURVE_COUNT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 1,\
+              maximum   = 4,\
+              step      = 1,\
+              default     = IT8625_FAN6_CURVE_COUNT_DEFAULT, \
+              default     = IT8625_FAN6_CURVE_COUNT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_EX_A_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan6ExtraAStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_A_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN6_EX_A_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN6_EX_A_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_EX_A_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6ExtraATempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN6_A_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN6_EX_A_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN6_EX_A_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_EX_A_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6ExtraASlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN6_A_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN6_EX_A_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN6_EX_A_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_EX_A_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan6ExtraARange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_A_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN6_EX_A_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN6_EX_A_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_EX_A_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan6ExtraASlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_A_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN6_EX_A_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN6_EX_A_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_EX_B_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan6ExtraBStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_B_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN6_EX_B_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN6_EX_B_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_EX_B_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6ExtraBTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN6_B_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN6_EX_B_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN6_EX_B_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_EX_B_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6ExtraBSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN6_B_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN6_EX_B_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN6_EX_B_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_EX_B_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan6ExtraBRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_B_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN6_EX_B_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN6_EX_B_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_EX_B_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan6ExtraBSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_B_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default   = IT8625_FAN6_EX_B_SLOPE_VALUE_DEFAULT, \
+              default   = IT8625_FAN6_EX_B_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_EX_C_START_LIMIT \
+          numeric varid = IT8625_SMF_CONTROL.Fan6ExtraCStartLimit,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_C_VECTOR_START_LIMIT),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_START_LIMIT_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 255,\
+              step      = 1,\
+              default     = IT8625_FAN6_EX_C_START_LIMIT_DEFAULT, \
+              default     = IT8625_FAN6_EX_C_START_LIMIT_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_EX_C_TEMP_SEL \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6ExtraCTempIn,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN6_C_VECTOR_TEMP_IN),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_TEMP_IN_HELP),\
+              default     = IT8625_FAN6_EX_C_TEMP_SEL_DEFAULT, \
+              default     = IT8625_FAN6_EX_C_TEMP_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN1), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN2), value = 1, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN3), value = 2, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN4), value = 3, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN5), value = 4, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_TEMP_IN6), value = 5, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_EX_C_SLOPE_TYPE \
+          oneof varid     = IT8625_SMF_CONTROL.Fan6ExtraCSlopeType,\
+              prompt      = STRING_TOKEN(STR_IT8625_FAN6_C_VECTOR_SLOPE_TYPE),\
+              help        = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_TYPE_HELP),\
+              default     = IT8625_FAN6_EX_C_SLOPE_TYPE_DEFAULT, \
+              default     = IT8625_FAN6_EX_C_SLOPE_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_POSTIVE), value = 0, flags = RESET_REQUIRED;\
+              option text = STRING_TOKEN(STR_IT8625_SLOPE_TYPE_NEGATIVE), value = 1, flags = RESET_REQUIRED;\
+          endoneof;
+
+        #define IT8625_FAN6_EX_C_RANGE_SEL \
+          numeric varid = IT8625_SMF_CONTROL.Fan6ExtraCRange,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_C_VECTOR_RANGE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_RANGE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 127,\
+              step      = 1,\
+              default     = IT8625_FAN6_EX_C_RANGE_SEL_DEFAULT, \
+              default     = IT8625_FAN6_EX_C_RANGE_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+
+        #define IT8625_FAN6_EX_C_SLOPE_VALUE \
+          numeric varid = IT8625_SMF_CONTROL.Fan6ExtraCSlope,\
+              prompt    = STRING_TOKEN(STR_IT8625_FAN6_C_VECTOR_SLOPE),\
+              help      = STRING_TOKEN(STR_IT8625_EXTRA_VECTOR_SLOPE_HELP),\
+              flags     = RESET_REQUIRED,\
+              minimum   = 0,\
+              maximum   = 504,\
+              step      = 1,\
+              default   = 0,\
+              default     = IT8625_FAN6_EX_C_SLOPE_VALUE_DEFAULT, \
+              default     = IT8625_FAN6_EX_C_SLOPE_VALUE_DEFAULT, defaultstore = AmiMfgDefault,\
+          endnumeric;
+      #endif  // IT8625_SMF6_SUPPORT
+
+#endif //CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+
+    IT8625_FAN_POLARITY
+  #if defined(IT8625_SMF1_SUPPORT) && (IT8625_SMF1_SUPPORT == 1)
+    IT8625_FAN1_MODE
+    IT8625_FAN1_PWM_CTRL
+    IT8625_FAN1_TYPE
+    IT8625_FAN1_TEMP_SEL
+    IT8625_FAN1_OFF_TEMP_LIMIT
+    IT8625_FAN1_START_TEMP_LIMIT
+    IT8625_FAN1_FULL_TEMP_LIMIT
+    IT8625_FAN1_START_PWM
+    IT8625_FAN1_START_RPM
+    IT8625_FAN1_PWM_SLOPE
+    IT8625_FAN1_RPM_SLOPE
+    IT8625_FAN1_TARGET_ZONE
+    IT8625_FAN1_TEMP_INTERVAL
+    IT8625_FAN1_SMOOTH
+    IT8625_FAN1_CURVE_COUNT
+    IT8625_FAN1_EX_A_START_LIMIT
+    IT8625_FAN1_EX_A_TEMP_SEL
+    IT8625_FAN1_EX_A_SLOPE_TYPE
+    IT8625_FAN1_EX_A_RANGE_SEL
+    IT8625_FAN1_EX_A_SLOPE_VALUE
+    IT8625_FAN1_EX_B_START_LIMIT
+    IT8625_FAN1_EX_B_TEMP_SEL
+    IT8625_FAN1_EX_B_SLOPE_TYPE
+    IT8625_FAN1_EX_B_RANGE_SEL
+    IT8625_FAN1_EX_B_SLOPE_VALUE
+    IT8625_FAN1_EX_C_START_LIMIT
+    IT8625_FAN1_EX_C_TEMP_SEL
+    IT8625_FAN1_EX_C_SLOPE_TYPE
+    IT8625_FAN1_EX_C_RANGE_SEL
+    IT8625_FAN1_EX_C_SLOPE_VALUE
+  #endif  // IT8625_SMF1_SUPPORT
+
+  #if defined(IT8625_SMF2_SUPPORT) && (IT8625_SMF2_SUPPORT == 1)
+    IT8625_FAN2_MODE
+    IT8625_FAN2_PWM_CTRL
+    IT8625_FAN2_TYPE
+    IT8625_FAN2_TEMP_SEL
+    IT8625_FAN2_OFF_TEMP_LIMIT
+    IT8625_FAN2_START_TEMP_LIMIT
+    IT8625_FAN2_FULL_TEMP_LIMIT
+    IT8625_FAN2_START_PWM
+    IT8625_FAN2_START_RPM
+    IT8625_FAN2_PWM_SLOPE
+    IT8625_FAN2_RPM_SLOPE
+    IT8625_FAN2_TARGET_ZONE
+    IT8625_FAN2_TEMP_INTERVAL
+    IT8625_FAN2_SMOOTH
+    IT8625_FAN2_CURVE_COUNT
+    IT8625_FAN2_EX_A_START_LIMIT
+    IT8625_FAN2_EX_A_TEMP_SEL
+    IT8625_FAN2_EX_A_SLOPE_TYPE
+    IT8625_FAN2_EX_A_RANGE_SEL
+    IT8625_FAN2_EX_A_SLOPE_VALUE
+    IT8625_FAN2_EX_B_START_LIMIT
+    IT8625_FAN2_EX_B_TEMP_SEL
+    IT8625_FAN2_EX_B_SLOPE_TYPE
+    IT8625_FAN2_EX_B_RANGE_SEL
+    IT8625_FAN2_EX_B_SLOPE_VALUE
+    IT8625_FAN2_EX_C_START_LIMIT
+    IT8625_FAN2_EX_C_TEMP_SEL
+    IT8625_FAN2_EX_C_SLOPE_TYPE
+    IT8625_FAN2_EX_C_RANGE_SEL
+    IT8625_FAN2_EX_C_SLOPE_VALUE
+  #endif  // IT8625_SMF2_SUPPORT
+
+  #if defined(IT8625_SMF3_SUPPORT) && (IT8625_SMF3_SUPPORT == 1)
+    IT8625_FAN3_MODE
+    IT8625_FAN3_PWM_CTRL
+    IT8625_FAN3_TYPE
+    IT8625_FAN3_TEMP_SEL
+    IT8625_FAN3_OFF_TEMP_LIMIT
+    IT8625_FAN3_START_TEMP_LIMIT
+    IT8625_FAN3_FULL_TEMP_LIMIT
+    IT8625_FAN3_START_PWM
+    IT8625_FAN3_START_RPM
+    IT8625_FAN3_PWM_SLOPE
+    IT8625_FAN3_RPM_SLOPE
+    IT8625_FAN3_TARGET_ZONE
+    IT8625_FAN3_TEMP_INTERVAL
+    IT8625_FAN3_SMOOTH
+    IT8625_FAN3_CURVE_COUNT
+    IT8625_FAN3_EX_A_START_LIMIT
+    IT8625_FAN3_EX_A_TEMP_SEL
+    IT8625_FAN3_EX_A_SLOPE_TYPE
+    IT8625_FAN3_EX_A_RANGE_SEL
+    IT8625_FAN3_EX_A_SLOPE_VALUE
+    IT8625_FAN3_EX_B_START_LIMIT
+    IT8625_FAN3_EX_B_TEMP_SEL
+    IT8625_FAN3_EX_B_SLOPE_TYPE
+    IT8625_FAN3_EX_B_RANGE_SEL
+    IT8625_FAN3_EX_B_SLOPE_VALUE
+    IT8625_FAN3_EX_C_START_LIMIT
+    IT8625_FAN3_EX_C_TEMP_SEL
+    IT8625_FAN3_EX_C_SLOPE_TYPE
+    IT8625_FAN3_EX_C_RANGE_SEL
+    IT8625_FAN3_EX_C_SLOPE_VALUE
+  #endif  // IT8625_SMF3_SUPPORT
+
+  #if defined(IT8625_SMF4_SUPPORT) && (IT8625_SMF4_SUPPORT == 1)
+    IT8625_FAN4_MODE
+    IT8625_FAN4_PWM_CTRL
+    IT8625_FAN4_TYPE
+    IT8625_FAN4_TEMP_SEL
+    IT8625_FAN4_OFF_TEMP_LIMIT
+    IT8625_FAN4_START_TEMP_LIMIT
+    IT8625_FAN4_FULL_TEMP_LIMIT
+    IT8625_FAN4_START_PWM
+    IT8625_FAN4_START_RPM
+    IT8625_FAN4_PWM_SLOPE
+    IT8625_FAN4_RPM_SLOPE
+    IT8625_FAN4_TARGET_ZONE
+    IT8625_FAN4_TEMP_INTERVAL
+    IT8625_FAN4_SMOOTH
+    IT8625_FAN4_CURVE_COUNT
+    IT8625_FAN4_EX_A_START_LIMIT
+    IT8625_FAN4_EX_A_TEMP_SEL
+    IT8625_FAN4_EX_A_SLOPE_TYPE
+    IT8625_FAN4_EX_A_RANGE_SEL
+    IT8625_FAN4_EX_A_SLOPE_VALUE
+    IT8625_FAN4_EX_B_START_LIMIT
+    IT8625_FAN4_EX_B_TEMP_SEL
+    IT8625_FAN4_EX_B_SLOPE_TYPE
+    IT8625_FAN4_EX_B_RANGE_SEL
+    IT8625_FAN4_EX_B_SLOPE_VALUE
+    IT8625_FAN4_EX_C_START_LIMIT
+    IT8625_FAN4_EX_C_TEMP_SEL
+    IT8625_FAN4_EX_C_SLOPE_TYPE
+    IT8625_FAN4_EX_C_RANGE_SEL
+    IT8625_FAN4_EX_C_SLOPE_VALUE
+  #endif  // IT8625_SMF4_SUPPORT
+
+  #if defined(IT8625_SMF5_SUPPORT) && (IT8625_SMF5_SUPPORT == 1)
+    IT8625_FAN5_MODE
+    IT8625_FAN5_PWM_CTRL
+    IT8625_FAN5_TYPE
+    IT8625_FAN5_TEMP_SEL
+    IT8625_FAN5_OFF_TEMP_LIMIT
+    IT8625_FAN5_START_TEMP_LIMIT
+    IT8625_FAN5_FULL_TEMP_LIMIT
+    IT8625_FAN5_START_PWM
+    IT8625_FAN5_START_RPM
+    IT8625_FAN5_PWM_SLOPE
+    IT8625_FAN5_RPM_SLOPE
+    IT8625_FAN5_TARGET_ZONE
+    IT8625_FAN5_TEMP_INTERVAL
+    IT8625_FAN5_SMOOTH
+    IT8625_FAN5_CURVE_COUNT
+    IT8625_FAN5_EX_A_START_LIMIT
+    IT8625_FAN5_EX_A_TEMP_SEL
+    IT8625_FAN5_EX_A_SLOPE_TYPE
+    IT8625_FAN5_EX_A_RANGE_SEL
+    IT8625_FAN5_EX_A_SLOPE_VALUE
+    IT8625_FAN5_EX_B_START_LIMIT
+    IT8625_FAN5_EX_B_TEMP_SEL
+    IT8625_FAN5_EX_B_SLOPE_TYPE
+    IT8625_FAN5_EX_B_RANGE_SEL
+    IT8625_FAN5_EX_B_SLOPE_VALUE
+    IT8625_FAN5_EX_C_START_LIMIT
+    IT8625_FAN5_EX_C_TEMP_SEL
+    IT8625_FAN5_EX_C_SLOPE_TYPE
+    IT8625_FAN5_EX_C_RANGE_SEL
+    IT8625_FAN5_EX_C_SLOPE_VALUE
+  #endif  // IT8625_SMF5_SUPPORT
+
+  #if defined(IT8625_SMF6_SUPPORT) && (IT8625_SMF6_SUPPORT == 1)
+    IT8625_FAN6_MODE
+    IT8625_FAN6_PWM_CTRL
+    IT8625_FAN6_TYPE
+    IT8625_FAN6_TEMP_SEL
+    IT8625_FAN6_OFF_TEMP_LIMIT
+    IT8625_FAN6_START_TEMP_LIMIT
+    IT8625_FAN6_FULL_TEMP_LIMIT
+    IT8625_FAN6_START_PWM
+    IT8625_FAN6_START_RPM
+    IT8625_FAN6_PWM_SLOPE
+    IT8625_FAN6_RPM_SLOPE
+    IT8625_FAN6_TARGET_ZONE
+    IT8625_FAN6_TEMP_INTERVAL
+    IT8625_FAN6_SMOOTH
+    IT8625_FAN6_CURVE_COUNT
+    IT8625_FAN6_EX_A_START_LIMIT
+    IT8625_FAN6_EX_A_TEMP_SEL
+    IT8625_FAN6_EX_A_SLOPE_TYPE
+    IT8625_FAN6_EX_A_RANGE_SEL
+    IT8625_FAN6_EX_A_SLOPE_VALUE
+    IT8625_FAN6_EX_B_START_LIMIT
+    IT8625_FAN6_EX_B_TEMP_SEL
+    IT8625_FAN6_EX_B_SLOPE_TYPE
+    IT8625_FAN6_EX_B_RANGE_SEL
+    IT8625_FAN6_EX_B_SLOPE_VALUE
+    IT8625_FAN6_EX_C_START_LIMIT
+    IT8625_FAN6_EX_C_TEMP_SEL
+    IT8625_FAN6_EX_C_SLOPE_TYPE
+    IT8625_FAN6_EX_C_RANGE_SEL
+    IT8625_FAN6_EX_C_SLOPE_VALUE
+  #endif  // IT8625_SMF6_SUPPORT
+
+#endif //CONTROLS_WITH_DEFAULTS
+
+//----------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//----------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//----------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+    #include "Token.h"
+    #include "IT8625SmartFansSetup.h"
+#endif
+
+//----------------------------------------------------------------------
+//If you need custom varstore's define them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+    varstore IT8625_SMF_CONTROL,
+        key   = AUTO_ID(IT8625_SMF_KEY),
+        name  = IT8625_SMF,
+        guid  = IT8625_SMF_GUID;
+#endif
+
+//----------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//----------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+
+//----------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//----------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+
+    #if IT8625_HWM_PRESENT
+    goto HMM_CONFIG_FORM_ID,
+    prompt  = STRING_TOKEN(STR_IT8625_HMM_CONFIGURATION),
+    help    = STRING_TOKEN(STR_IT8625_HMM_CONFIGURATION_HELP);
+    #endif
+
+#endif
+
+//----------------------------------------------------------------------
+// Define forms
+//----------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define HWM formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if IT8625_HWM_PRESENT
+    //Define HWM formset form
+    form formid = AUTO_ID(HMM_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8625_HMM_CONFIGURATION);
+     
+        SUBTITLE(STRING_TOKEN(STR_PC_HEALTH))
+     
+        SEPARATOR
+
+        //
+        // CPU DTS Temp
+        #if defined(AAEON_CPU_DTS_READING) && (AAEON_CPU_DTS_READING)
+          HWM_TEXT_CPU_DTS_TEMP
+        #endif //AAEON_CPU_DTS_READING
+
+        //
+        // System Temperature1
+        #if EFI_SPECIFICATION_VERSION>0x20000
+        INTERACTIVE_TEXT(STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1), STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1_VALUE),  AUTO_ID(IT8625_INTERACTIVE_KEY))
+        #else
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1),
+        text   = STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1_VALUE),
+        flags  = INTERACTIVE,
+        key    = IT8625_INTERACTIVE_KEY;
+        #endif
+
+        #if IT8625_TMPIN2_SUPPORT
+          HWM1_TEXT_TEMP2
+        #endif // IT8625_TMPIN2_SUPPORT
+        #if IT8625_TMPIN3_SUPPORT
+          HWM1_TEXT_TEMP3
+        #endif // IT8625_TMPIN3_SUPPORT
+        #if IT8625_TMPIN4_SUPPORT
+          HWM1_TEXT_TEMP4
+        #endif // IT8625_TMPIN4_SUPPORT
+        #if IT8625_TMPIN5_SUPPORT
+          HWM1_TEXT_TEMP5
+        #endif // IT8625_TMPIN5_SUPPORT
+        #if IT8625_TMPIN6_SUPPORT
+          HWM1_TEXT_TEMP6
+        #endif // IT8625_TMPIN6_SUPPORT
+
+        SEPARATOR
+
+        #if FAN_TAC1
+          HWM1_TEXT_FAN1_SPEED
+        #endif // FAN_TAC1
+        #if FAN_TAC2
+          HWM1_TEXT_FAN2_SPEED
+        #endif // FAN_TAC2
+        #if FAN_TAC3
+          HWM1_TEXT_FAN3_SPEED
+        #endif // FAN_TAC3
+        #if FAN_TAC4
+          HWM1_TEXT_FAN4_SPEED
+        #endif // FAN_TAC4
+        #if FAN_TAC5
+          HWM1_TEXT_FAN5_SPEED
+        #endif // FAN_TAC5
+        #if FAN_TAC6
+          HWM1_TEXT_FAN6_SPEED
+        #endif // FAN_TAC6
+
+        #if IT8625_VIN0_SUPPORT
+          //
+          // VIN0
+          text\
+          help   = STRING_TOKEN(STR_EMPTY),\
+          text   = STRING_TOKEN(STR_IT8625_HMM_VIN0),\
+          text   = STRING_TOKEN(STR_IT8625_HMM_VIN0_VALUE),\
+          flags  = 0,\
+          key    = 0;
+        #endif // IT8625_VIN0_SUPPORT
+        #if IT8625_VIN1_SUPPORT
+          HWM1_TEXT_VIN1
+        #endif // IT8625_VIN1_SUPPORT
+        #if IT8625_VIN2_SUPPORT
+          HWM1_TEXT_VIN2
+        #endif // IT8625_VIN2_SUPPORT
+        #if IT8625_VIN3_SUPPORT
+          HWM1_TEXT_VIN3
+        #endif // IT8625_VIN3_SUPPORT
+        #if IT8625_VIN4_SUPPORT
+          HWM1_TEXT_VIN4
+        #endif // IT8625_VIN4_SUPPORT
+        #if IT8625_VIN5_SUPPORT
+          HWM1_TEXT_VIN5
+        #endif // IT8625_VIN5_SUPPORT
+        #if IT8625_VIN6_SUPPORT
+          HWM1_TEXT_VIN6
+        #endif // IT8625_VIN6_SUPPORT
+        #if IT8625_3VSB_SUPPORT
+          HWM1_TEXT_VSB3V
+        #endif // IT8625_3VSB_SUPPORT
+        #if IT8625_VBAT_SUPPORT
+          HWM1_TEXT_VBAT
+        #endif // IT8625_VBAT_SUPPORT
+        #if IT8625_AVCC3_SUPPORT
+          HWM1_TEXT_VCC3V
+        #endif // IT8625_AVCC3_SUPPORT
+        
+        #if ((IT8625_SMF1_SUPPORT) || (IT8625_SMF2_SUPPORT) || \
+             (IT8625_SMF3_SUPPORT) || (IT8625_SMF4_SUPPORT) || \
+             (IT8625_SMF5_SUPPORT) || (IT8625_SMF6_SUPPORT))
+          goto SMF_CONFIG_FORM_ID,
+            prompt  = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION),
+            help    = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION_HELP);
+        #endif  // IT8625_SMF_SUPPORT
+
+    endform;//HWM form
+    
+    form formid = AUTO_ID(SMF_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION);
+        
+        IT8625_FAN_POLARITY
+        
+      #if defined(IT8625_SMF1_SUPPORT) && (IT8625_SMF1_SUPPORT == 1)
+        goto SMF1_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_IT8625_FAN1_SETTING),
+        help    = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION_HELP);
+      #endif  // IT8625_SMF1_SUPPORT
+        
+      #if defined(IT8625_SMF2_SUPPORT) && (IT8625_SMF2_SUPPORT == 1)
+        goto SMF2_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_IT8625_FAN2_SETTING),
+        help    = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION_HELP);
+      #endif  // IT8625_SMF2_SUPPORT
+        
+      #if defined(IT8625_SMF3_SUPPORT) && (IT8625_SMF3_SUPPORT == 1)
+        goto SMF3_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_IT8625_FAN3_SETTING),
+        help    = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION_HELP);
+      #endif  // IT8625_SMF3_SUPPORT
+        
+      #if defined(IT8625_SMF4_SUPPORT) && (IT8625_SMF4_SUPPORT == 1)
+        goto SMF4_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_IT8625_FAN4_SETTING),
+        help    = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION_HELP);
+      #endif  // IT8625_SMF4_SUPPORT
+        
+      #if defined(IT8625_SMF5_SUPPORT) && (IT8625_SMF5_SUPPORT == 1)
+        goto SMF5_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_IT8625_FAN5_SETTING),
+        help    = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION_HELP);
+      #endif  // IT8625_SMF5_SUPPORT
+        
+      #if defined(IT8625_SMF6_SUPPORT) && (IT8625_SMF6_SUPPORT == 1)
+        goto SMF6_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_IT8625_FAN6_SETTING),
+        help    = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION_HELP);
+      #endif  // IT8625_SMF6_SUPPORT
+    endform;
+
+  #if defined(IT8625_SMF1_SUPPORT) && (IT8625_SMF1_SUPPORT == 1)
+    form formid = AUTO_ID(SMF1_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION);
+        SUBTITLE(STRING_TOKEN(STR_IT8625_FAN1_SETTING))
+        //FAN1 Smart function setting--
+        IT8625_FAN1_MODE   
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan1SmartMode == 0x00;
+          IT8625_FAN1_PWM_CTRL
+        endif;
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan1SmartMode == 0x01;
+          IT8625_FAN1_TYPE
+          IT8625_FAN1_TEMP_SEL
+          IT8625_FAN1_OFF_TEMP_LIMIT
+          IT8625_FAN1_START_TEMP_LIMIT
+          IT8625_FAN1_FULL_TEMP_LIMIT
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan1Type == 0x00;
+            IT8625_FAN1_START_PWM
+            IT8625_FAN1_PWM_SLOPE
+          endif;
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan1Type == 0x01;
+            IT8625_FAN1_START_RPM
+            IT8625_FAN1_RPM_SLOPE
+            IT8625_FAN1_TARGET_ZONE
+          endif;
+          IT8625_FAN1_TEMP_INTERVAL
+          IT8625_FAN1_SMOOTH
+          IT8625_FAN1_CURVE_COUNT
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan1CurveCount > 0x01;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_A_SETTING))
+          
+          IT8625_FAN1_EX_A_START_LIMIT
+          IT8625_FAN1_EX_A_TEMP_SEL
+          IT8625_FAN1_EX_A_SLOPE_TYPE
+          IT8625_FAN1_EX_A_RANGE_SEL
+          IT8625_FAN1_EX_A_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan1CurveCount > 0x02;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_B_SETTING))
+        
+          IT8625_FAN1_EX_B_START_LIMIT
+          IT8625_FAN1_EX_B_TEMP_SEL
+          IT8625_FAN1_EX_B_SLOPE_TYPE
+          IT8625_FAN1_EX_B_RANGE_SEL
+          IT8625_FAN1_EX_B_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan1CurveCount > 0x03;        
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_C_SETTING))
+
+          IT8625_FAN1_EX_C_START_LIMIT
+          IT8625_FAN1_EX_C_TEMP_SEL
+          IT8625_FAN1_EX_C_SLOPE_TYPE
+          IT8625_FAN1_EX_C_RANGE_SEL
+          IT8625_FAN1_EX_C_SLOPE_VALUE
+        endif;
+
+    endform;
+  #endif  // IT8625_SMF1_SUPPORT
+    
+  #if defined(IT8625_SMF2_SUPPORT) && (IT8625_SMF2_SUPPORT == 1)
+    form formid = AUTO_ID(SMF2_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION);
+        SUBTITLE(STRING_TOKEN(STR_IT8625_FAN2_SETTING))
+   
+        //FAN2 Smart function setting--
+        IT8625_FAN2_MODE   
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan2SmartMode == 0x00;
+          IT8625_FAN2_PWM_CTRL
+        endif;
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan2SmartMode == 0x01;
+          IT8625_FAN2_TYPE
+          IT8625_FAN2_TEMP_SEL
+          IT8625_FAN2_OFF_TEMP_LIMIT
+          IT8625_FAN2_START_TEMP_LIMIT
+          IT8625_FAN2_FULL_TEMP_LIMIT
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan2Type == 0x00;
+            IT8625_FAN2_START_PWM
+            IT8625_FAN2_PWM_SLOPE
+          endif;
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan2Type == 0x01;
+            IT8625_FAN2_START_RPM
+            IT8625_FAN2_RPM_SLOPE
+            IT8625_FAN2_TARGET_ZONE
+          endif;
+          IT8625_FAN2_TEMP_INTERVAL
+          IT8625_FAN2_SMOOTH
+          IT8625_FAN2_CURVE_COUNT
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan2CurveCount > 0x01;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_A_SETTING))
+          
+          IT8625_FAN2_EX_A_START_LIMIT
+          IT8625_FAN2_EX_A_TEMP_SEL
+          IT8625_FAN2_EX_A_SLOPE_TYPE
+          IT8625_FAN2_EX_A_RANGE_SEL
+          IT8625_FAN2_EX_A_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan2CurveCount > 0x02;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_B_SETTING))
+        
+          IT8625_FAN2_EX_B_START_LIMIT
+          IT8625_FAN2_EX_B_TEMP_SEL
+          IT8625_FAN2_EX_B_SLOPE_TYPE
+          IT8625_FAN2_EX_B_RANGE_SEL
+          IT8625_FAN2_EX_B_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan2CurveCount > 0x03;        
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_C_SETTING))
+
+          IT8625_FAN2_EX_C_START_LIMIT
+          IT8625_FAN2_EX_C_TEMP_SEL
+          IT8625_FAN2_EX_C_SLOPE_TYPE
+          IT8625_FAN2_EX_C_RANGE_SEL
+          IT8625_FAN2_EX_C_SLOPE_VALUE
+        endif;
+    endform;
+  #endif  // IT8625_SMF2_SUPPORT
+    
+  #if defined(IT8625_SMF3_SUPPORT) && (IT8625_SMF3_SUPPORT == 1)
+    form formid = AUTO_ID(SMF3_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION);
+        SUBTITLE(STRING_TOKEN(STR_IT8625_FAN3_SETTING))
+   
+        //FAN3 Smart function setting--
+        IT8625_FAN3_MODE   
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan3SmartMode == 0x00;
+          IT8625_FAN3_PWM_CTRL
+        endif;
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan3SmartMode == 0x01;
+          IT8625_FAN3_TYPE
+          IT8625_FAN3_TEMP_SEL
+          IT8625_FAN3_OFF_TEMP_LIMIT
+          IT8625_FAN3_START_TEMP_LIMIT
+          IT8625_FAN3_FULL_TEMP_LIMIT
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan3Type == 0x00;
+            IT8625_FAN3_START_PWM
+            IT8625_FAN3_PWM_SLOPE
+          endif;
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan3Type == 0x01;
+            IT8625_FAN3_START_RPM
+            IT8625_FAN3_RPM_SLOPE
+            IT8625_FAN3_TARGET_ZONE
+          endif;
+          IT8625_FAN3_TEMP_INTERVAL
+          IT8625_FAN3_SMOOTH
+          IT8625_FAN3_CURVE_COUNT
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan3CurveCount > 0x01;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_A_SETTING))
+          
+          IT8625_FAN3_EX_A_START_LIMIT
+          IT8625_FAN3_EX_A_TEMP_SEL
+          IT8625_FAN3_EX_A_SLOPE_TYPE
+          IT8625_FAN3_EX_A_RANGE_SEL
+          IT8625_FAN3_EX_A_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan3CurveCount > 0x02;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_B_SETTING))
+        
+          IT8625_FAN3_EX_B_START_LIMIT
+          IT8625_FAN3_EX_B_TEMP_SEL
+          IT8625_FAN3_EX_B_SLOPE_TYPE
+          IT8625_FAN3_EX_B_RANGE_SEL
+          IT8625_FAN3_EX_B_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan3CurveCount > 0x03;        
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_C_SETTING))
+
+          IT8625_FAN3_EX_C_START_LIMIT
+          IT8625_FAN3_EX_C_TEMP_SEL
+          IT8625_FAN3_EX_C_SLOPE_TYPE
+          IT8625_FAN3_EX_C_RANGE_SEL
+          IT8625_FAN3_EX_C_SLOPE_VALUE
+        endif;
+    endform;
+  #endif  // IT8625_SMF3_SUPPORT
+    
+  #if defined(IT8625_SMF4_SUPPORT) && (IT8625_SMF4_SUPPORT == 1)
+    form formid = AUTO_ID(SMF4_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION);
+        SUBTITLE(STRING_TOKEN(STR_IT8625_FAN4_SETTING))
+   
+        //FAN4 Smart function setting--
+        IT8625_FAN4_MODE   
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan4SmartMode == 0x00;
+          IT8625_FAN4_PWM_CTRL
+        endif;
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan4SmartMode == 0x01;
+          IT8625_FAN4_TYPE
+          IT8625_FAN4_TEMP_SEL
+          IT8625_FAN4_OFF_TEMP_LIMIT
+          IT8625_FAN4_START_TEMP_LIMIT
+          IT8625_FAN4_FULL_TEMP_LIMIT
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan4Type == 0x00;
+            IT8625_FAN4_START_PWM
+            IT8625_FAN4_PWM_SLOPE
+          endif;
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan4Type == 0x01;
+            IT8625_FAN4_START_RPM
+            IT8625_FAN4_RPM_SLOPE
+            IT8625_FAN4_TARGET_ZONE
+          endif;
+          IT8625_FAN4_TEMP_INTERVAL
+          IT8625_FAN4_SMOOTH
+          IT8625_FAN4_CURVE_COUNT
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan4CurveCount > 0x01;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_A_SETTING))
+          
+          IT8625_FAN4_EX_A_START_LIMIT
+          IT8625_FAN4_EX_A_TEMP_SEL
+          IT8625_FAN4_EX_A_SLOPE_TYPE
+          IT8625_FAN4_EX_A_RANGE_SEL
+          IT8625_FAN4_EX_A_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan4CurveCount > 0x02;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_B_SETTING))
+        
+          IT8625_FAN4_EX_B_START_LIMIT
+          IT8625_FAN4_EX_B_TEMP_SEL
+          IT8625_FAN4_EX_B_SLOPE_TYPE
+          IT8625_FAN4_EX_B_RANGE_SEL
+          IT8625_FAN4_EX_B_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan4CurveCount > 0x03;        
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_C_SETTING))
+
+          IT8625_FAN4_EX_C_START_LIMIT
+          IT8625_FAN4_EX_C_TEMP_SEL
+          IT8625_FAN4_EX_C_SLOPE_TYPE
+          IT8625_FAN4_EX_C_RANGE_SEL
+          IT8625_FAN4_EX_C_SLOPE_VALUE
+        endif;
+    endform;
+  #endif  // IT8625_SMF4_SUPPORT
+    
+  #if defined(IT8625_SMF5_SUPPORT) && (IT8625_SMF5_SUPPORT == 1)
+    form formid = AUTO_ID(SMF5_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION);
+        SUBTITLE(STRING_TOKEN(STR_IT8625_FAN5_SETTING))
+   
+        //FAN5 Smart function setting--
+        IT8625_FAN5_MODE   
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan5SmartMode == 0x00;
+          IT8625_FAN5_PWM_CTRL
+        endif;
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan5SmartMode == 0x01;
+          IT8625_FAN5_TYPE
+          IT8625_FAN5_TEMP_SEL
+          IT8625_FAN5_OFF_TEMP_LIMIT
+          IT8625_FAN5_START_TEMP_LIMIT
+          IT8625_FAN5_FULL_TEMP_LIMIT
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan5Type == 0x00;
+            IT8625_FAN5_START_PWM
+            IT8625_FAN5_PWM_SLOPE
+          endif;
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan5Type == 0x01;
+            IT8625_FAN5_START_RPM
+            IT8625_FAN5_RPM_SLOPE
+            IT8625_FAN5_TARGET_ZONE
+          endif;
+          IT8625_FAN5_TEMP_INTERVAL
+          IT8625_FAN5_SMOOTH
+          IT8625_FAN5_CURVE_COUNT
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan5CurveCount > 0x01;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_A_SETTING))
+          
+          IT8625_FAN5_EX_A_START_LIMIT
+          IT8625_FAN5_EX_A_TEMP_SEL
+          IT8625_FAN5_EX_A_SLOPE_TYPE
+          IT8625_FAN5_EX_A_RANGE_SEL
+          IT8625_FAN5_EX_A_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan5CurveCount > 0x02;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_B_SETTING))
+        
+          IT8625_FAN5_EX_B_START_LIMIT
+          IT8625_FAN5_EX_B_TEMP_SEL
+          IT8625_FAN5_EX_B_SLOPE_TYPE
+          IT8625_FAN5_EX_B_RANGE_SEL
+          IT8625_FAN5_EX_B_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan5CurveCount > 0x03;        
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_C_SETTING))
+
+          IT8625_FAN5_EX_C_START_LIMIT
+          IT8625_FAN5_EX_C_TEMP_SEL
+          IT8625_FAN5_EX_C_SLOPE_TYPE
+          IT8625_FAN5_EX_C_RANGE_SEL
+          IT8625_FAN5_EX_C_SLOPE_VALUE
+        endif;
+    endform;
+  #endif  // IT8625_SMF5_SUPPORT
+    
+  #if defined(IT8625_SMF6_SUPPORT) && (IT8625_SMF6_SUPPORT == 1)
+    form formid = AUTO_ID(SMF6_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_IT8625_SMF_CONFIGURATION);
+        SUBTITLE(STRING_TOKEN(STR_IT8625_FAN6_SETTING))
+   
+        //FAN6 Smart function setting--
+        IT8625_FAN6_MODE   
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan6SmartMode == 0x00;
+          IT8625_FAN6_PWM_CTRL
+        endif;
+
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan6SmartMode == 0x01;
+          IT8625_FAN6_TYPE
+          IT8625_FAN6_TEMP_SEL
+          IT8625_FAN6_OFF_TEMP_LIMIT
+          IT8625_FAN6_START_TEMP_LIMIT
+          IT8625_FAN6_FULL_TEMP_LIMIT
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan6Type == 0x00;
+            IT8625_FAN6_START_PWM
+            IT8625_FAN6_PWM_SLOPE
+          endif;
+          suppressif NOT ideqval IT8625_SMF_CONTROL.Fan6Type == 0x01;
+            IT8625_FAN6_START_RPM
+            IT8625_FAN6_RPM_SLOPE
+            IT8625_FAN6_TARGET_ZONE
+          endif;
+          IT8625_FAN6_TEMP_INTERVAL
+          IT8625_FAN6_SMOOTH
+          IT8625_FAN6_CURVE_COUNT
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan6CurveCount > 0x01;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_A_SETTING))
+          
+          IT8625_FAN6_EX_A_START_LIMIT
+          IT8625_FAN6_EX_A_TEMP_SEL
+          IT8625_FAN6_EX_A_SLOPE_TYPE
+          IT8625_FAN6_EX_A_RANGE_SEL
+          IT8625_FAN6_EX_A_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan6CurveCount > 0x02;
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_B_SETTING))
+        
+          IT8625_FAN6_EX_B_START_LIMIT
+          IT8625_FAN6_EX_B_TEMP_SEL
+          IT8625_FAN6_EX_B_SLOPE_TYPE
+          IT8625_FAN6_EX_B_RANGE_SEL
+          IT8625_FAN6_EX_B_SLOPE_VALUE
+        endif;
+        
+        suppressif NOT ideqval IT8625_SMF_CONTROL.Fan6CurveCount > 0x03;        
+          SUBTITLE(STRING_TOKEN(STR_IT8625_FAN_EXTRA_C_SETTING))
+
+          IT8625_FAN6_EX_C_START_LIMIT
+          IT8625_FAN6_EX_C_TEMP_SEL
+          IT8625_FAN6_EX_C_SLOPE_TYPE
+          IT8625_FAN6_EX_C_RANGE_SEL
+          IT8625_FAN6_EX_C_SLOPE_VALUE
+        endif;
+    endform;
+  #endif  // IT8625_SMF6_SUPPORT
+    #endif//End of #if IT8625_HWM_PRESENT
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

@@ -1,0 +1,13 @@
+<component>
+	name = "IT8625Setup"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\IT8625\"
+	RefName = "AaeonIoPkg.IT8625.IT8625Setup"
+[files]
+"IT8625MiscSetup.sd"
+"IT8625MiscSetup.uni"
+"IT8625Setup.sd"
+"IT8625Setup.uni"
+"IT8625Setup.c"
+"IT8625Setup.h"
+<endComponent>

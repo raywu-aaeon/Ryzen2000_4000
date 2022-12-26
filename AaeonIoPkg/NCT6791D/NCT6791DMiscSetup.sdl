@@ -1,0 +1,1551 @@
+#**********************************************************************
+#
+# Name:  <NCT6791DGpioSetup.sdl>
+#
+# Description:     SDL file to define SIO setup functions
+#
+#**********************************************************************
+
+TOKEN
+	Name  = "NCT6791D_GPIO_INIT_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable NCT6791D hardware monitor support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "NCT6791D_MISC_DIR"
+End
+
+#==============================================================================
+#Restore On AC Power Loss definition
+#==============================================================================
+TOKEN
+	Name  = "NCT6791D_AC_POWER_LOSS_SUPPORT"
+	Value  = "0"
+	Help  = "NCT6791D Restore On AC Power Loss support.\0 - Disabled\1 - Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+#==============================================================================
+#Setup Default Value definition
+#==============================================================================
+TOKEN
+	Name  = "NCT6791D_DEEP_S5_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Deep S5> option.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_AC_PWR_LOSS_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Restore On AC Power Loss> option.\0: Power Off\1: Power On\2: Last State\4: By Pass"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "NCT6791D_AC_POWER_LOSS_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "NCT6791D_AC_PWR_LOSS_DEFAULT"
+	Value  = "4"
+	Help = "Default value of the <Restore On AC Power Loss> option.\0: Power Off\1: Power On\2: Last State\4: By Pass"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "NCT6791D_AC_POWER_LOSS_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name  = "NCT6791D_GP00_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP00 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP01_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP01 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP02_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP02 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP03_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP03 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP04_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP04 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP05_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP05 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP06_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP06 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP07_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP07 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP10_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP10 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP11_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP11 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP12_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP12 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP13_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP13 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP14_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP14 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP15_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP15 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP16_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP16 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP17_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP17 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP20_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP20 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP21_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP21 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP22_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP22 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP23_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP23 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP24_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP24 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP25_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP25 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP26_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP26 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP27_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP27 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP30_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP30 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP31_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP31 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP32_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP32 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP33_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP33 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP34_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP34 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP35_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP35 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP36_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP36 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP40_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP40 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP41_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP41 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP42_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP42 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP43_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP43 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP44_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP44 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP45_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP45 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP46_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP46 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP47_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP47 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP50_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP50 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP51_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP51 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP52_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP52 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP53_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP53 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP54_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP54 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP55_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP55 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP56_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP56 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP57_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP57 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP60_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP60 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP61_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP61 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP62_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP62 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP63_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP63 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP64_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP64 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP65_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP65 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP66_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP66 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP67_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP67 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP70_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP70 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP71_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP71 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP72_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP72 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP73_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP73 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP74_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP74 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP75_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP75 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP76_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP76 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP80_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP80 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP81_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP81 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP82_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP82 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP83_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP83 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP84_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP84 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP85_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP85 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP86_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP86 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP87_TYPE_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP87 Type Default\0 - Output\1 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NCT6791D_GP00_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP00 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP01_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP01 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP02_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP02 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP03_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP03 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP04_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP04 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP05_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP05 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP06_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP06 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP07_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP07 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP10_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP10 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP11_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP11 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP12_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP12 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP13_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP13 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP14_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP14 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP15_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP15 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP16_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP16 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP17_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP17 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP20_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP20 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP21_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP21 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP22_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP22 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP23_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP23 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP24_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP24 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP25_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP25 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP26_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP26 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP27_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP27 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP30_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP30 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP31_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP31 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP32_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP32 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP33_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP33 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP34_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP34 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP35_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP35 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP36_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP36 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP40_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP40 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP41_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP41 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP42_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP42 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP43_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP43 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP44_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP44 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP45_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP45 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP46_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP46 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP47_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP47 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP50_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP50 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP51_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP51 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP52_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP52 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP53_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP53 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP54_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP54 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP55_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP55 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP56_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP56 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP57_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP57 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP60_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP60 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP61_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP61 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP62_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP62 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP63_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP63 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP64_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP64 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP65_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP65 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP66_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP66 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP67_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP67 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP70_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP70 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP71_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP71 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP72_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP72 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP73_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP73 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP74_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP74 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP75_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP75 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP76_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP76 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP80_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP80 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP81_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP81 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP82_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP82 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP83_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP83 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP84_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP84 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP85_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP85 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP86_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP86 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP87_DATA_DEFAULT"
+	value = "1"
+	Help = "NCT6791D GP87 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NCT6791D_GP00_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP00 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP01_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP01 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP02_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP02 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP03_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP03 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP04_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP04 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP05_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP05 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP06_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP06 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP07_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP07 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP10_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP10 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP11_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP11 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP12_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP12 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP13_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP13 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP14_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP14 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP15_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP15 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP16_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP16 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP17_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP17 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP20_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP20 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP21_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP21 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP22_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP22 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP23_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP23 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP24_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP24 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP25_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP25 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP26_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP26 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP27_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP27 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP30_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP30 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP31_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP31 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP32_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP32 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP33_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP33 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP34_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP34 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP35_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP35 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP36_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP36 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP40_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP40 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP41_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP41 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP42_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP42 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP43_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP43 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP44_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP44 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP45_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP45 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP46_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP46 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP47_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP47 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP50_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP50 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP51_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP51 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP52_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP52 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP53_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP53 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP54_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP54 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP55_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP55 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP56_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP56 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP57_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP57 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP60_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP60 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP61_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP61 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP62_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP62 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP63_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP63 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP64_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP64 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP65_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP65 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP66_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP66 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP67_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP67 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP70_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP70 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP71_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP71 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP72_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP72 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP73_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP73 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP74_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP74 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP75_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP75 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP76_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP76 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP80_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP80 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP81_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP81 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP82_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP82 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP83_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP83 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP84_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP84 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP85_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP85 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP86_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP86 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NCT6791D_GP87_INV_DEFAULT"
+	value = "0"
+	Help = "NCT6791D GP87 Inversion Default\0 - Normal\1 - Inverted"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#==============================================================================
+#elink Setup Source file and table
+#==============================================================================
+ELINK
+	Name  = "$(NCT6791D_MISC_DIR)\NCT6791DMiscSetup.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(NCT6791D_MISC_DIR)\NCT6791DMiscSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+#ELINK
+#	Name  = "$(NCT6791D_MISC_DIR)/NCT6791DMiscSetup.c"
+#	Parent  = "SetupCallbackFiles"
+#	InvokeOrder = AfterParent
+#End

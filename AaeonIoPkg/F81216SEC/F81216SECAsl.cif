@@ -1,0 +1,12 @@
+<component>
+	name = "F81216SECAsl"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\F81216SEC\"
+	RefName = "AaeonIoPkg.F81216SEC.F81216SECAsl"
+[files]
+"SIO2UART3_Edge.asl"	
+"SIO2UART4_Edge.asl"
+"SIO2UART5_Edge.asl"	
+"SIO2UART6_Edge.asl"	
+"F81216SECDEV.asl"	
+<endComponent>

@@ -1,0 +1,13 @@
+<component>
+	name = "F81866Asl"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\F81866\"
+	RefName = "AaeonIoPkg.F81866.F81866Asl"
+[files]
+"UART3.asl"
+"UART4.asl"
+"UART5.asl"
+"UART6.asl"
+"F81866EVT.asl"
+"F81866DEV.asl"
+<endComponent>

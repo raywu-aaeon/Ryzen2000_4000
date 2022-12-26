@@ -1,0 +1,11 @@
+<component>
+	name = "IT8728FHwMonitor"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\IT8728F\"
+	RefName = "AaeonIoPkg.IT8728F.IT8728FHwMonitor"
+[files]
+"IT8728FHwmSetup.sdl"
+"IT8728FHwmSetup.c"	
+"IT8728FHwmSetup.sd"	
+"IT8728FHwmSetup.uni"	
+<endComponent>

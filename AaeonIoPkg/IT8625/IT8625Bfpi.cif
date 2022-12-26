@@ -1,0 +1,9 @@
+<component>
+	name = "IT8625Bfpi"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\IT8625\"
+	RefName = "AaeonIoPkg.IT8625.IT8625Bfpi"
+[files]
+"IT8625Bfpi.sdl"
+"IT8625Bfpi.asl"
+<endComponent>

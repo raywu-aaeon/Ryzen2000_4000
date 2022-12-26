@@ -1,0 +1,777 @@
+//**********************************************************************
+//
+// Name:  <NCT5538DGpioSetup.sd>
+//
+// Description: SIO Form Template, Setup screen definition file
+//
+//**********************************************************************
+//
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+    // Deep S5
+    UINT8 NCT5538DDeepS5;
+
+    // Restore On AC Power Loss
+    UINT8 NCT5538D_AC_PWR_LOSS;
+
+    // RS485 
+    UINT8 NCT5538D_UARTA_RS485_enable;
+    UINT8 NCT5538D_UARTA_RS485_inv_sel;
+    
+    // GP8x
+    UINT8 NCT5538D_GP8x_Type[8];	// 0: Output, 1: Input
+    UINT8 NCT5538D_GP8x_Data[8];	// 0: Low,    1: High
+    UINT8 NCT5538D_GP8x_Inv[8];		// 0: Normal, 1: Inverted
+
+	UINT8 NCT5538D_GP00_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP00_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP00_Inv;	// 0: Normal, 1: Inverted
+	UINT8 NCT5538D_GP01_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP01_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP01_Inv;	// 0: Normal, 1: Inverted
+	UINT8 NCT5538D_GP04_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP04_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP04_Inv;	// 0: Normal, 1: Inverted
+	UINT8 NCT5538D_GP05_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP05_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP05_Inv;	// 0: Normal, 1: Inverted
+
+	UINT8 NCT5538D_GP20_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP20_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP20_Inv;	// 0: Normal, 1: Inverted
+	UINT8 NCT5538D_GP21_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP21_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP21_Inv;	// 0: Normal, 1: Inverted
+	UINT8 NCT5538D_GP22_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP22_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP22_Inv;	// 0: Normal, 1: Inverted
+	UINT8 NCT5538D_GP23_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP23_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP23_Inv;	// 0: Normal, 1: Inverted
+	UINT8 NCT5538D_GP27_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP27_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP27_Inv;	// 0: Normal, 1: Inverted
+
+	UINT8 NCT5538D_GP30_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP30_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP30_Inv;	// 0: Normal, 1: Inverted
+	UINT8 NCT5538D_GP31_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP33_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP33_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP33_Inv;	// 0: Normal, 1: Inverted
+
+	UINT8 NCT5538D_GP47_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP47_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP47_Inv;	// 0: Normal, 1: Inverted
+
+	UINT8 NCT5538D_GP54_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP54_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP54_Inv;	// 0: Normal, 1: Inverted
+
+	UINT8 NCT5538D_GP75_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP75_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP75_Inv;	// 0: Normal, 1: Inverted
+	UINT8 NCT5538D_GP76_Type;	// 0: Output, 1: Input
+	UINT8 NCT5538D_GP76_Data;	// 0: Low,    1: High
+	UINT8 NCT5538D_GP76_Inv;	// 0: Normal, 1: Inverted
+#endif //SETUP_DATA_DEFINITION
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+	#define ONEOF_NCT5538D_DEEP_S5\
+		oneof varid = SETUP_DATA.NCT5538DDeepS5,\
+		  prompt  = STRING_TOKEN(STR_NCT5538D_EUP_ERP_PROMPT),\
+		  help    = STRING_TOKEN(STR_NCT5538D_EUP_ERP_HELP),\
+		  default = NCT5538D_DEEP_S5_DEFAULT,\
+		  default = NCT5538D_DEEP_S5_DEFAULT, defaultstore = AmiMfgDefault,\
+		  option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+		endoneof;
+
+	#define ONEOF_NCT5538D_AC_PWR_LOSS\
+		oneof varid = SETUP_DATA.NCT5538D_AC_PWR_LOSS,\
+		  prompt  = STRING_TOKEN(STR_NCT5538D_AC_PWR_LOSS),\
+		  help    = STRING_TOKEN(STR_NCT5538D_AC_PWR_LOSS_HELP),\
+		  default = NCT5538D_AC_PWR_LOSS_DEFAULT,\
+		  default = NCT5538D_AC_PWR_LOSS_DEFAULT, defaultstore = AmiMfgDefault,\
+		  option text = STRING_TOKEN(STR_NCT5538D_PWR_OFF), value = 0, flags = RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_NCT5538D_PWR_ON), value = 1, flags = RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_NCT5538D_LAST_STATE), value = 2, flags = RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_NCT5538D_BYPASS), value = 4, flags = RESET_REQUIRED;\
+		endoneof;
+
+	#define ONEOF_NCT5538D_UARTA_RS485_ENABLE\
+		oneof varid = SETUP_DATA.NCT5538D_UARTA_RS485_enable,\
+		  prompt  = STRING_TOKEN(STR_NCT5538D_RS485_EN),\
+		  help    = STRING_TOKEN(STR_NCT5538D_RS485_EN_HELP),\
+		  default = NCT5538D_UARTA_RS485_ENABLE_DEFAULT,\
+		  default = NCT5538D_UARTA_RS485_ENABLE_DEFAULT, defaultstore = AmiMfgDefault,\
+		  option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+		endoneof;
+
+	#define ONEOF_NCT5538D_UARTA_RS485_INV_SEL\
+		oneof varid = SETUP_DATA.NCT5538D_UARTA_RS485_inv_sel,\
+		  prompt  = STRING_TOKEN(STR_NCT5538D_RS485_INV),\
+		  help    = STRING_TOKEN(STR_NCT5538D_RS485_INV_HELP),\
+		  default = NCT5538D_UARTA_RS485_INV_SEL_DEFAULT,\
+		  default = NCT5538D_UARTA_RS485_INV_SEL_DEFAULT, defaultstore = AmiMfgDefault,\
+		  option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+		  option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+		endoneof;
+
+//RayWu >>
+	#define ONEOF_NCT5538D_GP00_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP00_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP00_TYPE_DEFAULT, \
+			default = NCT5538D_GP00_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP00_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP00_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP00_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP00_DATA_DEFAULT, \
+			default = NCT5538D_GP00_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP00_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP00_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP00_INV_DEFAULT, \
+			default = NCT5538D_GP00_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP01_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP01_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP01_TYPE_DEFAULT, \
+			default = NCT5538D_GP01_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP01_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP01_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP01_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP01_DATA_DEFAULT, \
+			default = NCT5538D_GP01_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP01_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP01_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP01_INV_DEFAULT, \
+			default = NCT5538D_GP01_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP04_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP04_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP04_TYPE_DEFAULT, \
+			default = NCT5538D_GP04_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP04_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP04_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP04_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP04_DATA_DEFAULT, \
+			default = NCT5538D_GP04_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP04_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP04_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP04_INV_DEFAULT, \
+			default = NCT5538D_GP04_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP05_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP05_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP05_TYPE_DEFAULT, \
+			default = NCT5538D_GP05_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP05_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP05_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP05_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP05_DATA_DEFAULT, \
+			default = NCT5538D_GP05_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP05_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP05_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP05_INV_DEFAULT, \
+			default = NCT5538D_GP05_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+
+	#define ONEOF_NCT5538D_GP20_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP20_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP20_TYPE_DEFAULT, \
+			default = NCT5538D_GP20_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP20_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP20_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP20_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP20_DATA_DEFAULT, \
+			default = NCT5538D_GP20_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP20_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP20_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP20_INV_DEFAULT, \
+			default = NCT5538D_GP20_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP21_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP21_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP21_TYPE_DEFAULT, \
+			default = NCT5538D_GP21_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP21_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP21_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP21_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP21_DATA_DEFAULT, \
+			default = NCT5538D_GP21_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP21_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP21_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP21_INV_DEFAULT, \
+			default = NCT5538D_GP21_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP22_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP22_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP22_TYPE_DEFAULT, \
+			default = NCT5538D_GP22_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP22_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP22_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP22_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP22_DATA_DEFAULT, \
+			default = NCT5538D_GP22_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP22_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP22_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP22_INV_DEFAULT, \
+			default = NCT5538D_GP22_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP23_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP23_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP23_TYPE_DEFAULT, \
+			default = NCT5538D_GP23_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP23_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP23_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP23_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP23_DATA_DEFAULT, \
+			default = NCT5538D_GP23_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP23_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP23_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP23_INV_DEFAULT, \
+			default = NCT5538D_GP23_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP27_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP27_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP27_TYPE_DEFAULT, \
+			default = NCT5538D_GP27_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP27_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP27_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP27_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP27_DATA_DEFAULT, \
+			default = NCT5538D_GP27_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP27_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP27_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP27_INV_DEFAULT, \
+			default = NCT5538D_GP27_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+
+	#define ONEOF_NCT5538D_GP30_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP30_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP30_TYPE_DEFAULT, \
+			default = NCT5538D_GP30_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP30_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP30_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP30_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP30_DATA_DEFAULT, \
+			default = NCT5538D_GP30_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP30_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP30_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP30_INV_DEFAULT, \
+			default = NCT5538D_GP30_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP33_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP33_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP33_TYPE_DEFAULT, \
+			default = NCT5538D_GP33_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP33_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP33_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP33_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP33_DATA_DEFAULT, \
+			default = NCT5538D_GP33_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP33_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP33_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP33_INV_DEFAULT, \
+			default = NCT5538D_GP33_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+
+	#define ONEOF_NCT5538D_GP47_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP47_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP47_TYPE_DEFAULT, \
+			default = NCT5538D_GP47_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP47_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP47_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP47_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP47_DATA_DEFAULT, \
+			default = NCT5538D_GP47_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP47_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP47_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP47_INV_DEFAULT, \
+			default = NCT5538D_GP47_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+
+	#define ONEOF_NCT5538D_GP54_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP54_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP54_TYPE_DEFAULT, \
+			default = NCT5538D_GP54_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP54_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP54_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP54_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP54_DATA_DEFAULT, \
+			default = NCT5538D_GP54_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP54_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP54_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP54_INV_DEFAULT, \
+			default = NCT5538D_GP54_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP75_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP75_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP75_TYPE_DEFAULT, \
+			default = NCT5538D_GP75_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP75_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP75_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP75_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP75_DATA_DEFAULT, \
+			default = NCT5538D_GP75_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP75_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP75_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP75_INV_DEFAULT, \
+			default = NCT5538D_GP75_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP76_TYPE \
+		oneof varid     = SETUP_DATA.NCT5538D_GP76_Type, \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = NCT5538D_GP76_TYPE_DEFAULT, \
+			default = NCT5538D_GP76_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+	#define ONEOF_NCT5538D_GP76_DATA \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP76_Type == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP76_Data, \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = NCT5538D_GP76_DATA_DEFAULT, \
+			default = NCT5538D_GP76_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+	#define ONEOF_NCT5538D_GP76_INV \
+		oneof varid     = SETUP_DATA.NCT5538D_GP76_Inv, \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = NCT5538D_GP76_INV_DEFAULT, \
+			default = NCT5538D_GP76_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+//RayWu <<
+
+	#define ONEOF_NCT5538D_GP8X_TYPE(PIN_NUM, PIN_TYPE_DEFAULT) \
+		oneof varid     = SETUP_DATA.NCT5538D_GP8x_Type[PIN_NUM], \
+			prompt  = STRING_TOKEN(STR_GPIO_TYPE), \
+			help    = STRING_TOKEN(STR_GPIO_TYPE_HELP), \
+			default = PIN_TYPE_DEFAULT, \
+			default = PIN_TYPE_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_OUTPUT), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_INPUT), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+
+	#define ONEOF_NCT5538D_GP8X_DATA(PIN_NUM, PIN_DATA_DEFAULT) \
+	      suppressif ideqval SETUP_DATA.NCT5538D_GP8x_Type[PIN_NUM] == 1; \
+		oneof varid     = SETUP_DATA.NCT5538D_GP8x_Data[PIN_NUM], \
+			prompt  = STRING_TOKEN(STR_GPIO_DATA), \
+			help    = STRING_TOKEN(STR_GPIO_DATA_HELP), \
+			default = PIN_DATA_DEFAULT, \
+			default = PIN_DATA_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+		endoneof;\
+	      endif;
+
+	#define ONEOF_NCT5538D_GP8X_INV(PIN_NUM, PIN_INV_DEFAULT) \
+		oneof varid     = SETUP_DATA.NCT5538D_GP8x_Inv[PIN_NUM], \
+			prompt  = STRING_TOKEN(STR_GPIO_INV), \
+			help    = STRING_TOKEN(STR_GPIO_INV_HELP), \
+			default = PIN_INV_DEFAULT, \
+			default = PIN_INV_DEFAULT, defaultstore = AmiMfgDefault, \
+			option text = STRING_TOKEN(STR_NORMAL), value = 0, flags = RESET_REQUIRED; \
+   	 		option text = STRING_TOKEN(STR_INVERTED), value = 1, flags = RESET_REQUIRED; \
+		endoneof;
+#endif //#ifdef CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+
+#endif //#ifdef CONTROLS_WITH_DEFAULTS
+
+
+	#define NCT5538D_GP8X_ITEMS(PIN_NUM, PIN_TYPE_DEFAULT, PIN_DATA_DEFAULT, PIN_INV_DEFAULT) \
+		ONEOF_NCT5538D_GP8X_TYPE(PIN_NUM, PIN_TYPE_DEFAULT) \
+		ONEOF_NCT5538D_GP8X_DATA(PIN_NUM, PIN_DATA_DEFAULT) \
+		ONEOF_NCT5538D_GP8X_INV(PIN_NUM, PIN_INV_DEFAULT)
+
+	#define NCT5538D_GP8X_GROUP \
+		SUBTITLE(STRING_TOKEN(STR_GP80)) \
+		NCT5538D_GP8X_ITEMS(0, NCT5538D_GP80_TYPE_DEFAULT, NCT5538D_GP80_DATA_DEFAULT, NCT5538D_GP80_INV_DEFAULT) \
+		SUBTITLE(STRING_TOKEN(STR_GP81)) \
+		NCT5538D_GP8X_ITEMS(1, NCT5538D_GP81_TYPE_DEFAULT, NCT5538D_GP81_DATA_DEFAULT, NCT5538D_GP81_INV_DEFAULT) \
+		SUBTITLE(STRING_TOKEN(STR_GP82)) \
+		NCT5538D_GP8X_ITEMS(2, NCT5538D_GP82_TYPE_DEFAULT, NCT5538D_GP82_DATA_DEFAULT, NCT5538D_GP82_INV_DEFAULT) \
+		SUBTITLE(STRING_TOKEN(STR_GP83)) \
+		NCT5538D_GP8X_ITEMS(3, NCT5538D_GP83_TYPE_DEFAULT, NCT5538D_GP83_DATA_DEFAULT, NCT5538D_GP83_INV_DEFAULT) \
+		SUBTITLE(STRING_TOKEN(STR_GP84)) \
+		NCT5538D_GP8X_ITEMS(4, NCT5538D_GP84_TYPE_DEFAULT, NCT5538D_GP84_DATA_DEFAULT, NCT5538D_GP84_INV_DEFAULT) \
+		SUBTITLE(STRING_TOKEN(STR_GP85)) \
+		NCT5538D_GP8X_ITEMS(5, NCT5538D_GP85_TYPE_DEFAULT, NCT5538D_GP85_DATA_DEFAULT, NCT5538D_GP85_INV_DEFAULT) \
+		SUBTITLE(STRING_TOKEN(STR_GP86)) \
+		NCT5538D_GP8X_ITEMS(6, NCT5538D_GP86_TYPE_DEFAULT, NCT5538D_GP86_DATA_DEFAULT, NCT5538D_GP86_INV_DEFAULT) \
+		SUBTITLE(STRING_TOKEN(STR_GP87)) \
+		NCT5538D_GP8X_ITEMS(7, NCT5538D_GP87_TYPE_DEFAULT, NCT5538D_GP87_DATA_DEFAULT, NCT5538D_GP87_INV_DEFAULT)
+
+//-------------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//-------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//-------------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+    #include "Token.h"
+#endif
+
+//-------------------------------------------------------------------------
+//If you need custom varstore's define them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+#endif
+
+//-------------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+
+//-------------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+
+        goto NCT5538D_MISC_FORM_ID,
+        	prompt  = STRING_TOKEN(STR_NCT5538D_MISC_CONFIG),
+        	help    = STRING_TOKEN(STR_NCT5538D_MISC_CONFIG);
+
+#endif
+
+//-------------------------------------------------------------------------
+// Define forms
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+
+	#ifndef NCT5538D_MISC_FORM_SETUP
+	#define NCT5538D_MISC_FORM_SETUP
+	  form formid = AUTO_ID(NCT5538D_MISC_FORM_ID),
+	    title = STRING_TOKEN(STR_NCT5538D_MISC_CONFIG);
+	    SUBTITLE(STRING_TOKEN(STR_NCT5538D_MISC_CONFIG))
+	    SEPARATOR
+	      SUBTITLE(STRING_TOKEN(NCT5538D_DEEP_S5))
+	      ONEOF_NCT5538D_DEEP_S5
+	      SEPARATOR
+
+	    ONEOF_NCT5538D_AC_PWR_LOSS
+	    SEPARATOR
+
+	    #if NCT5538D_SERIAL_PORT1_PRESENT
+		ONEOF_NCT5538D_UARTA_RS485_ENABLE
+		ONEOF_NCT5538D_UARTA_RS485_INV_SEL
+		SEPARATOR
+	    #endif //  NCT5538D_SERIAL_PORT1_PRESENT
+
+	    
+	    // NCT5538D GPIO Groups	    
+	    SUBTITLE(STRING_TOKEN(STR_GP00))
+		ONEOF_NCT5538D_GP00_TYPE
+		ONEOF_NCT5538D_GP00_DATA
+		ONEOF_NCT5538D_GP00_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP01))
+		ONEOF_NCT5538D_GP01_TYPE
+		ONEOF_NCT5538D_GP01_DATA
+		ONEOF_NCT5538D_GP01_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP04))
+		ONEOF_NCT5538D_GP04_TYPE
+		ONEOF_NCT5538D_GP04_DATA
+		ONEOF_NCT5538D_GP04_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP05))
+		ONEOF_NCT5538D_GP05_TYPE
+		ONEOF_NCT5538D_GP05_DATA
+		ONEOF_NCT5538D_GP05_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP20))
+		ONEOF_NCT5538D_GP20_TYPE
+		ONEOF_NCT5538D_GP20_DATA
+		ONEOF_NCT5538D_GP20_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP21))
+		ONEOF_NCT5538D_GP21_TYPE
+		ONEOF_NCT5538D_GP21_DATA
+		ONEOF_NCT5538D_GP21_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP22))
+		ONEOF_NCT5538D_GP22_TYPE
+		ONEOF_NCT5538D_GP22_DATA
+		ONEOF_NCT5538D_GP22_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP23))
+		ONEOF_NCT5538D_GP23_TYPE
+		ONEOF_NCT5538D_GP23_DATA
+		ONEOF_NCT5538D_GP23_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP27))
+		ONEOF_NCT5538D_GP27_TYPE
+		ONEOF_NCT5538D_GP27_DATA
+		ONEOF_NCT5538D_GP27_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP30))
+		ONEOF_NCT5538D_GP30_TYPE
+		ONEOF_NCT5538D_GP30_DATA
+		ONEOF_NCT5538D_GP30_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP33))
+		ONEOF_NCT5538D_GP33_TYPE
+		ONEOF_NCT5538D_GP33_DATA
+		ONEOF_NCT5538D_GP33_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP47))
+		ONEOF_NCT5538D_GP47_TYPE
+		ONEOF_NCT5538D_GP47_DATA
+		ONEOF_NCT5538D_GP47_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP54))
+		ONEOF_NCT5538D_GP54_TYPE
+		ONEOF_NCT5538D_GP54_DATA
+		ONEOF_NCT5538D_GP54_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP75))
+		ONEOF_NCT5538D_GP75_TYPE
+		ONEOF_NCT5538D_GP75_DATA
+		ONEOF_NCT5538D_GP75_INV
+	    SUBTITLE(STRING_TOKEN(STR_GP76))
+		ONEOF_NCT5538D_GP76_TYPE
+		ONEOF_NCT5538D_GP76_DATA
+		ONEOF_NCT5538D_GP76_INV
+
+	    NCT5538D_GP8X_GROUP
+
+	  endform; //NCT5538D_MISC_FORM_ID
+	#endif //NCT5538D_MISC_FORM_SETUP
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

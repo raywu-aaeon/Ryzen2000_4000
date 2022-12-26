@@ -1,0 +1,11 @@
+<component>
+	name = "IT8728FSetup"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\IT8728F\"
+	RefName = "AaeonIoPkg.IT8728F.IT8728FSetup"
+[files]
+"IT8728FSetup.sd"
+"IT8728FSetup.uni"	
+"IT8728FSetup.c"	
+"IT8728FSetup.h"	
+<endComponent>

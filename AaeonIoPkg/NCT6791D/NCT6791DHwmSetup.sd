@@ -1,0 +1,2971 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <NCT6791DHwmSetup.sd>
+//
+// Description: SIO Form Template, Setup screen definition file
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+//
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+  #if (NCT6791D_CPUFAN_CTRL_SUPPORT)
+    UINT8 OnOff_CpuFan_Ctrl;
+    UINT8 CpuFan_Ctrl_Mode;
+    UINT8 CpuFanOutValue;
+    UINT8 CpuFanTempSrc;        // 2015/11/03 Eric +
+    UINT8 CpuFanTargetTemp;
+    UINT8 CpuTolOfTemp;
+    UINT8 CpuFanStartUp;
+    UINT8 CpuFanStopduty;       // 2015/11/03 Eric +
+    UINT8 CpuFanStopValue;
+    UINT8 CpuFanStopTime;
+    UINT8 CpuFanStepUpTime;
+    UINT8 CpuFanStepDownTime;
+    UINT8 CpuFanCriticalTemp;
+    UINT16 CpuFanTargetSpeed;
+    UINT8 CpuFanSpeedTol;
+    UINT8 En_CPU_RPM;
+    UINT8 CpuFanT[4];
+    UINT8 CpuFanPwm[4];
+    UINT8 CpuFanCriticalTempTol;
+    UINT8 CpuFanCountUp;
+    UINT8 CpuFanCountDown;
+  #endif // (NCT6791D_CPUFAN_CTRL_SUPPORT)
+	
+  #if (NCT6791D_SYSFAN_CTRL_SUPPORT)
+    UINT8 OnOff_SysFan_Ctrl;
+    UINT8 SysFan_Ctrl_Mode;
+    UINT8 SysFanOutputMode;     // 2015/12/07 Eric +
+    UINT8 SysFanOutValue;
+    UINT8 SysFanTempSrc;        // 2015/11/03 Eric +
+    UINT8 SysFanTargetTemp;
+    UINT8 SysTolOfTemp;
+    UINT8 SysFanStartUp;
+    UINT8 SysFanStopduty;       // 2015/11/03 Eric +
+    UINT8 SysFanStopValue;
+    UINT8 SysFanStopTime;
+    UINT8 SysFanStepUpTime;
+    UINT8 SysFanStepDownTime;
+    UINT8 SysFanCriticalTemp;
+    UINT16 SysFanTargetSpeed;
+    UINT8 SysFanSpeedTol;
+    UINT8 En_SYS_RPM;
+    UINT8 SysFanT[4];
+    UINT8 SysFanPwm[4];
+    UINT8 SysFanCriticalTempTol;
+    UINT8 SysFanCountUp;
+    UINT8 SysFanCountDown;
+  #endif // (NCT6791D_SYSFAN_CTRL_SUPPORT)
+	
+  #if (NCT6791D_AUXFAN0_CTRL_SUPPORT)
+    UINT8 OnOff_Aux0Fan_Ctrl;
+    UINT8 Aux0Fan_Ctrl_Mode;
+    UINT8 Aux0FanOutValue;
+    UINT8 Aux0FanTempSrc;        // 2015/11/03 Eric +
+    UINT8 Aux0FanTargetTemp;
+    UINT8 Aux0TolOfTemp;
+    UINT8 Aux0FanStartUp;
+    UINT8 Aux0FanStopduty;       // 2015/11/03 Eric +
+    UINT8 Aux0FanStopValue;
+    UINT8 Aux0FanStopTime;
+    UINT8 Aux0FanStepUpTime;
+    UINT8 Aux0FanStepDownTime;
+    UINT8 Aux0FanCriticalTemp;
+    UINT16 Aux0FanTargetSpeed;
+    UINT8 Aux0FanSpeedTol;
+    UINT8 En_AUX0_RPM;
+    UINT8 Aux0FanT[4];
+    UINT8 Aux0FanPwm[4];
+    UINT8 Aux0FanCriticalTempTol;
+    UINT8 Aux0FanCountUp;
+    UINT8 Aux0FanCountDown;
+  #endif // (NCT6791D_AUXFAN0_CTRL_SUPPORT)
+
+  #if (NCT6791D_AUXFAN1_CTRL_SUPPORT)
+    UINT8 OnOff_Aux1Fan_Ctrl;
+    UINT8 Aux1Fan_Ctrl_Mode;
+    UINT8 Aux1FanOutValue;
+    UINT8 Aux1FanTempSrc;        // 2015/11/03 Eric +
+    UINT8 Aux1FanTargetTemp;
+    UINT8 Aux1TolOfTemp;
+    UINT8 Aux1FanStartUp;
+    UINT8 Aux1FanStopduty;       // 2015/11/03 Eric +
+    UINT8 Aux1FanStopValue;
+    UINT8 Aux1FanStopTime;
+    UINT8 Aux1FanStepUpTime;
+    UINT8 Aux1FanStepDownTime;
+    UINT8 Aux1FanCriticalTemp;
+    UINT16 Aux1FanTargetSpeed;
+    UINT8 Aux1FanSpeedTol;
+    UINT8 En_AUX1_RPM;
+    UINT8 Aux1FanT[4];
+    UINT8 Aux1FanPwm[4];
+    UINT8 Aux1FanCriticalTempTol;
+    UINT8 Aux1FanCountUp;
+    UINT8 Aux1FanCountDown;
+  #endif // (NCT6791D_AUXFAN1_CTRL_SUPPORT)
+
+  #if (NCT6791D_AUXFAN2_CTRL_SUPPORT)
+    UINT8 OnOff_Aux2Fan_Ctrl;
+    UINT8 Aux2Fan_Ctrl_Mode;
+    UINT8 Aux2FanOutValue;
+    UINT8 Aux2FanTempSrc;        // 2015/11/03 Eric +
+    UINT8 Aux2FanTargetTemp;
+    UINT8 Aux2TolOfTemp;
+    UINT8 Aux2FanStartUp;
+    UINT8 Aux2FanStopduty;       // 2015/11/03 Eric +
+    UINT8 Aux2FanStopValue;
+    UINT8 Aux2FanStopTime;
+    UINT8 Aux2FanStepUpTime;
+    UINT8 Aux2FanStepDownTime;
+    UINT8 Aux2FanCriticalTemp;
+    UINT16 Aux2FanTargetSpeed;
+    UINT8 Aux2FanSpeedTol;
+    UINT8 En_AUX2_RPM;
+    UINT8 Aux2FanT[4];
+    UINT8 Aux2FanPwm[4];
+    UINT8 Aux2FanCriticalTempTol;
+    UINT8 Aux2FanCountUp;
+    UINT8 Aux2FanCountDown;
+  #endif // (NCT6791D_AUXFAN2_CTRL_SUPPORT)
+
+  #if (NCT6791D_AUXFAN3_CTRL_SUPPORT)
+    UINT8 OnOff_Aux3Fan_Ctrl;
+    UINT8 Aux3Fan_Ctrl_Mode;
+    UINT8 Aux3FanOutValue;
+    UINT8 Aux3FanTempSrc;        // 2015/11/03 Eric +
+    UINT8 Aux3FanTargetTemp;
+    UINT8 Aux3TolOfTemp;
+    UINT8 Aux3FanStartUp;
+    UINT8 Aux3FanStopduty;       // 2015/11/03 Eric +
+    UINT8 Aux3FanStopValue;
+    UINT8 Aux3FanStopTime;
+    UINT8 Aux3FanStepUpTime;
+    UINT8 Aux3FanStepDownTime;
+    UINT8 Aux3FanCriticalTemp;
+    UINT16 Aux3FanTargetSpeed;
+    UINT8 Aux3FanSpeedTol;
+    UINT8 Aux3FanT[4];
+    UINT8 Aux3FanPwm[4];
+    UINT8 Aux3FanCriticalTempTol;
+    UINT8 Aux3FanCountUp;
+    UINT8 Aux3FanCountDown;
+  #endif // (NCT6791D_AUXFAN3_CTRL_SUPPORT)
+#endif //SETUP_DATA_DEFINITION
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+    #if (NCT6791D_CPUFAN_CTRL_SUPPORT)
+    	#define ONEOF_CPUFAN_CTRL\
+    	  oneof varid    = SETUP_DATA.OnOff_CpuFan_Ctrl,\
+    	    prompt       = STRING_TOKEN (STR_CPU_FAN_ONOFF),\
+    	    help         = STRING_TOKEN (STR_CPU_FAN_ONOFF_HELP),\
+            default      = ONEOF_CPUFAN_CTRL_DEFAULT,\
+            default      = ONEOF_CPUFAN_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define CPUFAN_CTRL_TYPE\
+    	  oneof varid    = SETUP_DATA.CpuFan_Ctrl_Mode,\
+    	    prompt       = STRING_TOKEN (STR_FAN_CTRL_MODE),\
+    	    help         = STRING_TOKEN (STR_FAN_CTRL_MODE_HELP),\
+            default      = CPUFAN_CTRL_TYPE_DEFAULT,\
+            default      = CPUFAN_CTRL_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_MANUAL_MODE), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_THRM_CRUISE_MODE), value = 1, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SPEED_CRUISE_MODE), value = 2, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SMART_FAN_IV_MODE), value = 4, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define CPUFAN_OUT_VALUE\
+              numeric varid  = SETUP_DATA.CpuFanOutValue,\
+                prompt       = STRING_TOKEN(STR_FAN_OUT_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_OUT_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 255,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define CPUFAN_TEMP_SRC\
+              oneof varid    = SETUP_DATA.CpuFanTempSrc,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_SRC),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_SRC_HELP),\
+                default      = CPUFAN_TEMP_SRC_DEFAULT,\
+                default      = CPUFAN_TEMP_SRC_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_SYSTIN), value = 1, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_CPUTIN), value = 2, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN0), value = 3, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN1), value = 4, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN2), value = 5, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN3), value = 6, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_0), value = 8, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_1), value = 9, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_2), value = 10, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_3), value = 11, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_4), value = 12, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_5), value = 13, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_6), value = 14, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_7), value = 15, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_0), value = 16, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_1), value = 17, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_CPU_MAX_TEMP), value = 18, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_TEMP), value = 19, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CPU_TEMP), value = 20, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_MCH_TEMP), value = 21, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM0_TEMP), value = 22, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM1_TEMP), value = 23, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM2_TEMP), value = 24, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM3_TEMP), value = 25, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_BYTE_TEMP), value = 26, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_VIRTUAL_TEMP), value = 31, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define CPUFAN_TARGET_TEMP\
+              numeric varid  = SETUP_DATA.CpuFanTargetTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TARGET_TEMP),\
+                help         = STRING_TOKEN(STR_FAN_TARGET_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 127,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define CPUFAN_TOL_TEMP\
+              numeric varid  = SETUP_DATA.CpuTolOfTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define CPUFAN_START_UP\
+              numeric varid  = SETUP_DATA.CpuFanStartUp,\
+                prompt       = STRING_TOKEN(STR_FAN_START_UP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_START_UP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 127,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define CPUFAN_STOP_DUTY\
+              oneof varid    = SETUP_DATA.CpuFanStopduty,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_DUTY),\
+                help         = STRING_TOKEN(STR_FAN_STOP_DUTY_HELP),\
+                default      = CPUFAN_STOP_DUTY_DEFAULT,\
+                default      = CPUFAN_STOP_DUTY_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_DOWN_TO_ZERO), value = 0, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_DOWN_TO_FAN_STOP_VALUE), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define CPUFAN_STOP_VALUE\
+              numeric varid  = SETUP_DATA.CpuFanStopValue,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_STOP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 100,\
+              endnumeric;
+    
+    	#define CPUFAN_STOP_TIME\
+              numeric varid  = SETUP_DATA.CpuFanStopTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STOP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define CPUFAN_STEP_UP_TIME\
+              numeric varid  = SETUP_DATA.CpuFanStepUpTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_UP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_UP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define CPUFAN_STEP_DOWN_TIME\
+              numeric varid  = SETUP_DATA.CpuFanStepDownTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define CPUFAN_CRITICAL_TEMP\
+              numeric varid  = SETUP_DATA.CpuFanCriticalTemp,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 75,\
+              endnumeric;
+    
+    	#define CPUFAN_TARGET_SPEED\
+              numeric varid  = SETUP_DATA.CpuFanTargetSpeed,\
+                prompt       = STRING_TOKEN(STR_TARGET_SPEED),\
+                help         = STRING_TOKEN(STR_TARGET_SPEED_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 4096,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define CPUFAN_SPEED_TOL\
+              numeric varid  = SETUP_DATA.CpuFanSpeedTol,\
+                prompt       = STRING_TOKEN(STR_SPEED_TOL),\
+                help         = STRING_TOKEN(STR_SPEED_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 64,\
+                step         = 1,\
+                default      = 2,\
+              endnumeric;
+    
+      #define CPUFAN_CLOSE_LOOP_MODE\
+              oneof varid    = SETUP_DATA.En_CPU_RPM,\
+                prompt       = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE),\
+                help         = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE_HELP),\
+                option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+    
+    	#define CPUFAN_TEMP1\
+              numeric varid  = SETUP_DATA.CpuFanT[0],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP1),\
+                help         = STRING_TOKEN(STR_FAN_TEMP1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 40,\
+              endnumeric;
+    
+    	#define CPUFAN_TEMP2\
+              numeric varid  = SETUP_DATA.CpuFanT[1],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP2),\
+                help         = STRING_TOKEN(STR_FAN_TEMP2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define CPUFAN_TEMP3\
+              numeric varid  = SETUP_DATA.CpuFanT[2],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP3),\
+                help         = STRING_TOKEN(STR_FAN_TEMP3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define CPUFAN_TEMP4\
+              numeric varid  = SETUP_DATA.CpuFanT[3],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP4),\
+                help         = STRING_TOKEN(STR_FAN_TEMP4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 70,\
+              endnumeric;
+    
+    	#define CPUFAN_PWM1\
+              numeric varid  = SETUP_DATA.CpuFanPwm[0],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM1),\
+                help         = STRING_TOKEN(STR_FAN_PWM1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 150,\
+              endnumeric;
+    
+    	#define CPUFAN_PWM2\
+              numeric varid  = SETUP_DATA.CpuFanPwm[1],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM2),\
+                help         = STRING_TOKEN(STR_FAN_PWM2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 170,\
+              endnumeric;
+    
+    	#define CPUFAN_PWM3\
+              numeric varid  = SETUP_DATA.CpuFanPwm[2],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM3),\
+                help         = STRING_TOKEN(STR_FAN_PWM3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 200,\
+              endnumeric;
+    
+    	#define CPUFAN_PWM4\
+              numeric varid  = SETUP_DATA.CpuFanPwm[3],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM4),\
+                help         = STRING_TOKEN(STR_FAN_PWM4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 220,\
+              endnumeric;
+    
+    	#define CPUFAN_CRITICAL_TEMP_TOL\
+              numeric varid  = SETUP_DATA.CpuFanCriticalTempTol,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP_TOL),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define CPUFAN_COUNT_UP\
+              numeric varid  = SETUP_DATA.CpuFanCountUp,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_UP),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_UP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = CPUFAN_COUNT_UP_DEFAULT,\
+              endnumeric;
+    
+    	#define CPUFAN_COUNT_DOWN\
+              numeric varid  = SETUP_DATA.CpuFanCountDown,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_DOWN),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_DOWN_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = CPUFAN_COUNT_DOWN_DEFAULT,\
+              endnumeric;
+    #endif // (NCT6791D_CPUFAN_CTRL_SUPPORT)
+
+    #if (NCT6791D_SYSFAN_CTRL_SUPPORT)
+    	#define ONEOF_SYSFAN_CTRL\
+    	  oneof varid    = SETUP_DATA.OnOff_SysFan_Ctrl,\
+    	    prompt       = STRING_TOKEN (STR_SYS_FAN_ONOFF),\
+    	    help         = STRING_TOKEN (STR_SYS_FAN_ONOFF_HELP),\
+            default      = ONEOF_SYSFAN_CTRL_DEFAULT,\
+            default      = ONEOF_SYSFAN_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+      // >> 2015/12/07 Eric
+      #define SYSFAN_OUTPUT_MODE\
+              oneof varid    = SETUP_DATA.SysFanOutputMode,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_SRC),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_SRC_HELP),\
+                default      = SYSFAN_OUTPUT_MODE_DEFAULT,\
+                default      = SYSFAN_OUTPUT_MODE_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_PWM_MODE), value = 0, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_DC_MODE), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/12/07 Eric
+    
+    	#define SYSFAN_CTRL_TYPE\
+    	  oneof varid    = SETUP_DATA.SysFan_Ctrl_Mode,\
+    	    prompt       = STRING_TOKEN (STR_FAN_CTRL_MODE),\
+    	    help         = STRING_TOKEN (STR_FAN_CTRL_MODE_HELP),\
+            default      = SYSFAN_CTRL_TYPE_DEFAULT,\
+            default      = SYSFAN_CTRL_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_MANUAL_MODE), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_THRM_CRUISE_MODE), value = 1, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SPEED_CRUISE_MODE), value = 2, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SMART_FAN_IV_MODE), value = 4, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define SYSFAN_OUT_VALUE\
+              numeric varid  = SETUP_DATA.SysFanOutValue,\
+                prompt       = STRING_TOKEN(STR_FAN_OUT_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_OUT_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 255,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define SYSFAN_TEMP_SRC\
+              oneof varid    = SETUP_DATA.SysFanTempSrc,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_SRC),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_SRC_HELP),\
+                default      = SYSFAN_TEMP_SRC_DEFAULT,\
+                default      = SYSFAN_TEMP_SRC_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_SYSTIN), value = 1, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_CPUTIN), value = 2, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN0), value = 3, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN1), value = 4, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN2), value = 5, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN3), value = 6, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_0), value = 8, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_1), value = 9, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_2), value = 10, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_3), value = 11, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_4), value = 12, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_5), value = 13, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_6), value = 14, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_7), value = 15, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_0), value = 16, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_1), value = 17, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_CPU_MAX_TEMP), value = 18, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_TEMP), value = 19, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CPU_TEMP), value = 20, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_MCH_TEMP), value = 21, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM0_TEMP), value = 22, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM1_TEMP), value = 23, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM2_TEMP), value = 24, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM3_TEMP), value = 25, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_BYTE_TEMP), value = 26, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_VIRTUAL_TEMP), value = 31, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define SYSFAN_TARGET_TEMP\
+              numeric varid  = SETUP_DATA.SysFanTargetTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TARGET_TEMP),\
+                help         = STRING_TOKEN(STR_FAN_TARGET_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 127,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define SYSFAN_TOL_TEMP\
+              numeric varid  = SETUP_DATA.SysTolOfTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define SYSFAN_START_UP\
+              numeric varid  = SETUP_DATA.SysFanStartUp,\
+                prompt       = STRING_TOKEN(STR_FAN_START_UP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_START_UP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 127,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define SYSFAN_STOP_DUTY\
+              oneof varid    = SETUP_DATA.SysFanStopduty,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_DUTY),\
+                help         = STRING_TOKEN(STR_FAN_STOP_DUTY_HELP),\
+                default      = SYSFAN_STOP_DUTY_DEFAULT,\
+                default      = SYSFAN_STOP_DUTY_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_DOWN_TO_ZERO), value = 0, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_DOWN_TO_FAN_STOP_VALUE), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define SYSFAN_STOP_VALUE\
+              numeric varid  = SETUP_DATA.SysFanStopValue,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_STOP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 100,\
+              endnumeric;
+    
+    	#define SYSFAN_STOP_TIME\
+              numeric varid  = SETUP_DATA.SysFanStopTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STOP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define SYSFAN_STEP_UP_TIME\
+              numeric varid  = SETUP_DATA.SysFanStepUpTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_UP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_UP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define SYSFAN_STEP_DOWN_TIME\
+              numeric varid  = SETUP_DATA.SysFanStepDownTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define SYSFAN_CRITICAL_TEMP\
+              numeric varid  = SETUP_DATA.SysFanCriticalTemp,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 75,\
+              endnumeric;
+    
+    	#define SYSFAN_TARGET_SPEED\
+              numeric varid  = SETUP_DATA.SysFanTargetSpeed,\
+                prompt       = STRING_TOKEN(STR_TARGET_SPEED),\
+                help         = STRING_TOKEN(STR_TARGET_SPEED_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 4096,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define SYSFAN_SPEED_TOL\
+              numeric varid  = SETUP_DATA.SysFanSpeedTol,\
+                prompt       = STRING_TOKEN(STR_SPEED_TOL),\
+                help         = STRING_TOKEN(STR_SPEED_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 64,\
+                step         = 1,\
+                default      = 2,\
+              endnumeric;
+    
+      #define SYSFAN_CLOSE_LOOP_MODE\
+              oneof varid    = SETUP_DATA.En_SYS_RPM,\
+                prompt       = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE),\
+                help         = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE_HELP),\
+                option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+    
+    	#define SYSFAN_TEMP1\
+              numeric varid  = SETUP_DATA.SysFanT[0],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP1),\
+                help         = STRING_TOKEN(STR_FAN_TEMP1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 40,\
+              endnumeric;
+    
+    	#define SYSFAN_TEMP2\
+              numeric varid  = SETUP_DATA.SysFanT[1],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP2),\
+                help         = STRING_TOKEN(STR_FAN_TEMP2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define SYSFAN_TEMP3\
+              numeric varid  = SETUP_DATA.SysFanT[2],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP3),\
+                help         = STRING_TOKEN(STR_FAN_TEMP3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define SYSFAN_TEMP4\
+              numeric varid  = SETUP_DATA.SysFanT[3],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP4),\
+                help         = STRING_TOKEN(STR_FAN_TEMP4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 70,\
+              endnumeric;
+    
+    	#define SYSFAN_PWM1\
+              numeric varid  = SETUP_DATA.SysFanPwm[0],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM1),\
+                help         = STRING_TOKEN(STR_FAN_PWM1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 150,\
+              endnumeric;
+    
+    	#define SYSFAN_PWM2\
+              numeric varid  = SETUP_DATA.SysFanPwm[1],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM2),\
+                help         = STRING_TOKEN(STR_FAN_PWM2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 170,\
+              endnumeric;
+    
+    	#define SYSFAN_PWM3\
+              numeric varid  = SETUP_DATA.SysFanPwm[2],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM3),\
+                help         = STRING_TOKEN(STR_FAN_PWM3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 200,\
+              endnumeric;
+    
+    	#define SYSFAN_PWM4\
+              numeric varid  = SETUP_DATA.SysFanPwm[3],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM4),\
+                help         = STRING_TOKEN(STR_FAN_PWM4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 220,\
+              endnumeric;
+    
+    	#define SYSFAN_CRITICAL_TEMP_TOL\
+              numeric varid  = SETUP_DATA.SysFanCriticalTempTol,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP_TOL),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define SYSFAN_COUNT_UP\
+              numeric varid  = SETUP_DATA.SysFanCountUp,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_UP),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_UP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = SYSFAN_COUNT_UP_DEFAULT,\
+              endnumeric;
+    
+    	#define SYSFAN_COUNT_DOWN\
+              numeric varid  = SETUP_DATA.SysFanCountDown,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_DOWN),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_DOWN_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = SYSFAN_COUNT_DOWN_DEFAULT,\
+              endnumeric;
+    #endif // (NCT6791D_SYSFAN_CTRL_SUPPORT)
+
+    #if (NCT6791D_AUXFAN0_CTRL_SUPPORT)
+    	#define ONEOF_AUX0FAN_CTRL\
+    	  oneof varid    = SETUP_DATA.OnOff_Aux0Fan_Ctrl,\
+    	    prompt       = STRING_TOKEN (STR_AUX0_FAN_ONOFF),\
+    	    help         = STRING_TOKEN (STR_AUX0_FAN_ONOFF_HELP),\
+            default      = ONEOF_AUX0FAN_CTRL_DEFAULT,\
+            default      = ONEOF_AUX0FAN_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define AUX0FAN_CTRL_TYPE\
+    	  oneof varid    = SETUP_DATA.Aux0Fan_Ctrl_Mode,\
+    	    prompt       = STRING_TOKEN (STR_FAN_CTRL_MODE),\
+    	    help         = STRING_TOKEN (STR_FAN_CTRL_MODE_HELP),\
+            default      = AUX0FAN_CTRL_TYPE_DEFAULT,\
+            default      = AUX0FAN_CTRL_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_MANUAL_MODE), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_THRM_CRUISE_MODE), value = 1, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SPEED_CRUISE_MODE), value = 2, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SMART_FAN_IV_MODE), value = 4, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define AUX0FAN_OUT_VALUE\
+              numeric varid  = SETUP_DATA.Aux0FanOutValue,\
+                prompt       = STRING_TOKEN(STR_FAN_OUT_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_OUT_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 255,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define AUX0FAN_TEMP_SRC\
+              oneof varid    = SETUP_DATA.Aux0FanTempSrc,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_SRC),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_SRC_HELP),\
+                default      = AUX0FAN_TEMP_SRC_DEFAULT,\
+                default      = AUX0FAN_TEMP_SRC_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_SYSTIN), value = 1, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_CPUTIN), value = 2, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN0), value = 3, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN1), value = 4, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN2), value = 5, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN3), value = 6, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_0), value = 8, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_1), value = 9, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_2), value = 10, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_3), value = 11, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_4), value = 12, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_5), value = 13, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_6), value = 14, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_7), value = 15, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_0), value = 16, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_1), value = 17, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_CPU_MAX_TEMP), value = 18, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_TEMP), value = 19, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CPU_TEMP), value = 20, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_MCH_TEMP), value = 21, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM0_TEMP), value = 22, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM1_TEMP), value = 23, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM2_TEMP), value = 24, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM3_TEMP), value = 25, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_BYTE_TEMP), value = 26, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_VIRTUAL_TEMP), value = 31, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define AUX0FAN_TARGET_TEMP\
+              numeric varid  = SETUP_DATA.Aux0FanTargetTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TARGET_TEMP),\
+                help         = STRING_TOKEN(STR_FAN_TARGET_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 127,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define AUX0FAN_TOL_TEMP\
+              numeric varid  = SETUP_DATA.Aux0TolOfTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX0FAN_START_UP\
+              numeric varid  = SETUP_DATA.Aux0FanStartUp,\
+                prompt       = STRING_TOKEN(STR_FAN_START_UP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_START_UP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 127,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define AUX0FAN_STOP_DUTY\
+              oneof varid    = SETUP_DATA.Aux0FanStopduty,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_DUTY),\
+                help         = STRING_TOKEN(STR_FAN_STOP_DUTY_HELP),\
+                default      = AUX0FAN_STOP_DUTY_DEFAULT,\
+                default      = AUX0FAN_STOP_DUTY_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_DOWN_TO_ZERO), value = 0, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_DOWN_TO_FAN_STOP_VALUE), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define AUX0FAN_STOP_VALUE\
+              numeric varid  = SETUP_DATA.Aux0FanStopValue,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_STOP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 100,\
+              endnumeric;
+    
+    	#define AUX0FAN_STOP_TIME\
+              numeric varid  = SETUP_DATA.Aux0FanStopTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STOP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define AUX0FAN_STEP_UP_TIME\
+              numeric varid  = SETUP_DATA.Aux0FanStepUpTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_UP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_UP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define AUX0FAN_STEP_DOWN_TIME\
+              numeric varid  = SETUP_DATA.Aux0FanStepDownTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define AUX0FAN_CRITICAL_TEMP\
+              numeric varid  = SETUP_DATA.Aux0FanCriticalTemp,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 75,\
+              endnumeric;
+    
+    	#define AUX0FAN_TARGET_SPEED\
+              numeric varid  = SETUP_DATA.Aux0FanTargetSpeed,\
+                prompt       = STRING_TOKEN(STR_TARGET_SPEED),\
+                help         = STRING_TOKEN(STR_TARGET_SPEED_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 4096,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX0FAN_SPEED_TOL\
+              numeric varid  = SETUP_DATA.Aux0FanSpeedTol,\
+                prompt       = STRING_TOKEN(STR_SPEED_TOL),\
+                help         = STRING_TOKEN(STR_SPEED_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 64,\
+                step         = 1,\
+                default      = 2,\
+              endnumeric;
+    
+      #define AUX0FAN_CLOSE_LOOP_MODE\
+              oneof varid    = SETUP_DATA.En_AUX0_RPM,\
+                prompt       = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE),\
+                help         = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE_HELP),\
+                option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+    
+    	#define AUX0FAN_TEMP1\
+              numeric varid  = SETUP_DATA.Aux0FanT[0],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP1),\
+                help         = STRING_TOKEN(STR_FAN_TEMP1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 40,\
+              endnumeric;
+    
+    	#define AUX0FAN_TEMP2\
+              numeric varid  = SETUP_DATA.Aux0FanT[1],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP2),\
+                help         = STRING_TOKEN(STR_FAN_TEMP2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define AUX0FAN_TEMP3\
+              numeric varid  = SETUP_DATA.Aux0FanT[2],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP3),\
+                help         = STRING_TOKEN(STR_FAN_TEMP3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define AUX0FAN_TEMP4\
+              numeric varid  = SETUP_DATA.Aux0FanT[3],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP4),\
+                help         = STRING_TOKEN(STR_FAN_TEMP4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 70,\
+              endnumeric;
+    
+    	#define AUX0FAN_PWM1\
+              numeric varid  = SETUP_DATA.Aux0FanPwm[0],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM1),\
+                help         = STRING_TOKEN(STR_FAN_PWM1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 150,\
+              endnumeric;
+    
+    	#define AUX0FAN_PWM2\
+              numeric varid  = SETUP_DATA.Aux0FanPwm[1],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM2),\
+                help         = STRING_TOKEN(STR_FAN_PWM2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 170,\
+              endnumeric;
+    
+    	#define AUX0FAN_PWM3\
+              numeric varid  = SETUP_DATA.Aux0FanPwm[2],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM3),\
+                help         = STRING_TOKEN(STR_FAN_PWM3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 200,\
+              endnumeric;
+    
+    	#define AUX0FAN_PWM4\
+              numeric varid  = SETUP_DATA.Aux0FanPwm[3],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM4),\
+                help         = STRING_TOKEN(STR_FAN_PWM4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 220,\
+              endnumeric;
+    
+    	#define AUX0FAN_CRITICAL_TEMP_TOL\
+              numeric varid  = SETUP_DATA.Aux0FanCriticalTempTol,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP_TOL),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX0FAN_COUNT_UP\
+              numeric varid  = SETUP_DATA.Aux0FanCountUp,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_UP),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_UP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = AUX0FAN_COUNT_UP_DEFAULT,\
+              endnumeric;
+    
+    	#define AUX0FAN_COUNT_DOWN\
+              numeric varid  = SETUP_DATA.Aux0FanCountDown,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_DOWN),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_DOWN_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = AUX0FAN_COUNT_DOWN_DEFAULT,\
+              endnumeric;
+    #endif // (NCT6791D_AUXFAN0_CTRL_SUPPORT)
+
+    #if (NCT6791D_AUXFAN1_CTRL_SUPPORT)
+    	#define ONEOF_AUX1FAN_CTRL\
+    	  oneof varid    = SETUP_DATA.OnOff_Aux1Fan_Ctrl,\
+    	    prompt       = STRING_TOKEN (STR_AUX1_FAN_ONOFF),\
+    	    help         = STRING_TOKEN (STR_AUX1_FAN_ONOFF_HELP),\
+            default      = ONEOF_AUX1FAN_CTRL_DEFAULT,\
+            default      = ONEOF_AUX1FAN_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define AUX1FAN_CTRL_TYPE\
+    	  oneof varid    = SETUP_DATA.Aux1Fan_Ctrl_Mode,\
+    	    prompt       = STRING_TOKEN (STR_FAN_CTRL_MODE),\
+    	    help         = STRING_TOKEN (STR_FAN_CTRL_MODE_HELP),\
+            default      = AUX1FAN_CTRL_TYPE_DEFAULT,\
+            default      = AUX1FAN_CTRL_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_MANUAL_MODE), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_THRM_CRUISE_MODE), value = 1, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SPEED_CRUISE_MODE), value = 2, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SMART_FAN_IV_MODE), value = 4, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define AUX1FAN_OUT_VALUE\
+              numeric varid  = SETUP_DATA.Aux1FanOutValue,\
+                prompt       = STRING_TOKEN(STR_FAN_OUT_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_OUT_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 255,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define AUX1FAN_TEMP_SRC\
+              oneof varid    = SETUP_DATA.Aux1FanTempSrc,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_SRC),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_SRC_HELP),\
+                default      = AUX1FAN_TEMP_SRC_DEFAULT,\
+                default      = AUX1FAN_TEMP_SRC_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_SYSTIN), value = 1, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_CPUTIN), value = 2, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN0), value = 3, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN1), value = 4, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN2), value = 5, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN3), value = 6, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_0), value = 8, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_1), value = 9, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_2), value = 10, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_3), value = 11, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_4), value = 12, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_5), value = 13, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_6), value = 14, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_7), value = 15, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_0), value = 16, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_1), value = 17, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_CPU_MAX_TEMP), value = 18, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_TEMP), value = 19, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CPU_TEMP), value = 20, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_MCH_TEMP), value = 21, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM0_TEMP), value = 22, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM1_TEMP), value = 23, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM2_TEMP), value = 24, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM3_TEMP), value = 25, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_BYTE_TEMP), value = 26, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_VIRTUAL_TEMP), value = 31, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define AUX1FAN_TARGET_TEMP\
+              numeric varid  = SETUP_DATA.Aux1FanTargetTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TARGET_TEMP),\
+                help         = STRING_TOKEN(STR_FAN_TARGET_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 127,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define AUX1FAN_TOL_TEMP\
+              numeric varid  = SETUP_DATA.Aux1TolOfTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX1FAN_START_UP\
+              numeric varid  = SETUP_DATA.Aux1FanStartUp,\
+                prompt       = STRING_TOKEN(STR_FAN_START_UP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_START_UP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 127,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define AUX1FAN_STOP_DUTY\
+              oneof varid    = SETUP_DATA.Aux1FanStopduty,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_DUTY),\
+                help         = STRING_TOKEN(STR_FAN_STOP_DUTY_HELP),\
+                default      = AUX1FAN_STOP_DUTY_DEFAULT,\
+                default      = AUX1FAN_STOP_DUTY_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_DOWN_TO_ZERO), value = 0, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_DOWN_TO_FAN_STOP_VALUE), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define AUX1FAN_STOP_VALUE\
+              numeric varid  = SETUP_DATA.Aux1FanStopValue,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_STOP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 100,\
+              endnumeric;
+    
+    	#define AUX1FAN_STOP_TIME\
+              numeric varid  = SETUP_DATA.Aux1FanStopTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STOP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define AUX1FAN_STEP_UP_TIME\
+              numeric varid  = SETUP_DATA.Aux1FanStepUpTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_UP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_UP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define AUX1FAN_STEP_DOWN_TIME\
+              numeric varid  = SETUP_DATA.Aux1FanStepDownTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define AUX1FAN_CRITICAL_TEMP\
+              numeric varid  = SETUP_DATA.Aux1FanCriticalTemp,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 75,\
+              endnumeric;
+    
+    	#define AUX1FAN_TARGET_SPEED\
+              numeric varid  = SETUP_DATA.Aux1FanTargetSpeed,\
+                prompt       = STRING_TOKEN(STR_TARGET_SPEED),\
+                help         = STRING_TOKEN(STR_TARGET_SPEED_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 4096,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX1FAN_SPEED_TOL\
+              numeric varid  = SETUP_DATA.Aux1FanSpeedTol,\
+                prompt       = STRING_TOKEN(STR_SPEED_TOL),\
+                help         = STRING_TOKEN(STR_SPEED_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 64,\
+                step         = 1,\
+                default      = 2,\
+              endnumeric;
+    
+      #define AUX1FAN_CLOSE_LOOP_MODE\
+              oneof varid    = SETUP_DATA.En_AUX1_RPM,\
+                prompt       = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE),\
+                help         = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE_HELP),\
+                option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+    
+    	#define AUX1FAN_TEMP1\
+              numeric varid  = SETUP_DATA.Aux1FanT[0],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP1),\
+                help         = STRING_TOKEN(STR_FAN_TEMP1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 40,\
+              endnumeric;
+    
+    	#define AUX1FAN_TEMP2\
+              numeric varid  = SETUP_DATA.Aux1FanT[1],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP2),\
+                help         = STRING_TOKEN(STR_FAN_TEMP2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define AUX1FAN_TEMP3\
+              numeric varid  = SETUP_DATA.Aux1FanT[2],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP3),\
+                help         = STRING_TOKEN(STR_FAN_TEMP3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define AUX1FAN_TEMP4\
+              numeric varid  = SETUP_DATA.Aux1FanT[3],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP4),\
+                help         = STRING_TOKEN(STR_FAN_TEMP4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 70,\
+              endnumeric;
+    
+    	#define AUX1FAN_PWM1\
+              numeric varid  = SETUP_DATA.Aux1FanPwm[0],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM1),\
+                help         = STRING_TOKEN(STR_FAN_PWM1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 150,\
+              endnumeric;
+    
+    	#define AUX1FAN_PWM2\
+              numeric varid  = SETUP_DATA.Aux1FanPwm[1],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM2),\
+                help         = STRING_TOKEN(STR_FAN_PWM2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 170,\
+              endnumeric;
+    
+    	#define AUX1FAN_PWM3\
+              numeric varid  = SETUP_DATA.Aux1FanPwm[2],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM3),\
+                help         = STRING_TOKEN(STR_FAN_PWM3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 200,\
+              endnumeric;
+    
+    	#define AUX1FAN_PWM4\
+              numeric varid  = SETUP_DATA.Aux1FanPwm[3],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM4),\
+                help         = STRING_TOKEN(STR_FAN_PWM4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 220,\
+              endnumeric;
+    
+    	#define AUX1FAN_CRITICAL_TEMP_TOL\
+              numeric varid  = SETUP_DATA.Aux1FanCriticalTempTol,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP_TOL),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX1FAN_COUNT_UP\
+              numeric varid  = SETUP_DATA.Aux1FanCountUp,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_UP),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_UP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = AUX1FAN_COUNT_UP_DEFAULT,\
+              endnumeric;
+    
+    	#define AUX1FAN_COUNT_DOWN\
+              numeric varid  = SETUP_DATA.Aux1FanCountDown,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_DOWN),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_DOWN_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = AUX1FAN_COUNT_DOWN_DEFAULT,\
+              endnumeric;
+    #endif // (NCT6791D_AUXFAN1_CTRL_SUPPORT)
+
+    #if (NCT6791D_AUXFAN2_CTRL_SUPPORT)
+    	#define ONEOF_AUX2FAN_CTRL\
+    	  oneof varid    = SETUP_DATA.OnOff_Aux2Fan_Ctrl,\
+    	    prompt       = STRING_TOKEN (STR_AUX1_FAN_ONOFF),\
+    	    help         = STRING_TOKEN (STR_AUX1_FAN_ONOFF_HELP),\
+            default      = ONEOF_AUX2FAN_CTRL_DEFAULT,\
+            default      = ONEOF_AUX2FAN_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define AUX2FAN_CTRL_TYPE\
+    	  oneof varid    = SETUP_DATA.Aux2Fan_Ctrl_Mode,\
+    	    prompt       = STRING_TOKEN (STR_FAN_CTRL_MODE),\
+    	    help         = STRING_TOKEN (STR_FAN_CTRL_MODE_HELP),\
+            default      = AUX2FAN_CTRL_TYPE_DEFAULT,\
+            default      = AUX2FAN_CTRL_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_MANUAL_MODE), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_THRM_CRUISE_MODE), value = 1, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SPEED_CRUISE_MODE), value = 2, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SMART_FAN_IV_MODE), value = 4, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define AUX2FAN_OUT_VALUE\
+              numeric varid  = SETUP_DATA.Aux2FanOutValue,\
+                prompt       = STRING_TOKEN(STR_FAN_OUT_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_OUT_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 255,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define AUX2FAN_TEMP_SRC\
+              oneof varid    = SETUP_DATA.Aux2FanTempSrc,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_SRC),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_SRC_HELP),\
+                default      = AUX2FAN_TEMP_SRC_DEFAULT,\
+                default      = AUX2FAN_TEMP_SRC_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_SYSTIN), value = 1, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_CPUTIN), value = 2, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN0), value = 3, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN1), value = 4, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN2), value = 5, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN3), value = 6, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_0), value = 8, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_1), value = 9, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_2), value = 10, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_3), value = 11, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_4), value = 12, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_5), value = 13, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_6), value = 14, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_7), value = 15, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_0), value = 16, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_1), value = 17, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_CPU_MAX_TEMP), value = 18, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_TEMP), value = 19, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CPU_TEMP), value = 20, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_MCH_TEMP), value = 21, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM0_TEMP), value = 22, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM1_TEMP), value = 23, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM2_TEMP), value = 24, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM3_TEMP), value = 25, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_BYTE_TEMP), value = 26, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_VIRTUAL_TEMP), value = 31, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define AUX2FAN_TARGET_TEMP\
+              numeric varid  = SETUP_DATA.Aux2FanTargetTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TARGET_TEMP),\
+                help         = STRING_TOKEN(STR_FAN_TARGET_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 127,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define AUX2FAN_TOL_TEMP\
+              numeric varid  = SETUP_DATA.Aux1TolOfTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX2FAN_START_UP\
+              numeric varid  = SETUP_DATA.Aux2FanStartUp,\
+                prompt       = STRING_TOKEN(STR_FAN_START_UP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_START_UP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 127,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define AUX2FAN_STOP_DUTY\
+              oneof varid    = SETUP_DATA.Aux2FanStopduty,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_DUTY),\
+                help         = STRING_TOKEN(STR_FAN_STOP_DUTY_HELP),\
+                default      = AUX2FAN_STOP_DUTY_DEFAULT,\
+                default      = AUX2FAN_STOP_DUTY_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_DOWN_TO_ZERO), value = 0, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_DOWN_TO_FAN_STOP_VALUE), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define AUX2FAN_STOP_VALUE\
+              numeric varid  = SETUP_DATA.Aux2FanStopValue,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_STOP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 100,\
+              endnumeric;
+    
+    	#define AUX2FAN_STOP_TIME\
+              numeric varid  = SETUP_DATA.Aux2FanStopTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STOP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define AUX2FAN_STEP_UP_TIME\
+              numeric varid  = SETUP_DATA.Aux2FanStepUpTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_UP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_UP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define AUX2FAN_STEP_DOWN_TIME\
+              numeric varid  = SETUP_DATA.Aux2FanStepDownTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define AUX2FAN_CRITICAL_TEMP\
+              numeric varid  = SETUP_DATA.Aux2FanCriticalTemp,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 75,\
+              endnumeric;
+    
+    	#define AUX2FAN_TARGET_SPEED\
+              numeric varid  = SETUP_DATA.Aux2FanTargetSpeed,\
+                prompt       = STRING_TOKEN(STR_TARGET_SPEED),\
+                help         = STRING_TOKEN(STR_TARGET_SPEED_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 4096,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX2FAN_SPEED_TOL\
+              numeric varid  = SETUP_DATA.Aux2FanSpeedTol,\
+                prompt       = STRING_TOKEN(STR_SPEED_TOL),\
+                help         = STRING_TOKEN(STR_SPEED_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 64,\
+                step         = 1,\
+                default      = 2,\
+              endnumeric;
+    
+      #define AUX2FAN_CLOSE_LOOP_MODE\
+              oneof varid    = SETUP_DATA.En_AUX2_RPM,\
+                prompt       = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE),\
+                help         = STRING_TOKEN (STR_FAN_CLS_LOOP_MODE_HELP),\
+                option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+    
+    	#define AUX2FAN_TEMP1\
+              numeric varid  = SETUP_DATA.Aux2FanT[0],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP1),\
+                help         = STRING_TOKEN(STR_FAN_TEMP1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 40,\
+              endnumeric;
+    
+    	#define AUX2FAN_TEMP2\
+              numeric varid  = SETUP_DATA.Aux2FanT[1],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP2),\
+                help         = STRING_TOKEN(STR_FAN_TEMP2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define AUX2FAN_TEMP3\
+              numeric varid  = SETUP_DATA.Aux2FanT[2],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP3),\
+                help         = STRING_TOKEN(STR_FAN_TEMP3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define AUX2FAN_TEMP4\
+              numeric varid  = SETUP_DATA.Aux2FanT[3],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP4),\
+                help         = STRING_TOKEN(STR_FAN_TEMP4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 70,\
+              endnumeric;
+    
+    	#define AUX2FAN_PWM1\
+              numeric varid  = SETUP_DATA.Aux2FanPwm[0],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM1),\
+                help         = STRING_TOKEN(STR_FAN_PWM1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 150,\
+              endnumeric;
+    
+    	#define AUX2FAN_PWM2\
+              numeric varid  = SETUP_DATA.Aux2FanPwm[1],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM2),\
+                help         = STRING_TOKEN(STR_FAN_PWM2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 170,\
+              endnumeric;
+    
+    	#define AUX2FAN_PWM3\
+              numeric varid  = SETUP_DATA.Aux2FanPwm[2],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM3),\
+                help         = STRING_TOKEN(STR_FAN_PWM3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 200,\
+              endnumeric;
+    
+    	#define AUX2FAN_PWM4\
+              numeric varid  = SETUP_DATA.Aux2FanPwm[3],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM4),\
+                help         = STRING_TOKEN(STR_FAN_PWM4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 220,\
+              endnumeric;
+    
+    	#define AUX2FAN_CRITICAL_TEMP_TOL\
+              numeric varid  = SETUP_DATA.Aux2FanCriticalTempTol,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP_TOL),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX2FAN_COUNT_UP\
+              numeric varid  = SETUP_DATA.Aux2FanCountUp,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_UP),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_UP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = AUX2FAN_COUNT_UP_DEFAULT,\
+              endnumeric;
+    
+    	#define AUX2FAN_COUNT_DOWN\
+              numeric varid  = SETUP_DATA.Aux2FanCountDown,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_DOWN),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_DOWN_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = AUX2FAN_COUNT_DOWN_DEFAULT,\
+              endnumeric;
+    #endif // (NCT6791D_AUXFAN2_CTRL_SUPPORT)
+
+    #if (NCT6791D_AUXFAN3_CTRL_SUPPORT)
+    	#define ONEOF_AUX3FAN_CTRL\
+    	  oneof varid    = SETUP_DATA.OnOff_Aux3Fan_Ctrl,\
+    	    prompt       = STRING_TOKEN (STR_AUX1_FAN_ONOFF),\
+    	    help         = STRING_TOKEN (STR_AUX1_FAN_ONOFF_HELP),\
+            default      = ONEOF_AUX3FAN_CTRL_DEFAULT,\
+            default      = ONEOF_AUX3FAN_CTRL_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_DISABLED), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define AUX3FAN_CTRL_TYPE\
+    	  oneof varid    = SETUP_DATA.Aux3Fan_Ctrl_Mode,\
+    	    prompt       = STRING_TOKEN (STR_FAN_CTRL_MODE),\
+    	    help         = STRING_TOKEN (STR_FAN_CTRL_MODE_HELP),\
+            default      = AUX3FAN_CTRL_TYPE_DEFAULT,\
+            default      = AUX3FAN_CTRL_TYPE_DEFAULT, defaultstore = AmiMfgDefault,\
+    	    option text  = STRING_TOKEN (STR_MANUAL_MODE), value = 0, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_THRM_CRUISE_MODE), value = 1, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SPEED_CRUISE_MODE), value = 2, flags = RESET_REQUIRED;\
+    	    option text  = STRING_TOKEN (STR_SMART_FAN_IV_MODE), value = 4, flags = RESET_REQUIRED;\
+    	  endoneof;
+    
+    	#define AUX3FAN_OUT_VALUE\
+              numeric varid  = SETUP_DATA.Aux3FanOutValue,\
+                prompt       = STRING_TOKEN(STR_FAN_OUT_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_OUT_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 255,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define AUX3FAN_TEMP_SRC\
+              oneof varid    = SETUP_DATA.Aux3FanTempSrc,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_SRC),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_SRC_HELP),\
+                default      = AUX3FAN_TEMP_SRC_DEFAULT,\
+                default      = AUX3FAN_TEMP_SRC_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_SYSTIN), value = 1, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_CPUTIN), value = 2, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN0), value = 3, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN1), value = 4, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN2), value = 5, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_AUXTIN3), value = 6, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_0), value = 8, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_1), value = 9, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_2), value = 10, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_3), value = 11, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_4), value = 12, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_5), value = 13, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_6), value = 14, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_SMBUS_MASTER_7), value = 15, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_0), value = 16, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PECI_AGENT_1), value = 17, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_CPU_MAX_TEMP), value = 18, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CHIP_TEMP), value = 19, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_CPU_TEMP), value = 20, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_MCH_TEMP), value = 21, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM0_TEMP), value = 22, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM1_TEMP), value = 23, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM2_TEMP), value = 24, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_PCH_DIM3_TEMP), value = 25, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_BYTE_TEMP), value = 26, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_VIRTUAL_TEMP), value = 31, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define AUX3FAN_TARGET_TEMP\
+              numeric varid  = SETUP_DATA.Aux3FanTargetTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TARGET_TEMP),\
+                help         = STRING_TOKEN(STR_FAN_TARGET_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 127,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define AUX3FAN_TOL_TEMP\
+              numeric varid  = SETUP_DATA.Aux1TolOfTemp,\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE),\
+                help         = STRING_TOKEN(STR_FAN_TEMP_TOLERANCE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX3FAN_START_UP\
+              numeric varid  = SETUP_DATA.Aux3FanStartUp,\
+                prompt       = STRING_TOKEN(STR_FAN_START_UP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_START_UP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 127,\
+              endnumeric;
+    
+      // >> 2015/11/03 Eric +
+      #define AUX3FAN_STOP_DUTY\
+              oneof varid    = SETUP_DATA.Aux3FanStopduty,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_DUTY),\
+                help         = STRING_TOKEN(STR_FAN_STOP_DUTY_HELP),\
+                default      = AUX3FAN_STOP_DUTY_DEFAULT,\
+                default      = AUX3FAN_STOP_DUTY_DEFAULT, defaultstore = AmiMfgDefault,\
+                option text  = STRING_TOKEN (STR_DOWN_TO_ZERO), value = 0, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN (STR_DOWN_TO_FAN_STOP_VALUE), value = 1, flags = RESET_REQUIRED;\
+              endoneof;
+      // << 2015/11/03 Eric +
+    
+    	#define AUX3FAN_STOP_VALUE\
+              numeric varid  = SETUP_DATA.Aux3FanStopValue,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_VALUE),\
+                help         = STRING_TOKEN(STR_FAN_STOP_VALUE_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 100,\
+              endnumeric;
+    
+    	#define AUX3FAN_STOP_TIME\
+              numeric varid  = SETUP_DATA.Aux3FanStopTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STOP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STOP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define AUX3FAN_STEP_UP_TIME\
+              numeric varid  = SETUP_DATA.Aux3FanStepUpTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_UP_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_UP_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define AUX3FAN_STEP_DOWN_TIME\
+              numeric varid  = SETUP_DATA.Aux3FanStepDownTime,\
+                prompt       = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME),\
+                help         = STRING_TOKEN(STR_FAN_STEP_DOWN_TIME_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 5,\
+                default      = 10,\
+              endnumeric;
+    
+    	#define AUX3FAN_CRITICAL_TEMP\
+              numeric varid  = SETUP_DATA.Aux3FanCriticalTemp,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 75,\
+              endnumeric;
+    
+    	#define AUX3FAN_TARGET_SPEED\
+              numeric varid  = SETUP_DATA.Aux3FanTargetSpeed,\
+                prompt       = STRING_TOKEN(STR_TARGET_SPEED),\
+                help         = STRING_TOKEN(STR_TARGET_SPEED_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 4096,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX3FAN_SPEED_TOL\
+              numeric varid  = SETUP_DATA.Aux3FanSpeedTol,\
+                prompt       = STRING_TOKEN(STR_SPEED_TOL),\
+                help         = STRING_TOKEN(STR_SPEED_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 64,\
+                step         = 1,\
+                default      = 2,\
+              endnumeric;
+    
+    	#define AUX3FAN_TEMP1\
+              numeric varid  = SETUP_DATA.Aux3FanT[0],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP1),\
+                help         = STRING_TOKEN(STR_FAN_TEMP1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 40,\
+              endnumeric;
+    
+    	#define AUX3FAN_TEMP2\
+              numeric varid  = SETUP_DATA.Aux3FanT[1],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP2),\
+                help         = STRING_TOKEN(STR_FAN_TEMP2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 50,\
+              endnumeric;
+    
+    	#define AUX3FAN_TEMP3\
+              numeric varid  = SETUP_DATA.Aux3FanT[2],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP3),\
+                help         = STRING_TOKEN(STR_FAN_TEMP3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 60,\
+              endnumeric;
+    
+    	#define AUX3FAN_TEMP4\
+              numeric varid  = SETUP_DATA.Aux3FanT[3],\
+                prompt       = STRING_TOKEN(STR_FAN_TEMP4),\
+                help         = STRING_TOKEN(STR_FAN_TEMP4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 70,\
+              endnumeric;
+    
+    	#define AUX3FAN_PWM1\
+              numeric varid  = SETUP_DATA.Aux3FanPwm[0],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM1),\
+                help         = STRING_TOKEN(STR_FAN_PWM1_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 150,\
+              endnumeric;
+    
+    	#define AUX3FAN_PWM2\
+              numeric varid  = SETUP_DATA.Aux3FanPwm[1],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM2),\
+                help         = STRING_TOKEN(STR_FAN_PWM2_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 170,\
+              endnumeric;
+    
+    	#define AUX3FAN_PWM3\
+              numeric varid  = SETUP_DATA.Aux3FanPwm[2],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM3),\
+                help         = STRING_TOKEN(STR_FAN_PWM3_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 200,\
+              endnumeric;
+    
+    	#define AUX3FAN_PWM4\
+              numeric varid  = SETUP_DATA.Aux3FanPwm[3],\
+                prompt       = STRING_TOKEN(STR_FAN_PWM4),\
+                help         = STRING_TOKEN(STR_FAN_PWM4_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 255,\
+                step         = 1,\
+                default      = 220,\
+              endnumeric;
+    
+    	#define AUX3FAN_CRITICAL_TEMP_TOL\
+              numeric varid  = SETUP_DATA.Aux3FanCriticalTempTol,\
+                prompt       = STRING_TOKEN(STR_CRITICAL_TEMP_TOL),\
+                help         = STRING_TOKEN(STR_CRITICAL_TEMP_TOL_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 7,\
+                step         = 1,\
+                default      = 0,\
+              endnumeric;
+    
+    	#define AUX3FAN_COUNT_UP\
+              numeric varid  = SETUP_DATA.Aux3FanCountUp,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_UP),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_UP_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = AUX3FAN_COUNT_UP_DEFAULT,\
+              endnumeric;
+    
+    	#define AUX3FAN_COUNT_DOWN\
+              numeric varid  = SETUP_DATA.Aux3FanCountDown,\
+                prompt       = STRING_TOKEN(STR_COUNT_STEP_DOWN),\
+                help         = STRING_TOKEN(STR_COUNT_STEP_DOWN_HELP),\
+                flags        = RESET_REQUIRED,\
+                minimum      = 0,\
+                maximum      = 15,\
+                step         = 1,\
+                default      = AUX3FAN_COUNT_DOWN_DEFAULT,\
+              endnumeric;
+    #endif // (NCT6791D_AUXFAN3_CTRL_SUPPORT)
+
+#endif //#ifdef CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+  #if (NCT6791D_CPUFAN_CTRL_SUPPORT)
+    ONEOF_CPUFAN_CTRL
+    CPUFAN_CTRL_TYPE
+    CPUFAN_OUT_VALUE
+    CPUFAN_TEMP_SRC   // 2015/11/03 Eric +
+    CPUFAN_TARGET_TEMP
+    CPUFAN_TOL_TEMP
+    CPUFAN_START_UP
+    CPUFAN_STOP_DUTY  // 2015/11/03 Eric +
+    CPUFAN_STOP_VALUE
+    CPUFAN_STOP_TIME
+    CPUFAN_STEP_UP_TIME
+    CPUFAN_STEP_DOWN_TIME
+    CPUFAN_CRITICAL_TEMP
+    CPUFAN_TARGET_SPEED
+    CPUFAN_SPEED_TOL
+    CPUFAN_CLOSE_LOOP_MODE
+    CPUFAN_TEMP1
+    CPUFAN_TEMP2
+    CPUFAN_TEMP3
+    CPUFAN_TEMP4
+    CPUFAN_PWM1
+    CPUFAN_PWM2
+    CPUFAN_PWM3
+    CPUFAN_PWM4
+    CPUFAN_CRITICAL_TEMP_TOL
+    CPUFAN_COUNT_UP
+    CPUFAN_COUNT_DOWN
+  #endif // (NCT6791D_CPUFAN_CTRL_SUPPORT)
+  #if (NCT6791D_SYSFAN_CTRL_SUPPORT)
+    ONEOF_SYSFAN_CTRL
+    SYSFAN_OUTPUT_MODE  // 2015/12/07 Eric +
+    SYSFAN_CTRL_TYPE
+    SYSFAN_OUT_VALUE
+    SYSFAN_TEMP_SRC   // 2015/11/03 Eric +
+    SYSFAN_TARGET_TEMP
+    SYSFAN_TOL_TEMP
+    SYSFAN_START_UP
+    SYSFAN_STOP_DUTY  // 2015/11/03 Eric +
+    SYSFAN_STOP_VALUE
+    SYSFAN_STOP_TIME
+    SYSFAN_STEP_UP_TIME
+    SYSFAN_STEP_DOWN_TIME
+    SYSFAN_CRITICAL_TEMP
+    SYSFAN_TARGET_SPEED
+    SYSFAN_SPEED_TOL
+    SYSFAN_CLOSE_LOOP_MODE
+    SYSFAN_TEMP1
+    SYSFAN_TEMP2
+    SYSFAN_TEMP3
+    SYSFAN_TEMP4
+    SYSFAN_PWM1
+    SYSFAN_PWM2
+    SYSFAN_PWM3
+    SYSFAN_PWM4
+    SYSFAN_CRITICAL_TEMP_TOL
+    SYSFAN_COUNT_UP
+    SYSFAN_COUNT_DOWN
+  #endif // (NCT6791D_SYSFAN_CTRL_SUPPORT)
+  #if (NCT6791D_AUXFAN0_CTRL_SUPPORT)
+    ONEOF_AUX0FAN_CTRL
+    AUX0FAN_CTRL_TYPE
+    AUX0FAN_OUT_VALUE
+    AUX0FAN_TEMP_SRC   // 2015/11/03 Eric +
+    AUX0FAN_TARGET_TEMP
+    AUX0FAN_TOL_TEMP
+    AUX0FAN_START_UP
+    AUX0FAN_STOP_DUTY  // 2015/11/03 Eric +
+    AUX0FAN_STOP_VALUE
+    AUX0FAN_STOP_TIME
+    AUX0FAN_STEP_UP_TIME
+    AUX0FAN_STEP_DOWN_TIME
+    AUX0FAN_CRITICAL_TEMP
+    AUX0FAN_TARGET_SPEED
+    AUX0FAN_SPEED_TOL
+    AUX0FAN_CLOSE_LOOP_MODE
+    AUX0FAN_TEMP1
+    AUX0FAN_TEMP2
+    AUX0FAN_TEMP3
+    AUX0FAN_TEMP4
+    AUX0FAN_PWM1
+    AUX0FAN_PWM2
+    AUX0FAN_PWM3
+    AUX0FAN_PWM4
+    AUX0FAN_CRITICAL_TEMP_TOL
+    AUX0FAN_COUNT_UP
+    AUX0FAN_COUNT_DOWN
+  #endif // (NCT6791D_AUXFAN0_CTRL_SUPPORT)
+  #if (NCT6791D_AUXFAN1_CTRL_SUPPORT)
+    ONEOF_AUX1FAN_CTRL
+    AUX1FAN_CTRL_TYPE
+    AUX1FAN_OUT_VALUE
+    AUX1FAN_TEMP_SRC   // 2015/11/03 Eric +
+    AUX1FAN_TARGET_TEMP
+    AUX1FAN_TOL_TEMP
+    AUX1FAN_START_UP
+    AUX1FAN_STOP_DUTY  // 2015/11/03 Eric +
+    AUX1FAN_STOP_VALUE
+    AUX1FAN_STOP_TIME
+    AUX1FAN_STEP_UP_TIME
+    AUX1FAN_STEP_DOWN_TIME
+    AUX1FAN_CRITICAL_TEMP
+    AUX1FAN_TARGET_SPEED
+    AUX1FAN_SPEED_TOL
+    AUX1FAN_CLOSE_LOOP_MODE
+    AUX1FAN_TEMP1
+    AUX1FAN_TEMP2
+    AUX1FAN_TEMP3
+    AUX1FAN_TEMP4
+    AUX1FAN_PWM1
+    AUX1FAN_PWM2
+    AUX1FAN_PWM3
+    AUX1FAN_PWM4
+    AUX1FAN_CRITICAL_TEMP_TOL
+    AUX1FAN_COUNT_UP
+    AUX1FAN_COUNT_DOWN
+  #endif // (NCT6791D_AUXFAN1_CTRL_SUPPORT)
+  #if (NCT6791D_AUXFAN2_CTRL_SUPPORT)
+    ONEOF_AUX2FAN_CTRL
+    AUX2FAN_CTRL_TYPE
+    AUX2FAN_OUT_VALUE
+    AUX2FAN_TEMP_SRC   // 2015/11/03 Eric +
+    AUX2FAN_TARGET_TEMP
+    AUX2FAN_TOL_TEMP
+    AUX2FAN_START_UP
+    AUX2FAN_STOP_DUTY  // 2015/11/03 Eric +
+    AUX2FAN_STOP_VALUE
+    AUX2FAN_STOP_TIME
+    AUX2FAN_STEP_UP_TIME
+    AUX2FAN_STEP_DOWN_TIME
+    AUX2FAN_CRITICAL_TEMP
+    AUX2FAN_TARGET_SPEED
+    AUX2FAN_SPEED_TOL
+    AUX2FAN_CLOSE_LOOP_MODE
+    AUX2FAN_TEMP1
+    AUX2FAN_TEMP2
+    AUX2FAN_TEMP3
+    AUX2FAN_TEMP4
+    AUX2FAN_PWM1
+    AUX2FAN_PWM2
+    AUX2FAN_PWM3
+    AUX2FAN_PWM4
+    AUX2FAN_CRITICAL_TEMP_TOL
+    AUX2FAN_COUNT_UP
+    AUX2FAN_COUNT_DOWN
+  #endif // (NCT6791D_AUXFAN2_CTRL_SUPPORT)
+  #if (NCT6791D_AUXFAN3_CTRL_SUPPORT)
+    ONEOF_AUX3FAN_CTRL
+    AUX3FAN_CTRL_TYPE
+    AUX3FAN_OUT_VALUE
+    AUX3FAN_TEMP_SRC   // 2015/11/03 Eric +
+    AUX3FAN_TARGET_TEMP
+    AUX3FAN_TOL_TEMP
+    AUX3FAN_START_UP
+    AUX3FAN_STOP_DUTY  // 2015/11/03 Eric +
+    AUX3FAN_STOP_VALUE
+    AUX3FAN_STOP_TIME
+    AUX3FAN_STEP_UP_TIME
+    AUX3FAN_STEP_DOWN_TIME
+    AUX3FAN_CRITICAL_TEMP
+    AUX3FAN_TARGET_SPEED
+    AUX3FAN_SPEED_TOL
+    AUX3FAN_TEMP1
+    AUX3FAN_TEMP2
+    AUX3FAN_TEMP3
+    AUX3FAN_TEMP4
+    AUX3FAN_PWM1
+    AUX3FAN_PWM2
+    AUX3FAN_PWM3
+    AUX3FAN_PWM4
+    AUX3FAN_CRITICAL_TEMP_TOL
+    AUX3FAN_COUNT_UP
+    AUX3FAN_COUNT_DOWN
+  #endif // (NCT6791D_AUXFAN3_CTRL_SUPPORT)
+#endif //#ifdef CONTROLS_WITH_DEFAULTS
+
+//-------------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//-------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//-------------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+    #include "Token.h"
+#endif
+
+//-------------------------------------------------------------------------
+//If you need custom varstore's define them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+#endif
+
+//-------------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+
+//-------------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+
+    #if NCT6791D_HWM_PRESENT
+      goto HMM_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_NCT6791D_HMM_CONFIGURATION),
+        help    = STRING_TOKEN(STR_NCT6791D_HMM_CONFIGURATION_HELP);
+    #endif
+
+#endif
+
+//-------------------------------------------------------------------------
+// Define forms
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define HWM formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if NCT6791D_HWM_PRESENT
+    //Define HWM formset form
+    form formid = AUTO_ID(HMM_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_NCT6791D_HMM_CONFIGURATION);
+     
+        SUBTITLE(STRING_TOKEN(STR_PC_HEALTH))
+
+    	#if ((NCT6791D_CPUFAN_CTRL_SUPPORT) || (NCT6791D_SYSFAN_CTRL_SUPPORT) || \
+    	    (NCT6791D_AUXFAN0_CTRL_SUPPORT) || (NCT6791D_AUXFAN1_CTRL_SUPPORT) || \
+            (NCT6791D_AUXFAN2_CTRL_SUPPORT) || (NCT6791D_AUXFAN3_CTRL_SUPPORT))
+    	  SEPARATOR
+    	  goto NCT6791D_SMARTFAN_FORM_ID,
+    	    prompt  = STRING_TOKEN(STR_NCT6791D_SMARTFAN_FORM),
+    	    help    = STRING_TOKEN(STR_NCT6791D_SMARTFAN_FORM);
+    	#endif // (NCT6791D_CPUFAN_CTRL_SUPPORT) || (NCT6791D_SYSFAN_CTRL_SUPPORT)
+        SEPARATOR
+        //
+        // System Temperature1
+        #if EFI_SPECIFICATION_VERSION>0x20000
+        INTERACTIVE_TEXT(STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP1), STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP1_VALUE),  AUTO_ID(NCT6791D_INTERACTIVE_KEY))
+        #else
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP1),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP1_VALUE),
+        flags  = INTERACTIVE,
+        key    = NCT6791D_INTERACTIVE_KEY;
+        #endif
+        //
+        // System Temperature2
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP2),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP2_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // System Temperature3
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP3),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP3_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // System Temperature4
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP4),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP4_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // System Temperature5
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP5),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP5_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // System Temperature6
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP6),
+        text   = STRING_TOKEN(STR_NCT6791D_SYSTEM_TEMP6_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // System FAN1 Speed
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN1_SPEED),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN1_SPEED_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // System FAN2 Speed
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN2_SPEED),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN2_SPEED_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // System FAN3 Speed
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN3_SPEED),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN3_SPEED_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // System FAN4 Speed
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN4_SPEED),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN4_SPEED_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // System FAN5 Speed
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN5_SPEED),
+        text   = STRING_TOKEN(STR_NCT6791D_FAN5_SPEED_VALUE),
+        flags  = 0,
+        key    = 0;
+        //
+        // CPUVCORE
+        #if NCT6791D_CPUVCORE_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_CPUVCORE),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_CPUVCORE_VALUE),
+        flags  = 0,
+        key    = 0;
+        #endif
+        //
+        // Vin0
+        #if NCT6791D_VIN0_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN0),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN0_VALUE),
+        flags  = 0,
+        key    = 0;   
+        #endif     
+        //
+        // Vin1
+        #if NCT6791D_VIN1_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN1),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN1_VALUE),
+        flags  = 0,
+        key    = 0; 
+        #endif
+        //
+        // Vin2
+        #if NCT6791D_VIN2_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN2),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN2_VALUE),
+        flags  = 0,
+        key    = 0;
+        #endif
+        //
+        // Vin3
+        #if NCT6791D_VIN3_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN3),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN3_VALUE),
+        flags  = 0,
+        key    = 0;  
+        #endif
+        //
+        // Vin4
+        #if NCT6791D_VIN4_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN4),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN4_VALUE),
+        flags  = 0,
+        key    = 0;  
+        #endif
+        //
+        // Vin5
+        #if NCT6791D_VIN5_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN5),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN5_VALUE),
+        flags  = 0,
+        key    = 0;
+        #endif
+        //  
+        // Vin6
+        #if NCT6791D_VIN6_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN6),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN6_VALUE),
+        flags  = 0,
+        key    = 0;
+        #endif
+        //  
+        // Vin7
+        #if NCT6791D_VIN7_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN7),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VIN7_VALUE),
+        flags  = 0,
+        key    = 0;                
+        #endif
+        // AVCC
+        #if NCT6791D_AVCC_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_AVCC),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_AVCC_VALUE),
+        flags  = 0,
+        key    = 0;    
+        #endif
+        //
+        // VSB3
+        #if NCT6791D_VSB3_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VSB3),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VSB3_VALUE),
+        flags  = 0,
+        key    = 0;    
+        #endif
+        //
+        // 3vcc
+        #if NCT6791D_VCC3_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VCC3V),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VCC3V_VALUE),
+        flags  = 0,
+        key    = 0;  
+        #endif
+        //
+        // vbat
+        #if NCT6791D_VBAT_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VBAT),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VBAT_VALUE),
+        flags  = 0,
+        key    = 0;  
+        #endif
+        //
+        // VTT
+        #if NCT6791D_VTT_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VTT),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VTT_VALUE),
+        flags  = 0,
+        key    = 0;          
+        #endif
+        //
+        // VCOREREFIN
+        #if NCT6791D_VCOREREFIN_PRESENT
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VCOREREFIN),
+        text   = STRING_TOKEN(STR_NCT6791D_HMM_VCOREREFIN_VALUE),
+        flags  = 0,
+        key    = 0;  
+        #endif
+    endform;//HWM form
+    #endif//End of #if NCT6791D_HWM_PRESENT
+
+    //-------------------------------------------------------------------------
+    //	Smart Fan Group _begin
+    //-------------------------------------------------------------------------
+    #if ((NCT6791D_CPUFAN_CTRL_SUPPORT) || (NCT6791D_SYSFAN_CTRL_SUPPORT) || \
+    	  (NCT6791D_AUXFAN0_CTRL_SUPPORT) || (NCT6791D_AUXFAN1_CTRL_SUPPORT) || \
+        (NCT6791D_AUXFAN2_CTRL_SUPPORT) || (NCT6791D_AUXFAN3_CTRL_SUPPORT))
+    #ifndef SMF_CONFIG_FORM_NCT6791D
+    #define SMF_CONFIG_FORM_NCT6791D
+
+    form formid = AUTO_ID(NCT6791D_SMARTFAN_FORM_ID),
+  	title = STRING_TOKEN(STR_NCT6791D_SMARTFAN_FORM);
+  	SUBTITLE(STRING_TOKEN(STR_NCT6791D_SMARTFAN_FORM))
+      
+  	SEPARATOR
+  
+  	#if (NCT6791D_CPUFAN_CTRL_SUPPORT)
+  	  ONEOF_CPUFAN_CTRL
+  	  suppressif ideqval SETUP_DATA.OnOff_CpuFan_Ctrl == 0x00;
+  	    CPUFAN_CTRL_TYPE
+  	    suppressif NOT ideqval SETUP_DATA.CpuFan_Ctrl_Mode == 0x00;
+  	      CPUFAN_OUT_VALUE
+  	    endif; // OnOff_CpuFan_Ctrl_Mode == 0x00;
+  
+            // >> 2015/11/03 Eric +
+            suppressif ideqval SETUP_DATA.CpuFan_Ctrl_Mode == 0x00 OR
+                       ideqval SETUP_DATA.CpuFan_Ctrl_Mode == 0x02;
+              CPUFAN_TEMP_SRC
+            endif; // suppressif CpuFan_Ctrl_Mode == 0x00 or 0x02;
+            // << 2015/11/03 Eric +
+  
+  	    suppressif NOT ideqval SETUP_DATA.CpuFan_Ctrl_Mode == 0x01;
+  	      CPUFAN_TARGET_TEMP
+  	      CPUFAN_TOL_TEMP
+  	      CPUFAN_START_UP
+              CPUFAN_STOP_DUTY    // 2015/11/03 Eric +
+  	      CPUFAN_STOP_VALUE
+  	      CPUFAN_STOP_TIME
+  	      CPUFAN_CRITICAL_TEMP
+  	    endif; // CpuFan_Ctrl_Mode == 0x01;
+  
+  	    suppressif NOT ideqval SETUP_DATA.CpuFan_Ctrl_Mode == 0x02;
+  	      CPUFAN_TARGET_SPEED
+  	      CPUFAN_SPEED_TOL
+  	    endif; // CpuFan_Ctrl_Mode == 0x02;
+  
+  	    suppressif NOT ideqval SETUP_DATA.CpuFan_Ctrl_Mode == 0x04;
+              CPUFAN_CLOSE_LOOP_MODE
+  	      CPUFAN_TEMP1
+  	      CPUFAN_TEMP2
+  	      CPUFAN_TEMP3
+  	      CPUFAN_TEMP4
+  	      CPUFAN_PWM1
+  	      CPUFAN_PWM2
+  	      CPUFAN_PWM3
+  	      CPUFAN_PWM4
+  	      CPUFAN_TOL_TEMP
+  	      CPUFAN_CRITICAL_TEMP
+  	      CPUFAN_CRITICAL_TEMP_TOL
+  	      CPUFAN_COUNT_UP
+  	      CPUFAN_COUNT_DOWN
+  	    endif; // CpuFan_Ctrl_Mode == 0x04;
+  
+  	    suppressif ideqval SETUP_DATA.CpuFan_Ctrl_Mode == 0x00;
+  	      CPUFAN_STEP_UP_TIME
+  	      CPUFAN_STEP_DOWN_TIME
+  	    endif; // CpuFan_Ctrl_Mode == 0x00;
+  	  endif;	// OnOff_CpuFan_Ctrl == 0x00;
+  	#endif // (NCT6791D_CPUFAN_CTRL_SUPPORT)
+  
+  	#if (NCT6791D_SYSFAN_CTRL_SUPPORT)
+          SEPARATOR
+  	  ONEOF_SYSFAN_CTRL
+  	  suppressif ideqval SETUP_DATA.OnOff_SysFan_Ctrl == 0x00;
+            SYSFAN_OUTPUT_MODE    // 2015/12/07 Eric +
+  	    SYSFAN_CTRL_TYPE
+  	    suppressif NOT ideqval SETUP_DATA.SysFan_Ctrl_Mode == 0x00;
+  	      SYSFAN_OUT_VALUE
+            endif; // OnOff_SysFan_Ctrl_Mode == 0x00;
+  
+            // >> 2015/11/03 Eric +
+            suppressif ideqval SETUP_DATA.SysFan_Ctrl_Mode == 0x00 OR
+                       ideqval SETUP_DATA.SysFan_Ctrl_Mode == 0x02;
+              SYSFAN_TEMP_SRC
+            endif; // suppressif SysFan_Ctrl_Mode == 0x00 or 0x02;
+            // << 2015/11/03 Eric +
+  
+  	    suppressif NOT ideqval SETUP_DATA.SysFan_Ctrl_Mode == 0x01;
+  	      SYSFAN_TARGET_TEMP
+  	      SYSFAN_TOL_TEMP
+  	      SYSFAN_START_UP
+              SYSFAN_STOP_DUTY    // 2015/11/03 Eric +
+  	      SYSFAN_STOP_VALUE
+  	      SYSFAN_STOP_TIME
+  	      SYSFAN_CRITICAL_TEMP
+  	    endif; // SysFan_Ctrl_Mode == 0x01;
+  
+  	    suppressif NOT ideqval SETUP_DATA.SysFan_Ctrl_Mode == 0x02;
+  	      SYSFAN_TARGET_SPEED
+  	      SYSFAN_SPEED_TOL
+  	    endif; // SysFan_Ctrl_Mode == 0x02;
+  
+  	    suppressif NOT ideqval SETUP_DATA.SysFan_Ctrl_Mode == 0x04;
+              SYSFAN_CLOSE_LOOP_MODE
+  	      SYSFAN_TEMP1
+  	      SYSFAN_TEMP2
+  	      SYSFAN_TEMP3
+  	      SYSFAN_TEMP4
+  	      SYSFAN_PWM1
+  	      SYSFAN_PWM2
+  	      SYSFAN_PWM3
+  	      SYSFAN_PWM4
+  	      SYSFAN_TOL_TEMP
+  	      SYSFAN_CRITICAL_TEMP
+  	      SYSFAN_CRITICAL_TEMP_TOL
+  	      SYSFAN_COUNT_UP
+  	      SYSFAN_COUNT_DOWN
+            endif; // SysFan_Ctrl_Mode == 0x04;
+  
+  	    suppressif ideqval SETUP_DATA.SysFan_Ctrl_Mode == 0x00;
+  	      SYSFAN_STEP_UP_TIME
+  	      SYSFAN_STEP_DOWN_TIME
+  	    endif; // SysFan_Ctrl_Mode == 0x00;
+  	  endif;	// OnOff_SysFan_Ctrl == 0x00;
+  	#endif // (NCT6791D_SYSFAN_CTRL_SUPPORT)
+  
+  	#if (NCT6791D_AUXFAN0_CTRL_SUPPORT)
+          SEPARATOR
+  	  ONEOF_AUX0FAN_CTRL
+  	  suppressif ideqval SETUP_DATA.OnOff_Aux0Fan_Ctrl == 0x00;
+  	    AUX0FAN_CTRL_TYPE
+  	    suppressif NOT ideqval SETUP_DATA.Aux0Fan_Ctrl_Mode == 0x00;
+  	      AUX0FAN_OUT_VALUE
+            endif; // OnOff_Aux0Fan_Ctrl_Mode == 0x00;
+  
+            // >> 2015/11/03 Eric +
+            suppressif ideqval SETUP_DATA.Aux0Fan_Ctrl_Mode == 0x00 OR
+                       ideqval SETUP_DATA.Aux0Fan_Ctrl_Mode == 0x02;
+              AUX0FAN_TEMP_SRC
+            endif; // suppressif Aux0Fan_Ctrl_Mode == 0x00 or 0x02;
+            // << 2015/11/03 Eric +
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux0Fan_Ctrl_Mode == 0x01;
+  	      AUX0FAN_TARGET_TEMP
+  	      AUX0FAN_TOL_TEMP
+  	      AUX0FAN_START_UP
+              AUX0FAN_STOP_DUTY    // 2015/11/03 Eric +
+  	      AUX0FAN_STOP_VALUE
+  	      AUX0FAN_STOP_TIME
+  	      AUX0FAN_CRITICAL_TEMP
+  	    endif; // Aux0Fan_Ctrl_Mode == 0x01;
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux0Fan_Ctrl_Mode == 0x02;
+  	      AUX0FAN_TARGET_SPEED
+  	      AUX0FAN_SPEED_TOL
+  	    endif; // Aux0Fan_Ctrl_Mode == 0x02;
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux0Fan_Ctrl_Mode == 0x04;
+              AUX0FAN_CLOSE_LOOP_MODE
+  	      AUX0FAN_TEMP1
+  	      AUX0FAN_TEMP2
+  	      AUX0FAN_TEMP3
+  	      AUX0FAN_TEMP4
+  	      AUX0FAN_PWM1
+  	      AUX0FAN_PWM2
+  	      AUX0FAN_PWM3
+  	      AUX0FAN_PWM4
+  	      AUX0FAN_TOL_TEMP
+  	      AUX0FAN_CRITICAL_TEMP
+  	      AUX0FAN_CRITICAL_TEMP_TOL
+  	      AUX0FAN_COUNT_UP
+  	      AUX0FAN_COUNT_DOWN
+            endif; // Aux0Fan_Ctrl_Mode == 0x04;
+  
+  	    suppressif ideqval SETUP_DATA.Aux0Fan_Ctrl_Mode == 0x00;
+  	      AUX0FAN_STEP_UP_TIME
+  	      AUX0FAN_STEP_DOWN_TIME
+  	    endif; // Aux0Fan_Ctrl_Mode == 0x00;
+  	  endif;	// OnOff_Aux0Fan_Ctrl == 0x00;
+  	#endif // (NCT6791D_AUXFAN0_CTRL_SUPPORT)
+  
+  	#if (NCT6791D_AUXFAN1_CTRL_SUPPORT)
+          SEPARATOR
+  	  ONEOF_AUX1FAN_CTRL
+  	  suppressif ideqval SETUP_DATA.OnOff_Aux1Fan_Ctrl == 0x00;
+  	    AUX1FAN_CTRL_TYPE
+  	    suppressif NOT ideqval SETUP_DATA.Aux1Fan_Ctrl_Mode == 0x00;
+  	      AUX1FAN_OUT_VALUE
+          endif; // OnOff_Aux1Fan_Ctrl_Mode == 0x00;
+  
+          // >> 2015/11/03 Eric +
+          suppressif ideqval SETUP_DATA.Aux1Fan_Ctrl_Mode == 0x00 OR
+                     ideqval SETUP_DATA.Aux1Fan_Ctrl_Mode == 0x02;
+            AUX1FAN_TEMP_SRC
+          endif; // suppressif Aux1Fan_Ctrl_Mode == 0x00 or 0x02;
+          // << 2015/11/03 Eric +
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux1Fan_Ctrl_Mode == 0x01;
+  	      AUX1FAN_TARGET_TEMP
+  	      AUX1FAN_TOL_TEMP
+  	      AUX1FAN_START_UP
+              AUX1FAN_STOP_DUTY    // 2015/11/03 Eric +
+  	      AUX1FAN_STOP_VALUE
+  	      AUX1FAN_STOP_TIME
+  	      AUX1FAN_CRITICAL_TEMP
+  	    endif; // Aux1Fan_Ctrl_Mode == 0x01;
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux1Fan_Ctrl_Mode == 0x02;
+  	      AUX1FAN_TARGET_SPEED
+  	      AUX1FAN_SPEED_TOL
+  	    endif; // Aux1Fan_Ctrl_Mode == 0x02;
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux1Fan_Ctrl_Mode == 0x04;
+              AUX1FAN_CLOSE_LOOP_MODE
+  	      AUX1FAN_TEMP1
+  	      AUX1FAN_TEMP2
+  	      AUX1FAN_TEMP3
+  	      AUX1FAN_TEMP4
+  	      AUX1FAN_PWM1
+  	      AUX1FAN_PWM2
+  	      AUX1FAN_PWM3
+  	      AUX1FAN_PWM4
+  	      AUX1FAN_TOL_TEMP
+  	      AUX1FAN_CRITICAL_TEMP
+  	      AUX1FAN_CRITICAL_TEMP_TOL
+  	      AUX1FAN_COUNT_UP
+  	      AUX1FAN_COUNT_DOWN
+            endif; // Aux1Fan_Ctrl_Mode == 0x04;
+  
+  	    suppressif ideqval SETUP_DATA.Aux1Fan_Ctrl_Mode == 0x00;
+  	      AUX1FAN_STEP_UP_TIME
+  	      AUX1FAN_STEP_DOWN_TIME
+  	    endif; // Aux1Fan_Ctrl_Mode == 0x00;
+  	  endif;	// OnOff_Aux1Fan_Ctrl == 0x00;
+  	#endif // (NCT6791D_AUXFAN1_CTRL_SUPPORT)
+  
+  	#if (NCT6791D_AUXFAN2_CTRL_SUPPORT)
+          SEPARATOR
+  	  ONEOF_AUX2FAN_CTRL
+  	  suppressif ideqval SETUP_DATA.OnOff_Aux2Fan_Ctrl == 0x00;
+  	    AUX2FAN_CTRL_TYPE
+  	    suppressif NOT ideqval SETUP_DATA.Aux2Fan_Ctrl_Mode == 0x00;
+  	      AUX2FAN_OUT_VALUE
+            endif; // OnOff_Aux2Fan_Ctrl_Mode == 0x00;
+  
+            // >> 2015/11/03 Eric +
+            suppressif ideqval SETUP_DATA.Aux2Fan_Ctrl_Mode == 0x00 OR
+                       ideqval SETUP_DATA.Aux2Fan_Ctrl_Mode == 0x02;
+              AUX2FAN_TEMP_SRC
+            endif; // suppressif Aux2Fan_Ctrl_Mode == 0x00 or 0x02;
+            // << 2015/11/03 Eric +
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux2Fan_Ctrl_Mode == 0x01;
+  	      AUX2FAN_TARGET_TEMP
+  	      AUX2FAN_TOL_TEMP
+  	      AUX2FAN_START_UP
+              AUX2FAN_STOP_DUTY    // 2015/11/03 Eric +
+  	      AUX2FAN_STOP_VALUE
+  	      AUX2FAN_STOP_TIME
+  	      AUX2FAN_CRITICAL_TEMP
+  	    endif; // Aux2Fan_Ctrl_Mode == 0x01;
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux2Fan_Ctrl_Mode == 0x02;
+  	      AUX2FAN_TARGET_SPEED
+  	      AUX2FAN_SPEED_TOL
+  	    endif; // Aux2Fan_Ctrl_Mode == 0x02;
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux2Fan_Ctrl_Mode == 0x04;
+              AUX2FAN_CLOSE_LOOP_MODE
+  	      AUX2FAN_TEMP1
+  	      AUX2FAN_TEMP2
+  	      AUX2FAN_TEMP3
+  	      AUX2FAN_TEMP4
+  	      AUX2FAN_PWM1
+  	      AUX2FAN_PWM2
+  	      AUX2FAN_PWM3
+  	      AUX2FAN_PWM4
+  	      AUX2FAN_TOL_TEMP
+  	      AUX2FAN_CRITICAL_TEMP
+  	      AUX2FAN_CRITICAL_TEMP_TOL
+  	      AUX2FAN_COUNT_UP
+  	      AUX2FAN_COUNT_DOWN
+            endif; // Aux2Fan_Ctrl_Mode == 0x04;
+  
+  	    suppressif ideqval SETUP_DATA.Aux2Fan_Ctrl_Mode == 0x00;
+  	      AUX2FAN_STEP_UP_TIME
+  	      AUX2FAN_STEP_DOWN_TIME
+  	    endif; // Aux2Fan_Ctrl_Mode == 0x00;
+  	  endif;	// OnOff_Aux2Fan_Ctrl == 0x00;
+  	#endif // (NCT6791D_AUXFAN2_CTRL_SUPPORT)
+  
+  	#if (NCT6791D_AUXFAN3_CTRL_SUPPORT)
+          SEPARATOR
+  	  ONEOF_AUX3FAN_CTRL
+  	  suppressif ideqval SETUP_DATA.OnOff_Aux3Fan_Ctrl == 0x00;
+  	    AUX3FAN_CTRL_TYPE
+  	    suppressif NOT ideqval SETUP_DATA.Aux3Fan_Ctrl_Mode == 0x00;
+  	      AUX3FAN_OUT_VALUE
+            endif; // OnOff_Aux3Fan_Ctrl_Mode == 0x00;
+  
+            // >> 2015/11/03 Eric +
+            suppressif ideqval SETUP_DATA.Aux3Fan_Ctrl_Mode == 0x00 OR
+                       ideqval SETUP_DATA.Aux3Fan_Ctrl_Mode == 0x02;
+              AUX3FAN_TEMP_SRC
+            endif; // suppressif Aux3Fan_Ctrl_Mode == 0x00 or 0x02;
+            // << 2015/11/03 Eric +
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux3Fan_Ctrl_Mode == 0x01;
+  	      AUX3FAN_TARGET_TEMP
+  	      AUX3FAN_TOL_TEMP
+  	      AUX3FAN_START_UP
+              AUX3FAN_STOP_DUTY    // 2015/11/03 Eric +
+  	      AUX3FAN_STOP_VALUE
+  	      AUX3FAN_STOP_TIME
+  	      AUX3FAN_CRITICAL_TEMP
+  	    endif; // Aux3Fan_Ctrl_Mode == 0x01;
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux3Fan_Ctrl_Mode == 0x02;
+  	      AUX3FAN_TARGET_SPEED
+  	      AUX3FAN_SPEED_TOL
+  	    endif; // Aux3Fan_Ctrl_Mode == 0x02;
+  
+  	    suppressif NOT ideqval SETUP_DATA.Aux3Fan_Ctrl_Mode == 0x04;
+  	      AUX3FAN_TEMP1
+  	      AUX3FAN_TEMP2
+  	      AUX3FAN_TEMP3
+  	      AUX3FAN_TEMP4
+  	      AUX3FAN_PWM1
+  	      AUX3FAN_PWM2
+  	      AUX3FAN_PWM3
+  	      AUX3FAN_PWM4
+  	      AUX3FAN_TOL_TEMP
+  	      AUX3FAN_CRITICAL_TEMP
+  	      AUX3FAN_CRITICAL_TEMP_TOL
+  	      AUX3FAN_COUNT_UP
+  	      AUX3FAN_COUNT_DOWN
+            endif; // Aux3Fan_Ctrl_Mode == 0x04;
+  
+  	    suppressif ideqval SETUP_DATA.Aux3Fan_Ctrl_Mode == 0x00;
+  	      AUX3FAN_STEP_UP_TIME
+  	      AUX3FAN_STEP_DOWN_TIME
+  	    endif; // Aux3Fan_Ctrl_Mode == 0x00;
+  	  endif;	// OnOff_Aux3Fan_Ctrl == 0x00;
+  	#endif // (NCT6791D_AUXFAN3_CTRL_SUPPORT)
+
+    endform;
+    #endif	// SMF_CONFIG_FORM_NCT6791D
+    #endif	// (NCT6791D_FAN_CTRL_SUPPORT)
+    //-------------------------------------------------------------------------
+    //	Smart Fan Group _end
+    //-------------------------------------------------------------------------
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+
+
+

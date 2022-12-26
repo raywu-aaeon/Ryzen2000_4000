@@ -1,0 +1,11 @@
+<component>
+	name = "W83627DHGHwMonitor"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\W83627DHG\"
+	RefName = "AaeonIoPkg.W83627DHG.W83627DHGHwMonitor"
+[files]
+"W83627DHGHwmSetup.sdl"
+"W83627DHGHwmSetup.c"	
+"W83627DHGHwmSetup.sd"	
+"W83627DHGHwmSetup.uni"	
+<endComponent>

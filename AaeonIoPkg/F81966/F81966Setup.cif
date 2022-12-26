@@ -1,0 +1,11 @@
+<component>
+	name = "F81966Setup"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\F81966\"
+	RefName = "AaeonIoPkg.F81966.F81966Setup"
+[files]
+"F81966Setup.sd"
+"F81966Setup.uni"
+"F81966Setup.c"
+"F81966Setup.h"
+<endComponent>

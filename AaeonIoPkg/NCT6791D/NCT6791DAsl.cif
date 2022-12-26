@@ -1,0 +1,10 @@
+<component>
+	name = "NCT6791DAsl"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\NCT6791D\"
+	RefName = "AaeonIoPkg.NCT6791D.NCT6791DAsl"
+[files]
+"CIR.asl"	
+"NCT6791DEVT.asl"	
+"NCT6791DDEV.asl"	
+<endComponent>

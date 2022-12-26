@@ -1,0 +1,701 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <W83627DHGHwmSetup.sd>
+//
+// Description: SIO Form Template, Setup screen definition file
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+//
+#ifdef SETUP_DATA_DEFINITION
+#include "Token.h" //Please refer to EIP179915 
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+#if W83627DHG_SmartFan_SUPPORT
+    UINT8   SmartFanEnable;
+    //SYS Fan Smart Function Elements
+    UINT8   SysSmartFanMode;
+    UINT8   SysFanOutValue;
+    UINT8   SysFanOfTarTemp;
+    UINT8   SysFanOfTarSpeed;
+    UINT8   SysTolOfTarTemp;
+    UINT8   SysTolOfTarSpeed;
+    //CPU Fan0 Smart Function Elements
+    UINT8   CPUSmartFan0Mode;
+    UINT8   CPUFan0OutValue;
+    UINT8   CPUFan0OfTarTemp;
+    UINT8   CPUFan0OfTarSpeed;
+    UINT8   CPUTol0OfTarTemp;
+    UINT8   CPUTol0OfTarSpeed;
+    //AUX Fan Smart Function Elements
+    UINT8   AuxSmartFanMode;
+    UINT8   AuxFanOutValue;
+    UINT8   AuxFanOfTarTemp;
+    UINT8   AuxFanOfTarSpeed;
+    UINT8   AuxTolOfTarTemp;
+    UINT8   AuxTolOfTarSpeed;
+    //CPU Fan1 Smart Function Elements
+    UINT8   CPUSmartFan1Mode;
+    UINT8   CPUFan1OutValue;
+    UINT8   CPUFan1OfTarTemp;
+    UINT8   CPUFan1OfTarSpeed;
+    UINT8   CPUTol1OfTarTemp;
+    UINT8   CPUTol1OfTarSpeed;
+#endif //#if W83627DHG_SmartFan_SUPPORT
+#if defined(AC_POWER_LOSS_DEFINED) && (AC_POWER_LOSS_DEFINED)
+    UINT8   LastState;
+#endif
+#endif //SETUP_DATA_DEFINITION
+
+//-------------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//-------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//-------------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+    #include "Token.h"
+#endif
+
+//-------------------------------------------------------------------------
+//If you need custom varstore's define them here
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+#endif
+
+//-------------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+    #if defined(AC_POWER_LOSS_DEFINED) && (AC_POWER_LOSS_DEFINED)
+        oneof varid     = SETUP_DATA.LastState,
+            prompt      = STRING_TOKEN(STR_W83627DHG_POWER_LOSS_CONFIG),
+            help        = STRING_TOKEN(STR_W83627DHG_POWER_LOSS_CONFIG_HELP),
+            option text = STRING_TOKEN(STR_POWER_OFF),  value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_POWER_ON),   value = 1, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_LAST_STATE), value = 2, flags = RESET_REQUIRED|DEFAULT|MANUFACTURING;
+        endoneof;
+    #endif
+#endif
+
+//-------------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+
+    #if W83627DHG_HWM_PRESENT
+    goto HMM_CONFIG_FORM_ID,
+    prompt  = STRING_TOKEN(STR_W83627DHG_HMM_CONFIGURATION),
+    help    = STRING_TOKEN(STR_W83627DHG_HMM_CONFIGURATION_HELP);
+    #endif
+
+#endif
+
+//-------------------------------------------------------------------------
+// Define forms
+//-------------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define HWM formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if W83627DHG_HWM_PRESENT
+    //Define HWM formset form
+    form formid = AUTO_ID(HMM_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_W83627DHG_HMM_CONFIGURATION);
+     
+        SUBTITLE(STRING_TOKEN(STR_PC_HEALTH))
+     
+        // Null line for generate interactive key ID automatically
+        #if EFI_SPECIFICATION_VERSION>0x20000
+                INTERACTIVE_TEXT(STRING_TOKEN(STR_NULL), STRING_TOKEN(STR_NULL), STRING_TOKEN(STR_NULL),  AUTO_ID(W83627DHG_INTERACTIVE_KEY))
+        #else
+                text
+                help   = STRING_TOKEN(STR_NULL),
+                text   = STRING_TOKEN(STR_NULL),
+                text   = STRING_TOKEN(STR_NULL),
+                flags  = INTERACTIVE | NV_ACCESS,
+                key    = W83627DHG_INTERACTIVE_KEY;
+        #endif
+
+        #if W83627DHG_SmartFan_SUPPORT
+            checkbox varid  = SETUP_DATA.SmartFanEnable,
+                prompt      = STRING_TOKEN(STR_W83627DHG_SMARTFAN_PROMPT),
+                help        = STRING_TOKEN(STR_W83627DHG_SMARTFAN_PROMPT_HELP),
+                flags       = CHECKBOX_DEFAULT | RESET_REQUIRED, 
+            endcheckbox;
+
+            //Goto Smart Fan Form
+            suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00;
+                goto SIO_SMARTFAN_FORM_ID,
+                prompt  = STRING_TOKEN(STR_W83627DHG_SMARTFAN_FORM),
+                help    = STRING_TOKEN(STR_W83627DHG_SMARTFAN_FORM_HELP);
+            endif;
+        #endif //#if W83627DHG_SmartFan_SUPPORT
+
+        //
+        // Temperature
+        SEPARATOR
+        #if W83627DHG_CPU_DTS_SUPPORT
+            text\
+            help   = STRING_TOKEN(STR_EMPTY),\
+            text   = STRING_TOKEN(STR_W83627DHG_HWM1_CPU_DTS_TEMP),\
+            text   = STRING_TOKEN(STR_W83627DHG_HWM1_CPU_DTS_TEMP_VALUE),\
+            flags  = 0,\
+            key    = 0;
+        #else
+        #if W83627DHG_CPUTIN_SUPPORT
+            HWM1_TEXT_TEMP2
+        #endif
+        #endif
+        #if W83627DHG_SYSTIN_SUPPORT
+            HWM1_TEXT_TEMP1
+        #endif
+        #if W83627DHG_AUXTIN_SUPPORT
+            HWM1_TEXT_TEMP3
+        #endif
+
+        //
+        // FAN
+        SEPARATOR
+        #if W83627DHG_CPUFANIN0_SUPPORT
+            HWM1_TEXT_FAN2_SPEED
+        #endif
+        #if W83627DHG_CPUFANIN1_SUPPORT
+            HWM1_TEXT_FAN4_SPEED
+        #endif
+        #if W83627DHG_SYSFANIN_SUPPORT
+            HWM1_TEXT_FAN1_SPEED
+        #endif
+        #if W83627DHG_AUXFANIN0_SUPPORT
+            HWM1_TEXT_FAN3_SPEED
+        #endif
+        #if W83627DHG_AUXFANIN1_SUPPORT
+            HWM1_TEXT_FAN5_SPEED
+        #endif
+
+        //
+        // Voltage
+        #if W83627DHG_VCORE_SUPPORT
+            //
+            // VCORE
+            text\
+            help   = STRING_TOKEN(STR_EMPTY),\
+            text   = STRING_TOKEN(STR_W83627DHG_HWM1_VCORE),\
+            text   = STRING_TOKEN(STR_W83627DHG_HWM1_VCORE_VALUE),\
+            flags  = 0,\
+            key    = 0;
+        #endif
+        #if W83627DHG_VIN0_SUPPORT
+            //
+            // VIN0
+            text\
+            help   = STRING_TOKEN(STR_EMPTY),\
+            text   = STRING_TOKEN(STR_W83627DHG_HWM1_VIN0),\
+            text   = STRING_TOKEN(STR_W83627DHG_HWM1_VIN0_VALUE),\
+            flags  = 0,\
+            key    = 0; 
+        #endif
+        #if W83627DHG_VIN1_SUPPORT
+            HWM1_TEXT_VIN1
+        #endif
+        #if W83627DHG_VIN2_SUPPORT
+            HWM1_TEXT_VIN2
+        #endif
+        #if W83627DHG_VIN3_SUPPORT
+            HWM1_TEXT_VIN3
+        #endif
+        #if W83627DHG_AVCC_SUPPORT
+            //
+            // VACC
+            text\
+            help   = STRING_TOKEN(STR_EMPTY),\
+            text   = STRING_TOKEN(STR_W83627DHG_HWM1_VACC),\
+            text   = STRING_TOKEN(STR_W83627DHG_HWM1_VACC_VALUE),\
+            flags  = 0,\
+            key    = 0;
+        #endif
+        #if W83627DHG_VCC3_SUPPORT
+            HWM1_TEXT_VCC3V
+        #endif
+        #if W83627DHG_VSB3_SUPPORT
+            HWM1_TEXT_VSB3V
+        #endif
+        #if W83627DHG_VBAT_SUPPORT
+            HWM1_TEXT_VBAT
+        #endif
+
+    endform;//HWM form
+    #if W83627DHG_SmartFan_SUPPORT
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////Smart Fan Form
+    form formid = AUTO_ID(SIO_SMARTFAN_FORM_ID),
+        title = STRING_TOKEN(STR_W83627DHG_SMARTFAN_FORM);
+        SUBTITLE(STRING_TOKEN(STR_W83627DHG_SMARTFAN_FORM))
+    
+            SEPARATOR
+        #if W83627DHG_SYSFANOUT_SUPPORT
+    /////////////////////////////////////////////////////////SYS Smart Fan Form
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00;
+            oneof varid     = SETUP_DATA.SysSmartFanMode,
+                prompt      = STRING_TOKEN(STR_W83627DHG_SMARTFAN1_CONFIG),
+                help        = STRING_TOKEN(STR_W83627DHG_SMARTFAN1_CONFIG_HELP),
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN1_MODE0), value = 0, flags = DEFAULT |RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN1_MODE1), value = 1, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN1_MODE2), value = 2, flags = RESET_REQUIRED;
+            endoneof;
+        endif;
+    
+        //SYS Smart Fan, Manual Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x01
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x02;
+            numeric varid = SETUP_DATA.SysFanOutValue,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN1_MANUAL_FANOUT_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN1_MANUAL_FANOUT_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 255,
+            endnumeric;
+        endif;
+    
+        //SYS Smart Fan, Thermal Cruise Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x00
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x02;
+            numeric varid = SETUP_DATA.SysFanOfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN1_TARGET_TEMP_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN1_TARGET_TEMP_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 127,
+                step      = 1,
+                default   = 50,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x00
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x02;
+            numeric varid = SETUP_DATA.SysTolOfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN1_TEMP_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN1_TEMP_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 5,
+            endnumeric;
+        endif;
+    
+        //SYS Smart Fan, Fan Speed Cruise Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x00
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x01;
+            numeric varid = SETUP_DATA.SysFanOfTarSpeed,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN1_TARGET_SPEED_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN1_TARGET_SPEED_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 100,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x00
+            OR ideqval SETUP_DATA.SysSmartFanMode == 0x01;
+            numeric varid = SETUP_DATA.SysTolOfTarSpeed,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN1_SPEED_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN1_SPEED_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 10,
+            endnumeric;
+        endif;
+    
+            SEPARATOR
+        #endif //W83627DHG_SYSFANOUT_SUPPORT
+    
+    /////////////////////////////////////////////////////////CPU Smart Fan0 Form
+        #if W83627DHG_CPUFANOUT0_SUPPORT
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00;
+            oneof varid     = SETUP_DATA.CPUSmartFan0Mode,
+                prompt      = STRING_TOKEN(STR_W83627DHG_SMARTFAN2_CONFIG),
+                help        = STRING_TOKEN(STR_W83627DHG_SMARTFAN2_CONFIG_HELP),
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN2_MODE0), value = 0, flags = DEFAULT |RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN2_MODE1), value = 1, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN2_MODE2), value = 2, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN2_MODE3), value = 3, flags = RESET_REQUIRED;
+            endoneof;
+        endif;
+    
+        //CPU Smart Fan0, Manual Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x02
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUFan0OutValue,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN2_MANUAL_FANOUT_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN2_MANUAL_FANOUT_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 255,
+            endnumeric;
+        endif;
+    
+        //CPU Smart Fan0, Thermal Cruise Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x02
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUFan0OfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN2_TARGET_TEMP_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN2_TARGET_TEMP_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 127,
+                step      = 1,
+                default   = 50,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x02
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUTol0OfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN2_TEMP_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN2_TEMP_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 5,
+            endnumeric;
+        endif;
+    
+        //CPU Smart Fan0, Fan Speed Cruise Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUFan0OfTarSpeed,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN2_TARGET_SPEED_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN2_TARGET_SPEED_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 100,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUTol0OfTarSpeed,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN2_SPEED_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN2_SPEED_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 10,
+            endnumeric;
+        endif;
+    
+        //CPU Smart Fan0, SMART FAN III Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x02;
+            numeric varid = SETUP_DATA.CPUFan0OfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN2_TARGET_TEMP_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN2_TARGET_TEMP_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 127,
+                step      = 1,
+                default   = 50,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan0Mode == 0x02;
+            numeric varid = SETUP_DATA.CPUTol0OfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN2_TEMP_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN2_TEMP_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 5,
+            endnumeric;
+        endif;
+    
+            SEPARATOR
+        #endif  //W83627DHG_CPUFANOUT0_SUPPORT
+    
+    /////////////////////////////////////////////////////////AUX Smart Fan Form
+        #if W83627DHG_AUXFANOUT_SUPPORT
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00;
+            oneof varid     = SETUP_DATA.AuxSmartFanMode,
+                prompt      = STRING_TOKEN(STR_W83627DHG_SMARTFAN3_CONFIG),
+                help        = STRING_TOKEN(STR_W83627DHG_SMARTFAN3_CONFIG_HELP),
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN3_MODE0), value = 0, flags = DEFAULT |RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN3_MODE1), value = 1, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN3_MODE2), value = 2, flags = RESET_REQUIRED;
+            endoneof;
+        endif;
+    
+        //AUX Smart Fan, Manual Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x01
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x02;
+            numeric varid = SETUP_DATA.AuxFanOutValue,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN3_MANUAL_FANOUT_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN3_MANUAL_FANOUT_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 255,
+            endnumeric;
+        endif;
+    
+        //AUX Smart Fan, Thermal Cruise Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x00
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x02;
+            numeric varid = SETUP_DATA.AuxFanOfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN3_TARGET_TEMP_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN3_TARGET_TEMP_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 127,
+                step      = 1,
+                default   = 50,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x00
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x02;
+            numeric varid = SETUP_DATA.AuxTolOfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN3_TEMP_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN3_TEMP_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 5,
+            endnumeric;
+        endif;
+    
+        //AUX Smart Fan, Fan Speed Cruise Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x00
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x01;
+            numeric varid = SETUP_DATA.AuxFanOfTarSpeed,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN3_TARGET_SPEED_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN3_TARGET_SPEED_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 100,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x00
+            OR ideqval SETUP_DATA.AuxSmartFanMode == 0x01;
+            numeric varid = SETUP_DATA.AuxTolOfTarSpeed,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN3_SPEED_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN3_SPEED_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 10,
+            endnumeric;
+        endif;
+    
+            SEPARATOR
+        #endif  //W83627DHG_AUXFANOUT_SUPPORT
+    
+    /////////////////////////////////////////////////////////CPU Smart Fan1 Form
+        #if W83627DHG_CPUFANOUT1_SUPPORT
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00;
+            oneof varid     = SETUP_DATA.CPUSmartFan1Mode,
+                prompt      = STRING_TOKEN(STR_W83627DHG_SMARTFAN4_CONFIG),
+                help        = STRING_TOKEN(STR_W83627DHG_SMARTFAN4_CONFIG_HELP),
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN4_MODE0), value = 0, flags = DEFAULT |RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN4_MODE1), value = 1, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN4_MODE2), value = 2, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_W83627DHG_SMARTFAN4_MODE3), value = 3, flags = RESET_REQUIRED;
+            endoneof;
+        endif;
+    
+        //CPU Smart Fan1, Manual Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x02
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUFan1OutValue,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN4_MANUAL_FANOUT_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN4_MANUAL_FANOUT_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 255,
+            endnumeric;
+        endif;
+    
+        //CPU Smart Fan1, Thermal Cruise Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x02
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUFan1OfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN4_TARGET_TEMP_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN4_TARGET_TEMP_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 127,
+                step      = 1,
+                default   = 50,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x02
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUTol1OfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN4_TEMP_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN4_TEMP_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 5,
+            endnumeric;
+        endif;
+    
+        //CPU Smart Fan1, Fan Speed Cruise Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUFan1OfTarSpeed,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN4_TARGET_SPEED_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN4_TARGET_SPEED_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 100,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x03;
+            numeric varid = SETUP_DATA.CPUTol1OfTarSpeed,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN4_SPEED_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN4_SPEED_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 10,
+            endnumeric;
+        endif;
+    
+        //CPU Smart Fan1, SMART FAN III Mode Setting
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x02;
+            numeric varid = SETUP_DATA.CPUFan1OfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN4_TARGET_TEMP_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN4_TARGET_TEMP_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 127,
+                step      = 1,
+                default   = 50,
+            endnumeric;
+        endif;
+    
+        suppressif ideqval SETUP_DATA.SmartFanEnable == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x00
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x01
+            OR ideqval SETUP_DATA.CPUSmartFan1Mode == 0x02;
+            numeric varid = SETUP_DATA.CPUTol1OfTarTemp,
+                prompt    = STRING_TOKEN(STR_W83627DHG_FAN4_TEMP_TOLERANCE_VALUE),
+                help      = STRING_TOKEN(STR_W83627DHG_FAN4_TEMP_TOLERANCE_VALUE_HELP),
+                flags     = RESET_REQUIRED,
+                minimum   = 0,
+                maximum   = 15,
+                step      = 1,
+                default   = 5,
+            endnumeric;
+        endif;
+        #endif  //W83627DHG_CPUFANOUT1_SUPPORT
+    
+    endform;//Smart Fan End
+    
+    #endif //#if W83627DHG_SmartFan_SUPPORT
+    #endif//End of #if W83627DHG_HWM_PRESENT
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

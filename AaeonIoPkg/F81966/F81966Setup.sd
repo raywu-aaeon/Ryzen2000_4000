@@ -1,0 +1,490 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <F81966Setup.sd>
+//
+// Description: SIO form template, setup screen definition file.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+#endif //SETUP_DATA_DEFINITION
+
+//----------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//----------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//----------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+    #include "F81966Setup.h"
+    #include "Token.h"
+#endif
+
+//----------------------------------------------------------------------
+//If you need custom varstore's define them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+    #ifdef SETUP_DATA_DEFINITION
+    AUTO_ID(FDC_V_DATA_KEY)
+    AUTO_ID(FDC_NV_DATA_KEY)
+    AUTO_ID(LPT_V_DATA_KEY)
+    AUTO_ID(LPT_NV_DATA_KEY)
+    AUTO_ID(COMA_V_DATA_KEY)
+    AUTO_ID(COMA_NV_DATA_KEY)
+    AUTO_ID(COMB_V_DATA_KEY)
+    AUTO_ID(COMB_NV_DATA_KEY)
+    AUTO_ID(COMC_V_DATA_KEY)
+    AUTO_ID(COMC_NV_DATA_KEY)
+    AUTO_ID(COMD_V_DATA_KEY)
+    AUTO_ID(COMD_NV_DATA_KEY)
+    AUTO_ID(COME_V_DATA_KEY)
+    AUTO_ID(COME_NV_DATA_KEY)
+    AUTO_ID(COMF_V_DATA_KEY)
+    AUTO_ID(COMF_NV_DATA_KEY)
+    #endif //#ifdef SETUP_DATA_DEFINITION
+    AMI_SIO_VARSTORE(FDC, PNP0700_0)
+    AMI_SIO_VARSTORE(LPT, PNP0400_0)
+    AMI_SIO_VARSTORE(COMA, PNP0501_0)
+    AMI_SIO_VARSTORE(COMB, PNP0501_1)
+    AMI_SIO_VARSTORE(COMC, PNP0501_2)
+    AMI_SIO_VARSTORE(COMD, PNP0501_3)
+    AMI_SIO_VARSTORE(COME, PNP0501_4)
+    AMI_SIO_VARSTORE(COMF, PNP0501_5)
+#endif
+
+//----------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//----------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+
+//----------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//----------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+    goto F81966_FORM_ID,
+    prompt  = STRING_TOKEN(STR_F81966_SIO_FORM),
+    help    = STRING_TOKEN(STR_F81966_SIO_FORM_HELP);
+#endif
+
+//----------------------------------------------------------------------
+//Define forms
+//----------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SIO formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    form formid = AUTO_ID(F81966_FORM_ID),
+        title = STRING_TOKEN(STR_F81966_SIO_FORM);
+        SUBTITLE(STRING_TOKEN(STR_F81966_SIO_FORM))
+    
+        SEPARATOR
+    
+        text
+        help   = STRING_TOKEN(STR_F81966_SIO_FORM_HELP),
+        text   = STRING_TOKEN(STR_F81966_SIO_PROMPT),
+        text   = STRING_TOKEN(STR_F81966),
+        flags  = 0,
+        key    = 0;
+    
+        //Goto Floppy Form
+        #if F81966_FLOPPY_PORT_PRESENT
+        suppressif ideqval FDC_V_DATA.DevImplemented == 0x00;
+            goto F81966_FLOPPY_FORM_ID,
+            prompt  = STRING_TOKEN(STR_FLOPPY_FORM),
+            help    = STRING_TOKEN(STR_FLOPPY_FORM_HELP);
+        endif;
+        #endif
+    
+        //Goto Serial 1 Form
+        #if F81966_SERIAL_PORT1_PRESENT
+        suppressif ideqval COMA_V_DATA.DevImplemented == 0x00;
+            goto F81966_SERIAL1_FORM_ID,
+            prompt  = STRING_TOKEN(STR_SERIAL1_FORM),
+            help    = STRING_TOKEN(STR_SERIAL1_FORM_HELP);
+        endif;
+        #endif
+    
+        //Goto Serial 2 Form
+        #if F81966_SERIAL_PORT2_PRESENT
+        suppressif ideqval COMB_V_DATA.DevImplemented == 0x00;
+            goto F81966_SERIAL2_FORM_ID,
+            prompt  = STRING_TOKEN(STR_SERIAL2_FORM),
+            help    = STRING_TOKEN(STR_SERIAL2_FORM_HELP);
+        endif;
+        #endif
+    
+        //Goto Serial 3 Form
+        #if F81966_SERIAL_PORT3_PRESENT
+        suppressif ideqval COMC_V_DATA.DevImplemented == 0x00;
+            goto F81966_SERIAL3_FORM_ID,
+            prompt  = STRING_TOKEN(STR_SERIAL3_FORM),
+            help    = STRING_TOKEN(STR_SERIAL3_FORM_HELP);
+        endif;
+        #endif
+    
+        //Goto Serial 4 Form
+        #if F81966_SERIAL_PORT4_PRESENT
+        suppressif ideqval COMD_V_DATA.DevImplemented == 0x00;
+            goto F81966_SERIAL4_FORM_ID,
+            prompt  = STRING_TOKEN(STR_SERIAL4_FORM),
+            help    = STRING_TOKEN(STR_SERIAL4_FORM_HELP);
+        endif;
+        #endif
+    
+        //Goto Serial 5 Form
+        #if F81966_SERIAL_PORT5_PRESENT
+        suppressif ideqval COME_V_DATA.DevImplemented == 0x00;
+            goto F81966_SERIAL5_FORM_ID,
+            prompt  = STRING_TOKEN(STR_SERIAL5_FORM),
+            help    = STRING_TOKEN(STR_SERIAL5_FORM_HELP);
+        endif;
+        #endif
+    
+        //Goto Serial 6 Form
+        #if F81966_SERIAL_PORT6_PRESENT
+        suppressif ideqval COMF_V_DATA.DevImplemented == 0x00;
+            goto F81966_SERIAL6_FORM_ID,
+            prompt  = STRING_TOKEN(STR_SERIAL6_FORM),
+            help    = STRING_TOKEN(STR_SERIAL6_FORM_HELP);
+        endif;
+        #endif
+    
+        //Goto Parallel Form
+        #if F81966_PARALLEL_PORT_PRESENT
+        suppressif ideqval LPT_V_DATA.DevImplemented == 0x00;
+            goto F81966_PARALLEL_FORM_ID,
+            prompt  = STRING_TOKEN(STR_PARALLEL_FORM),
+            help    = STRING_TOKEN(STR_PARALLEL_FORM_HELP);
+        endif;
+        #endif
+
+      endform;//SIO Form
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define FDC formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81966_FLOPPY_PORT_PRESENT
+    form formid = AUTO_ID(F81966_FLOPPY_FORM_ID),
+        title = STRING_TOKEN(STR_FLOPPY_FORM);
+        SUBTITLE(STRING_TOKEN(STR_FLOPPY_FORM))
+    
+        SEPARATOR
+
+        FDC_CHECKBOX_DEVEN    
+
+        suppressif ideqval FDC_NV_DATA.DevEnable == 0x00;
+        FDC_TEXT_CURRENT
+        endif; //SIO_SETUP_VAR.FdcEnable == 0x00;
+    
+        SEPARATOR
+    
+        suppressif ideqval FDC_NV_DATA.DevEnable == 0x00;
+        FDC_ONEOF_PRSID
+        endif; //SIO_SETUP_VAR.FdcEnable == 0x00;
+    
+        suppressif ideqval FDC_NV_DATA.DevEnable == 0x00;
+        FDC_ONEOF_MODE
+        endif; //SIO_SETUP_VAR.FdcEnable == 0x00;
+    endform; //Floppy  Form
+    #endif //#if F81966_FLOPPY_PORT_PRESENT
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SP1 formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81966_SERIAL_PORT1_PRESENT
+    form formid = AUTO_ID(F81966_SERIAL1_FORM_ID),
+        title = STRING_TOKEN(STR_SERIAL1_FORM);
+        SUBTITLE(STRING_TOKEN(STR_SERIAL1_FORM))
+    
+        SEPARATOR
+    
+        COMA_CHECKBOX_DEVEN
+    
+        suppressif ideqval COMA_NV_DATA.DevEnable == 0x00;
+        COMA_TEXT_CURRENT
+        endif;    //suppressif SIO_SETUP_VAR.ComAEnable == 0x00;
+    
+        SEPARATOR
+    
+        suppressif ideqval COMA_NV_DATA.DevEnable == 0x00;
+        COMA_ONEOF_PRSID
+        endif;    //suppressif SIO_SETUP_VAR.ComAEnable == 0x00;
+
+    endform;  //Serial 1 Form
+    #endif //#if F81966_SERIAL_PORT1_PRESENT
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SP2 formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81966_SERIAL_PORT2_PRESENT
+    form formid = AUTO_ID(F81966_SERIAL2_FORM_ID),
+        title = STRING_TOKEN(STR_SERIAL2_FORM);
+        SUBTITLE(STRING_TOKEN(STR_SERIAL2_FORM))
+    
+        SEPARATOR
+        COMB_CHECKBOX_DEVEN    
+    
+        suppressif ideqval COMB_NV_DATA.DevEnable == 0x00;
+        COMB_TEXT_CURRENT
+        endif;    //suppressif SIO_SETUP_VAR.ComBEnable == 0x00;
+    
+        SEPARATOR
+    
+        suppressif ideqval COMB_NV_DATA.DevEnable == 0x00;
+        COMB_ONEOF_PRSID
+        endif;    //suppressif SIO_SETUP_VAR.ComBEnable == 0x00;
+
+    endform;  //Serial 2 Form
+    #endif //#if F81966_SERIAL_PORT2_PRESENT
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SP3 formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81966_SERIAL_PORT3_PRESENT
+    form formid = AUTO_ID(F81966_SERIAL3_FORM_ID),
+        title = STRING_TOKEN(STR_SERIAL3_FORM);
+        SUBTITLE(STRING_TOKEN(STR_SERIAL3_FORM))
+    
+        SEPARATOR
+    
+        COMC_CHECKBOX_DEVEN    
+
+        suppressif ideqval COMC_NV_DATA.DevEnable == 0x00;
+        COMC_TEXT_CURRENT
+        endif;    //suppressif SIO_SETUP_VAR.ComCEnable == 0x00;
+    
+        SEPARATOR
+    
+        suppressif ideqval COMC_NV_DATA.DevEnable == 0x00;
+        oneof varid     = COMC_NV_DATA.DevPrsId,\
+            prompt      = STRING_TOKEN(STR_CHANGE_CONFIG),\
+            help        = STRING_TOKEN(STR_SETTINGS_HELP),\
+            option text = STRING_TOKEN(STR_AUTO), value = 0, flags = DEFAULT | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO3E8_IRQ7), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO3E8_IRQX), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E8_IRQX), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2F0_IRQX), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E0_IRQX), value = 5, flags = RESET_REQUIRED;\
+        endoneof;        
+        endif;    //suppressif SIO_SETUP_VAR.ComCEnable == 0x00;
+
+    endform;  //Serial 3 Form
+    #endif //#if F81966_SERIAL_PORT3_PRESENT
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SP4 formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81966_SERIAL_PORT4_PRESENT
+    form formid = AUTO_ID(F81966_SERIAL4_FORM_ID),
+        title = STRING_TOKEN(STR_SERIAL4_FORM);
+        SUBTITLE(STRING_TOKEN(STR_SERIAL4_FORM))
+    
+        SEPARATOR
+    
+        COMD_CHECKBOX_DEVEN    
+    
+        suppressif ideqval COMD_NV_DATA.DevEnable == 0x00;
+        COMD_TEXT_CURRENT
+        endif;    //suppressif SIO_SETUP_VAR.ComDEnable == 0x00;
+    
+        SEPARATOR
+    
+        suppressif ideqval COMD_NV_DATA.DevEnable == 0x00;
+        oneof varid     = COMD_NV_DATA.DevPrsId,\
+            prompt      = STRING_TOKEN(STR_CHANGE_CONFIG),\
+            help        = STRING_TOKEN(STR_SETTINGS_HELP),\
+            option text = STRING_TOKEN(STR_AUTO), value = 0, flags = DEFAULT | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E8_IRQ7), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO3E8_IRQX), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E8_IRQX), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2F0_IRQX), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E0_IRQX), value = 5, flags = RESET_REQUIRED;\
+        endoneof;        
+        endif;    //suppressif SIO_SETUP_VAR.ComDEnable == 0x00;
+
+    endform;  //Serial 4 Form
+    #endif //#if F81966_SERIAL_PORT4_PRESENT
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SP5 formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81966_SERIAL_PORT5_PRESENT
+    form formid = AUTO_ID(F81966_SERIAL5_FORM_ID),
+        title = STRING_TOKEN(STR_SERIAL5_FORM);
+        SUBTITLE(STRING_TOKEN(STR_SERIAL5_FORM))
+    
+        SEPARATOR
+    
+        COME_CHECKBOX_DEVEN    
+    
+        suppressif ideqval COME_NV_DATA.DevEnable == 0x00;
+        COME_TEXT_CURRENT
+        endif;    //suppressif SIO_SETUP_VAR.ComEEnable == 0x00;
+    
+        SEPARATOR
+    
+        suppressif ideqval COME_NV_DATA.DevEnable == 0x00;
+        oneof varid     = COME_NV_DATA.DevPrsId,\
+            prompt      = STRING_TOKEN(STR_CHANGE_CONFIG),\
+            help        = STRING_TOKEN(STR_SETTINGS_HELP),\
+            option text = STRING_TOKEN(STR_AUTO), value = 0, flags = DEFAULT | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E0_IRQ7), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO3E8_IRQX), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E8_IRQX), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2F0_IRQX), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E0_IRQX), value = 5, flags = RESET_REQUIRED;\
+        endoneof;        
+        endif;    //suppressif SIO_SETUP_VAR.ComEEnable == 0x00;
+
+    endform;  //Serial 5 Form
+    #endif //#if F81966_SERIAL_PORT5_PRESENT
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define SP6 formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81966_SERIAL_PORT6_PRESENT
+    form formid = AUTO_ID(F81966_SERIAL6_FORM_ID),
+        title = STRING_TOKEN(STR_SERIAL6_FORM);
+        SUBTITLE(STRING_TOKEN(STR_SERIAL6_FORM))
+    
+        SEPARATOR
+    
+        COMF_CHECKBOX_DEVEN    
+    
+        suppressif ideqval COMF_NV_DATA.DevEnable == 0x00;
+        COMF_TEXT_CURRENT
+        endif;    //suppressif SIO_SETUP_VAR.ComFEnable == 0x00;
+    
+        SEPARATOR
+    
+        suppressif ideqval COMF_NV_DATA.DevEnable == 0x00;
+        oneof varid     = COMF_NV_DATA.DevPrsId,\
+            prompt      = STRING_TOKEN(STR_CHANGE_CONFIG),\
+            help        = STRING_TOKEN(STR_SETTINGS_HELP),\
+            option text = STRING_TOKEN(STR_AUTO), value = 0, flags = DEFAULT | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2F0_IRQ7), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO3E8_IRQX), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E8_IRQX), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2F0_IRQX), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_F81966_SERIAL_IO2E0_IRQX), value = 5, flags = RESET_REQUIRED;\
+        endoneof;        
+        endif;    //suppressif SIO_SETUP_VAR.ComFEnable == 0x00;
+    
+        suppressif ideqval COMF_NV_DATA.DevEnable == 0x00;
+            oneof varid = COMF_NV_DATA.DevMode,
+                prompt      = STRING_TOKEN(STR_SELECT_MODE),
+                help        = STRING_TOKEN(STR_SERIAL_MODE_HELP),
+                option text = STRING_TOKEN(STR_F81966_SERIAL6_MODE1), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_F81966_SERIAL6_MODE2), value = 1, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_F81966_SERIAL6_MODE3), value = 2, flags = RESET_REQUIRED;
+            endoneof;
+        endif;   
+    endform;  // Serial 6 Form
+    #endif //#if F81966_SERIAL_PORT6_PRESENT
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////Define Paralel formset form//////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81966_PARALLEL_PORT_PRESENT
+    form formid = AUTO_ID(F81966_PARALLEL_FORM_ID),
+        title = STRING_TOKEN(STR_PARALLEL_FORM);
+        SUBTITLE(STRING_TOKEN(STR_PARALLEL_FORM))
+    
+        SEPARATOR
+    
+        LPT_CHECKBOX_DEVEN
+    
+        suppressif ideqval LPT_NV_DATA.DevEnable == 0x0;
+        LPT_TEXT_CURRENT
+        endif;    //suppressif SIO_SETUP_VAR.LptEnable == 0x0;
+    
+        SEPARATOR
+    
+        suppressif ideqval LPT_NV_DATA.DevEnable == 0x0
+            OR ideqval LPT_NV_DATA.DevMode == 0x4
+            OR ideqval LPT_NV_DATA.DevMode == 0x5
+            OR ideqval LPT_NV_DATA.DevMode == 0x6;
+            oneof varid     = LPT_NV_DATA.DevPrsId,\
+                prompt      = STRING_TOKEN(STR_CHANGE_CONFIG),\
+                help        = STRING_TOKEN(STR_SETTINGS_HELP),\
+                option text = STRING_TOKEN(STR_AUTO), value = 0, flags = DEFAULT | RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_IO378_IRQ5), value = 1, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_IO378_IRQX), value = 2, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_IO278_IRQX), value = 3, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_IO3BC_IRQX), value = 4, flags = RESET_REQUIRED;\
+            endoneof;        
+        endif;    //suppressif SIO_SETUP_VAR.LptEnable == 0x0;
+    
+        suppressif ideqval LPT_NV_DATA.DevEnable == 0x0 
+            OR ideqval LPT_NV_DATA.DevMode == 0x1
+            OR ideqval LPT_NV_DATA.DevMode == 0x2
+            OR ideqval LPT_NV_DATA.DevMode == 0x3
+            OR ideqval LPT_NV_DATA.DevMode == 0x0;
+            oneof varid     = LPT_NV_DATA.DevPrsId,\
+                prompt      = STRING_TOKEN(STR_CHANGE_CONFIG),\
+                help        = STRING_TOKEN(STR_SETTINGS_HELP),\
+                option text = STRING_TOKEN(STR_AUTO), value = 0, flags = DEFAULT | RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_F81966_PARALLELE_IO378_778_IRQ5_DMA3), value = 1, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_F81966_PARALLELE_IO378_778_IRQX_DMAX), value = 2, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_F81966_PARALLELE_IO278_678_IRQX_DMAX), value = 3, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_F81966_PARALLELE_IO3BC_7BC_IRQX_DMAX), value = 4, flags = RESET_REQUIRED;\
+            endoneof;
+        endif;    //suppressif SIO_SETUP_VAR.LptEnable == 0x0;
+    
+        suppressif ideqval LPT_NV_DATA.DevEnable == 0x0;
+            oneof varid = LPT_NV_DATA.DevMode,
+                prompt        = STRING_TOKEN(STR_SELECT_MODE),
+                help        = STRING_TOKEN(STR_F81966_PARALLEL_MODE_HELP),
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_MODE0), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_MODE1), value = 1, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_MODE2), value = 2, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_MODE3), value = 3, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_MODE4), value = 4, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_MODE5), value = 5, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_F81966_PARALLEL_MODE6), value = 6, flags = RESET_REQUIRED;
+            endoneof;
+        endif;    //suppressif SIO_SETUP_VAR.LptEnable == 0x0;
+    
+    endform;  //Parralel Form
+    #endif //#if F81966_PARALLEL_PORT_PRESENT
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

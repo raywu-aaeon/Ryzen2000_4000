@@ -1,0 +1,607 @@
+#**********************************************************************
+#
+# Name:  <F75113GpioSetup.sdl>
+#
+# Description:     SDL file to define SIO setup functions
+#
+#**********************************************************************
+
+TOKEN
+	Name  = "F75113_GPIO_INIT_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable F75113 hardware monitor support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "F75113_MISC_DIR"
+End
+
+#==============================================================================
+#Setup Default Value definition
+#==============================================================================
+
+TOKEN
+	Name  = "F75113_GP00_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP00 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP01_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP01 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP02_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP02 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP03_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP03 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP04_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP04 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP05_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP05 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP06_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP06 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP07_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP07 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP10_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP10 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP11_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP11 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP12_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP12 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP13_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP13 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP14_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP14 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP15_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP15 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP16_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP16 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP17_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP17 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP20_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP20 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP21_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP21 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP22_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP22 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP23_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP23 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP24_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP24 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP25_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP25 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP26_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP26 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP27_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP27 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP30_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP30 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP31_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP31 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP32_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP32 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP33_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP33 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP34_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP34 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP35_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP35 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP36_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP36 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP37_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP37 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP40_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP40 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP41_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP41 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP42_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP42 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP43_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP43 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP44_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP44 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP45_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP45 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP46_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP46 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP47_TYPE_DEFAULT"
+	value = "1"
+	Help = "F75113 GP47 Type Default\1 - Output\0 - Input"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+
+TOKEN
+	Name  = "F75113_GP00_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP00 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP01_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP01 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP02_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP02 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP03_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP03 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP04_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP04 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP05_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP05 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP06_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP06 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP07_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP07 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP10_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP10 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP11_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP11 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP12_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP12 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP13_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP13 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP14_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP14 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP15_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP15 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP16_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP16 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP17_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP17 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP20_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP20 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP21_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP21 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP22_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP22 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP23_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP23 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP24_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP24 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP25_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP25 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP26_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP26 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP27_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP27 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP30_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP30 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP31_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP31 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP32_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP32 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP33_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP33 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP34_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP34 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP35_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP35 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP36_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP36 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP37_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP37 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP40_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP40 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP41_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP41 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP42_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP42 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP43_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP43 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP44_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP44 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP45_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP45 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP46_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP46 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F75113_GP47_DATA_DEFAULT"
+	value = "1"
+	Help = "F75113 GP47 DATA Default\0 - Low\1 - High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#==============================================================================
+#elink Setup Source file and table
+#==============================================================================
+ELINK
+	Name  = "$(F75113_MISC_DIR)\F75113MiscSetup.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(F75113_MISC_DIR)\F75113MiscSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+#ELINK
+#	Name  = "$(F75113_MISC_DIR)/F75113MiscSetup.c"
+#	Parent  = "SetupCallbackFiles"
+#	InvokeOrder = AfterParent
+#End

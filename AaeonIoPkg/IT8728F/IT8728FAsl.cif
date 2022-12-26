@@ -1,0 +1,10 @@
+<component>
+	name = "IT8728FAsl"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\IT8728F\"
+	RefName = "AaeonIoPkg.IT8728F.IT8728FAsl"
+[files]
+"CIR.asl"	
+"IT8728FEVT.asl"	
+"IT8728FDEV.asl"	
+<endComponent>

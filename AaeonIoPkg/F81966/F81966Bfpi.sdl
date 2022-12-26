@@ -1,0 +1,630 @@
+#**********************************************************************
+#<AAEON_FHDR_START>
+#
+# Name:  <F81966Bfpi.sdl>
+#
+# Description:     SDL file to define AAEON BFPI functions
+#
+#
+#<AAEON_FHDR_END>
+#**********************************************************************
+TOKEN
+	Name  = "F81966_BFPI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AAEON F81966 BFPI support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "F81966_BFPI_DIR"
+End
+
+MODULE
+	Help  = "Includes F81966Bfpi.MAK to Project"
+	File  = "F81966Bfpi.MAK"
+End
+
+#==============================================================================
+# HWM Configurations
+#==============================================================================
+TOKEN
+	Name  = "F81966_TEMPERATURE_1_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if Temperature 1 is designed and is used.\Register Offset : 0x72(Kernel Default)"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_1_NAME"
+	Value  = "$(STD_SYS_TEMP)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no   matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_TEMPERATURE_1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_2_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if Temperature 2 is designed and is used.\Register Offset : 0x74(Kernel Default)"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_2_NAME"
+	Value  = "$(STD_SYS_TEMP2)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no   matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_TEMPERATURE_2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_3_SUPPORT"
+	Value  = "0"
+	Help  = "Switch on if Temperature 3 is designed and is used.\Register Offset : 0x7E(Kernel Default), Only available if PECI interface is enabled"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "F81966_HWM_PECI_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if Temperature 3 is designed and is used.\Register Offset : 0x7E(Kernel Default), Only available if PECI interface is enabled"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "F81966_HWM_PECI_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_3_NAME"
+	Value  = "$(STD_CPU_TEMP)"
+	Help  = "CPU(PECI) Temperature\ Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no   matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_TEMPERATURE_3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_4_SUPPORT"
+	Value  = "0"
+	Help  = "Switch on if Temperature 4 is designed and is used.\Register Offset : 0x7A(Kernel Default), Available if Intel IBX or AMD TSI interface is enabled"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "F81966_IBEX_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_4_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if Temperature 4 is designed and is used.\Register Offset : 0x7A(Kernel Default), Available if Intel IBX or AMD TSI interface is enabled"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "F81966_IBEX_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_4_NAME"
+	Value  = "$(STD_CPU_TEMP)"
+	Help  = "IBX/TSI CPU Temperature\ Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no   matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_TEMPERATURE_4_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_5_SUPPORT"
+	Value  = "0"
+	Help  = "Switch on if Temperature 5 is designed and is used.\Register Offset : 0x7B(Kernel Default), Only available if Intel IBX interface is enabled"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "F81966_IBEX_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_5_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if Temperature 5 is designed and is used.\Register Offset : 0x7B(Kernel Default), Only available if Intel IBX interface is enabled"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "F81966_IBEX_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_5_NAME"
+	Value  = "IBX PCH Temperature"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no   matchness. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_TEMPERATURE_5_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_FAN_1_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if FAN1 is designed and is used.\Register Offset : 0xA0 ~ 0xA1"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "GPIO95_EN" "=" "0"
+End
+
+TOKEN
+	Name  = "F81966_FAN_1_SUPPORT"
+	Value  = "0"
+	Help  = "Switch on if FAN1 is designed and is used.\Register Offset : 0xA0 ~ 0xA1"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "GPIO95_EN" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_FAN_1_NAME"
+	Value  = "$(STD_SYS_FAN)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_FAN_1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_FAN_2_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if FAN2 is designed and is used.\Register Offset : 0xB0 ~ 0xB1"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "GPIO96_EN" "=" "0"
+End
+
+TOKEN
+	Name  = "F81966_FAN_2_SUPPORT"
+	Value  = "0"
+	Help  = "Switch on if FAN2 is designed and is used.\Register Offset : 0xB0 ~ 0xB1"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "GPIO96_EN" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_FAN_2_NAME"
+	Value  = "$(STD_SYS_FAN2)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_FAN_2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_FAN_3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if FAN3 is designed and is used.\Register Offset : 0xC0 ~ 0xC1"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "F81966_FAN3_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_FAN_3_SUPPORT"
+	Value  = "0"
+	Help  = "Switch on if FAN3 is designed and is used.\Register Offset : 0xC0 ~ 0xC1"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+	Token = "F81966_FAN3_PRESENT" "=" "0"
+End
+
+TOKEN
+	Name  = "F81966_FAN_3_NAME"
+	Value  = "$(STD_SYS_FAN3)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_FAN_3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_3VCC_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if 3VCC is designed and is used.\Register Offset : 0x20"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_3VCC_NAME"
+	Value  = "$(STD_3V3)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_3VCC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VIN1_VCORE_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN1(VCORE) is designed and is used.\Register Offset : 0x21"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_VIN1_VCORE_NAME"
+	Value  = "$(STD_VCORE)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_VIN1_VCORE_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VIN2_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN2 is designed and is used.\Register Offset : 0x22"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_VIN2_NAME"
+	Value  = "$(STD_VMEM)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_VIN2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VIN3_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN3 is designed and is used.\Register Offset : 0x23"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_VIN3_NAME"
+	Value  = "$(STD_5V)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_VIN3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VIN4_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VIN4 is designed and is used.\Register Offset : 0x24"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_VIN4_NAME"
+	Value  = "$(STD_12V)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_VIN4_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VSB3V_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VSB3V is designed and is used.\Register Offset : 0x25"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_VSB3V_NAME"
+	Value  = "$(STD_3VSB)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_VSB3V_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VBAT_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if VBAT is designed and is used.\Register Offset : 0x26"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_VBAT_NAME"
+	Value  = "$(STD_VBAT)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_VBAT_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_5VSB_SUPPORT"
+	Value  = "1"
+	Help  = "Switch on if 5VSB is designed and is used.\Register Offset : 0x27"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "F81966_5VSB_NAME"
+	Value  = "$(STD_5VSB)"
+	Help  = "Sensor name to be displayed in setup menu and to be reported in BFPI. Standard names in AaeonIoPkg.sdl 'Standard string Constants' section should be used, unless no matchness."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "F81966_5VSB_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "=== Hardware monitor Report Capabilities =========="
+	Value  = "!!!DO NOT CHANGE!!!"
+	Help  = "Tokens in this section basically needs no porting between projects.\Tokens here are for generating information automatically to report capability in BFPI. "
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81966_TEMP_SENSOR_NUMBER"
+	Value  = "$(F81966_TEMPERATURE_1_SUPPORT) + $(F81966_TEMPERATURE_2_SUPPORT) + $(F81966_TEMPERATURE_3_SUPPORT) + $(F81966_TEMPERATURE_4_SUPPORT) + $(F81966_TEMPERATURE_5_SUPPORT)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81966_FAN_SENSOR_NUMBER"
+	Value  = "$(F81966_FAN_1_SUPPORT) + $(F81966_FAN_2_SUPPORT) + $(F81966_FAN_3_SUPPORT)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81966_VOLT_SENSOR_NUMBER"
+	Value  = "$(F81966_3VCC_SUPPORT) + $(F81966_VIN1_VCORE_SUPPORT) + $(F81966_VIN2_SUPPORT) + $(F81966_VIN3_SUPPORT) + $(F81966_VIN4_SUPPORT) + $(F81966_VSB3V_SUPPORT) + $(F81966_VBAT_SUPPORT) + $(F81966_5VSB_SUPPORT)"
+	Help  = "Temperature sensor number for from this SIO."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_1_STRING"
+	Value  = '"$(F81966_TEMPERATURE_1_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_TEMPERATURE_1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_2_STRING"
+	Value  = '"$(F81966_TEMPERATURE_2_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_TEMPERATURE_2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_3_STRING"
+	Value  = '"$(F81966_TEMPERATURE_3_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_TEMPERATURE_3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_4_STRING"
+	Value  = '"$(F81966_TEMPERATURE_4_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_TEMPERATURE_4_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_TEMPERATURE_5_STRING"
+	Value  = '"$(F81966_TEMPERATURE_5_NAME)"'
+	Help  = "Name for the temperature sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_TEMPERATURE_5_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_FAN_1_STRING"
+	Value  = '"$(F81966_FAN_1_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_FAN_1_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_FAN_2_STRING"
+	Value  = '"$(F81966_FAN_2_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_FAN_2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_FAN_3_STRING"
+	Value  = '"$(F81966_FAN_3_NAME)"'
+	Help  = "Name for the fan sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_FAN_3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_3VCC_STRING"
+	Value  = '"$(F81966_3VCC_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_3VCC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VIN1_VCORE_STRING"
+	Value  = '"$(F81966_VIN1_VCORE_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_VIN1_VCORE_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VIN2_STRING"
+	Value  = '"$(F81966_VIN2_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_VIN2_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VIN3_STRING"
+	Value  = '"$(F81966_VIN3_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_VIN3_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VIN4_STRING"
+	Value  = '"$(F81966_VIN4_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_VIN4_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VSB3V_STRING"
+	Value  = '"$(F81966_VSB3V_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_VSB3V_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_VBAT_STRING"
+	Value  = '"$(F81966_VBAT_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_VBAT_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81966_5VSB_STRING"
+	Value  = '"$(F81966_5VSB_NAME)"'
+	Help  = "Name for the voltage sensor."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "F81966_5VSB_SUPPORT" "=" "1"
+End
+
+#==============================================================================
+# WDT Configurations
+#==============================================================================
+TOKEN
+	Name  = "SIO_WDT_MAX_TIMEOUT"
+	Value  = "15300000"
+	Help  = "Maximum time-out value in ms supported by this SIO"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+    Name  = "=== Smart FAN Report Capabilities =========="
+    Value  = "!!!DO NOT CHANGE!!!"
+    Help  = "Tokens in this section basically needs no porting between projects. Tokens here are for generate information automatically to report capability in BFPI."
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "F81966_SMF_NUMBER"
+    Value  = "$(F81966_SMF1_SUPPORT) + $(F81966_SMF2_SUPPORT) + $(F81966_SMF3_SUPPORT)"
+    Help  = "Smart FAN controller number from this SIO."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "F81966_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81966_SMFC_FAN_1_PREFIX"
+    Value  = '"{\"Name\":\"$(F81966_FAN_1_NAME)\",\"Temperature Point\":4,\"Temperature Target\":\""'
+    Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81966_SMF1_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81966_SMFC_FAN_2_PREFIX"
+    Value  = '"{\"Name\":\"$(F81966_FAN_2_NAME)\",\"Temperature Point\":4,\"Temperature Target\":\""'
+    Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81966_SMF2_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81966_SMFC_FAN_3_PREFIX"
+    Value  = '"{\"Name\":\"$(F81966_FAN_3_NAME)\",\"Temperature Point\":4,\"Temperature Target\":\""'
+    Help  = "Detail capability for FAN controller.\Prefix only because 'Temperature Target' will be check in runtime."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "F81966_SMF3_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "F81966_SMFC_FANOUT_SUFFIX"
+    Value  = '"\",\"Supported Mode\":[\"Manual\",\"Linear\"]}"'
+    Help  = "Detail capability for FAN controller.\Suffix only, should be concatenate after PREFIX and 'Temperature Target'."
+    TokenType = Expression
+    TargetH = Yes
+End
+
+#==============================================================================
+# For .mak to build setup strings from .sdl to .uni
+#==============================================================================
+ELINK
+	Name  = "$(BUILD_DIR)\F81966HwmStrings.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End

@@ -1,0 +1,621 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <F81804HwmSetup.sd>
+//
+// Description: HWM form template, setup screen definition file.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+#ifdef SETUP_DATA_DEFINITION
+	UINT8	F81804RestoreACPowerLoss;
+	UINT8	F81804UartAutoFlowControlEnable[2];
+
+	UINT8	F81804Gpio0x_Oe[8];
+	UINT8	F81804Gpio0x_Val[8];
+	UINT8	F81804Gpio0x_DrvEn[8];
+	UINT8	F81804Gpio1x_Oe[8];
+	UINT8	F81804Gpio1x_Val[8];
+	UINT8	F81804Gpio1x_DrvEn[8];
+	UINT8	F81804Gpio2x_Oe[8];
+	UINT8	F81804Gpio2x_Val[8];
+	UINT8	F81804Gpio2x_DrvEn[8];
+	UINT8	F81804Gpio5x_Oe[8];
+	UINT8	F81804Gpio5x_Val[8];
+	UINT8	F81804Gpio5x_DrvEn[8];
+	UINT8	F81804Gpio6x_Oe[8];
+	UINT8	F81804Gpio6x_Val[8];
+	UINT8	F81804Gpio6x_DrvEn[8];
+	UINT8	F81804Gpio7x_Oe[8];
+	UINT8	F81804Gpio7x_Val[8];
+	UINT8	F81804Gpio7x_DrvEn[8];
+	UINT8	F81804Gpio9x_Oe[8];
+	UINT8	F81804Gpio9x_Val[8];
+	UINT8	F81804Gpio9x_DrvEn[8];	
+#endif //SETUP_DATA_DEFINITION
+
+
+#ifdef CONTROL_DEFINITION
+
+	#define ONEOF_F81804RESTOREACPOWERLOSS\
+		oneof varid    = SETUP_DATA.F81804RestoreACPowerLoss,\
+		prompt       = STRING_TOKEN (STR_F81804RESTOREACPOWERLOSS),\
+		help         = STRING_TOKEN (STR_F81804RESTOREACPOWERLOSS_HELP),\
+		default = ONEOF_F81804RESTOREACPOWERLOSS_DEFAULT,\
+		default = ONEOF_F81804RESTOREACPOWERLOSS_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804RESTOREACPOWERLOSS_LASTSTATE), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F81804RESTOREACPOWERLOSS_ALWAYSON), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F81804RESTOREACPOWERLOSS_ALWAYSOFF), value = 2, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F81804RESTOREACPOWERLOSS_ALWAYSON_NOPS), value = 3, flags = RESET_REQUIRED;\
+		endoneof;
+	#define ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_0\
+	oneof varid     = SETUP_DATA.F81804UartAutoFlowControlEnable[0],\
+		prompt      = STRING_TOKEN(STR_F81804_UARTAUTOFLOWCONTROLENABLE),\
+		help        = STRING_TOKEN (STR_F81804_UARTAUTOFLOWCONTROLENABLE),\
+		default     = ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_DEFAULT,\
+		default     = ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_COMMON_DISABLED), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F81804_COMMON_ENABLED), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_1\
+	oneof varid     = SETUP_DATA.F81804UartAutoFlowControlEnable[1],\
+		prompt      = STRING_TOKEN(STR_F81804_UARTAUTOFLOWCONTROLENABLE),\
+		help        = STRING_TOKEN (STR_F81804_UARTAUTOFLOWCONTROLENABLE),\
+		default     = ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_DEFAULT,\
+		default     = ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_COMMON_DISABLED), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F81804_COMMON_ENABLED), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define F81804_GPIO0X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio0x_Oe[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		default = GPIO_OE_DEFAULT,\
+		default = GPIO_OE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_INPUT), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO0X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio0x_Val[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		default = GPIO_VAL_DEFAULT,\
+		default = GPIO_VAL_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO0X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio0x_DrvEn[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		default = GPIO_DRVEN_DEFAULT,\
+		default = GPIO_DRVEN_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_OPENDRAIN), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_PUSHPULL), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO1X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio1x_Oe[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		default = GPIO_OE_DEFAULT,\
+		default = GPIO_OE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_INPUT), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO1X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio1x_Val[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		default = GPIO_VAL_DEFAULT,\
+		default = GPIO_VAL_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO1X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio1x_DrvEn[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		default = GPIO_DRVEN_DEFAULT,\
+		default = GPIO_DRVEN_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_OPENDRAIN), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_PUSHPULL), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO2X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio2x_Oe[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		default = GPIO_OE_DEFAULT,\
+		default = GPIO_OE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_INPUT), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO2X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio2x_Val[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		default = GPIO_VAL_DEFAULT,\
+		default = GPIO_VAL_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO2X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio2x_DrvEn[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		default = GPIO_DRVEN_DEFAULT,\
+		default = GPIO_DRVEN_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_OPENDRAIN), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_PUSHPULL), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO5X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio5x_Oe[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		default = GPIO_OE_DEFAULT,\
+		default = GPIO_OE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_INPUT), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO5X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio5x_Val[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		default = GPIO_VAL_DEFAULT,\
+		default = GPIO_VAL_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO5X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio5x_DrvEn[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		default = GPIO_DRVEN_DEFAULT,\
+		default = GPIO_DRVEN_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_OPENDRAIN), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_PUSHPULL), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO6X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio6x_Oe[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		default = GPIO_OE_DEFAULT,\
+		default = GPIO_OE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_INPUT), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO6X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio6x_Val[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		default = GPIO_VAL_DEFAULT,\
+		default = GPIO_VAL_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO6X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio6x_DrvEn[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		default = GPIO_DRVEN_DEFAULT,\
+		default = GPIO_DRVEN_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_OPENDRAIN), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_PUSHPULL), value = 1, flags = RESET_REQUIRED; \
+	endoneof;		
+
+	#define F81804_GPIO7X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio7x_Oe[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		default = GPIO_OE_DEFAULT,\
+		default = GPIO_OE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_INPUT), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO7X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio7x_Val[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		default = GPIO_VAL_DEFAULT,\
+		default = GPIO_VAL_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO7X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio7x_DrvEn[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		default = GPIO_DRVEN_DEFAULT,\
+		default = GPIO_DRVEN_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_OPENDRAIN), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_PUSHPULL), value = 1, flags = RESET_REQUIRED; \
+	endoneof;							
+
+	#define F81804_GPIO9X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio9x_Oe[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_OE), \
+		default = GPIO_OE_DEFAULT,\
+		default = GPIO_OE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_INPUT), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO9X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio9x_Val[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_VAL), \
+		default = GPIO_VAL_DEFAULT,\
+		default = GPIO_VAL_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_LOW), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_HIGH), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+	#define F81804_GPIO9X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT) \
+	oneof varid    	= SETUP_DATA.F81804Gpio9x_DrvEn[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		help    = STRING_TOKEN(STR_F81804_GPIO_DRVEN), \
+		default = GPIO_DRVEN_DEFAULT,\
+		default = GPIO_DRVEN_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_F81804_GPIO_OPENDRAIN), value = 0, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_F81804_GPIO_PUSHPULL), value = 1, flags = RESET_REQUIRED; \
+	endoneof;								
+#endif //CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+	ONEOF_F81804RESTOREACPOWERLOSS
+	ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_0
+	ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_1
+#endif //CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+// Define Macro
+//------------------------------------------------------------
+#define F81804_GPIO0X_ITEMS( \
+	UART_NUM, \
+	GPIO_OE_DEFAULT, \
+	GPIO_VAL_DEFAULT, \
+	GPIO_DRVEN_DEFAULT) \
+	F81804_GPIO0X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	suppressif ideqval SETUP_DATA.F81804Gpio0x_Oe[UART_NUM] == 0; \
+		F81804_GPIO0X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	endif; \
+	F81804_GPIO0X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT)
+
+#define F81804_GPIO0X_GROUP \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO00)) \
+	F81804_GPIO0X_ITEMS(0, F81804GPIO00_OE_DEFAULT, F81804GPIO00_VAL_DEFAULT, F81804GPIO00_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO04)) \
+	F81804_GPIO0X_ITEMS(4, F81804GPIO04_OE_DEFAULT, F81804GPIO04_VAL_DEFAULT, F81804GPIO04_DRVEN_DEFAULT) \
+	SEPARATOR	
+
+#define F81804_GPIO1X_ITEMS( \
+	UART_NUM, \
+	GPIO_OE_DEFAULT, \
+	GPIO_VAL_DEFAULT, \
+	GPIO_DRVEN_DEFAULT) \
+	F81804_GPIO1X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	suppressif ideqval SETUP_DATA.F81804Gpio1x_Oe[UART_NUM] == 0; \
+		F81804_GPIO1X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	endif; \
+	F81804_GPIO1X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT)
+
+#define F81804_GPIO1X_GROUP \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO12)) \
+	F81804_GPIO1X_ITEMS(2, F81804GPIO12_OE_DEFAULT, F81804GPIO12_VAL_DEFAULT, F81804GPIO12_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO14)) \
+	F81804_GPIO1X_ITEMS(4, F81804GPIO14_OE_DEFAULT, F81804GPIO14_VAL_DEFAULT, F81804GPIO14_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO15)) \
+	F81804_GPIO1X_ITEMS(5, F81804GPIO15_OE_DEFAULT, F81804GPIO15_VAL_DEFAULT, F81804GPIO15_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO16)) \
+	F81804_GPIO1X_ITEMS(6, F81804GPIO16_OE_DEFAULT, F81804GPIO16_VAL_DEFAULT, F81804GPIO16_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO17)) \
+	F81804_GPIO1X_ITEMS(7, F81804GPIO17_OE_DEFAULT, F81804GPIO17_VAL_DEFAULT, F81804GPIO17_DRVEN_DEFAULT) \
+	SEPARATOR	
+
+#define F81804_GPIO2X_ITEMS( \
+	UART_NUM, \
+	GPIO_OE_DEFAULT, \
+	GPIO_VAL_DEFAULT, \
+	GPIO_DRVEN_DEFAULT) \
+	F81804_GPIO2X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	suppressif ideqval SETUP_DATA.F81804Gpio2x_Oe[UART_NUM] == 0; \
+		F81804_GPIO2X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	endif;
+
+#define F81804_GPIO2X_GROUP \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO22)) \
+	F81804_GPIO2X_ITEMS(2, F81804GPIO22_OE_DEFAULT, F81804GPIO22_VAL_DEFAULT, F81804GPIO22_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO23)) \
+	F81804_GPIO2X_ITEMS(3, F81804GPIO23_OE_DEFAULT, F81804GPIO23_VAL_DEFAULT, F81804GPIO23_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO24)) \
+	F81804_GPIO2X_ITEMS(4, F81804GPIO24_OE_DEFAULT, F81804GPIO24_VAL_DEFAULT, F81804GPIO24_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO25)) \
+	F81804_GPIO2X_ITEMS(5, F81804GPIO25_OE_DEFAULT, F81804GPIO25_VAL_DEFAULT, F81804GPIO25_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO26)) \
+	F81804_GPIO2X_ITEMS(6, F81804GPIO26_OE_DEFAULT, F81804GPIO26_VAL_DEFAULT, F81804GPIO26_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO27)) \
+	F81804_GPIO2X_ITEMS(7, F81804GPIO27_OE_DEFAULT, F81804GPIO27_VAL_DEFAULT, F81804GPIO27_DRVEN_DEFAULT) \
+	SEPARATOR		
+
+#define F81804_GPIO5X_ITEMS( \
+	UART_NUM, \
+	GPIO_OE_DEFAULT, \
+	GPIO_VAL_DEFAULT, \
+	GPIO_DRVEN_DEFAULT) \
+	F81804_GPIO5X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	suppressif ideqval SETUP_DATA.F81804Gpio5x_Oe[UART_NUM] == 0; \
+		F81804_GPIO5X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	endif;
+
+#define F81804_GPIO5X_GROUP \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO50)) \
+	F81804_GPIO5X_ITEMS(0, F81804GPIO50_OE_DEFAULT, F81804GPIO50_VAL_DEFAULT, F81804GPIO50_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO51)) \
+	F81804_GPIO5X_ITEMS(1, F81804GPIO51_OE_DEFAULT, F81804GPIO51_VAL_DEFAULT, F81804GPIO51_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO52)) \
+	F81804_GPIO5X_ITEMS(2, F81804GPIO52_OE_DEFAULT, F81804GPIO52_VAL_DEFAULT, F81804GPIO52_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO53)) \
+	F81804_GPIO5X_ITEMS(3, F81804GPIO53_OE_DEFAULT, F81804GPIO53_VAL_DEFAULT, F81804GPIO53_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO54)) \
+	F81804_GPIO5X_ITEMS(4, F81804GPIO54_OE_DEFAULT, F81804GPIO54_VAL_DEFAULT, F81804GPIO54_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO55)) \
+	F81804_GPIO5X_ITEMS(5, F81804GPIO55_OE_DEFAULT, F81804GPIO55_VAL_DEFAULT, F81804GPIO55_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO56)) \
+	F81804_GPIO5X_ITEMS(6, F81804GPIO56_OE_DEFAULT, F81804GPIO56_VAL_DEFAULT, F81804GPIO56_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO57)) \
+	F81804_GPIO5X_ITEMS(7, F81804GPIO57_OE_DEFAULT, F81804GPIO57_VAL_DEFAULT, F81804GPIO57_DRVEN_DEFAULT) \
+	SEPARATOR	
+
+#define F81804_GPIO6X_ITEMS( \
+	UART_NUM, \
+	GPIO_OE_DEFAULT, \
+	GPIO_VAL_DEFAULT, \
+	GPIO_DRVEN_DEFAULT) \
+	F81804_GPIO6X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	suppressif ideqval SETUP_DATA.F81804Gpio6x_Oe[UART_NUM] == 0; \
+		F81804_GPIO6X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	endif; \
+	F81804_GPIO6X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT)
+
+#define F81804_GPIO6X_GROUP \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO66)) \
+	F81804_GPIO6X_ITEMS(6, F81804GPIO66_OE_DEFAULT, F81804GPIO66_VAL_DEFAULT, F81804GPIO66_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO67)) \
+	F81804_GPIO6X_ITEMS(7, F81804GPIO67_OE_DEFAULT, F81804GPIO67_VAL_DEFAULT, F81804GPIO67_DRVEN_DEFAULT) \
+	SEPARATOR	
+
+#define F81804_GPIO7X_ITEMS( \
+	UART_NUM, \
+	GPIO_OE_DEFAULT, \
+	GPIO_VAL_DEFAULT, \
+	GPIO_DRVEN_DEFAULT) \
+	F81804_GPIO7X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	suppressif ideqval SETUP_DATA.F81804Gpio7x_Oe[UART_NUM] == 0; \
+		F81804_GPIO7X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	endif; \
+	F81804_GPIO7X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT)
+
+#define F81804_GPIO7X_GROUP \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO70)) \
+	F81804_GPIO7X_ITEMS(0, F81804GPIO70_OE_DEFAULT, F81804GPIO70_VAL_DEFAULT, F81804GPIO70_DRVEN_DEFAULT) \
+	SEPARATOR								
+
+#define F81804_GPIO9X_ITEMS( \
+	UART_NUM, \
+	GPIO_OE_DEFAULT, \
+	GPIO_VAL_DEFAULT, \
+	GPIO_DRVEN_DEFAULT) \
+	F81804_GPIO9X_OE(UART_NUM, GPIO_OE_DEFAULT) \
+	suppressif ideqval SETUP_DATA.F81804Gpio9x_Oe[UART_NUM] == 0; \
+		F81804_GPIO9X_VAL(UART_NUM, GPIO_VAL_DEFAULT) \
+	endif; \
+	F81804_GPIO9X_DRVEN(UART_NUM, GPIO_DRVEN_DEFAULT)
+
+#define F81804_GPIO9X_GROUP \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO91)) \
+	F81804_GPIO9X_ITEMS(1, F81804GPIO91_OE_DEFAULT, F81804GPIO91_VAL_DEFAULT, F81804GPIO91_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO92)) \
+	F81804_GPIO9X_ITEMS(2, F81804GPIO92_OE_DEFAULT, F81804GPIO92_VAL_DEFAULT, F81804GPIO92_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO93)) \
+	F81804_GPIO9X_ITEMS(3, F81804GPIO93_OE_DEFAULT, F81804GPIO93_VAL_DEFAULT, F81804GPIO93_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO94)) \
+	F81804_GPIO9X_ITEMS(4, F81804GPIO94_OE_DEFAULT, F81804GPIO94_VAL_DEFAULT, F81804GPIO94_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO95)) \
+	F81804_GPIO9X_ITEMS(5, F81804GPIO95_OE_DEFAULT, F81804GPIO95_VAL_DEFAULT, F81804GPIO95_DRVEN_DEFAULT) \
+	SUBTITLE(STRING_TOKEN(STR_F81804_GPIO97)) \
+	F81804_GPIO9X_ITEMS(7, F81804GPIO97_OE_DEFAULT, F81804GPIO97_VAL_DEFAULT, F81804GPIO97_DRVEN_DEFAULT) \
+	SEPARATOR		
+
+//----------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//----------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//----------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+
+#endif
+
+//----------------------------------------------------------------------
+//If you need custom varstore's define them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+#endif
+
+//----------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//----------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+
+//----------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//----------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+
+	goto F81804_MISC_CONFIGURATION_FORM_ID, 
+	prompt = STRING_TOKEN(STR_F81804_MISC_CONFIGURATION),
+	help    = STRING_TOKEN(STR_F81804_MISC_CONFIGURATION);
+
+#endif
+
+//----------------------------------------------------------------------
+// Define forms
+//----------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+
+		#ifndef F81804_MISC_CONFIGURATION_FORM_SETUP
+		#define F81804_MISC_CONFIGURATION_FORM_SETUP
+		form formid = AUTO_ID(F81804_MISC_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_F81804_MISC_CONFIGURATION);
+			SUBTITLE(STRING_TOKEN(STR_F81804_MISC_CONFIGURATION))
+			SEPARATOR
+
+			ONEOF_F81804RESTOREACPOWERLOSS
+
+			ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_0
+			ONEOF_F81804UARTAUTOFLOWCONTROLENABLE_1
+			
+			SEPARATOR
+
+			goto F81804_GPIO0X_CONFIGURATION_FORM_ID, 
+			prompt = STRING_TOKEN(STR_F81804_GPIO0X),
+			help    = STRING_TOKEN(STR_F81804_GPIO0X);
+
+			goto F81804_GPIO1X_CONFIGURATION_FORM_ID, 
+			prompt = STRING_TOKEN(STR_F81804_GPIO1X),
+			help    = STRING_TOKEN(STR_F81804_GPIO1X);
+
+			goto F81804_GPIO2X_CONFIGURATION_FORM_ID, 
+			prompt = STRING_TOKEN(STR_F81804_GPIO2X),
+			help    = STRING_TOKEN(STR_F81804_GPIO2X);
+
+			goto F81804_GPIO5X_CONFIGURATION_FORM_ID, 
+			prompt = STRING_TOKEN(STR_F81804_GPIO5X),
+			help    = STRING_TOKEN(STR_F81804_GPIO5X);
+
+			goto F81804_GPIO6X_CONFIGURATION_FORM_ID, 
+			prompt = STRING_TOKEN(STR_F81804_GPIO6X),
+			help    = STRING_TOKEN(STR_F81804_GPIO6X);
+
+			goto F81804_GPIO7X_CONFIGURATION_FORM_ID, 
+			prompt = STRING_TOKEN(STR_F81804_GPIO7X),
+			help    = STRING_TOKEN(STR_F81804_GPIO7X);		
+
+			goto F81804_GPIO9X_CONFIGURATION_FORM_ID, 
+			prompt = STRING_TOKEN(STR_F81804_GPIO9X),
+			help    = STRING_TOKEN(STR_F81804_GPIO9X);	
+		endform;  // STR_F81804_MISC_CONFIGURATION
+
+		form formid = AUTO_ID(F81804_GPIO0X_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_F81804_GPIO0X);
+			SUBTITLE(STRING_TOKEN(STR_F81804_GPIO0X))
+			SEPARATOR
+
+			F81804_GPIO0X_GROUP
+
+		endform;  // F81804_GPIO0X_CONFIGURATION_FORM_ID
+
+		form formid = AUTO_ID(F81804_GPIO1X_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_F81804_GPIO1X);
+			SUBTITLE(STRING_TOKEN(STR_F81804_GPIO1X))
+			SEPARATOR
+
+			F81804_GPIO1X_GROUP
+
+		endform;  // F81804_GPIO1X_CONFIGURATION_FORM_ID
+
+		form formid = AUTO_ID(F81804_GPIO2X_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_F81804_GPIO2X);
+			SUBTITLE(STRING_TOKEN(STR_F81804_GPIO2X))
+			SEPARATOR
+
+			F81804_GPIO2X_GROUP
+
+		endform;  // F81804_GPIO2X_CONFIGURATION_FORM_ID
+
+		form formid = AUTO_ID(F81804_GPIO5X_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_F81804_GPIO5X);
+			SUBTITLE(STRING_TOKEN(STR_F81804_GPIO5X))
+			SEPARATOR
+
+			F81804_GPIO5X_GROUP
+
+		endform;  // F81804_GPIO5X_CONFIGURATION_FORM_ID
+
+		form formid = AUTO_ID(F81804_GPIO6X_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_F81804_GPIO6X);
+			SUBTITLE(STRING_TOKEN(STR_F81804_GPIO6X))
+			SEPARATOR
+
+			F81804_GPIO6X_GROUP
+
+		endform;  // F81804_GPIO6X_CONFIGURATION_FORM_ID
+
+		form formid = AUTO_ID(F81804_GPIO7X_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_F81804_GPIO7X);
+			SUBTITLE(STRING_TOKEN(STR_F81804_GPIO7X))
+			SEPARATOR
+
+			F81804_GPIO7X_GROUP
+
+		endform;  // F81804_GPIO7X_CONFIGURATION_FORM_ID		
+
+		form formid = AUTO_ID(F81804_GPIO9X_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_F81804_GPIO9X);
+			SUBTITLE(STRING_TOKEN(STR_F81804_GPIO9X))
+			SEPARATOR
+
+			F81804_GPIO9X_GROUP
+
+		endform;  // F81804_GPIO9X_CONFIGURATION_FORM_ID	
+
+		#endif //F81804_MISC_CONFIGURATION_FORM_SETUP
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

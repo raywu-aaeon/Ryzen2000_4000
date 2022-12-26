@@ -1,0 +1,9 @@
+<component>
+	name = "F81804Asl"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\F81804\"
+	RefName = "AaeonIoPkg.F81804.F81804Asl"
+[files]
+"F81804Evt.asl"	
+"F81804Dev.asl"	
+<endComponent>

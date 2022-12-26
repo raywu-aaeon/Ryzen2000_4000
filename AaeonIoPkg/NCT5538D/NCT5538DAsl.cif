@@ -1,0 +1,9 @@
+<component>
+	name = "NCT5538DAsl"
+	category = ModulePart
+	LocalRoot = "AaeonIoPkg\NCT5538D\"
+	RefName = "AaeonIoPkg.NCT5538D.NCT5538DAsl"
+[files]
+"NCT5538DEvt.asl"	
+"NCT5538DDev.asl"	
+<endComponent>

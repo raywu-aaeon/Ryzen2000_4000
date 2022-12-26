@@ -1,0 +1,21 @@
+<component>
+	name = "SuperI/O - IT8728F"
+	category = IO
+	LocalRoot = "AaeonIoPkg\IT8728F\"
+	RefName = "AaeonIoPkg.IT8728F"
+[INF]
+"IT8728FDxeInit.inf"
+"IT8728FPeiInit.inf"
+"IT8728FPlatformHookSerialPortLib.inf"
+[files]
+"IT8728F.sdl"
+"IT8728F.mak"
+"IT8728F.chm"
+"IT8728FMiscSetup.sd"
+"IT8728FMiscSetup.uni"
+[parts]
+"AaeonIoPkg.IT8728F.IT8728FAsl"
+"AaeonIoPkg.IT8728F.IT8728FSetup"
+"AaeonIoPkg.IT8728F.IT8728FHwMonitor"
+"AaeonIoPkg.IT8728F.IT8728FBFPI"
+<endComponent>
