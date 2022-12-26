@@ -109,6 +109,7 @@ variables:
     paths:
       - '*.[Bb][Aa][Tt]'
       - '*.[Bb][Ii][Nn]'
+      - '*.[Rr][Oo][Mm]'
       - 'build.log'
       - '_Aaeon_Release\*.[Bb][Ii][Nn]'
       - 'Build\*.[Bb][Aa][Tt]'
