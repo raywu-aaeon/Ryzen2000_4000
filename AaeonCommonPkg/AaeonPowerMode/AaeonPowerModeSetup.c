@@ -52,7 +52,12 @@ EFI_STATUS AaeonAcLossCallback(EFI_HII_HANDLE HiiHandle, UINT16 Class, UINT16 Su
 #if CRB_USE_VAR_STATEAFTERG3
 				SetupData.StateAfterG3 = MapToACPowerLoss[ACLOSS_ALWAYS_ON];
 #else
+/**
+ * 	AAEON_OVERRIDE >>
 				SetupData.LastState = MapToACPowerLoss[ACLOSS_ALWAYS_ON];
+*/
+				PcdSet8 (PcdPwrFailShadow, MapToACPowerLoss[ACLOSS_ALWAYS_ON]);
+//	AAEON_OVERRIDE <<
 #endif 
 
 
@@ -84,7 +89,12 @@ EFI_STATUS AaeonAcLossCallback(EFI_HII_HANDLE HiiHandle, UINT16 Class, UINT16 Su
 #if CRB_USE_VAR_STATEAFTERG3
 						SetupData.StateAfterG3 = MapToACPowerLoss[SetupData.AaeonRestoreACPowerLoss];
 #else
+/**
+ * 	AAEON_OVERRIDE >>
 						SetupData.LastState = MapToACPowerLoss[SetupData.AaeonRestoreACPowerLoss];
+*/
+						PcdSet8 (PcdPwrFailShadow, MapToACPowerLoss[SetupData.AaeonRestoreACPowerLoss]);
+//	AAEON_OVERRIDE <<
 #endif 	
 
 						//Patch SIO to bypass mode.
@@ -201,7 +211,12 @@ EFI_STATUS AaeonAcLossCallback(EFI_HII_HANDLE HiiHandle, UINT16 Class, UINT16 Su
 #if CRB_USE_VAR_STATEAFTERG3
 						SetupData.StateAfterG3 = MapToACPowerLoss[ACLOSS_ALWAYS_ON];
 #else
+/**
+ * 	AAEON_OVERRIDE >>
 						SetupData.LastState = MapToACPowerLoss[ACLOSS_ALWAYS_ON];
+*/
+						PcdSet8 (PcdPwrFailShadow, MapToACPowerLoss[ACLOSS_ALWAYS_OFF]);
+//	AAEON_OVERRIDE <<
 #endif 
 					}
 					break;

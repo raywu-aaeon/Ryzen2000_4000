@@ -262,6 +262,32 @@ TOKEN
 	TargetH = Yes
 End
 
+ELINK
+    Name  = "gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPwrFailShadow"
+    Parent  = "AMI_CSP_PCD"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AgesaModulePkg/Fch/Sandstone/FchSandstone.dec"
+    Parent  = "AMI_CSP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPwrFailShadow"
+    Parent  = "AdditionalSetupPcds"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name = "STATEAFTERG3_MAP"
+	Value = "{3, 1, 0}"
+	Help = "{LastState, Always-on, Always-off}"
+	TokenType = Expression
+	TargetH = Yes
+End
+
 TOKEN
     Name  = " "
     TokenType = Integer
