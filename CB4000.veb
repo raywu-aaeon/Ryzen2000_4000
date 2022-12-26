@@ -667,4 +667,5 @@
 "AaeonCommonPkg\AaeonCapsuleUpdate\AaeonCapsuleUpdate.cif"= Private
 "AaeonCommonPkg\ScreenRotation\ScreenRotation.cif"= "SS: AptioV;$/AptioV/Source/Modules/ScreenRotation;ScreenRotation_04"
 "AaeonCommonPkg\ScreenRotation\AbsolutePointerRotation\AbsolutePointerRotation.cif"= "SS: AptioV;$/AptioV/Source/Modules/ScreenRotation/AbsolutePointerRotation;ScreenRotation_04"
+"AaeonProject\AaeonKernelOverride.cif"
 "AaeonProject/AaeonProject.cif"= Private

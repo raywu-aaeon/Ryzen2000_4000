@@ -65,7 +65,7 @@ AaeonGetIoLdnValue (
 	{
 		case F81866_CHIP_TYPE:
 			#if defined(F81866_SUPPORT) && (F81866_SUPPORT == 1)
-		        Data = F8186GetIoLdnValue(IOLDN,RegisterOffset);	
+		        Data = F81866GetIoLdnValue(IOLDN,RegisterOffset);	
 			#endif
 			break;
 

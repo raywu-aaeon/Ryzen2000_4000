@@ -1,0 +1,94 @@
+TOKEN
+	Name  = "AaeonKernelOverride_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+    Name  = "====== AmdCpmPkg\AmiCpmWrapper\AmiCpmWrapper.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AmiCpmFchUartDriver_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AmiCpmFchUartDriver support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== MandolinPkg\Crb.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "FCH_UART_DEBUG_SELECT"
+    Value  = "0"
+    Help  = "0: Disable,1:UART0,2:UART1. Select Fch Uart port as debug port."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "EcPs2Kbd_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "SILENT"
+    Value  = "1"
+    Help  = "Enables/disables silent build mode.\In silent build mode executed commands are not displayed, and certain auxiliary build process messages are suppressed or displayed in a condensed format.\In non-silent build mode executed command are displayed prior to execution, and all auxiliary messages are visible.\Silent build mode is typically faster because less information goes into a build log.\Non-silent mode is useful for debugging of the build issues."
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== MandolinPkg\Csp.sdl ======"
+    TokenType = Expression
+End
+
+LibraryMapping
+    Class  = "SerialPortLib"
+    Instance  = "MdeModulePkg.BaseSerialPortLib16550"
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== AmiModulePkg\Ps2Ctl\Ps2Ctl.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "PS2Ctl_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable PS2 Controller support in the project."
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End

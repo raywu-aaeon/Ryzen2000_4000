@@ -1,0 +1,9 @@
+<component>
+	name = "AaeonKernelOverride"
+	category = Flavor
+	Rank = 60
+	LocalRoot = "AaeonProject\"
+	RefName = "AaeonKernelOverride"
+[files]
+"AaeonKernelOverride.sdl"
+<endComponent>
