@@ -1,0 +1,251 @@
+TOKEN
+	Name  = "AaeonProject_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PROJECT_TAG"
+	Value  = "4000A"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	TargetEQU = Yes
+End
+TOKEN
+	Name  = "AAEON_MAJOR_VERSION"
+	Value  = "0"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	TargetEQU = Yes
+	Range  = "Maximum 3 digits"
+End
+TOKEN
+	Name  = "AAEON_MINOR_VERSION"
+	Value  = "1"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	TargetEQU = Yes
+	Range  = "Maximum 3 digits"
+End
+TOKEN
+	Name  = "BUILD_FOR_TEST"
+	Value  = "0"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	TargetEQU = Yes
+End
+TOKEN
+	Name  = "AAEON_ROM"
+	Value  = "$(PROJECT_TAG)$(PROJECT_BUILD).rom"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	TargetEQU = Yes
+	Range  = "valid file name"
+End
+TOKEN
+	Name  = "AAEON_BIN"
+	Value  = "$(PROJECT_TAG)$(PROJECT_BUILD).bin"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	TargetEQU = Yes
+	Range  = "valid file name"
+End
+TOKEN
+	Name  = "PROJECT_BUILD"
+	Value  = "M$(AAEON_MAJOR_VERSION)$(AAEON_MINOR_VERSION)"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	TargetEQU = Yes
+	Range  = "Maximum 3 digits"
+	Token = "BUILD_FOR_TEST" "=" "0"
+End
+TOKEN
+	Name  = "PROJECT_BUILD"
+	Value  = "T$(AAEON_MAJOR_VERSION)$(AAEON_MINOR_VERSION)"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	TargetEQU = Yes
+	Range  = "Maximum 3 digits"
+	Token = "BUILD_FOR_TEST" "=" "1"
+End
+TOKEN
+	Name  = "BIOS_TAG"
+	Value  = "$(PROJECT_TAG)$(PROJECT_BUILD)"
+	TokenType = Expression
+	TargetEQU = Yes
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "AMI_ROM"
+	Value  = "$(AAEON_ROM)"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "valid file name"
+End
+
+TOKEN
+    Name  = "====== SMBIOS Configuration ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "SMBIOS_DMIEDIT_DATA_LOC"
+    Value  = "2"
+    Help  = "SMBIOS DMIEdit data location: \0 = Boot Block \1 = FV_SMBIOS (FV_SMBIOS: defined in SmbiosFlashData.sdl)\2 = NVRAM"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BIOS_VERSION"
+    Value  = "$(BIOS_TAG)"
+    Help  = "Specifies the BIOS Version"
+    TokenType = File
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+
+    Name  = "SYSTEM_PRODUCT_NAME"
+    Value  = "BEP4000"
+    Help  = "Specifies the System Product Name"
+    TokenType = Expression
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "BASE_BOARD_PRODUCT_NAME_1"
+    Value  = "BEP4000"
+    Help  = "Specifies the Product Name"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "BASE_BOARD_INFORMATION" "=" "1"
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== SIO Configuration ======"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "AaeonIoPkg_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable F81866 support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== SIO Configuration \ Hardware Monitor ======"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "F81866_SMF1_SUPPORT"
+	Value  = "1"
+	Help  = "F81866 SmartFan 1 control support"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "F81866_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81866_SMF2_SUPPORT"
+	Value  = "1"
+	Help  = "F81866 SmartFan 2 control support"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "F81866_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== AaeonCommon Configuration ======"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "AAEON_BFPI_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable AaeonBfpi support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AaeonSecureBoot_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable Setup support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AaeonMagicWordPkg_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AaeonDefaultPwd_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable OEMTSEHook support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
