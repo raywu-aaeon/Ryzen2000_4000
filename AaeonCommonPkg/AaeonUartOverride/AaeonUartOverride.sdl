@@ -1,0 +1,216 @@
+TOKEN
+    Name  = "AAEON_UART_OVERRIDE_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AAEON UART override support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Master = Yes
+    Token = "SIO_SUPPORT" "=" "1"    
+End
+
+TOKEN
+    Name  = "AAEON_UART_OVERRIDE_PRS_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AAEON UART override PRS function which use for control LDEVICE Flags for IRQ sharing"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+INFComponent
+	Name  = "AaeonUartOverride"
+	File  = "AaeonUartOverride.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+FFS_FILE
+    Name  = "AaeonUartOverride"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "AaeonCommonPkg.AaeonUartOverride"
+    Index = 0
+End
+
+INFComponent
+    Name  = "AaeonUartOverridePrs"
+    File  = "AaeonUartOverridePrs.inf"
+    Package  = "AaeonCommonPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "AAEON_UART_OVERRIDE_PRS_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "AaeonUartOverridePrs"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "AaeonCommonPkg.AaeonUartOverridePrs"
+    Index = 1
+End
+
+TOKEN
+    Name  = "MAX_UART_OVERRIDE_ITEM"
+    Value  = "6"
+    Help = "Maximum number of UART override support item.\nNOTE: Porting required for changing this value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_OVERRIDE_1_SUPPORT_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Override Support> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_PRESENT_1_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Present> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NUMERIC_AAEON_UART_OVERRIDE_1_UID_DEFAULT"
+    Value  = "1"
+    Help = "Default value of the <UART Override UID Number> option.\minimum: 0\maximum: 100\step: 1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_OVERRIDE_2_SUPPORT_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Override Support> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_PRESENT_2_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Present> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NUMERIC_AAEON_UART_OVERRIDE_2_UID_DEFAULT"
+    Value  = "2"
+    Help = "Default value of the <UART Override UID Number> option.\minimum: 0\maximum: 100\step: 1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_OVERRIDE_3_SUPPORT_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Override Support> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_PRESENT_3_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Present> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NUMERIC_AAEON_UART_OVERRIDE_3_UID_DEFAULT"
+    Value  = "3"
+    Help = "Default value of the <UART Override UID Number> option.\minimum: 0\maximum: 100\step: 1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_OVERRIDE_4_SUPPORT_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Override Support> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_PRESENT_4_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Present> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NUMERIC_AAEON_UART_OVERRIDE_4_UID_DEFAULT"
+    Value  = "4"
+    Help = "Default value of the <UART Override UID Number> option.\minimum: 0\maximum: 100\step: 1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_OVERRIDE_5_SUPPORT_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Override Support> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_PRESENT_5_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Present> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NUMERIC_AAEON_UART_OVERRIDE_5_UID_DEFAULT"
+    Value  = "5"
+    Help = "Default value of the <UART Override UID Number> option.\minimum: 0\maximum: 100\step: 1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_OVERRIDE_6_SUPPORT_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Override Support> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECKBOX_AAEON_UART_PRESENT_6_DEFAULT"
+    Value  = "0"
+    Help = "Default value of the <UART Present> option.\0: Disabled\1: Enabled"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NUMERIC_AAEON_UART_OVERRIDE_6_UID_DEFAULT"
+    Value  = "6"
+    Help = "Default value of the <UART Override UID Number> option.\minimum: 0\maximum: 100\step: 1"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+PATH
+    Name  = "AaeonUartOverride_DIR"
+End
+
+ELINK
+    Name  = "$(AaeonUartOverride_DIR)\AaeonUartOverride.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AaeonUartOverride_DIR)\AaeonUartOverride.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End

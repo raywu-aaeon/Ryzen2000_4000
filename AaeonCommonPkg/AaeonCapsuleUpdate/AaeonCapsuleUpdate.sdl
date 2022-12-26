@@ -1,0 +1,208 @@
+TOKEN
+	Name  = "AaeonCapsuleUpdate_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AAEONCAPSULEUPDATE_DIR"
+End
+
+PATH
+	Name  = "AAEONCAPSULEUPDATE_KEY_DIR"
+	Path  = "$(AAEONCAPSULEUPDATE_DIR)\KEY"
+End
+
+TOKEN
+    Name  = "====================== Tokens for Secure Flash======================"
+    Value  = "====================== Tokens for Secure Flash======================"
+    Help = "Firmware Capsule Update need project support Secure Flash"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "SECURE_FLASH_SUPPORT"
+    Value  = "1"
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "SecureMod_SUPPORT"
+    Value  = "1"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FWpub"
+    Value  = "$(AAEONCAPSULEUPDATE_KEY_DIR)\OemPubKey"
+    Help  = "Root of trust Key for signed BIOS verification.\Public portion of the Key is inserted as ffs file inside BIOS RTU (FV_BB)\RSA Key formatted as PKCS#1v2.1 ASN.1 or X.509 DER file."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FWCAPSULE_CERT_FORMAT" "=" "0"
+End
+
+TOKEN
+    Name  = "FWpriv"
+    Value  = "$(AAEONCAPSULEUPDATE_KEY_DIR)\OemPriKey"
+    Help  = "A Signer Certificate Key in the FwCapsule Hdr.\Used as upgrade(new) key in 2-key signing model\RSA Key formatted as PKCS#1v2.1 ASN.1 or X.509 DER file."
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FWCAPSULE_CERT_FORMAT" "=" "0"
+End
+
+TOKEN
+    Name  = "====================== Tokens for SMBIOS DMI EDIT DATA ======================"
+    Value  = "====================== Tokens for SMBIOS DMI EDIT DATA ======================"
+    Help = "If Secure Flash Enable, SMBIOS_DMIEDIT_DATA_LOC should be NVRAM"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "SMBIOS_DMIEDIT_DATA_LOC"
+    Value  = "2"
+    Help  = "SMBIOS DMIEdit data location: \0 = Boot Block \1 = FV_SMBIOS (FV_SMBIOS: defined in SmbiosFlashData.sdl)\2 = NVRAM"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for ESRT ======================"
+    Value  = "====================== Tokens for ESRT======================"
+    Help = "Capsule Update mechanism will check ESRT GUID"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "OEM_ESRT_FIRMWARE_GUID"
+    Value = "{0x00000000, 0x0000, 0x0000, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}"
+    Help  = "This is an invalid GUID, it can't be used for Windows Logo certification.\IT MUST BE CLONED TO OEM/ODM PROJECT AND UPDATE IT!"
+    TokenType = Expression
+    TargetH = Yes
+    Range  = "GUID"
+End
+
+TOKEN
+    Name  = "====================== Tokens for Capsule Update======================"
+    Value  = "====================== Tokens for Capsule Update======================"
+    Help = "Tokens for support Capsule Update"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "FWCAPSULE_FILE_NAME"
+    Value  = "$(PROJECT_TAG)M$(AAEON_MAJOR_VERSION)$(AAEON_MINOR_VERSION).ROM"
+    Help  = "Signed BIOS file name. FwCapsule Hdr with the Signature is embedded inside the BIOS ROM.\Warning!!! Default Recovery image name is set by PCD:PcdRecoveryImageName"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "FWCAPSULE_FILE_FORMAT" "=" "0"
+End
+
+TOKEN
+    Name  = "Recovery_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Recovery support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes    
+End
+
+TOKEN
+    Name  = "====================== Tokens for ESRT firmware version synchronization======================"
+    Value  = "====================== Tokens for ESRT firmware version synchronization======================"
+    Help = "Capsule Update mechanism need check firmware version form ESRT table,and the version is determined by PROJECT_MAJOR_VERSION & PROJECT_MINOR_VERSION"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "PROJECT_MAJOR_VERSION"
+    Value  = "$(AAEON_MAJOR_VERSION)"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PROJECT_MINOR_VERSION"
+    Value  = "$(AAEON_MINOR_VERSION)"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "=================== Tokens for Firmware GUID and Platform GUID==================="
+    Value  = "=================== Tokens for Firmware GUID and Platform GUID==================="
+    Help = "Filled Firmware GUID and Platform GUID, and they should be the same"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "PLATFORM_GUID"
+    Value  = "00000000-0000-0000-0000-000000000000"
+    Help  = "Porting required!!!\The unique platform GUID that does into the description file.\MUST BE CLONED IN EVERY PROJECT!"
+    TokenType = Expression
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "FW_VERSION_GUID"
+    Value  = "{0x00000000, 0x0000, 0x0000, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}"
+    Help  = "Porting required!!!\FW Version GUID inserted into Firmware ID structure.\FW version has to be overridden for every project."
+    TokenType = Expression
+    TargetH = Yes
+    Range  = "GUID"
+End
+
+TOKEN
+    Name  = "====================== Tokens for AutoMeud ======================"
+    Value  = "====================== Tokens for AutoMeud ======================"
+    Help = "Tokens for support ME firmware Capsule Update"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AUTO_MEUD_SUPPORT"
+    Help  = "Main switch to enable ME Firmware Update support in Project"
+    Value  = "1"
+    TokenType = Boolean
+    TargetMAK = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+    Token = "SecureMod_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BIOS_MEFW_CAPSULE_FILE"
+    Value  = "$(PROJECT_TAG)M$(AAEON_MAJOR_VERSION)$(AAEON_MINOR_VERSION).CAP"
+    Help  = "File name of the BIOS + ME FW image to be signed."
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "====================== ESRT_Firmware_Version_Patch ======================"
+    Value  = "====================== ESRT_Firmware_Version_Patch ======================"
+    Help = "Patch for ESRT firmware format"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "GetFirmwareVersion"
+    Value  = "AaeonGetVersionFromFid"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "$(AAEONCAPSULEUPDATE_DIR)\AaeonCapsuleUpdate.c"
+    Parent  = "AMI_CSP_DXE_SOURCES"
+    InvokeOrder = AfterParent
+End

@@ -1,0 +1,13 @@
+<component>
+	name = "SioLdnDefaultDisable"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\SioLdnDefaultDisable\"
+	RefName = "AaeonCommonPkg.SioLdnDefaultDisable"
+
+
+[files]
+"SioLdnDefaultDisable.h"	
+"SioLdnDefaultDisable.c"
+"SioLdnLoadDefault.c"	
+"SioLdnDefaultDisable.sdl"
+<endComponent>

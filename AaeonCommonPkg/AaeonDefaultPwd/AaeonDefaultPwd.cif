@@ -1,0 +1,14 @@
+<component>
+	name = "AaeonDefaultPwd"
+	category = eModule
+	LocalRoot = "AaeonCommonPkg\AaeonDefaultPwd\"
+	RefName = "AaeonCommonPkg.AaeonDefaultPwd"
+[INF]
+
+[files]
+"AaeonDefaultPwd.sdl"
+"AaeonDefaultPwd.c"
+"AaeonDefaultPwd.sd"
+"AutoGenAaeonDefaultPwd.gawk"
+"AutoGenAaeonDefaultPwd.mak"
+<endComponent>

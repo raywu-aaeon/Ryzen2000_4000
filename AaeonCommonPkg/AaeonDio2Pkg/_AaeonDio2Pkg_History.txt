@@ -1,0 +1,52 @@
+###########################################################################
+                	AaeonDio2Pkg
+###########################################################################
+---------------------------------------------------------------------------
+Porting Guide:
+1. Enable MAIN TOKEN "AaeonDio2Pkg_SUPPORT"
+2. This module can support 8 or 16 pin DIO which was controlled by TOKEN "SECOND_DIO_SUPPORT"
+2. Set GPIO source chip for target DIO function by TOKEN "ONEOF_AAEON_DIO_SOURCE_DEFAULT"
+3. Set GPIO number which use for control DIO by TOKEN "NUMERIC_AAEON_DIO_X_GPIO_DEFAULT"
+
+---------------------------------------------------------------------------
+###########################################################################
+Source Revision:	AaeonDio2Pkg_02
+Release Date:		06/05/2020
+Dependencies:		AaeonCommonLib
+Action:
+			1. Support IT8625 Super I/O chip
+File:
+			> AaeonDio2Pkg/AaeonDio2Pkg.sd
+
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_30
+
+###########################################################################
+Source Revision:	AaeonDio2Pkg_01
+Release Date:		12/27/2018
+Dependencies:		AaeonDxeLib
+Action:
+			1. Support 4 bit DIO function
+			2. Add TOKEN for control DIO direction default value
+File:
+			> AaeonDio2Pkg/AaeonDio2Pkg.sd
+			> AaeonDio2Pkg/AaeonDio2Pkg.sdl
+
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_30
+
+###########################################################################
+Source Revision:	AaeonDio2Pkg_00
+Release Date:		07/03/2017	
+Action:
+			1. First release - This module use setup menu 
+			"DIO Control Configuration" to control DIO source 
+			and GPIO 
+
+Dependencies:
+			AaeonDxeLib
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_30
+
+###########################################################################
+

@@ -1,0 +1,68 @@
+//***********************************************************************
+//*                                                                     *
+//*                  Copyright (c) 1985-2021, AMI.                      *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+#include <Token.h>
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example: UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+///
+/// Put control definitions here.
+///
+
+#define ONEOF_SCREEN_ROTATION_POLICY\
+        oneof varid   = SCREEN_ROTATION_POLICY.Direction,\
+            prompt    = STRING_TOKEN(STR_SCREEN_ROTATION_POLICY),\
+            help      = STRING_TOKEN(STR_SCREEN_ROTATION_POLICY_HELP),\
+            default   = SCREEN_ROTATION_POLICY_SELECTION,\
+            option text  = STRING_TOKEN(STR_NORMAL),            value = 0, flags = RESET_REQUIRED;\
+            option text  = STRING_TOKEN(STR_RIGHT_ROTATION),    value = 1, flags = RESET_REQUIRED;\
+            option text  = STRING_TOKEN(STR_LEFT_ROTATION),     value = 2, flags = RESET_REQUIRED;\
+            option text  = STRING_TOKEN(STR_REVERSION),         value = 3, flags = RESET_REQUIRED;\
+        endoneof;
+        
+#endif 
+        
+#ifdef CONTROLS_WITH_DEFAULTS
+///
+/// List macros of all the controls attached to the actual data.
+///
+    ONEOF_SCREEN_ROTATION_POLICY
+#endif
+
+#ifdef BOOT_FORM_SET
+
+#ifdef FORM_SET_TYPEDEF
+    #include "AaeonCommonPkg/ScreenRotation/ScreenRotation.h"
+#endif
+
+    #ifdef FORM_SET_VARSTORE
+        varstore SCREEN_ROTATION_POLICY,
+        key   = AUTO_ID(SCREEN_ROTATION_POLICY_KEY),
+        name  = ScreenRotationPolicy,
+        guid  = {0xef9a6033, 0x6e54, 0x448c, 0xa3, 0x93, 0xee, 0xc4, 0xd6, 0x89, 0xdc, 0x62};
+    #endif
+
+    #ifdef FORM_SET_ITEM
+    
+        ONEOF_SCREEN_ROTATION_POLICY
+        
+    #endif  //#ifdef FORM_SET_FORM
+                        
+#endif  //#ifdef BOOT_FORM_SET

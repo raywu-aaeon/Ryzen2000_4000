@@ -1,0 +1,18 @@
+<component>
+	name = "Ptn3460PeiPkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\Ptn3460PeiPkg\"
+	RefName = "AaeonCommonPkg.Ptn3460PeiPkg"
+[INF]
+"Ptn3460PeiPkg.inf"
+
+[files]
+"Ptn3460PeiPkg.c"
+"Ptn3460PeiPkg.sdl"
+"Ptn3460PeiPkg.sd"
+"Ptn3460PeiPkg.uni"
+"Ptn3460Callback.c"
+
+[parts]
+
+<endComponent>

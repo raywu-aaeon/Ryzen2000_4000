@@ -1,0 +1,32 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = HiManagerUUID
+  FILE_GUID                      = E17F0016-E0E6-4B01-AB59-797A2699901B
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = HiManagerUUIDEntryPoint
+
+[Sources]
+  HiManagerUUID.c
+  HiManagerUUID.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  
+[LibraryClasses]
+  AmiDxeLib
+  AmiCspLib
+  PciLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+
+[Protocols]
+  gEfiSmbiosProtocolGuid
+  gAmiSmbiosProtocolGuid
+  gAmiSmbiosBoardProtocolGuid
+    
+#[Guids]
+[Depex]
+  TRUE

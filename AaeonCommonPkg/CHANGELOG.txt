@@ -1,0 +1,2573 @@
+###############################################################################
+                AaeonCommonPkg
+###############################################################################
+===============================================================================
+Source Rev.:    AaeonCommon_57
+Release Date:   2022/02/22
+Changes:
+        1. Fix BFPI failed on certain platforms. Ex: AMD V2000
+Upgrade note:
+        N/A
+===============================================================================
+-------------------------------------------------------------------------------
+AaeonDio3 - Add ACPI Support Dependency
+
+Root Cause:
+        ACPI Support protocol haven't ready,
+        so can't update ACPI table with correct MMIO address.
+Detail:
+        AaeonDio3 - Update WDCB MMIO address.
+File:
+        > AaeonDio3/AaeonDio3Dxe.inf
+
+-------------------------------------------------------------------------------
+AaeonBfpi - Add ACPI Support Dependency
+
+Root Cause:
+        ACPI Support protocol haven't ready,
+        so can't update ACPI table with correct MMIO address.
+Detail:
+        AaeonBfpi - Update WMDB MMIO address.
+File:
+        > AaeonBfpi/AaeonBfpiDxe.inf
+
+-------------------------------------------------------------------------------
+===============================================================================
+Source Rev.:    AaeonCommon_56
+Release Date:   2021/12/16
+
+Description:
+        1. Support weekday selection for System Wake On RTC
+        2. Fix compiler error issue of AaeonUartMode2.
+Upgrade note:
+        N/A
+===============================================================================
+-------------------------------------------------------------------------------
+AaeonUartMode2 - Fix compiler error.
+
+Reason:
+        incorrect parameter
+File:
+        > AaeonUartMode2Pkg/AaeonUartMode2.c
+        > AaeonUartMode2Pkg/_AaeonUartMode2Pkg_History.txt
+
+-------------------------------------------------------------------------------
+AaeonRtcWake - Support weekday selection for System Wake On RTC
+
+Reason:
+        User need system only wake up on weekdays
+Detail:
+        * Remove garbage code in AaeonRtcWakePkg
+        * Add setup items for weekday
+        * Update setup item "System Wake On RTC" for support week day
+        * Disable Dynamic Time as default
+File:
+        > AaeonRtcWakePkg/AaeonRtcWakePkg.c
+        > AaeonRtcWakePkg/AaeonRtcWakePkg.sd
+        > AaeonRtcWakePkg/AaeonRtcWakePkg.sdl
+        > AaeonRtcWakePkg/AaeonRtcWakePkg.uni
+
+-------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_55
+Release Date:   2021/10/28
+
+Description:
+        1. Add ScreenRotation module.
+        2. BFPI - Update to rev.0.6
+            1. Support LED function
+            2. Fix compiling error when implementing OEM smart fan
+Upgrade note:
+        N/A
+==============================================================================
+-------------------------------------------------------------------------------
+AaeonBfpi - Correct duplicated OFSP method
+
+Root cause:
+        Bad coding. Fix compiling error when implementing OEM smart fan.
+File:
+        > Modified: AaeonBfpi/AaeonBfpiReportCapability/AaeonBfpiReportCapability.sdl
+
+-------------------------------------------------------------------------------
+AaeonBfpi - Support LED. Update revision to 0.6
+
+Reason:
+        Improvement.
+File:
+        > Modified: AaeonBfpi/AaeonBfpi.asl
+        > Modified: AaeonBfpi/AaeonBfpi.cif
+        > Modified: AaeonBfpi/AaeonBfpi.sdl
+        > Added: AaeonBfpi/AaeonBfpiLed.asl
+        > Modified: AaeonBfpi/AaeonBfpiReportCapability/AaeonBfpiReportCapability.sdl
+        > Modified: AaeonBfpi/OemBfpiTemplate.asl
+        > Modified: AaeonBfpi/Readme.md
+
+-------------------------------------------------------------------------------
+ScreenRotation -  Add ScreenRotation module.
+
+Reason:
+        For support screen rotation function.
+Detail:
+        
+        ScreenRotation version ScreenRotation_04.
+        Module source: AptioV;$/AptioV/Source/Modules/ScreenRotation; 
+File:
+        > AaeonCommonPkg.cif
+        > ScreenRotation/AbsolutePointerRotation/AbsolutePointerRotation.c
+        > ScreenRotation/AbsolutePointerRotation/AbsolutePointerRotation.cif
+        > ScreenRotation/AbsolutePointerRotation/AbsolutePointerRotation.inf
+        > ScreenRotation/AbsolutePointerRotation/AbsolutePointerRotation.sdl
+        > ScreenRotation/ScreenRotation.c
+        > ScreenRotation/ScreenRotation.chm
+        > ScreenRotation/ScreenRotation.cif
+        > ScreenRotation/ScreenRotation.h
+        > ScreenRotation/ScreenRotation.inf
+        > ScreenRotation/ScreenRotation.sd
+        > ScreenRotation/ScreenRotation.sdl
+        > ScreenRotation/ScreenRotation.uni
+        > ScreenRotation/ScreenRotationTse.c
+
+-------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_54
+Release Date:   2021/09/28
+
+Description:
+        1. AaeonDio3 - Fix driving cannot set to a value stronger than 20K
+        2. AaeonCapsuleUpdate - Support BIOS and ME firmware update
+           by capsule updatea
+
+Upgrade note:
+        N/A
+==============================================================================
+-------------------------------------------------------------------------------
+AaeonCapsuleUpdate - Add ESRT firmware version patch
+
+Reason:
+        Windows show BCD format of firmware version in device manager,
+        sync ESRT firmware version format to firmware device in device manager.
+        (For example: If AAEON_MAJOR_VERSION = 1,AAEON_MINOR_VERSION = 2,
+        The original ESRT firmware version is a hex value: "0x66"(102)
+        The BCD format ESRT firmware version is a hex value: "0x102")
+Detail:
+        Changed ESRT firmware version format
+
+File:
+        > AaeonCapsuleUpdate/AaeonCapsuleUpdate.c
+        > AaeonCapsuleUpdate/AaeonCapsuleUpdate.cif
+        > AaeonCapsuleUpdate/AaeonCapsuleUpdate.sdl
+
+-------------------------------------------------------------------------------
+AaeonCapsuleUpdate - Support ME Capsule Update
+
+Reason:
+        BIOS rule
+Detail:
+        1.Enabled AUTO_MEUD_SUPPORT
+        2.Changed save path of BIOS+ME capsule update firmware
+
+File:
+        > AaeonCapsuleUpdate/AaeonCapsuleUpdate.sdl
+
+-------------------------------------------------------------------------------
+AaeonCapsuleUpdate - Support BIOS Capsule Update
+
+Reason:
+        BIOS rule
+Detail:
+        1.Change save path of capsule update firmware
+        2.Enabled Recovery_SUPPORT
+        3.Sync token "PROJECT_MAJOR_VERSION" & "PROJECT_MINOR_VERSION"
+          to token "AAEON_MAJOR_VERSION" & "AAEON_MINOR_VERSION"
+        4.Set token "PLATFORM_GUID" & "FW_VERSION_GUID" to the same GUID
+
+File:
+        > AaeonCapsuleUpdate/AaeonCapsuleUpdate.sdl
+
+-------------------------------------------------------------------------------
+AaeonCapsuleUpdate - Support OEM ESRT GUID
+
+Reason:
+        Capsule Update mechanism will check ESRT GUID .
+Detail:
+        Add token "OEM_ESRT_FIRMWARE_GUID"
+
+File:
+        > AaeonCapsuleUpdate/AaeonCapsuleUpdate.sdl
+
+-------------------------------------------------------------------------------
+AaeonCapsuleUpdate - Support Secure Flash
+
+Reason:
+        Support firmware capsule update need BIOS support secure flash .
+Detail:
+        1.BIOS porting for secure flash.
+        2.Change FW pub key and priv key store path to AaeonCapsuleUpdate\KEY.
+        3.Change SMBIOS data location to NVRAM.
+
+File:
+        > AaeonCapsuleUpdate/AaeonCapsuleUpdate.sdl
+
+-------------------------------------------------------------------------------
+AaeonCapsuleUpdate - Add AaeonCapsuleUpdate module
+
+Reason:
+        Support BIOS and ME firmware OTA(Over-the-air programming).
+Detail:
+        Add AaeonCapsuleUpdate module in AaeonCommonPkg.
+
+File:
+        > AaeonCapsuleUpdate/AaeonCapsuleUpdate.cif
+        > AaeonCapsuleUpdate/AaeonCapsuleUpdate.sdl
+        > AaeonCapsuleUpdate/Readme.md
+        > AaeonCommonPkg.cif
+        > CONTRIBUTING.md
+
+-------------------------------------------------------------------------------
+AaeonDio3 - Fix driving cannot set to a value stronger than 20K
+
+Root Cause:
+        Bad Coding.
+
+==============================================================================
+Source Rev.:    AaeonCommon_53_hotfix_1
+Release Date:   2021/05/12
+
+Description:
+		1. AaeonBiosRobot - Fix delay time of PEI phase incorrect issue.
+==============================================================================
+-------------------------------------------------------------------------------
+AaeonBiosRobot - Modify PEI phase delay from "SetupData.DelayedTime" to "SetupData.DelayedTimePei".
+
+Reason:
+        Used the wrong variable for PEI phase delay.
+
+Detail:
+        Use DelayedTimePei instead of DelayedTime.
+	
+File:
+        > Modified: AaeonBiosRobot/PowerOnRobot/PowerOnRobotPei.c
+
+==============================================================================
+Source Rev.:    AaeonCommon_53
+Release Date:   2021/05/11
+
+Description:
+        1. AaeonUartMode2 - Support UART Mode 7~10, Fix RS485 fail issue
+        2. AaeonBfpi - Prevent compiling error when SMF enabled without HWM
+        3. AaeonBfpi - Fix compiling error when SoC SMF enabled
+        4. AaeonDio3 - Fix DIO Report Capability reports wrong "Supported Bit Map"
+        5. AaeonDio3 - Fixed get the wrong Dio Pin Map when DIO controller is second or third
+
+Upgrade note:
+        N/A
+==============================================================================
+-------------------------------------------------------------------------------
+AaeonUartMode2 - Support UART Mode 7~10, Fix RS485 fail issue
+
+Reason:
+        1. Improvement
+        2. UartMode index isn't equal to LDN number
+Detail:
+        1. Support UART Mode 7~10
+	    2. Fix function "SioSetFlowControl" UART index incorrect issue
+
+File:
+        > AaeonUartMode2Pkg/AaeonUartMode2.c
+        > AaeonUartMode2Pkg/AaeonUartMode2.h
+        > AaeonUartMode2Pkg/AaeonUartMode2Callback.c
+        > AaeonUartMode2Pkg/AaeonUartMode2Pkg.c
+        > AaeonUartMode2Pkg/AaeonUartMode2Pkg.sd
+        > AaeonUartMode2Pkg/AaeonUartMode2Pkg.sdl
+        > AaeonUartMode2Pkg/AaeonUartMode2Pkg.uni
+        > AaeonUartMode2Pkg/_AaeonUartMode2Pkg_History.txt
+
+-------------------------------------------------------------------------------
+AaeonBfpi - Prevent compiling error when SMF enabled without HWM
+
+Reason:
+        New condition previously not considered.
+
+File:
+        > Modified: AaeonBfpi/AaeonBfpiSmf.asl
+
+-------------------------------------------------------------------------------
+AaeonBfpi - Fix compiling error when SoC SMF enabled
+
+Root Cause:
+        Bad coding.
+
+File:
+        > Modified: AaeonBfpi/AaeonBfpiSmf.asl
+
+-------------------------------------------------------------------------------
+AaeonDio3 - Fix DIO Report Capability reports wrong "Supported Bit Map"
+
+Root Cause:
+        Bad coding. Second DIO is falsely used while it is not present.
+
+File:
+        > Modified: AaeonDio3/AaeonDio3Dxe.c
+
+-------------------------------------------------------------------------------
+AaeonDio3 - Fixed get the wrong Dio Pin Map when DIO controller is second or third
+
+Root Cause:
+        When Dio Controller is 2nd or 3rd , we need to adjust the correct offset in Dio Pin Map Buffer
+
+File:
+        > AaeonDio3/AaeonDio3.asl
+-------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_52_hotfix_3
+Release Date:   2021/05/10
+
+Description:
+        1. AaeonUartMode2 - Corrected HwDesignSetMode()
+           Fix HW-controlled RS422/RS485 modes failed
+
+==============================================================================
+------------------------------------------------------------------------------
+AaeonUartMode2 - Corrected HwDesignSetMode()
+Root cause: Fix coding error
+Detail: Used wrong array for RS422 and 485
+
+File:
+        > Modified: AaeonCommonPkg\AaeonUartMode2Pkg\AaeonUartMode2.c
+
+------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_52_hotfix_2
+Release Date:   2021/04/15
+
+Description:
+		1. AaeonCommonLib - Add IT8625SetGpioFnType function
+
+==============================================================================
+------------------------------------------------------------------------------
+IT8625GpioFnTypeSupport - Add IT8625SetGpioFnType function in AaeonCommonLib
+Reason: To support setting IT8625 GPIO Function Type library
+Detail: Add IT8625SetGpioFnType function in AaeonCommonLib.
+
+File:
+        > Modified: AaeonCommonPkg\AaeonCommonLib\AaeonCommonLib.h
+        > Modified: AaeonCommonPkg\AaeonCommonLib\IT8625.c
+
+------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_52_hotfix
+Release Date:   2020/12/22
+
+Description:
+		1. General - Fix compiling error
+		2. BiosRobot - Fix system hang during reset on Tiger Lake platform
+
+==============================================================================
+------------------------------------------------------------------------------
+Change: General - Enhance compatibility related to PCI0/PC00 part 3 - compiling error
+
+Root cause: Bad coding
+Detail: N/A
+File:
+        > Modified: AaeonCommonPkg.sdl
+
+------------------------------------------------------------------------------
+Change: BiosRobot - Fix system hang during reset on Tiger Lake platform
+Root cause: Bad coding
+Detail: Issue happens after first boot/POST.
+File:
+        > Modified: AaeonBiosRobot/SentryRobot/SentryRobotLib.c
+
+------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_52
+Release Date:   2020/12/15
+
+Description:
+		1. General - Enhance compatibility related to PCI0/PC00
+		2. PTN3460Cfg - Support PWM pass through mode.
+		3. AaeonSetup - Add FIX_BOOT_ORDER dependency to AaeonBoot.sd
+		   Reason: For preventing compiling error when switching
+		           AaeonProjectPkg off.
+
+Upgrade note:
+	* General -
+		* TOKEN AP_PCI_ROOT_DEVICE_NAME and AP_LPC_BRIDGE_DEVICE_NAME
+		  introduced in AaeonCommon_50 is no longer used.
+	* PTN3460Cfg -
+		* TOKEN PTN3460_SLAVE_ADDRESS1:
+		  default changed. Should be re-defined in project level .sdl
+		* TOKEN PTN3460_SLAVE_ADDRESS2:
+		  default changed. Should be re-defined in project level .sdl
+		* TOKEN DEFAULT_PTN3460_MODE:
+		  New token. Should be re-defined in project level .sdl
+		* Needs HW Support: https://sts.aaeon.com.tw:12080/projects/knowledgebase/knowledgebase/articles/1549
+
+==============================================================================
+------------------------------------------------------------------------------
+Change: Support PTN3460 PWM 'Pass Through' mode part 2
+Reason: Feature improving
+Detail:
+		1. Do not force read/write PTN3460, follow structure
+File:
+		> PTN3460Cfg/PTN3460CfgDxe.c
+		> PTN3460Cfg/PTN3460CfgPei.c
+
+------------------------------------------------------------------------------
+Change: General - Enhance compatibility related to PCI0/PC00 part 2
+Reason: Compatibility enhancement
+Detail:
+		1. Add CORE_BUILD_NUMBER dependency to prevent affecting old platform
+File:
+		> AaeonCommonPkg.sdl
+
+------------------------------------------------------------------------------
+Change:		
+		1. AaeonSetup - Add FIX_BOOT_ORDER dependency to AaeonBoot.sd
+
+Root Cause:	Prevent compiling error when switching AaeonProjectPkg off.
+I.E. FIX_BOOT_ORDER enabled with un-ported AaeonSetup.
+
+Files:		
+		> AaeonSetup/AaeonBoot.sd
+
+------------------------------------------------------------------------------
+Change: Support PTN3460 PWM 'Pass Through' mode.
+Reason: Feature improving
+Note:   Needs HW support
+STS:    https://sts.aaeon.com.tw:12080/projects/knowledgebase/knowledgebase/articles/1549
+File:
+		> PTN3460Cfg/History.txt
+		> PTN3460Cfg/PTN3460Cfg.h
+		> PTN3460Cfg/PTN3460Cfg.sdl
+		> PTN3460Cfg/PTN3460CfgDxe.c
+		> PTN3460Cfg/PTN3460CfgPei.c
+		> PTN3460Cfg/PTN3460CfgSetup.sd
+		> PTN3460Cfg/PTN3460CfgSetup.uni
+		> PTN3460Cfg/PTN3460CfgSetupCallback.c
+
+Upgrade note:
+		* TOKEN PTN3460_SLAVE_ADDRESS1:
+		  default changed. Should be re-defined in project level .sdl
+		* TOKEN PTN3460_SLAVE_ADDRESS2:
+		  default changed. Should be re-defined in project level .sdl
+		* TOKEN DEFAULT_PTN3460_MODE:
+		  New token. Should be re-defined in project level .sdl
+		* Needs HW Support: https://sts.aaeon.com.tw:12080/projects/knowledgebase/knowledgebase/articles/1549
+
+------------------------------------------------------------------------------
+Change: Restore BFPI LPC device path to original setting to fix old code base
+        compiler error issue.	
+Reason: Compatibility enhancement
+Detail:
+		1. Restore BFPI LPC device path to original setting to fix
+		   old code base compiler error issue.
+		2. Remove unused token.
+		3. Fix ElkhartLake platform BFPI module compiling fail issue.
+File:
+        > AaeonBfpi/AaeonBfpiHwm.asl
+        > AaeonBfpi/AaeonBfpiSmf.asl
+        > AaeonBfpi/AaeonBfpiWdt.asl
+        > AaeonDio3/AaeonDio3.asl
+        > AaeonCommonPkg.sdl
+
+------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_51
+Release Date:   2020/09/30
+
+Description:
+		# Fix AaeonBfpi build error for support AaeonGpioIdPkg
+		# Update module "PTN3460Cfg" for supporting Panel Mode
+		# Fix HiManager module doesn't work issue
+		# Fix AaeonDio3 and AaeonUartMode2Pkg build fail issue
+==============================================================================
+------------------------------------------------------------------------------
+Change:		Fix AaeonBfpi build error for support AaeonGpioIdPkg
+Root Cause:	AaeonBfpiDxe.c can not GetVariable for AaeonSetup
+Action:
+		# Include AaeonCommonLib.h
+		# Correct coding mistake
+Files:
+		> AaeonBfpi/AaeonBfpiDxe.c
+STS:
+		https://sts.aaeon.com.tw:12080/issues/11708
+------------------------------------------------------------------------------
+Change:		Update module "PTN3460Cfg" for supporting Panel Mode
+Root Cause:	Support panel mode selection for single/dual channel
+Action:
+                # Add setup item "Panel Mode"
+Files:
+		> PTN3460Cfg/PTN3460Cfg.h
+		> PTN3460Cfg/PTN3460Cfg.sdl
+		> PTN3460Cfg/PTN3460CfgDxe.c
+		> PTN3460Cfg/PTN3460CfgPei.c
+		> PTN3460Cfg/PTN3460CfgSetup.sd
+		> PTN3460Cfg/PTN3460CfgSetup.uni
+		> PTN3460Cfg/PTN3460CfgSetupCallback.c
+STS:
+		https://sts.aaeon.com.tw:12080/issues/11708
+------------------------------------------------------------------------------
+Change:		Fix HiManager module doesn't work issue
+Root Cause:	PCH LAN IO Memory Space was disabled on CoffeeLake/CometLake
+Action:
+		# Enable PCH LAN IO Memory Space before get MAC address
+Files:
+		> AaeonCommonPkg/HiManagerUUID/HiManagerUUID.c	
+STS:
+		https://sts.aaeon.com.tw:12080/issues/11708
+------------------------------------------------------------------------------
+Change:		Fix AaeonDio3 and AaeonUartMode2Pkg build fail issue
+Root Cause:	# AaeonUartMode2Callback.obj unresolved external symbol UartModeInit
+		# AaeonDio3SetupCallback.obj unresolved external symbol DioInit
+Action:
+                # Add ELINK "AmiCspLib" AfterParent 
+		  "AdditionalSetupLibraryClasses"
+Files:
+		> AaeonDio3/AaeonDio3.sdl
+		> AaeonUartMode2Pkg/AaeonUartMode2Pkg.sdl
+STS:
+		https://sts.aaeon.com.tw:12080/issues/11708
+------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_50_hotfix_2
+Release Date:   2020/08/11
+
+Description:
+		* Fixed AaeonSetup Coding Mistake
+
+Upgrade note:
+		N/A
+==============================================================================
+------------------------------------------------------------------------------
+Change:		
+		1. Corrected Coding Mistake in `AaeonBoot.sd`
+
+Root Cause:	Fixed AaeonSetup Coding Mistake
+		
+Files:		
+		Modified > AaeonSetup\AaeonBoot.sd
+
+------------------------------------------------------------------------------
+
+==============================================================================
+Source Rev.:    AaeonCommon_50_hotfix_1
+Release Date:   2020/08/10
+
+Description:
+		* Fixed build error when project not support DIO3 module. -
+	          Correct path in SentryRobot.sd and SentryRobotLib.c
+		* Fixed build error in CometLake code base.-
+	          Correct path in PowerOnRobotPei.c
+Upgrade note:
+			
+
+==============================================================================
+------------------------------------------------------------------------------
+Change:         Fixed build error when project not support DIO3 module.
+Root Cause:     To resolve compile error.
+Files:
+                > AaeonBiosRobot/SentryRobot/SentryRobot.sd
+		> AaeonBiosRobot/SentryRobot/SentryRobotLib.c
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Fixed build error in CometLake code base.
+Root Cause:     To resolve compile error.
+Files:
+                > AaeonBiosRobot/PowerOnRobot/PowerOnRobotPei.inf
+		> AaeonBiosRobot/PowerOnRobot/PowerOnRobotPei.c
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_50
+Release Date:   2020/06/19
+
+Description:
+		* Module Capability Improvement / Corrected Dependency of CIF file
+			- Symptom: There will be several "Warnings" at beginning of Build Process
+		* Module Capability Improvement / AaeonBfpi (Easily to Change for Engineer)
+			- Symptom: PCI(LPC) Root Bridge Name will be Different on Different Platform
+
+Upgrade note:
+		* TOKEN AP_PCI_ROOT_DEVICE_NAME: Should be Defined in AaeonPlatform (unnecessary after AaeonCommon_52)
+		* TOKEN AP_LPC_BRIDGE_DEVICE_NAME: Should be Defined in AaeonPlatform (unnecessary after AaeonCommon_52)
+
+==============================================================================
+------------------------------------------------------------------------------
+Change:		
+		1. Replace SIO1/2/3,EC0/1 ASL Name by TOKEN Defined
+		2. TOKEN Defined will be more Easily to Change for Engineer
+
+Root Cause:	Module Capability Improvement / AaeonBfpi
+		Symptom:
+			PCI(LPC) Root Bridge Name will be Different on Different Platform
+			For Example :
+				PCI Root Bridge = PCI0 on APL/CFL
+				PCI Root Bridge = PC00 on EHL/Purley
+			AaeonBfpi will make a build error due to "PCI(LPC) Root Bridge Name" was hard-coding in ASL code
+
+Files:		
+		Modified > AaeonBfpi/AaeonBfpiHwm.asl
+		Modified > AaeonBfpi/AaeonBfpiSmf.asl
+		Modified > AaeonBfpi/AaeonBfpiWdt.asl
+		Modified > AaeonCommonPkg.sdl
+		Modified > AaeonDio3/AaeonDio3.asl
+
+Note:
+		1. AP: Prefix for AaeonPlatform
+		2. AC: Prefix for AaeonCommon
+------------------------------------------------------------------------------
+Change:		
+		1. Complete Module Dependency for All sub-Modules
+
+Root Cause:	Module Capability Improvement / Corrected Dependency of CIF file
+		Symptom:
+			There will be several "Warnings" at beginning of Build Process
+		
+Files:		
+		Modified > AaeonBfpi/AaeonBfpi.cif
+		Modified > AaeonBfpi/AaeonBfpiReportCapability/AaeonBfpiReportCapability.cif
+		Modified > AaeonBiosRobot/AaeonBiosRobot.cif
+		Modified > AaeonBiosRobot/PowerOnRobot/PowerOnRobot.cif
+		Modified > AaeonBiosRobot/SentryRobot/SentryRobot.cif
+		Modified > AaeonBiosRobot/WatchRobot/WatchRobot.cif
+		Modified > AaeonCommonPkg.cif
+		Modified > AaeonDefaultPwd/AaeonDefaultPwd.cif
+		Modified > AaeonDio2Pkg/AaeonDio2Pkg.cif
+		Modified > AaeonDio3/AaeonDio3.cif
+		Modified > AaeonDio3/AaeonDio3ReportCapability/AaeonDio3ReportCapability.cif
+		Modified > AaeonDioPkg/AaeonDioPkg.cif
+		Modified > AaeonGpioIdPkg/AaeonGpioIdPkg.cif
+		Modified > AaeonMagicWordPkg/AaeonMagicWordPkg.cif
+		Modified > AaeonMultiVbiosPkg/AaeonMultiVbiosPkg.cif
+		Modified > AaeonOemBeepMap/AaeonOemBeepMap.cif
+		Modified > AaeonRtcWakePkg/AaeonRtcWakePkg.cif
+		Modified > AaeonRunningTime/AaeonRunningTime.cif
+		Modified > AaeonSWSmm/AaeonSWSmm.cif
+		Modified > AaeonSecureBoot/AaeonSecureBoot.cif
+		Modified > AaeonSetup/AaeonSetup.cif
+		Modified > AaeonSetup/LibraryInstances/LibraryInstances.cif
+		Modified > AaeonSetup/SignOnMessage/SignOnMessage.cif
+		Modified > AaeonUartMode2Pkg/AaeonUartMode2Pkg.cif
+		Modified > AaeonUartModePkg/AaeonUartModePkg.cif
+		Modified > AaeonUartOverride/AaeonUartOverride.cif
+		Modified > AaeonUefiLanPkg/AaeonLanUefiDriver.cif
+		Modified > AutoLoadDefault/AutoLoadDefault.cif
+		Modified > F75111PeiPkg/F75111PeiPkg.cif
+		Modified > HiManagerUUID/HiManagerUUID.cif
+		Modified > IPCBU_BiosInfoPeiPkg/BiosInfoPei.cif
+		Modified > MacToUUIDPkg/MacToUUID.cif
+		Modified > PTN3460Cfg/PTN3460Cfg.cif
+		Modified > PTN3460Cfg/PTN3460CfgSetup.cif
+		Modified > PTN3460Cfg/PTN3460OemHooks/PTN3460OemHooks.cif
+		Modified > Ptn3460PeiPkg/Ptn3460PeiPkg.cif
+		Modified > SecDecodePkg/SecDecodePkg.cif
+		Modified > SioLdnDefaultDisable/SioLdnDefaultDisable.cif
+
+------------------------------------------------------------------------------
+
+==============================================================================
+Source Rev.:    AaeonCommon_49
+Release Date:   06/16/2020
+Description:
+                * PTN3460Cfg -
+                   * Suppressif related option if PTN3460 is disabled.
+                   * Fix compiler error with new code base. (5.13_1AUOK_RC7.0.70.20_057 after)
+                * HiManagerUUID - Use DWORD access for MMIO to avoid unexpected behavior
+				* AaeonCommonLib (renamed from AaeonDxeLib) -
+				   * Support WDT
+				   * Support reading SIO registers
+				   * Support both PEI and DXE
+                   * Support IT8625 Super I/O
+				* AaeonBiosRobot - New module
+				* AaeonSWSmm - New module
+				* AaeonRunningTime - New module
+                * AaeonSecureBoot - Update AAEON Secure Boot Keys (Valid date 20200611~20391231)
+                * AaeonDio2Pkg - Support IT8625 Super I/O
+                * AaeonDio3 - Support IT8625 Super I/O
+                * AaeonPowerMode - Support IT8625 Super I/O
+                * AaeonUartMode2Pkg - Support IT8625 Super I/O
+
+Upgrade note:
+                * Refer to CONTRIBUTING.md, add following .cif into project.veb
+				   - AaeonBiosRobot related
+				      * AaeonBiosRobot.cif
+				      * PowerOnRobot\PowerOnRobot.cif
+				      * SentryRobot\SentryRobot.cif
+				      * WatchRobot\WatchRobot.cif
+				   - AaeonSWSmm.cif
+				   - AaeonRunningTime.cif
+==============================================================================
+------------------------------------------------------------------------------
+Change:         Resolve the SourceTypeSio1[] and SourceTypeEc1[] redefined issue
+Root Cause:     To resolve compile error.
+Action:
+                * Rename SourceTypeSio1[] and SourceTypeEc1[] for SIO and WDT respectively
+Files:
+                > AaeonCommonLib\SIO.c
+                > AaeonCommonLib\WatchDog.c
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Merge AaeonPeiLib.h and AaeonDxeLib.h
+Root Cause:     For simplification
+Action:
+                * Rename AaeonDxeLib folder as AaeonCommonLib
+                * Rename AaeonDxeLib.h to AaeonCommonLib.h
+                * Rename the code which using AaeonPeiLib.h and AaeonDxeLib.h to AaeonCommonLib.h
+Files:
+                > \AaeonDxeLib -> \AaeonCommonLib (renamed)
+                > AaeonBiosRobot\SentryRobot\SentryRobotLib.c
+                > AaeonBiosRobot\WatchRobot\WatchRobotACPILib.c
+                > AaeonBiosRobot\WatchRobot\WatchRobotDxeLib.c
+                > AaeonBiosRobot\WatchRobot\WatchRobotPei.c
+                > AaeonCommonLib\AaeonDxeLib.inf
+                > AaeonCommonLib\AaeonPeiLib.inf
+                > AaeonCommonLib\F75111.c
+                > AaeonCommonLib\F75113.c
+                > AaeonCommonLib\F81804.c
+                > AaeonCommonLib\F81866.c
+                > AaeonCommonLib\F81966.c
+                > AaeonCommonLib\GPIO.c
+                > AaeonCommonLib\IT8625.c
+                > AaeonCommonLib\IT8728.c
+                > AaeonCommonLib\Readme.md
+                > AaeonCommonLib\SIO.c
+                > AaeonCommonLib\WatchDog.c
+                > AaeonDio2Pkg\AaeonDio2.c
+                > AaeonDio3\AaeonDio3.c
+                > AaeonGpioIdPkg\AaeonGpioIdDxe.c
+                > AaeonGpioIdPkg\AaeonGpioIdLoadDefaults.c
+                > AaeonUartMode2Pkg\AaeonUartMode2.c
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonCommonPkg_IT8625_SUPPORT - Correct the typos
+Root Cause:     For improvement
+Action:
+                * Correct the name of AaeonDio3ReportCapability master token
+                * Correct the IT8625GetIoLdnValue name in SIO.c
+
+File:
+                > AaeonDio3\AaeonDio3ReportCapability\AaeonDio3ReportCapability.sdl
+                > AaeonDxeLib\SIO.c
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonCommonPkg_IT8625_SUPPORT - Fine-tune the SIO WDT functions
+Root Cause:     For improvement
+Action:
+                Remove garbage code and makeup the exit config mode for the SIO WDT functions
+
+File:
+                > AaeonDxeLib\F81804.c
+                > AaeonDxeLib\F81866.c
+                > AaeonDxeLib\F81966.c
+                > AaeonDxeLib\IT8728.c
+
+STS:
+                10948
+------------------------------------------------------------------------------
+Change:         AaeonCommonPkg_IT8625_SUPPORT - Modify AAEON PEI/DXE Library module to support IT8625
+Root Cause:     For support IT8625 Super I/O.
+Action:
+                Add related code to support IT8625
+
+File:
+                > AaeonBfpi\AaeonBfpiReportCapability\AaeonBfpiReportCapability.sdl
+                > AaeonDxeLib\AaeonDxeLib.h
+                > AaeonDxeLib\AaeonPeiLib.inf
+                > AaeonDxeLib\SIO.c
+                > AaeonDxeLib\WatchDog.c
+
+STS:
+                10948
+------------------------------------------------------------------------------
+Change:         AaeonCommonPkg_IT8625_SUPPORT - Modify for support IT8625 Super I/O
+Root Cause:     For support IT8625 Super I/O.
+Action:
+                Add related code of below module parts
+                - AaeonDio2Pkg
+                - AaeonDio3
+                - AaeonPowerMode
+                - AaeonDxeLib
+                - AaeonUartMode2Pkg
+File:
+                > AaeonBfpi\AaeonBfpiReportCapability\AaeonBfpiReportCapability.sdl
+                > AaeonCommonPkg.sdl
+                > AaeonCommonPkg.uni
+                > AaeonDio2Pkg\AaeonDio2Pkg.sd
+                > AaeonDio3\AaeonDio3.sd
+                > AaeonDio3\AaeonDio3.sdl
+                > AaeonDio3\AaeonDio3ReportCapability\AaeonDio3ReportCapability.sdl
+                > AaeonDxeLib\AaeonDxeLib.inf
+                > AaeonDxeLib\GPIO.c
+                > AaeonDxeLib\IT8625.c
+                > AaeonDxeLib\Readme.md
+                > AaeonPowerMode\AaeonPowerModeDxe.c
+                > AaeonPowerMode\AaeonPowerModeSetup.c
+                > AaeonUartMode2Pkg\AaeonUartMode2.c
+                > AaeonUartMode2Pkg\AaeonUartMode2Pkg.sd
+
+STS:
+                10948
+------------------------------------------------------------------------------
+Change:         Update AAEON Secure Boot Keys (Valid date 20200611~20391231)
+Root Cause:     Improvement
+Action:
+                * Update PK / KEK / db files
+
+File:
+                > AaeonSecureBoot\AaeonKeys\KEK
+                > AaeonSecureBoot\AaeonKeys\PK
+                > AaeonSecureBoot\AaeonKeys\db
+
+Note:
+                About the AAEON Secure Boot Keys (built date 20200609),
+                SDD2 Roy Tseng says they used the wrong .cer to db key content,
+                so they deliver AAEON Secure Boot Keys (built date 20200611) for
+                replacement.
+
+------------------------------------------------------------------------------
+Change:         AaeonRunningTime - Support new module
+Root Cause:     Improvement
+Action:
+                * AaeonRunningTime - Support new module
+File:
+		> AaeonCommonPkg.cif	
+		> AaeonRunningTime/AaeonRunningTime.c	
+		> AaeonRunningTime/AaeonRunningTime.cif	
+		> AaeonRunningTime/AaeonRunningTime.sd	
+		> AaeonRunningTime/AaeonRunningTime.sdl	
+		> AaeonRunningTime/AaeonRunningTime.uni	
+		> AaeonRunningTime/AaeonRunningTimeDxe.c	
+		> AaeonRunningTime/AaeonRunningTimeDxe.inf	
+		> AaeonRunningTime/S5andPowerBtnSMI.c	
+		> CHANGELOG.txt	
+		> CONTRIBUTING.md	
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonSWSmm - Support new module
+Root Cause:     Improvement
+Action:
+                * AaeonSWSmm - Support new module
+File:
+		> AaeonCommonPkg.cif
+		> AaeonSWSmm/AaeonSWSmm.c
+		> AaeonSWSmm/AaeonSWSmm.cif
+		> AaeonSWSmm/AaeonSWSmm.inf
+		> AaeonSWSmm/AaeonSWSmm.sdl
+		> CONTRIBUTING.md
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonBiosRobot - Move SIO related code to AaeonDxeLib.
+		AaeonDxeLib    - Move SIO related code to AaeonDxeLib.
+Root Cause:     Improvement
+Action:
+                * AaeonDxeLib  - Move SIO related code to AaeonDxeLib.
+		* AaeonBiosRobot - Move SIO related code to AaeonDxeLib.
+File:
+		> AaeonBiosRobot/AaeonBiosRobot.sdl
+		> AaeonBiosRobot/AaeonBiosRobotLib/AaeonBiosRobotCommonLib.h
+		> AaeonBiosRobot/Readme.md
+		> AaeonBiosRobot/SentryRobot/SentryRobot.sd
+		> AaeonBiosRobot/SentryRobot/SentryRobotLib.c
+		> AaeonDxeLib/AaeonDxeLib.h
+		> AaeonDxeLib/AaeonDxeLib.inf
+		> AaeonDxeLib/F81804.c
+		> AaeonDxeLib/F81866.c
+		> AaeonDxeLib/F81966.c
+		> AaeonDxeLib/IT8518.c
+		> AaeonDxeLib/IT8728.c
+		> AaeonDxeLib/SIO.c
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonBiosRobot - Add AaeonBiosRobot module.
+Root Cause:     Improvement
+Action:
+                * AaeonBiosRobot - Add AaeonBiosRobot module.
+
+File:
+		>Add AaeonBiosRobot module.
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonDxeLib - Add watch dog function.
+Root Cause:     Improvement
+Action:
+                * AaeonDxeLib - Add watch dog function.
+
+File:
+		> AaeonCommonPkg.cif
+		> AaeonCommonPkg.sdl
+		> AaeonDxeLib/AaeonDxeLib.h
+		> AaeonDxeLib/AaeonDxeLib.inf
+		> AaeonDxeLib/F75111.c
+		> AaeonDxeLib/F75113.c
+		> AaeonDxeLib/F81804.c
+		> AaeonDxeLib/F81866.c
+		> AaeonDxeLib/F81966.c
+		> AaeonDxeLib/GPIO.c
+		> AaeonDxeLib/IT8728.c
+		> AaeonDxeLib/AaeonPeiLib.h
+		> AaeonDxeLib/AaeonPeiLib.inf
+		> AaeonDxeLib/IT8518.c
+		> AaeonDxeLib/WatchDog.c
+
+------------------------------------------------------------------------------
+Refer to Rev.03 in HiManagerUUID/History.txt
+
+------------------------------------------------------------------------------
+Refer to PTN3460Cfg_03 in PTN3460Cfg/History.txt
+
+------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_48_HF1
+Release Date:   05/25/2020
+Description:
+				Hotfix 1 -
+                * AaeonDio3 - Improve error handling.
+                * Update CONTRIBUTING.md and CHANGELOG.txt for AaeonSecureBoot.
+				* Update CONTRIBUTING.md guild for writing "Update note".
+                * Fix compiling error -
+				  * Correct path in AaeonSetup.sdl
+				  * Add missing string in AaeonCommonPkg.uni
+Upgrade note:
+                * Refer to CONTRIBUTING.md, add "AaeonSecureBoot.cif" into project.veb
+				* Remove SecureBoot related project portings since they're not required anymore -
+				   * .sdl
+				   * AaeonSecurity.sd
+==============================================================================
+------------------------------------------------------------------------------
+Change:         Update CONTRIBUTING.md, Add "UPGRADE" section
+Root Cause:     Improvement
+Action:
+                * Update CONTRIBUTING.md, Add "UPGRADE" section
+
+File:
+                > CONTRIBUTING.md
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Fix compiling error. Add missing string in AaeonCommonPkg.uni
+Root Cause:     Bad coding.
+Action:
+                * Fix compiling error. Add missing string in AaeonCommonPkg.uni
+
+File:
+                > AaeonCommonPkg.uni
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Fix compiling error. Correct path in AaeonSetup.sdl
+Root Cause:     Bad coding.
+Action:
+                * Fix compiling error. Correct path in AaeonSetup.sdl
+
+File:
+                > AaeonSetup/AaeonSetup.sdl
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Update CONTRIBUTING.md guild for writing "Update note"
+Root Cause:     Improvement
+Action:
+                * Update CONTRIBUTING.md guild for writing "Update note"
+
+File:
+                > CONTRIBUTING.md
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Update CONTRIBUTING.md and CHANGELOG.txt for AaeonSecureBoot
+Root Cause:     Some porting note must be followed otherwise lead to compiling error.
+Action:
+                * Update CONTRIBUTING.md and CHANGELOG.txt for AaeonSecureBoot.
+
+File:
+                > CONTRIBUTING.md
+				> CHANGELOG.txt
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonDio3 - Improve error handling.
+Root Cause:     Improvement
+Action:
+                * AaeonDio3 - Improve error handling.
+
+File:
+                > AaeonDio3/AaeonDio3.asl
+                > AaeonDio3/AaeonDio3.sd
+                > AaeonDio3/OemDioTemplate.asl
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_48
+Release Date:   03/27/2020
+Description:
+                * Added a Bypass option for RTC wake module. BIOS will not
+                  control RTC wake function during system shutdown when Bypass
+                  is selected.
+                * Update AaeonBfpi -
+                  * Support BFPI V0.4 Final
+                  * Clean-up garbage space chars at end of line
+                  * Fix HWM and SMF is not reported correctly in GlobalReportCapability.
+                  * Improve token dependency related to IT851X EC
+                * Improve AaeonDio3 -
+                  * Fix compiling error when AaeonBfpi is not enabled
+                  * Improve token dependency related to IT851X EC
+                  * Fix DIO level/IO item will be hidden if GpioNum is 0.
+                * Add new module - AaeonSecureBoot
+                * Update PK, KEK to latest with Microsoft CA included in KEK.
+                * Improve AaeonSetup - Add a template AaeonSetupCallback.c for project porting.
+Upgrade note:
+                * Refer to CONTRIBUTING.md, add "AaeonSecureBoot.cif" into project.veb
+				* Remove SecureBoot related project portings since they're not required anymore -
+				   * .sdl
+				   * AaeonSecurity.sd
+==============================================================================
+------------------------------------------------------------------------------
+Change:         AaeonSetup - Add a template AaeonSetupCallback.c for project porting.
+Root Cause:     Improvement
+Action:
+                * Add a template AaeonSetupCallback.c for project porting.
+File:
+                > AaeonSetup/AaeonSetupCallback.c
+                > AaeonSetup/AaeonSetup.sdl
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Correct "warning" wheb building code.
+Root Cause:     Improvement
+Action:
+                * Remove garbage ";" char
+File:
+                > AaeonSetup\AaeonBoot.sd
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonDio3 - Fix DIO level/IO item will be hidden if GpioNum is 0.
+Root Cause:     Improvement
+Action:
+                * Remove related suppressif since they are useless.
+Files:
+                > AaeonDio3/AaeonDio3.sd
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonSecureBoot - Update PK, KEK to latest with Microsoft CA included in KEK.
+Root Cause:     Improvement
+Action:
+                * Update PK, KEK to latest with Microsoft CA included in KEK.
+
+File:
+                > AaeonSecureBoot/AaeonKeys/KEK
+                > AaeonSecureBoot/AaeonKeys/PK
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonSecureBoot - Correct token dependency about SecureBoot module
+Root Cause:     Improvement
+Action:
+                * Correct token dependency about SecureBoot module
+
+File:
+                > AaeonSecureBoot/AaeonSecureBoot.sdl
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Add new module - AaeonSecureBoot
+Root Cause:     Improvement
+Action:
+                * Add new module - AaeonSecureBoot
+
+File:
+                > AaeonSecureBoot/AaeonKeys/KEK
+                > AaeonSecureBoot/AaeonKeys/PK
+                > AaeonSecureBoot/AaeonKeys/db
+                > AaeonSecureBoot/AaeonSecureBoot.cif
+                > AaeonSecureBoot/AaeonSecureBoot.sd
+                > AaeonSecureBoot/AaeonSecureBoot.sdl
+                > AaeonSecureBoot/AaeonSecureBootSetup.c
+                > AaeonCommonPkg.cif
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonDio3 - Fix DIO level/IO item will be hidden if GpioNum is 0.
+Root Cause:     Improvement
+Action:
+                * Remove related suppressif since they are useless.
+Files:
+                > AaeonDio3/AaeonDio3.sd
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         AaeonBfpi - Fix comiling error due to duplicated ASL name.
+Root Cause:     Bad coding.
+Action:
+                * Fix comiling error due to duplicated ASL name in SMF
+Files:
+                > AaeonBfpi/AaeonBfpiReportCapability/AaeonBfpiReportCapability.sdl
+                > AaeonBfpi/AaeonBfpiSmf.asl
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Improve AaeonDio3
+Root Cause:     Feature improvement
+Action:
+                * Fix compiling error when AaeonBfpi is not enabled
+                * Improve token dependency related to IT851X EC
+Files:
+                > AaeonDio3/AaeonDio3.sdl
+                > AaeonDio3/AaeonDio3ReportCapability/AaeonDio3ReportCapability.sdl
+
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Update AaeonBfpi for support BFPI V0.4 Final
+Root Cause:     Feature improvement
+Action:
+                * Update AaeonBfpi for support BFPI V0.4 Final
+                * Clean-up garbage space chars at end of line
+                * Fix HWM and SMF is not reported correctly in GlobalReportCapability.
+                * Improve token dependency related to IT851X EC
+Files:
+                > AaeonBfpi/AaeonBfpi.asl
+                > AaeonBfpi/AaeonBfpi.sdl
+                > AaeonBfpi/AaeonBfpiDxe.c
+                > AaeonBfpi/AaeonBfpiDxe.inf
+                > AaeonBfpi/AaeonBfpiHwm.asl
+                > AaeonBfpi/AaeonBfpiReportCapability/AaeonBfpiReportCapability.cif
+                > AaeonBfpi/AaeonBfpiReportCapability/AaeonBfpiReportCapability.sdl
+                > AaeonBfpi/AaeonBfpiSmf.asl
+                > AaeonBfpi/AaeonBfpiWdt.asl
+                > AaeonBfpi/OemBfpiTemplate.asl
+STS:
+                N/A
+------------------------------------------------------------------------------
+Change:         Added a Bypass option for RTC wake module
+Root Cause:     To allow OS to configure RTC wake time, and not be overwrite
+                by BIOS RTC wake module.
+Action:
+                * Added a Bypass option for RTC wake module
+Files:
+                > AaeonRtcWakePkg/AaeonRtcWakePkg.c
+                > AaeonRtcWakePkg/AaeonRtcWakePkg.sd
+                > AaeonRtcWakePkg/AaeonRtcWakePkg.uni
+STS:
+                N/A
+------------------------------------------------------------------------------
+==============================================================================
+Source Rev.:    AaeonCommon_47
+Release Date:   11/22/2019
+Description:
+                * Update module "AaeonUartMode2Pkg" for supporting source
+                chip selection
+                * Update library "AaeonGpioIdPkg" for fixing GPIO ID setup
+                item doesn't preserve value when load default
+                * Update library "AaeonDxeLib" for support F75111
+                * Fix module "F75111PeiPkg" doesn't work on Coffee Lake issue
+                * Write header comment for AaeonGpioIdPkg/AaeonUartMode2Pkg/
+                  AaeonDxeLib
+                * Write Readme.md for AaeonGpioIdPkg/AaeonUartMode2Pkg/
+                  AaeonDxeLib
+                * Update library "AaeonDxeLib" for support F75113
+==============================================================================
+------------------------------------------------------------------------------
+Change:         Update library "AaeonDxeLib" for support F75113
+Root Cause:     AaeonDio2Pkg/AaeonUartMode2Pkg/AaeonGpioIdPkg need F75113
+                library from AaeonDxeLib
+Action:
+                * Add function "F75113SetGpio"
+                * Add function "F75113GetGpio"
+                * Add string "F75113"
+                * Add TOKEN "F75113_CHIP_TYPE"
+                * Add F75113 support for module "AaeonDio2Pkg", "AaeonDio3",
+                  "AaeonUartMode2Pkg"
+Files:
+                > AaeonCommonPkg.uni
+				> AaeonCommonPkg.sdl
+				> AaeonDio2Pkg/AaeonDio2Pkg.sd
+				> AaeonDio3/AaeonDio3.sd
+				> AaeonDxeLib/AaeonDxeLib.h
+				> AaeonDxeLib/AaeonDxeLib.inf
+				> AaeonDxeLib/GPIO.c
+				> AaeonDxeLib/Readme.md
+				> AaeonUartMode2Pkg/AaeonUartMode2Pkg.sd
+				> AaeonDxeLib/F75113.c
+STS:
+                https://sts.aaeon.com.tw:12080/issues/8727
+------------------------------------------------------------------------------
+Change:         Update module "AaeonUartMode2Pkg" for supporting source
+                chip selection
+Root Cause:     The control GPIO of UART mode is different chip as UART
+                source chip
+Action:
+                * Add setup item "  UART Source"
+                * Implement "F81216SEC_CHIP_TYPE" for function
+                  "SioSetFlowControl"
+                * Add option "F81804" to setup item "  GPIO Source"
+                * Add TOKEN "ONEOF_AAEON_UART1MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART2MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART3MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART4MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART5MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART6MODE_UART_SOURCE_DEFAULT"
+Files:
+                > AaeonUartMode2Pkg/AaeonUartMode2.c
+                > AaeonUartMode2Pkg/AaeonUartMode2Pkg.sd
+                > AaeonUartMode2Pkg/AaeonUartMode2Pkg.sdl
+                > AaeonUartMode2Pkg/AaeonUartMode2Pkg.uni
+STS:
+                https://sts.aaeon.com.tw:12080/issues/8727
+------------------------------------------------------------------------------
+Change:         Update module "AaeonGpioIdPkg" for fixing GPIO ID setup
+                item doesn't preserve value when load default
+Root Cause:     GPIO ID setup items should restore value from HW GPIO ID
+                variables when load setup default
+Action:
+                * Add ELINK "$(AaeonCommonPkg_DIR)\AaeonCommonPkg.dec" to
+                  "ADDITIONAL_AMITSE_Packages"
+                * Add ELINK "AaeonDxeLib" to "ADDITIONAL_AMITSE_LibraryClasses"
+                * Add ELINK "AaeonGpioIdLoadDefaults," to "LoadSetupDefaultsHook,"
+                * Add ELINK "$(AaeonGpioIdPkg_DIR)\AaeonGpioIdLoadDefaults.c"
+                  to "TSE_SOURCE_FILES"
+                * Add function "AaeonGpioIdLoadDefaults"
+Files:
+                > AaeonCommonPkg.sdl
+                > AaeonGpioIdPkg/AaeonGpioIdLoadDefaults.c
+                > AaeonGpioIdPkg/AaeonGpioIdPkg.sdl
+STS:
+                https://sts.aaeon.com.tw:12080/issues/8727
+------------------------------------------------------------------------------
+Change:         Update library "AaeonDxeLib" for support F75111
+Root Cause:     AaeonDio2Pkg/AaeonUartMode2Pkg/AaeonGpioIdPkg need F75111
+                library from AaeonDxeLib
+Action:
+                * Add function "F75111SetGpio"
+                * Add function "F75111GetGpio"
+                * Add UefiBootServicesTableLib in [LibraryClasses]
+                * Add DebugLib in [LibraryClasses]
+                * Add gEfiSmbusHcProtocolGuid in [Protocols]
+Files:
+                > AaeonDxeLib/AaeonDxeLib.h
+                > AaeonDxeLib/AaeonDxeLib.inf
+                > AaeonDxeLib/GPIO.c
+                > AaeonDxeLib/F75111.c
+STS:
+                https://sts.aaeon.com.tw:12080/issues/8727
+------------------------------------------------------------------------------
+Change:         Fix module "F75111PeiPkg" doesn't work on Coffee Lake issue
+Root Cause:     This module need PPI "gEfiPeiSmbus2PpiGuid" to be installed
+                before F75111 initialization
+Action:
+                * Add [Ppis] gEfiPeiSmbus2PpiGuid
+                * Add [Depex] gEfiPeiSmbus2PpiGuid
+Files:
+                > F75111PeiPkg/F75111PeiPkg.inf
+STS:
+                https://sts.aaeon.com.tw:12080/issues/8727
+------------------------------------------------------------------------------
+###########################################################################
+Source Rev.:    AaeonCommon_46
+Release Date:   11/11/2019
+
+Change:
+                1. Add: Add module "AaeonUartOverride_00" which use setup
+                   item to control UART present
+File:
+                > AaeonUartOverride/AaeonUartOverride.sd
+                > AaeonCommonPkg.cif
+                > CHANGELOG.txt
+                > AaeonUartOverride/AaeonUartOverride.c
+                > AaeonUartOverride/AaeonUartOverride.cif
+                > AaeonUartOverride/AaeonUartOverride.inf
+                > AaeonUartOverride/AaeonUartOverride.sdl
+                > AaeonUartOverride/AaeonUartOverride.uni
+                > AaeonUartOverride/AaeonUartOverridePrs.c
+                > AaeonUartOverride/AaeonUartOverridePrs.inf
+                > AaeonUartOverride/AaeonUartOverride_History.txt
+###########################################################################
+Source Revision:	AaeonCommon_45
+Release Date:		08/08/2019
+
+Change:
+		1. Improve : code modification to tip BIOS engineer
+                to add prefix for special character password (# -> \#
+                , $ -> $$, % -> %%). This the limitation of makefile.
+File:
+		> AaeonCommonPkg/AaeonDefaultPwd/AaeonDefaultPwd.sdl
+		> AaeonCommonPkg/AaeonDefaultPwd/AutoGenAaeonDefaultPwd.gawk
+		> AaeonCommonPkg/AaeonDefaultPwd/AutoGenAaeonDefaultPwd.mak
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_44
+Release Date:		08/01/2019
+
+Change:
+		1. New module - AaeonBfpi
+		2. New module - AaeonDio3
+File:
+		> AaeonBfpi/AaeonBfpi.asl
+		> AaeonBfpi/AaeonBfpi.cif
+		> AaeonBfpi/AaeonBfpi.sdl
+		> AaeonBfpi/AaeonBfpiDxe.c
+		> AaeonBfpi/AaeonBfpiDxe.inf
+		> AaeonBfpi/AaeonBfpiHwm.asl
+		> AaeonBfpi/AaeonBfpiReportCapability/AaeonBfpiReportCapability.cif
+		> AaeonBfpi/AaeonBfpiReportCapability/AaeonBfpiReportCapability.sdl
+		> AaeonBfpi/AaeonBfpiSmf.asl
+		> AaeonBfpi/AaeonBfpiWdt.asl
+		> AaeonBfpi/OemBfpiTemplate.asl
+		> AaeonBfpi/Readme.md
+		> AaeonDio3/AaeonDio3.asl
+		> AaeonDio3/AaeonDio3.c
+		> AaeonDio3/AaeonDio3.cif
+		> AaeonDio3/AaeonDio3.h
+		> AaeonDio3/AaeonDio3.sd
+		> AaeonDio3/AaeonDio3.sdl
+		> AaeonDio3/AaeonDio3.uni
+		> AaeonDio3/AaeonDio3Dxe.c
+		> AaeonDio3/AaeonDio3Dxe.inf
+		> AaeonDio3/AaeonDio3ReportCapability/AaeonDio3ReportCapability.cif
+		> AaeonDio3/AaeonDio3ReportCapability/AaeonDio3ReportCapability.sdl
+		> AaeonDio3/AaeonDio3Setup.h
+		> AaeonDio3/AaeonDio3SetupCallback.c
+		> AaeonDio3/OemDioTemplate.asl
+		> AaeonDio3/Readme.md
+		> AaeonCommonPkg.cif
+		> AaeonCommonPkg.dec
+		> AaeonCommonPkg.sdl
+		> AaeonCommonPkg.uni
+		> CONTRIBUTING.md
+
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_43
+Release Date:		04/08/2019
+
+Change:
+		1. Fixed : avoid potential build error "gSetupGuid already
+		defined" in AaeonDefaultPwd.c
+File:
+		> AaeonDefaultPwd/AaeonDefaultPwd.c
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_42
+Release Date:		04/01/2019
+
+Change:
+		1. Fix variable HwBoardId/HwPanelId/HwOemId won't be created
+		when BoardId/PanelId/OemId == 0
+File:
+		> AaeonGpioIdPkg/AaeonGpioIdDxe.c
+STS:
+		http://sts.aaeon.com.tw:12080/issues/6154
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_41
+Release Date:		12/27/2018
+
+Change:
+		1. Update AaeonDxeLib/AaeonPowerMode for support F81804
+		2. Update AaeonDio2Pkg for Support 4 bit DIO function
+		3. Fix coding mistake for function "F81966SetGpio"
+		4. Add TOKEN for control DIO direction default value
+File:
+		> AaeonCommonPkg.sdl
+		> AaeonCommonPkg.uni
+		> AaeonDio2Pkg/AaeonDio2Pkg.sd
+		> AaeonDio2Pkg/AaeonDio2Pkg.sdl
+		> AaeonDio2Pkg/_AaeonDio2Pkg_History.txt
+		> AaeonDxeLib/AaeonDxeLib.h
+		> AaeonDxeLib/AaeonDxeLib.inf
+		> AaeonDxeLib/F81966.c
+		> AaeonDxeLib/GPIO.c
+		> AaeonPowerMode/AaeonPowerModeDxe.c
+		> AaeonPowerMode/AaeonPowerModeSetup.c
+		> AaeonDxeLib/F81804.c
+STS:
+		http://sts.aaeon.com.tw:12080/issues/5517
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_40
+Release Date:		11/09/2018
+
+Change:
+		1. Update AaeonUartMode2Pkg for support modifying UART mode
+		default by setup item
+File:
+		> AaeonUartMode2Pkg/AaeonUartMode2Pkg.c
+		> AaeonUartMode2Pkg/AaeonUartMode2Pkg.cif
+		> AaeonUartMode2Pkg/AaeonUartMode2Pkg.sd
+		> AaeonUartMode2Pkg/AaeonUartMode2Pkg.sdl
+		> AaeonUartMode2Pkg/AaeonUartMode2Pkg.uni
+		> AaeonUartMode2Pkg/AaeonUartMode2LoadDefaults.c
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_39
+Release Date:		2018/10/26
+
+Change:
+	1.Modify the AAEON's own key path in AaeonSetup.sdl.
+
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_38
+Release Date:		2018/10/16
+
+Change:
+	1. Add "Secure Boot" item at AaeonSecurity page.
+	2. Set Secure boot default to disable.
+	3. Replace AMI demo key with AAEON's own key.
+	4. Hide the "Launch PXE ROM" item when enable secure boot.
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_37
+Release Date:		2018/09/14
+
+Change:
+	1. AaeonDefaultPwd module : Add a mak to process default password so that BIoX can show it on Web
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_36
+Release Date:		2018/09/13
+
+Change:
+	1. Add a Goto in CRB Setup form so BCP CMD line can parse Aaeon setup, it's to support remote BIOS customization service.
+	2. Add AaeonDefaultPwd module to support default password modified by AMI BCP tool
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_35
+Release Date:		2018/04/03
+
+Change:
+		1. Change the variable name in AAEON_SETUP_DATA back to previous name, to avoid build error.
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_34
+Release Date:		2018/03/23
+
+Change:
+		1. GpioId : Enhance to reboot on DXE only when off-line flash or CMOS battery loss
+		2. GpioId : Add S/W GPIO ID
+			a. H/W GPIO ID is designed to read from actual GPIO
+			b. S/W GPIO ID is designed to be configured by S/W like AMI BCP or SCE
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_33
+Release Date:		2018/03/19
+
+Change:
+		1. Correct PTN3460 EDID table to match 1920x1200 resolution
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_32
+Release Date:		2018/03/05
+
+Change:
+		1. "AutoLoadDefault_SUPPORT" Default as Enabled
+		2. "SMBIOS_DMIEDIT_DATA_LOC" Default as "0" (SMBIOS DMIEdit data location : Boot Block)
+		3. Merge Branch "MacToUUID" , and update "CONTRIBUTING.MD"
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_31
+Release Date:		2018/01/19
+
+Change:
+		1. AaeonUefiLanPkg : Support Intel Lan only /RTL Lan only /Intel and RTL Lan at the same time.
+		2. "SETUP_BMP_LOGO_SUPPORT" : 1 (Show AMI Small Logo when Quiet Boot as Disabled)
+###########################################################################
+
+###########################################################################
+Source Revision:	AaeonCommon_30
+Release Date:		12/08/2017
+
+Change:
+		1. Fix power button still can work when BIOS set to AT mode issue.
+Files:
+		Modified > AaeonPowerMode/AaeonPowerModeDxe.c
+###########################################################################
+Source Revision:	AaeonCommon_29
+Release Date:		11/28/2017
+
+Change:
+		1. Fix that AaeonNonSioCommonDxe module is not executed always.
+Files:
+		Modified > AaeonNonSioCommonDxe.inf
+###########################################################################
+Source Revision:	AaeonCommon_28
+Release Date:		11/23/2017
+
+Change:
+		1. Fix function "F81438SetMode" in AaeonUartMode2Pkg
+		2. Support AaeonGpioIdPkg
+		3. Remove unused definition for AaeonDxeLib
+		4. Include AaeonSetup.h to AaeonDxeLib
+Files:
+		Added > AaeonGpioIdPkg/AaeonGpioIdDxe.c
+		Added > AaeonGpioIdPkg/AaeonGpioIdDxe.inf
+		Added > AaeonGpioIdPkg/AaeonGpioIdDxe.mak
+		Added > AaeonGpioIdPkg/AaeonGpioIdPkg.cif
+		Added > AaeonGpioIdPkg/AaeonGpioIdPkg.sd
+		Added > AaeonGpioIdPkg/AaeonGpioIdPkg.sdl
+		Added > AaeonGpioIdPkg/AaeonGpioIdPkg.uni
+		Added > AaeonGpioIdPkg/AaeonGpioIdPkg_History.txt
+		Added > AaeonGpioIdPkg/AaeonNonSioGpioIdDxe.inf
+		Modified > AaeonUartMode2Pkg/AaeonUartMode2.c
+		Modified > AaeonCommonPkg.cif
+		Modified > AaeonSetup/AaeonSetup.h
+		Modified > AaeonCommonPkg.cif
+		Modified > AaeonCommonPkg.dec
+		Modified > AaeonDxeLib/AaeonDxeLib.h
+		Modified > AaeonDxeLib/AaeonDxeLib.inf
+###########################################################################
+Source Revision:	AaeonCommon_27
+Release Date:		2017/11/14
+
+Change:
+		Correct AaeonCommonPkg.cif sub module parts
+
+Files:
+		Modified > AaeonCommonPkg.cif
+###########################################################################
+Source Revision:	AaeonCommon_26
+Release Date:		2017/11/10
+
+Change:
+		Add F81966 support for AaeonDio2Pkg
+
+Files:
+		Modified > AaeonDio2Pkg/AaeonDio2Pkg.sd
+###########################################################################
+Source Revision:	AaeonCommon_25
+Release Date:		2017/11/10
+
+Change:
+		SioLdnDefaultDisable : Disabled as default
+
+Files:
+		Modified > SioLdnDefaultDisable\SioLdnDefaultDisable.sdl
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_24
+Release Date:		2017/11/02
+
+Change:
+
+Root Cause:	Fixed for SioLdnDefaultDisable : Compile Error if there's no SIO supported.
+Files:
+		Modified > SioLdnDefaultDisable\SioLdnDefaultDisable.sdl
+
+###########################################################################
+Source Revision:	AaeonCommon_23
+Release Date:		2017/11/01
+
+Changes:
+	1. Fix issue STS_Debug_#243: User shouldn't boot to CRB setup by windows debug mode
+	   Verification:
+		   Pass on UP-APL01 (UPA1AM22) with WIN10 OS.
+	   Root cause:
+		   AMI _gBootFlowTable sets the first entry of setup page to CRB main page.
+
+	2. Supported SioLdnDefaultDisable package
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_22
+Release Date:		08/31/2017
+
+Changes:
+	1. PTN3460Cfg - Change to 300 ms delay after programming magic code.
+	2. PTN3460Cfg - Correct EDID version and modify Definition blocks to follow
+	                same rule as other resolutions.
+	3. Change BIOS boot logo to AAEON_2017_800x600.jpg.
+	4. Resolve compile error if SioLibraryInstances_SUPPORT token is disabled.
+
+Compiling Env:		Aptio_5.x_TOOLS_30.7
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_21
+Release Date:		07/04/2017
+
+Changes:
+	1. Add AaeonUartMode2Pkg for support UART mode configuration by
+	setup item
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_20
+Release Date:		2017/07/03
+
+Changes:
+	1. Add AaeonDio2Pkg for support DIO configuration by setup item
+
+Compiling Env:		Aptio_5.x_TOOLS_30
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_19
+Release Date:		2017/07/03
+
+Changes:
+	1. Add AaeonDxeLib for GPIO porting
+
+Compiling Env:		Aptio_5.x_TOOLS_30
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_18
+Release Date:		2017/06/27
+
+Changes:
+	1. Update module AaeonPowerMode to support F81966
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_17
+Release Date:		2017/04/24
+
+Changes:
+	1. Remove "USB_RUNTIME_DRIVER_IN_SMM" token override.
+	   (This token already defined in each AMI platform Chipset code)
+
+Compiling Env:		Aptio_5.x_TOOLS_30_7
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_16
+Release Date:		2017/01/16
+
+Changes:
+	1. Correct coding error for all "GetVariable & SetVariable" (like AaeonCommon_12)
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_15
+Release Date:		2016/12/28
+
+Action:
+	1. TOKEN - BEEP_ENABLE : TargetH / TargetMAK = Yes
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_14
+Release Date:		2016/12/20
+
+Action:
+	1. Support UEFI PXE by adding AaeonLanUefiDriver module.
+	   Refer to README.md for porting note.
+	2. PTN3460Cfg - Fixed PWM 500Hz output incorrect issue.
+    3. Ptn3460PeiPkg - Add workaround to fix PTN3460 sometimes EDID table loss issue and un-configurable issue.
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_13
+Release Date:		2016/12/06
+
+Action:
+	1. Modify AaeonMagicWord Policy. AaeonMagicWord can work functionally no matter CSM is Supported/Un-supported or Enabled/Disable.
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_12
+Release Date:		2016/11/21
+
+Action:
+	1. Correct coding error, support a parameter in AaeonCommonDxe.c when GetVariable & SetVariable
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_11
+Release Date:		2016/11/09
+
+Action:
+	1. Add IT8728 AC Power Loss Bypass mode support in AaeonPowerMode module.
+		> AaeonPowerMode\AaeonPowerModeDxe.c
+		> AaeonPowerMode\AaeonPowerModeSetup.c
+	2. Modify SignOnMessage module to correct BIOS file name for test version.
+		> AaeonCommonPkg\AaeonSetup\SignOnMessage\SignOnMessage.sdl
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_10
+Release Date:		2016/10/11
+
+Action:
+	1. Set "Chipset" as default "Action Source" of Restore On AC Power Loss function
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0Z
+Release Date:		2016/10/03
+
+Action:
+	1. Hotfix - Add SMBIOS Chasis version, default "V1.0
+	2. Fix system hang 0x99 when
+	    (1) AaeonMagicWordPkg is enabled
+	    (2) CSM_SUPPORT is disabled.
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0Y
+Release Date:		2016/08/24
+
+Action:
+	1. Fixed build error if "AmiSioDxeLib" used under AaeonCommonPkg
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0X
+Release Date:		2016/08/16
+
+Action:
+	1. Rename Setup Variable in "AaeonRtcWakePkg", and module default as Enabled.
+	2. "AaeonMagicWordPkg" default as Enabled.
+	3. "AaeonOemBeepMap" default Enabled.
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0W
+Release Date:		2016/08/12
+
+Action:
+	1. Disabling default UEFI image boot.
+	2. Enable AmiGopPolicy in Platform as default.
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0V
+Release Date:		2016/07/28
+
+Action:
+	1. Support AaeonPostBeep, before HandoffToTse
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0U
+Release Date:		2016/07/06
+
+Action:
+	General: clearup unused code
+
+	AaeonPowerMode:
+		1. Support CRB_USE_VAR_STATEAFTERG3 for CRB uses
+		   StateAfterG3 for AC power failure setting.
+		2. Keep report S5 to system to avoid system hangup
+		   (Skylake driver may reference S5 package)
+		3. Sync ErP control to F81866 and NCT6791D
+
+	PTN3460:
+		1. Add gEfiSmbusHcProtocolGuid Elink to avoid build error
+
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0T
+Release Date:		2016/03/20
+
+Action:
+	1. Correct some INFComponent Package items.
+	2. Resolved "When pressed Load Optimal Default, the BIOS Setup
+           Menu will switch to AMI CRB" issue.
+        3. Change BIOS Setup F4 Hotkey as Save & Reset.
+
+Compiling Env:		Aptio_5.x_TOOLS_27
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0S
+Release Date:		2016/03/15
+
+Action:
+	1. Resolve build error when AaeonSetup_SUPPORT token disabled.
+
+Compiling Env:		Aptio_5.x_TOOLS_27
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0R
+Release Date:		2016/03/14
+
+Action:
+	1. Add AaeonOemBeepMap module.
+
+Compiling Env:		Aptio_5.x_TOOLS_27
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0Q
+Release Date:		2016/02/05
+
+Action:
+	1. Update HiManagerUUID
+	2. (AaeonPowerMode) AT power mode also set AC power lose item to "Power On"
+
+Compiling Env:		Aptio_5.x_TOOLS_27
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0P
+Release Date:		2016/02/03
+
+Action:
+	1. Add HiManagerUUID
+
+Compiling Env:		Aptio_5.x_TOOLS_27
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0N
+Release Date:		2015/12/10
+
+Action:
+	1. Update PTN3460Cfg to PTN3460Cfg_01
+      . Check device ready before configure PTN3460
+      . Support Backlight PWM frequency control
+      . Support Backlight dynamic changed in SETUP
+
+Compiling Env:		Aptio_5.x_TOOLS_27
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0M
+Release Date:		2015/12/07
+
+Action:
+	1. Disables checkpoint display on the ConOut devices (right bottom corner)
+		"CONOUT_CHECKPOINTS_SUPPORT" = 0
+	2. "STRING_STATUS_SUPPORT", "SERIAL_DEBUG" = 0
+
+Compiling Env:		Aptio_5.x_TOOLS_27
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0L
+Release Date:		2015/12/01
+
+Action:
+	1. Support ASUS SMBIOS Type 0 BIOS version string TOKEN. (in IPCBU_BiosInfoPeiPkg)
+	2. TOKEN "SYSTEM_PRODUCT_NAME" : TargetMAK = Yes
+	3. Patched PTN3460 initialization failed on some motherboard
+
+Compiling Env:		Aptio_5.x_TOOLS_27
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0K
+Release Date:		2015/09/09
+
+Action:
+	1. Add module to support IPC BU PEIM with GUID (IPCBU_BiosInfoPeiPkg).
+
+	Important Suggestion: AAEON PlatformPkg priority should be moved to where after AaeonCommonPkg
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+			Aptio_5.x_TOOLS_26
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIoPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0J
+Release Date:		2015/09/04
+
+Action:
+	1. Fixed: pRS->GetVariable return NOT_FOUND in SMM mode. (AaeonPowerButtonSmi.c)
+	2. Fixed: Coding error. (AutoLoadDefault.c)
+
+	Important Suggestion: AAEON PlatformPkg priority should be moved to where after AaeonCommonPkg
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+			Aptio_5.x_TOOLS_26
+Features version:
+			AaeonSetup_01
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIOPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0I
+Release Date:		2015/08/26
+
+Action:
+	1. Fixed: pRS->GetVariable return NOT_FOUND in SMM mode. (AaeonSxSmi.c)
+	2. Support BIOS auto load default (AaeonCommonPkg/AutoLoadDefault/*.*)
+	3. PIRQA/B/C/D support IRQ7 (AaeonCommonPkg.sdl)
+	4. Support "AaeonDefaultOverride.sd" to override non-token setup default items
+
+	Important Suggestion: AAEON PlatformPkg priority should be moved to where after AaeonCommonPkg
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_01
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIOPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0H
+Release Date:		2015/07/29
+
+Action:
+	1. Link "PTN3460Cfg" in "AaeonCommonPkg.cif"
+	2. Remove re-definition TOKENs in "AaeonSetup.sdl"
+	3. AaeonPowerMode module support IT8728, NCT6791D
+	4. AaeonPowerMode module, Re-define setup callback function
+	5. "ONEOF_AAEONRESTOREACPOWERLOSS_DEFAULT" default as 0
+	6. Do not report _S5 when AT mode
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_01
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIOPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0G
+Release Date:		2015/07/08
+
+Action:
+	1. (PowerMode) Fixed mismatch laststate define for SB
+	2. (PowerMode) Use AaeonCommonFeaturesSyncReady to sync AC power failure
+	               items in SIO/SB
+	3. (Common) Because AaeonSetup may be disabled,
+	            COMMON_ENABLED/COMMON_DISABLED is also defined in AaeonCommonPkg.uni
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_01
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIOPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+Source Revision:	AaeonCommon_0F
+Release Date:		2015/06/24
+
+Action:
+	1. Add missing Ptn3460PeiPkg back in version 0x0E
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_01
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIOPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+Source Revision:	AaeonCommon_0E
+Release Date:		2015/06/08
+
+Action:
+	1. Integrated generic PowerMode/AC Power Loss and ERP items in AaeonPowerType
+	Note: It's a generic implementation for power related items and use TSE
+	      callback to link with real working items for chipset or SIO. Please
+		  make sure the default setting are the same with make function work
+		  correctly.
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_01
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIOPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0D
+Release Date:		2015/05/22
+
+Action:
+	1. Pass SetupData to AAEON_S3_SMI_FUNCTIONS/AAEON_S4_SMI_FUNCTIONS/
+	   AAEON_S5_SMI_FUNCTIONS/AAEON_POWER_BUTTON_SMI_FUNCTIONS callback
+	2. Add PTN3460Cfg (Disable by default)
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_01
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIOPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0C
+Release Date:		2015/04/16
+
+Action:
+	1. Include AmiCspLib.h in AaeonPowerButtonSmi.c
+	2. Link AmiCspLib in AaeonPowerButtonSmi.inf
+	3. Support "AAEON_READY_TO_BOOT_INIT_FUNCTIONS"
+	4. Support AaeonSxSmiPkg
+	5. Support AaeonRtcWakePkg
+	6. Compatibility improvement, add string definition "STR_SATA_CONFIG_FORM"
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_00
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIOPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0B
+Release Date:		2015/04/14
+
+Action:
+	1. Arrange default setup layout in AaeonAdvanced.sd
+	2. Support "ONEOF_AAEONPOWERMODE"
+	3. Support "ONEOF_AAEONRIWAKEENABLE"
+	4. Support "ONEOF_AAEONRESTOREACPOWERLOSS"
+	5. Correct "AaeonPowerButtonSmi.inf" directory in AaeonCommonPkg.cif
+	6. Add "AaeonCommonDxe.inf" directory in AaeonCommonPkg.cif
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_00
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:
+	1. AaeonIOPkg
+	2. "AmiCompatibilityPkg\Setup\Setup.cif"= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_05"
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_0A
+Release Date:		2015/04/14
+
+Action:
+	1. AaeonSetup default as Enabled, Engineer setup mode default as Enabled
+	2. Need "suppressif ideqval AAEON_SETUP_DATA.EgrMode == 0;" in features SD file
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_00
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:		AaeonIOPkg
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_09
+Release Date:		2015/04/13
+
+Action:
+	1. Support AaeonPowerButtonSmiPkg
+	2. "USB_BEEP_ENABLE" 1 -> 0
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_00
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:		AaeonIOPkg
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_08
+Release Date:		2015/04/08
+
+Action:
+			1. Fix compile error when AaeonSetup module part is disabled.
+Modified files:
+	AaeonCommonPkg\AaeonCommonPkg.sd
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_00
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:		AaeonIOPkg
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_07
+Release Date:		2015/03/26
+
+Action:
+			1. Support AaeonUartModePkg_00
+			2. Support AaeonMultiVbiosPkg_00
+			3. AaeonDioPkg_02 -> AaeonDioPkg_03
+			4. Remove "NbSmi_Support" definition from AaeonCommonPkg
+			5. Support AaeonMagicWordPkg_00
+
+			6. Support "AaeonCommonFeaturesSyncReady" flag
+			7. Do not use functions run one bit
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_00
+			AaeonDioPkg_03
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+			AaeonMagicWordPkg_00
+			AaeonUartModePkg_00
+			AaeonMultiVbiosPkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+			GenericSio, GenericSio_05a
+
+Dependency:		AaeonIOPkg
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_06
+Release Date:		2015/03/17
+
+Label:
+Action:
+			1. AaeonDioPkg_01 -> AaeonDioPkg_02
+			2. Support AaeonCommonDxe Hook
+			3. "NbSmi_Support" Default as "1"
+
+Modified files:
+	N/A
+Added modules:
+	N/A
+Removed modules:
+	N/A
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_00
+			AaeonDioPkg_02
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+
+Dependency:		AaeonIOPkg
+
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_05
+Release Date:		2015/03/14
+
+Label:
+Action:
+			1. AaeonDioPkg_00 -> AaeonDioPkg_01
+			2. F75111PeiPkg_00 -> F75111PeiPkg_01
+			3. Support Ptn3460PeiPkg_00
+
+Modified files:
+	N/A
+Added modules:
+	N/A
+Removed modules:
+	N/A
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Features version:
+			AaeonSetup_00
+			AaeonDioPkg_01
+			F75111PeiPkg_01
+			Ptn3460PeiPkg_00
+			SecDecodePkg_00
+
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+
+Dependency:		AaeonIOPkg
+
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_04
+Release Date:		2015/03/13
+
+Label:
+Action:
+			1. Support AaeonDioPkg; AaeonDio_00
+
+Modified files:
+	N/A
+Added modules:
+	N/A
+Removed modules:
+	N/A
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+
+Dependency:		AaeonIOPkg
+
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_03
+Release Date:		2015/03/11
+
+Label:
+Action:
+			1. Support AaeonSetup; AaeonSetup_00
+
+Modified files:
+	N/A
+Added modules:
+	N/A
+Removed modules:
+	N/A
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_02
+Release Date:		2015/03/10
+
+Label:
+Action:
+			1. Support F75111PeiPkg; F75111PeiPkg_00
+			2. Support SecDecodePkg; SecDecodePkg_00
+
+Modified files:
+	N/A
+Added modules:
+	N/A
+Removed modules:
+	N/A
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_01
+Release Date:		2015/03/07
+
+Label:
+
+Modified files:
+	AaeonCommonPkg/AaeonCommonPkg.sdl
+		TOKEN, "BEEP_ENABLE": "1"
+
+Added modules:
+	N/A
+Removed modules:
+	N/A
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+			AmiStatusCode, AmiStatusCode_04
+###########################################################################
+###########################################################################
+Source Revision:	AaeonCommon_00
+Release Date:		2015/02/25
+
+Label:
+
+Modified files:
+	AaeonCommonPkg/AaeonCommonPkg.sdl
+		TOEKN, "SYSTEM_MANUFACTURER": "To be filled by O.E.M." -> "AAEON"
+		TOEKN, "SYSTEM_VERSION": "To be filled by O.E.M." -> "V1.0"
+		TOEKN, "BASE_BOARD_MANUFACTURER": "To be filled by O.E.M." -> "AAEON"
+		TOEKN, "BASE_BOARD_VERSION": "To be filled by O.E.M." -> "V1.0"
+		TOEKN, "SYS_CHASSIS_MANUFACTURER_1": "To be filled by O.E.M." -> "AAEON"
+		TOEKN, "DEFAULT_QUIET_BOOT": "0" -> "1"
+		TOEKN, "SETUP_BMP_LOGO_SUPPORT": "1" -> "0"
+		TOEKN, "SETUP_JPEG_LOGO_SUPPORT": "0" -> "1"
+		TOEKN, "LOGO_FILE_NAME": "AmiTsePkg/Core/em/AMITSE/Logo.bmp" -> "AaeonCommonPkg/AAEON_800x600.jpg"
+		TOEKN, "SETUP_HIDE_BIOS_SIGNON_MESSAGE2": "0" -> "1"
+		TOEKN, "SETUP_BBS_POPUP_ENABLE": "0" -> "1"
+		TOEKN, "POPUP_MENU_SHOW_ALL_BBS_DEVICES": "0" -> "1"
+		TOEKN, "SETUP_PRINT_EVAL_MSG": "0" -> "0", Ensuring value = 0
+		TOEKN, "TSE_SUPPORT_NATIVE_RESOLUTION": "1" -> "0"
+		INFComponent, "SignOn": Not built in "SignOn\SignOn.inf"
+		FFS_FILE, "SignOn": Not built in FFS; "SignOn"
+		TOKEN, "RESERVED_PAGE_ROUTE": "" -> "0", Define TOKEN value = 0
+		TOKEN, "DEFAULT_CSM_LAUNCH_POLICY": "1" -> "1", Ensuring value = 1
+		TOKEN, "DEFAULT_PXE_OPROM_POLICY": "$(CSMSETUP_UEFI_ONLY_OPROMS)" -> "$(CSMSETUP_SKIP_OPROMS)"
+		TOKEN, "DEFAULT_MASS_STORAGE_OPROM_POLICY": "$(CSMSETUP_UEFI_ONLY_OPROMS)" -> "$(CSMSETUP_LEGACY_ONLY_OPROMS)"
+		TOKEN, "DEFAULT_VIDEO_OPROM_POLICY": "$(CSMSETUP_LEGACY_ONLY_OPROMS)" -> "$(CSMSETUP_LEGACY_ONLY_OPROMS)", Ensuring value = $(CSMSETUP_LEGACY_ONLY_OPROMS)
+		TOKEN, "DEFAULT_BOOT_OPTION_FILTERING_POLICY": "$(CSMSETUP_ENABLE_ALL_BOOT_OPTIONS)" -> "$(CSMSETUP_ENABLE_ALL_BOOT_OPTIONS)", Ensuring value = $(CSMSETUP_ENABLE_ALL_BOOT_OPTIONS)
+		TOKEN, "USB_RUNTIME_DRIVER_IN_SMM": "1" -> "1", Ensuring value = 1
+Added modules:
+	N/A
+Removed modules:
+	N/A
+------------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Relative Modules version:
+			Smbios, Smbios_04
+			Board, AmiCompatibilityPkg_19
+			TSE Binary, AmiTse_2_17_1249.1
+			Csm, Csm_7.76_06.00
+			Usb, AmiUsb_10
+###########################################################################

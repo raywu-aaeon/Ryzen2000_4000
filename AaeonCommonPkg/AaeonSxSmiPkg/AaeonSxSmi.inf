@@ -1,0 +1,33 @@
+#
+# This file contains code for South Bridge SMI initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                     = 0x00010005
+  BASE_NAME                       = AaeonSxSmi
+  FILE_GUID                       = 87FB2BE8-F1E6-448d-970A-BE4DFE7921CB
+  MODULE_TYPE                     = DXE_SMM_DRIVER
+  VERSION_STRING                  = 1.0
+  PI_SPECIFICATION_VERSION        = 0x0001000A
+  ENTRY_POINT                     = AaeonSxSmi_Init
+
+[Sources]
+  AaeonSxSmi.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+##  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  AmiDxeLib
+  AmiCspLib
+
+[Protocols]
+  gEfiSmmSxDispatch2ProtocolGuid
+
+[Depex.common.DXE_SMM_DRIVER]
+  gEfiSmmSxDispatch2ProtocolGuid
+

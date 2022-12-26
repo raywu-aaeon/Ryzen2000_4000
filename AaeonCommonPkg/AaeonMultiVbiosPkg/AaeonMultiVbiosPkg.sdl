@@ -1,0 +1,221 @@
+TOKEN
+	Name  = "AaeonMultiVbiosPkg_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+	Token = "CSM_SUPPORT" "=" "1"
+End
+PATH
+	Name  = "AaeonMultiVbiosPkg_DIR"
+End
+
+ELINK
+	Name  = "$(AaeonMultiVbiosPkg_DIR)\AaeonMultiVbiosPkg.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonMultiVbiosPkg_DIR)\AaeonMultiVbiosPkg.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	##Priority  = 255
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name  = "AAEON_MULTI_VBIOS_CONTROL_DEFAULT"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AAEON_MULTIVBIOS_0_PATH"
+	Value  = "$(LEGACY_VBIOS_PATH)"
+	TokenType = Expression
+	TargetFDF = Yes
+End
+TOKEN
+	Name  = "AAEON_MULTIVBIOS_1_PATH"
+	Value  = ""
+	TokenType = Expression
+	TargetFDF = Yes
+End
+TOKEN
+	Name  = "AAEON_MULTIVBIOS_2_PATH"
+	Value  = ""
+	TokenType = Expression
+	TargetFDF = Yes
+End
+TOKEN
+	Name  = "AAEON_MULTIVBIOS_3_PATH"
+	Value  = ""
+	TokenType = Expression
+	TargetFDF = Yes
+End
+TOKEN
+	Name  = "AAEON_MULTIVBIOS_4_PATH"
+	Value  = ""
+	TokenType = Expression
+	TargetFDF = Yes
+End
+TOKEN
+	Name  = "AAEON_MULTIVBIOS_5_PATH"
+	Value  = ""
+	TokenType = Expression
+	TargetFDF = Yes
+End
+TOKEN
+	Name  = "AAEON_MULTIVBIOS_6_PATH"
+	Value  = ""
+	TokenType = Expression
+	TargetFDF = Yes
+End
+TOKEN
+	Name  = "AAEON_MULTIVBIOS_7_PATH"
+	Value  = ""
+	TokenType = Expression
+	TargetFDF = Yes
+End
+
+PCIDEVICE
+	Title  = "AaeonMultiVbiosPkg Container 0"
+	Parent  = "PciRoot"
+	Attribute  = "0x0"
+	Dev_type  = "Container"
+	Dev  = 02h
+	Fun  = 00h
+	ROMFile  = "$(AAEON_MULTIVBIOS_0_PATH)"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	OptionROM = Yes
+	ROMMain = No
+	Virtual = Yes
+	LegacyRom = Yes
+	FFSFileName  = "ROM Storage"
+	ROMSectionGuid  = "1443A01D-8F1E-4B2C-A3A0-0DF6114D4600"
+End
+##PCIDEVICE
+##	Title  = "AaeonMultiVbiosPkg Container 1"
+##	Parent  = "PciRoot"
+##	Attribute  = "0x0"
+##	Dev_type  = "Container"
+##	Dev  = 02h
+##	Fun  = 00h
+##	ROMFile  = "$(AAEON_MULTIVBIOS_1_PATH)"
+##	DeviceType = OnBoard
+##	PCIBusSize = 32bit
+##	OptionROM = Yes
+##	ROMMain = No
+##	Virtual = Yes
+##	LegacyRom = Yes
+##	FFSFileName  = "ROM Storage"
+##	ROMSectionGuid  = "1443A01D-8F1E-4B2C-A3A0-0DF6114D4601"
+##End
+##PCIDEVICE
+##	Title  = "AaeonMultiVbiosPkg Container 2"
+##	Parent  = "PciRoot"
+##	Attribute  = "0x0"
+##	Dev_type  = "Container"
+##	Dev  = 02h
+##	Fun  = 00h
+##	ROMFile  = "$(AAEON_MULTIVBIOS_2_PATH)"
+##	DeviceType = OnBoard
+##	PCIBusSize = 32bit
+##	OptionROM = Yes
+##	ROMMain = No
+##	Virtual = Yes
+##	LegacyRom = Yes
+##	FFSFileName  = "ROM Storage"
+##	ROMSectionGuid  = "1443A01D-8F1E-4B2C-A3A0-0DF6114D4602"
+##End
+##PCIDEVICE
+##	Title  = "AaeonMultiVbiosPkg Container 3"
+##	Parent  = "PciRoot"
+##	Attribute  = "0x0"
+##	Dev_type  = "Container"
+##	Dev  = 02h
+##	Fun  = 00h
+##	ROMFile  = "$(AAEON_MULTIVBIOS_3_PATH)"
+##	DeviceType = OnBoard
+##	PCIBusSize = 32bit
+##	OptionROM = Yes
+##	ROMMain = No
+##	Virtual = Yes
+##	LegacyRom = Yes
+##	FFSFileName  = "ROM Storage"
+##	ROMSectionGuid  = "1443A01D-8F1E-4B2C-A3A0-0DF6114D4603"
+##End
+##PCIDEVICE
+##	Title  = "AaeonMultiVbiosPkg Container 4"
+##	Parent  = "PciRoot"
+##	Attribute  = "0x0"
+##	Dev_type  = "Container"
+##	Dev  = 02h
+##	Fun  = 00h
+##	ROMFile  = "$(AAEON_MULTIVBIOS_4_PATH)"
+##	DeviceType = OnBoard
+##	PCIBusSize = 32bit
+##	OptionROM = Yes
+##	ROMMain = No
+##	Virtual = Yes
+##	LegacyRom = Yes
+##	FFSFileName  = "ROM Storage"
+##	ROMSectionGuid  = "1443A01D-8F1E-4B2C-A3A0-0DF6114D4604"
+##End
+##PCIDEVICE
+##	Title  = "AaeonMultiVbiosPkg Container 5"
+##	Parent  = "PciRoot"
+##	Attribute  = "0x0"
+##	Dev_type  = "Container"
+##	Dev  = 02h
+##	Fun  = 00h
+##	ROMFile  = "$(AAEON_MULTIVBIOS_5_PATH)"
+##	DeviceType = OnBoard
+##	PCIBusSize = 32bit
+##	OptionROM = Yes
+##	ROMMain = No
+##	Virtual = Yes
+##	LegacyRom = Yes
+##	FFSFileName  = "ROM Storage"
+##	ROMSectionGuid  = "1443A01D-8F1E-4B2C-A3A0-0DF6114D4605"
+##End
+##PCIDEVICE
+##	Title  = "AaeonMultiVbiosPkg Container 6"
+##	Parent  = "PciRoot"
+##	Attribute  = "0x0"
+##	Dev_type  = "Container"
+##	Dev  = 02h
+##	Fun  = 00h
+##	ROMFile  = "$(AAEON_MULTIVBIOS_6_PATH)"
+##	DeviceType = OnBoard
+##	PCIBusSize = 32bit
+##	OptionROM = Yes
+##	ROMMain = No
+##	Virtual = Yes
+##	LegacyRom = Yes
+##	FFSFileName  = "ROM Storage"
+##	ROMSectionGuid  = "1443A01D-8F1E-4B2C-A3A0-0DF6114D4606"
+##End
+##PCIDEVICE
+##	Title  = "AaeonMultiVbiosPkg Container 7"
+##	Parent  = "PciRoot"
+##	Attribute  = "0x0"
+##	Dev_type  = "Container"
+##	Dev  = 02h
+##	Fun  = 00h
+##	ROMFile  = "$(AAEON_MULTIVBIOS_7_PATH)"
+##	DeviceType = OnBoard
+##	PCIBusSize = 32bit
+##	OptionROM = Yes
+##	ROMMain = No
+##	Virtual = Yes
+##	LegacyRom = Yes
+##	FFSFileName  = "ROM Storage"
+##	ROMSectionGuid  = "1443A01D-8F1E-4B2C-A3A0-0DF6114D4607"
+##End
+
+

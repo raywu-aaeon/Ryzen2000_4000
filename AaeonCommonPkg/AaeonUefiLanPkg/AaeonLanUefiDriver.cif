@@ -1,0 +1,13 @@
+<component>
+	name = "AaeonLanUefiDriver"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\AaeonUefiLanPkg\"
+	RefName = "AaeonCommonPkg.AaeonLanUefiDriver"
+[files]
+"AaeonLanUefiDriver.sdl"	
+"AaeonLanFdfFileStatement.txt"
+"AaeonIntelLanFdfFileStatement.txt"
+"AaeonRTLLanFdfFileStatement.txt"
+"IntelGigabitLan.efi"	
+"RtkUndiDxe.efi"
+<endComponent>

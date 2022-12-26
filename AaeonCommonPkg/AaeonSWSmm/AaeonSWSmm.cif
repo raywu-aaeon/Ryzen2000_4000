@@ -1,0 +1,11 @@
+<component>
+	name = "AaeonSWSmm"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\AaeonSWSmm\"
+	RefName = "AaeonCommonPkg.AaeonSWSmm"
+[INF]
+"AaeonSWSmm.inf"
+[files]
+"AaeonSWSmm.sdl"
+"AaeonSWSmm.c"	
+<endComponent>

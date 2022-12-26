@@ -1,0 +1,11 @@
+<component>
+	name = "Hi-Manager UUID"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\HiManagerUUID\"
+	RefName = "AaeonCommonPkg.HiManagerUUID"
+[INF]
+"HiManagerUUID.inf"
+[files]
+"HiManagerUUID.sdl"	
+"History.txt"	
+<endComponent>

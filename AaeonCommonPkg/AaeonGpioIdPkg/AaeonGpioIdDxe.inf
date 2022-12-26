@@ -1,0 +1,42 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonGpioIdDxe
+  FILE_GUID                      = 201841f8-d432-4b68-a51c-ecf8796c0b4b
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AaeonGpioIdDxeInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  AaeonGpioIdDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec 
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AaeonCommonPkg/AaeonCommonPkg.dec
+  
+[Protocols]
+  gEfiAmiSioProtocolGuid
+  gEfiSmbusHcProtocolGuid
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  AmiSioDxeLib
+  AmiDxeLib
+  AmiCspLib
+  AaeonDxeLib
+  MemoryAllocationLib
+  
+[Depex]
+  gEfiSmbusHcProtocolGuid

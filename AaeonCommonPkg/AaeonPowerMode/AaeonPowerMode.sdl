@@ -1,0 +1,128 @@
+TOKEN
+	Name  = "AAEONPOWERMODE_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+	Help  = "Main switch to enable support in Project"
+End
+
+PATH
+	Name  = "AaeonPowerMode_DIR"
+End
+
+TOKEN
+	Name = "ONEOF_AAEONPOWERMODE_DEFAULT"
+	Value = "0"
+	Help = "0: ATX Type\1: AT Type"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "ONEOF_AAEONRESTOREACPOWERLOSS_DEFAULT"
+	Value = "0"
+	Help = "0: Last State\1: Always On\2: Always Off"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "ONEOF_AAEONRESTOREACPOWERLOSSSRC_DEFAULT"
+	Value = "0"
+	Help = "0: Chipset\1: EC/Super IO"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "CRB_USE_VAR_STATEAFTERG3"
+	Value = "0"
+	Help = "1: CRB code provide StateAfterG3\0: CRB provide LastState"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "STATEAFTERG3_MAP"
+	Value = "{2, 1, 0}"
+	Help = "{LastState, Always-on, Always-off}"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "STATEAFTERG3_MAP"
+	Value = "{2, 0, 1}"
+	Help = "{LastState, Always-on, Always-off}"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "CRB_USE_VAR_STATEAFTERG3" "=" "1"
+End
+
+ELINK
+	Name  = "AaeonPowerModeDxeInit,"
+	Parent  = "AaeonCommonDxeReset,"
+	InvokeOrder = BeforeParent
+End
+
+ELINK
+	Name  = "AaeonPowerModeCfg, "
+	Parent  = "AAEON_READY_TO_BOOT_INIT_FUNCTIONS"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "AaeonPowerMode"
+	File  = "AaeonPowerModeSmm.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+ELINK
+	Name  = "$(AaeonPowerMode_DIR)\AaeonPowerMode.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	Priority  = 10
+	InvokeOrder = AfterParent
+End
+
+
+ELINK
+	Name  = "$(AaeonPowerMode_DIR)\AaeonPowerMode.uni"
+	Parent  = "SetupStringFiles"
+	Priority  = 10
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AaeonPowerMode_DIR)\AaeonPowerModeDxe.c"
+    Parent  = "AMI_CSP_DXE_SOURCES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AaeonPowerMode_DIR)\AaeonPowerModeSetup.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AAEON_ERPMODE_KEY,AaeonErpCallback),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AAEON_ACLOSE_KEY,AaeonAcLossCallback),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS,0,AAEON_ACLOSESRC_KEY,AaeonAcLossCallback),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+

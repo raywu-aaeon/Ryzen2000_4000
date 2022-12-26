@@ -1,0 +1,33 @@
+#
+# This file contains code for South Bridge SMI initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                     = 0x00010005
+  BASE_NAME                       = AaeonPowerButtonSmi
+  FILE_GUID                       = 1C132679-BB95-479c-8A82-6DE72A52D6FD
+  MODULE_TYPE                     = DXE_SMM_DRIVER
+  VERSION_STRING                  = 1.0
+  PI_SPECIFICATION_VERSION        = 0x0001000A
+  ENTRY_POINT                     = AaeonPowerButtonSmi_Init
+
+[Sources]
+  AaeonPowerButtonSmi.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+##  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  AmiDxeLib
+  AmiCspLib
+
+[Protocols]
+  gEfiSmmPowerButtonDispatch2ProtocolGuid
+
+[Depex.common.DXE_SMM_DRIVER]
+  gEfiSmmPowerButtonDispatch2ProtocolGuid
+

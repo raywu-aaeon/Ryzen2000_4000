@@ -1,0 +1,24 @@
+<component>
+	name = "AaeonSetup"
+	category = eModule
+	Rank = 60
+	LocalRoot = "AaeonCommonPkg\AaeonSetup\"
+	RefName = "AaeonCommonPkg.AaeonSetup"
+[files]
+"AaeonSetup.sdl"	
+"AaeonMain.sd"	
+"AaeonAdvanced.sd"	
+"AaeonSB.sd"	
+"AaeonNB.sd"	
+"AaeonChipset.sd"	
+"AaeonSecurity.sd"	
+"AaeonBoot.sd"	
+"AaeonExit.sd"	
+"AaeonSetup.uni"	
+"AaeonSetup.h"	
+"AaeonSetup.c"	
+"AaeonDefaultOverride.sd"	
+[parts]
+"AaeonCommonPkg.AaeonSetup.LibraryInstances"
+"AaeonCommonPkg.AaeonSetup.SignOnMessage"
+<endComponent>

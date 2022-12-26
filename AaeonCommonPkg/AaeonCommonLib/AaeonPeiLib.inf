@@ -1,0 +1,46 @@
+## @file
+#  AaeonPeiLib library implementation
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonPeiLib
+  FILE_GUID                      = dd9813b3-eadc-45b6-ab7c-1f6a456344f7
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AaeonPeiLib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  GPIO.c
+  F81866.c
+  F81966.c
+  IT8728.c
+  IT8625.c
+  F81804.c
+  #F75111.c  ## gSmBus2Ppi porting required. Maybe refer to PTN3460OemHook.c
+  #F75113.c  ## gSmBus2Ppi porting required. Maybe refer to PTN3460OemHook.c
+  IT8518.c
+  AaeonCommonLib.h
+  WatchDog.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AaeonCommonPkg/AaeonCommonPkg.dec
+
+
+[LibraryClasses]
+  IoLib
+  PeiServicesTablePointerLib
+
+[Guids]
+
+
+[Ppis]
+

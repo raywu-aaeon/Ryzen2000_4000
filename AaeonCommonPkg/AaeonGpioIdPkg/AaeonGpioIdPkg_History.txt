@@ -1,0 +1,62 @@
+###########################################################################
+				AaeonGpioIdPkg
+###########################################################################
+---------------------------------------------------------------------------
+Change:         Fixing GPIO ID setup item doesn't preserve value when load 
+                default
+Root Cause:     GPIO ID setup items should restore value from HW GPIO ID 
+                variables when load setup default
+Action:
+                * Add ELINK "$(AaeonCommonPkg_DIR)\AaeonCommonPkg.dec" to
+                  "ADDITIONAL_AMITSE_Packages"
+                * Add ELINK "AaeonDxeLib" to "ADDITIONAL_AMITSE_LibraryClasses"
+                * Add ELINK "AaeonGpioIdLoadDefaults," to "LoadSetupDefaultsHook,"
+                * Add ELINK "$(AaeonGpioIdPkg_DIR)\AaeonGpioIdLoadDefaults.c" 
+                  to "TSE_SOURCE_FILES"
+                * Add function "AaeonGpioIdLoadDefaults"
+Files:
+                > AaeonCommonPkg.sdl
+                > AaeonGpioIdPkg/AaeonGpioIdLoadDefaults.c
+                > AaeonGpioIdPkg/AaeonGpioIdPkg.sdl
+STS:
+                https://sts.aaeon.com.tw:12080/issues/8727
+---------------------------------------------------------------------------
+Description:	1. Fix variable HwBoardId/HwPanelId/HwOemId won't be created 
+				when BoardId/PanelId/OemId == 0
+
+Root Cause:		1. Function "AaeonGpioIdDxeInit" only SetVariable when GPIO ID
+				was changed. 
+				2. Variable HwBoardId/HwPanelId/HwOemId will fill 
+				zero pool at first GetVariable
+				3. When BoardId/PanelId/OemId == 0 it looks the same as 
+				wBoardId/HwPanelId/HwOemId with zero pool. That cause 
+				function "AaeonGpioIdDxeInit" doesn't execute SetVariable. 
+
+Date:			04/01/2019
+---------------------------------------------------------------------------
+Description:	1. Change the variable name in AAEON_SETUP_DATA back to previous
+		name, to avoid build error.
+
+Date:			04/03/2018
+---------------------------------------------------------------------------
+Description:	1. Enhance to reboot on DXE only when off-line flash or CMOS battery loss
+		2. Add S/W GPIO ID
+			a. H/W GPIO ID is designed to read from actual GPIO
+			b. S/W GPIO ID is designed to be configured by S/W like AMI BCP or SCE
+
+Date:			03/22/2018
+---------------------------------------------------------------------------
+Description:	1. Modify setup variable definition to AAEON_SETUP_DATA
+		2. Modify AaeonBoardID to BoardId
+		3. Modify AaeonPanelID to PanelId
+		4. Modify AaeonOemID to OemId
+		5. Modify GpioID to GpioId
+		6. Fix Attribute for GetVariable and SetVariable
+		7. Support Non SIO project
+
+Date:			11/22/2017
+---------------------------------------------------------------------------
+Description:	Add AaeonGpioIdPkg
+
+Date:			10/26/2016
+---------------------------------------------------------------------------

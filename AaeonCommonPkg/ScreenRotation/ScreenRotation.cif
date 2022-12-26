@@ -1,0 +1,18 @@
+<component>
+    name = "ScreenRotation"
+    category = eModule
+    LocalRoot = "AaeonCommonPkg\ScreenRotation\"
+    RefName = "AaeonCommonPkg.ScreenRotation"
+[INF]
+"ScreenRotation.inf"
+[files]
+"ScreenRotation.chm"	
+"ScreenRotation.sdl"	
+"ScreenRotation.sd"	
+"ScreenRotation.uni"	
+"ScreenRotationTse.c"	
+[parts]
+"AaeonCommonPkg.AbsolutePointerRotation"
+[dependency]
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;5.004_AmiTse_2_16_1242"
+<endComponent>

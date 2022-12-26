@@ -1,0 +1,164 @@
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+#endif
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+#endif //ENDIF CONTROL_DEFINITION
+
+//----------------------------------------------------------------------------
+//                MAIN - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef MAIN_FORM_SET
+	#ifdef FORM_SET_TYPEDEF
+	#endif
+  
+	#ifdef FORM_SET_VARSTORE
+        #ifdef SETUP_DATA_DEFINITION
+        #endif
+	#endif
+
+	#ifdef FORM_SET_FORM
+	form formid = AUTO_ID(AAEON_MAIN_MAIN), // MAIN
+		title = STRING_TOKEN(STR_AAEON_MAIN);
+
+		SUBTITLE(STRING_TOKEN(STR_BIOS))
+		SUBTITLE(STRING_TOKEN(STR_BIOS_SIGNON_MESSAGE))
+		SEPARATOR
+
+		INVENTORY(STRING_TOKEN(STR_BIOS_VENDOR_NAME),STRING_TOKEN(STR_BIOS_VENDOR_VALUE))
+		INVENTORY(STRING_TOKEN(STR_BIOS_COMPLIANCY_NAME),STRING_TOKEN(STR_BIOS_COMPLIANCY_VALUE))
+		SEPARATOR
+        
+		#undef FORM_SET_FORM
+		
+		#define AAEON_FORM_SET_ITEM
+		#include <SetupDefinitions.h>
+		#undef AAEON_FORM_SET_ITEM
+		#define AAEON_FORM_SET_GOTO
+		#include <SetupDefinitions.h>
+		#undef AAEON_FORM_SET_GOTO
+		
+		#define FORM_SET_FORM 
+
+		date 
+		    year varid  = Date.Year,
+		        prompt  = STRING_TOKEN(STR_DATE),
+		        help    = STRING_TOKEN(STR_DATE_HELP),
+		        minimum = 2005,
+		        maximum = 2099,
+		        step    = 1,
+		        default = 2005,
+		    month varid = Date.Month,
+		        prompt  = STRING_TOKEN(STR_DATE),
+		        help    = STRING_TOKEN(STR_DATE_HELP),
+		        minimum = 1,
+		        maximum = 12,
+		        step    = 1,
+		        default = 1,
+		    day varid   = Date.Day,
+		        prompt  = STRING_TOKEN(STR_DATE),
+		        help    = STRING_TOKEN(STR_DATE_HELP),
+		        minimum = 1,
+		        maximum = 31,
+		        step    = 1,
+		        default = 1,
+		enddate;
+		time
+		    hour varid  = Time.Hours,
+		        prompt  = STRING_TOKEN(STR_TIME),
+		        help    = STRING_TOKEN(STR_TIME_HELP),
+		        minimum = 0,
+		        maximum = 23,
+		        step    = 1, default = 0,
+		    minute varid = Time.Minutes,
+		        prompt  = STRING_TOKEN(STR_TIME),
+		        help    = STRING_TOKEN(STR_TIME_HELP),
+		        minimum = 0,
+		        maximum = 59,
+		        step    = 1,
+		        default = 0,
+		    second varid = Time.Seconds,
+		        prompt  = STRING_TOKEN(STR_TIME),
+		        help    = STRING_TOKEN(STR_TIME_HELP),
+		        minimum = 0,
+		        maximum = 59,
+		        step    = 1,
+		        default = 0,
+		endtime;
+		SEPARATOR
+
+		suppressif  ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_ADMIN;
+		    text 
+		        help   = STRING_TOKEN(STR_EMPTY),
+		        text   = STRING_TOKEN(STR_ACCESS_LEVEL),
+		        text   = STRING_TOKEN(STR_ACCESS_USER),
+		        flags  = 0,
+		        key    = 0;
+		endif;
+		suppressif  ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_USER;
+		    text 
+		        help   = STRING_TOKEN(STR_EMPTY),
+		        text   = STRING_TOKEN(STR_ACCESS_LEVEL),
+		        text   = STRING_TOKEN(STR_ACCESS_ADMIN),
+		        flags  = 0,
+		        key    = 0;
+		endif;
+		suppressif ideqval AAEON_SETUP_DATA.EgrMode == 0;
+			goto AAEON_CRB_SETUP_ID, 
+		        prompt  = STRING_TOKEN(STR_CRB_SETUP_PROMPT),
+		        help    = STRING_TOKEN(STR_CRB_SETUP_HELP);
+		endif;
+        endform;
+
+        form formid = AUTO_ID(AAEON_CRB_SETUP_ID), // CRB Setup pages
+		title = STRING_TOKEN(STR_CRB_SETUP_PROMPT);
+		goto MAIN_MAIN, 
+		    prompt = STRING_TOKEN(STR_MAIN),
+		    help = STRING_TOKEN(STR_EMPTY);
+		
+		goto ADVANCED_MAIN, 
+		    prompt = STRING_TOKEN(STR_ADVANCED),
+		    help = STRING_TOKEN(STR_EMPTY);
+		
+		goto CHIPSET_MAIN, 
+		    prompt = STRING_TOKEN(STR_CHIPSET),
+		    help = STRING_TOKEN(STR_EMPTY);
+		
+		goto SECURITY_MAIN, 
+		    prompt = STRING_TOKEN(STR_SECURITY),
+		    help = STRING_TOKEN(STR_EMPTY);
+		
+		goto BOOT_MAIN, 
+		    prompt = STRING_TOKEN(STR_BOOT),
+		    help = STRING_TOKEN(STR_EMPTY);
+
+		goto EXIT_MAIN, 
+		    prompt = STRING_TOKEN(STR_EXIT),
+		    help = STRING_TOKEN(STR_EMPTY);
+        endform;
+    #endif //FORM_SET_FORM
+#endif  // MAIN_FORM_SET
+
+//**********************************************************************
+//  Add a Goto in CRB Setup form so BCP CMD line can parse Aaeon setup
+//**********************************************************************
+#ifdef TOP_LEVEL_FORM_SET
+    #ifdef FORM_SET_GOTO
+		suppressif TRUE;
+	        goto AAEON_MAIN_MAIN, 
+	        prompt = STRING_TOKEN(STR_AAEON_MAIN),
+	        help = STRING_TOKEN(STR_EMPTY);
+		endif;
+    #endif //FORM_SET_GOTO    
+#endif // TOP_LEVEL_FORM_SET

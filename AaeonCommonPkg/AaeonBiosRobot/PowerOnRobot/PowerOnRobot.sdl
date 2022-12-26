@@ -1,0 +1,67 @@
+TOKEN
+	Name  = "AAEON_POWER_ON_ROBOT_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AaeonPCICheckPkg support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+    Name  = "AAEON_POWER_ON_ROBOT_DIR"
+End
+
+ELINK
+        Name = "$(AAEON_POWER_ON_ROBOT_DIR)/PowerOnRobot.sd"
+        Parent = "SETUP_DEFINITIONS"
+        InvokeOrder = AfterParent
+End
+
+ELINK
+        Name  = "$(AAEON_POWER_ON_ROBOT_DIR)/PowerOnRobot.uni"
+        Parent  = "SetupStringFiles"
+        InvokeOrder = AfterParent
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AaeonBiosRobotPkg.PowerOnRobotDxeResetLib"
+    Override  = "AmiModulePkg.Bds"
+End
+
+INFComponent
+    Name     = "PowerOnRobotDxeResetLib"
+    File     = "PowerOnRobotDxeResetLib.inf"
+    Package  = "AaeonBiosRobotPkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+ELINK
+    Name  = "PowerOnRobotDxeReset,"
+    Parent  = "/* Full System Initialization */"
+    InvokeOrder = BeforeParent
+End
+
+INFComponent
+    Name  = "PowerOnRobotDxe"
+    File  = "PowerOnRobotDxe.inf"
+    Package  = "$(AAEONBIOSROBOT_DIR)"
+    ModuleTypes  = "DXE_DRIVER"  
+End
+
+INFComponent
+    Name  = "PowerOnRobotPei"
+    File  = "PowerOnRobotPei.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+End
+
+FFS_FILE
+    Name  = "PowerOnRobotPei"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiModulePkg.PowerOnRobotPei"
+    Index  = '"AFTER" "PlatformInitPreMem"'
+End
+

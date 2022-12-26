@@ -1,0 +1,83 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+UINT8 AaeonSetDefaultAdminPwd;
+UINT8 AaeonSetDefaultUserPwd;
+UINT8 AaeonSetDefaultPWDFirstBoot;
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------
+//------------------------------------------------------------
+#define ONEOF_AAEON_SET_DEFAULT_ADMIN_PWD \
+    oneof varid    = SETUP_DATA.AaeonSetDefaultAdminPwd, \
+      prompt       = STRING_TOKEN (STR_AAEON_SET_DEFAULT_ADMIN_PWD), \
+      help         = STRING_TOKEN (STR_AAEON_SET_DEFAULT_ADMIN_PWD_HELP), \
+      option text  = STRING_TOKEN (STR_AAEON_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; \
+      option text  = STRING_TOKEN (STR_AAEON_ENABLED_STRING), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING; \
+    endoneof;
+    
+#define ONEOF_AAEON_SET_DEFAULT_USER_PWD \
+    oneof varid    = SETUP_DATA.AaeonSetDefaultUserPwd, \
+      prompt       = STRING_TOKEN (STR_AAEON_SET_DEFAULT_USER_PWD), \
+      help         = STRING_TOKEN (STR_AAEON_SET_DEFAULT_USER_PWD_HELP), \
+      option text  = STRING_TOKEN (STR_AAEON_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; \
+      option text  = STRING_TOKEN (STR_AAEON_ENABLED_STRING), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING; \
+    endoneof;
+    
+#define ONEOF_AAEON_SET_DEFAULT_PWD_FIRST_BOOT \
+    oneof varid    = SETUP_DATA.AaeonSetDefaultPWDFirstBoot, \
+      prompt       = STRING_TOKEN (STR_AAEON_SET_DEFAULT_PWD_AT_FIRST_BOOT), \
+      help         = STRING_TOKEN (STR_AAEON_SET_DEFAULT_PWD_AT_FIRST_BOOT_HELP), \
+      option text  = STRING_TOKEN (STR_AAEON_DISABLED_STRING), value = 0, flags = RESET_REQUIRED  | DEFAULT | MANUFACTURING; \
+      option text  = STRING_TOKEN (STR_AAEON_ENABLED_STRING), value = 1, flags = RESET_REQUIRED; \
+    endoneof;
+    
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+//------------------------------------------------------------
+ONEOF_AAEON_SET_DEFAULT_ADMIN_PWD
+ONEOF_AAEON_SET_DEFAULT_USER_PWD
+ONEOF_AAEON_SET_DEFAULT_PWD_FIRST_BOOT
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+// Define Macro
+//------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//                SECURITY - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef SECURITY_FORM_SET
+
+    #ifdef AAEON_FORM_SET_ITEM
+
+        suppressif TRUE;    
+            ONEOF_AAEON_SET_DEFAULT_ADMIN_PWD
+            SUBTITLE(STRING_TOKEN(STR_AAEON_DEFAULT_ADMIN_PWD))
+            SUBTITLE(STRING_TOKEN(STR_AAEON_DEFAULT_ADMIN_PWD_VALUE))
+            
+            ONEOF_AAEON_SET_DEFAULT_USER_PWD
+            SUBTITLE(STRING_TOKEN(STR_AAEON_DEFAULT_USER_PWD))
+            SUBTITLE(STRING_TOKEN(STR_AAEON_DEFAULT_USER_PWD_VALUE))
+            
+            //ONEOF_AAEON_SET_DEFAULT_PWD_FIRST_BOOT
+        endif;        
+    #endif
+#endif  // SECURITY_FORM_SET

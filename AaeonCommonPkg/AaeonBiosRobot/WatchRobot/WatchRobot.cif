@@ -1,0 +1,18 @@
+<component>
+	name = "WatchRobot"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonBiosRobotPkg\WatchRobot\"
+	RefName = "AaeonCommonPkg.AaeonBiosRobot.WatchRobot"
+[INF]
+"WatchRobotPei.inf"
+"WatchRobotDxeLib.inf"
+"WatchRobotACPILib.inf"
+
+[files]
+"WatchRobot.sdl"
+"WatchRobot.sd"
+"WatchRobot.uni"
+
+[parts]
+
+<endComponent>

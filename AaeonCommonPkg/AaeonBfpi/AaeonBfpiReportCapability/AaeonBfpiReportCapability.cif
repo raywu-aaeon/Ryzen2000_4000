@@ -1,0 +1,9 @@
+<component>
+	name = "AaeonBfpiReportCapability"
+	category = ModulePart
+	Rank = 60
+	LocalRoot = "AaeonCommonPkg\AaeonBfpi\AaeonBfpiReportCapability\"
+	RefName = "AaeonCommonPkg.AaeonBfpi.AaeonBfpiReportCapability"
+[files]
+"AaeonBfpiReportCapability.sdl"
+<endComponent>

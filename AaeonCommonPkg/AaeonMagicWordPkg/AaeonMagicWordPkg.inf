@@ -1,0 +1,26 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonMagicWordPkg
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AaeonMagicWordPkg
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  
+[LibraryClasses]
+  UefiLib
+  UefiBootServicesTableLib
+  AmiCspLib
+    
+[Protocols]
+  gEfiLegacyBiosExtProtocolGuid
+  gEfiLegacyRegion2ProtocolGuid
+    
+[Sources]
+  AaeonMagicWordPkg.c

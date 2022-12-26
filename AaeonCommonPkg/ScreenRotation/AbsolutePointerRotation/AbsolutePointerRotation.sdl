@@ -1,0 +1,20 @@
+TOKEN
+    Name  = "ABSOLUTE_POINTER_ROTATION_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable screen rotation support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+End
+
+#PATH
+    #Name  = "AbsolutePointerRotation_DIR"
+    #Help  = "AbsolutePointerRotation files source directory"
+#End
+
+INFComponent
+    Name  = "AbsolutePointerRotation"
+    File  = "AbsolutePointerRotation.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End

@@ -1,0 +1,18 @@
+###########################################################################
+Source Revision:	Ptn3460Pei_00
+Release Date:		2015/03/14
+
+Label:			
+Action:
+			1. First release - New architecture
+
+Modified files:
+	N/A	
+Added modules:
+	N/A
+Removed modules:
+	N/A
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+
+###########################################################################

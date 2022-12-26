@@ -1,0 +1,38 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonDioDxe
+  FILE_GUID                      = 04DD1EE1-4C38-41C7-83C6-4ED6BB692CFd
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AaeonDio3DxeEntry
+
+[Sources.common]
+  AaeonDio3Dxe.c
+
+[Packages]
+  Build/ChipsetReference.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec 
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AaeonCommonPkg/AaeonCommonPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  AslUpdateLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  AmiDxeLib
+  AmiCspLib
+  AaeonDxeLib
+
+[Protocols]
+  gEfiGlobalNvsAreaProtocolGuid                 ## CONSUMES
+
+[Depex]
+  gEfiAcpiTableProtocolGuid           AND
+  gEfiFirmwareVolume2ProtocolGuid     AND
+  gEfiAcpiSupportGuid

@@ -1,0 +1,22 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonSetupLib
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AaeonSetupLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  
+[LibraryClasses]
+    UefiLib
+    UefiRuntimeServicesTableLib
+    AmiCspLib
+    
+[Protocols]
+      
+[Sources]
+  AaeonSetupLib.c

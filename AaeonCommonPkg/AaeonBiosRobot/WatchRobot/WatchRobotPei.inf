@@ -1,0 +1,49 @@
+[Defines]
+INF_VERSION                    = 0x00010005
+BASE_NAME                      = WatchRobotPei
+FILE_GUID                      = f235025b-85a0-4ad8-839e-a7fedfd0cde3
+MODULE_TYPE                    = PEIM
+VERSION_STRING                 = 1.0
+ENTRY_POINT                    = WatchRobotPeiEntryPoint
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#
+
+
+[Sources]
+WatchRobotPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  
+  IntelFrameworkPkg/IntelFrameworkPkg.dec       # Optional. should use Mde Library instead.
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec   # Optional. should use Mde Library instead.
+  AaeonCommonPkg/AaeonBiosRobot/AaeonBiosRobot.dec
+  AaeonCommonPkg/AaeonCommonPkg.dec
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib #EIP137196
+  BaseLib #EIP137196
+  PciLib
+  AmiPeiLib # Optional. should use Mde Library instead.
+  AmiCspLib # Optional. should use Mde Library instead.
+  AaeonPeiLib
+  AaeonBiosRobotLib
+  
+[Ppis]
+
+    gEfiPeiReadOnlyVariable2PpiGuid
+  gEfiPeiStallPpiGuid 
+
+[Pcd]
+
+
+[Depex]
+  gEfiPeiReadOnlyVariable2PpiGuid
+

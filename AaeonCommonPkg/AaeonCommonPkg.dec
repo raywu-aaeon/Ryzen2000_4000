@@ -1,0 +1,36 @@
+################################################################################
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+################################################################################
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AaeonCommonPkg
+  PACKAGE_GUID                   = BD6C7DFC-A7B1-4e97-BA6F-463BD0457E2D
+  PACKAGE_VERSION                = 0.1
+
+################################################################################
+#
+# Include Section - list of Include Paths that are provided by this package.
+#                   Comments are used for Keywords and Module Types.
+#
+# Supported Module Types: 
+#  SEC PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_SAL_DRIVER UEFI_DRIVER
+#
+################################################################################
+[Includes]
+	AaeonCommonLib
+	AaeonSetup
+	
+[LibraryClasses]
+
+[Protocols]
+  gEfiGlobalNvsAreaProtocolGuid={0x74e1e48, 0x8132, 0x47a1,{0x8c, 0x2c, 0x3f, 0x14, 0xad, 0x9a, 0x66, 0xdc}}
+
+[Ppis]
+
+[Guids]
+
+[PcdsFixedAtBuild]
+  

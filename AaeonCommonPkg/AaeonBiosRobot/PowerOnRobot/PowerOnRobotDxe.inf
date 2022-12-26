@@ -1,0 +1,51 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PowerOnRobotDxe
+  FILE_GUID                      = 3ae7dcc4-d073-41ee-8d9b-85c38bc7878d
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PowerOnRobotDxeInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  PowerOnRobotDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+
+  IntelFrameworkPkg/IntelFrameworkPkg.dec       # Optional. should use Mde Library instead.
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec   # Optional. should use Mde Library instead.
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+
+  ##PciLib # Default DXE_DRIVER PciLib should depend on gEfiPciRootBridgeIoProtocolGuid.
+
+  DEFINE MDE = $(WORKSPACE)/MdePkg/Library
+  PciLib|$(MDE)/BasePciLibPciExpress/BasePciLibPciExpress.inf # Optional use PciExpress base instead.
+  S3PciLib
+
+  AmiDxeLib # Optional. should use Mde Library instead.
+  AmiCspLib # Optional. should use Mde Library instead.
+
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gEfiS3SaveStateProtocolGuid
+
+  gEfiBootScriptSaveGuid # Optional. should use Mde Library instead.
+  
+[Depex]
+  TRUE

@@ -1,0 +1,43 @@
+---------------------------------------------------------------------------
+		Hi-Manager Module for AMI Aptio
+---------------------------------------------------------------------------
+
+---------------------------------------------------------------------------
+		Porting Notice
+---------------------------------------------------------------------------
+Below define cause UUID define value is incorrect.
+ 
+1. TOKEN UUID_SYSTEM_PRODUCT_NAME
+2. OnBoard Lan define. eg. LAN_BUS, LAN_DEV, LAN_FUN 
+
+---------------------------------------------------------------------------
+Revision:	0.4
+Date:		2020/09/30
+---------------------------------------------------------------------------
+Decription:
+    1. Enable PCH LAN IO Memory Space before get MAC address
+
+---------------------------------------------------------------------------
+Revision:	0.3
+Date:		2020/04/21
+---------------------------------------------------------------------------
+Decription:
+    1. Use DWORD access for MMIO to avoid unexpected behavior
+	
+---------------------------------------------------------------------------
+Revision:	0.2
+Date:		2016/02/04
+---------------------------------------------------------------------------
+Decription:
+    1. Use DWORD access for MMIO to avoid unexpected behavior
+
+---------------------------------------------------------------------------
+Revision:	0.1
+Date:		2014/09/25
+---------------------------------------------------------------------------
+Decription:
+    1. Porting to Aptio V style
+    2. Use REF_LAN_X token to define the location of referenced NIC.
+    3. OemSetup hook is too late for displaying UUID in SETUP, changing 
+	   to use BdsAllDriversConnected event for creating UUID.
+

@@ -1,0 +1,33 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MacToUUID
+  FILE_GUID                      = 583CF04B-42E3-4638-AA22-02E4D3330A61
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MacToUUIDEntryPoint
+
+[Sources]
+  MacToUUID.c
+  MacToUUID.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec  
+  
+[LibraryClasses]
+  AmiDxeLib
+  AmiCspLib
+  PciLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+
+[Protocols]
+  gEfiSmbiosProtocolGuid
+  gAmiSmbiosProtocolGuid
+  gAmiSmbiosBoardProtocolGuid
+    
+#[Guids]
+[Depex]
+  TRUE

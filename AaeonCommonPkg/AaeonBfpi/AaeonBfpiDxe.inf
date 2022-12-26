@@ -1,0 +1,38 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonBfpiDxe
+  FILE_GUID                      = 12C293C3-3745-4726-8FA2-2A9EF18679AD
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AaeonBfpiDxeEntry
+
+[Sources.common]
+  AaeonBfpiDxe.c
+
+[Packages]
+  Build/ChipsetReference.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec
+  AaeonCommonPkg/AaeonCommonPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  AslUpdateLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  AmiDxeLib
+  AmiCspLib
+  AaeonDxeLib
+
+[Protocols]
+  gEfiGlobalNvsAreaProtocolGuid                 ## CONSUMES
+
+[Depex]
+  gEfiAcpiTableProtocolGuid           AND
+  gEfiFirmwareVolume2ProtocolGuid     AND
+  gEfiAcpiSupportGuid

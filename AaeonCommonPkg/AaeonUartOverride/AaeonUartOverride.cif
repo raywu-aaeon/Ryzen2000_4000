@@ -1,0 +1,15 @@
+<component>
+	name = "AaeonUartOverride"
+	category = eModule
+	LocalRoot = "AaeonCommonPkg/AaeonUartOverride/"
+	RefName = "AaeonCommonPkg.AaeonUartOverride"
+[INF]
+"AaeonUartOverride.inf"
+"AaeonUartOverridePrs.inf"
+
+[files]
+"AaeonUartOverride.sdl"
+"AaeonUartOverride.sd"
+"AaeonUartOverride.uni"
+"AaeonUartOverride_History.txt"
+<endComponent>

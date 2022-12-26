@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------
+		Aaeon Updtae SMBIOS for AMI Aptio V
+---------------------------------------------------------------------------
+Validated H/W
+Platform : Intel 100 Series (Skylake DT)
+Project : IMBM-Q170A
+
+---------------------------------------------------------------------------
+		Porting Notice
+---------------------------------------------------------------------------
+Modify below token to enable this feature.
+ 
+1. TOKEN "AAEON_OEM_BEEP_MAP_SUPPORT"
+
+
+---------------------------------------------------------------------------
+Revision:	V0.1
+Date:		2016/03/14
+---------------------------------------------------------------------------
+Decription:
+    1. Add PEI_MEMORY_NOT_DETECTED and PEI_MEMORY_NONE_USEFUL error beep support.
+    2. Remove DXE_NO_CON_OUT and DXE_NO_CON_IN error beep support.
+
+---------------------------------------------------------------------------
+Revision:	V0.0
+Date:		2016/03/03
+---------------------------------------------------------------------------
+Decription:
+    1. First Version.
+

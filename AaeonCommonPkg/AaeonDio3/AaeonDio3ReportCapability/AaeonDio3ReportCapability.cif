@@ -1,0 +1,9 @@
+<component>
+	name = "AaeonDio3ReportCapability"
+	category = ModulePart
+	Rank = 60
+	LocalRoot = "AaeonCommonPkg\AaeonDio3\AaeonDio3ReportCapability\"
+	RefName = "AaeonCommonPkg.AaeonDio3.AaeonDio3ReportCapability"
+[files]
+"AaeonDio3ReportCapability.sdl"	
+<endComponent>

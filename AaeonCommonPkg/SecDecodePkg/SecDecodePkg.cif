@@ -1,0 +1,15 @@
+<component>
+	name = "SecDecodePkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\SecDecodePkg\"
+	RefName = "AaeonCommonPkg.SecDecodePkg"
+[INF]
+"SecDecodePkg.inf"
+
+[files]
+"SecDecodePkg.sdl"
+"SecDecodePkg.asm"
+
+[parts]
+
+<endComponent>

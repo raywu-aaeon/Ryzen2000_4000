@@ -1,0 +1,31 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonCommonDxe
+  FILE_GUID                      = 6F7E88AD-C634-498a-84AF-CAEC526A3A51
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AaeonCommonDxeInit
+
+
+[Sources]
+  AaeonCommonDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  AmiDxeLib # Optional. should use Mde Library instead.
+  AmiCspLib # Optional. should use Mde Library instead.
+  AmiSioDxeLib
+  AaeonDxeLib
+
+[Protocols]
+  
+[Depex]
+  gAmiBoardSioInitProtocolGuid AND
+  gEfiAmiSioProtocolGuid

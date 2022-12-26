@@ -1,0 +1,100 @@
+TOKEN
+	Name  = "AAEON_LAN_UEFI_DRIVER_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	Master = Yes
+	Help  = "Main switch to enable OemLanUefiDriver support in Project"
+End
+
+TOKEN
+	Name  = "Lan_Option"
+	Value  = "2"
+	Help  = "\0-IntelGigabitLan,\1-RealtekLan \2- Support Intel and RealTekLan"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+FFS_FILE
+	Name  = "AaeonGigabitLan"
+	FD_AREA  = "FV_MAIN"
+	FILE_Stmt  = "AaeonCommonPkg\AaeonUefiLanPkg\AaeonLanFdfFileStatement.txt"
+	Disable = Yes
+End
+
+#Intel Lan FFS only
+FFS_FILE
+   Name  = "AaeonGigabitLan_Intel"
+   FD_AREA  = "FV_MAIN"
+   FILE_Stmt  = "AaeonCommonPkg\AaeonUefiLanPkg\AaeonIntelLanFdfFileStatement.txt"
+   Token = "Lan_Option" "=" "0"
+End
+
+#Realtek Lan FFS only
+FFS_FILE
+   Name  = "AaeonGigabitLan_Realtek"
+   FD_AREA  = "FV_MAIN"
+   FILE_Stmt  = "AaeonCommonPkg\AaeonUefiLanPkg\AaeonRTLLanFdfFileStatement.txt"
+   Token = "Lan_Option" "=" "1"
+End
+
+#Support Intel Lan FFS and Realtek Lan Both
+FFS_FILE
+   Name  = "AaeonGigabitLan_Intel"
+   FD_AREA  = "FV_MAIN"
+   FILE_Stmt  = "AaeonCommonPkg\AaeonUefiLanPkg\AaeonIntelLanFdfFileStatement.txt"
+   Token = "Lan_Option" "=" "2"
+End
+
+FFS_FILE
+   Name  = "AaeonGigabitLan_Realtek"
+   FD_AREA  = "FV_MAIN"
+   FILE_Stmt  = "AaeonCommonPkg\AaeonUefiLanPkg\AaeonRTLLanFdfFileStatement.txt"
+   Token = "Lan_Option" "=" "2"
+End
+
+#Intel Lan only
+TOKEN
+	Name  = "AAEON_GBE_EFI_FILE_PATH_INTEL"
+	Value  = "AaeonCommonPkg\AaeonUefiLanPkg\IntelGigabitLan.efi"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetFDF = Yes
+	Help  = "GBE X64 EFI File name and path for INTEL Lan"
+	Token = "Lan_Option" "=" "0"
+End
+
+#Realtek Lan only
+TOKEN
+	Name  = "AAEON_GBE_EFI_FILE_PATH_RTL"
+	Value  = "AaeonCommonPkg\AaeonUefiLanPkg\RtkUndiDxe.efi"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetFDF = Yes
+	Help  = "GBE X64 EFI File name and path for Realtek Lan"
+	Token = "Lan_Option" "=" "1"
+End
+
+#Support Intel Lan and Realtek Lan Both
+TOKEN
+    Name  = "AAEON_GBE_EFI_FILE_PATH_INTEL"
+    Value  = "AaeonCommonPkg\AaeonUefiLanPkg\IntelGigabitLan.efi"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetFDF = Yes
+    Help  = "GBE X64 EFI File name and path for INTEL Lan"
+    Token = "Lan_Option" "=" "2"
+End
+
+TOKEN
+    Name  = "AAEON_GBE_EFI_FILE_PATH_RTL"
+    Value  = "AaeonCommonPkg\AaeonUefiLanPkg\RtkUndiDxe.efi"
+    TokenType = Expression
+    TargetMAK = Yes
+    TargetFDF = Yes
+    Help  = "GBE X64 EFI File name and path for Realtek Lan"
+    Token = "Lan_Option" "=" "2"
+End
+
+
+

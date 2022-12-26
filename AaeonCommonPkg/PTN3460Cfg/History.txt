@@ -1,0 +1,46 @@
+
+
+
+
+
+###########################################################################
+Source Revision:	PTN3460Cfg_04
+Release Date:		2020/09/24
+Changes:
+1. Suppprt PWM pass through mode.
+Note:
+Module default setting changed.
+1. 'PTN3460_SLAVE_ADDRESS1' form '0x60' to '0x20'
+2. 'PTN3460_SLAVE_ADDRESS2' form '0x20' to '0x60'
+3. Primary 'PTN3460' default as 'Pass Through' mode. (DEFAULT_PTN3460_MODE)
+###########################################################################
+Source Revision:	PTN3460Cfg_04
+Release Date:		2020/09/30
+
+Action:
+1. Add setup item "Panel Mode"
+###########################################################################
+Source Revision:	PTN3460Cfg_03
+Release Date:		2020/04/21
+
+Action:
+1. Suppressif related option if PTN3460 is disabled.
+2. Fix compiler error with new code base. (5.13_1AUOK_RC7.0.70.20_057 after)
+###########################################################################
+Source Revision:	PTN3460Cfg_02
+Release Date:		2015/12/10
+
+Action:
+  1. Add ready check in GetChipCfgTable( ), timeout = 200ms
+  2. Enable clock for 2 channel. Table[0x81], Bit0/1 = 0b11
+  3. Support PWM frequency for 100Hz/200Hz/220Hz/500Hz/1KHz/2KHz/6.5KHz         
+  4. Backlight changes dynamically when item changed.
+  5. Rewrite DXE phase to use SMBUS protocol instead of using smbuslib
+   
+
+###########################################################################
+Source Revision:	PTN3460Cfg_01
+Release Date:		2015/09/09
+
+Initial version
+###########################################################################

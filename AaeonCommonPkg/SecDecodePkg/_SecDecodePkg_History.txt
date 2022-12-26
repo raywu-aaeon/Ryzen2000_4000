@@ -1,0 +1,17 @@
+###########################################################################
+Source Revision:	SecDecodePkg_00
+Release Date:		2015/03/10
+
+Label:			
+Action:
+			1. Suport SkylakeDT
+
+Added modules:
+
+Removed modules:
+
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+Verified Platform:	IMBM-Q170A (MQH0AM00)
+
+###########################################################################

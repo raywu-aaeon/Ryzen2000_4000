@@ -1,0 +1,44 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PowerOnRobotDxeResetLib
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NULL
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  PowerOnRobotDxeResetLib.c
+ 
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec   # Optional. should use Mde Library instead.
+  AaeonCommonPkg/AaeonBiosRobot/AaeonBiosRobot.dec
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+
+  ##PciLib # Default DXE_DRIVER PciLib should depend on gEfiPciRootBridgeIoProtocolGuid.
+
+  AmiDxeLib # Optional. should use Mde Library instead.
+  AmiCspLib # Optional. should use Mde Library instead.
+  AaeonBiosRobotLib
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gEfiS3SaveStateProtocolGuid
+
+  gEfiBootScriptSaveGuid # Optional. should use Mde Library instead.
+  
+[Depex]
+  TRUE

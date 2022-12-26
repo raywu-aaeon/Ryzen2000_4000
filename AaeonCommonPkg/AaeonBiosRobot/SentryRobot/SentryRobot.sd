@@ -1,0 +1,701 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+
+    UINT8   SentryRobotType[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryDioNum[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryInCondition[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryAddCondition[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryBitOffset[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryBitValue[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryDioLevel[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryRevert[SENTRY_ROBOT_NUMBER];
+
+    UINT8   SentryAction;
+    UINT8   SentryRetryCount;
+    UINT8   SentryHoldTime;
+    UINT8   SentryResetType;
+    UINT8   SentryBootCount;
+    UINT8   SentryActionTime;
+
+    UINT32  SentryMmioAddress[SENTRY_ROBOT_NUMBER];
+    UINT16  SentryIoAddress[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryIoLdn[SENTRY_ROBOT_NUMBER];
+    UINT8   SentrySmbusSlave[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryRegOffset[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryByteValue[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryCheckBus[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryCheckDev[SENTRY_ROBOT_NUMBER];
+    UINT8   SentryCheckFun[SENTRY_ROBOT_NUMBER];
+
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------
+#define SENTRY1 0
+#define SENTRY2 1
+#define SENTRY3 2
+#define SENTRY4 3
+#define SENTRY5 4
+
+#if defined (AaeonDio3_SUPPORT) && AaeonDio3_SUPPORT
+#define SENTRY_ROBOT(NUM) \
+    oneof varid     = SETUP_DATA.SentryRobotType[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_ROBOT_TYPE), \
+        help    = STRING_TOKEN(STR_SENTRY_ROBOT_TYPE_HELP), \
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_PCI), value = 1, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_DIO), value = 2, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_SMBUS), value = 3, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_LEGACY_IO), value = 4, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_SUPER_IO), value = 5, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_MMIO), value = 6, flags = RESET_REQUIRED; \
+    endoneof;
+#else
+#define SENTRY_ROBOT(NUM) \
+    oneof varid     = SETUP_DATA.SentryRobotType[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_ROBOT_TYPE), \
+        help    = STRING_TOKEN(STR_SENTRY_ROBOT_TYPE_HELP), \
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_PCI), value = 1, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_SMBUS), value = 3, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_LEGACY_IO), value = 4, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_SUPER_IO), value = 5, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_WATCH_MMIO), value = 6, flags = RESET_REQUIRED; \
+    endoneof;
+#endif
+
+#define SENTRY_DIO_LEVEL(NUM)\
+    oneof varid     = SETUP_DATA.SentryDioLevel[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_DIO_LEVEL), \
+        help    = STRING_TOKEN(STR_SENTRY_DIO_LEVEL_HELP), \
+        option text = STRING_TOKEN(STR_LOW), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_HIGH), value = 1, flags = RESET_REQUIRED; \
+    endoneof;
+
+#define SENTRY_CHECK_BUS(NUM)\
+    numeric varid    = SETUP_DATA.SentryCheckBus[NUM],\
+        prompt   = STRING_TOKEN(STR_SENTRY_CHECK_BUS),\
+        help     = STRING_TOKEN(STR_SENTRY_CHECK_BUS_HELP),\
+        flags        = 0 | DISPLAY_UINT_HEX | RESET_REQUIRED,\
+        key      = 0,\
+        minimum  = 0,\
+        maximum  = 0xff,\
+        default     = 0,\
+    endnumeric;
+
+#define SENTRY_CHECK_DEV(NUM) \
+    numeric varid    = SETUP_DATA.SentryCheckDev[NUM],\
+        prompt   = STRING_TOKEN(STR_SENTRY_CHECK_DEV),\
+        help     = STRING_TOKEN(STR_SENTRY_CHECK_DEV_HELP),\
+        flags        = 0 | DISPLAY_UINT_HEX | RESET_REQUIRED,\
+        key      = 0,\
+        minimum  = 0,\
+        maximum  = 0xff,\
+        default     = 0,\
+    endnumeric;
+
+#define SENTRY_CHECK_FUN(NUM) \
+    numeric varid    = SETUP_DATA.SentryCheckFun[NUM],\
+        prompt   = STRING_TOKEN(STR_SENTRY_CHECK_FUN),\
+        help     = STRING_TOKEN(STR_SENTRY_CHECK_FUN_HELP),\
+        flags        = 0 | DISPLAY_UINT_HEX | RESET_REQUIRED,\
+        key      = 0,\
+        minimum  = 0,\
+        maximum  = 0xff,\
+        default     = 0,\
+    endnumeric;
+
+#define SENTRY_REG_OFFSET(NUM) \
+    numeric varid    = SETUP_DATA.SentryRegOffset[NUM],\
+        prompt   = STRING_TOKEN(STR_SENTRY_REG_OFFSET),\
+        help     = STRING_TOKEN(STR_SENTRY_REG_OFFSET_HELP),\
+        flags        = 0 | DISPLAY_UINT_HEX | RESET_REQUIRED,\
+        key      = 0,\
+        minimum  = 0,\
+        maximum  = 0xff,\
+        default     = 0,\
+    endnumeric;
+
+#define SENTRY_BYTE_VALUE(NUM) \
+    numeric varid    = SETUP_DATA.SentryByteValue[NUM],\
+        prompt   = STRING_TOKEN(STR_SENTRY_BYTE_VALUE),\
+        help     = STRING_TOKEN(STR_SENTRY_BYTE_VALUE_HELP),\
+        flags        = 0 | DISPLAY_UINT_HEX | RESET_REQUIRED,\
+        key      = 0,\
+        minimum  = 0,\
+        maximum  = 0xff,\
+        default     = 0,\
+    endnumeric;
+
+#if defined (AaeonDio3_SUPPORT) && AaeonDio3_SUPPORT
+#if FIRST_DIO_NUMBER == 1
+#define SENTRY_DIO_NUM(NUM) \
+    oneof varid     = SETUP_DATA.SentryDioNum[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_DIO_NUM), \
+        help    = STRING_TOKEN(STR_SENTRY_DIO_NUM_HELP), \
+        option text = STRING_TOKEN(STR_DIO0_PROMPT), value = DIO_0_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+    endoneof;
+#endif
+#if FIRST_DIO_NUMBER == 2
+#define SENTRY_DIO_NUM(NUM) \
+    oneof varid     = SETUP_DATA.SentryDioNum[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_DIO_NUM), \
+        help    = STRING_TOKEN(STR_SENTRY_DIO_NUM_HELP), \
+        option text = STRING_TOKEN(STR_DIO0_PROMPT), value = DIO_0_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO1_PROMPT), value = DIO_1_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+    endoneof;
+#endif
+#if FIRST_DIO_NUMBER == 3
+#define SENTRY_DIO_NUM(NUM) \
+    oneof varid     = SETUP_DATA.SentryDioNum[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_DIO_NUM), \
+        help    = STRING_TOKEN(STR_SENTRY_DIO_NUM_HELP), \
+        option text = STRING_TOKEN(STR_DIO0_PROMPT), value = DIO_0_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO1_PROMPT), value = DIO_1_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO2_PROMPT), value = DIO_2_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+    endoneof;
+#endif
+#if FIRST_DIO_NUMBER == 4
+#define SENTRY_DIO_NUM(NUM) \
+    oneof varid     = SETUP_DATA.SentryDioNum[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_DIO_NUM), \
+        help    = STRING_TOKEN(STR_SENTRY_DIO_NUM_HELP), \
+        option text = STRING_TOKEN(STR_DIO0_PROMPT), value = DIO_0_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO1_PROMPT), value = DIO_1_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO2_PROMPT), value = DIO_2_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO3_PROMPT), value = DIO_3_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+    endoneof;
+#endif
+#if FIRST_DIO_NUMBER == 5
+#define SENTRY_DIO_NUM(NUM) \
+    oneof varid     = SETUP_DATA.SentryDioNum[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_DIO_NUM), \
+        help    = STRING_TOKEN(STR_SENTRY_DIO_NUM_HELP), \
+        option text = STRING_TOKEN(STR_DIO0_PROMPT), value = DIO_0_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO1_PROMPT), value = DIO_1_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO2_PROMPT), value = DIO_2_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO3_PROMPT), value = DIO_3_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO4_PROMPT), value = DIO_4_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+    endoneof;
+#endif
+#if FIRST_DIO_NUMBER == 6
+#define SENTRY_DIO_NUM(NUM) \
+    oneof varid     = SETUP_DATA.SentryDioNum[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_DIO_NUM), \
+        help    = STRING_TOKEN(STR_SENTRY_DIO_NUM_HELP), \
+        option text = STRING_TOKEN(STR_DIO0_PROMPT), value = DIO_0_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO1_PROMPT), value = DIO_1_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO2_PROMPT), value = DIO_2_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO3_PROMPT), value = DIO_3_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO4_PROMPT), value = DIO_4_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO5_PROMPT), value = DIO_5_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+    endoneof;
+#endif
+#if FIRST_DIO_NUMBER == 7
+#define SENTRY_DIO_NUM(NUM) \
+    oneof varid     = SETUP_DATA.SentryDioNum[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_DIO_NUM), \
+        help    = STRING_TOKEN(STR_SENTRY_DIO_NUM_HELP), \
+        option text = STRING_TOKEN(STR_DIO0_PROMPT), value = DIO_0_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO1_PROMPT), value = DIO_1_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO2_PROMPT), value = DIO_2_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO3_PROMPT), value = DIO_3_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO4_PROMPT), value = DIO_4_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO5_PROMPT), value = DIO_5_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO6_PROMPT), value = DIO_6_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+    endoneof;
+#endif
+#if FIRST_DIO_NUMBER == 8 || FIRST_DIO_NUMBER > 8
+#define SENTRY_DIO_NUM(NUM) \
+    oneof varid     = SETUP_DATA.SentryDioNum[NUM], \
+        prompt  = STRING_TOKEN(STR_SENTRY_DIO_NUM), \
+        help    = STRING_TOKEN(STR_SENTRY_DIO_NUM_HELP), \
+        option text = STRING_TOKEN(STR_DIO0_PROMPT), value = DIO_0_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO1_PROMPT), value = DIO_1_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO2_PROMPT), value = DIO_2_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO3_PROMPT), value = DIO_3_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO4_PROMPT), value = DIO_4_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO5_PROMPT), value = DIO_5_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO6_PROMPT), value = DIO_6_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_DIO7_PROMPT), value = DIO_7_GPIO_DEFAULT, flags = RESET_REQUIRED; \
+    endoneof;
+#endif
+#endif
+#define SENTRY_SLAVE_ADDR(NUM) \
+    numeric varid    = SETUP_DATA.SentrySmbusSlave[NUM], \
+        prompt   = STRING_TOKEN(STR_SENTRY_SLAVE_ADDR),\
+        help     = STRING_TOKEN(STR_SENTRY_SLAVE_ADDR_HELP),\
+        flags        = 0 | DISPLAY_UINT_HEX | RESET_REQUIRED,\
+        key      = 0,\
+        minimum  = 0,\
+        maximum  = 0xff,\
+        default  = 0,\
+    endnumeric;
+
+#define SENTRY_IO_ADDR(NUM) \
+    numeric varid    = SETUP_DATA.SentryIoAddress[NUM],\
+        prompt   = STRING_TOKEN(STR_SENTRY_IO_ADDR),\
+        help     = STRING_TOKEN(STR_SENTRY_IO_ADDR_HELP),\
+        flags        = 0 | DISPLAY_UINT_HEX | RESET_REQUIRED,\
+        key      = 0,\
+        minimum  = 0,\
+        maximum  = 0xffff,\
+        default  = 0,\
+    endnumeric;
+
+#define SENTRY_IO_LDN(NUM) \
+    numeric varid = SETUP_DATA.SentryIoLdn[NUM],\
+          prompt      = STRING_TOKEN (STR_SENTRY_IO_LDN),\
+          help        = STRING_TOKEN (STR_SENTRY_IO_LDN_HELP),\
+        flags        = 0 | DISPLAY_UINT_HEX | RESET_REQUIRED,\
+        key      = 0,\
+        minimum  = 0,\
+        maximum  = 0xff,\
+        default  = 0,\
+    endnumeric;
+
+#define SENTRY_MMIO_ADDR(NUM) \
+    numeric varid    = SETUP_DATA.SentryMmioAddress[NUM],\
+        prompt   = STRING_TOKEN(STR_SENTRY_MMIO_ADDR),\
+        help     = STRING_TOKEN(STR_SENTRY_MMIO_ADDR_HELP),\
+        flags        = 0 | DISPLAY_UINT_HEX | RESET_REQUIRED,\
+        key      = 0,\
+        minimum  = 0,\
+        maximum  = 0xffffffff,\
+        default  = 0,\
+    endnumeric;
+
+#define SENTRY_REVERT_ACTION(NUM)\
+    oneof varid     = SETUP_DATA.SentryRevert[NUM],\
+        prompt  = STRING_TOKEN(STR_SENTRY_REVERT_ACTION),\
+        help    = STRING_TOKEN(STR_SENTRY_REVERT_ACTION_HELP),\
+        option text = STRING_TOKEN(STR_IS), value = 0, flags = RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_IS_NOT), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+    endoneof;
+
+#define SENTRY_IN_CONDITION(NUM)\
+    oneof varid     = SETUP_DATA.SentryInCondition[NUM],\
+        prompt  = STRING_TOKEN(STR_SENTRY_IN_CONDITION),\
+        help    = STRING_TOKEN(STR_SENTRY_IN_CONDITION_HELP),\
+        option text = STRING_TOKEN(STR_PRESENT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_ACCORDING_TO_REG), value = 1, flags = RESET_REQUIRED;\
+    endoneof;
+
+#define SENTRY_ADDITIONAL_CONDITION(NUM)\
+    oneof varid     = SETUP_DATA.SentryAddCondition[NUM],\
+        prompt  = STRING_TOKEN(STR_SENTRY_ADD_CONDITUON),\
+        help    = STRING_TOKEN(STR_SENTRY_ADD_CONDITUON_HELP),\
+        option text = STRING_TOKEN(STR_BIT_EQUAL), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_BYTE_EQUAL), value = 1, flags = RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_LESSER_EQUAL), value = 2, flags = RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_LARGER_EQUAL), value = 3, flags = RESET_REQUIRED;\
+    endoneof;
+
+#define SENTRY_BIT_OFFSET(NUM)\
+    numeric varid = SETUP_DATA.SentryBitOffset[NUM],\
+        prompt      = STRING_TOKEN (STR_SENTRY_BIT_OFFSET),\
+        help        = STRING_TOKEN (STR_SENTRY_BIT_OFFSET_HELP),\
+        minimum     = 0,\
+        maximum     = 7,\
+        step        = 0,\
+        default     = 0,\
+    endnumeric;
+
+#define SENTRY_BIT_VALUE(NUM)\
+    oneof varid     = SETUP_DATA.SentryBitValue[NUM],\
+        prompt  = STRING_TOKEN(STR_SENTRY_BIT_VALUE),\
+        help    = STRING_TOKEN(STR_SENTRY_BIT_VALUE_HELP),\
+        option text = STRING_TOKEN(STR_LOW), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_HIGH), value = 1, flags = RESET_REQUIRED;\
+    endoneof;
+
+#define SENTRY_ACTION\
+    oneof varid     = SETUP_DATA.SentryAction,\
+        prompt  = STRING_TOKEN(STR_SENTRY_ACTION),\
+        help    = STRING_TOKEN(STR_SENTRY_ACTION_HELP),\
+        option text = STRING_TOKEN(STR_RESET_SYS), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_HOLD_SYS), value = 1, flags = RESET_REQUIRED;\
+    endoneof;
+
+#define SENTRY_RESET_TYPE\
+    oneof varid     = SETUP_DATA.SentryResetType,\
+        prompt  = STRING_TOKEN(STR_SENTRY_RESET_TYPE),\
+        help    = STRING_TOKEN(STR_SENTRY_RESET_TYPE_HELP),\
+        option text = STRING_TOKEN(STR_RESET_SOFT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_RESET_HARD), value = 1, flags = RESET_REQUIRED;\
+    endoneof;
+
+
+#define SENTRY_RETRY_COUNT\
+    numeric varid = SETUP_DATA.SentryRetryCount,\
+        prompt      = STRING_TOKEN (STR_SENTRY_RETRY_COUNT),\
+        help        = STRING_TOKEN (STR_SENTRY_RETRY_COUNT_HELP),\
+        minimum     = 0,\
+        maximum     = 255,\
+        step        = 0,\
+        default     = 3,\
+    endnumeric;
+
+#define SENTRY_HOLD_TIME\
+    numeric varid = SETUP_DATA.SentryHoldTime,\
+        prompt      = STRING_TOKEN (STR_SENTRY_HOLD_TIME),\
+        help        = STRING_TOKEN (STR_SENTRY_HOLD_TIME_HELP),\
+        minimum     = 0,\
+        maximum     = 255,\
+        step        = 0,\
+        default     = 10,\
+    endnumeric;
+
+
+#define SENTRY_ACTION_TIME\
+    oneof varid     = SETUP_DATA.SentryActionTime, \
+        prompt  = STRING_TOKEN(STR_SENTRY_ACTION_TIME), \
+        help    = STRING_TOKEN(STR_SENTRY_ACTION_TIME_HELP), \
+        option text = STRING_TOKEN(STR_AFTER_LOGO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; \
+        option text = STRING_TOKEN(STR_BEFORE_LOGO), value = 1, flags = RESET_REQUIRED; \
+    endoneof;
+
+//Sentry robot Form (in refer to terminal.sd)
+#if defined (AaeonDio3_SUPPORT) && AaeonDio3_SUPPORT
+#define SENTRY_ROBOT_SUB_PAGE(TITLE_STR_TOKEN, SUBTITLE_STR_TOKEN, FORM_ID, ROBOT_NUM) \
+    form formid = FORM_ID, \
+        title = TITLE_STR_TOKEN; \
+        SUBTITLE_STR_TOKEN \
+\
+        SEPARATOR \
+        SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_STR1)) \
+\
+        SENTRY_ROBOT(ROBOT_NUM) \
+\
+        suppressif ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 0; \
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 1; \
+                SENTRY_CHECK_BUS(ROBOT_NUM) \
+                SENTRY_CHECK_DEV(ROBOT_NUM) \
+                SENTRY_CHECK_FUN(ROBOT_NUM) \
+            endif; \
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 2; \
+                SENTRY_DIO_NUM(ROBOT_NUM) \
+            endif; \
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 3; \
+                SENTRY_SLAVE_ADDR(ROBOT_NUM) \
+            endif; \
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 4; \
+                SENTRY_IO_ADDR(ROBOT_NUM) \
+            endif; \
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 5; \
+                SENTRY_IO_LDN(ROBOT_NUM) \
+            endif; \
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 6; \
+            SENTRY_MMIO_ADDR(ROBOT_NUM) \
+            endif; \
+\
+            SEPARATOR \
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_STR2)) \
+\
+            SENTRY_REVERT_ACTION(ROBOT_NUM) \
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 2; \
+            SENTRY_DIO_LEVEL(ROBOT_NUM) \
+            endif; \
+\
+            suppressif ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 2; \
+                SENTRY_IN_CONDITION(ROBOT_NUM) \
+                suppressif ideqval SETUP_DATA.SentryInCondition[ROBOT_NUM] == 0; \
+\
+                    SEPARATOR \
+                    SENTRY_ADDITIONAL_CONDITION(ROBOT_NUM) \
+\
+                    suppressif ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 2 OR ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 4 OR ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 6; \
+                        SENTRY_REG_OFFSET(ROBOT_NUM) \
+                    endif; \
+\
+                    suppressif ideqval  SETUP_DATA.SentryAddCondition[ROBOT_NUM] == 0; \
+                        SENTRY_BYTE_VALUE(ROBOT_NUM) \
+                    endif; \
+\
+                    suppressif NOT ideqval SETUP_DATA.SentryAddCondition[ROBOT_NUM] == 0; \
+                        SENTRY_BIT_OFFSET(ROBOT_NUM) \
+                        SENTRY_BIT_VALUE(ROBOT_NUM) \
+                    endif; \
+\
+                endif; \
+\
+            endif; \
+\
+        endif; \
+\
+    endform;  
+#else    
+#define SENTRY_ROBOT_SUB_PAGE(TITLE_STR_TOKEN, SUBTITLE_STR_TOKEN, FORM_ID, ROBOT_NUM)\
+    form formid = FORM_ID,\
+        title = TITLE_STR_TOKEN;\
+        SUBTITLE_STR_TOKEN\
+\
+        SEPARATOR\
+        SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_STR1))\
+\
+        SENTRY_ROBOT(ROBOT_NUM)\
+\
+        suppressif ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 0;\
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 1;\
+                SENTRY_CHECK_BUS(ROBOT_NUM)\
+                SENTRY_CHECK_DEV(ROBOT_NUM)\
+                SENTRY_CHECK_FUN(ROBOT_NUM)\
+            endif;\
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 3;\
+                SENTRY_SLAVE_ADDR(ROBOT_NUM)\
+            endif;\
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 4;\
+                SENTRY_IO_ADDR(ROBOT_NUM)\
+            endif;\
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 5;\
+                SENTRY_IO_LDN(ROBOT_NUM)\
+            endif;\
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 6;\
+            SENTRY_MMIO_ADDR(ROBOT_NUM)\
+            endif;\
+\
+            SEPARATOR\
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_STR2))\
+\
+            SENTRY_REVERT_ACTION(ROBOT_NUM)\
+\
+            suppressif NOT ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 2;\
+            SENTRY_DIO_LEVEL(ROBOT_NUM)\
+            endif;\
+\
+            suppressif ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 2; \
+                SENTRY_IN_CONDITION(ROBOT_NUM)\
+                suppressif ideqval SETUP_DATA.SentryInCondition[ROBOT_NUM] == 0;\
+\
+                    SEPARATOR\
+                    SENTRY_ADDITIONAL_CONDITION(ROBOT_NUM)\
+\
+                    suppressif ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 2 OR ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 4 OR ideqval SETUP_DATA.SentryRobotType[ROBOT_NUM] == 6;\
+                        SENTRY_REG_OFFSET(ROBOT_NUM)\
+                    endif;\
+\
+                    suppressif ideqval  SETUP_DATA.SentryAddCondition[ROBOT_NUM] == 0;\
+                        SENTRY_BYTE_VALUE(ROBOT_NUM)\
+                    endif;\
+\
+                    suppressif NOT ideqval SETUP_DATA.SentryAddCondition[ROBOT_NUM] == 0;\
+                        SENTRY_BIT_OFFSET(ROBOT_NUM)\
+                        SENTRY_BIT_VALUE(ROBOT_NUM)\
+                    endif;\
+\
+                endif;\
+\
+            endif;\
+\
+        endif;\
+\
+    endform;  
+//Sentry robot Form <<
+#endif
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+#if defined (AaeonDio3_SUPPORT) && AaeonDio3_SUPPORT
+    #define SENTRY_ROBOT_SUB_PAGE_DEFAULT(ROBOT_NUM) \
+        SENTRY_ROBOT(ROBOT_NUM) \
+        SENTRY_CHECK_BUS(ROBOT_NUM) \
+        SENTRY_CHECK_DEV(ROBOT_NUM) \
+        SENTRY_CHECK_FUN(ROBOT_NUM) \
+        SENTRY_DIO_NUM(ROBOT_NUM)  \
+        SENTRY_SLAVE_ADDR(ROBOT_NUM) \
+        SENTRY_IO_ADDR(ROBOT_NUM) \
+        SENTRY_IO_LDN(ROBOT_NUM) \
+        SENTRY_MMIO_ADDR(ROBOT_NUM) \
+        SENTRY_REVERT_ACTION(ROBOT_NUM) \
+        SENTRY_DIO_LEVEL(ROBOT_NUM) \
+        SENTRY_IN_CONDITION(ROBOT_NUM) \
+        SENTRY_ADDITIONAL_CONDITION(ROBOT_NUM) \
+        SENTRY_REG_OFFSET(ROBOT_NUM) \
+        SENTRY_BYTE_VALUE(ROBOT_NUM) \
+        SENTRY_BIT_OFFSET(ROBOT_NUM) \
+        SENTRY_BIT_VALUE(ROBOT_NUM)
+#else
+    #define SENTRY_ROBOT_SUB_PAGE_DEFAULT(ROBOT_NUM) \
+        SENTRY_ROBOT(ROBOT_NUM) \
+        SENTRY_CHECK_BUS(ROBOT_NUM) \
+        SENTRY_CHECK_DEV(ROBOT_NUM) \
+        SENTRY_CHECK_FUN(ROBOT_NUM)\
+        SENTRY_SLAVE_ADDR(ROBOT_NUM) \
+        SENTRY_IO_ADDR(ROBOT_NUM) \
+        SENTRY_IO_LDN(ROBOT_NUM) \
+        SENTRY_MMIO_ADDR(ROBOT_NUM) \
+        SENTRY_REVERT_ACTION(ROBOT_NUM) \
+        SENTRY_DIO_LEVEL(ROBOT_NUM) \
+        SENTRY_IN_CONDITION(ROBOT_NUM) \
+        SENTRY_ADDITIONAL_CONDITION(ROBOT_NUM) \
+        SENTRY_REG_OFFSET(ROBOT_NUM) \
+        SENTRY_BYTE_VALUE(ROBOT_NUM) \
+        SENTRY_BIT_OFFSET(ROBOT_NUM) \
+        SENTRY_BIT_VALUE(ROBOT_NUM)
+#endif
+    SENTRY_ROBOT_SUB_PAGE_DEFAULT(SENTRY1)
+    SENTRY_ROBOT_SUB_PAGE_DEFAULT(SENTRY2)
+    SENTRY_ROBOT_SUB_PAGE_DEFAULT(SENTRY3)
+    SENTRY_ROBOT_SUB_PAGE_DEFAULT(SENTRY4)
+    SENTRY_ROBOT_SUB_PAGE_DEFAULT(SENTRY5)
+    #if SENTRY_ROBOT_NUMBER > 5
+    // Porting required
+        force comile error
+        SENTRY_ROBOT_SUB_PAGE_DEFAULT(SENTRY6)
+    #endif
+
+    SENTRY_ACTION
+    SENTRY_RESET_TYPE
+    SENTRY_RETRY_COUNT
+    SENTRY_HOLD_TIME
+    SENTRY_ACTION_TIME
+
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+	#ifdef FORM_SET_TYPEDEF
+
+	#endif
+
+    #ifdef FORM_SET_VARSTORE
+
+    #endif
+
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+
+	#endif
+
+	#ifdef SENTRY_ROBOT_FORM_SET_GOTO
+
+	    goto AAEON_DEVICE_DETEC_FORM_ID,
+            prompt  = STRING_TOKEN(AAEON_DEVICE_DETEC),
+            help    = STRING_TOKEN(AAEON_DEVICE_DETEC);
+
+	#endif //SENTRY_ROBOT_FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+	//-------------------------------------------------------------------------
+	//	AAEON OEM Group
+	//-------------------------------------------------------------------------
+
+    //Device detecting configuration page
+        form formid = AUTO_ID(AAEON_DEVICE_DETEC_FORM_ID),
+            title = STRING_TOKEN(AAEON_DEVICE_DETEC);
+            SUBTITLE(STRING_TOKEN(AAEON_DEVICE_DETEC))
+            SEPARATOR
+
+            #if SENTRY_ROBOT_NUMBER > 0
+            goto AAEON_SENTRY_ROBOT_1_FORM_ID,
+                prompt  = STRING_TOKEN(STR_SENTRY_ROBOT_1_FORM),
+                help    = STRING_TOKEN(STR_SENTRY_ROBOT_1_FORM);
+            #endif
+            #if SENTRY_ROBOT_NUMBER > 1
+            goto AAEON_SENTRY_ROBOT_2_FORM_ID,
+                prompt  = STRING_TOKEN(STR_SENTRY_ROBOT_2_FORM),
+                help    = STRING_TOKEN(STR_SENTRY_ROBOT_2_FORM);
+            #endif
+            #if SENTRY_ROBOT_NUMBER > 2
+            goto AAEON_SENTRY_ROBOT_3_FORM_ID,
+                prompt  = STRING_TOKEN(STR_SENTRY_ROBOT_3_FORM),
+                help    = STRING_TOKEN(STR_SENTRY_ROBOT_3_FORM);
+            #endif
+            #if SENTRY_ROBOT_NUMBER > 3
+            goto AAEON_SENTRY_ROBOT_4_FORM_ID,
+                prompt  = STRING_TOKEN(STR_SENTRY_ROBOT_4_FORM),
+                help    = STRING_TOKEN(STR_SENTRY_ROBOT_4_FORM);
+            #endif
+            #if SENTRY_ROBOT_NUMBER > 4
+            goto AAEON_SENTRY_ROBOT_5_FORM_ID,
+                prompt  = STRING_TOKEN(STR_SENTRY_ROBOT_5_FORM),
+                help    = STRING_TOKEN(STR_SENTRY_ROBOT_5_FORM);
+            #endif
+            #if SENTRY_ROBOT_NUMBER > 5
+            // Comile should error, porting required
+            goto AAEON_SENTRY_ROBOT_6_FORM_ID,
+                prompt  = STRING_TOKEN(STR_SENTRY_ROBOT_6_FORM),
+                help    = STRING_TOKEN(STR_SENTRY_ROBOT_6_FORM);
+            #endif
+
+            SEPARATOR
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_STR3))
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_STR4))
+            SENTRY_ACTION
+
+            suppressif ideqval SETUP_DATA.SentryAction[0] == 1;
+                SENTRY_RESET_TYPE
+                SENTRY_RETRY_COUNT
+            endif; //suppressif ideqval SETUP_DATA.SentryAction == 1;
+
+            suppressif ideqval SETUP_DATA.SentryAction[0] == 0;
+                SENTRY_HOLD_TIME
+            endif; //suppressif ideqval SETUP_DATA.SentryAction == 0;
+
+            SENTRY_ACTION_TIME
+
+        endform;
+
+        SENTRY_ROBOT_SUB_PAGE(STRING_TOKEN(STR_SENTRY_ROBOT_1_FORM),
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_1_FORM)),
+            AUTO_ID(AAEON_SENTRY_ROBOT_1_FORM_ID), SENTRY1)
+
+        SENTRY_ROBOT_SUB_PAGE(STRING_TOKEN(STR_SENTRY_ROBOT_2_FORM),
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_2_FORM)),
+            AUTO_ID(AAEON_SENTRY_ROBOT_2_FORM_ID), SENTRY2)
+
+        SENTRY_ROBOT_SUB_PAGE(STRING_TOKEN(STR_SENTRY_ROBOT_3_FORM),
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_3_FORM)),
+            AUTO_ID(AAEON_SENTRY_ROBOT_3_FORM_ID), SENTRY3)
+
+        SENTRY_ROBOT_SUB_PAGE(STRING_TOKEN(STR_SENTRY_ROBOT_4_FORM),
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_4_FORM)),
+            AUTO_ID(AAEON_SENTRY_ROBOT_4_FORM_ID), SENTRY4)
+
+        SENTRY_ROBOT_SUB_PAGE(STRING_TOKEN(STR_SENTRY_ROBOT_5_FORM),
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_5_FORM)),
+            AUTO_ID(AAEON_SENTRY_ROBOT_5_FORM_ID), SENTRY5)
+
+        #if SENTRY_ROBOT_NUMBER > 5
+        // Comile should error, porting required
+        SENTRY_ROBOT_SUB_PAGE(STRING_TOKEN(STR_SENTRY_ROBOT_6_FORM),
+            SUBTITLE(STRING_TOKEN(STR_SENTRY_ROBOT_6_FORM)),
+            AUTO_ID(AAEON_SENTRY_ROBOT_6_FORM_ID), SENTRY6)
+        #endif
+
+	#endif //FORM_SET_FORM
+#endif  // ADVANCED_FORM_SET

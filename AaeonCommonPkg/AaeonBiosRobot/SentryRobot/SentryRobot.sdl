@@ -1,0 +1,60 @@
+TOKEN
+	Name  = "SENTRY_ROBOT_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AaeonPCICheckPkg support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+    Name  = "SENTRY_ROBOT_DIR"
+End
+
+ELINK
+        Name = "$(SENTRY_ROBOT_DIR)/SentryRobot.sd"
+        Parent = "SETUP_DEFINITIONS"
+        InvokeOrder = AfterParent
+End
+
+ELINK
+        Name  = "$(SENTRY_ROBOT_DIR)/SentryRobot.uni"
+        Parent  = "SetupStringFiles"
+        InvokeOrder = AfterParent
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AaeonBiosRobotPkg.SentryRobotLib"
+    Override  = "AmiModulePkg.Bds"
+End
+
+INFComponent
+    Name  = "SentryRobotLib"
+    File  = "SentryRobotLib.inf"
+    Package  = "AaeonBiosRobotPkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+ELINK
+    Name  = "SentryRobotCheckFunction,"
+    Parent  = "AaeonPostBeep,"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "SentryRobotCheckBeforeLogo,"
+    Parent  = "/* Connect ConOut Devices */"
+    InvokeOrder = BeforeParent
+End
+
+TOKEN
+    Name  = "SENTRY_ROBOT_NUMBER"
+    Value  = "5"
+    Help  = "Number of Setry Robot. Porting required to set it to more than 5."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End

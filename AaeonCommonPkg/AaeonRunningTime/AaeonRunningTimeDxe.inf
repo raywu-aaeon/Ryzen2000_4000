@@ -1,0 +1,35 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonRunningTimeDxe
+  FILE_GUID                      = 8401DB0B-9695-4C90-BBC3-FFAA62FE70D5
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = DxeInitRunningTime
+
+[Sources]  
+  AaeonRunningTimeDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec   
+  MdeModulePkg/MdeModulePkg.dec 
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  SerialPortLib
+  PrintLib
+  TimerLib
+  
+[Protocols]  
+  
+[Guids]
+  
+[Pcd]
+    
+[Depex]
+  TRUE

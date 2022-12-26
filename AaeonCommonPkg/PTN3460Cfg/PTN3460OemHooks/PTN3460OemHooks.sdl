@@ -1,0 +1,57 @@
+TOKEN
+	Name  = "PTN3460OEMHOOKS_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PTN3460 hooks templates support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+PATH
+    Name  = "PTN3460OEMHOOKS_DIR"
+End
+
+ELINK
+    Name  = "$(PTN3460OEMHOOKS_DIR)\PTN3460OemHooks.c"
+    Parent  = "AMI_CSP_DXE_SOURCES"
+    InvokeOrder = AfterParent
+	Token = "PTN3460_CFG_TIME" "=" "0"
+End
+
+ELINK
+    Name  = "$(PTN3460OEMHOOKS_DIR)\PTN3460OemHooks.c"
+    Parent  = "AMI_CSP_PEI_SOURCES"
+    InvokeOrder = AfterParent
+	Token = "PTN3460_CFG_TIME" "=" "1"
+End
+
+ELINK
+	Name  = "CfgAd5247_2E, "
+	Parent  = "PTN3460_PANEL1_PRECFG_FUNC"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CfgAd5247_17, "
+	Parent  = "PTN3460_PANEL2_PRECFG_FUNC"
+	InvokeOrder = AfterParent
+	Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End
+
+ELINK
+    Name  = "$(PTN3460OEMHOOKS_DIR)\PTN3460OemSetupHooks.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CfgAd5247_2E, "
+	Parent  = "PTN3460_PANEL1_TSE_BLKCTL_FUNC"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CfgAd5247_17, "
+	Parent  = "PTN3460_PANEL2_TSE_BLKCTL_FUNC"
+	InvokeOrder = AfterParent
+	Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End

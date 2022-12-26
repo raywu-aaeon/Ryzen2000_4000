@@ -1,0 +1,24 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonBiosRobotLib
+  FILE_GUID                      = 10af7b94-d514-4ddc-89f8-c7e77019ce27
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AaeonBiosRobotLib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  AaeonBiosRobotCommonLib.c
+  AaeonBiosRobotCommonLib.h
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AaeonCommonPkg/AaeonCommonPkg.dec
+
+[LibraryClasses]
+  IoLib

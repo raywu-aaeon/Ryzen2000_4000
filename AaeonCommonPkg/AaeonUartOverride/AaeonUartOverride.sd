@@ -1,0 +1,153 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+    UINT8   AaeonUartOverrideSupport[MAX_UART_OVERRIDE_ITEM];
+	UINT8	AaeonUartOverrideUid[MAX_UART_OVERRIDE_ITEM];
+	UINT8	AaeonUartPresent[MAX_UART_OVERRIDE_ITEM];			
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------
+#define CHECKBOX_AAEON_UART_SUPPORT(UART_NUM, CHECKBOX_AAEON_UART_OVERRIDE_SUPPORT_DEFAULT) \
+    checkbox varid     = SETUP_DATA.AaeonUartOverrideSupport[UART_NUM], \
+        prompt  = STRING_TOKEN(STR_AAEON_UART_OVERRIDE_SUPPORT), \
+        help    = STRING_TOKEN(STR_AAEON_UART_OVERRIDE_SUPPORT_HELP), \
+        flags   = RESET_REQUIRED,\
+        default = CHECKBOX_AAEON_UART_OVERRIDE_SUPPORT_DEFAULT, \
+        default = CHECKBOX_AAEON_UART_OVERRIDE_SUPPORT_DEFAULT, defaultstore = AmiMfgDefault, \
+    endcheckbox;
+
+#define NUMERIC_AAEON_UART_OVERRIDE_UID(UART_NUM, NUMERIC_AAEON_UART_OVERRIDE_UID_DEFAULT) \
+	numeric varid     = SETUP_DATA.AaeonUartOverrideUid[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_AAEON_UART_OVERRIDE_UID), \
+		help    = STRING_TOKEN(STR_AAEON_UART_OVERRIDE_UID_HELP), \
+		flags 	= RESET_REQUIRED,\
+		minimum = 0,\
+		maximum = 100,\
+		step    = 1,\
+        default = NUMERIC_AAEON_UART_OVERRIDE_UID_DEFAULT, \
+		default = NUMERIC_AAEON_UART_OVERRIDE_UID_DEFAULT, defaultstore = AmiMfgDefault, \
+	endnumeric;		 		
+
+#define CHECKBOX_AAEON_UART_PRESENT(UART_NUM, CHECKBOX_AAEON_UART_PRESENT_DEFAULT) \
+	checkbox varid     = SETUP_DATA.AaeonUartPresent[UART_NUM], \
+		prompt  = STRING_TOKEN(STR_AAEON_UART_OVERRIDE_PRESENT), \
+		help    = STRING_TOKEN(STR_AAEON_UART_OVERRIDE_PRESENT_HELP), \
+		flags 	= RESET_REQUIRED,\
+		default = CHECKBOX_AAEON_UART_PRESENT_DEFAULT, \
+		default = CHECKBOX_AAEON_UART_PRESENT_DEFAULT, defaultstore = AmiMfgDefault, \
+	endcheckbox;
+
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+// Define Macro
+//------------------------------------------------------------
+
+#define AAEON_UART_OVERRIDE_ITEMS( \
+	UART_NUM, \
+	CHECKBOX_AAEON_UART_OVERRIDE_SUPPORT_DEFAULT, \
+	NUMERIC_AAEON_UART_OVERRIDE_UID_DEFAULT, \
+	CHECKBOX_AAEON_UART_PRESENT_DEFAULT) \
+	CHECKBOX_AAEON_UART_SUPPORT(UART_NUM, CHECKBOX_AAEON_UART_OVERRIDE_SUPPORT_DEFAULT) \
+	suppressif ideqval SETUP_DATA.AaeonUartOverrideSupport[UART_NUM] == 0; \
+		NUMERIC_AAEON_UART_OVERRIDE_UID(UART_NUM, NUMERIC_AAEON_UART_OVERRIDE_UID_DEFAULT) \
+		CHECKBOX_AAEON_UART_PRESENT(UART_NUM, CHECKBOX_AAEON_UART_PRESENT_DEFAULT) \
+	endif;
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+	#ifdef FORM_SET_TYPEDEF
+	#endif
+	
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+	#endif
+
+	#ifdef FORM_SET_GOTO
+        goto AAEON_UART_OVERRIDE_FORM_ID,
+        prompt  = STRING_TOKEN(STR_UART_OVERRIDE_FORM),
+        help    = STRING_TOKEN(STR_UARTMODE_FORM_HELP);
+	#endif //FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+		form formid = AUTO_ID(AAEON_UART_OVERRIDE_FORM_ID),
+			title = STRING_TOKEN(STR_UART_OVERRIDE_FORM);
+			
+			SUBTITLE(STRING_TOKEN(STR_UART_OVERRIDE_FORM))
+
+			SEPARATOR
+
+			SUBTITLE(STRING_TOKEN(STR_AAEON_UART_OVERRIDE_1))
+			AAEON_UART_OVERRIDE_ITEMS(
+				0, 
+				CHECKBOX_AAEON_UART_OVERRIDE_1_SUPPORT_DEFAULT,
+				NUMERIC_AAEON_UART_OVERRIDE_1_UID_DEFAULT,
+				CHECKBOX_AAEON_UART_PRESENT_1_DEFAULT)
+			SEPARATOR
+
+			SUBTITLE(STRING_TOKEN(STR_AAEON_UART_OVERRIDE_2))
+			AAEON_UART_OVERRIDE_ITEMS(
+                1, 
+                CHECKBOX_AAEON_UART_OVERRIDE_2_SUPPORT_DEFAULT,
+                NUMERIC_AAEON_UART_OVERRIDE_2_UID_DEFAULT,
+                CHECKBOX_AAEON_UART_PRESENT_2_DEFAULT)
+			SEPARATOR
+
+			SUBTITLE(STRING_TOKEN(STR_AAEON_UART_OVERRIDE_3))
+			AAEON_UART_OVERRIDE_ITEMS(
+                2, 
+                CHECKBOX_AAEON_UART_OVERRIDE_3_SUPPORT_DEFAULT,
+                NUMERIC_AAEON_UART_OVERRIDE_3_UID_DEFAULT,
+                CHECKBOX_AAEON_UART_PRESENT_3_DEFAULT)
+			SEPARATOR
+
+			SUBTITLE(STRING_TOKEN(STR_AAEON_UART_OVERRIDE_4))
+			AAEON_UART_OVERRIDE_ITEMS(
+                3, 
+                CHECKBOX_AAEON_UART_OVERRIDE_4_SUPPORT_DEFAULT,
+                NUMERIC_AAEON_UART_OVERRIDE_4_UID_DEFAULT,
+                CHECKBOX_AAEON_UART_PRESENT_4_DEFAULT)
+			SEPARATOR
+
+			SUBTITLE(STRING_TOKEN(STR_AAEON_UART_OVERRIDE_5))
+			AAEON_UART_OVERRIDE_ITEMS(
+                4, 
+                CHECKBOX_AAEON_UART_OVERRIDE_5_SUPPORT_DEFAULT,
+                NUMERIC_AAEON_UART_OVERRIDE_5_UID_DEFAULT,
+                CHECKBOX_AAEON_UART_PRESENT_5_DEFAULT)
+			SEPARATOR
+
+			SUBTITLE(STRING_TOKEN(STR_AAEON_UART_OVERRIDE_6))
+			AAEON_UART_OVERRIDE_ITEMS(
+                5, 
+                CHECKBOX_AAEON_UART_OVERRIDE_6_SUPPORT_DEFAULT,
+                NUMERIC_AAEON_UART_OVERRIDE_6_UID_DEFAULT,
+                CHECKBOX_AAEON_UART_PRESENT_6_DEFAULT)
+
+		endform;  //AAEON_UART_OVERRIDE_FORM
+	#endif //FORM_SET_FORM
+#endif  // ADVANCED_FORM_SET

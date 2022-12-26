@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "AAEONSWSMM_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+	Help  = "Main switch to enable support in Project"
+End
+
+PATH
+	Name  = "AaeonSWSMM_DIR"
+End
+
+
+INFComponent
+	Name  = "AaeonSWSmm"
+	File  = "AaeonSWSmm.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"		
+End
+
+
+TOKEN
+	Name  = "SwSMI_RegNum"
+	Value  = "0xAE"
+	Help  = "Sw Smi register number ."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+
+

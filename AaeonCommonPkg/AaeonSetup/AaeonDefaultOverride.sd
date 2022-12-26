@@ -1,0 +1,59 @@
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+#endif
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+
+
+#ifdef CONTROL_DEFINITION
+
+//----------------------------------------------------------------------------
+//                 Exit
+//----------------------------------------------------------------------------
+#ifdef AMI_TSE_SAVE_AND_RESET
+#undef AMI_TSE_SAVE_AND_RESET
+#define AMI_TSE_SAVE_AND_RESET\
+    suppressif ideqval AMI_CALLBACK.Value == SAVE_AND_RESET_VALUE;\
+        goto AAEON_EXIT_MAIN,\
+            prompt = STRING_TOKEN(STR_SAVE_RESET),\
+            help = STRING_TOKEN(STR_SAVE_RESET_HELP);\
+    endif;
+#endif // AMI_TSE_SAVE_AND_RESET
+
+#ifdef AMI_TSE_DISCARD_AND_EXIT
+#undef AMI_TSE_DISCARD_AND_EXIT
+#define AMI_TSE_DISCARD_AND_EXIT\
+    suppressif ideqval AMI_CALLBACK.Value == DISCARD_AND_EXIT_VALUE;\
+        goto AAEON_EXIT_MAIN,\
+            prompt = STRING_TOKEN(STR_DISCARD_EXIT),\
+            help = STRING_TOKEN(STR_DISCARD_EXIT_HELP);\
+    endif;
+#endif // AMI_TSE_DISCARD_AND_EXIT
+
+#ifdef AMI_TSE_RESTORE_DEFAULTS
+#undef AMI_TSE_RESTORE_DEFAULTS
+#define AMI_TSE_RESTORE_DEFAULTS\
+    suppressif ideqval AMI_CALLBACK.Value == RESTORE_DEFAULTS_VALUE;\
+        goto AAEON_EXIT_MAIN,\
+            prompt = STRING_TOKEN(STR_RESTORE_DEFAULTS),\
+            help = STRING_TOKEN(STR_RESTORE_DEFAULTS_HELP);\
+    endif;
+#endif // AMI_TSE_RESTORE_DEFAULTS
+
+#endif //ENDIF CONTROL_DEFINITION
+
+
+
+#ifdef CONTROLS_WITH_DEFAULTS
+
+#endif //#ifdef CONTROLS_WITH_DEFAULTS

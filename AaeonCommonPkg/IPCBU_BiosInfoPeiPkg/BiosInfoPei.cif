@@ -1,0 +1,11 @@
+<component>
+	name = "IPCBU_BiosInfoPeiPkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\IPCBU_BiosInfoPeiPkg\"
+	RefName = "AaeonCommonPkg.IPCBU_BiosInfoPeiPkg"
+[INF]
+"BiosInfoPei.inf"
+[files]
+"BiosInfoPei.sdl"	
+"BiosInfoPei.c"
+<endComponent>

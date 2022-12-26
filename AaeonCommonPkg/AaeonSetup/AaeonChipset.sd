@@ -1,0 +1,70 @@
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+
+#endif
+
+
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+#endif
+
+//**********************************************************************
+//                CHIPSET - North/South Bridge Form
+//**********************************************************************
+#ifdef CHIPSET_FORM_SET
+	#ifdef FORM_SET_TYPEDEF
+	#endif
+
+	#ifdef AAEON_FORM_SET_ITEM
+	  // Define controls to be added to the main page of the formset
+	#endif //AAEON_FORM_SET_ITEM
+	
+	#ifdef AAEON_FORM_SET_GOTO
+	  // Define goto commands for the forms defined in this file
+
+	#endif //AAEON_FORM_SET_GOTO
+	
+	#ifdef FORM_SET_FORM
+
+		form formid = AUTO_ID(AAEON_CHIPSET_MAIN),
+			title = STRING_TOKEN(STR_AAEON_CHIPSET);
+			
+			#undef FORM_SET_FORM
+			
+			#define AAEON_FORM_SET_ITEM
+			#include <SetupDefinitions.h>
+			#undef AAEON_FORM_SET_ITEM
+			#define AAEON_FORM_SET_GOTO
+			#include <SetupDefinitions.h>
+			#undef AAEON_FORM_SET_GOTO      
+			
+			#define FORM_SET_FORM    
+		endform;    
+	
+	#endif //FORM_SET_FORM
+#endif //CHIPSET_FORM_SET
+
+//**********************************************************************
+//  Add a Goto in CRB Setup form so BCP CMD line can parse Aaeon setup
+//**********************************************************************
+#ifdef TOP_LEVEL_FORM_SET
+    #ifdef FORM_SET_GOTO
+		suppressif TRUE;
+	        goto AAEON_CHIPSET_MAIN, 
+	        prompt = STRING_TOKEN(STR_AAEON_CHIPSET),
+	        help = STRING_TOKEN(STR_EMPTY);
+		endif;
+    #endif //FORM_SET_GOTO    
+#endif // TOP_LEVEL_FORM_SET

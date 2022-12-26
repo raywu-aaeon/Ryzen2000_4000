@@ -1,0 +1,41 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = F75111PeiPkg
+  FILE_GUID                      = 9A9DA223-B117-4799-A070-4D2CFCB1C442
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = F75111PeiPkg_Init
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  F75111PeiPkg.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  IoLib
+  ##AmiPeiLib # Optional. should use Mde Library instead.
+  ##AmiCspLib # Optional. should use Mde Library instead.
+
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gEfiPeiSmbus2PpiGuid
+  
+[Guids]
+
+[Depex]
+  gAmiPeiSbInitPolicyGuid AND
+  gEfiPeiSmbus2PpiGuid

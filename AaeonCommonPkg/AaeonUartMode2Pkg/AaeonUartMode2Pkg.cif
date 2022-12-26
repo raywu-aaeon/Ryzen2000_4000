@@ -1,0 +1,17 @@
+<component>
+	name = "AaeonUartMode2Pkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg/AaeonUartMode2Pkg/"
+	RefName = "AaeonCommonPkg.AaeonUartMode2Pkg"
+
+[files]
+"_AaeonUartMode2Pkg_History.txt"
+"AaeonUartMode2.c"
+"AaeonUartMode2.h"
+"AaeonUartMode2Callback.c"
+"AaeonUartMode2Pkg.c"
+"AaeonUartMode2Pkg.sd"
+"AaeonUartMode2Pkg.sdl"
+"AaeonUartMode2Pkg.uni"
+"AaeonUartMode2LoadDefaults.c"
+<endComponent>

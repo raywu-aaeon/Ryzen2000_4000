@@ -1,0 +1,17 @@
+<component>
+	name = "SentryRobot"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonBiosRobotPkg\SentryRobot\"
+	RefName = "AaeonCommonPkg.AaeonBiosRobot.SentryRobot"
+[INF]
+"SentryRobotLib.inf"
+
+
+[files]
+"SentryRobot.sdl"
+"SentryRobot.sd"
+"SentryRobot.uni"
+
+[parts]
+
+<endComponent>

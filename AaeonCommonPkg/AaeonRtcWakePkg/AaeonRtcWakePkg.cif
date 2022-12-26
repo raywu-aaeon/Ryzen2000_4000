@@ -1,0 +1,13 @@
+<component>
+	name = "AaeonRtcWakePkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonRtcWakePkg\"
+	RefName = "AaeonCommonPkg.AaeonRtcWakePkg"
+
+[files]
+"AaeonRtcWakePkg.c"
+"AaeonRtcWakePkg.sdl"
+"AaeonRtcWakePkg.sd"
+"AaeonRtcWakePkg.uni"
+	
+<endComponent>

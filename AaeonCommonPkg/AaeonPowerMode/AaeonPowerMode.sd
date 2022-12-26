@@ -1,0 +1,98 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+	UINT8	AaeonPowerMode;
+	UINT8	AaeonErpMode;
+	UINT8	AaeonRestoreACPowerLoss;
+	UINT8	AaeonRestoreACPowerLossSrc;
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------
+#define ONEOF_AAEONPOWERMODE \
+	oneof varid    = SETUP_DATA.AaeonPowerMode, \
+	  prompt       = STRING_TOKEN (STR_POWER_MODE), \
+	  help         = STRING_TOKEN (STR_POWER_MODE_HELP), \
+	  default = ONEOF_AAEONPOWERMODE_DEFAULT,\
+	  default = ONEOF_AAEONPOWERMODE_DEFAULT, defaultstore = AmiMfgDefault,\
+	  option text  = STRING_TOKEN (STR_ATX_TYPE), value = 0, flags = RESET_REQUIRED; \
+	  option text  = STRING_TOKEN (STR_AT_TYPE), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+#define ONEOF_AAEON_ERPPOWERMODE \
+	oneof varid    = SETUP_DATA.AaeonErpMode, questionid = AUTO_ID(AAEON_ERPMODE_KEY), \
+	  prompt       = STRING_TOKEN (STR_POWER_SAVING_PROMPT), \
+	  help         = STRING_TOKEN (STR_POWER_SAVING_HELP), \
+	  option text  = STRING_TOKEN (STR_COMMON_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | INTERACTIVE | RESET_REQUIRED; \
+	  option text  = STRING_TOKEN (STR_COMMON_ENABLED), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+	
+#define ONEOF_AAEONRESTOREACPOWERLOSS\
+	oneof varid    = SETUP_DATA.AaeonRestoreACPowerLoss, questionid = AUTO_ID(AAEON_ACLOSE_KEY), \
+		prompt       = STRING_TOKEN (STR_AAEONRESTOREACPOWERLOSS),\
+		help         = STRING_TOKEN (STR_AAEONRESTOREACPOWERLOSS_HELP),\
+		default = ONEOF_AAEONRESTOREACPOWERLOSS_DEFAULT,\
+		default = ONEOF_AAEONRESTOREACPOWERLOSS_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_AAEONRESTOREACPOWERLOSS_LASTSTATE), value = 0, flags = INTERACTIVE | RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_AAEONRESTOREACPOWERLOSS_ALWAYSON), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_AAEONRESTOREACPOWERLOSS_ALWAYSOFF), value = 2, flags = RESET_REQUIRED;\
+	endoneof;
+
+#define ONEOF_AAEONRESTOREACPOWERLOSS_SRC\
+	oneof varid    = SETUP_DATA.AaeonRestoreACPowerLossSrc, questionid = AUTO_ID(AAEON_ACLOSESRC_KEY), \
+		prompt       = STRING_TOKEN (STR_AAEONRESTOREACPOWERLOSS_ACT),\
+		help         = STRING_TOKEN (STR_AAEONRESTOREACPOWERLOSS_ACT_HELP),\
+		default = ONEOF_AAEONRESTOREACPOWERLOSSSRC_DEFAULT,\
+		default = ONEOF_AAEONRESTOREACPOWERLOSSSRC_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_AAEONRESTOREACPOWERLOSS_SB), value = 0, flags = INTERACTIVE | RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_AAEONRESTOREACPOWERLOSS_SIO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+ONEOF_AAEONPOWERMODE
+ONEOF_AAEON_ERPPOWERMODE
+ONEOF_AAEONRESTOREACPOWERLOSS
+ONEOF_AAEONRESTOREACPOWERLOSS_SRC
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+	#ifdef FORM_SET_TYPEDEF
+	#endif
+	
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+
+	#endif
+
+	#ifdef FORM_SET_GOTO
+	#endif //FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+	//-------------------------------------------------------------------------
+	//	AAEON OEM Group
+	//-------------------------------------------------------------------------
+	#endif //FORM_SET_FORM
+#endif  // ADVANCED_FORM_SET

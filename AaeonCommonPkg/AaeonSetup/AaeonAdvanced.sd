@@ -1,0 +1,229 @@
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+	UINT8	AaeonRIWakeEnable;
+#endif
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+    #ifndef ONEOF_AAEONPOWERMODE
+    #define ONEOF_AAEONPOWERMODE
+    #endif
+
+    #ifndef ONEOF_AAEON_ERPPOWERMODE
+    #define ONEOF_AAEON_ERPPOWERMODE
+    #endif
+    
+    #ifndef ONEOF_AAEONRESTOREACPOWERLOSS
+    #define ONEOF_AAEONRESTOREACPOWERLOSS
+    #endif
+	
+	#define ONEOF_AAEONRIWAKEENABLE\
+		oneof varid    = SETUP_DATA.AaeonRIWakeEnable,\
+		prompt       = STRING_TOKEN (STR_AAEONRIWAKEENABLE),\
+		help         = STRING_TOKEN (STR_AAEONRIWAKEENABLE_HELP),\
+		default = ONEOF_AAEONRIWAKEENABLE_DEFAULT,\
+		default = ONEOF_AAEONRIWAKEENABLE_DEFAULT, defaultstore = AmiMfgDefault,\
+		option text  = STRING_TOKEN (STR_COMMON_DISABLED), value = 0, flags = RESET_REQUIRED;\
+		option text  = STRING_TOKEN (STR_COMMON_ENABLED), value = 1, flags = RESET_REQUIRED;\
+		endoneof;
+
+	//Do not remove this item
+	#define BOARD_ONEOF_ENGINEER_ITEM \
+		checkbox varid  = AAEON_SETUP_DATA.EgrMode, \
+		prompt = STRING_TOKEN(STR_EGRMOD_PROMPT), \
+		help = STRING_TOKEN(STR_EGRMOD_HELP), \
+		flags = RESET_REQUIRED,\
+		default = DEFAULT_ENGINEERING_MODE,\
+		default = DEFAULT_ENGINEERING_MODE, defaultstore = AmiMfgDefault,\
+		endcheckbox;   
+#endif //ENDIF CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+	ONEOF_AAEONRIWAKEENABLE
+#endif // CONTROLS_WITH_DEFAULTS
+//----------------------------------------------------------------------------
+//                VAR_SETUP
+//----------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+	#ifdef FORM_SET_TYPEDEF
+	#include "AaeonSetup.h"
+	#endif
+  
+	#ifdef FORM_SET_VARSTORE
+		varstore AAEON_SETUP_DATA,
+		    key   = AUTO_ID(AAEON_NVAR_KEY),
+		    name  = AaeonSetup,
+		    guid  = AAEON_VAR_GUID;
+	#endif
+  
+	#ifdef AAEON_FORM_SET_ITEM
+		suppressif ideqval AAEON_SETUP_DATA.EgrMode == 0;
+		    BOARD_ONEOF_ENGINEER_ITEM
+		endif;
+	#endif //AAEON_FORM_SET_ITEM
+  
+	#ifdef AAEON_FORM_SET_GOTO
+
+		// CPU Configuration
+		goto AAEON_CPU_FORM_ID, 
+		prompt = STRING_TOKEN(STR_CPU_FORM),
+		help = STRING_TOKEN(STR_CPU_FORM_HELP);
+		// SATA Configuration
+		goto AAEON_IDE_CONFIG_FORM_ID,
+		prompt  = STRING_TOKEN(STR_SATA_CONFIG_FORM),
+		help    = STRING_TOKEN(STR_SATA_CONFIG_FORM_HELP);
+		// USB Configuration
+		goto AAEON_USB_CONFIG_FORM_ID,
+		prompt  = STRING_TOKEN(STR_USB_CONFIGURATION),
+		help    = STRING_TOKEN(STR_USB_CONFIGURATION_HELP);
+		// Hardware Monitor
+		goto AAEON_HARDWARE_MONITOR_CONFIG_FORM_ID,
+		prompt  = STRING_TOKEN(STR_AAEON_HARDWARE_MONITOR_CONFIG_FORM),
+		help    = STRING_TOKEN(STR_AAEON_HARDWARE_MONITOR_CONFIG_FORM_HELP);
+		// SIO Configuration
+		#if SIO_SUPPORT
+		goto formsetguid = SIO_FORM_SET_GUID, formid = SIO_MAIN_FORM_ID,
+		question = AUTO_ID(AAEON_SIO_KEY),
+		prompt  = STRING_TOKEN(STR_SIO_CONFIGURATION),
+		help    = STRING_TOKEN(STR_SIO_CONFIGURATION_HELP); 
+		#endif
+
+		SEPARATOR
+
+		SUBTITLE(STRING_TOKEN(STR_AAEON_FEATURES_FORM))
+		// Power Management
+		goto AAEON_POWER_MANAGEMENT_FORM_ID,
+		prompt = STRING_TOKEN(STR_POWER_MANAGEMENT),
+		help = STRING_TOKEN(STR_POWER_MANAGEMENT_HELP);
+		// Digital IO Port Configuration
+		#if AaeonDioPkg_SUPPORT
+		goto AAEON_DIO_FORM_ID,
+		prompt  = STRING_TOKEN(STR_DIO_FORM),
+		help    = STRING_TOKEN(STR_DIO_FORM_HELP);
+		#endif
+
+	#endif //AAEON_FORM_SET_GOTO
+  
+	#ifdef FORM_SET_FORM
+
+// CPU Configuration BEGIN >>
+		form formid = AUTO_ID(AAEON_CPU_FORM_ID),
+			title = STRING_TOKEN(STR_CPU_FORM);
+			SUBTITLE(STRING_TOKEN(STR_CPU_FORM))
+		
+			SEPARATOR
+
+
+		endform;
+// CPU Configuration END <<
+
+// SATA Configuration BEGIN >>
+		form formid = AUTO_ID(AAEON_IDE_CONFIG_FORM_ID),
+			title = STRING_TOKEN(STR_SATA_CONFIG_FORM);
+			SUBTITLE(STRING_TOKEN(STR_SATA_CONFIG_FORM))
+		
+			SEPARATOR
+
+
+		endform;
+// SATA Configuration END <<
+
+// USB Configuration BEGIN >>
+		form formid = AUTO_ID(AAEON_USB_CONFIG_FORM_ID),
+			title = STRING_TOKEN(STR_USB_CONFIGURATION);
+			SUBTITLE(STRING_TOKEN(STR_USB_CONFIGURATION))
+		
+			SEPARATOR
+
+
+		endform;
+// USB Configuration END <<
+
+// Hardware Monitor BEGIN >>
+		form formid = AUTO_ID(AAEON_HARDWARE_MONITOR_CONFIG_FORM_ID),
+			title = STRING_TOKEN(STR_AAEON_HARDWARE_MONITOR_CONFIG_FORM);
+			SUBTITLE(STRING_TOKEN(STR_AAEON_HARDWARE_MONITOR_CONFIG_FORM_HELP))
+		
+			SEPARATOR
+
+
+		endform;
+// Hardware Monitor END <<
+
+// Power Management BEGIN >>
+		form formid = AUTO_ID(AAEON_POWER_MANAGEMENT_FORM_ID),
+			title = STRING_TOKEN(STR_POWER_MANAGEMENT);
+			SUBTITLE(STRING_TOKEN(STR_POWER_MANAGEMENT))
+		
+			SEPARATOR
+
+			ONEOF_AAEONPOWERMODE
+			#if defined(AAEONPOWERMODE_SUPPORT) && (AAEONPOWERMODE_SUPPORT == 1)
+			suppressif ideqval SETUP_DATA.AaeonPowerMode == 0x01;
+				ONEOF_AAEON_ERPPOWERMODE
+
+				ONEOF_AAEONRESTOREACPOWERLOSS
+				suppressif ideqval AAEON_SETUP_DATA.EgrMode == 0;
+					ONEOF_AAEONRESTOREACPOWERLOSS_SRC
+				endif;
+
+				SEPARATOR
+
+				SUBTITLE(STRING_TOKEN(STR_AAEON_WAKE_EVENTS))
+				ONEOF_AAEONRIWAKEENABLE
+				#if defined(AaeonRtcWakePkg_SUPPORT) && (AaeonRtcWakePkg_SUPPORT == 1)
+				#define AAEON_RTCWAKE_FORM_SET_ITEM
+				#include "AaeonCommonPkg/AaeonRtcWakePkg/AaeonRtcWakePkg.sd"
+				#undef AAEON_RTCWAKE_FORM_SET_ITEM
+				#endif
+			endif;
+			#endif //AAEONPOWERMODE_SUPPORT
+		endform;
+// Power Management END <<
+
+		form formid = AUTO_ID(AAEON_ADVANCED_MAIN),
+			title = STRING_TOKEN(STR_AAEON_ADVANCED);
+        
+			#undef FORM_SET_FORM
+			
+			#define AAEON_FORM_SET_ITEM
+			#include <SetupDefinitions.h>
+			#undef AAEON_FORM_SET_ITEM
+			#define AAEON_FORM_SET_GOTO
+			#include <SetupDefinitions.h>
+			#undef AAEON_FORM_SET_GOTO
+			
+			#define FORM_SET_FORM
+        
+		endform;
+
+	#endif //FORM_SET_FORM
+  
+#endif  // ADVANCED_FORM_SET
+
+//**********************************************************************
+//  Add a Goto in CRB Setup form so BCP CMD line can parse Aaeon setup
+//**********************************************************************
+#ifdef TOP_LEVEL_FORM_SET
+    #ifdef FORM_SET_GOTO
+		suppressif TRUE;
+	        goto AAEON_ADVANCED_MAIN, 
+	        prompt = STRING_TOKEN(STR_AAEON_ADVANCED),
+	        help = STRING_TOKEN(STR_EMPTY);
+		endif;
+    #endif //FORM_SET_GOTO    
+#endif // TOP_LEVEL_FORM_SET

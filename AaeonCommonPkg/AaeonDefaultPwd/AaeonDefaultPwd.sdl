@@ -1,0 +1,132 @@
+TOKEN
+	Name  = "AaeonDefaultPwd_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable OEMTSEHook support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AaeonDefaultPwd_DIR"
+End
+
+ELINK
+    Name  = "$(AaeonDefaultPwd_DIR)\AaeonDefaultPwd.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "Build\AutoGenAaeonDefaultPwd.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SetAaeonDefaultPWD,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AaeonDefaultPwd_DIR)\AaeonDefaultPwd.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiTsePkg/AmiTsePkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiCryptLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "PasswordEncode"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "BaseCryptLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiCryptoPkg/AmiCryptoPkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+MODULE
+    Help  = "Includes AutoGenAaeonDefaultPwd.mak to Project"
+    File  = "AutoGenAaeonDefaultPwd.mak"
+End
+
+#
+# Set password relevant token
+#
+TOKEN
+	Name  = "PASSWORD_WITH_SPECIAL_CHAR_SUPPORT"
+	Value  = "1"
+	Help  = "0 => Only alphanumeric characters are support in the Password 1 => Also supports printable special characters."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SETUP_PASSWORD_NON_CASE_SENSITIVE"
+	Value  = "0"
+	Help  = "Allow to use of case sensitive password. Note:This token should be OFF with SETUP_STORE_KEYCODE_PASSWORD value 1 or 2."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "TSE_DONOT_LOAD_PASSWORD_ON_DEFAULTS"
+	Value  = "1"
+	Help  = "1 => Will not load defaults for password when we press F3. 0 => Load default passowrd."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#
+# Set ADMIN password
+#
+# CAUTION : 
+#    Need to add prefix at some special character like #, $ and % (# -> \#, $ -> $$, % -> %%).
+#    For example, you want to set the password as 2#3$4%5, you have to set is as 2\#3$$4%%5. This the limitation of makefile.
+#        
+TOKEN
+	Name  = "TSE_ADMIN_PASSWORD"
+	Value  ='"EMPTY_DATA"'
+	Help  = "Need to add prefix at some special character like #, $ and % (# -> \#, $ -> $$, % -> %%). If default admin password is not required, it will not be set; in that case keep EMPTY_DATA as a default value. Otherwise, replace EMPTY_DATA with the new value of default admin password. Keep the double quotes - they are necessary to support special characters."
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	Range =  "From PASSWORD_MIN_SIZE to SETUP_PASSWORD_LENGTH"
+	Token = "TSE_DEFAULT_SETUP_PASSWORD_SUPPORT" "=" "1"
+End
+#
+# Set USER password
+#
+# CAUTION : 
+#    Need to add prefix at some special character like #, $ and % (# -> \#, $ -> $$, % -> %%).
+#    For example, you want to set the password as 2#3$4%5, you have to set is as 2\#3$$4%%5. This the limitation of makefile.
+# 
+TOKEN
+	Name  = "TSE_USER_PASSWORD"
+	Value  = '"EMPTY_DATA"'
+	Help  = "Need to add prefix at some special character like #, $ and % (# -> \#, $ -> $$, % -> %%). If default user password is not required, it will not be set; in that case keep EMPTY_DATA as a default value. Otherwise, replace EMPTY_DATA with the new value of default user password. Keep the double quotes - they are necessary to support special characters."
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+	Range =  "From PASSWORD_MIN_SIZE to SETUP_PASSWORD_LENGTH"
+	Token = "TSE_DEFAULT_SETUP_PASSWORD_SUPPORT" "=" "1"
+End

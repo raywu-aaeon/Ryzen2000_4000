@@ -1,0 +1,81 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+	UINT8	AaeonMultiVbiosControl;
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+
+	#define ONEOF_AAEON_MULTI_VBIOS_CONTROL \
+		oneof varid     = SETUP_DATA.AaeonMultiVbiosControl, \
+			prompt      = STRING_TOKEN(STR_AAEON_MULTI_VBIOS_CONTROL), \
+			help        = STRING_TOKEN(STR_AAEON_MULTI_VBIOS_CONTROL), \
+			default     = AAEON_MULTI_VBIOS_CONTROL_DEFAULT, \
+			option text = STRING_TOKEN(STR_AAEON_MULTIVBIOS_0), value = 0, flags = RESET_REQUIRED; \
+			option text = STRING_TOKEN(STR_AAEON_MULTIVBIOS_1), value = 1, flags = RESET_REQUIRED; \
+			option text = STRING_TOKEN(STR_AAEON_MULTIVBIOS_2), value = 2, flags = RESET_REQUIRED; \
+			option text = STRING_TOKEN(STR_AAEON_MULTIVBIOS_3), value = 3, flags = RESET_REQUIRED; \
+			option text = STRING_TOKEN(STR_AAEON_MULTIVBIOS_4), value = 4, flags = RESET_REQUIRED; \
+			option text = STRING_TOKEN(STR_AAEON_MULTIVBIOS_5), value = 5, flags = RESET_REQUIRED; \
+			option text = STRING_TOKEN(STR_AAEON_MULTIVBIOS_6), value = 6, flags = RESET_REQUIRED; \
+			option text = STRING_TOKEN(STR_AAEON_MULTIVBIOS_7), value = 7, flags = RESET_REQUIRED; \
+		endoneof;
+
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+// Define Macro
+//------------------------------------------------------------
+
+#ifdef CHIPSET_FORM_SET
+
+	#ifdef FORM_SET_TYPEDEF
+	#endif
+	
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+	#endif
+
+	#ifdef FORM_SET_GOTO
+
+		goto AAEON_MULTI_VBIOS_CONFIGURATION_FORM_ID, 
+		prompt = STRING_TOKEN(STR_AAEON_MULTI_VBIOS_CONFIGURATION),
+		help    = STRING_TOKEN(STR_AAEON_MULTI_VBIOS_CONFIGURATION);
+
+	#endif //FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+
+		#ifndef AAEON_MULTI_VBIOS_CONFIGURATION_FORM_SETUP
+		#define AAEON_MULTI_VBIOS_CONFIGURATION_FORM_SETUP
+		form formid = AUTO_ID(AAEON_MULTI_VBIOS_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_AAEON_MULTI_VBIOS_CONFIGURATION);
+			SUBTITLE(STRING_TOKEN(STR_AAEON_MULTI_VBIOS_CONFIGURATION))
+			SEPARATOR
+
+			ONEOF_AAEON_MULTI_VBIOS_CONTROL
+			
+		endform;  // AAEON_MULTI_VBIOS_CONFIGURATION_FORM_ID
+		#endif //AAEON_MULTI_VBIOS_CONFIGURATION_FORM_SETUP
+
+	#endif //FORM_SET_FORM
+
+#endif  // CHIPSET_FORM_SET

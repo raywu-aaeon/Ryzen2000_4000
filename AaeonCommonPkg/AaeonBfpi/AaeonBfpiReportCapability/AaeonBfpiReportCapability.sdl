@@ -1,0 +1,1520 @@
+TOKEN
+	Name  = "AAEON_BFPI_REPORT_CAPABILITY"
+	Value  = "1"
+	Help  = "Main switch to automatically generate capability report to WMI caller. Tokens here are basically needs no porting."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+PCIDEVICE
+	Title  = "Aaeon OEM BFPI Container"
+	Parent  = "PciHost (Virtual)"
+	Attribute  = "0x0"
+	Dev_type  = "Container"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ASLfile  = "'AaeonCommonPkg/AaeonBfpi/OemBfpiTemplate.asl;After Pci Tree'"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	Virtual = Yes
+End
+
+TOKEN
+	Name  = "BRGC"
+	Value  = '"{\"Label\":\"BFPI\",\"Version\":$(BPIV)$(BRGC_DIO)$(BRGC_WDT)$(BRGC_HWM)$(BRGC_BLC)$(BRGC_SMF)$(BRGC_LED)$(BRGC_I2C)$(BRGC_PWM)$(BRGC_PDA)$(BRGC_SMB)$(BRGC_BST)}"'
+	Help  = "Revision of AAEON ACPI WMI Specification"
+	TokenType = Expression
+	TargetASL = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for Interfaces supported ======================"
+    Value  = "====================== Tokens for Interfaces supported ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "WMI_DIO_SUPPORT"
+	Value  = "0"
+	Help  = "Support DIO WMI Method. Should be swithed on if AaeonDio3 module is present and enabled."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_WDT_SUPPORT"
+	Value  = "0"
+	Help  = "Support WDT WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_HWM_SUPPORT"
+	Value  = "0"
+	Help  = "Support Hardware Monitor WMI Method"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_BLK_SUPPORT"
+	Value  = "0"
+	Help  = "Support Backlight Control WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_I2C_SUPPORT"
+	Value  = "0"
+	Help  = "Support I2C WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_SMF_SUPPORT"
+	Value  = "0"
+	Help  = "Support Smart Fan WMI Method"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_PWM_SUPPORT"
+	Value  = "0"
+	Help  = "Support PWM WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_PDA_SUPPORT"
+	Value  = "0"
+	Help  = "Support Private Data Area WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_SMB_SUPPORT"
+	Value  = "0"
+	Help  = "Support SMBIOS WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_BST_SUPPORT"
+	Value  = "0"
+	Help  = "Support BIOS Setting WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_LED_SUPPORT"
+	Value  = "0"
+	Help  = "Support LED WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for BFPI STATUS ======================"
+    Value  = "====================== Tokens for BFPI STATUS ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "BFPI_SUCCESS"
+	Value  = "0x00000000"
+	Help  = "BFPI operation is succeeded"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_NOT_SUPPORTED"
+	Value  = "0xFFFFFFFF"
+	Help  = "BFPI received an invalid parameter"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_INVALID_PARAMETER"
+	Value  = "0xFFFFFFFE"
+	Help  = "BFPI received an invalid parameter"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for function number ======================"
+    Value  = "====================== Tokens for function number ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "BFPI_DIO_FN"
+	Value  = "1"
+	Help  = "Function number for DIO"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_WDT_FN"
+	Value  = "2"
+	Help  = "Function number for WDT"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_HWM_FN"
+	Value  = "3"
+	Help  = "Function number for hardware monitor"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_BLC_FN"
+	Value  = "4"
+	Help  = "Function number for backlight controlling"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_SMF_FN"
+	Value  = "5"
+	Help  = "Function number for smart fan"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_LED_FN"
+	Value  = "6"
+	Help  = "Function number for LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_I2C_FN"
+	Value  = "7"
+	Help  = "Function number for I2C"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_PWM_FN"
+	Value  = "8"
+	Help  = "Function number for PWM control"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_PDA_FN"
+	Value  = "9"
+	Help  = "Function number for private data area"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_SMB_FN"
+	Value  = "10"
+	Help  = "Function number for SMBIOS"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "BFPI_BST_FN"
+	Value  = "11"
+	Help  = "Function number for BIOS settings"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for capability strings ======================"
+    Value  = "====================== Tokens for capability strings ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_DIO"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_DIO"
+	Value  = ',\"DIO\": $(BFPI_DIO_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_DIO_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_WDT"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_WDT"
+	Value  = ',\"WDT\": $(BFPI_WDT_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_WDT_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_HWM"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_HWM"
+	Value  = ',\"HWM\": $(BFPI_HWM_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_HWM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_BLC"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_BLC"
+	Value  = ',\"BLC\": $(BFPI_BLC_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_BLC_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_I2C"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_I2C"
+	Value  = ',\"I2C\": $(BFPI_I2C_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_I2C_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_SMF"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_SMF"
+	Value  = ',\"SMF\": $(BFPI_SMF_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_PWM"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_PWM"
+	Value  = ',\"PWM\": $(BFPI_PWM_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_PWM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_PDA"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_PDA"
+	Value  = ',\"PDA\": $(BFPI_PDA_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_PDA_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_SMB"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_SMB"
+	Value  = ',\"SMB\": $(BFPI_SMB_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_SMB_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_BST"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_BST"
+	Value  = ',\"BST\": $(BFPI_BST_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_BST_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "BRGC_LED"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "BRGC_LED"
+	Value  = ',\"LED\": $(BFPI_LED_FN)'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WMI_LED_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens for Source types ======================"
+    Value  = "====================== Tokens for Source types ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "SOURCE_TYPE_OEM"
+	Value  = "180"
+	Help  = "OEM Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SOURCE_TYPE_SOC"
+	Value  = "100"
+	Help  = "SOC Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SOURCE_TYPE_SIO1"
+	Value  = "101"
+	Help  = "SIO1 Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SOURCE_TYPE_SIO2"
+	Value  = "102"
+	Help  = "SIO2 Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SOURCE_TYPE_SIO3"
+	Value  = "103"
+	Help  = "SIO3 Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SOURCE_TYPE_EC1"
+	Value  = "104"
+	Help  = "EC1 Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SOURCE_TYPE_EC2"
+	Value  = "105"
+	Help  = "EC2 Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SOURCE_TYPE_SMBUS"
+	Value  = "106"
+	Help  = "SMBUS Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for WDT  ======================"
+    Value  = "====================== Tokens for WDT  ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "WMI_WDT_SUPPORT"
+	Value  = "1"
+	Help  = "Support WDT WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "WDT_NUMBER" ">" "0"
+End
+
+TOKEN
+	Name  = "WDTC"
+	Value  = '"{ \"Label\":\"WDT\", \"Instance Number\":$(WDT_NUMBER), \"Instance Data\":[$(WDTC_WDT)$(WDTC_SECOND_WDT)]}"'
+	Help  = "WDT capability reported in BFPI"
+	TokenType = Expression
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "WDTC_WDT"
+	Value  = '{ \"Name\": \"$(FIRST_WDT_NAME)\" }'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "WDTC_SECOND_WDT"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "WDTC_SECOND_WDT"
+	Value  = ', { \"Name\": \"$(SECOND_WDT_NAME)\" }'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "WDT_NUMBER" ">" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens for WDT Chip type support ======================"
+    Value  = "====================== Tokens for WDT Chip type support ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "WDT_TYPE_OEM_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling WDT from an OEM WDT controller in ASL code\\Note: Porting required to switch token on. Refor to porting guide for detail."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SOC_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling WDT from SoC GPIO in ASL code\\Note: Porting required to switch token on. Refor to porting guide for detail."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO1_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling WDT from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO2_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling WDT from second SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO3_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling WDT from third SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WDT_TYPE_EC1_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling WDT from first EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WDT_TYPE_EC2_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling WDT from secondary EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OEM_WDT_RC_METHOD"
+	Value  = "\_SB.BFPI.OWRC()"
+	Help  = "OEM WDT report capability - Max Timeout"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "WDT_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_WDT_GT_METHOD"
+	Value  = "\_SB.BFPI.OWGT()"
+	Help  = "OEM WDT Get Timeout"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "WDT_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_WDT_ST_METHOD"
+	Value  = "\_SB.BFPI.OWST(Arg0)"
+	Help  = "OEM WDT Set Level"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "WDT_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens override for WDT Chip type support ======================"
+    Value  = "====================== Tokens override for WDT Chip type support ======================"
+	Help  = "Enable WDT chip type support automatically depends on tokens from other module.\Porting may be required if new chip type is supported."
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling WDT from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81804_SUPPORT" "=" "1"
+	Token = "F81804_WDT_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling WDT from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81866_SUPPORT" "=" "1"
+	Token = "F81866_WDT_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling WDT from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81966_SUPPORT" "=" "1"
+	Token = "F81966_WDT_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling WDT from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8728F_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling WDT from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8625_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling WDT from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NCT6791D_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "WDT_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling WDT from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "W83627DHG_SUPPORT" "=" "1"
+	Token = "W83627DHG_WDT_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "WDT_TYPE_EC1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling WDT from EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8518_SUPPORT" "=" "1"
+	Token = "IT851X_WDT_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens for HWM  ======================"
+    Value  = "====================== Tokens for HWM  ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "WMI_HWM_SUPPORT"
+	Value  = "$(HWM_TYPE_OEM_SUPPORT)|$(HWM_TYPE_SOC_SUPPORT)|$(HWM_TYPE_SIO1_SUPPORT)|$(HWM_TYPE_SIO2_SUPPORT)|$(HWM_TYPE_SIO3_SUPPORT)|$(HWM_TYPE_EC1_SUPPORT)|$(HWM_TYPE_EC2_SUPPORT)"
+	Help  = "Support HWM WMI Method"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "STD_TEMP_STRING_LIST"
+	Value = '"$(STD_CPU_TEMP)", "$(STD_SYS_TEMP)", "$(STD_SYS_TEMP2)"'
+	Help = "List of names for standard temperature sensors. Name should be surrounded by double-quote and should be seperated with comma from other names."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "STD_FAN_STRING_LIST"
+	Value = '"$(STD_CPU_FAN)", "$(STD_SYS_FAN)", "$(STD_SYS_FAN2)", "$(STD_CHS_FAN)", "$(STD_CHS_FAN2)"'
+	Help = "List of names for standard FAN sensors. Name should be surrounded by double-quote and should be seperated with comma from other names."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "STD_VOLT_STRING_LIST"
+	Value = '"$(STD_VCORE)", "$(STD_VMEM)", "$(STD_12V)", "$(STD_5V)", "$(STD_3V3)", "$(STD_1V8)", "$(STD_5VSB)", "$(STD_3VSB)", "$(STD_VBAT)"'
+	Help = "List of names for standard voltage sensors. Name should be surrounded by double-quote and should be seperated with comma from other names."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for HWM Chip type support ======================"
+    Value  = "====================== Tokens for HWM Chip type support ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "HWM_TYPE_OEM_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling HWM from an OEM HWM controller in ASL code\\Note: Porting required to switch token on. Refor to porting guide for detail."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SOC_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling HWM from SoC GPIO in ASL code\\Note: Porting required to switch token on. Refor to porting guide for detail."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO1_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling HWM from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO2_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling HWM from second SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO3_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling HWM from third SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "HWM_TYPE_EC1_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling HWM from first EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "HWM_TYPE_EC2_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling HWM from secondary EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OEM_HWM_SN_METHOD"
+	Value  = "\_SB.BFPI.OHSN(Arg0)"
+	Help  = "OEM HWM Report sensor number"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "HWM_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_HWM_SS_METHOD"
+	Value  = "\_SB.BFPI.OHSS(Arg0, Local0)"
+	Help  = "OEM HWM report sensor name string"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "HWM_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_HWM_SL_METHOD"
+	Value  = "\_SB.BFPI.OHSL(Arg0)"
+	Help  = "OEM HWM Report sensor name list"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "HWM_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_HWM_RS_METHOD"
+	Value  = "\_SB.BFPI.OHRS(Arg0, Arg1)"
+	Help  = "OEM HWM Read Sensor"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "HWM_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens override for HWM Chip type support ======================"
+    Value  = "====================== Tokens override for HWM Chip type support ======================"
+	Help  = "Enable HWM chip type support automatically depends on tokens from other module.\Porting may be required if new chip type is supported."
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling HWM from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81804_SUPPORT" "=" "1"
+	Token = "F81804_HWM_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling HWM from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81866_SUPPORT" "=" "1"
+	Token = "F8186_HWM_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling HWM from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81966_SUPPORT" "=" "1"
+	Token = "F81966_HWM_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling HWM from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8728F_SUPPORT" "=" "1"
+	Token = "IT8728F_HWM_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling HWM from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8625_SUPPORT" "=" "1"
+	Token = "IT8625_HWM_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling HWM from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NCT6791D_SUPPORT" "=" "1"
+	Token = "NCT6791D_HWM_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "HWM_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling HWM from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "W83627DHG_SUPPORT" "=" "1"
+	Token = "W83627DHG_HWM_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "HWM_TYPE_EC1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling HWM from EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8518_SUPPORT" "=" "1"
+	Token = "IT851X_HWM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "HWM_TYPE_EC2_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling HWM from secondary EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8518SEC_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens for SMF  ======================"
+    Value  = "====================== Tokens for SMF  ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "WMI_SMF_SUPPORT"
+	Value  = "$(SMF_TYPE_OEM_SUPPORT)|$(SMF_TYPE_SOC_SUPPORT)|$(SMF_TYPE_SIO1_SUPPORT)|$(SMF_TYPE_SIO2_SUPPORT)|$(SMF_TYPE_SIO3_SUPPORT)|$(SMF_TYPE_EC1_SUPPORT)|$(SMF_TYPE_EC2_SUPPORT)"
+	Help  = "Support SMF WMI Method"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OEM_SMF_RC_METHOD"
+	Value  = "\_SB.BFPI.OFRC(Arg0)"
+	Help  = "OEM SMF return capability"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_RN_METHOD"
+	Value  = "\_SB.BFPI.OFRN"
+	Help  = "OEM SMF return controller number"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_FS_METHOD"
+	Value  = "\_SB.BFPI.OFFS(Local0)"
+	Help  = "OEM SMF return controller name string"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_RM_METHOD"
+	Value  = "\_SB.BFPI.OFRM(Arg0)"
+	Help  = "OEM SMF Get Mode"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_TS_METHOD"
+	Value  = "\_SB.BFPI.OFTS(Local0)"
+	Help  = "OEM SMF return name string for target temperature"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_PW_METHOD"
+	Value  = "\_SB.BFPI.OFPW(Arg0)"
+	Help  = "OEM SMF return Max. PWM value"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_LP_METHOD"
+	Value  = "\_SB.BFPI.OFLP(Arg0)"
+	Help  = "OEM SMF return Min. slope unit"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_RL_METHOD"
+	Value  = "\_SB.BFPI.OFRL"
+	Help  = "OEM SMF return controller name list"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_GM_METHOD"
+	Value  = "\_SB.BFPI.OFGM(Arg0)"
+	Help  = "OEM SMF Get Mode"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_SM_METHOD"
+	Value  = "\_SB.BFPI.OFSM(Arg0,Arg1,Arg2)"
+	Help  = "OEM SMF Set Mode"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_GP_METHOD"
+	Value  = "\_SB.BFPI.OFGP(Arg0,Arg1)"
+	Help  = "OEM SMF Get Control Point"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_SMF_SP_METHOD"
+	Value  = "\_SB.BFPI.OFSP(Arg0,Arg1,Arg2,Arg3)"
+	Help  = "OEM SMF Set Control Point"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SMF_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens for SMF source type support ======================"
+    Value  = "====================== Tokens for SMF source type support ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "SMF_TYPE_OEM_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling SMF from an OEM SMF controller in ASL code\\Note: Porting required to switch token on. Refor to porting guide for detail."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SOC_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling SMF from SoC GPIO in ASL code\\Note: Porting required to switch token on. Refor to porting guide for detail."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO1_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling SMF from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO2_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling SMF from second SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO3_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling SMF from third SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMF_TYPE_EC1_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling SMF from first EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMF_TYPE_EC2_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling SMF from secondary EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens override for SMF source type support ======================"
+    Value  = "====================== Tokens override for SMF source type support ======================"
+	Help  = "Enable SMF chip type support automatically depends on tokens from other module.\Porting may be required if new chip type is supported."
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling SMF from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81804_SUPPORT" "=" "1"
+	Token = "F81804_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling SMF from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81866_SUPPORT" "=" "1"
+	Token = "F81866_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling SMF from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81966_SUPPORT" "=" "1"
+	Token = "F81966_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling SMF from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8728F_SUPPORT" "=" "1"
+	Token = "IT8728F_SMF_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling SMF from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8625_SUPPORT" "=" "1"
+	Token = "IT8625_SMF_PRESENT" "=" "1"
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling SMF from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NCT6791D_SUPPORT" "=" "1"
+	Token = "NCT6791D_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SMF_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling SMF from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "W83627DHG_SUPPORT" "=" "1"
+	Token = "W83627DHG_SmartFan_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SMF_TYPE_EC1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling SMF from EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8518_SUPPORT" "=" "1"
+	Token = "IT851X_SMARTFAN_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SMF_TYPE_EC2_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling SMF from secondary EC in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8518SEC_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens for LED  ======================"
+    Value  = "====================== Tokens for LED  ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "WMI_LED_SUPPORT"
+	Value  = "1"
+	Help  = "Support LED WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "LED_NUMBER" ">" "0"
+End
+
+TOKEN
+	Name  = "LEDC"
+	Value  = '"{ \"Label\":\"LED\", \"Instance Number\":$(LED_NUMBER), \"Instance Data\":["'
+	Help  = "LED capability reported in BFPI"
+	TokenType = Expression
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "LED_TYPE_OEM_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling LED from an OEM LED controller in ASL code\\Currently support OEM LED type only\Note: Porting required to switch token on. Refor to porting guide for detail."
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "WMI_LED_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_LED_GB_METHOD"
+	Value  = "\_SB.BFPI.OLGB(Arg0)"
+	Help  = "OEM LED Get Brightness"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "LED_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_LED_SB_METHOD"
+	Value  = "\_SB.BFPI.OLSB(Local0, Local1)"
+	Help  = "OEM LED Set Brightness"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "LED_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+###########################################################################
+##	
+##	Standard string Constants
+##  Should use tokens from AaeonIoPkg first.
+##
+###########################################################################
+TOKEN
+	Name = "STD_CPU_TEMP"
+	Value = "CPU Temperature"
+	Help = "Standard name for CPU temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_CPU_TEMP2"
+	Value = "CPU Temperature 2"
+	Help = "Standard name for CPU temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP"
+	Value = "System Temperature"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP2"
+	Value = "System Temperature 2"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP3"
+	Value = "System Temperature 3"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP4"
+	Value = "System Temperature 4"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP5"
+	Value = "System Temperature 5"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP6"
+	Value = "System Temperature 6"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_CPU_FAN"
+	Value = "CPU FAN"
+	Help = "Standard name for CPU FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_CPU_FAN2"
+	Value = "CPU FAN2"
+	Help = "Standard name for CPU FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_FAN"
+	Value = "System FAN"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_FAN2"
+	Value = "System FAN2"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_FAN3"
+	Value = "System FAN3"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_FAN4"
+	Value = "System FAN 4"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_FAN5"
+	Value = "System FAN 5"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_SYS_FAN6"
+	Value = "System FAN 6"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_CHS_FAN"
+	Value = "Chassis FAN"
+	Help = "Standard name for Chassis FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_CHS_FAN2"
+	Value = "Chassis FAN2"
+	Help = "Standard name for Chassis FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_VCORE"
+	Value = "VCORE"
+	Help = "Standard name for VCORE voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_VMEM"
+	Value = "VMEM"
+	Help = "Standard name for VMEM/2.5V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_12V"
+	Value = "+12V"
+	Help = "Standard name for +12V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_5V"
+	Value = "+5V"
+	Help = "Standard name for +5V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_3V3"
+	Value = "+3.3V"
+	Help = "Standard name for +3.3V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_1V8"
+	Value = "+1.8V"
+	Help = "Standard name for +1.8V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_5VSB"
+	Value = "5VSB"
+	Help = "Standard name for 5VSB voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_3VSB"
+	Value = "3VSB"
+	Help = "Standard name for 3VSB voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name = "STD_VBAT"
+	Value = "VBAT"
+	Help = "Standard name for VBAT voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "AaeonIoPkg_SUPPORT" "=" "0"
+End

@@ -1,0 +1,120 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+
+    UINT8   WatchDogPost;
+    UINT8   WatchDogOS;
+    UINT8   TimerSecond;
+    UINT8   TimerMinute;
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------ 
+    #define AAEON_WATCH_DOG_POST\
+    oneof varid     = SETUP_DATA.WatchDogPost,\
+    prompt  = STRING_TOKEN(STR_WATCH_DOG_POWER_ON),\
+    help    = STRING_TOKEN(STR_WATCH_DOG_POWER_ON_HELP),\
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+    option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    endoneof;
+    
+    #define AAEON_WATCH_DOG_OS\
+    oneof varid     = SETUP_DATA.WatchDogOS,\
+    prompt  = STRING_TOKEN(STR_WATCH_DOG_BOOTING_OS),\
+    help    = STRING_TOKEN(STR_WATCH_DOG_BOOTING_OS_HELP),\
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+    option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    endoneof;  
+
+    #define AAEON_TIMER_SECOND\
+    numeric varid = SETUP_DATA.TimerSecond,\
+    prompt      = STRING_TOKEN (STR_TIMER_SECOND),\
+    help        = STRING_TOKEN (STR_TIMER_SECOND_HELP),\
+    minimum     = 0,\
+    maximum     = 255,\
+    step        = 0,    \
+    default     = 30,    \
+    endnumeric;
+      
+            
+    #define AAEON_TIMER_MINUTE\
+    numeric varid = SETUP_DATA.TimerMinute,\
+    prompt      = STRING_TOKEN (STR_TIMER_MINUTE),\
+    help        = STRING_TOKEN (STR_TIMER_MINUTE_HELP),\
+    minimum     = 0,\
+    maximum     = 255,\
+    step        = 0,    \
+    default     = 3,    \
+    endnumeric;
+//------------------------------------------------------------
+// Define Macro
+//------------------------------------------------------------    
+         
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+	#ifdef FORM_SET_TYPEDEF
+
+	#endif
+    #ifdef FORM_SET_VARSTORE
+
+    #endif	
+	#ifdef WATCHROBOT_FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset 
+
+            //Watch Robot
+    
+            AAEON_WATCH_DOG_POST
+                        
+            grayoutif ideqval SETUP_DATA.WatchDogPost == 0;
+            AAEON_TIMER_SECOND                          
+            endif;
+
+            AAEON_WATCH_DOG_OS    
+                              
+            grayoutif ideqval SETUP_DATA.WatchDogOS == 0;
+            AAEON_TIMER_MINUTE                          
+            endif;    	
+	
+             
+	#endif
+
+	#ifdef FORM_SET_GOTO
+        
+	#endif //FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+	//-------------------------------------------------------------------------
+	//	AAEON OEM Group
+	//-------------------------------------------------------------------------  
+
+            
+            
+	#endif //FORM_SET_FORM
+#endif  // ADVANCED_FORM_SET

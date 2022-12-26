@@ -1,0 +1,91 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------ 
+         
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+	#ifdef FORM_SET_TYPEDEF
+
+	#endif
+    #ifdef FORM_SET_VARSTORE
+
+    #endif	
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset 
+	
+	
+             
+	#endif
+
+	#ifdef FORM_SET_GOTO
+	
+	        goto AAEON_BIOS_ROBOT_FORM_ID,
+        prompt  = STRING_TOKEN(STR_BIOS_ROBOT_FORM),
+        help    = STRING_TOKEN(STR_BIOS_ROBOT_FORM_HELP);
+        
+	#endif //FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+	//-------------------------------------------------------------------------
+	//	AAEON OEM Group
+	//-------------------------------------------------------------------------
+	
+	
+	       form formid = AUTO_ID(AAEON_BIOS_ROBOT_FORM_ID),
+            title = STRING_TOKEN(STR_BIOS_ROBOT_FORM);
+            SUBTITLE(STRING_TOKEN(STR_BIOS_ROBOT_FORM))
+            SEPARATOR
+
+            #undef FORM_SET_FORM
+            
+            #define WATCHROBOT_FORM_SET_ITEM
+            #include <SetupDefinitions.h>
+            #undef WATCHROBOT_FORM_SET_ITEM
+
+            #define POWER_ON_ROBOT_FORM_SET_ITEM
+            #include <SetupDefinitions.h>
+            #undef POWER_ON_ROBOT_FORM_SET_ITEM
+            
+            #define SENTRY_ROBOT_FORM_SET_GOTO
+            #include <SetupDefinitions.h>
+            #undef SENTRY_ROBOT_FORM_SET_GOTO
+            
+            #define FORM_SET_FORM 
+                                                  
+            
+            endform;
+
+            
+	#endif //FORM_SET_FORM
+#endif  // ADVANCED_FORM_SET

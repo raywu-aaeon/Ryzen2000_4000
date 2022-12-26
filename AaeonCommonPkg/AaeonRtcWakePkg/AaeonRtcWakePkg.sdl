@@ -1,0 +1,107 @@
+TOKEN
+	Name  = "AaeonRtcWakePkg_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AaeonRtcWakePkg_DIR"
+End
+
+ELINK
+	Name  = "$(AaeonRtcWakePkg_DIR)\AaeonRtcWakePkg.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonRtcWakePkg_DIR)\AaeonRtcWakePkg.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AaeonRtcWake_Init,"
+	Parent  = "AAEON_S5_SMI_FUNCTIONS"
+	InvokeOrder = BeforeParent
+End
+
+ELINK
+	Name  = "AaeonRtcWake_Init,"
+	Parent  = "AAEON_POWER_BUTTON_SMI_FUNCTIONS"
+	InvokeOrder = BeforeParent
+End
+
+ELINK
+	Name  = "$(AaeonRtcWakePkg_DIR)\AaeonRtcWakePkg.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name  = "AAEON_RTC_WAKE_DYNAMIC_SUPPORT"
+	Value  = "0"
+	Help  = "Support Dynamic Time for System Wake On RTC"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_RTCWAKEUP_SUNDAY_DEFAULT"
+	Value  = "0"
+	Help = "Default value of RTC wake up on weekday\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_RTCWAKEUP_MONDAY_DEFAULT"
+	Value  = "1"
+	Help = "Default value of RTC wake up on weekday\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_RTCWAKEUP_TUESDAY_DEFAULT"
+	Value  = "1"
+	Help = "Default value of RTC wake up on weekday\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_RTCWAKEUP_WEDNESDAY_DEFAULT"
+	Value  = "1"
+	Help = "Default value of RTC wake up on weekday\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_RTCWAKEUP_THURSDAY_DEFAULT"
+	Value  = "1"
+	Help = "Default value of RTC wake up on weekday\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_RTCWAKEUP_FRIDAY_DEFAULT"
+	Value  = "1"
+	Help = "Default value of RTC wake up on weekday\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_RTCWAKEUP_SATURDAY_DEFAULT"
+	Value  = "0"
+	Help = "Default value of RTC wake up on weekday\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End

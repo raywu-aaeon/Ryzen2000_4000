@@ -1,0 +1,19 @@
+<component>
+	name = "PowerOnRobot"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonBiosRobotPkg\PowerOnRobot\"
+	RefName = "AaeonCommonPkg.AaeonBiosRobot.PowerOnRobot"
+[INF]
+"PowerOnRobotPei.inf"
+"PowerOnRobotDxe.inf"
+"PowerOnRobotDxeResetLib.inf"
+
+
+[files]
+"PowerOnRobot.sdl"
+"PowerOnRobot.sd"
+"PowerOnRobot.uni"
+
+[parts]
+
+<endComponent>

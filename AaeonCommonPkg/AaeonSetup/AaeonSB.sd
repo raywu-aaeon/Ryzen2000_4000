@@ -1,0 +1,50 @@
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+#endif
+
+
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+#endif
+
+//**********************************************************************
+//                CHIPSET - North/South Bridge Form
+//**********************************************************************
+#ifdef CHIPSET_FORM_SET
+
+    #ifdef FORM_SET_TYPEDEF
+    #endif
+
+    #ifdef AAEON_FORM_SET_ITEM
+    // Define controls to be added to the main page of the formset
+    #endif //AAEON_FORM_SET_ITEM
+  
+    #ifdef AAEON_FORM_SET_GOTO
+        // Define goto commands for the forms defined in this file
+        goto AAEON_SB_FORM_ID, 
+            prompt  = STRING_TOKEN(STR_SB_FORM),
+            help    = STRING_TOKEN(STR_SB_FORM_HELP);
+    #endif //AAEON_FORM_SET_GOTO
+  
+    #ifdef FORM_SET_FORM
+        form formid = AUTO_ID(AAEON_SB_FORM_ID),
+            title = STRING_TOKEN(STR_SB_FORM);
+
+        endform; //ENDFORM AAEON_SB_FORM_ID
+    
+    #endif //FORM_SET_FORM
+
+#endif  // CHIPSET_FORM_SET
+

@@ -1,0 +1,15 @@
+<component>
+	name = "AutoLoadDefault"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AutoLoadDefault\"
+	RefName = "AaeonCommonPkg.AutoLoadDefault"
+[INF]
+"AutoLoadDefault.inf"
+
+[files]
+"AutoLoadDefault.sdl"
+"AutoLoadDefault.c"
+
+[parts]
+
+<endComponent>

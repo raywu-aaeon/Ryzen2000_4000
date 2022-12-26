@@ -1,0 +1,15 @@
+<component>
+	name = "AaeonSecureBoot"
+	category = eModule
+	Rank = 60
+	LocalRoot = "AaeonCommonPkg\AaeonSecureBoot\"
+	RefName = "AaeonCommonPkg.AaeonSecureBoot"
+[files]
+"AaeonSecureBoot.sdl"
+"AaeonSecureBoot.sd"
+"AaeonSecureBootSetup.c"
+"AaeonKeys\db"
+"AaeonKeys\KEK"
+"AaeonKeys\PK"
+
+<endComponent>

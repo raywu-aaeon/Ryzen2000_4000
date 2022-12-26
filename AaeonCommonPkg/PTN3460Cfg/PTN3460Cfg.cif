@@ -1,0 +1,17 @@
+<component>
+	name = "PTN3460Cfg"
+	category = eModule
+	Rank = 40
+	LocalRoot = "AaeonCommonPkg\PTN3460Cfg"
+	RefName = "AaeonCommonPkg.PTN3460Cfg"
+[files]
+"PTN3460Cfg.sdl"
+"PTN3460Cfg.mak"
+"PTN3460Cfg.h"
+[parts]
+"AaeonCommonPkg.PTN3460Cfg.PTN3460CfgSetup"
+"AaeonCommonPkg.PTN3460Cfg.PTN3460OemHooks"
+[INF]
+"PTN3460CfgDxe.inf"
+"PTN3460CfgPei.inf"
+<endComponent>

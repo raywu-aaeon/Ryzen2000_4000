@@ -1,0 +1,35 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonDxeLib
+  FILE_GUID                      = 10af7b94-d514-4ddc-89f8-c7e77019ce25
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AaeonDxeLib
+
+[Sources]
+  GPIO.c
+  F81866.c
+  F81966.c
+  IT8728.c
+  IT8625.c
+  F75111.c
+  F81804.c
+  F75113.c
+  IT8518.c
+  AaeonCommonLib.h
+  WatchDog.c
+  SIO.c
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AaeonCommonPkg/AaeonCommonPkg.dec
+
+[LibraryClasses]
+  IoLib
+  UefiBootServicesTableLib
+  DebugLib
+
+[Protocols]
+  gEfiSmbusHcProtocolGuid
+

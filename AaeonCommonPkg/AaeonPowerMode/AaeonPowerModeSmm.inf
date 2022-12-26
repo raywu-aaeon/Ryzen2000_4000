@@ -1,0 +1,36 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AaeonPowerModeSmm
+  FILE_GUID                      = 35C3FC82-1767-40E9-89A7-9A1CF23A8EF9
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION        = 0x0001000A
+  ENTRY_POINT                    = AaeonPowerModeSmmInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  AaeonPowerModeSmm.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  AmiDxeLib
+  AmiCspLib
+  
+[Protocols]
+  gEfiSmmSxDispatch2ProtocolGuid
+
+[Depex]
+  gEfiSmmSxDispatch2ProtocolGuid

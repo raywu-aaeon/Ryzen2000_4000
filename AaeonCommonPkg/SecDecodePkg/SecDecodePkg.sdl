@@ -1,0 +1,140 @@
+TOKEN
+	Name  = "SecDecodePkg_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "=============== SB LPC/eSPI Config =============="
+	TokenType = Expression
+End
+TOKEN
+	Name  = "PCH_IO_DECODE_IN_SEC"
+	Value  = "1"
+	Help  = "Main switch for LPC I/O decode in SEC phase, '0' means disabled."
+	TokenType = Boolean
+	TargetEQU = Yes
+End
+TOKEN
+	Name  = "PCH_DMI_IO_DECODE"
+	Value  = "0"
+	Help  = "Set PCH DMI LPC I/O decode registers (MMIO) in SEC phase, '0' means disabled."
+	TokenType = Boolean
+	TargetEQU = Yes
+End
+
+TOKEN
+	Name  = "PCH_LPC_IO_DECODE_RANGE"
+	Value  = "0x0070"
+	Help  = "The LPC_I/O_DEC-I/O Decode Ranges Register setting."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+	Name  = "PCH_LPC_IO_DECODE_EN"
+	Value  = "0x3C07"
+	Help  = "The LPC I/F Enables Register value."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+	Name  = "PCH_GEN_DECODE_RANGE_1"
+	Value  = "0x2B0"
+	Help  = "The base address of PCH Generic decode I/O range 1, '0' means no function."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+	Name  = "PCH_GEN_DECODE_MASK_1"
+	Value  = "0x7C"
+	Help  = "The mask bit of of PCH Generic decode I/O range 1, '0' means no function."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+	Name  = "PCH_GEN_DECODE_RANGE_2"
+	Value  = "0xA00"
+	Help  = "The base address of PCH Generic decode I/O range 2, '0' means no function."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+	Name  = "PCH_GEN_DECODE_MASK_2"
+	Value  = "0x3C"
+	Help  = "The mask bit of of PCH Generic decode I/O range 2, '0' means no function."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+	Name  = "PCH_GEN_DECODE_RANGE_3"
+	Value  = "0x4700"
+	Help  = "The base address of of PCH Generic decode I/O range 3, '0' means no function."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+	Name  = "PCH_GEN_DECODE_MASK_3"
+	Value  = "0xFC"
+	Help  = "The mask bit of PCH Generic decode I/O range 3, '0' means no function."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+	Name  = "PCH_GEN_DECODE_RANGE_4"
+	Value  = "0"
+	Help  = "The base address of of PCH Generic decode I/O range 4, '0' means no function."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+	Name  = "PCH_GEN_DECODE_MASK_4"
+	Value  = "0x1C"
+	Help  = "The mask bit of PCH Generic decode I/O range 4, '0' means no function."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+	Range  = "00 - 0FFFFh"
+End
+TOKEN
+    Name  = " "
+    TokenType = Expression
+End
+
+INFComponent
+	Name  = "SecDecodePkg"
+	File  = "SecDecodePkg.inf"
+	Package  = "AaeonCommonPkg"
+End
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AaeonCommonPkg.SecDecodePkg"
+	Override  = "IA32FamilyCpuPkg.SecCore"
+End
+ELINK
+	Name  = "SecDecodePkg_EarlyInit"
+	Parent  = "SECCoreAtPowerOn"
+	Help  = "OEM Early Init in SEC (before Cache as memory enabling)"
+	InvokeOrder = AfterParent
+End

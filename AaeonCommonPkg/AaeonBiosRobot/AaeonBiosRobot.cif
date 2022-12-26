@@ -1,0 +1,20 @@
+<component>
+	name = "AaeonBiosRobot"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonBiosRobot\"
+	RefName = "AaeonCommonPkg.AaeonBiosRobot"
+[INF]
+"AaeonBiosRobotLib\AaeonBiosRobotLib.inf"
+
+[files]
+"AaeonBiosRobot.sdl"
+"AaeonBiosRobot.uni"    
+"AaeonBiosRobot.sd"
+"AaeonBiosRobot.ssp"
+"Readme.md"
+
+[parts]
+"AaeonCommonPkg.AaeonBiosRobot.PowerOnRobot"
+"AaeonCommonPkg.AaeonBiosRobot.WatchRobot"
+"AaeonCommonPkg.AaeonBiosRobot.SentryRobot"
+<endComponent>

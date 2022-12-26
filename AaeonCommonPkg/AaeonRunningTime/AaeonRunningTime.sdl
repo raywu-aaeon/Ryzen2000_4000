@@ -1,0 +1,91 @@
+TOKEN
+	Name  = "AaeonRunningTime_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+#
+# Below two ELINKs used to preserve PowerOnTime and PreviousRunTime varsion across BIOS F/W update even AFU.efi with /n is used.
+#
+ELINK
+	Name  = '{L"PowerOnTime", {0xCE066E0D, 0x1893, 0x4FF5, {0x81, 0x89, 0x0B, 0xF8, 0x8F, 0xF1, 0x6B, 0xCA}}},'
+	Parent  = "NvramPersistentVariables"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = '{L"PreviousRunTime", {0xCE066E0D, 0x1893, 0x4FF5, {0x81, 0x89, 0x0B, 0xF8, 0x8F, 0xF1, 0x6B, 0xCA}}},'
+	Parent  = "NvramPersistentVariables"
+	InvokeOrder = AfterParent
+End
+
+## =======================================================
+##               For Setup Item Call Back
+## =======================================================
+PATH
+	Name  = "AaeonRunningTime_DIR"
+End
+ELINK
+	Name  = "$(AaeonRunningTime_DIR)\AaeonRunningTime.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS, 0, AAEON_RUN_TIME_INTERACTIVE_KEY, AaeonRunningTimeCallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+## =======================================================
+##               For Dxe Module
+## =======================================================
+INFComponent
+	Name  = "AaeonRunningTimeDxe"
+	File  = "AaeonRunningTimeDxe.inf"
+	Package  = "AaeonRunningTime"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+End
+
+ELINK
+	Name  = "RunningTimePwrBtnSxHandler,"
+	Parent  = "AAEON_S5_SMI_FUNCTIONS"
+	InvokeOrder = BeforeParent
+End
+
+ELINK
+	Name  = "RunningTimePwrBtnSxHandler,"
+	Parent  = "AAEON_POWER_BUTTON_SMI_FUNCTIONS"
+	InvokeOrder = BeforeParent
+End
+
+ELINK
+	Name  = "$(AaeonRunningTime_DIR)\S5andPowerBtnSMI.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "gEfiSmmVariableProtocolGuid"
+	Parent  = "AMI_CSP_DXE_PROTOCOLS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "MdeModulePkg\MdeModulePkg.dec"
+	Parent  = "AMI_CSP_PACKAGES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonRunningTime_DIR)\AaeonRunningTime.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonRunningTime_DIR)\AaeonRunningTime.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End

@@ -1,0 +1,8 @@
+<component>
+	name = "LibraryInstances"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\AaeonSetup\LibraryInstances\"
+	RefName = "AaeonCommonPkg.AaeonSetup.LibraryInstances"
+[INF]
+"AaeonSetupLib\AaeonSetupLib.inf"
+<endComponent>

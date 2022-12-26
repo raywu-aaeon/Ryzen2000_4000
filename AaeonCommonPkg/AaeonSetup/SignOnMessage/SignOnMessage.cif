@@ -1,0 +1,10 @@
+<component>
+	name = "SignOnMesasge"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\AaeonSetup\SignOnMessage\"
+	RefName = "AaeonCommonPkg.AaeonSetup.SignOnMessage"
+[files]
+"SignOnMessage.sdl"	
+"SignOnMessage.mak"	
+"GenUniFile.exe"	
+<endComponent>

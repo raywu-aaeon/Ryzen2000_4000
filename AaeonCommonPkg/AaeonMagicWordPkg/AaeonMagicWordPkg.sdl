@@ -1,0 +1,64 @@
+TOKEN
+	Name  = "AaeonMagicWordPkg_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AaeonMagicWordPkg_DIR"
+End
+
+ELINK
+	Name  = "AAEONMagicWordInit, "
+	Parent  = "SmbiosOemUpdateList"
+	InvokeOrder = AfterParent
+	Help  = "AAEON SDK magic word"
+End
+
+TOKEN
+	Name  = "AAEON_Signature1_Address"
+	Value  = "0xFE83C"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AAEON_Signature1"
+	Value  = "AAEON Technology Inc."
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AAEON_Signature2_Address"
+	Value  = "0xFE8F0"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AAEON_Signature2"
+	Value  = "__$(PROJECT_TAG)__"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+INFComponent
+	Name  = "AaeonMagicWordPkg"
+	File  = "AaeonMagicWordPkg.inf"
+	Package  = "AaeonCommonPkg"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AaeonCommonPkg.AaeonMagicWordPkg"
+	Override  = "AmiCompatibilityPkg.SmbiosBoard"
+End

@@ -1,0 +1,38 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PTN3460CfgPei
+  FILE_GUID                      = 4FEBE43F-256E-4c82-A20A-BC0D03C72185
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PTN3460CfgPeiInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  PTN3460CfgPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+[Ppis]
+  gEfiPeiSmbus2PpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gEfiPeiStallPpiGuid
+  
+[LibraryClasses]
+  PeimEntryPoint
+  AmiCspLib
+  AmiPeiLib
+  
+[Depex]
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gEfiPeiSmbus2PpiGuid AND
+  gEfiPeiStallPpiGuid AND
+  gEfiDxeIplPpiGuid

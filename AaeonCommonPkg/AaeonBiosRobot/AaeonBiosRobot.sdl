@@ -1,0 +1,110 @@
+TOKEN
+	Name  = "AAEON_BIOS_ROBOT_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AaeonBiosRobot support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+    Name  = "AAEONBIOSROBOT_DIR"
+End
+
+ELINK
+        Name = "$(AAEONBIOSROBOT_DIR)/AaeonBiosRobot.sd"
+        Parent = "SETUP_DEFINITIONS"
+        InvokeOrder = AfterParent
+End
+
+ELINK
+        Name  = "$(AAEONBIOSROBOT_DIR)/AaeonBiosRobot.uni"
+        Parent  = "SetupStringFiles"
+        InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AAEONBIOSROBOT_DIR)/AaeonBiosRobot.ssp"
+    Parent  = "ADDON_SSP_FILES"
+    Token = "CMOS_MANAGER_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "AaeonBiosRobotLib"
+    File  = "AaeonBiosRobotLib\AaeonBiosRobotLib.inf"
+    Package  = "AaeonBiosRobot"
+End
+
+LibraryMapping
+    Class  = "AaeonBiosRobotLib"
+    Instance  = "AaeonBiosRobot.AaeonBiosRobotLib"
+End
+
+ELINK
+    Name  = "AaeonBiosRobotLib"
+    Parent  = "AMI_CSP_DXE_LIBRARIES"
+    InvokeOrder = AfterParent
+End
+################# BIOS Robot porting start ####################
+#################  WDT CHIP  #########################
+TOKEN
+	Name  = "ROBOT_WDT_CHIP_TYPE"
+	Value  = "$(F81804_CHIP_TYPE)"
+	Help  = "Select WDT chip type. Refer to AaeonCommonPkg.sdl for possible values."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ROBOT_WDT_CHIP_TYPE"
+	Value  = "$(FIRST_WDT_TYPE)"
+	Help  = "Select WDT chip type. Refer to AaeonCommonPkg.sdl for possible values."
+	TokenType = Integer
+	TargetH = Yes
+    Token = "AAEON_BFPI_SUPPORT" "=" "1"
+    Token = "WDT_NUMBER" ">=" "1"
+End
+
+################ SIO Monitor CHIP ###################
+TOKEN
+    Name  = "ROBOT_MONITOR_SIO_CHIP_TYPE"
+    Value  = "$(F81804_CHIP_TYPE)"
+    Help  = "Select SIO Monitor chip type. Refer to AaeonCommonPkg.sdl for possible values."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ROBOT_MONITOR_SIO_CHIP_TYPE"
+    Value  = "$(FIRST_WDT_TYPE)"
+    Help  = "Select SIO Monitor chip type. Refer to AaeonCommonPkg.sdl for possible values."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "AAEON_BFPI_SUPPORT" "=" "1"
+    Token = "WDT_NUMBER" ">=" "1"
+End
+
+#################  CMOS FLAG  ########################
+TOKEN
+    Name  = "BIOS_ROBOT_FLAG_REG"
+    Value  = "0x6B"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Lock = Yes
+    Token = "CMOS_MANAGER_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "OS_WATCH_DOG_TIME_FLAG_REG"
+    Value  = "0x6A"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Lock = Yes
+    Token = "CMOS_MANAGER_SUPPORT" "=" "1"
+End
+

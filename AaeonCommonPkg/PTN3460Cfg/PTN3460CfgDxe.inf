@@ -1,0 +1,39 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PTN3460CfgDxe
+  FILE_GUID                      = F92C448E-5919-4064-B784-E1E7741C9C33
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PTN3460CfgDxeInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  PTN3460CfgDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  
+[Protocols]
+  gEfiS3SaveStateProtocolGuid
+  gEfiSmbusHcProtocolGuid #EIP154389 
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  AmiCspLib
+  AmiDxeLib
+
+  
+[Depex]
+  gEfiS3SaveStateProtocolGuid AND
+  gEfiSmbusHcProtocolGuid 

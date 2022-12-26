@@ -1,0 +1,12 @@
+<component>
+	name = "AaeonCapsuleUpdate"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonCapsuleUpdate\"
+	RefName = "AaeonCommonPkg.AaeonCapsuleUpdate"
+
+[files]
+"AaeonCapsuleUpdate.sdl"
+"AaeonCapsuleUpdate.c"
+
+<endComponent>
+

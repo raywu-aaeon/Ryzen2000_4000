@@ -1,0 +1,106 @@
+###########################################################################
+Source Revision:	AaeonSetup_04
+Release Date:		2018/04/02
+
+Label:			N/A
+
+Description:
+	(1) To support remote BIOS customization service.
+		Change:
+			Add a Goto in CRB Setup form so BCP CMD line can parse Aaeon setup
+
+Modified files:
+			AaeonAdvanced.sd
+			AaeonBoot.sd
+			AaeonChipset.sd
+			AaeonExit.sd
+			AaeonMain.sd
+			AaeonSecurity.sd
+
+Added modules:
+	N/A
+Removed modules:
+	N/A
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+Source Revision:	AaeonSetup_03
+Release Date:		2017/10/31
+
+Label:			N/A
+
+Description:            (1) Fix issue STS_Debug_#243: User shouldn't boot to CRB setup by windows debug 
+			    mode
+			    Verification:
+				    Pass on UP-APL01 (UPA1AM22) with WIN10 OS.
+			    Root cause:
+				    AMI _gBootFlowTable sets the first entry of setup page to CRB main page.
+
+Modified files:         AaeonSetup.h
+			AaeonSetup.sdl
+			AaeonSetup.c
+
+Added modules:
+	N/A
+Removed modules:
+	N/A
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+Source Revision:	AaeonSetup_02
+Release Date:		2016/03/20
+
+Label:			N/A
+
+Description:            (1) Modify BIOS Setup Menu F4 Hot key function as "Save & Reset"
+			(2) Resolved "When pressed Load Optimal Default, the BIOS Setup
+			    Menu switch to AMI CRB" issue.
+
+Modified files:         AaeonSetup.cif
+			AaeonSetup.h
+			AaeonSetup.sdl
+			AaeonSetup.c
+			AaeonDefaultOverride.sd
+
+Added modules:
+	N/A
+Removed modules:
+	N/A
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_27
+
+###########################################################################
+Source Revision:	AaeonSetup_01
+Release Date:		2015/05/22
+
+Label:			N/A
+
+Description:            Remove PowerMode items, the item is supported in 
+                        AaeonPowerMode module
+
+Modified files:         AaeonAdvanced.sd
+                        AaeonSetup.uni
+
+Added modules:
+	N/A
+Removed modules:
+	N/A
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+
+###########################################################################
+Source Revision:	AaeonSetup_00
+Release Date:		2015/03/11
+
+Label:			
+
+Modified files:
+
+Added modules:
+	N/A
+Removed modules:
+	N/A
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_25_6
+
+###########################################################################

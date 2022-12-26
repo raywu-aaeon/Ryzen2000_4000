@@ -1,0 +1,542 @@
+TOKEN
+	Name  = "AaeonCommonPkg_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AaeonCommonPkg_DIR"
+End
+ELINK
+	Name  = "AmiSioDxeLib"
+	Parent  = "AdditionalSetupLibraryClasses"
+	InvokeOrder = AfterParent
+	Token = "SioLibraryInstances_SUPPORT" "=" "1"
+End
+INFComponent
+	Name  = "AaeonSxSmi"
+	File  = "AaeonSxSmiPkg/AaeonSxSmi.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+ELINK
+	Name  = "AAEON_S3_SMI_FUNCTIONS"
+	InvokeOrder = ReplaceParent
+End
+ELINK
+	Name  = "AAEON_S4_SMI_FUNCTIONS"
+	InvokeOrder = ReplaceParent
+End
+ELINK
+	Name  = "AAEON_S5_SMI_FUNCTIONS"
+	InvokeOrder = ReplaceParent
+End
+INFComponent
+	Name  = "AaeonPowerButtonSmi"
+	File  = "AaeonPowerButtonSmiPkg/AaeonPowerButtonSmi.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+ELINK
+	Name  = "AAEON_POWER_BUTTON_SMI_FUNCTIONS"
+	InvokeOrder = ReplaceParent
+End
+INFComponent
+	Name  = "AaeonCommonDxe"
+	File  = "AaeonNonSioCommonDxe.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SIO_SUPPORT" "=" "0"
+End
+INFComponent
+	Name  = "AaeonCommonDxe"
+	File  = "AaeonCommonDxe.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SIO_SUPPORT" "=" "1"
+End
+ELINK
+	Name  = "AAEON_DXE_INIT_FUNCTIONS"
+	InvokeOrder = ReplaceParent
+End
+ELINK
+	Name  = "AAEON_READY_TO_BOOT_INIT_FUNCTIONS"
+	InvokeOrder = ReplaceParent
+End
+MODULE
+	File  = "AaeonCommonDxe.mak"
+End
+ELINK
+	Name  = "AaeonCommonDxeReset,"
+	Parent  = "AAEON_DXE_INIT_FUNCTIONS"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonCommonPkg_DIR)\AaeonCommonPkg.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonCommonPkg_DIR)\AaeonCommonPkg.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonCommonPkg_DIR)\AaeonCommonCallback.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS, 0, AAEON_COMMON_INTERACTIVE_KEY, AaeonCommonCallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+###########################################################################
+##	Aaeon DXE Library
+##	TODO:
+##		
+##		
+###########################################################################
+
+ELINK
+    Name  = "$(AaeonCommonPkg_DIR)\AaeonCommonPkg.dec"
+    Parent  = "ADDITIONAL_AMITSE_Packages"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "AaeonDxeLib"
+	File  = "AaeonCommonLib/AaeonDxeLib.inf"
+	Package  = "AaeonCommonPkg"
+End
+
+INFComponent
+	Name  = "AaeonPeiLib"
+	File  = "AaeonCommonLib/AaeonPeiLib.inf"
+	Package  = "AaeonCommonPkg"
+End
+
+LibraryMapping
+	Class  = "AaeonDxeLib"
+	Instance  = "AaeonCommonPkg.AaeonDxeLib"
+End
+
+LibraryMapping
+	Class  = "AaeonPeiLib"
+	Instance  = "AaeonCommonPkg.AaeonPeiLib"
+End
+
+ELINK
+    Name  = "AaeonDxeLib"
+    Parent  = "ADDITIONAL_AMITSE_LibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AaeonDxeLib"
+    Parent  = "AMI_CSP_DXE_LIBRARIES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AaeonPeiLib"
+    Parent  = "AMI_CSP_PEI_LIBRARIES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonCommonPkg_DIR)\AaeonCommonPkg.dec"
+	Parent  = "AMI_CSP_PACKAGES"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name = "F81866_CHIP_TYPE"
+	Value = "0"
+	Help = "F81866 Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F81801_CHIP_TYPE"
+	Value = "1"
+	Help = "F81801 Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F81216SEC_CHIP_TYPE"
+	Value = "2"
+	Help = "F81216SEC Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "IT8728F_CHIP_TYPE"
+	Value = "3"
+	Help = "IT8728F Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "W83627DHG_CHIP_TYPE"
+	Value = "4"
+	Help = "W83627DHG Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111_CHIP_TYPE"
+	Value = "5"
+	Help = "F75111 Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F81966_CHIP_TYPE"
+	Value = "6"
+	Help = "F81966 Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F81804_CHIP_TYPE"
+	Value = "7"
+	Help = "F81804 Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "IT851X_CHIP_TYPE"
+	Value = "8"
+	Help = "IT851X Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75113_CHIP_TYPE"
+	Value = "9"
+	Help = "F75113 Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "IT8625_CHIP_TYPE"
+	Value = "10"
+	Help = "IT8625 Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "SOC_CHIP_TYPE"
+	Value = "0xFF"
+	Help = "SOC Chip type value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+###########################################################################
+##	Aaeon Common Module Override FOR Module; AmiStatusCode, RefName = "AmiModulePkg.AmiStatusCode"
+##	TODO:
+##		
+##		
+###########################################################################
+TOKEN
+	Name  = "BEEP_ENABLE"
+	Value  = "1"
+	Help  = "This flag enables/disables all firmware beeps"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "USB_BEEP_ENABLE"
+	Value  = "0"
+	Help  = "Enables/disables sounds on USB devices connection or removal."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "CONOUT_CHECKPOINTS_SUPPORT"
+	Value  = "0"
+	Help  = "Enables/Disables checkpoint display on the ConOut devices\(right bottom corner)"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "STRING_STATUS_SUPPORT"
+	Value  = "0"
+	Help  = "Enables/Disables all string-based status code routines \defined by the ReportStringStatus eLink"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SERIAL_DEBUG"
+	Value  = "0"
+	Help  = "A switch to print TSE Debug messages over Serial Port."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "BOOT_FLOW_NORMAL_LAUNCH_DEFAULT_BOOTIMAGE"
+	Value  = "0"
+	Help  = "Support for UEFI specification v 2.3.1 section 3.4.1.1 and 3.4.1.2 to load the default boot image (efi\boot\boot####.efi) from any of the available file system if no boot option found. 1 = Enabling default image boot and 0 = Disabling default image boot."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "AmiGopPolicy"
+	Value  = "1"
+	Help  = "Main Switch to Enable AmiGopPolicy in Platform"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+End
+
+###########################################################################
+##	Aaeon Common Module Override FOR Module; SmbiosStaticData, RefName = "SmbiosStaticData"
+##	TODO:
+##		TYPE 1/2/3 TOKENs definitions
+##		
+###########################################################################
+TOKEN
+	Name  = "SYSTEM_MANUFACTURER"
+	Value  = "AAEON"
+	Help  = "Specifies the System Manufacturer Name."
+	TokenType = Expression
+	TargetEQU = Yes
+End
+TOKEN
+	Name  = "SYSTEM_PRODUCT_NAME"
+	Value  = "$(DEFAULT_STRING)"
+	Help  = "Specifies the System Product Name"
+	TokenType = Expression
+	TargetEQU = Yes
+	TargetMAK = Yes ## Do not forget this parameter
+End
+TOKEN
+	Name  = "SYSTEM_VERSION"
+	Value  = "V1.0"
+	Help  = "Specifies the System Product Version."
+	TokenType = Expression
+	TargetEQU = Yes
+End
+TOKEN
+	Name  = "BASE_BOARD_MANUFACTURER"
+	Value  = "AAEON"
+	Help  = "Specifies the Board Manufacturer."
+	TokenType = Expression
+	TargetEQU = Yes
+	Token = "BASE_BOARD_INFO" "=" "1"
+	##Token = "NUMBER_OF_BASEBOARDS" "=" "1"
+End
+TOKEN
+	Name  = "BASE_BOARD_VERSION"
+	Value  = "V1.0"
+	Help  = "Specifies the Product Version."
+	TokenType = Expression
+	TargetEQU = Yes
+	Token = "BASE_BOARD_INFO" "=" "1"
+	##Token = "NUMBER_OF_BASEBOARDS" "=" "1"
+End
+TOKEN
+	Name  = "SYS_CHASSIS_MANUFACTURER_1"
+	Value  = "AAEON"
+	Help  = "Specifies the System Chassis Manufacturer."
+	TokenType = Expression
+	TargetEQU = Yes
+End
+TOKEN
+	Name  = "SYS_CHASSIS_VERSION_1"
+	Value  = "V1.0"
+	Help  = "Specifies the Chassis Version"
+	TokenType = Expression
+	TargetEQU = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_DMIEDIT_DATA_LOC"
+	Value  = "0"
+	Help  = "SMBIOS DMIEdit data location: \0 = Boot Block \1 = FV_SMBIOS (FV_SMBIOS: defined in SmbiosFlashData.sdl)\2 = NVRAM"
+	TokenType = Integer
+	TargetMAK = Yes
+	TargetH = Yes
+End
+###########################################################################
+##	Aaeon Common Module Override FOR MODULE; Board, RefName = "AmiCompatibilityPkg.Board"
+##	TODO:
+##		
+###########################################################################
+TOKEN
+	Name  = "DEFAULT_QUIET_BOOT"
+	Value  = "1"
+	Help  = "Default value of the Quiet Boot option"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+###########################################################################
+##	Aaeon Common Module Override FOR MODULE; TSE Binary, RefName = "AMITSE"
+##	TODO:
+##		
+###########################################################################
+TOKEN
+	Name  = "SETUP_BMP_LOGO_SUPPORT"
+	Value  = "1"
+	Help  = "BMP Logo support in Setup"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SETUP_JPEG_LOGO_SUPPORT"
+	Value  = "1"
+	Help  = "JPEG Logo support in Setup."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+TOKEN
+	Name  = "LOGO_FILE_NAME"
+	Value  = "AaeonCommonPkg/AAEON_2017_800x600.jpg"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetFDF = Yes
+End
+TOKEN
+	Name  = "SETUP_HIDE_BIOS_SIGNON_MESSAGE2"
+	Value  = "1"
+	Help  = "1 => Hides the BIOS signon message. 0 => Shows the BIOS sign on message."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SETUP_BBS_POPUP_ENABLE"
+	Value  = "1"
+	Help  = "Enable or disable the SETUP_BBS_POPUP_ENABLE. CAUTION This works only if complete TSE sources are present."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "POPUP_MENU_SHOW_ALL_BBS_DEVICES"
+	Value  = "1"
+	Help  = "1 => Shows all BBS devices in BBS POPup menu. 0 => Shows only the first device of a BBS type in BBS POPUP menu."
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SETUP_PRINT_EVAL_MSG"
+	Value  = "0"
+	Help  = "Enable/Disable Evaluation message in Post screen"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "TSE_SUPPORT_NATIVE_RESOLUTION"
+	Value  = "0"
+	Help  = "Sets the graphics mode for quiet boot from EDID. 1 - Defaultly enable make 0 to disable the feature"
+	TokenType = Boolean
+	TargetH = Yes
+End
+INFComponent
+	Name  = "SignOn"
+	File  = "SignOn\SignOn.inf"
+	Package  = "AmiTsePkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "TSE_FOR_EDKII_SUPPORT" "!=" "1"
+	Disable = Yes
+End
+FFS_FILE
+	Name  = "SignOn"
+	FD_AREA  = "FV_MAIN"
+	INFComponent  = "AmiTsePkg.SignOn"
+	Rule_Override  = "SubtypeGuidUncompressed"
+	Token = "TSE_FOR_EDKII_SUPPORT" "!=" "1"
+	Disable = Yes
+End
+
+###########################################################################
+##	Aaeon Common Module Override FOR SB
+##	TODO:
+##		
+###########################################################################
+TOKEN
+	Name  = "RESERVED_PAGE_ROUTE"
+	Value  = "0"
+	Help  = "Off:Enable Port 80 decoding to LPC.\On:Enable Port 80 decoding to PCI."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+###########################################################################
+##	Aaeon Common Module Override FOR MODULE; Csm, RefName = "CSM"
+##	TODO:
+##		
+###########################################################################
+TOKEN
+	Name  = "DEFAULT_CSM_LAUNCH_POLICY"
+	Value  = "1"
+	Help  = "Controls default value of CSM Launch Policy setup control"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0 - do not launch CSM, 1 - launch CSM"
+End
+TOKEN
+	Name  = "DEFAULT_PXE_OPROM_POLICY"
+	Value  = "$(CSMSETUP_SKIP_OPROMS)"
+	Help  = "Default value of Launch PXE OpROM policy setup control"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "$(CSMSETUP_SKIP_OPROMS) - Do not launch\$(CSMSETUP_UEFI_ONLY_OPROMS) - Launch UEFI OpROM only\$(CSMSETUP_LEGACY_ONLY_OPROMS) - Launch Legacy OpROM only"
+	Token = "CSM_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "DEFAULT_MASS_STORAGE_OPROM_POLICY"
+	Value  = "$(CSMSETUP_LEGACY_ONLY_OPROMS)"
+	Help  = "Default value of Launch Storage OpROM policy setup control"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "$(CSMSETUP_SKIP_OPROMS) - Do not launch\$(CSMSETUP_UEFI_ONLY_OPROMS) - Launch UEFI OpROM only\$(CSMSETUP_LEGACY_ONLY_OPROMS) - Launch Legacy OpROM only"
+	Token = "CSM_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "DEFAULT_VIDEO_OPROM_POLICY"
+	Value  = "$(CSMSETUP_LEGACY_ONLY_OPROMS)"
+	Help  = "Default value of Launch Video OpROM policy setup control"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "$(CSMSETUP_SKIP_OPROMS) - Do not launch\$(CSMSETUP_UEFI_ONLY_OPROMS) - Launch UEFI OpROM only\$(CSMSETUP_LEGACY_ONLY_OPROMS) - Launch Legacy OpROM only"
+	Token = "CSM_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "DEFAULT_BOOT_OPTION_FILTERING_POLICY"
+	Value  = "$(CSMSETUP_ENABLE_ALL_BOOT_OPTIONS)"
+	Help  = "Controls default value of Boot Option Filter setup control"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "$(CSMSETUP_ENABLE_ALL_BOOT_OPTIONS) - Both UEFI and Legacy boot options enabled\$(CSMSETUP_LEGACY_ONLY_BOOT_OPTIONS) - Only Legacy boot options enabled\$(CSMSETUP_UEFI_ONLY_BOOT_OPTIONS) - Only UEFI boot options enabled"
+	Token = "CSM_SUPPORT" "=" "1"
+End
+ELINK
+    Name  = "-D PCI0=PC00"
+    Parent  = "*_*_*_ASLPP_FLAGS"
+    InvokeOrder = AfterParent
+	Token = "CORE_BUILD_NUMBER" ">" "19"
+End

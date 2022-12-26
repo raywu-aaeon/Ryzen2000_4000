@@ -1,0 +1,145 @@
+TOKEN
+    Name  = "SCREEN_ROTATION_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable screen ratation support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SCREEN_ROTATION_POLICY_SELECTION"
+    Value  = "0"
+    Help  = "Default Rotation Policy. \0: Normal \1:Right Rotation \2: Left Rotation  \3:Reverstion "
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BGRT_LOGO_PATCH"
+    Value  = "0"
+    Help  = "Patch the BRGT. \0: Disable \1: Reinstall BGRT table for Windows who will not call the hooked Gop to display BGRT logo., \2: Reinstall BGRT with non-rotating logo"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ROTATE_HORIZONTAL_RESOLURION"
+    Value  = "600"
+    Help  = "Rotated horizontal resolution"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ROTATE_VERTICAL_RESOLURION"
+    Value  = "800"
+    Help  = "Rotated vertical resolution"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "STYLE_FULL_MAX_ROWS"
+    Value  = "(UINT8)(ROTATE_VERTICAL_RESOLURION/19)"
+    Help  = "Maximum rows in full screen mode"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "STYLE_FULL_MAX_COLS"
+    Value  = "(UINT8)(ROTATE_HORIZONTAL_RESOLURION/8)"
+    Help  = "Maximum columns in full screen mode"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FULL_STYLE_CONTROL_LEFT_MARGIN"
+    Value  = "20"
+    Help  = "Control column left margin in full screen mode"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "ROTATE_HORIZONTAL_RESOLURION" "<=" "600"
+End
+
+TOKEN
+    Name  = "GC_MODE4"
+    Value  = "{ 4, ROTATE_HORIZONTAL_RESOLURION/8, ROTATE_VERTICAL_RESOLURION/19, ROTATE_HORIZONTAL_RESOLURION, ROTATE_VERTICAL_RESOLURION }"
+    Help  = "Parameters of the graphical console text mode 2.\Format: {ModeNumber, TextColomns,TextRows, HorizontalPixels,VerticalPixels}"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GC_MODE_LIST"
+    Value  = "$(GC_MODE0), $(GC_MODE1), $(GC_MODE2), $(GC_MODE3), $(GC_MODE4)"
+    Help  = "List of text modes supported by graphic console.\Format: {ModeNumber, TextColomns,TextRows, HorizontalPixels,VerticalPixels}"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+PATH
+    Name  = "ScreenRotation_DIR"
+    Help  = "ScreenRotation files source directory"
+End
+
+ELINK
+    Name  = "$(ScreenRotation_DIR)/ScreenRotation.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(ScreenRotation_DIR)/ScreenRotation.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(ScreenRotation_DIR)/ScreenRotationTse.c"
+    Parent  = "TSE_SOURCE_FILES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ScreenRotationSetupScreenInit,"
+    Parent  = "ProcessUIInitHookHook,"
+    InvokeOrder = AfterParent
+    Token = "OVERRIDE_SetResAndScreenBufferHook" "=" "0"
+    Token = "ESA_BINARY_SUPPORT" "=" "0"
+End
+
+ELINK
+    Name  = "ScreenRotationInitHook,"
+    Parent  = "MinisetupDriverEntryHookHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ScreenRotationInitHook,"
+    Parent  = "ESADriverEntryHookHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiAcpiTableProtocolGuid"
+    Parent  = "ADDITIONAL_AMITSE_Protocols"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "ScreenRotation"
+    File  = "ScreenRotation.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_RUNTIME_DRIVER"
+End
+
+TOKEN
+    Name  = "STYLE_CLEAR_SCREEN_COLOR"
+    Value  = "((UINT8)(EFI_BACKGROUND_BLUE) | EFI_WHITE)"
+    Help  = "Background color of the Help Title Frame"
+    TokenType = Expression
+    TargetH = Yes
+End

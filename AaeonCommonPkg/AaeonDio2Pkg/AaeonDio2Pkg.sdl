@@ -1,0 +1,457 @@
+TOKEN
+	Name  = "AaeonDio2Pkg_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AaeonDio2Pkg_DIR"
+End
+
+TOKEN
+	Name  = "FULL_DIO_SUPPORT"
+	Value  = "1"
+	Help  = "0: Support 4 bit DIO control, 1: Support 8 bit DIO control"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SECOND_DIO_SUPPORT"
+	Value  = "0"
+	Help  = "Suppport second 8 bit DIO control"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_DIO_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <DIO Source> option.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO_0_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 1.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO_1_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 2.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO_2_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 3.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO_3_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 4.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO_4_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 5.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO_5_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 6.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO_6_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 7.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO_7_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 8.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO2_0_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 9.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO2_1_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 10.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO2_2_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 11.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO2_3_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 12.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO2_4_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 13.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO2_5_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 14.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO2_6_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 15.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_DIO2_7_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 16.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+ELINK
+	Name  = "AaeonDio2DxeInit,"
+	Parent  = "AAEON_DXE_INIT_FUNCTIONS"
+	InvokeOrder = BeforeParent
+End
+ELINK
+	Name  = "$(AaeonDio2Pkg_DIR)\AaeonDio2.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonDio2Pkg_DIR)\AaeonDio2Pkg.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonDio2Pkg_DIR)\AaeonDio2Dxe.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonDio2Pkg_DIR)\AaeonDio2Pkg.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonDio2Pkg_DIR)\AaeonDio2Pkg.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonDio2Pkg_DIR)\AaeonDio2Pkg.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS, 0, AAEON_DIO_INTERACTIVE_KEY, AaeonDio2CallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name  = "DIO_DIR_0_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_DIR_1_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_DIR_2_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "FULL_DIO_SUPPORT" "=" "0"
+End
+TOKEN
+	Name  = "DIO_DIR_3_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "FULL_DIO_SUPPORT" "=" "0"
+End
+TOKEN
+	Name  = "DIO_DIR_2_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "FULL_DIO_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "DIO_DIR_3_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "FULL_DIO_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "DIO_DIR_4_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_DIR_5_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_DIR_6_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_DIR_7_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+
+TOKEN
+	Name  = "DIO_LV_0_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_1_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_2_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_3_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_4_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_5_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_6_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_7_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO2_DIR_0_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_DIR_1_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_DIR_2_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_DIR_3_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_DIR_4_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_DIR_5_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_DIR_6_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_DIR_7_DEFAULT"
+	Value  = "0"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO2_LV_0_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_1_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_2_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_3_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_4_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_5_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_6_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_7_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End

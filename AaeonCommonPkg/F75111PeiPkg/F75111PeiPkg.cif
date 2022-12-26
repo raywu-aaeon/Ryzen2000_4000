@@ -1,0 +1,17 @@
+<component>
+	name = "F75111PeiPkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\F75111PeiPkg\"
+	RefName = "AaeonCommonPkg.F75111PeiPkg"
+[INF]
+"F75111PeiPkg.inf"
+
+[files]
+"F75111PeiPkg.sdl"
+"F75111PeiPkg.c"
+"F75111PeiPkg.sd"
+"F75111PeiPkg.uni"
+
+[parts]
+
+<endComponent>

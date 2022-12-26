@@ -1,0 +1,168 @@
+TOKEN
+	Name  = "AaeonDioPkg_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AaeonDioPkg_DIR"
+End
+
+TOKEN
+	Name  = "SECOND_DIO_SUPPORT"
+	Value  = "0"
+	Help  = "Suppport second 8 bit DIO control"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+ELINK
+	Name  = "AaeonDioDxeInit,"
+	Parent  = "AAEON_DXE_INIT_FUNCTIONS"
+	InvokeOrder = BeforeParent
+End
+ELINK
+	Name  = "$(AaeonDioPkg_DIR)\AaeonDioDxe.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonDioPkg_DIR)\AaeonDioPkg.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonDioPkg_DIR)\AaeonDioPkg.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(AaeonDioPkg_DIR)\AaeonDioPkg.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS, 0, AAEON_DIO_INTERACTIVE_KEY, AaeonDioCallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name  = "DIO_LV_0_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_1_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_2_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_3_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_4_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_5_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_6_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_LV_7_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO2_LV_0_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_1_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_2_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_3_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_4_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_5_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_6_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO2_LV_7_DEFAULT"
+	Value  = "1"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End

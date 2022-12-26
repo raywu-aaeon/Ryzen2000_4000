@@ -1,0 +1,123 @@
+TOKEN
+	Name  = "AAEON_BFPI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AaeonBfpi support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PCIDEVICE
+	Title  = "Aaeon BFPI Container"
+	Parent  = "PciHost (Virtual)"
+	Attribute  = "0x0"
+	Dev_type  = "Container"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ASLfile  = "'AaeonCommonPkg/AaeonBfpi/AaeonBfpi.asl;After Pci Tree','AaeonCommonPkg/AaeonBfpi/AaeonBfpiWdt.asl;After Pci Tree','AaeonCommonPkg/AaeonBfpi/AaeonBfpiHwm.asl;After Pci Tree','AaeonCommonPkg/AaeonBfpi/AaeonBfpiSmf.asl;After Pci Tree','AaeonCommonPkg/AaeonBfpi/AaeonBfpiLed.asl;After Pci Tree'"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	Virtual = Yes
+End
+
+#Bit[15:0]: Minor Version of spec, Bit[31:16]: Major Version of spec
+TOKEN
+	Name  = "BPIV"
+	Value  = "0x00000006"
+	Help  = "Revision of AAEON BFPI Specification"
+	TokenType = Integer
+	TargetASL = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "WMI_DATA_BUFFER_LENGTH"
+	Value  = "0x00001100"
+	Help  = "Data buffer size for AAEON BFPI"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for WDT configuration ======================"
+    Value  = "====================== Tokens for WDT configuration ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "WDT_NUMBER"
+	Value  = "1"
+	Help  = "Supported WDT instance number"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "FIRST_WDT_TYPE"
+	Value  = "$(SOURCE_TYPE_SIO1)"
+	Help  = "Select WDT source type. Refer to 'Source types' in AaeonBfpiReportCapability.sdl for possible values."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "FIRST_WDT_NAME"
+	Value  = "WDT"
+	Help  = "Name string reported in WDTC to BFPI"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "SECOND_WDT_TYPE"
+	Value  = "$(SOURCE_TYPE_EC1)"
+	Help  = "Select WDT source type. Refer to 'Source types' in AaeonBfpiReportCapability.sdl for possible values."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "WDT_NUMBER" ">" "1"
+End
+
+TOKEN
+	Name  = "SECOND_WDT_NAME"
+	Value  = "Secondary WDT"
+	Help  = "Name string reported in WDTC to BFPI"
+	TokenType = Expression
+	Token = "WDT_NUMBER" ">" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens for LED configuration ======================"
+    Value  = "====================== Tokens for LED configuration ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "LED_NUMBER"
+	Value  = "0"
+	Help  = "Supported LED number"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "LED_STRING_LIST"
+	Value = '"LED1", "LED2", "LED3"'
+	Help = "List of names for LED.\Number of name strings should be same as LED number.\Name should be surrounded by double-quote and should be separated with comma from other names."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+INFComponent
+	Name  = "AaeonBfpiDxe"
+	File  = "AaeonBfpiDxe.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+PATH
+	Name  = "AAEONACPI_DIR"
+End
+

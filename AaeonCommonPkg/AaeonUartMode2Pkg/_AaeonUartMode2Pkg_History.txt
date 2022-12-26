@@ -1,0 +1,103 @@
+###########################################################################
+                AaeonUartMode2Pkg
+###########################################################################
+---------------------------------------------------------------------------
+Porting Guide:
+                Refer to Readme.md
+
+---------------------------------------------------------------------------
+
+
+###########################################################################
+Source Revision:	AaeonUartMode2Pkg_03
+Release Date:		12/07/2021
+Action:
+			1. Fix Compiler error issue.
+File:
+			> AaeonCommonPkg/AaeonUartMode2Pkg/AaeonUartMode2.c
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_32_1
+###########################################################################
+Source Revision:	AaeonUartMode2Pkg_02
+Release Date:		11/25/2020
+Action:
+			1. Support UART Mode 7~10
+			2. Fix function "SioSetFlowControl" UART index incorrect issue
+Dependencies:
+			AaeonDxeLib
+File:
+			> AaeonCommonPkg/AaeonUartMode2Pkg/AaeonUartMode2Pkg.sd
+			> AaeonCommonPkg/AaeonUartMode2Pkg/AaeonUartMode2Pkg.sdl
+			> AaeonCommonPkg/AaeonUartMode2Pkg/AaeonUartMode2Pkg.uni
+			> AaeonCommonPkg/AaeonUartMode2Pkg/AaeonUartMode2.c
+			> AaeonCommonPkg/AaeonUartMode2Pkg/AaeonUartMode2Callback.c
+			> AaeonCommonPkg/AaeonUartMode2Pkg/AaeonUartMode2Pkg.c
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_32_1
+###########################################################################
+===========================================================================
+Change:         Support IT8625 SIO chip selection
+Root Cause:     To support IT8625 SIO chip
+Action:
+                * Implement "IT8625_CHIP_TYPE" for function 
+                  "SioSetFlowControl"
+Files:
+                > AaeonUartMode2Pkg/AaeonUartMode2.c
+
+===========================================================================
+Change:         Support SIO source chip selection for target UART
+Root Cause:     The control GPIO of UART mode is different chip as UART 
+                source chip
+Action:
+                * Add setup item "  UART Source"
+                * Implement "F81216SEC_CHIP_TYPE" for function 
+                  "SioSetFlowControl"
+                * Add option "F81804" to setup item "  GPIO Source"
+                * Add TOKEN "ONEOF_AAEON_UART1MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART2MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART3MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART4MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART5MODE_UART_SOURCE_DEFAULT"
+                * Add TOKEN "ONEOF_AAEON_UART6MODE_UART_SOURCE_DEFAULT"
+Files:
+                > AaeonUartMode2Pkg/AaeonUartMode2.c
+                > AaeonUartMode2Pkg/AaeonUartMode2Pkg.sd
+                > AaeonUartMode2Pkg/AaeonUartMode2Pkg.sdl
+                > AaeonUartMode2Pkg/AaeonUartMode2Pkg.uni
+STS:
+                https://sts.aaeon.com.tw:12080/issues/8727
+===========================================================================
+Source Revision:	AaeonUartMode2Pkg_01
+Release Date:		11/09/2018
+Action:
+			1. Add function "UartModeDefaultInit" for set UART
+			mode default before AaeonCommonFeaturesSyncReady
+			2. Add file "AaeonUartMode2LoadDefaults" for set 
+			UART mode when user load default
+			3. Add setup item "UART Mode Default" for each
+			UART Control item
+			4. Add TOKEN "DEFAULT_AAEON_UART1/2/3/4/5/6MODE"
+			for set UART mode default
+Dependencies:
+			AaeonDxeLib
+File:
+			> AaeonUartMode2Pkg/AaeonUartMode2Pkg.c
+			> AaeonUartMode2Pkg/AaeonUartMode2Pkg.cif
+			> AaeonUartMode2Pkg/AaeonUartMode2Pkg.sd
+			> AaeonUartMode2Pkg/AaeonUartMode2Pkg.sdl
+			> AaeonUartMode2Pkg/AaeonUartMode2Pkg.uni
+			> AaeonUartMode2Pkg/AaeonUartMode2LoadDefaults.c
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_28
+###########################################################################
+Source Revision:	AaeonUartMode2Pkg_00
+Release Date:		07/18/2017
+Action:
+			1. First release - This module use setup menu "UART 
+			Mode Configuration" to control UART Mode 
+Dependencies:
+			AaeonDxeLib
+---------------------------------------------------------------------------
+Compiling Env:		Aptio_5.x_TOOLS_28
+
+###########################################################################

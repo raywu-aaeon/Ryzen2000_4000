@@ -1,0 +1,122 @@
+
+TOKEN
+	Name  = "SIGN_ON_MESSAGE_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+	Help  = "Main switch to enable support in Project"
+End
+
+MODULE
+	Help  = "Includes SignOnMessage.mak to Project"
+	File  = "SignOnMessage.mak"
+End
+
+PATH
+	Name  = "SignOnMessage_DIR"
+End
+
+TOKEN
+	Name  = "GENUNIFILE"
+	Value  = "$(SignOnMessage_DIR)\GenUniFile.exe"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "AAEON_MODEL_NAME"
+	Value  = "$(SYSTEM_PRODUCT_NAME)"
+	TargetMAK = Yes
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "AAEON_MODEL_TAG"
+	Value  = "$(PROJECT_TAG)"
+	TokenType = Expression
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AAEON_MAJOR_VERSION"
+	Value  = "$(PROJECT_MAJOR_VERSION)"
+	Help  = "Build Number and should be incremented with any new release."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "AAEON_MINOR_VERSION"
+	Value  = "$(PROJECT_MINOR_VERSION)"
+	Help  = "Build Number and should be incremented with any new release."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "AAEON_VERSION"
+	Value  = "$(AAEON_MAJOR_VERSION)$(AAEON_MINOR_VERSION)"
+	Help  = "Build Number and should be incremented with any new release."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "AAEON_ROM_BUILD_VER"
+	Value  = "M$(AAEON_VERSION)"
+	Help  = "Build Number and should be incremented with any new release."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "AAEON_ROM_BUILD_VER"
+	Value  = "T$(AAEON_VERSION)"
+	Help  = "Build Number and should be incremented with any new release."
+	TokenType = Expression
+	TargetMAK = Yes
+	Token = "BUILD_FOR_TEST" "=" "1"
+End
+
+TOKEN
+	Name  = "BIOS_SIGNON_VERSION"
+	Value  = "R$(AAEON_MAJOR_VERSION).$(AAEON_MINOR_VERSION) ($(AAEON_MODEL_TAG)$(AAEON_ROM_BUILD_VER))"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "BIOS_SIGNON_VERSION"
+	Value  = "T$(AAEON_MAJOR_VERSION).$(AAEON_MINOR_VERSION) ($(AAEON_MODEL_TAG)$(AAEON_ROM_BUILD_VER))"
+	TokenType = Expression
+	TargetMAK = Yes
+	##Token = "RELEASE_TYPE" "=" "T"
+	Token = "BUILD_FOR_TEST" "=" "1"
+End
+
+TOKEN
+	Name  = "BIOS_BUILD_DAY"
+	Value  = "$(TODAY)"
+	Help  = "BIOS Build Day."
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+ELINK
+	Name  = "$(BUILD_DIR)\SignOnMessage.sdb"
+	Parent  = "SETUP_SDBS"
+	Priority  = 10	
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(BUILD_DIR)\SignOnMessage.uni"
+	Parent  = "SetupStringFiles"
+	Priority  = 10	
+	InvokeOrder = AfterParent
+End
+

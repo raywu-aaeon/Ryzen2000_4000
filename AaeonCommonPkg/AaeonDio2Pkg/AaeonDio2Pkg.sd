@@ -1,0 +1,456 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+    #if defined(FULL_DIO_SUPPORT) && (FULL_DIO_SUPPORT == 0)
+	UINT8	DIO[4];
+	UINT8	DIO_LV[4];
+	UINT8	AaeonDio2Gpio[4];
+    #endif
+    #if defined(FULL_DIO_SUPPORT) && (FULL_DIO_SUPPORT == 1)
+	UINT8	DIO[8];
+	UINT8	DIO_LV[8];
+	UINT8	AaeonDio2Gpio[8];
+	#endif
+    #if defined(SECOND_DIO_SUPPORT) && (SECOND_DIO_SUPPORT == 1)
+	UINT8	DIO2[8];
+	UINT8	DIO2_LV[8];
+	UINT8	AaeonDio22Gpio[8];
+    #endif
+
+	UINT8	AaeonDio2RunOnce;
+	UINT8	AaeonDio2Source;
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------
+// Do not remove these items >>
+#define ONEOF_AaeonDio2RUNONCE \
+	oneof varid     = SETUP_DATA.AaeonDio2RunOnce, \
+			prompt  = STRING_TOKEN(STR_DIO0_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+			option text = STRING_TOKEN(STR_EMPTY), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; \
+	        	option text = STRING_TOKEN(STR_EMPTY), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+// Do not remove these items <<
+
+#define ONEOF_AAEON_DIO_SOURCE \
+	oneof varid     = SETUP_DATA.AaeonDio2Source, \
+		prompt  = STRING_TOKEN(STR_AAEON_DIO_SOURCE), \
+		help    = STRING_TOKEN(STR_AAEON_DIO_SOURCE_HELP), \
+		default     = ONEOF_AAEON_DIO_SOURCE_DEFAULT, \
+		default     = ONEOF_AAEON_DIO_SOURCE_DEFAULT, defaultstore = AmiMfgDefault, \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81866), value = F81866_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81966), value = F81966_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81801), value = F81801_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81216SEC), value = F81216SEC_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_IT8728F), value = IT8728F_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_W83627DHG), value = W83627DHG_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F75111), value = F75111_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81804), value = F81804_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_IT851X), value = IT851X_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F75113), value = F75113_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_IT8625), value = IT8625_CHIP_TYPE, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO0_DIR \
+	oneof varid     = SETUP_DATA.DIO[0], \
+			prompt  = STRING_TOKEN(STR_DIO0_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO_DIR_0_DEFAULT,\
+	  		default = DIO_DIR_0_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO1_DIR \
+	oneof varid     = SETUP_DATA.DIO[1], \
+			prompt  = STRING_TOKEN(STR_DIO1_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO_DIR_1_DEFAULT,\
+	  		default = DIO_DIR_1_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO2_DIR \
+	oneof varid     = SETUP_DATA.DIO[2], \
+			prompt  = STRING_TOKEN(STR_DIO2_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO_DIR_2_DEFAULT,\
+	  		default = DIO_DIR_2_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO3_DIR \
+	oneof varid     = SETUP_DATA.DIO[3], \
+			prompt  = STRING_TOKEN(STR_DIO3_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO_DIR_3_DEFAULT,\
+	  		default = DIO_DIR_3_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#if defined(FULL_DIO_SUPPORT) && (FULL_DIO_SUPPORT == 1)
+#define ONEOF_DIO4_DIR \
+	oneof varid     = SETUP_DATA.DIO[4], \
+			prompt  = STRING_TOKEN(STR_DIO4_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO_DIR_4_DEFAULT,\
+	  		default = DIO_DIR_4_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO5_DIR \
+	oneof varid     = SETUP_DATA.DIO[5], \
+			prompt  = STRING_TOKEN(STR_DIO5_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO_DIR_5_DEFAULT,\
+	  		default = DIO_DIR_5_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO6_DIR \
+	oneof varid     = SETUP_DATA.DIO[6], \
+			prompt  = STRING_TOKEN(STR_DIO6_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO_DIR_6_DEFAULT,\
+	  		default = DIO_DIR_6_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO7_DIR \
+	oneof varid     = SETUP_DATA.DIO[7], \
+			prompt  = STRING_TOKEN(STR_DIO7_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO_DIR_7_DEFAULT,\
+	  		default = DIO_DIR_7_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+#endif //FULL_DIO_SUPPORT == 1
+
+#define NUMERIC_AAEON_DIO_GPIO(DIO_NUM, NUMERIC_AAEON_DIO_GPIO_DEFAULT) \
+	numeric varid     = SETUP_DATA.AaeonDio2Gpio[DIO_NUM], \
+		prompt  = STRING_TOKEN(STR_AAEON_DIO_GPIO), \
+		help    = STRING_TOKEN(STR_AAEON_DIO_GPIO_HELP), \
+		flags 	= RESET_REQUIRED,\
+		minimum = 0,\
+		maximum = 100,\
+		step    = 1,\
+		default = NUMERIC_AAEON_DIO_GPIO_DEFAULT, \
+	endnumeric;	
+
+#if defined(SECOND_DIO_SUPPORT) && (SECOND_DIO_SUPPORT == 1)
+#define ONEOF_DIO8_DIR \
+	oneof varid     = SETUP_DATA.DIO2[0], \
+			prompt  = STRING_TOKEN(STR_DIO8_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO2_DIR_0_DEFAULT,\
+	  		default = DIO2_DIR_0_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO9_DIR \
+	oneof varid     = SETUP_DATA.DIO2[1], \
+			prompt  = STRING_TOKEN(STR_DIO9_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO2_DIR_1_DEFAULT,\
+	  		default = DIO2_DIR_1_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO10_DIR \
+	oneof varid     = SETUP_DATA.DIO2[2], \
+			prompt  = STRING_TOKEN(STR_DIO10_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO2_DIR_2_DEFAULT,\
+	  		default = DIO2_DIR_2_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO11_DIR \
+	oneof varid     = SETUP_DATA.DIO2[3], \
+			prompt  = STRING_TOKEN(STR_DIO11_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO2_DIR_3_DEFAULT,\
+	  		default = DIO2_DIR_3_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO12_DIR \
+	oneof varid     = SETUP_DATA.DIO2[4], \
+			prompt  = STRING_TOKEN(STR_DIO12_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO2_DIR_4_DEFAULT,\
+	  		default = DIO2_DIR_4_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO13_DIR \
+	oneof varid     = SETUP_DATA.DIO2[5], \
+			prompt  = STRING_TOKEN(STR_DIO13_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO2_DIR_5_DEFAULT,\
+	  		default = DIO2_DIR_5_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO14_DIR \
+	oneof varid     = SETUP_DATA.DIO2[6], \
+			prompt  = STRING_TOKEN(STR_DIO14_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO2_DIR_6_DEFAULT,\
+	  		default = DIO2_DIR_6_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_DIO15_DIR \
+	oneof varid     = SETUP_DATA.DIO2[7], \
+			prompt  = STRING_TOKEN(STR_DIO15_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO2_DIR_7_DEFAULT,\
+	  		default = DIO2_DIR_7_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN_OPTION), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT_OPTION), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define NUMERIC_AAEON_DIO_GPIO(DIO_NUM, NUMERIC_AAEON_DIO_GPIO_DEFAULT) \
+	numeric varid     = SETUP_DATA.AaeonDio22Gpio[DIO_NUM], \
+		prompt  = STRING_TOKEN(STR_AAEON_DIO_GPIO), \
+		help    = STRING_TOKEN(STR_AAEON_DIO_GPIO_HELP), \
+		flags 	= RESET_REQUIRED,\
+		minimum = 0,\
+		maximum = 100,\
+		step    = 1,\
+		default = NUMERIC_AAEON_DIO_GPIO_DEFAULT, \
+	endnumeric;		
+#endif //SECOND_DIO_SUPPORT == 1
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+// Do not remove these items >>
+	ONEOF_AaeonDio2RUNONCE
+// Do not remove these items <<
+
+	ONEOF_DIO0_DIR
+	ONEOF_DIO1_DIR
+	ONEOF_DIO2_DIR
+	ONEOF_DIO3_DIR
+	#if defined(FULL_DIO_SUPPORT) && (FULL_DIO_SUPPORT == 1)
+	ONEOF_DIO4_DIR
+	ONEOF_DIO5_DIR
+	ONEOF_DIO6_DIR
+	ONEOF_DIO7_DIR
+	#endif //FULL_DIO_SUPPORT == 1
+    #if defined(SECOND_DIO_SUPPORT) && (SECOND_DIO_SUPPORT == 1)
+	ONEOF_DIO8_DIR
+	ONEOF_DIO9_DIR
+	ONEOF_DIO10_DIR
+	ONEOF_DIO11_DIR
+	ONEOF_DIO12_DIR
+	ONEOF_DIO13_DIR
+	ONEOF_DIO14_DIR
+	ONEOF_DIO15_DIR
+    #endif //SECOND_DIO_SUPPORT == 1
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+// Define Macro
+//------------------------------------------------------------
+#define DIO_COND_ONEOF_LV_TYPE(PIN_NUM, PIN_DEFAULT) \
+	suppressif ideqval SETUP_DATA.DIO[PIN_NUM] == 0; \
+		oneof varid     = SETUP_DATA.DIO_LV[PIN_NUM], \
+				prompt  = STRING_TOKEN(STR_DIO_LV_PROMPT), \
+				help    = STRING_TOKEN(STR_DIO_LV_PROMPT_HELP), \
+	  			default = PIN_DEFAULT,\
+	  			default = PIN_DEFAULT, defaultstore = AmiMfgDefault,\
+				option text = STRING_TOKEN(STR_DIO_LOW_OPTION), value = 0, flags = RESET_REQUIRED; \
+   	 	        	option text = STRING_TOKEN(STR_DIO_HI_OPTION), value = 1, flags = RESET_REQUIRED; \
+		endoneof; \
+	endif;
+
+#if defined(SECOND_DIO_SUPPORT) && (SECOND_DIO_SUPPORT == 1)
+#define DIO2_COND_ONEOF_LV_TYPE(PIN_NUM, PIN_DEFAULT) \
+	suppressif ideqval SETUP_DATA.DIO2[PIN_NUM] == 0; \
+		oneof varid     = SETUP_DATA.DIO2_LV[PIN_NUM], \
+				prompt  = STRING_TOKEN(STR_DIO_LV_PROMPT), \
+				help    = STRING_TOKEN(STR_DIO_LV_PROMPT_HELP), \
+	  			default = PIN_DEFAULT,\
+	  			default = PIN_DEFAULT, defaultstore = AmiMfgDefault,\
+				option text = STRING_TOKEN(STR_DIO_LOW_OPTION), value = 0, flags = RESET_REQUIRED; \
+   	 	        	option text = STRING_TOKEN(STR_DIO_HI_OPTION), value = 1, flags = RESET_REQUIRED; \
+		endoneof; \
+	endif;
+#endif //SECOND_DIO_SUPPORT == 1
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+	#ifdef FORM_SET_TYPEDEF
+	#endif
+	
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+	#endif
+
+	#ifdef FORM_SET_GOTO
+        goto AAEON_DIO_FORM_ID,
+        prompt  = STRING_TOKEN(STR_DIO_FORM),
+        help    = STRING_TOKEN(STR_DIO_FORM_HELP);
+	#endif //FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+	//-------------------------------------------------------------------------
+	//	AAEON OEM Group
+	//-------------------------------------------------------------------------
+
+		form formid = AUTO_ID(AAEON_DIO_FORM_ID),
+			title = STRING_TOKEN(STR_DIO_FORM);
+			
+			SUBTITLE(STRING_TOKEN(STR_DIO_FORM))
+			SEPARATOR
+			// Do not remove this item >>
+			suppressif ideqval AAEON_SETUP_DATA.EgrMode == 0;
+				INTERACTIVE_TEXT(STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_AAEON_DIO_CALLBACK), STRING_TOKEN(STR_AAEON_DIO_DUMMY),  AUTO_ID(AAEON_DIO_INTERACTIVE_KEY))
+				SEPARATOR
+
+				goto AAEON_DIO_SOURCE_FORM_ID,
+        			prompt  = STRING_TOKEN(STR_DIO_SOURCE_FORM),
+        			help    = STRING_TOKEN(STR_DIO_SOURCE_FORM_HELP);
+        			SEPARATOR
+			endif;
+			// Do not remove this item <<
+
+			ONEOF_DIO0_DIR
+			DIO_COND_ONEOF_LV_TYPE(0, DIO_LV_0_DEFAULT)
+
+			ONEOF_DIO1_DIR
+			DIO_COND_ONEOF_LV_TYPE(1, DIO_LV_1_DEFAULT)
+
+			ONEOF_DIO2_DIR
+			DIO_COND_ONEOF_LV_TYPE(2, DIO_LV_2_DEFAULT)
+
+			ONEOF_DIO3_DIR
+			DIO_COND_ONEOF_LV_TYPE(3, DIO_LV_3_DEFAULT)
+
+			#if defined(FULL_DIO_SUPPORT) && (FULL_DIO_SUPPORT == 1)
+			ONEOF_DIO4_DIR
+			DIO_COND_ONEOF_LV_TYPE(4, DIO_LV_4_DEFAULT)
+
+			ONEOF_DIO5_DIR
+			DIO_COND_ONEOF_LV_TYPE(5, DIO_LV_5_DEFAULT)
+
+			ONEOF_DIO6_DIR
+			DIO_COND_ONEOF_LV_TYPE(6, DIO_LV_6_DEFAULT)
+
+			ONEOF_DIO7_DIR
+			DIO_COND_ONEOF_LV_TYPE(7, DIO_LV_7_DEFAULT)
+			#endif  //FULL_DIO_SUPPORT == 1
+
+		    #if defined(SECOND_DIO_SUPPORT) && (SECOND_DIO_SUPPORT == 1)
+			ONEOF_DIO8_DIR
+			DIO2_COND_ONEOF_LV_TYPE(0, DIO2_LV_0_DEFAULT)
+
+			ONEOF_DIO9_DIR
+			DIO2_COND_ONEOF_LV_TYPE(1, DIO2_LV_1_DEFAULT)
+
+			ONEOF_DIO10_DIR
+			DIO2_COND_ONEOF_LV_TYPE(2, DIO2_LV_2_DEFAULT)
+
+			ONEOF_DIO11_DIR
+			DIO2_COND_ONEOF_LV_TYPE(3, DIO2_LV_3_DEFAULT)
+
+			ONEOF_DIO12_DIR
+			DIO2_COND_ONEOF_LV_TYPE(4, DIO2_LV_4_DEFAULT)
+
+			ONEOF_DIO13_DIR
+			DIO2_COND_ONEOF_LV_TYPE(5, DIO2_LV_5_DEFAULT)
+
+			ONEOF_DIO14_DIR
+			DIO2_COND_ONEOF_LV_TYPE(6, DIO2_LV_6_DEFAULT)
+
+			ONEOF_DIO15_DIR
+			DIO2_COND_ONEOF_LV_TYPE(7, DIO2_LV_7_DEFAULT)
+		    #endif //SECOND_DIO_SUPPORT == 1
+		endform;  //DIO Form
+
+		form formid = AUTO_ID(AAEON_DIO_SOURCE_FORM_ID),
+			title = STRING_TOKEN(STR_DIO_SOURCE_FORM);
+			
+			SUBTITLE(STRING_TOKEN(STR_DIO_SOURCE_FORM))
+			SEPARATOR
+
+			ONEOF_AAEON_DIO_SOURCE
+			SEPARATOR
+
+			SUBTITLE(STRING_TOKEN(STR_DIO0_PROMPT))
+			NUMERIC_AAEON_DIO_GPIO(0, NUMERIC_AAEON_DIO_0_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO1_PROMPT))
+			NUMERIC_AAEON_DIO_GPIO(1, NUMERIC_AAEON_DIO_1_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO2_PROMPT))
+			NUMERIC_AAEON_DIO_GPIO(2, NUMERIC_AAEON_DIO_2_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO3_PROMPT))
+			NUMERIC_AAEON_DIO_GPIO(3, NUMERIC_AAEON_DIO_3_GPIO_DEFAULT)
+
+			#if defined(FULL_DIO_SUPPORT) && (FULL_DIO_SUPPORT == 1)
+			SUBTITLE(STRING_TOKEN(STR_DIO4_PROMPT))
+			NUMERIC_AAEON_DIO_GPIO(4, NUMERIC_AAEON_DIO_4_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO5_PROMPT))
+			NUMERIC_AAEON_DIO_GPIO(5, NUMERIC_AAEON_DIO_5_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO6_PROMPT))
+			NUMERIC_AAEON_DIO_GPIO(6, NUMERIC_AAEON_DIO_6_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO7_PROMPT))
+			NUMERIC_AAEON_DIO_GPIO(7, NUMERIC_AAEON_DIO_7_GPIO_DEFAULT)
+			#endif  //FULL_DIO_SUPPORT == 1						
+
+		    #if defined(SECOND_DIO_SUPPORT) && (SECOND_DIO_SUPPORT == 1)
+			SUBTITLE(STRING_TOKEN(STR_DIO8_PROMPT))
+			NUMERIC_AAEON_DIO2_GPIO(0, NUMERIC_AAEON_DIO2_0_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO9_PROMPT))
+			NUMERIC_AAEON_DIO2_GPIO(1, NUMERIC_AAEON_DIO2_1_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO10_PROMPT))
+			NUMERIC_AAEON_DIO2_GPIO(2, NUMERIC_AAEON_DIO2_2_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO11_PROMPT))
+			NUMERIC_AAEON_DIO2_GPIO(3, NUMERIC_AAEON_DIO2_3_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO12_PROMPT))
+			NUMERIC_AAEON_DIO2_GPIO(4, NUMERIC_AAEON_DIO2_4_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO13_PROMPT))
+			NUMERIC_AAEON_DIO2_GPIO(5, NUMERIC_AAEON_DIO2_5_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO14_PROMPT))
+			NUMERIC_AAEON_DIO2_GPIO(6, NUMERIC_AAEON_DIO2_6_GPIO_DEFAULT)
+			SUBTITLE(STRING_TOKEN(STR_DIO15_PROMPT))
+			NUMERIC_AAEON_DIO2_GPIO(7, NUMERIC_AAEON_DIO2_7_GPIO_DEFAULT)	
+		    #endif //SECOND_DIO_SUPPORT == 1
+		endform;  //DIO Form		
+	#endif //FORM_SET_FORM
+#endif  // ADVANCED_FORM_SET

@@ -1,0 +1,137 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+    UINT8   DelayPOST;
+    UINT8   DelayedTime;
+    UINT8   ResetSystemOnce;
+    UINT8   PORResetType;
+    UINT8   DelayPOSTPei;
+    UINT8   DelayedTimePei;    
+      
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------ 
+
+    #define AAEON_DELAYED_POST_PEI\
+    oneof varid     = SETUP_DATA.DelayPOSTPei,\
+    prompt  = STRING_TOKEN(STR_DELAY_POST_PEI),\
+    help    = STRING_TOKEN(STR_DELAY_POST_PEI_HELP),\
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    endoneof;
+
+    #define AAEON_DELAYED_TIMER_SECOND_PEI\
+    numeric varid = SETUP_DATA.DelayedTimePei,\
+    prompt      = STRING_TOKEN (STR_DELAY_POST_TIME_PEI),\
+    help        = STRING_TOKEN (STR_DELAY_POST_TIME_PEI_HELP),\
+    minimum     = 0,\
+    maximum     = 255,\
+    step        = 0,    \
+    default     = 10,    \
+    endnumeric;
+
+    #define AAEON_DELAYED_POST\
+    oneof varid     = SETUP_DATA.DelayPOST,\
+    prompt  = STRING_TOKEN(STR_DELAY_POST),\
+    help    = STRING_TOKEN(STR_DELAY_POST_HELP),\
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    endoneof;
+
+    #define AAEON_DELAYED_TIMER_SECOND\
+    numeric varid = SETUP_DATA.DelayedTime,\
+    prompt      = STRING_TOKEN (STR_DELAY_POST_TIME),\
+    help        = STRING_TOKEN (STR_DELAY_POST_TIME_HELP),\
+    minimum     = 0,\
+    maximum     = 255,\
+    step        = 0,    \
+    default     = 10,    \
+    endnumeric;
+
+    #define AAEON_RESET_ONCE\
+    oneof varid     = SETUP_DATA.ResetSystemOnce,\
+    prompt  = STRING_TOKEN(STR_RESET_ONCE),\
+    help    = STRING_TOKEN(STR_RESET_ONCE_HELP),\
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;\
+    endoneof;      
+
+    #define AAEON_POWER_ON_RESET_TYPE\
+    oneof varid     = SETUP_DATA.PORResetType,\
+    prompt  = STRING_TOKEN(STR_POWER_ON_RESET_TYPE),\
+    help    = STRING_TOKEN(STR_RESET_TYPE_HELP),\
+    option text = STRING_TOKEN(STR_RESET_TYPE_SOFT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+    option text = STRING_TOKEN(STR_RESET_TYPE_HARD), value = 1, flags = RESET_REQUIRED;\
+    endoneof;          
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+	#ifdef FORM_SET_TYPEDEF
+
+	#endif
+    #ifdef FORM_SET_VARSTORE
+
+    #endif	
+
+	#ifdef POWER_ON_ROBOT_FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+	
+	        AAEON_DELAYED_POST_PEI
+	        grayoutif ideqval SETUP_DATA.DelayPOSTPei == 0;   
+	        AAEON_DELAYED_TIMER_SECOND_PEI
+	        endif;
+	        
+            AAEON_DELAYED_POST
+            
+            grayoutif ideqval SETUP_DATA.DelayPOST == 0;                        
+            AAEON_DELAYED_TIMER_SECOND            
+            endif;
+
+            AAEON_RESET_ONCE
+            
+            grayoutif ideqval SETUP_DATA.ResetSystemOnce == 0;             
+            AAEON_POWER_ON_RESET_TYPE
+            endif;	
+	
+             
+	#endif
+
+	#ifdef FORM_SET_GOTO
+	
+        
+	#endif //FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+	//-------------------------------------------------------------------------
+	//	AAEON OEM Group
+	//-------------------------------------------------------------------------
+            
+	#endif //FORM_SET_FORM
+#endif  // ADVANCED_FORM_SET

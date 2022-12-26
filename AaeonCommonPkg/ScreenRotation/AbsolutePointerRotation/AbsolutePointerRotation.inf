@@ -1,0 +1,39 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+    INF_VERSION                     = 0x00010015
+    BASE_NAME                       = AbsolutePointerRotation
+    FILE_GUID                       = 5790e29f-8502-4b6b-ba97-2a36c8e0bfa7
+    MODULE_TYPE                     = DXE_DRIVER
+    VERSION_STRING                  = 1.0
+    ENTRY_POINT                     = AbsolutePointerRotationEntryPoint
+
+[Sources]
+  AbsolutePointerRotation.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+
+[LibraryClasses]
+  DebugLib
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  AmiDxeLib
+
+[Protocols]
+  gEfiAbsolutePointerProtocolGuid
+
+[Guids]
+  gAmiTseEventBeforeBootGuid
+
+[Depex]
+  TRUE

@@ -1,0 +1,64 @@
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+#endif
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+#endif //ENDIF CONTROL_DEFINITION
+
+//----------------------------------------------------------------------------
+//                SECURITY - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef SECURITY_FORM_SET
+    #ifdef FORM_SET_TYPEDEF
+    #endif
+  
+    #ifdef FORM_SET_VARSTORE
+        #ifdef SETUP_DATA_DEFINITION
+        #endif
+    #endif
+  
+    #ifdef AAEON_FORM_SET_ITEM
+    #endif //AAEON_FORM_SET_ITEM
+  
+    #ifdef AAEON_FORM_SET_GOTO
+	
+	#if defined(AaeonSecureBoot_SUPPORT) && AaeonSecureBoot_SUPPORT
+            SEPARATOR
+            goto SECURE_BOOT_SUBMENU_FORM_ID,
+            prompt  = STRING_TOKEN(SECURE_BOOT_MENU_FORM_TITLE),
+            help    = STRING_TOKEN(SECURE_BOOT_MENU_FORM_HELP),
+            flags   = INTERACTIVE, key = AUTO_ID(AAEON_SECURE_BOOT_MENU_REFRESH);
+    #endif
+
+    #endif //AAEON_FORM_SET_GOTO
+  
+    #ifdef FORM_SET_FORM
+ 
+
+  #endif //FORM_SET_FORM
+  
+#endif  // SECURITY_FORM_SET
+
+//**********************************************************************
+//  Add a Goto in CRB Setup form so BCP CMD line can parse Aaeon setup
+//**********************************************************************
+#ifdef TOP_LEVEL_FORM_SET
+    #ifdef FORM_SET_GOTO
+		suppressif TRUE;
+	        goto AAEON_SECURITY_MAIN, 
+	        prompt = STRING_TOKEN(STR_AAEON_SECURITY),
+	        help = STRING_TOKEN(STR_EMPTY);
+		endif;
+    #endif //FORM_SET_GOTO    
+#endif // TOP_LEVEL_FORM_SET

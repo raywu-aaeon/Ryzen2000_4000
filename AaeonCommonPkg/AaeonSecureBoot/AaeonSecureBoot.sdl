@@ -1,0 +1,89 @@
+TOKEN
+	Name  = "AaeonSecureBoot_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Setup support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AaeonSecureBoot_DIR"
+End
+
+ELINK
+	Name  = "$(AaeonSecureBoot_DIR)\AaeonSecureBoot.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent  
+End
+
+ELINK
+    Name  = "$(AaeonSecureBoot_DIR)$(PATH_SLASH)AaeonSecureBootSetup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name  = "SecureBoot_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SecureBoot Module support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "DEFAULT_SECURE_BOOT_ENABLE"
+    Value  = "0"
+    Help  = "Default value of Secure Boot Enable Control.\0-Secure Boot control option will be locked Disabled unless platform in User mode with CSM disabled "
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,AAEON_SECURE_BOOT_MENU_REFRESH,AaeonSecureBootCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "PKVarFile"
+    Value  = "$(AaeonSecureBoot_DIR)\AaeonKeys\PK"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "SECURE_BOOT_MODULE_REVISION" ">" "20"
+End
+
+TOKEN
+    Name  = "PkVarFile"
+    Value  = "$(AaeonSecureBoot_DIR)\AaeonKeys\PK"
+    Help  = "For backward compability to older SecureBoot module"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "SECURE_BOOT_MODULE_REVISION" "<=" "20"
+End
+
+TOKEN
+    Name  = "KEKVarFile"
+    Value  = "$(AaeonSecureBoot_DIR)\AaeonKeys\KEK"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "SECURE_BOOT_MODULE_REVISION" ">" "20"
+End
+
+TOKEN
+    Name  = "KekVarFile"
+    Value  = "$(AaeonSecureBoot_DIR)\AaeonKeys\KEK"
+    Help  = "For backward compability to older SecureBoot module"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "SECURE_BOOT_MODULE_REVISION" "<=" "20"
+End
+
+TOKEN
+    Name  = "dbVarFile"
+    Value  = "$(AaeonSecureBoot_DIR)\AaeonKeys\db"
+    TokenType = Expression
+    TargetMAK = Yes
+End

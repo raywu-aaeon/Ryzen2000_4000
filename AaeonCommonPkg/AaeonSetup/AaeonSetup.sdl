@@ -1,0 +1,218 @@
+TOKEN
+	Name  = "AaeonSetup_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Setup support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AaeonSetup_DIR"
+End
+
+TOKEN
+	Name = "ONEOF_AAEONRIWAKEENABLE_DEFAULT"
+	Value = "1"
+	Help = "0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+## SETUP DEFAULT VALUE END <<
+
+TOKEN
+	Name  = "DEFAULT_ENGINEERING_MODE"
+	Value  = "1"
+	Help  = "Main switch to enable Engineer setup mode"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AUTOID_HEADER_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Setup support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "AMITSE_SUBPAGE_AS_ROOT_PAGE_LIST_SUPPORT"
+	Value  = "1"
+	Help  = "1 -> Shows subpages as root page & 0 -> Shows subpages as is"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#20171031 Carson-Fix issue Os Indications Support-add >>
+TOKEN
+    Name  = "OS_INDICATIONS_SUPPORT_FIRST_PAGE"
+    Value  = "AAEON_MAIN_MAIN"
+    Help  = "Set to one of the defined setup page form ID. BIOS will enter this page after OS request entering setup"
+    TokenType = Expression
+    TargetH = Yes
+End
+#20171031 Carson-Fix issue Os Indications Support-add <<
+
+ELINK
+	Name  = "{{ 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, AAEON_MAIN_MAIN, NULL},"
+	Parent  = "{ { 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, MAIN_MAIN, NULL},"
+	InvokeOrder = ReplaceParent   
+End
+
+ELINK
+	Name  = "{ { 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, AAEON_ADVANCED_MAIN, NULL},"
+	Parent  = "{ { 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, ADVANCED_MAIN, NULL},"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "{{ 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, AAEON_CHIPSET_MAIN, NULL},"
+	Parent  = "{ { 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, CHIPSET_MAIN, NULL},"
+	InvokeOrder = ReplaceParent   
+End
+
+ELINK
+	Name  = "{ { 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, AAEON_SECURITY_MAIN, NULL},"
+	Parent  = "{ { 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, SECURITY_MAIN, NULL},"
+	InvokeOrder = ReplaceParent  
+End
+
+ELINK
+	Name  = "{{ 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, AAEON_BOOT_MAIN, NULL},"
+	Parent  = "{ { 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, BOOT_MAIN, NULL},"
+	InvokeOrder = ReplaceParent   
+End
+
+ELINK
+	Name  = "{{ 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, AAEON_EXIT_MAIN, NULL},"
+	Parent  = "{ { 0x7B59104A, 0xC00D, 0x4158, 0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15 }, EXIT_MAIN, NULL},"
+	InvokeOrder = ReplaceParent  
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonSetup.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonMain.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+##	Disable = Yes
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonAdvanced.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+##	Disable = Yes
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonChipset.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+##	Disable = Yes
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonNB.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+##	Disable = Yes
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonSB.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+##	Disable = Yes
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonSecurity.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent  
+##	Disable = Yes
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonBoot.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent  
+##	Disable = Yes
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonExit.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+##	Disable = Yes
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)\AaeonDefaultOverride.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+##	Disable = Yes
+End
+
+ELINK
+    Name  = "$(AaeonSetup_DIR)$(PATH_SLASH)AaeonSetupCallback.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+#ELINK
+#	Name  = "AaeonSetupLibHook,"
+#	Parent  = "ProcessUIInitHook,"
+#	InvokeOrder = AfterParent
+#End
+
+#INFComponent
+#	Name  = "AaeonSetupLib"
+#	File  = "LibraryInstances/AaeonSetupLib/AaeonSetupLib.inf"
+#	Package  = "AaeonSetup"
+#End
+
+#LibraryMapping
+#	Class  = "NULL"
+#	Instance  = "AaeonSetup.AaeonSetupLib"
+#	Override  = "AmiTsePkg.AMITSE"
+#End
+
+# >> 2016/03/17 Eric
+ELINK
+	Name  = "$(AaeonSetup_DIR)/AaeonSetup.c"
+	Parent  = "TSE_SOURCE_FILES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonSetup_DIR)/AaeonSetup.h"
+	Parent  = "AMITSE_OEM_HEADER_LIST"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "{{SCAN_F4, 0 },0, AaeonHandleSaveExitKey, 0 },"
+	Parent  = "{{SCAN_F4, 0},0, HandleSaveExitKey, 0 },"
+	InvokeOrder = ReplaceParent
+End
+# << 2016/03/17 Eric
+
+#20171031 Carson-Fix issue Os Indications Support-add >>
+ELINK
+	Name  = "AaeonOsIndicationsSupportHook,"
+	Parent  = "PostManagerHandShakeHook,"
+	InvokeOrder = AfterParent
+End
+#20171031 Carson-Fix issue Os Indications Support-add <<

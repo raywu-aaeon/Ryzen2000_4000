@@ -1,0 +1,838 @@
+TOKEN
+	Name  = "AaeonUartMode2Pkg_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AaeonUartMode2Pkg_DIR"
+End
+
+TOKEN
+	Name  = "RS232_MODE"
+	Value  = "0"
+	Help = "Default value of the RS232 UART mode option"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "RS422_MODE"
+	Value  = "1"
+	Help = "Default value of the RS422 UART mode option"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "RS485_MODE"
+	Value  = "2"
+	Help = "Default value of the RS485 UART mode option"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "MAX_UARTMODE_NUM"
+	Value  = "10"
+	Help = "Maximum number of UART mode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UARTMODE_TRANSCEIVER_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <UART Mode Transceiver> option.\0: F81438\1: HW Design"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SIO_FLOW_CTRL_SUPPORT"
+	Value  = "1"
+	Help = "SIO need to enable flow control to support RS485 mode"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "MAX_F81438_GPIO_NUM"
+	Value = "2"
+	Help = "How many GPIO use for control RS232/422/485 mode by F81438"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F81438_RS232_TRUTH_TABLE"
+	Value = "{0, 1}"
+	Help = "GPIO value for RS232 mode, {GPIO0, GPIO1}"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F81438_RS422_TRUTH_TABLE"
+	Value = "{0, 0}"
+	Help = "GPIO value for RS422 mode, {GPIO0, GPIO1}"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F81438_RS485_TRUTH_TABLE"
+	Value = "{1, 1}"
+	Help = "GPIO value for RS485 mode, {GPIO0, GPIO1}"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "MAX_HW_DESIGN_GPIO_NUM"
+	Value = "3"
+	Help = "How many GPIO use for control RS232/422/485 mode by HW design"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "HW_DESIGN_RS232_TRUTH_TABLE"
+	Value = "{0, 0, 0}"
+	Help = "GPIO value for RS232 mode, {GPIO0, GPIO1, GPIO2}, {ENRS232, EN422#, EN485#}"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "HW_DESIGN_RS422_TRUTH_TABLE"
+	Value = "{1, 1, 0}"
+	Help = "GPIO value for RS422 mode, {GPIO0, GPIO1, GPIO2}, {ENRS232, EN422#, EN485#}"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "HW_DESIGN_RS485_TRUTH_TABLE"
+	Value = "{1, 0, 1}"
+	Help = "GPIO value for RS485 mode, {GPIO0, GPIO1, GPIO2}, {ENRS232, EN422#, EN485#}"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART1MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM1.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART1MODE_UID_DEFAULT"
+	Value  = "1"
+	Help = "Default value of the <UID Number> option for COM1.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART1MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM1.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART1MODE_UART_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <UART Source> option for COM1.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART1MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART1MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART1MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM1.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART1MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM1.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART1MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM1.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART2MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM2.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART2MODE_UID_DEFAULT"
+	Value  = "2"
+	Help = "Default value of the <UID Number> option for COM2.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART2MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM2.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART2MODE_UART_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <UART Source> option for COM2.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART2MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART2MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART2MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM2.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART2MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM2.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART2MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM2.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART3MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM3.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART3MODE_UID_DEFAULT"
+	Value  = "3"
+	Help = "Default value of the <UID Number> option for COM3.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART3MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM3.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART3MODE_UART_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <UART Source> option for COM3.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART3MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART3MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART3MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM3.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART3MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM3.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART3MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM3.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART4MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM4.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART4MODE_UID_DEFAULT"
+	Value  = "4"
+	Help = "Default value of the <UID Number> option for COM4.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART4MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM4.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART4MODE_UART_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <UART Source> option for COM4.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART4MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART4MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART4MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM4.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART4MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM4.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART4MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM4.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART5MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM5.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART5MODE_UID_DEFAULT"
+	Value  = "5"
+	Help = "Default value of the <UID Number> option for COM5.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART5MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM5.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART5MODE_UART_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <UART Source> option for COM5.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART5MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART5MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART5MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM5.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART5MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM5.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART5MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM5.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART6MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM6.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART6MODE_UID_DEFAULT"
+	Value  = "6"
+	Help = "Default value of the <UID Number> option for COM6.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART6MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM6.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART6MODE_UART_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <UART Source> option for COM6.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART6MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART6MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART6MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM6.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART6MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM6.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART6MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM6.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART7MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM7.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART7MODE_UID_DEFAULT"
+	Value  = "7"
+	Help = "Default value of the <UID Number> option for COM7.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART7MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM7.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_AAEON_UART7MODE_UART_SOURCE_DEFAULT"
+    Value  = "$(F81866_CHIP_TYPE)"
+    Help = "Default value of the <UART Source> option for COM7.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART7MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART7MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART7MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM7.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART7MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM7.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART7MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM7.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART8MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM8.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART8MODE_UID_DEFAULT"
+	Value  = "8"
+	Help = "Default value of the <UID Number> option for COM8.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART8MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM8.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_AAEON_UART8MODE_UART_SOURCE_DEFAULT"
+    Value  = "$(F81866_CHIP_TYPE)"
+    Help = "Default value of the <UART Source> option for COM8.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART8MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART8MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART8MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM8.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART8MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM8.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART8MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM8.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART9MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM9.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART9MODE_UID_DEFAULT"
+	Value  = "9"
+	Help = "Default value of the <UID Number> option for COM9.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART9MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM9.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_AAEON_UART9MODE_UART_SOURCE_DEFAULT"
+    Value  = "$(F81866_CHIP_TYPE)"
+    Help = "Default value of the <UART Source> option for COM9.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART9MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART9MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART9MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM9.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART9MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM9.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART9MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM9.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART10MODE_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <RS232/422/485 Support> option for COM10.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART10MODE_UID_DEFAULT"
+	Value  = "10"
+	Help = "Default value of the <UID Number> option for COM10.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONEOF_AAEON_UART10MODE_SOURCE_DEFAULT"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Default value of the <GPIO Source> option for COM10.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "ONEOF_AAEON_UART10MODE_UART_SOURCE_DEFAULT"
+    Value  = "$(F81866_CHIP_TYPE)"
+    Help = "Default value of the <UART Source> option for COM10.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "DEFAULT_AAEON_UART10MODE"
+	Value  = "$(RS232_MODE)"
+	Help = "Default value of the <Mode> option for UART10MODE."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART10MODE_GPIO0_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM10.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART10MODE_GPIO1_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM10.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "NUMERIC_AAEON_UART10MODE_GPIO2_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <Mode 2 GPIO Number> option for COM10.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+
+ELINK
+	Name  = "AaeonUartMode2Init,"
+	Parent  = "AAEON_DXE_INIT_FUNCTIONS"
+	InvokeOrder = BeforeParent
+End
+
+ELINK
+	Name  = "$(AaeonUartMode2Pkg_DIR)\AaeonUartMode2.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonUartMode2Pkg_DIR)\AaeonUartMode2Pkg.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonUartMode2Pkg_DIR)\AaeonUartMode2Callback.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonUartMode2Pkg_DIR)\AaeonUartMode2Callback.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonUartMode2Pkg_DIR)\AaeonUartMode2Pkg.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonUartMode2Pkg_DIR)\AaeonUartMode2Pkg.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(ADVANCED_FORM_SET_CLASS, 0, AAEON_UARTMODE_INTERACTIVE_KEY, AaeonUartMode2CallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "UartModeLoadDefaults,"
+	Parent  = "LoadSetupDefaultsHook,"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonUartMode2Pkg_DIR)\AaeonUartMode2LoadDefaults.c"
+	Parent  = "TSE_SOURCE_FILES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AmiSdlLib"
+	Parent  = "ADDITIONAL_AMITSE_LibraryClasses"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiCspLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End

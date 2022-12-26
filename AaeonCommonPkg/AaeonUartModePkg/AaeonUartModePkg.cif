@@ -1,0 +1,13 @@
+<component>
+	name = "AaeonUartModePkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonUartModePkg\"
+	RefName = "AaeonCommonPkg.AaeonUartModePkg"
+
+[files]
+"AaeonUartModePkg.sdl"
+"AaeonUartModePkg.c"
+"AaeonUartModePkg.sd"
+"AaeonUartModePkg.uni"
+
+<endComponent>

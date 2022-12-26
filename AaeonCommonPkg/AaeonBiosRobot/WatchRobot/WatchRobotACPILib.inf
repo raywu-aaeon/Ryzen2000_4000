@@ -1,0 +1,40 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = WatchRobotACPILib
+  FILE_GUID                      = ca49e785-e7be-46cb-a02b-50cba049e912
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = WatchRobotACPI|DXE_SMM_DRIVER
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  WatchRobotACPILib.c
+
+[Packages]
+  MdePkg/MdePkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiChipsetPkg/AmiChipsetPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # Optional. should use Mde Library instead.
+  AmiChipsetModulePkg/AmiChipsetModulePkg.dec   # Optional. should use Mde Library instead.
+  AaeonCommonPkg/AaeonCommonPkg.dec
+  AaeonCommonPkg/AaeonBiosRobot/AaeonBiosRobot.dec
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+
+  ##PciLib # Default DXE_DRIVER PciLib should depend on gEfiPciRootBridgeIoProtocolGuid.
+
+  AmiDxeLib # Optional. should use Mde Library instead.
+  AmiCspLib # Optional. should use Mde Library instead.
+  AaeonDxeLib
+  AaeonBiosRobotLib
+[Protocols]
+
+[Depex]
+  TRUE

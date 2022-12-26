@@ -1,0 +1,978 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+    #if (FIRST_DIO_NUMBER > 0)
+	UINT8	DioDirection[FIRST_DIO_NUMBER];
+	UINT8	DioLevel[FIRST_DIO_NUMBER];
+	UINT8	DioDriving[FIRST_DIO_NUMBER];
+	UINT8	DioInterrupt[FIRST_DIO_NUMBER];
+	UINT8	DioGpioNum[FIRST_DIO_NUMBER];
+    #endif
+    #if (SECOND_DIO_NUMBER > 0)
+	UINT8	Dio2Direction[SECOND_DIO_NUMBER];
+	UINT8	Dio2Level[SECOND_DIO_NUMBER];
+	UINT8	Dio2Driving[SECOND_DIO_NUMBER];
+	UINT8	Dio2Interrupt[SECOND_DIO_NUMBER];
+	UINT8	Dio2GpioNum[SECOND_DIO_NUMBER];
+    #endif
+
+	UINT8	DioRunOnce;
+	UINT8	DioSource;
+	UINT8	Dio2Source;
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------
+// Do not remove these items >>
+#define ONEOF_AAEONDIO3RUNONCE \
+	oneof varid     = SETUP_DATA.DioRunOnce, \
+			prompt  = STRING_TOKEN(STR_DIO0_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+			option text = STRING_TOKEN(STR_EMPTY), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; \
+	        	option text = STRING_TOKEN(STR_EMPTY), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+// Do not remove these items <<
+
+#define ONEOF_DIO_SOURCE \
+	oneof varid     = SETUP_DATA.DioSource, \
+		prompt  = STRING_TOKEN(STR_AAEON_DIO_SOURCE), \
+		help    = STRING_TOKEN(STR_AAEON_DIO_SOURCE_HELP), \
+		default     = FIRST_DIO_TYPE, \
+		default     = FIRST_DIO_TYPE, defaultstore = AmiMfgDefault, \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81866), value = F81866_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81966), value = F81966_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81801), value = F81801_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81216SEC), value = F81216SEC_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_IT8728F), value = IT8728F_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_W83627DHG), value = W83627DHG_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F75111), value = F75111_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81804), value = F81804_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_IT851X), value = IT851X_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F75113), value = F75113_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_IT8625), value = IT8625_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_SOC), value = SOC_CHIP_TYPE, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_SEC_DIO_SOURCE \
+	oneof varid     = SETUP_DATA.Dio2Source, \
+		prompt  = STRING_TOKEN(STR_AAEON_SEC_DIO_SOURCE), \
+		help    = STRING_TOKEN(STR_AAEON_DIO_SOURCE_HELP), \
+		default     = SECOND_DIO_TYPE, \
+		default     = SECOND_DIO_TYPE, defaultstore = AmiMfgDefault, \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81866), value = F81866_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81966), value = F81966_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81801), value = F81801_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81216SEC), value = F81216SEC_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_IT8728F), value = IT8728F_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_W83627DHG), value = W83627DHG_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F75111), value = F75111_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F81804), value = F81804_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_IT851X), value = IT851X_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_F75113), value = F75113_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_IT8625), value = IT8625_CHIP_TYPE, flags = RESET_REQUIRED; \
+		option text = STRING_TOKEN(STR_AAEON_CHIP_TYPE_SOC), value = SOC_CHIP_TYPE, flags = RESET_REQUIRED; \
+	endoneof; 
+
+//------------------------------------------------------------
+// Define Macro
+//------------------------------------------------------------
+#define ONEOF_DIO_DIR(NUM, STR_PROMPT_TOKEN, DIO_DIR_DEFAULT) \
+	oneof varid     = SETUP_DATA.DioDirection[NUM], \
+			prompt  = STRING_TOKEN(STR_PROMPT_TOKEN), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = DIO_DIR_DEFAULT,\
+	  		default = DIO_DIR_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_SEC_DIO_DIR(NUM, STR_PROMPT_TOKEN, SEC_DIO_DIR_DEFAULT) \
+	oneof varid     = SETUP_DATA.Dio2Direction[NUM], \
+			prompt  = STRING_TOKEN(STR_PROMPT_TOKEN), \
+			help    = STRING_TOKEN(STR_DIO_DIR_HELP), \
+	  		default = SEC_DIO_DIR_DEFAULT,\
+	  		default = SEC_DIO_DIR_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DIR_IN), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_DIR_OUT), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+#define COND_ONEOF_DIO_LV_TYPE(PIN_NUM, PIN_DEFAULT) \
+	suppressif ideqval SETUP_DATA.DioDirection[PIN_NUM] == 0; \
+		oneof varid     = SETUP_DATA.DioLevel[PIN_NUM], \
+				prompt  = STRING_TOKEN(STR_DIO_LV_PROMPT), \
+				help    = STRING_TOKEN(STR_DIO_LV_HELP), \
+	  			default = PIN_DEFAULT,\
+	  			default = PIN_DEFAULT, defaultstore = AmiMfgDefault,\
+				option text = STRING_TOKEN(STR_DIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 	        	option text = STRING_TOKEN(STR_DIO_HI), value = 1, flags = RESET_REQUIRED; \
+		endoneof; \
+	endif;
+
+#define COND_ONEOF_SEC_DIO_LV_TYPE(PIN_NUM, PIN_DEFAULT) \
+	suppressif ideqval SETUP_DATA.Dio2Direction[PIN_NUM] == 0; \
+		oneof varid     = SETUP_DATA.Dio2Level[PIN_NUM], \
+				prompt  = STRING_TOKEN(STR_DIO_LV_PROMPT), \
+				help    = STRING_TOKEN(STR_DIO_LV_HELP), \
+	  			default = PIN_DEFAULT,\
+	  			default = PIN_DEFAULT, defaultstore = AmiMfgDefault,\
+				option text = STRING_TOKEN(STR_DIO_LOW), value = 0, flags = RESET_REQUIRED; \
+   	 	        	option text = STRING_TOKEN(STR_DIO_HI), value = 1, flags = RESET_REQUIRED; \
+		endoneof; \
+	endif;
+
+// Porting required if DIO pin supported other driving. For example: SoC 20K/10K pull-up
+#define ONEOF_DIO_DRIVING(NUM, DIO_DRIVING_DEFAULT) \
+	oneof varid     = SETUP_DATA.DioDriving[NUM], \
+			prompt  = STRING_TOKEN(STR_DIO_DRIVING_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DRIVING_HELP), \
+	  		default = DIO_DRIVING_DEFAULT,\
+	  		default = DIO_DRIVING_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_OPEN_DRAIN), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_PUSH_PULL), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+// Porting required if DIO pin supported other driving. For example: SoC 20K/10K pull-up
+#define ONEOF_SEC_DIO_DRIVING(NUM, SEC_DIO_DRIVING_DEFAULT) \
+	oneof varid     = SETUP_DATA.Dio2Driving[NUM], \
+			prompt  = STRING_TOKEN(STR_DIO_DRIVING_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_DRIVING_HELP), \
+	  		default = SEC_DIO_DRIVING_DEFAULT,\
+	  		default = SEC_DIO_DRIVING_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_OPEN_DRAIN), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_PUSH_PULL), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+#define ONEOF_DIO_INT(NUM, DIO_INT_DEFAULT) \
+	oneof varid     = SETUP_DATA.DioInterrupt[NUM], \
+			prompt  = STRING_TOKEN(STR_DIO_INTERRUPT_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_INTERRUPT_HELP), \
+	  		default = DIO_INT_DEFAULT,\
+	  		default = DIO_INT_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED; \
+	endoneof; 
+
+#define ONEOF_SEC_DIO_INT(NUM, SEC_DIO_INT_DEFAULT) \
+	oneof varid     = SETUP_DATA.Dio2Interrupt[NUM], \
+			prompt  = STRING_TOKEN(STR_DIO_INTERRUPT_PROMPT), \
+			help    = STRING_TOKEN(STR_DIO_INTERRUPT_HELP), \
+	  		default = SEC_DIO_INT_DEFAULT,\
+	  		default = SEC_DIO_INT_DEFAULT, defaultstore = AmiMfgDefault,\
+			option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED; \
+	        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED; \
+	endoneof;
+
+#define NUMERIC_DIO_GPIO_NUM(DIO_NUM, DIO_GPIO_NUM_DEFAULT) \
+	numeric varid     = SETUP_DATA.DioGpioNum[DIO_NUM], \
+		prompt  = STRING_TOKEN(STR_AAEON_DIO_GPIO), \
+		help    = STRING_TOKEN(STR_AAEON_DIO_GPIO_HELP), \
+		flags 	= RESET_REQUIRED,\
+		minimum = 0,\
+		maximum = 100,\
+		step    = 1,\
+		default = DIO_GPIO_NUM_DEFAULT, \
+	  	default = DIO_GPIO_NUM_DEFAULT, defaultstore = AmiMfgDefault,\
+	endnumeric;	
+
+#define NUMERIC_SEC_DIO_GPIO_NUM(DIO_NUM, DIO_GPIO_NUM_DEFAULT) \
+	numeric varid     = SETUP_DATA.Dio2GpioNum[DIO_NUM], \
+		prompt  = STRING_TOKEN(STR_AAEON_DIO_GPIO), \
+		help    = STRING_TOKEN(STR_AAEON_DIO_GPIO_HELP), \
+		flags 	= RESET_REQUIRED,\
+		minimum = 0,\
+		maximum = 100,\
+		step    = 1,\
+		default = DIO_GPIO_NUM_DEFAULT, \
+	  	default = DIO_GPIO_NUM_DEFAULT, defaultstore = AmiMfgDefault,\
+	endnumeric;
+
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+// Do not remove these items >>
+	ONEOF_AAEONDIO3RUNONCE
+// Do not remove these items <<
+
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+	#ifdef FORM_SET_TYPEDEF
+		#include "AaeonDio3Setup.h"
+	#endif
+	
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+	#endif
+
+	#ifdef FORM_SET_GOTO
+        goto AAEON_DIO_FORM_ID,
+        prompt  = STRING_TOKEN(STR_DIO_FORM),
+        help    = STRING_TOKEN(STR_DIO_FORM_HELP);
+	#endif //FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+	//-------------------------------------------------------------------------
+	//	AAEON OEM Group
+	//-------------------------------------------------------------------------
+
+		form formid = AUTO_ID(AAEON_DIO_FORM_ID),
+			title = STRING_TOKEN(STR_DIO_FORM);
+			
+			SUBTITLE(STRING_TOKEN(STR_DIO_FORM))
+			SEPARATOR
+			// Do not remove this item >>
+			suppressif ideqval AAEON_SETUP_DATA.EgrMode == 0;
+				INTERACTIVE_TEXT(STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_AAEON_DIO_CALLBACK), STRING_TOKEN(STR_AAEON_DIO_DUMMY),  AUTO_ID(AAEON_DIO_INTERACTIVE_KEY))
+				SEPARATOR
+
+				goto AAEON_DIO_SOURCE_FORM_ID,
+        			prompt  = STRING_TOKEN(STR_DIO_SOURCE_FORM),
+        			help    = STRING_TOKEN(STR_DIO_SOURCE_FORM_HELP);
+        			SEPARATOR
+			endif;
+			// Do not remove this item <<
+
+    		#if (FIRST_DIO_NUMBER > 0)
+			#if ((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(0, STR_DIO0_PROMPT, DIO_DIR_0_DEFAULT)
+			endif;
+			#elif ((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) & BIT0) == 1
+				ONEOF_DIO_DIR(0, STR_DIO0_PROMPT, DIO_DIR_0_DEFAULT)
+			#endif
+			#if (DIO_OUTPUT_CAPABLE_MAP & BIT0) == 1
+				COND_ONEOF_DIO_LV_TYPE(0, DIO_LV_0_DEFAULT)
+			#endif
+			#if (DIO_INTERRUPT_CAPABLE_MAP & BIT0) == 1
+				ONEOF_DIO_INT(0, DIO_INT_0_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 1)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 1) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(1, STR_DIO1_PROMPT, DIO_DIR_1_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 1) & BIT0) == 1
+				ONEOF_DIO_DIR(1, STR_DIO1_PROMPT, DIO_DIR_1_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 1) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(1, DIO_LV_1_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 1) & BIT0 ) == 1
+				ONEOF_DIO_INT(1, DIO_INT_1_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 2)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 2) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(2, STR_DIO2_PROMPT, DIO_DIR_2_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 2) & BIT0) == 1
+				ONEOF_DIO_DIR(2, STR_DIO2_PROMPT, DIO_DIR_2_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 2) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(2, DIO_LV_2_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 2) & BIT0 ) == 1
+				ONEOF_DIO_INT(2, DIO_INT_2_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 3)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 3) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(3, STR_DIO3_PROMPT, DIO_DIR_3_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 3) & BIT0) == 1
+				ONEOF_DIO_DIR(3, STR_DIO3_PROMPT, DIO_DIR_3_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 3) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(3, DIO_LV_3_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 3) & BIT0 ) == 1
+				ONEOF_DIO_INT(3, DIO_INT_3_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 4)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 4) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(4, STR_DIO4_PROMPT, DIO_DIR_4_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 4) & BIT0) == 1
+				ONEOF_DIO_DIR(4, STR_DIO4_PROMPT, DIO_DIR_4_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 4) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(4, DIO_LV_4_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 4) & BIT0 ) == 1
+				ONEOF_DIO_INT(4, DIO_INT_4_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 5)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 5) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(5, STR_DIO5_PROMPT, DIO_DIR_5_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 5) & BIT0) == 1
+				ONEOF_DIO_DIR(5, STR_DIO5_PROMPT, DIO_DIR_5_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 5) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(5, DIO_LV_5_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 5) & BIT0 ) == 1
+				ONEOF_DIO_INT(5, DIO_INT_5_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 6)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 6) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(6, STR_DIO6_PROMPT, DIO_DIR_6_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 6) & BIT0) == 1
+				ONEOF_DIO_DIR(6, STR_DIO6_PROMPT, DIO_DIR_6_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 6) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(6, DIO_LV_6_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 6) & BIT0 ) == 1
+				ONEOF_DIO_INT(6, DIO_INT_6_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 7)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 7) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(7, STR_DIO7_PROMPT, DIO_DIR_7_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 7) & BIT0) == 1
+				ONEOF_DIO_DIR(7, STR_DIO7_PROMPT, DIO_DIR_7_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 7) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(7, DIO_LV_7_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 7) & BIT0 ) == 1
+				ONEOF_DIO_INT(7, DIO_INT_7_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 8)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 8) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(8, STR_DIO8_PROMPT, DIO_DIR_8_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 8) & BIT0) == 1
+				ONEOF_DIO_DIR(8, STR_DIO8_PROMPT, DIO_DIR_8_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 8) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(8, DIO_LV_8_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 8) & BIT0 ) == 1
+				ONEOF_DIO_INT(8, DIO_INT_8_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 9)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 9) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(9, STR_DIO9_PROMPT, DIO_DIR_9_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 9) & BIT0) == 1
+				ONEOF_DIO_DIR(9, STR_DIO9_PROMPT, DIO_DIR_9_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 9) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(9, DIO_LV_9_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 9) & BIT0 ) == 1
+				ONEOF_DIO_INT(9, DIO_INT_9_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 10)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 10) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(10, STR_DIO10_PROMPT, DIO_DIR_10_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 10) & BIT0) == 1
+				ONEOF_DIO_DIR(10, STR_DIO10_PROMPT, DIO_DIR_10_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 10) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(10, DIO_LV_10_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 10) & BIT0 ) == 1
+				ONEOF_DIO_INT(10, DIO_INT_10_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 11)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 11) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(11, STR_DIO11_PROMPT, DIO_DIR_11_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 11) & BIT0) == 1
+				ONEOF_DIO_DIR(11, STR_DIO11_PROMPT, DIO_DIR_11_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 11) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(11, DIO_LV_11_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 11) & BIT0 ) == 1
+				ONEOF_DIO_INT(11, DIO_INT_11_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 12)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 12) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(12, STR_DIO12_PROMPT, DIO_DIR_12_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 12) & BIT0) == 1
+				ONEOF_DIO_DIR(12, STR_DIO12_PROMPT, DIO_DIR_12_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 12) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(12, DIO_LV_12_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 12) & BIT0 ) == 1
+				ONEOF_DIO_INT(12, DIO_INT_12_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 13)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 13) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(13, STR_DIO13_PROMPT, DIO_DIR_13_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 13) & BIT0) == 1
+				ONEOF_DIO_DIR(13, STR_DIO13_PROMPT, DIO_DIR_13_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 13) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(13, DIO_LV_13_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 13) & BIT0 ) == 1
+				ONEOF_DIO_INT(13, DIO_INT_13_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 14)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 14) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(14, STR_DIO14_PROMPT, DIO_DIR_14_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 14) & BIT0) == 1
+				ONEOF_DIO_DIR(14, STR_DIO14_PROMPT, DIO_DIR_14_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 14) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(14, DIO_LV_14_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 14) & BIT0 ) == 1
+				ONEOF_DIO_INT(14, DIO_INT_14_DEFAULT)
+			#endif
+			#endif
+
+    		#if (FIRST_DIO_NUMBER > 15)
+			#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 15) & BIT0) == 1
+			grayoutif TRUE;
+				ONEOF_DIO_DIR(15, STR_DIO15_PROMPT, DIO_DIR_15_DEFAULT)
+			endif;
+			#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 15) & BIT0) == 1
+				ONEOF_DIO_DIR(15, STR_DIO15_PROMPT, DIO_DIR_15_DEFAULT)
+			#endif
+			#if ((DIO_OUTPUT_CAPABLE_MAP >> 15) & BIT0 ) == 1
+				COND_ONEOF_DIO_LV_TYPE(15, DIO_LV_15_DEFAULT)
+			#endif
+			#if ((DIO_INTERRUPT_CAPABLE_MAP >> 15) & BIT0 ) == 1
+				ONEOF_DIO_INT(15, DIO_INT_15_DEFAULT)
+			#endif
+			#endif
+
+			#if (FIRST_DIO_NUMBER > 16)
+			TODO: Porting required
+			
+			//#if (((DIO_INPUT_CAPABLE_MAP ^ DIO_OUTPUT_CAPABLE_MAP) >> 16) & BIT0) == 1
+			//grayoutif TRUE;
+			//	ONEOF_DIO_DIR(16, STR_DIO16_PROMPT, DIO_DIR_16_DEFAULT)
+			//endif;
+			//#elif (((DIO_INPUT_CAPABLE_MAP & DIO_OUTPUT_CAPABLE_MAP) >> 16) & BIT0) == 1
+			//	ONEOF_DIO_DIR(16, STR_DIO16_PROMPT, DIO_DIR_16_DEFAULT)
+			//#endif
+			//#if ((DIO_OUTPUT_CAPABLE_MAP >> 16) & BIT0 ) == 1
+			//	COND_ONEOF_DIO_LV_TYPE(16, DIO_LV_16_DEFAULT)
+			//#endif
+			//#if ((DIO_INTERRUPT_CAPABLE_MAP >> 16) & BIT0 ) == 1
+			//	ONEOF_DIO_INT(16, DIO_INT_16_DEFAULT)
+			//#endif
+
+			// ...
+
+			#endif
+
+			#if (SECOND_DIO_NUMBER > 0)
+				SEPARATOR
+
+				SUBTITLE(STRING_TOKEN(STR_SEC_DIO))
+				SEPARATOR
+
+				#if ((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(0,STR_DIO0_PROMPT,SEC_DIO_DIR_0_DEFAULT)
+				endif;
+				#elif ((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(0,STR_DIO0_PROMPT,SEC_DIO_DIR_0_DEFAULT)
+				#endif
+				#if (SECOND_DIO_OUTPUT_CAPABLE_MAP & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(0, SEC_DIO_LV_0_DEFAULT)
+				#endif
+				#if (SECOND_DIO_INTERRUPT_CAPABLE_MAP & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(0, SEC_DIO_INT_0_DEFAULT)
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 1)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 1) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(1,STR_DIO1_PROMPT,SEC_DIO_DIR_1_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 1) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(1,STR_DIO1_PROMPT,SEC_DIO_DIR_1_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 1) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(1, SEC_DIO_LV_1_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 1) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(1, SEC_DIO_INT_1_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 2)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 2) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(2,STR_DIO2_PROMPT,SEC_DIO_DIR_2_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 2) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(2,STR_DIO2_PROMPT,SEC_DIO_DIR_2_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 2) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(2, SEC_DIO_LV_2_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 2) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(2, SEC_DIO_INT_2_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 3)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 3) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(3,STR_DIO3_PROMPT,SEC_DIO_DIR_3_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 3) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(3,STR_DIO3_PROMPT,SEC_DIO_DIR_3_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 3) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(3, SEC_DIO_LV_3_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 3) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(3, SEC_DIO_INT_3_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 4)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 4) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(4,STR_DIO4_PROMPT,SEC_DIO_DIR_4_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 4) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(4,STR_DIO4_PROMPT,SEC_DIO_DIR_4_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 4) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(4, SEC_DIO_LV_4_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 4) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(4, SEC_DIO_INT_4_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 5)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 5) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(5,STR_DIO5_PROMPT,SEC_DIO_DIR_5_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 5) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(5,STR_DIO5_PROMPT,SEC_DIO_DIR_5_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 5) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(5, SEC_DIO_LV_5_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 5) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(5, SEC_DIO_INT_5_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 6)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 6) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(6,STR_DIO6_PROMPT,SEC_DIO_DIR_6_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 6) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(6,STR_DIO6_PROMPT,SEC_DIO_DIR_6_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 6) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(6, SEC_DIO_LV_6_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 6) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(6, SEC_DIO_INT_6_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 7)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 7) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(7,STR_DIO7_PROMPT,SEC_DIO_DIR_7_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 7) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(7,STR_DIO7_PROMPT,SEC_DIO_DIR_7_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 7) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(7, SEC_DIO_LV_7_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 7) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(7, SEC_DIO_INT_7_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 8)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 8) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(8,STR_DIO8_PROMPT,SEC_DIO_DIR_8_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 8) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(8,STR_DIO8_PROMPT,SEC_DIO_DIR_8_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 8) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(8, SEC_DIO_LV_8_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 8) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(8, SEC_DIO_INT_8_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 9)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 9) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(9,STR_DIO9_PROMPT,SEC_DIO_DIR_9_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 9) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(9,STR_DIO9_PROMPT,SEC_DIO_DIR_9_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 9) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(9, SEC_DIO_LV_9_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 9) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(9, SEC_DIO_INT_9_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 10)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 10) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(10,STR_DIO10_PROMPT,SEC_DIO_DIR_10_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 10) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(10,STR_DIO10_PROMPT,SEC_DIO_DIR_10_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 10) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(10, SEC_DIO_LV_10_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 10) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(10, SEC_DIO_INT_10_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 11)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 11) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(11,STR_DIO11_PROMPT,SEC_DIO_DIR_11_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 11) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(11,STR_DIO11_PROMPT,SEC_DIO_DIR_11_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 11) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(11, SEC_DIO_LV_11_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 11) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(11, SEC_DIO_INT_11_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 12)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 12) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(12,STR_DIO12_PROMPT,SEC_DIO_DIR_12_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 12) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(12,STR_DIO12_PROMPT,SEC_DIO_DIR_12_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 12) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(12, SEC_DIO_LV_12_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 12) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(12, SEC_DIO_INT_12_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 13)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 13) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(13,STR_DIO13_PROMPT,SEC_DIO_DIR_13_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 13) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(13,STR_DIO13_PROMPT,SEC_DIO_DIR_13_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 13) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(13, SEC_DIO_LV_13_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 13) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(13, SEC_DIO_INT_13_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 14)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 14) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(14,STR_DIO14_PROMPT,SEC_DIO_DIR_14_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 14) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(14,STR_DIO14_PROMPT,SEC_DIO_DIR_14_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 14) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(14, SEC_DIO_LV_14_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 14) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(14, SEC_DIO_INT_14_DEFAULT)
+				#endif
+				#endif
+
+    			#if (SECOND_DIO_NUMBER > 15)
+				#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 15) & BIT0) == 1
+				grayoutif TRUE;
+					ONEOF_SEC_DIO_DIR(15,STR_DIO15_PROMPT,SEC_DIO_DIR_15_DEFAULT)
+				endif;
+				#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 15) & BIT0) == 1
+					ONEOF_SEC_DIO_DIR(15,STR_DIO15_PROMPT,SEC_DIO_DIR_15_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 15) & BIT0 ) == 1
+					COND_ONEOF_SEC_DIO_LV_TYPE(15, SEC_DIO_LV_15_DEFAULT)
+				#endif
+				#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 15) & BIT0 ) == 1
+					ONEOF_SEC_DIO_INT(15, SEC_DIO_INT_15_DEFAULT)
+				#endif
+				#endif
+
+				#if (SECOND_DIO_NUMBER > 16)
+				TODO: Porting required
+
+				//#if (((SECOND_DIO_INPUT_CAPABLE_MAP ^ SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 16) & BIT0) == 1
+				//grayoutif TRUE;
+				//	ONEOF_SEC_DIO_DIR(16,STR_DIO16_PROMPT,SEC_DIO_DIR_16_DEFAULT)
+				//endif;
+				//#elif (((SECOND_DIO_INPUT_CAPABLE_MAP & SECOND_DIO_OUTPUT_CAPABLE_MAP) >> 16) & BIT0) == 1
+				//	ONEOF_SEC_DIO_DIR(16,STR_DIO16_PROMPT,SEC_DIO_DIR_16_DEFAULT)
+				//#endif
+				//#if ((SECOND_DIO_OUTPUT_CAPABLE_MAP >> 16) & BIT0 ) == 1
+				//	COND_ONEOF_SEC_DIO_LV_TYPE(16, SEC_DIO_LV_16_DEFAULT)
+				//#endif
+				//#if ((SECOND_DIO_INTERRUPT_CAPABLE_MAP >> 16) & BIT0 ) == 1
+				//	ONEOF_SEC_DIO_INT(16, SEC_DIO_INT_16_DEFAULT)
+				//#endif
+
+				//...
+				#endif
+			#endif
+		endform;  //DIO Form
+
+		form formid = AUTO_ID(AAEON_DIO_SOURCE_FORM_ID),
+			title = STRING_TOKEN(STR_DIO_SOURCE_FORM);
+			
+			SUBTITLE(STRING_TOKEN(STR_DIO_SOURCE_FORM))
+			SEPARATOR
+
+			ONEOF_DIO_SOURCE
+			SEPARATOR
+
+    		#if (FIRST_DIO_NUMBER > 0)
+			SUBTITLE(STRING_TOKEN(STR_DIO0_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(0, DIO_0_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 1)
+			SUBTITLE(STRING_TOKEN(STR_DIO1_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(1, DIO_1_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 2)
+			SUBTITLE(STRING_TOKEN(STR_DIO2_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(2, DIO_2_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 3)
+			SUBTITLE(STRING_TOKEN(STR_DIO3_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(3, DIO_3_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 4)
+			SUBTITLE(STRING_TOKEN(STR_DIO4_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(4, DIO_4_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 5)
+			SUBTITLE(STRING_TOKEN(STR_DIO5_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(5, DIO_5_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 6)
+			SUBTITLE(STRING_TOKEN(STR_DIO6_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(6, DIO_6_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 7)
+			SUBTITLE(STRING_TOKEN(STR_DIO7_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(7, DIO_7_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 8)
+			SUBTITLE(STRING_TOKEN(STR_DIO8_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(8, DIO_8_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 9)
+			SUBTITLE(STRING_TOKEN(STR_DIO9_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(9, DIO_9_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 10)
+			SUBTITLE(STRING_TOKEN(STR_DIO10_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(10, DIO_10_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 11)
+			SUBTITLE(STRING_TOKEN(STR_DIO11_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(11, DIO_11_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 12)
+			SUBTITLE(STRING_TOKEN(STR_DIO12_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(12, DIO_12_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 13)
+			SUBTITLE(STRING_TOKEN(STR_DIO13_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(13, DIO_13_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 14)
+			SUBTITLE(STRING_TOKEN(STR_DIO14_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(14, DIO_14_GPIO_DEFAULT)
+			#endif
+    		#if (FIRST_DIO_NUMBER > 15)
+			SUBTITLE(STRING_TOKEN(STR_DIO15_PROMPT))
+			NUMERIC_DIO_GPIO_NUM(15, DIO_15_GPIO_DEFAULT)
+			#endif
+
+			#if (FIRST_DIO_NUMBER > 16)
+			TODO: Porting required
+			//SUBTITLE(STRING_TOKEN(STR_DIO16_PROMPT))
+			//NUMERIC_DIO_GPIO_NUM(16, DIO_16_GPIO_DEFAULT)
+			//...
+			#endif
+
+			#if (SECOND_DIO_NUMBER > 0)
+				SEPARATOR
+
+				SUBTITLE(STRING_TOKEN(STR_SEC_DIO))
+				SEPARATOR
+
+				ONEOF_SEC_DIO_SOURCE
+				SEPARATOR
+
+				SUBTITLE(STRING_TOKEN(STR_DIO0_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(0, SEC_DIO_0_GPIO_DEFAULT)
+    			#if (SECOND_DIO_NUMBER > 1)
+				SUBTITLE(STRING_TOKEN(STR_DIO1_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(1, SEC_DIO_1_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 2)
+				SUBTITLE(STRING_TOKEN(STR_DIO2_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(2, SEC_DIO_2_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 3)
+				SUBTITLE(STRING_TOKEN(STR_DIO3_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(3, SEC_DIO_3_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 4)
+				SUBTITLE(STRING_TOKEN(STR_DIO4_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(4, SEC_DIO_4_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 5)
+				SUBTITLE(STRING_TOKEN(STR_DIO5_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(5, SEC_DIO_5_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 6)
+				SUBTITLE(STRING_TOKEN(STR_DIO6_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(6, SEC_DIO_6_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 7)
+				SUBTITLE(STRING_TOKEN(STR_DIO7_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(7, SEC_DIO_7_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 8)
+				SUBTITLE(STRING_TOKEN(STR_DIO8_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(8, SEC_DIO_8_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 9)
+				SUBTITLE(STRING_TOKEN(STR_DIO9_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(9, SEC_DIO_9_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 10)
+				SUBTITLE(STRING_TOKEN(STR_DIO10_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(10, SEC_DIO_10_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 11)
+				SUBTITLE(STRING_TOKEN(STR_DIO11_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(11, SEC_DIO_11_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 12)
+				SUBTITLE(STRING_TOKEN(STR_DIO12_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(12, SEC_DIO_12_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 13)
+				SUBTITLE(STRING_TOKEN(STR_DIO13_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(13, SEC_DIO_13_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 14)
+				SUBTITLE(STRING_TOKEN(STR_DIO14_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(14, SEC_DIO_14_GPIO_DEFAULT)
+				#endif
+    			#if (SECOND_DIO_NUMBER > 15)
+				SUBTITLE(STRING_TOKEN(STR_DIO15_PROMPT))
+				NUMERIC_SEC_DIO_GPIO_NUM(15, SEC_DIO_15_GPIO_DEFAULT)
+				#endif
+
+				#if (SECOND_DIO_NUMBER > 16)
+				TODO: Porting required
+				//SUBTITLE(STRING_TOKEN(STR_DIO16_PROMPT))
+				//NUMERIC_SEC_DIO_GPIO_NUM(16, SEC_DIO_16_GPIO_DEFAULT)
+				//...
+				#endif
+
+			#endif
+		endform;  //DIO Form		
+	#endif //FORM_SET_FORM
+#endif  // ADVANCED_FORM_SET

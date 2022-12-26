@@ -1,0 +1,87 @@
+TOKEN
+	Name  = "WATCH_ROBOT"
+	Value  = "1"
+	Help  = "Main switch to enable Watch Robot support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+    Name  = "WATCH_ROBOT_DIR"
+End
+
+ELINK
+        Name = "$(WATCH_ROBOT_DIR)/WatchRobot.sd"
+        Parent = "SETUP_DEFINITIONS"
+        InvokeOrder = AfterParent
+End
+
+ELINK
+        Name  = "$(WATCH_ROBOT_DIR)/WatchRobot.uni"
+        Parent  = "SetupStringFiles"
+        InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "WatchRobotPei"
+    File  = "WatchRobotPei.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+End
+
+FFS_FILE
+    Name  = "WatchRobotPei"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiModulePkg.WatchRobotPei"
+    Index  = '"AFTER" "PlatformInitPreMem"'
+End
+
+FFS_FILE
+    Name  = "WatchRobotPei"
+    FD_AREA  = "FV_PRE_BB"
+    INFComponent  = "AmiModulePkg.WatchRobotPei"
+    Apriori_Index  = "2"
+    Token = "FV_PRE_BB_SIZE" "!=" "0"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AaeonBiosRobotPkg.WatchRobotDxeLib"
+    Override  = "AmiModulePkg.Bds"
+End
+
+INFComponent
+    Name     = "WatchRobotDxeLib"
+    File     = "WatchRobotDxeLib.inf"
+    Package  = "AaeonBiosRobotPkg"
+End
+
+ELINK
+    Name  = "WatchRobotDxe,"
+    Parent  = "HandoffToTse,"
+    InvokeOrder = BeforeParent
+End
+
+INFComponent
+    Name     = "WatchRobotACPILib"
+    File     = "WatchRobotACPILib.inf"
+    Package  = "AaeonBiosRobotPkg"
+End
+
+LibraryMapping
+    Class       = "NULL"
+    Instance    = "AaeonBiosRobotPkg.WatchRobotACPILib"
+    ModuleTypes = "DXE_DRIVER"
+    Override    = "AmiChipsetModulePkg.AcpiModeEnable"
+    Token       = "AmiChipsetModulePkg_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name        = "EnableWatchRobotBeforeOS,"
+    Parent      = "AcpiEnableCallbackList"
+    InvokeOrder = BeforeParent
+End
+

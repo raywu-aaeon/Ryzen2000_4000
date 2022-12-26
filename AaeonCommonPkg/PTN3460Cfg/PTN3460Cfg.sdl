@@ -1,0 +1,290 @@
+TOKEN
+	Name  = "PTN3460CFG_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling PTN3460 board support in the project"
+	TokenType = Boolean
+    TargetH = Yes
+	Master = Yes
+End
+
+MODULE
+    Help  = "Includes PTN3460Cfg.mak to Project"
+    File  = "PTN3460Cfg.mak"
+End
+
+TOKEN
+  Name  = "PTN3460_CFG_TIME"
+  Value  = "1"
+  TokenType = Integer
+  TargetH = Yes
+  Help  = "0:DXE phase, 1:PEI phase"
+End
+
+TOKEN
+  Name  = "PTN3460_SUPPORT_NUMBER"
+  Value  = "2"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "PTN3460_SLAVE_ADDRESS1"
+  Value  = "0x20"
+  Help  = "Depends on HW DEV_CFG, Floating = 0x60, Pull Low = 0x20"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_MODE"
+  Value  = "1"
+  Help  = "Slave addr 0x20 only, use DEV_CFG as PWM pass throuhg input. 0:By PTN3460 , 1:Pass Through."
+  TokenType = Integer
+  TargetH = Yes
+End
+
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_EN1"
+  Value  = "1"
+  TokenType = Boolean
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_PANELTYPE1"
+  Value  = "4"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_PANELMODE1"
+  Value  = "0"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_PANELCOLOR1"
+  Value  = "0"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_BLTYPE1"
+  Value  = "0"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_BLLEVEL1"
+  Value  = "8"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_BLPWM_FREQ1"
+  Value  = "2"
+  TokenType = Integer
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "PTN3460_SLAVE_ADDRESS2"
+  Value  = "0x60"
+  TokenType = Integer
+  TargetH = Yes
+  Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_EN2"
+  Value  = "1"
+  TokenType = Boolean
+  TargetH = Yes
+  Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_PANELTYPE2"
+  Value  = "4"
+  TokenType = Integer
+  TargetH = Yes
+  Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_PANELMODE2"
+  Value  = "0"
+  TokenType = Integer
+  TargetH = Yes
+  Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_PANELCOLOR2"
+  Value  = "0"
+  TokenType = Integer
+  TargetH = Yes
+  Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_BLTYPE2"
+  Value  = "0"
+  TokenType = Integer
+  TargetH = Yes
+  Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_BLLEVEL2"
+  Value  = "8"
+  TokenType = Integer
+  TargetH = Yes
+  Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End
+
+TOKEN
+  Name  = "DEFAULT_PTN3460_BLPWM_FREQ2"
+  Value  = "2"
+  TokenType = Integer
+  TargetH = Yes
+  Token = "PTN3460_SUPPORT_NUMBER" "=" "2"
+End
+
+
+PATH
+    Name  = "PTN3460CFG_DIR"
+End
+
+INFComponent
+	Name  = "PTN3460CfgDxe"
+	File  = "PTN3460CfgDxe.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PTN3460_CFG_TIME" "=" "0"
+End
+
+INFComponent
+	Name  = "PTN3460CfgPei"
+	File  = "PTN3460CfgPei.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "PEIM"
+	Token = "PTN3460_CFG_TIME" "=" "1"
+End
+
+ELINK
+	Name  = "$(PTN3460CFG_DIR)/PTN3460CfgSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	Priority  = 30
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(PTN3460CFG_DIR)/PTN3460CfgSetup.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(PTN3460CFG_DIR)/PTN3460CfgSetupCallback.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(CHIPSET_FORM_SET_CLASS, 0, AAEON_PTN3460CFG_INTERACTIVE_KEY, AaeonPtn3460CallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(CHIPSET_FORM_SET_CLASS, 0, PTN3460_BLKLV1_KEY, AaeonPtn3460BlkLvCallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(CHIPSET_FORM_SET_CLASS, 0, PTN3460_BLKTYPE1_KEY, AaeonPtn3460BlkLvCallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(CHIPSET_FORM_SET_CLASS, 0, PTN3460_BLKMODE_KEY, AaeonPtn3460BlkLvCallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(CHIPSET_FORM_SET_CLASS, 0, PTN3460_BLKLV2_KEY, AaeonPtn3460BlkLvCallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ITEM_CALLBACK(CHIPSET_FORM_SET_CLASS, 0, PTN3460_BLKTYPE2_KEY, AaeonPtn3460BlkLvCallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "PTN3460_PANEL1_PRECFG_FUNC"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "PTN3460_PANEL2_PRECFG_FUNC"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "PTN3460_PANEL1_POSTCFG_FUNC"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "PTN3460_PANEL2_POSTCFG_FUNC"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "PTN3460_PANEL1_TSE_BLKCTL_FUNC"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "PTN3460_PANEL2_TSE_BLKCTL_FUNC"
+	InvokeOrder = ReplaceParent
+End
+
+TOKEN
+  Name  = "UPDATE_FLASH_ONCHANGE"
+  Value  = "1"
+  TokenType = Boolean
+  TargetH = Yes
+End
+
+TOKEN
+  Name  = "FORCE_TO_WRITE_FULLTABLE"
+  Value  = "0"
+  TokenType = Boolean
+  TargetH = Yes
+End
+
+ELINK
+	Name  = "gEfiSmbusHcProtocolGuid"
+	Parent  = "AMI_CSP_DXE_PROTOCOLS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+  Name  = "gEfiSmbusHcProtocolGuid"
+  Parent  = "AdditionalSetupProtocols"
+  InvokeOrder = AfterParent
+End

@@ -1,0 +1,27 @@
+[Defines]
+  INF_VERSION       = 0x00010005
+  BASE_NAME         = AaeonUartOverride
+  FILE_GUID         = 3374b583-7a96-496e-9b8c-2befe911adb7
+  MODULE_TYPE       = DXE_DRIVER
+  VERSION_STRING    = 1.0
+  ENTRY_POINT       = AaeonUartOverrideInit
+
+[Sources]
+  AaeonUartOverrideDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  AmiSdlLib
+  UefiDriverEntryPoint
+  S3BootScriptLib
+
+[Protocols]
+
+[Depex]
+  TRUE

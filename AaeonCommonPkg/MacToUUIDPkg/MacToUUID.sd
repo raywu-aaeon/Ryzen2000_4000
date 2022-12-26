@@ -1,0 +1,54 @@
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+
+    UINT8 MacUUID;
+
+#endif
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+   #define ONEOF_AAEONMACTOUUID\
+        oneof varid    = SETUP_DATA.MacUUID,\
+        prompt       = STRING_TOKEN (AAEON_STR_UUID_DISPLAY),\
+        help         = STRING_TOKEN (AAEON_STR_UUID_DISPLAY_HELP),\
+        option text = STRING_TOKEN(AAEON_STR_UUID_DISABLE),   value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;\
+        option text = STRING_TOKEN(AAEON_STR_UUID_ENABLE),    value = 1, flags = RESET_REQUIRED;\
+        endoneof;
+
+#endif //ENDIF CONTROL_DEFINITION
+
+//----------------------------------------------------------------------------
+//                MAIN - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef MAIN_FORM_SET
+        #ifdef AAEON_FORM_SET_ITEM
+              suppressif ideqval SETUP_DATA.MacUUID == 0x00;           //Default not Display
+                    SUBTITLE(STRING_TOKEN(AAEON_STR_SMBIOS_SYS_UUID))
+                    SUBTITLE(STRING_TOKEN(AAEON_STR_SMBIOS_SYS_UUID_VAL))
+                    SEPARATOR
+              endif;
+        #endif      
+#endif  // MAIN_FORM_SET
+
+
+//----------------------------------------------------------------------------
+//                ADVANCED - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+    #ifdef AAEON_FORM_SET_ITEM
+            suppressif TRUE;                                         //Not show bios setup menu , but can be modified default value by BCP.
+                    ONEOF_AAEONMACTOUUID
+            endif;
+    #endif
+#endif   // ADVANCED_FORM_SET

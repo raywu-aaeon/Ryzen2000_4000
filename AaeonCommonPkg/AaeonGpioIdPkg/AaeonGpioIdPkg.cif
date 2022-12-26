@@ -1,0 +1,16 @@
+<component>
+	name = "AaeonGpioId"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\AaeonGpioIdPkg"
+	RefName = "AaeonCommonPkg.AaeonGpioIdPkg"
+[INF]
+"AaeonGpioIdDxe.inf"
+"AaeonNonSioGpioIdDxe.inf"
+
+[files]
+"AaeonGpioIdDxe.c"
+"AaeonGpioIdPkg.sd"
+"AaeonGpioIdPkg.sdl"
+"AaeonGpioIdPkg.uni"
+"AaeonGpioIdDxe.mak"
+<endComponent>

@@ -1,0 +1,51 @@
+
+
+[Defines]
+INF_VERSION                    = 0x00010005
+BASE_NAME                      = SentryRobotLib
+FILE_GUID                      = 4bcee02d-1ea1-41ae-b8cc-e77d9d767b5c
+MODULE_TYPE                    = DXE_DRIVER
+VERSION_STRING                 = 1.0
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#
+
+
+[Sources]
+SentryRobotLib.c
+SentryRobotLib.h
+
+[Packages]
+MdePkg/MdePkg.dec
+AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+AmiModulePkg/AmiModulePkg.dec
+AmiChipsetPkg/AmiChipsetPkg.dec
+AaeonCommonPkg/AaeonBiosRobot/AaeonBiosRobot.dec
+AaeonCommonPkg/AaeonCommonPkg.dec
+[LibraryClasses]
+AmiDxeLib
+UefiDriverEntryPoint
+TimerLib
+IoLib
+UefiBootServicesTableLib
+UefiDriverEntryPoint
+AmiCspLib
+AmiPciBusLib
+AmiSdlLib
+UefiRuntimeServicesTableLib
+AaeonBiosRobotLib
+AaeonDxeLib
+
+[Depex]
+gEfiVariableArchProtocolGuid  AND
+gEfiVariableWriteArchProtocolGuid AND
+gAmiBoardPciInitProtocolGuid AND
+gEfiPciHostBridgeResourceAllocationProtocolGuid
+
+
+[Protocols]
+  gEfiPciEnumerationCompleteProtocolGuid
+  gEfiSmbusHcProtocolGuid 

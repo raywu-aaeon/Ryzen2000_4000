@@ -1,0 +1,817 @@
+TOKEN
+	Name  = "F75111PeiPkg_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name = "F75111_SLAVE_ADDRESS"
+	Value = "0x37"
+	Help = "7 bit Smbus Slave Address of F75111"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+	TargetEQU = Yes
+End
+TOKEN
+	Name = "SECOND_F75111_SLAVE_ADDRESS"
+	Value = "0"
+	Help = "7 bit Smbus Slave Address of F75111"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+	TargetEQU = Yes
+End
+PATH
+	Name  = "F75111PeiPkg_DIR"
+End
+INFComponent
+	Name  = "F75111PeiPkg"
+	File  = "F75111PeiPkg.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "PEIM"
+End
+ELINK
+	Name  = "$(F75111PeiPkg_DIR)\F75111PeiPkg.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(F75111PeiPkg_DIR)\F75111PeiPkg.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	##Priority  = 255
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name = "F75111GPIO10_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO11_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO12_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO13_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO14_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO15_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO16_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO17_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO10_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO11_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO12_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO13_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO14_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO15_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO16_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO17_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO10_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO11_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO12_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO13_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO14_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO15_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO16_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO17_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO10_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO11_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO12_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO13_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO14_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO15_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO16_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO17_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO10_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO11_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO12_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO13_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO14_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO15_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO16_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO17_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO10_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO11_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO12_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO13_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO14_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO15_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO16_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO17_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO20_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO21_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO22_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO23_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO24_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO25_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO26_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO27_EN_DEFAULT"
+	Value = "0"
+	Help = "0: GPIO\1: LED"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO20_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO21_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO22_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO23_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO24_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO25_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO26_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO27_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO20_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO21_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO22_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO23_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO24_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO25_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO26_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO27_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO20_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO21_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO22_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO23_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO24_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO25_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO26_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO27_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO20_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO21_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO22_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO23_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO24_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO25_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO26_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO27_PU_DEFAULT"
+	Value = "0"
+	Help = "0: \1: Pull-Up Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO20_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO21_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO22_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO23_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO24_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO25_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO26_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO27_OBUF_DEFAULT"
+	Value = "1"
+	Help = "0: I-OD\1: I-O"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "F75111GPIO30_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO31_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO32_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO33_OE_DEFAULT"
+	Value = "0"
+	Help = "0: INPUT\1: OUTPUT"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO30_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO31_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO32_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO33_VAL_DEFAULT"
+	Value = "1"
+	Help = "0: LOW\1: HIGH"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO30_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO31_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO32_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name = "F75111GPIO33_OMODE_DEFAULT"
+	Value = "0"
+	Help = "0: LEVEL\1: PULSE"
+	TokenType = Integer
+	TargetH = Yes
+End

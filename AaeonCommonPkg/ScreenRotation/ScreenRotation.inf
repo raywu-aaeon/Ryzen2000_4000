@@ -1,0 +1,47 @@
+#***********************************************************************
+#*                                                                     *
+#*                  Copyright (c) 1985-2021, AMI.                      *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+[Defines]
+    INF_VERSION                     = 0x00010015
+    BASE_NAME                       = ScreenRotation
+    FILE_GUID                       = ccf9768e-73a0-45a9-ba1d-0c56818e3a3a
+    MODULE_TYPE                     = DXE_DRIVER
+    VERSION_STRING                  = 1.0
+    ENTRY_POINT                     = ScreenRotationEntryPoint
+
+[Sources]
+  ScreenRotation.h
+  ScreenRotation.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+  AmiTsePkg/AmiTsePrivatePkg.dec
+  AaeonCommonPkg/AaeonCommonPkg.dec
+[LibraryClasses]
+  DebugLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  AmiDxeLib
+  UefiLib
+
+[Protocols]
+  gEfiGraphicsOutputProtocolGuid
+  gEfiDevicePathProtocolGuid
+
+[Guids]
+  gAmiTseEventBeforeBootGuid
+
+[Depex]
+  TRUE
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50
+  GCC:*_*_*_CC_FLAGS = -DTSE_FOR_APTIO_4_50 

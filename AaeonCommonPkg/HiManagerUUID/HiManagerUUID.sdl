@@ -1,0 +1,53 @@
+TOKEN
+	Name  = "HIMANAGER_UUID_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+	Help  = "Main switch to enable HIMANAGER UUID support in Project"
+End
+
+PATH
+	Name  = "HiManagerUUID_DIR"
+End
+
+TOKEN
+	Name  = "UUID_SYSTEM_PRODUCT_NAME"
+	Value  = "$(SYSTEM_PRODUCT_NAME)"
+	Help  = "System Product Name For UUID"
+	TokenType = Expression
+	TargetH= Yes
+End
+
+TOKEN
+	Name  = "REF_LAN_BUS"
+	Value  = "0"
+	Help  = "Bus number of referenced LAN NIC"
+	TokenType = Integer
+	TargetH= Yes
+End
+
+TOKEN
+	Name  = "REF_LAN_DEV"
+	Value  = "31"
+	Help  = "Dev number of referenced LAN NIC"
+	TokenType = Integer
+	TargetH= Yes
+End
+
+TOKEN
+	Name  = "REF_LAN_FUN"
+	Value  = "6"
+	Help  = "Function number of referenced LAN NIC"
+	TokenType = Integer
+	TargetH= Yes
+End
+
+INFComponent
+	Name  = "HiManagerUUID"
+	File  = "HiManagerUUID.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End

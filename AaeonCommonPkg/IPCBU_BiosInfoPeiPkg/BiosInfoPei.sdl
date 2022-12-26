@@ -1,0 +1,33 @@
+
+TOKEN
+	Name  = "BIOSINFOPEI_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+	Help  = "Main switch to enable BIOSINFO support in Project"
+End
+
+ELINK
+	Name  = "$(BUILD_DIR)\BiosInfoPei.ffs"
+	Parent  = "FV_BB"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "BiosInfoPei"
+	File  = "BiosInfoPei.inf"
+	Package  = "BiosInfoPei"
+	ModuleTypes  = "PEIM"
+End
+
+TOKEN
+	Name  = "ASUS_TYPE0_BIOS_VERSION"
+	Value  = "0000"
+	TokenType = Expression
+	TargetEQU = Yes
+	TargetH = Yes
+	TargetMAK = Yes
+End

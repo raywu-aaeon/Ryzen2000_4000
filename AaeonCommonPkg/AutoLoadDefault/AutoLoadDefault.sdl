@@ -1,0 +1,105 @@
+TOKEN
+	Name  = "AutoLoadDefault_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "AutoLoadDefault_DIR"
+End
+
+INFComponent
+	Name  = "AutoLoadDefault"
+	File  = "AutoLoadDefault/AutoLoadDefault.inf"
+	Package  = "AaeonCommonPkg"
+End
+ELINK
+	Name  = "AAEON_AutoLoadDefault, "
+	Parent  = "IsResetConfigMode"
+	Help  = "Auto Load Default Function"
+	InvokeOrder = BeforeParent
+End
+ELINK
+	Name  = "$(AutoLoadDefault_DIR)\AutoLoadDefault.c"
+	Parent  = "AMI_CSP_PEI_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name  = "MMIO_READ_RTC_PWR_STS"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+TOKEN
+	Name = "BASE_ADDRESS_MMIO_READ_RTC_PWR_STS"
+	Value = "0"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "MMIO_READ_RTC_PWR_STS" "=" "1"
+End
+TOKEN
+	Name = "REG_MMIO_READ_RTC_PWR_STS"
+	Value = "0xA4"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "MMIO_READ_RTC_PWR_STS" "=" "1"
+End
+TOKEN
+	Name = "BIT_MMIO_READ_RTC_PWR_STS"
+	Value = "2"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "MMIO_READ_RTC_PWR_STS" "=" "1"
+End
+
+TOKEN
+	Name  = "PCI_READ_RTC_PWR_STS"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+TOKEN
+	Name = "BUS_PCI_READ_RTC_PWR_STS"
+	Value = "0"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "PCI_READ_RTC_PWR_STS" "=" "1"
+End
+TOKEN
+	Name = "DEVICE_PCI_READ_RTC_PWR_STS"
+	Value = "0x1F"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "PCI_READ_RTC_PWR_STS" "=" "1"
+End
+TOKEN
+	Name = "FUNCTION_PCI_READ_RTC_PWR_STS"
+	Value = "0"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "PCI_READ_RTC_PWR_STS" "=" "1"
+End
+TOKEN
+	Name = "REG_PCI_READ_RTC_PWR_STS"
+	Value = "0xA4"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "PCI_READ_RTC_PWR_STS" "=" "1"
+End
+TOKEN
+	Name = "BIT_PCI_READ_RTC_PWR_STS"
+	Value = "2"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "PCI_READ_RTC_PWR_STS" "=" "1"
+End
+

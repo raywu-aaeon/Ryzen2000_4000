@@ -1,0 +1,116 @@
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+
+#endif
+
+
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+#if defined(CSM_SUPPORT) && (CSM_SUPPORT == 1)
+	#ifdef CSM_POLICY_PXE_OPROM
+	#undef CSM_POLICY_PXE_OPROM
+	#define CSM_POLICY_PXE_OPROM\
+		oneof varid = SETUP_DATA.PxeOpRom,\
+		prompt  = STRING_TOKEN(STR_PXE_OPROM_POLICY),\
+		help    = STRING_TOKEN(STR_PXE_OPROM_POLICY_HELP),\
+		default = DEFAULT_PXE_OPROM_POLICY,\
+		default = DEFAULT_PXE_OPROM_POLICY, defaultstore = AmiMfgDefault,\
+		option text = STRING_TOKEN(STR_COMMON_DISABLED),  value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_COMMON_ENABLED),  value = 2, flags = RESET_REQUIRED;\
+		endoneof;
+	#endif //CSM_POLICY_PXE_OPROM
+#endif // defined(CSM_SUPPORT) && (CSM_SUPPORT == 1)
+
+#endif
+
+
+//**********************************************************************
+//                CHIPSET - North/South Bridge Form
+//**********************************************************************
+#ifdef BOOT_FORM_SET
+
+    #ifdef FORM_SET_TYPEDEF
+    #endif
+
+    #ifdef AAEON_FORM_SET_ITEM
+
+	SUBTITLE(STRING_TOKEN(STR_BOOT_CFG))
+
+	SEPARATOR
+
+	QUIET_BOOT
+
+#if defined(CSM_SUPPORT) && (CSM_SUPPORT == 1)
+#if defined(SecureBoot_SUPPORT) && SecureBoot_SUPPORT
+	suppressif ideqval SECURE_BOOT_SETUP_VAR.SecureBootSupport == 1;
+#endif
+		CSM_POLICY_PXE_OPROM
+#if defined(SecureBoot_SUPPORT) && SecureBoot_SUPPORT
+	endif;
+#endif
+#endif // defined(CSM_SUPPORT) && (CSM_SUPPORT == 1)
+
+	SEPARATOR
+
+	SUBTITLE(STRING_TOKEN(STR_BOOT_ORDER_SUBTITLE))
+	#if !defined(FIXED_BOOT_ORDER_SUPPORT)||(FIXED_BOOT_ORDER_SUPPORT==0)
+	AMI_BOOT_ORDER
+	#endif
+
+    #endif //AAEON_FORM_SET_ITEM
+
+    #ifdef AAEON_FORM_SET_GOTO
+
+	#if !defined(FIXED_BOOT_ORDER_SUPPORT)||(FIXED_BOOT_ORDER_SUPPORT==0)
+	#if !defined(GROUP_BOOT_OPTIONS_BY_TAG)||(GROUP_BOOT_OPTIONS_BY_TAG==1)
+
+		SEPERATOR
+
+		AMI_BOOT_ORDER_GROUPS_GOTO
+	#endif
+	#endif
+
+    #endif //AAEON_FORM_SET_GOTO
+
+    #ifdef FORM_SET_FORM
+        form formid = AUTO_ID(AAEON_BOOT_MAIN),
+            title = STRING_TOKEN(STR_AAEON_BOOT);
+
+            #undef FORM_SET_FORM
+            
+            #define AAEON_FORM_SET_ITEM
+            #include <SetupDefinitions.h>
+            #undef AAEON_FORM_SET_ITEM
+            #define AAEON_FORM_SET_GOTO
+            #include <SetupDefinitions.h>
+            #undef AAEON_FORM_SET_GOTO
+            
+            #define FORM_SET_FORM 
+        endform;  
+    #endif //FORM_SET_FORM
+
+#endif //BOOT_FORM_SET
+
+//**********************************************************************
+//  Add a Goto in CRB Setup form so BCP CMD line can parse Aaeon setup
+//**********************************************************************
+#ifdef TOP_LEVEL_FORM_SET
+    #ifdef FORM_SET_GOTO
+		suppressif TRUE;
+	        goto AAEON_BOOT_MAIN, 
+	        prompt = STRING_TOKEN(STR_AAEON_BOOT),
+	        help = STRING_TOKEN(STR_EMPTY);
+		endif;
+    #endif //FORM_SET_GOTO    
+#endif // TOP_LEVEL_FORM_SET

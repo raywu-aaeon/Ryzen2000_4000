@@ -1,0 +1,10 @@
+<component>
+	name = "PTN3460CfgSetup"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\PTN3460Cfg"
+	RefName = "AaeonCommonPkg.PTN3460Cfg.PTN3460CfgSetup"
+[files]
+"PTN3460CfgSetup.sd"
+"PTN3460CfgSetup.uni"
+"PTN3460CfgSetupCallback.c"
+<endComponent>

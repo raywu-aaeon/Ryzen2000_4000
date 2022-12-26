@@ -1,0 +1,21 @@
+PORTING NOTE:
+
+1. Add following codes after ""AaeonCommonPkg\AaeonCommonPkg.cif"= Private" in veb file.
+==>>
+"AaeonCommonPkg\AaeonDefaultPwd\AaeonDefaultPwd.cif"= Private
+<<==
+
+2. Need to add prefix at some special character like #, $ and % (# -> \#, $ -> $$, % -> %%). 
+   For example, you want to set the ADMIN password as 2#3$4%5, you have to set is as 2\#3$$4%%5. This the limitation of makefile.
+        '''
+        TOKEN
+        	Name  = "TSE_ADMIN_PASSWORD"
+        	Value  ='"2\#3$$4%%5"'
+        	Help  = "Need to add prefix at some special character like #, $ and % (# -> \#, $ -> $$, % -> %%). If default admin password is not required, it will not be set; in that case keep EMPTY_DATA as a default value. Otherwise, replace EMPTY_DATA with the new value of default admin password. Keep the double quotes - they are necessary to support special characters."
+        	TokenType = Expression
+        	TargetMAK = Yes
+        	TargetH = Yes
+        	Range =  "From PASSWORD_MIN_SIZE to SETUP_PASSWORD_LENGTH"
+        	Token = "TSE_DEFAULT_SETUP_PASSWORD_SUPPORT" "=" "1"
+        End
+        '''

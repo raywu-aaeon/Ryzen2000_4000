@@ -1,0 +1,246 @@
+TOKEN
+	Name  = "AAEON_GPIO_ID_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+MODULE
+	File  = "AaeonGpioIdDxe.mak"
+End
+
+PATH
+	Name  = "AaeonGpioIdPkg_DIR"
+End
+
+INFComponent
+	Name  = "AaeonGpioIdDxe"
+	File  = "AaeonGpioIdDxe.inf"
+	Package  = "AaeonGpioIdPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SIO_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AaeonGpioIdDxe"
+	File  = "AaeonNonSioGpioIdDxe.inf"
+	Package  = "AaeonGpioIdPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SIO_SUPPORT" "=" "0"
+End
+
+# ===============================================
+# Hardware GPIO ID setting
+# H/W GPIO ID is designed to read from actual GPIO
+# ===============================================
+TOKEN
+	Name  = "AAEON_HW_BOARD_ID_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "BOARD_ID_CHIP_TYPE"
+	Value = "$(F81866_CHIP_TYPE)"
+	Help = "Source chip of HW Board ID GPIO"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "AAEON_HW_BOARD_ID_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name = "BOARD_ID_GPIO"
+	Value = "{50, 52, 54}"
+	Help = "GPIO table for HW BOARD ID"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "AAEON_HW_BOARD_ID_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name = "BOARD_ID_NUM"
+	Value = "3"
+	Help = "GPIO number for HW BOARD ID"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "AAEON_HW_BOARD_ID_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AAEON_HW_BOARD_ID_DEFAULT"
+	Value  = "0"
+	Help  = "HW BOARD ID default value"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-255"
+End
+
+TOKEN
+	Name  = "AAEON_HW_PANEL_ID_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "PANEL_ID_CHIP_TYPE"
+	Value = "$(F81866_CHIP_TYPE)"
+	Help = "Source chip of PANEL ID GPIO"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "AAEON_HW_PANEL_ID_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name = "PANEL_ID_GPIO"
+	Value = "{50, 52, 54}"
+	Help = "GPIO table for HW PANEL ID"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "AAEON_HW_PANEL_ID_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name = "PANEL_ID_NUM"
+	Value = "3"
+	Help = "GPIO number for HW PANEL ID"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "AAEON_HW_PANEL_ID_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AAEON_HW_PANEL_ID_DEFAULT"
+	Value  = "0"
+	Help  = "HW PANEL ID default value"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-255"
+End
+
+TOKEN
+	Name  = "AAEON_HW_OEM_ID_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "OEM_ID_CHIP_TYPE"
+	Value = "$(F81866_CHIP_TYPE)"
+	Help = "Source chip of HW OEM ID GPIO"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "AAEON_HW_OEM_ID_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name = "OEM_ID_GPIO"
+	Value = "{50, 52, 54}"
+	Help = "GPIO table for OEM ID"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "AAEON_HW_OEM_ID_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name = "OEM_ID_NUM"
+	Value = "3"
+	Help = "GPIO number for HW OEM ID"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "AAEON_HW_OEM_ID_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AAEON_HW_OEM_ID_DEFAULT"
+	Value  = "0"
+	Help  = "HW OEM ID default value"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-255"
+End
+
+ELINK
+	Name  = "AAEON_GPIO_ID_INIT_FUNCTION"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "$(AaeonGpioIdPkg_DIR)\AaeonGpioIdPkg.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(AaeonGpioIdPkg_DIR)\AaeonGpioIdPkg.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	##Priority  = 255
+	InvokeOrder = AfterParent
+End
+
+# ===============================================
+# Software GPIO ID setting
+# S/W GPIO ID is designed to be configured by S/W like AMI BCP or SCE
+# ===============================================
+TOKEN
+	Name  = "AAEON_SW_BOARD_ID_DEFAULT"
+	Value  = "0"
+	Help  = "SW BOARD ID default value"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-255"
+End
+TOKEN
+	Name  = "AAEON_SW_PANEL_ID_DEFAULT"
+	Value  = "0"
+	Help  = "SW PANEL ID default value"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-255"
+End
+TOKEN
+	Name  = "AAEON_SW_OEM_ID_DEFAULT"
+	Value  = "0"
+	Help  = "SW OEM ID default value"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-255"
+End
+
+#
+# Below two ELINKs used to preserve AaeonHwId across BIOS F/W update even AFU.efi with /n is used, and NvRam recycle is executed.
+#
+ELINK
+	Name  = '{L"AaeonHwId", {0x9ADE22C1, 0x477F, 0x41CC, {0x91, 0x83, 0x72, 0xD6, 0x6F, 0xA3, 0xEE, 0xCC}}},'
+	Parent  = "NvramPersistentVariables"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+        Name = '{L"AaeonHwId", { 0x9ADE22C1, 0x477F, 0x41CC, 0x91, 0x83, 0x72, 0xD6, 0x6F, 0xA3, 0xEE, 0xCC }},'
+        Parent = "NvramPreservedVariables"
+        InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AaeonGpioIdLoadDefaults,"
+    Parent  = "LoadSetupDefaultsHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AaeonGpioIdPkg_DIR)\AaeonGpioIdLoadDefaults.c"
+    Parent  = "TSE_SOURCE_FILES"
+    InvokeOrder = AfterParent
+End

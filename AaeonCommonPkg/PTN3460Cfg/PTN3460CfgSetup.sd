@@ -1,0 +1,318 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example: UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+    UINT8   PTN3460En1;
+    UINT8   PTN3460PanelType1;
+    UINT8	PTN3460PanelMode1;
+    UINT8   PTN3460PanelColor1;
+    UINT8   PTN3460PanelBacklightMode;
+    UINT8   PTN3460PanelBacklightType1;
+    UINT8   PTN3460PanelBacklight1;
+    UINT8   PTN3460PanelBacklightPwmFreq1;
+#if (PTN3460_SUPPORT_NUMBER > 1)
+    UINT8   PTN3460En2;
+    UINT8   PTN3460PanelType2;
+    UINT8	PTN3460PanelMode2;
+    UINT8   PTN3460PanelColor2;
+    UINT8   PTN3460PanelBacklightType2;
+    UINT8   PTN3460PanelBacklight2;
+    UINT8   PTN3460PanelBacklightPwmFreq2;
+#endif
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+    #define BOARD_GOTO_PTN3460_FORM\
+		goto PTN3460_FORM_ID, \
+			prompt = STRING_TOKEN(STR_PTN3460_CONFIG_FORM),\
+			help = STRING_TOKEN(STR_PTN3460_CONFIG_FORM_HELP);
+
+    #define BOARD_ONEOF_PTN3460_EN1\
+        oneof varid = SETUP_DATA.PTN3460En1,\
+            prompt = STRING_TOKEN(STR_PTN3460_EN1_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_EN_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_EN1,\
+            option text = STRING_TOKEN(STR_PTN3460_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_ENABLED), value = 1, flags = MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+        
+    #define BOARD_ONEOF_PTN3460_PANELTYPE1\
+        oneof varid = SETUP_DATA.PTN3460PanelType1, \
+            prompt = STRING_TOKEN(STR_PTN3460_TYPE_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_TYPE_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_PANELTYPE1,\
+            option text = STRING_TOKEN(STR_PANEL_640_480), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_800_480), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_800_600), value = 2, flags = MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1024_600), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1024_768), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1280_768), value = 5, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1280_800), value = 6, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1280_1024), value = 7, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1366_768), value = 8, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1440_900), value = 9, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1600_1200), value = 10, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1920_1080), value = 11, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1920_1200), value = 12, flags = RESET_REQUIRED;\
+        endoneof;
+
+	#define BOARD_ONEOF_PTN3460_PANELMODE1\
+		oneof varid  = SETUP_DATA.PTN3460PanelMode1,\
+		    prompt  = STRING_TOKEN(STR_PTN3460_PANELMODE_PROMPT),\
+		    help    = STRING_TOKEN(STR_PTN3460_PANELMODE_HELP),\
+		    default = DEFAULT_PTN3460_PANELMODE1,\
+		    option text = STRING_TOKEN(STR_PTN3460_SINGEL_CHANNEL),	value = 0, flags = RESET_REQUIRED;\
+		    option text = STRING_TOKEN(STR_PTN3460_DUAL_CHANNEL),	value = 1, flags = MANUFACTURING | RESET_REQUIRED;\
+		endoneof;
+
+    #define BOARD_ONEOF_PTN3460_COLORDEP1\
+        oneof varid = SETUP_DATA.PTN3460PanelColor1,\
+            prompt = STRING_TOKEN(STR_PTN3460_COLORDEP_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_COLORDEP_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_PANELCOLOR1,\
+            option text = STRING_TOKEN(STR_PTN3460_COLOR_18B), value = 0, flags = MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_COLOR_24B), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_COLOR_36B), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_COLOR_48B), value = 3, flags = RESET_REQUIRED;\
+        endoneof;
+
+
+    #define BOARD_ONEOF_PTN3460_BL_MODE\
+        oneof varid = SETUP_DATA.PTN3460PanelBacklightMode, questionid = AUTO_ID(PTN3460_BLKMODE_KEY),\
+            prompt = STRING_TOKEN(STR_PTN3460_BLMODE_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_BLMODE_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_MODE,\
+            option text = STRING_TOKEN(STR_PTN3460_BLMODE_APP), value = 0, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_BLTYPE_WIN), value = 1, flags = INTERACTIVE | MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+
+    #define BOARD_ONEOF_PTN3460_BL_TYPE1\
+        oneof varid = SETUP_DATA.PTN3460PanelBacklightType1, questionid = AUTO_ID(PTN3460_BLKTYPE1_KEY),\
+            prompt = STRING_TOKEN(STR_PTN3460_BLTYPE_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_BLTYPE_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_BLTYPE1,\
+            option text = STRING_TOKEN(STR_PTN3460_BLTYPE_NORMAL), value = 0, flags = INTERACTIVE | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_BLTYPE_INVERTED), value = 1, flags = INTERACTIVE | RESET_REQUIRED;\
+        endoneof;
+        
+    #define BOARD_ONEOF_PTN3460_BL_LV1\
+        oneof varid = SETUP_DATA.PTN3460PanelBacklight1, questionid = AUTO_ID(PTN3460_BLKLV1_KEY), \
+            prompt = STRING_TOKEN(STR_PTN3460_BLLV_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_BLLV_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_BLLEVEL1,\
+            option text = STRING_TOKEN(STR_BLLV_BL00), value = 0, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL10), value = 1, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL20), value = 2, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL30), value = 3, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL40), value = 4, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL50), value = 5, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL60), value = 6, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL70), value = 7, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL80), value = 8, flags = INTERACTIVE | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL90), value = 9, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL100), value = 10, flags = INTERACTIVE | RESET_REQUIRED;\
+        endoneof;
+
+    #define BOARD_ONEOF_PTN3460_BLPWM_FREQ1\
+        oneof varid = SETUP_DATA.PTN3460PanelBacklightPwmFreq1,\
+            prompt = STRING_TOKEN(STR_PTN3460_BLPWMF_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_BLPWMF_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_BLPWM_FREQ1,\
+            option text = STRING_TOKEN(STR_PWMF_100HZ), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_200HZ), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_220HZ), value = 2, flags = MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_500HZ), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_1KHZ), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_2_2KHZ), value = 5, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_6_5KHZ), value = 6, flags = RESET_REQUIRED;\
+        endoneof;
+
+#if (PTN3460_SUPPORT_NUMBER > 1)
+    #define BOARD_ONEOF_PTN3460_EN2\
+        oneof varid = SETUP_DATA.PTN3460En2,\
+            prompt = STRING_TOKEN(STR_PTN3460_EN2_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_EN_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_EN2,\
+            option text = STRING_TOKEN(STR_ACPI_DISABLED), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ACPI_ENABLED), value = 1, flags = MANUFACTURING | RESET_REQUIRED;\
+        endoneof;
+        
+    #define BOARD_ONEOF_PTN3460_PANELTYPE2\
+        oneof varid = SETUP_DATA.PTN3460PanelType2,\
+            prompt = STRING_TOKEN(STR_PTN3460_TYPE_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_TYPE_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_PANELTYPE2,\
+            option text = STRING_TOKEN(STR_PANEL_640_480), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_800_480), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_800_600), value = 2, flags = MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1024_600), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1024_768), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1280_768), value = 5, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1280_800), value = 6, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1280_1024), value = 7, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1366_768), value = 8, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1440_900), value = 9, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1600_1200), value = 10, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1920_1080), value = 11, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PANEL_1920_1200), value = 12, flags = RESET_REQUIRED;\
+        endoneof;
+
+	#define BOARD_ONEOF_PTN3460_PANELMODE2\
+		oneof varid  = SETUP_DATA.PTN3460PanelMode2,\
+		    prompt  = STRING_TOKEN(STR_PTN3460_PANELMODE_PROMPT),\
+		    help    = STRING_TOKEN(STR_PTN3460_PANELMODE_HELP),\
+		    default = DEFAULT_PTN3460_PANELMODE2,\
+		    option text = STRING_TOKEN(STR_PTN3460_SINGEL_CHANNEL),	value = 0, flags = RESET_REQUIRED;\
+		    option text = STRING_TOKEN(STR_PTN3460_DUAL_CHANNEL),	value = 1, flags = MANUFACTURING | RESET_REQUIRED;\
+		endoneof;
+
+    #define BOARD_ONEOF_PTN3460_COLORDEP2\
+        oneof varid = SETUP_DATA.PTN3460PanelColor2,\
+            prompt = STRING_TOKEN(STR_PTN3460_COLORDEP_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_COLORDEP_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_PANELCOLOR2,\
+            option text = STRING_TOKEN(STR_PTN3460_COLOR_18B), value = 0, flags = MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_COLOR_24B), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_COLOR_36B), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_COLOR_48B), value = 3, flags = RESET_REQUIRED;\
+        endoneof;
+
+    #define BOARD_ONEOF_PTN3460_BL_TYPE2\
+        oneof varid = SETUP_DATA.PTN3460PanelBacklightType2, questionid = AUTO_ID(PTN3460_BLKTYPE2_KEY),\
+            prompt = STRING_TOKEN(STR_PTN3460_BLTYPE_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_BLTYPE_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_BLTYPE2,\
+            option text = STRING_TOKEN(STR_PTN3460_BLTYPE_NORMAL), value = 0, flags = INTERACTIVE | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PTN3460_BLTYPE_INVERTED), value = 1, flags = INTERACTIVE | RESET_REQUIRED;\
+        endoneof;
+        
+    #define BOARD_ONEOF_PTN3460_BL_LV2\
+        oneof varid = SETUP_DATA.PTN3460PanelBacklight2, questionid = AUTO_ID(PTN3460_BLKLV2_KEY), \
+            prompt = STRING_TOKEN(STR_PTN3460_BLLV_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_BLLV_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_BLLEVEL2,\
+            option text = STRING_TOKEN(STR_BLLV_BL00), value = 0, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL10), value = 1, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL20), value = 2, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL30), value = 3, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL40), value = 4, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL50), value = 5, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL60), value = 6, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL70), value = 7, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL80), value = 8, flags = INTERACTIVE | MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL90), value = 9, flags = INTERACTIVE | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_BLLV_BL100), value = 10, flags = INTERACTIVE | RESET_REQUIRED;\
+        endoneof;
+
+    #define BOARD_ONEOF_PTN3460_BLPWM_FREQ2\
+        oneof varid = SETUP_DATA.PTN3460PanelBacklightPwmFreq2,\
+            prompt = STRING_TOKEN(STR_PTN3460_BLPWMF_PROMPT),\
+            help = STRING_TOKEN(STR_PTN3460_BLPWMF_PROMPT_HELP),\
+            default = DEFAULT_PTN3460_BLPWM_FREQ2,\
+            option text = STRING_TOKEN(STR_PWMF_100HZ), value = 0, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_200HZ), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_220HZ), value = 2, flags = MANUFACTURING | RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_500HZ), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_1KHZ), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_2_2KHZ), value = 5, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_PWMF_6_5KHZ), value = 6, flags = RESET_REQUIRED;\
+        endoneof;
+#else
+    #define BOARD_ONEOF_PTN3460_EN2
+    #define BOARD_ONEOF_PTN3460_PANELTYPE2
+    #define BOARD_ONEOF_PTN3460_PANELMODE2
+    #define BOARD_ONEOF_PTN3460_COLORDEP2
+    #define BOARD_ONEOF_PTN3460_BL_TYPE2
+    #define BOARD_ONEOF_PTN3460_BL_LV2
+    #define BOARD_ONEOF_PTN3460_BLPWM_FREQ2
+#endif
+    
+#endif //#ifdef CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+    BOARD_ONEOF_PTN3460_EN1
+    BOARD_ONEOF_PTN3460_PANELTYPE1
+    BOARD_ONEOF_PTN3460_PANELMODE1
+    BOARD_ONEOF_PTN3460_COLORDEP1   
+    BOARD_ONEOF_PTN3460_BL_MODE
+    BOARD_ONEOF_PTN3460_BL_TYPE1
+    BOARD_ONEOF_PTN3460_BL_LV1
+    BOARD_ONEOF_PTN3460_BLPWM_FREQ1
+    BOARD_ONEOF_PTN3460_EN2
+    BOARD_ONEOF_PTN3460_PANELTYPE2
+    BOARD_ONEOF_PTN3460_PANELMODE2
+    BOARD_ONEOF_PTN3460_COLORDEP2
+    BOARD_ONEOF_PTN3460_BL_TYPE2
+    BOARD_ONEOF_PTN3460_BL_LV2
+    BOARD_ONEOF_PTN3460_BLPWM_FREQ2
+#endif //#ifdef CONTROLS_WITH_DEFAULTS
+
+#ifdef CHIPSET_FORM_SET
+    #ifndef SUPPRESS_GRAYOUT_ENDIF //old Core
+    #define SUPPRESS_GRAYOUT_ENDIF endif;
+    #endif
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+	#endif
+
+	#ifdef FORM_SET_GOTO
+	// Define goto commands for the forms defined in this file
+		BOARD_GOTO_PTN3460_FORM
+	#endif
+
+	#ifdef FORM_SET_FORM
+	// Define forms
+        #ifndef PTN3460_FORM_MAIN
+        #define PTN3460_FORM_MAIN
+
+		    form formid = AUTO_ID(PTN3460_FORM_ID),
+			    title = STRING_TOKEN(STR_PTN3460_CONFIG_FORM);
+                
+                SUBTITLE(STRING_TOKEN(STR_PTN3460_CONFIG_FORM))
+                SEPARATOR
+
+				// Do not remove this item >>
+				suppressif TRUE;
+					INTERACTIVE_TEXT(STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_EMPTY), AUTO_ID(AAEON_PTN3460CFG_INTERACTIVE_KEY))
+				endif;
+				// Do not remove this item <<
+			                
+				BOARD_ONEOF_PTN3460_EN1
+				suppressif ideqval SETUP_DATA.PTN3460En1 == 0;	
+				BOARD_ONEOF_PTN3460_PANELTYPE1
+				BOARD_ONEOF_PTN3460_PANELMODE1
+				BOARD_ONEOF_PTN3460_COLORDEP1   
+                                BOARD_ONEOF_PTN3460_BL_MODE   
+                        suppressif ideqval SETUP_DATA.PTN3460PanelBacklightMode == 1; 
+			    BOARD_ONEOF_PTN3460_BL_TYPE1
+			    BOARD_ONEOF_PTN3460_BL_LV1
+    			    BOARD_ONEOF_PTN3460_BLPWM_FREQ1
+                        endif;
+    			endif;
+
+                #if (PTN3460_SUPPORT_NUMBER > 1)    			    				
+                SEPARATOR
+				BOARD_ONEOF_PTN3460_EN2
+                suppressif ideqval SETUP_DATA.PTN3460En2 == 0;
+				BOARD_ONEOF_PTN3460_PANELTYPE2
+				BOARD_ONEOF_PTN3460_PANELMODE2
+				BOARD_ONEOF_PTN3460_COLORDEP2
+			    BOARD_ONEOF_PTN3460_BL_TYPE2
+			    BOARD_ONEOF_PTN3460_BL_LV2
+			    BOARD_ONEOF_PTN3460_BLPWM_FREQ2
+			    endif;
+			    #endif
+			    
+		    endform;  // PTN3460_FORM_ID
+        #endif // PTN3460_FORM_MAIN
+	#endif  // FORM_SET_FORM
+
+#endif  // CHIPSET_FORM_SET

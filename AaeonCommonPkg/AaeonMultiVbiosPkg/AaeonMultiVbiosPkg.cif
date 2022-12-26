@@ -1,0 +1,12 @@
+<component>
+	name = "AaeonMultiVbiosPkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonMultiVbiosPkg\"
+	RefName = "AaeonCommonPkg.AaeonMultiVbiosPkg"
+
+[files]
+"AaeonMultiVbiosPkg.sdl"
+"AaeonMultiVbiosPkg.sd"
+"AaeonMultiVbiosPkg.uni"
+
+<endComponent>

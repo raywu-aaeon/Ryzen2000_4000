@@ -1,0 +1,1246 @@
+#ifdef SETUP_DATA_DEFINITION
+	UINT8	F75111Gpio1x_En[8];		// 0: GPIO, 1: LED
+	UINT8	F75111Gpio1x_Oe[8];		// 0: INPUT, 1: OUTPUT
+	UINT8	F75111Gpio1x_Val[8];		// 0: LOW, 1: HIGH
+	UINT8	F75111Gpio1x_Omode[8];		// 0: LEVEL, 1: PULSE
+	UINT8	F75111Gpio1x_Pu[8];		// 0: , 1: Internal Pull Up
+	UINT8	F75111Gpio1x_Obuf[8];		// 0: I/OD, 1: I/O
+	UINT8	F75111Gpio2x_En[8];
+	UINT8	F75111Gpio2x_Oe[8];
+	UINT8	F75111Gpio2x_Val[8];
+	UINT8	F75111Gpio2x_Omode[8];
+	UINT8	F75111Gpio2x_Pu[8];
+	UINT8	F75111Gpio2x_Obuf[8];		// 0: I/OD, 1: I/O
+	UINT8	F75111Gpio3x_Oe[4];
+	UINT8	F75111Gpio3x_Val[4];
+	UINT8	F75111Gpio3x_Omode[4];
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+// GPIO1x
+	#define GPIO1X_EN_0\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_En[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO10),\
+		help        = STRING_TOKEN (STR_F75111_GPIO10),\
+		default	    = F75111GPIO10_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_EN_1\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_En[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO11),\
+		help        = STRING_TOKEN (STR_F75111_GPIO11),\
+		default	    = F75111GPIO11_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_EN_2\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_En[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO12),\
+		help        = STRING_TOKEN (STR_F75111_GPIO12),\
+		default	    = F75111GPIO12_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_EN_4\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_En[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO14),\
+		help        = STRING_TOKEN (STR_F75111_GPIO14),\
+		default	    = F75111GPIO14_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_EN_5\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_En[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO15),\
+		help        = STRING_TOKEN (STR_F75111_GPIO15),\
+		default	    = F75111GPIO15_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_EN_6\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_En[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO16),\
+		help        = STRING_TOKEN (STR_F75111_GPIO16),\
+		default	    = F75111GPIO16_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_EN_7\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_En[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO17),\
+		help        = STRING_TOKEN (STR_F75111_GPIO17),\
+		default	    = F75111GPIO17_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO1X_OE_0\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Oe[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO10_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OE_1\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Oe[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO11_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OE_2\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Oe[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO12_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OE_3\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Oe[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO13_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OE_4\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Oe[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO14_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OE_5\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Oe[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO15_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OE_6\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Oe[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO16_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OE_7\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Oe[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO17_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO1X_VAL_0\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Val[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO10_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_VAL_1\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Val[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO11_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_VAL_2\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Val[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO12_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_VAL_3\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Val[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO13_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_VAL_4\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Val[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO14_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_VAL_5\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Val[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO15_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_VAL_6\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Val[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO16_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_VAL_7\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Val[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO17_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO1X_OMODE_0\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Omode[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO10_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OMODE_1\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Omode[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO11_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OMODE_2\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Omode[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO12_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OMODE_3\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Omode[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO13_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OMODE_4\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Omode[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO14_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OMODE_5\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Omode[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO15_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OMODE_6\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Omode[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO16_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OMODE_7\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Omode[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO17_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO1X_PU_0\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Pu[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO10_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_PU_1\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Pu[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO11_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_PU_2\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Pu[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO12_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_PU_3\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Pu[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO13_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_PU_4\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Pu[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO14_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_PU_5\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Pu[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO15_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_PU_6\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Pu[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO16_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_PU_7\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Pu[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO17_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO1X_OBUF_0\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Obuf[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO10_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OBUF_1\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Obuf[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO11_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OBUF_2\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Obuf[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO12_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OBUF_3\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Obuf[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO13_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OBUF_4\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Obuf[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO14_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OBUF_5\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Obuf[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO15_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OBUF_6\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Obuf[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO16_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO1X_OBUF_7\
+	oneof varid     = SETUP_DATA.F75111Gpio1x_Obuf[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO17_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+// GPIO2x
+	#define GPIO2X_EN_0\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_En[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO20),\
+		help        = STRING_TOKEN (STR_F75111_GPIO20),\
+		default     = F75111GPIO20_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_EN_1\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_En[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO21),\
+		help        = STRING_TOKEN (STR_F75111_GPIO21),\
+		default     = F75111GPIO21_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_EN_2\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_En[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO22),\
+		help        = STRING_TOKEN (STR_F75111_GPIO22),\
+		default     = F75111GPIO22_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_EN_3\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_En[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO23),\
+		help        = STRING_TOKEN (STR_F75111_GPIO23),\
+		default     = F75111GPIO23_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_EN_4\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_En[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO24),\
+		help        = STRING_TOKEN (STR_F75111_GPIO24),\
+		default     = F75111GPIO24_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_EN_5\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_En[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO25),\
+		help        = STRING_TOKEN (STR_F75111_GPIO25),\
+		default     = F75111GPIO25_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_EN_6\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_En[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO26),\
+		help        = STRING_TOKEN (STR_F75111_GPIO26),\
+		default     = F75111GPIO26_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_EN_7\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_En[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO27),\
+		help        = STRING_TOKEN (STR_F75111_GPIO27),\
+		default     = F75111GPIO27_EN_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_DIS), value = 1, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_EN), value = 0, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO2X_OE_0\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Oe[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO20_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OE_1\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Oe[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO21_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OE_2\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Oe[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO22_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OE_3\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Oe[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO23_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OE_4\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Oe[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO24_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OE_5\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Oe[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO25_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OE_6\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Oe[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO26_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OE_7\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Oe[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO27_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO2X_VAL_0\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Val[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO20_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_VAL_1\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Val[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO21_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_VAL_2\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Val[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO22_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_VAL_3\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Val[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO23_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_VAL_4\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Val[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO24_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_VAL_5\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Val[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO25_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_VAL_6\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Val[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO26_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_VAL_7\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Val[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO27_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO2X_OMODE_0\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Omode[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO20_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OMODE_1\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Omode[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO21_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OMODE_2\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Omode[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO22_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OMODE_3\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Omode[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO23_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OMODE_4\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Omode[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO24_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OMODE_5\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Omode[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO25_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OMODE_6\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Omode[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO26_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OMODE_7\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Omode[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO27_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO2X_PU_0\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Pu[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO20_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_PU_1\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Pu[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO21_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_PU_2\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Pu[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO22_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_PU_3\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Pu[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO23_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_PU_4\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Pu[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO24_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_PU_5\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Pu[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO25_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_PU_6\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Pu[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO26_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_PU_7\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Pu[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_PU),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_PU),\
+		default     = F75111GPIO27_PU_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_NA), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PU_EN), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO2X_OBUF_0\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Obuf[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO20_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OBUF_1\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Obuf[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO21_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OBUF_2\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Obuf[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO22_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OBUF_3\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Obuf[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO23_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OBUF_4\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Obuf[4],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO24_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OBUF_5\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Obuf[5],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO25_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OBUF_6\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Obuf[6],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO26_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO2X_OBUF_7\
+	oneof varid     = SETUP_DATA.F75111Gpio2x_Obuf[7],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OBUF),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OBUF),\
+		default     = F75111GPIO27_OBUF_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IOD), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_IO), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+// GPIO3x
+	#define GPIO3X_OE_0\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Oe[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO30_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO3X_OE_1\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Oe[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO31_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO3X_OE_2\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Oe[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO32_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO3X_OE_3\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Oe[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OE),\
+		default     = F75111GPIO33_OE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_INPUT), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_OUTPUT), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO3X_VAL_0\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Val[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO30_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO3X_VAL_1\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Val[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO31_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO3X_VAL_2\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Val[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO32_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO3X_VAL_3\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Val[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_VAL),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_VAL),\
+		default     = F75111GPIO33_VAL_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LOW), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_HIGH), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+	#define GPIO3X_OMODE_0\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Omode[0],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO30_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO3X_OMODE_1\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Omode[1],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO31_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO3X_OMODE_2\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Omode[2],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO32_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+	#define GPIO3X_OMODE_3\
+	oneof varid     = SETUP_DATA.F75111Gpio3x_Omode[3],\
+		prompt      = STRING_TOKEN(STR_F75111_GPIO_OMODE),\
+		help        = STRING_TOKEN (STR_F75111_GPIO_OMODE),\
+		default     = F75111GPIO33_OMODE_DEFAULT,\
+		option text = STRING_TOKEN(STR_F75111_GPIO_LEVEL), value = 0, flags = RESET_REQUIRED;\
+		option text = STRING_TOKEN(STR_F75111_GPIO_PULSE), value = 1, flags = RESET_REQUIRED;\
+	endoneof;
+
+#endif //#ifdef CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+	GPIO1X_EN_0
+	GPIO1X_EN_1
+	GPIO1X_EN_2
+	GPIO1X_EN_4
+	GPIO1X_EN_5
+	GPIO1X_EN_6
+	GPIO1X_EN_7
+	GPIO1X_OE_0
+	GPIO1X_OE_1
+	GPIO1X_OE_2
+	GPIO1X_OE_3
+	GPIO1X_OE_4
+	GPIO1X_OE_5
+	GPIO1X_OE_6
+	GPIO1X_OE_7
+	GPIO1X_VAL_0
+	GPIO1X_VAL_1
+	GPIO1X_VAL_2
+	GPIO1X_VAL_3
+	GPIO1X_VAL_4
+	GPIO1X_VAL_5
+	GPIO1X_VAL_6
+	GPIO1X_VAL_7
+	GPIO1X_OMODE_0
+	GPIO1X_OMODE_1
+	GPIO1X_OMODE_2
+	GPIO1X_OMODE_3
+	GPIO1X_OMODE_4
+	GPIO1X_OMODE_5
+	GPIO1X_OMODE_6
+	GPIO1X_OMODE_7
+	GPIO1X_PU_0
+	GPIO1X_PU_1
+	GPIO1X_PU_2
+	GPIO1X_PU_3
+	GPIO1X_PU_4
+	GPIO1X_PU_5
+	GPIO1X_PU_6
+	GPIO1X_PU_7
+	GPIO1X_OBUF_0
+	GPIO1X_OBUF_1
+	GPIO1X_OBUF_2
+	GPIO1X_OBUF_3
+	GPIO1X_OBUF_4
+	GPIO1X_OBUF_5
+	GPIO1X_OBUF_6
+	GPIO1X_OBUF_7
+	GPIO2X_EN_0
+	GPIO2X_EN_1
+	GPIO2X_EN_2
+	GPIO2X_EN_3
+	GPIO2X_EN_4
+	GPIO2X_EN_5
+	GPIO2X_EN_6
+	GPIO2X_EN_7
+	GPIO2X_OE_0
+	GPIO2X_OE_1
+	GPIO2X_OE_2
+	GPIO2X_OE_3
+	GPIO2X_OE_4
+	GPIO2X_OE_5
+	GPIO2X_OE_6
+	GPIO2X_OE_7
+	GPIO2X_VAL_0
+	GPIO2X_VAL_1
+	GPIO2X_VAL_2
+	GPIO2X_VAL_3
+	GPIO2X_VAL_4
+	GPIO2X_VAL_5
+	GPIO2X_VAL_6
+	GPIO2X_VAL_7
+	GPIO2X_OMODE_0
+	GPIO2X_OMODE_1
+	GPIO2X_OMODE_2
+	GPIO2X_OMODE_3
+	GPIO2X_OMODE_4
+	GPIO2X_OMODE_5
+	GPIO2X_OMODE_6
+	GPIO2X_OMODE_7
+	GPIO2X_PU_0
+	GPIO2X_PU_1
+	GPIO2X_PU_2
+	GPIO2X_PU_3
+	GPIO2X_PU_4
+	GPIO2X_PU_5
+	GPIO2X_PU_6
+	GPIO2X_PU_7
+	GPIO2X_OBUF_0
+	GPIO2X_OBUF_1
+	GPIO2X_OBUF_2
+	GPIO2X_OBUF_3
+	GPIO2X_OBUF_4
+	GPIO2X_OBUF_5
+	GPIO2X_OBUF_6
+	GPIO2X_OBUF_7
+	GPIO3X_OE_0
+	GPIO3X_OE_1
+	GPIO3X_OE_2
+	GPIO3X_OE_3
+	GPIO3X_VAL_0
+	GPIO3X_VAL_1
+	GPIO3X_VAL_2
+	GPIO3X_VAL_3
+	GPIO3X_OMODE_0
+	GPIO3X_OMODE_1
+	GPIO3X_OMODE_2
+	GPIO3X_OMODE_3
+#endif //#ifdef CONTROLS_WITH_DEFAULTS
+
+#ifdef ADVANCED_FORM_SET
+	#ifdef FORM_SET_TYPEDEF
+	#endif
+	
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+	#endif
+
+	#ifdef FORM_SET_GOTO
+
+		goto F75111_GPIO_CONFIGURATION_FORM_ID, 
+		prompt = STRING_TOKEN(STR_F75111_GPIO_CONFIGURATION),
+		help    = STRING_TOKEN(STR_F75111_GPIO_CONFIGURATION);
+
+	#endif //FORM_SET_GOTO
+	
+	#ifdef AAEON_FORM_SET_GOTO
+	#endif //AAEON_FORM_SET_GOTO
+	
+	#ifdef FORM_SET_FORM
+
+		#ifndef F75111_GPIO_CONFIGURATION_FORM_SETUP
+		#define F75111_GPIO_CONFIGURATION_FORM_SETUP
+		form formid = AUTO_ID(F75111_GPIO_CONFIGURATION_FORM_ID),
+			title = STRING_TOKEN(STR_F75111_GPIO_CONFIGURATION);
+			SUBTITLE(STRING_TOKEN(STR_F75111_GPIO_CONFIGURATION))
+			SEPARATOR
+
+	GPIO1X_EN_0
+		suppressif ideqval SETUP_DATA.F75111Gpio1x_En[0] == 0x01;
+		GPIO1X_OE_0
+			suppressif ideqval SETUP_DATA.F75111Gpio1x_Oe[0] == 0x00;
+			GPIO1X_VAL_0
+			GPIO1X_OMODE_0
+			GPIO1X_PU_0
+			GPIO1X_OBUF_0
+			endif; // SETUP_DATA.F75111Gpio1x_Oe[0] == 0x00
+		endif; // SETUP_DATA.F75111Gpio1x_En[0] == 0x01
+
+	GPIO1X_EN_1
+		suppressif ideqval SETUP_DATA.F75111Gpio1x_En[1] == 0x01;
+		GPIO1X_OE_1
+			suppressif ideqval SETUP_DATA.F75111Gpio1x_Oe[1] == 0x00;
+			GPIO1X_VAL_1
+			GPIO1X_OMODE_1
+			GPIO1X_PU_1
+			GPIO1X_OBUF_1
+			endif; // SETUP_DATA.F75111Gpio1x_Oe[1] == 0x00
+		endif; // SETUP_DATA.F75111Gpio1x_En[1] == 0x01
+
+	GPIO1X_EN_2
+		suppressif ideqval SETUP_DATA.F75111Gpio1x_En[2] == 0x01;
+		GPIO1X_OE_2
+			suppressif ideqval SETUP_DATA.F75111Gpio1x_Oe[2] == 0x00;
+			GPIO1X_VAL_2
+			GPIO1X_OMODE_2
+			GPIO1X_PU_2
+			GPIO1X_OBUF_2
+			endif; // SETUP_DATA.F75111Gpio1x_Oe[2] == 0x00
+		endif; // SETUP_DATA.F75111Gpio1x_En[2] == 0x01
+
+	SUBTITLE(STRING_TOKEN(STR_F75111_GPIO13))
+		GPIO1X_OE_3
+			suppressif ideqval SETUP_DATA.F75111Gpio1x_Oe[3] == 0x00;
+			GPIO1X_VAL_3
+			GPIO1X_OMODE_3
+			GPIO1X_PU_3
+			GPIO1X_OBUF_3
+			endif; // SETUP_DATA.F75111Gpio1x_Oe[3] == 0x00
+
+	GPIO1X_EN_4
+		suppressif ideqval SETUP_DATA.F75111Gpio1x_En[4] == 0x01;
+		GPIO1X_OE_4
+			suppressif ideqval SETUP_DATA.F75111Gpio1x_Oe[4] == 0x00;
+			GPIO1X_VAL_4
+			GPIO1X_OMODE_4
+			GPIO1X_PU_4
+			GPIO1X_OBUF_4
+			endif; // SETUP_DATA.F75111Gpio1x_Oe[4] == 0x00
+		endif; // SETUP_DATA.F75111Gpio1x_En[4] == 0x01
+
+	GPIO1X_EN_5
+		suppressif ideqval SETUP_DATA.F75111Gpio1x_En[5] == 0x01;
+		GPIO1X_OE_5
+			suppressif ideqval SETUP_DATA.F75111Gpio1x_Oe[5] == 0x00;
+			GPIO1X_VAL_5
+			GPIO1X_OMODE_5
+			GPIO1X_PU_5
+			GPIO1X_OBUF_5
+			endif; // SETUP_DATA.F75111Gpio1x_Oe[5] == 0x00
+		endif; // SETUP_DATA.F75111Gpio1x_En[5] == 0x01
+
+	GPIO1X_EN_6
+		suppressif ideqval SETUP_DATA.F75111Gpio1x_En[6] == 0x01;
+		GPIO1X_OE_6
+			suppressif ideqval SETUP_DATA.F75111Gpio1x_Oe[6] == 0x00;
+			GPIO1X_VAL_6
+			GPIO1X_OMODE_6
+			GPIO1X_PU_6
+			GPIO1X_OBUF_6
+			endif; // SETUP_DATA.F75111Gpio1x_Oe[6] == 0x00
+		endif; // SETUP_DATA.F75111Gpio1x_En[6] == 0x01
+
+	GPIO1X_EN_7
+		suppressif ideqval SETUP_DATA.F75111Gpio1x_En[7] == 0x01;
+		GPIO1X_OE_7
+			suppressif ideqval SETUP_DATA.F75111Gpio1x_Oe[7] == 0x00;
+			GPIO1X_VAL_7
+			GPIO1X_OMODE_7
+			GPIO1X_PU_7
+			GPIO1X_OBUF_7
+			endif; // SETUP_DATA.F75111Gpio1x_Oe[7] == 0x00
+		endif; // SETUP_DATA.F75111Gpio1x_En[7] == 0x01
+	SEPARATOR
+
+	GPIO2X_EN_0
+		suppressif ideqval SETUP_DATA.F75111Gpio2x_En[0] == 0x01;
+		GPIO2X_OE_0
+			suppressif ideqval SETUP_DATA.F75111Gpio2x_Oe[0] == 0x00;
+			GPIO2X_VAL_0
+			GPIO2X_OMODE_0
+			GPIO2X_PU_0
+			GPIO2X_OBUF_0
+			endif; // SETUP_DATA.F75111Gpio2x_Oe[0] == 0x00
+		endif; // SETUP_DATA.F75111Gpio2x_En[0] == 0x01
+
+	GPIO2X_EN_1
+		suppressif ideqval SETUP_DATA.F75111Gpio2x_En[1] == 0x01;
+		GPIO2X_OE_1
+			suppressif ideqval SETUP_DATA.F75111Gpio2x_Oe[1] == 0x00;
+			GPIO2X_VAL_1
+			GPIO2X_OMODE_1
+			GPIO2X_PU_1
+			GPIO2X_OBUF_1
+			endif; // SETUP_DATA.F75111Gpio2x_Oe[1] == 0x00
+		endif; // SETUP_DATA.F75111Gpio2x_En[1] == 0x01
+
+	GPIO2X_EN_2
+		suppressif ideqval SETUP_DATA.F75111Gpio2x_En[2] == 0x01;
+		GPIO2X_OE_2
+			suppressif ideqval SETUP_DATA.F75111Gpio2x_Oe[2] == 0x00;
+			GPIO2X_VAL_2
+			GPIO2X_OMODE_2
+			GPIO2X_PU_2
+			GPIO2X_OBUF_2
+			endif; // SETUP_DATA.F75111Gpio2x_Oe[2] == 0x00
+		endif; // SETUP_DATA.F75111Gpio2x_En[2] == 0x01
+
+	GPIO2X_EN_3
+		suppressif ideqval SETUP_DATA.F75111Gpio2x_En[3] == 0x01;
+		GPIO2X_OE_3
+			suppressif ideqval SETUP_DATA.F75111Gpio2x_Oe[3] == 0x00;
+			GPIO2X_VAL_3
+			GPIO2X_OMODE_3
+			GPIO2X_PU_3
+			GPIO2X_OBUF_3
+			endif; // SETUP_DATA.F75111Gpio2x_Oe[3] == 0x00
+		endif; // SETUP_DATA.F75111Gpio2x_En[3] == 0x01
+
+	GPIO2X_EN_4
+		suppressif ideqval SETUP_DATA.F75111Gpio2x_En[4] == 0x01;
+		GPIO2X_OE_4
+			suppressif ideqval SETUP_DATA.F75111Gpio2x_Oe[4] == 0x00;
+			GPIO2X_VAL_4
+			GPIO2X_OMODE_4
+			GPIO2X_PU_4
+			GPIO2X_OBUF_4
+			endif; // SETUP_DATA.F75111Gpio2x_Oe[4] == 0x00
+		endif; // SETUP_DATA.F75111Gpio2x_En[4] == 0x01
+
+	GPIO2X_EN_5
+		suppressif ideqval SETUP_DATA.F75111Gpio2x_En[5] == 0x01;
+		GPIO2X_OE_5
+			suppressif ideqval SETUP_DATA.F75111Gpio2x_Oe[5] == 0x00;
+			GPIO2X_VAL_5
+			GPIO2X_OMODE_5
+			GPIO2X_PU_5
+			GPIO2X_OBUF_5
+			endif; // SETUP_DATA.F75111Gpio2x_Oe[5] == 0x00
+		endif; // SETUP_DATA.F75111Gpio2x_En[5] == 0x01
+
+	GPIO2X_EN_6
+		suppressif ideqval SETUP_DATA.F75111Gpio2x_En[6] == 0x01;
+		GPIO2X_OE_6
+			suppressif ideqval SETUP_DATA.F75111Gpio2x_Oe[6] == 0x00;
+			GPIO2X_VAL_6
+			GPIO2X_OMODE_6
+			GPIO2X_PU_6
+			GPIO2X_OBUF_6
+			endif; // SETUP_DATA.F75111Gpio2x_Oe[6] == 0x00
+		endif; // SETUP_DATA.F75111Gpio2x_En[6] == 0x01
+
+	GPIO2X_EN_7
+		suppressif ideqval SETUP_DATA.F75111Gpio2x_En[7] == 0x01;
+		GPIO2X_OE_7
+			suppressif ideqval SETUP_DATA.F75111Gpio2x_Oe[7] == 0x00;
+			GPIO2X_VAL_7
+			GPIO2X_OMODE_7
+			GPIO2X_PU_7
+			GPIO2X_OBUF_7
+			endif; // SETUP_DATA.F75111Gpio2x_Oe[7] == 0x00
+		endif; // SETUP_DATA.F75111Gpio2x_En[7] == 0x01
+	SEPARATOR
+
+	SUBTITLE(STRING_TOKEN(STR_F75111_GPIO30))
+		GPIO3X_OE_0
+			suppressif ideqval SETUP_DATA.F75111Gpio3x_Oe[0] == 0x00;
+			GPIO3X_VAL_0
+			GPIO3X_OMODE_0
+			endif; // SETUP_DATA.F75111Gpio3x_Oe[0] == 0x00
+
+	SUBTITLE(STRING_TOKEN(STR_F75111_GPIO31))
+		GPIO3X_OE_1
+			suppressif ideqval SETUP_DATA.F75111Gpio3x_Oe[1] == 0x00;
+			GPIO3X_VAL_1
+			GPIO3X_OMODE_1
+			endif; // SETUP_DATA.F75111Gpio3x_Oe[1] == 0x00
+
+	SUBTITLE(STRING_TOKEN(STR_F75111_GPIO32))
+		GPIO3X_OE_2
+			suppressif ideqval SETUP_DATA.F75111Gpio3x_Oe[2] == 0x00;
+			GPIO3X_VAL_2
+			GPIO3X_OMODE_2
+			endif; // SETUP_DATA.F75111Gpio3x_Oe[2] == 0x00
+
+	SUBTITLE(STRING_TOKEN(STR_F75111_GPIO33))
+		GPIO3X_OE_3
+			suppressif ideqval SETUP_DATA.F75111Gpio3x_Oe[3] == 0x00;
+			GPIO3X_VAL_3
+			GPIO3X_OMODE_3
+			endif; // SETUP_DATA.F75111Gpio3x_Oe[3] == 0x00
+
+		endform;  // F75111_GPIO_CONFIGURATION_FORM_ID
+		#endif //F75111_GPIO_CONFIGURATION_FORM_SETUP
+
+	#endif //FORM_SET_FORM
+#endif //ADVANCED_FORM_SET

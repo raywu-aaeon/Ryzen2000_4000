@@ -1,0 +1,14 @@
+<component>
+	name = "AaeonPowerMode"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\AaeonPowerMode\"
+	RefName = "AaeonCommonPkg.AaeonPowerMode"
+[INF]
+"AaeonPowerModeSmm.inf"
+[files]
+"AaeonPowerMode.sdl"	
+"AaeonPowerMode.uni"	
+"AaeonPowerMode.sd"	
+"AaeonPowerModeDxe.c"	
+"AaeonPowerModeSetup.c"	
+<endComponent>

@@ -1,0 +1,10 @@
+<component>
+        name = "AbsolutePointerRotation"
+        category = ModulePart
+        LocalRoot = "AaeonCommonPkg/ScreenRotation/AbsolutePointerRotation/"
+        RefName = "AaeonCommonPkg.AbsolutePointerRotation"
+[INF]
+"AbsolutePointerRotation.inf"
+[files]
+"AbsolutePointerRotation.sdl"
+<endComponent>

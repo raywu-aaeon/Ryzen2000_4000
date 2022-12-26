@@ -1,0 +1,23 @@
+<component>
+	name = "AaeonDio3"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonDio3\"
+	RefName = "AaeonCommonPkg.AaeonDio3"
+
+[files]
+"AaeonDio3.asl"
+"AaeonDio3.c"
+"AaeonDio3.h"
+"AaeonDio3Dxe.inf"
+"AaeonDio3Dxe.c"
+"AaeonDio3SetupCallback.c"
+"AaeonDio3.sd"
+"AaeonDio3.sdl"
+"AaeonDio3.uni"
+"AaeonDio3Setup.h"
+"OemDioTemplate.asl"
+
+[parts]
+"AaeonCommonPkg.AaeonDio3.AaeonDio3ReportCapability" 
+
+<endComponent>

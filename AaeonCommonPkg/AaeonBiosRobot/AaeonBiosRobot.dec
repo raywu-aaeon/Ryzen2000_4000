@@ -1,0 +1,28 @@
+ [Defines]
+ DEC_SPECIFICATION              = 0x00010005
+ PACKAGE_NAME                   = AaeonBiosRobot
+ PACKAGE_GUID                   = a4ac2d4a-3eb9-4cb0-ae69-793d0aac6e91
+ PACKAGE_VERSION                = 0.1
+ 
+ #
+ # The following information is for reference only and not required by the build tools.
+ #
+ #  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+ #
+ 
+ [Includes]
+    AaeonBiosRobotLib
+ 
+ [LibraryClasses]
+ 
+ 
+ [Guids]
+ 
+ 
+ [Protocols]
+ 
+ [Ppis]
+   
+ 
+ [PcdsFixedAtBuild]
+ 

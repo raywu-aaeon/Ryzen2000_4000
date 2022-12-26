@@ -1,0 +1,16 @@
+<component>
+	name = "AaeonDioPkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonDioPkg\"
+	RefName = "AaeonCommonPkg.AaeonDioPkg"
+
+[files]
+"AaeonDioPkg.sdl"
+"AaeonDioPkg.c"
+"AaeonDioPkg.sd"
+"AaeonDioPkg.uni"
+"AaeonDioDxe.c"
+
+[parts]
+
+<endComponent>

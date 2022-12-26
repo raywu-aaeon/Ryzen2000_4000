@@ -1,0 +1,16 @@
+<component>
+	name = "AaeonOemBeepMap"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonOemBeepMap\"
+	RefName = "AaeonCommonPkg.AaeonOemBeepMap"
+[INF]
+"AaeonOemPeiBeepMap.inf"
+"AaeonOemDxeBeepMap.inf"
+
+[files]
+"AaeonOemBeepMap.sdl"
+"AaeonOemPeiBeepMap.c"
+"AaeonOemDxeBeepMap.c"
+"History.txt"
+
+<endComponent>

@@ -1,0 +1,55 @@
+TOKEN
+	Name  = "SioLdnDefaultDisable_SUPPORT"
+	Value  = "0"
+	Help  = "Switch for Enabling board library support in the project"
+	TokenType = Boolean
+    	TargetMAK = Yes
+    	TargetH = Yes
+	Master = Yes
+	Token = "SIO_SUPPORT" "=" "1"
+End
+
+PATH
+    Name  = "SioLdnDefaultDisable_DIR"
+End
+
+ELINK
+	Name  = "$(SioLdnDefaultDisable_DIR)/SioLdnDefaultDisable.c"
+	Parent  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(SioLdnDefaultDisable_DIR)/SioLdnLoadDefault.c"
+	Parent  = "TSE_SOURCE_FILES"
+	InvokeOrder = AfterParent
+End
+
+
+ELINK
+	Name  = "SioLdnDefaultDisable, "
+	Parent  = "AAEON_DXE_INIT_FUNCTIONS"
+	Help  = "APTIO_5_STYLE for Override to Disabled for some customer specific request."
+	Priority  = 2
+	InvokeOrder = BeforeParent
+    	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "0"
+End
+
+ELINK
+ 	Name  = "LoadDynSioDefaults,"
+ 	Parent  = "LoadSetupDefaultsHook,"
+ 	InvokeOrder = AfterParent
+ 	Help  = "APTIO_5_STYLE for Override to Disabled for some customer specific request++"
+ 	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "0"
+End
+
+
+#Please refer to build\GSIOSETUPVAR.H to fill your corresponding COM /LPT Name and the last element must be {L" ", 0XFF}.....
+TOKEN
+	Name = "SIO_DEFAULT_OVERRIDE_TABLE_LIST"
+	Value = '{L"NV_SIO0_LD2", FALSE},{L"NV_SIO0_LD3", FALSE},{L"NV_SIO0_LD4", FALSE},{L"NV_SIO0_LD5", FALSE},{L" ", 0XFF}'
+	Help = " Format:{SioLdnName, Enable(TRUE)/Disable(FALSE)}."
+	TokenType = Expression
+	TargetH = Yes
+End
+

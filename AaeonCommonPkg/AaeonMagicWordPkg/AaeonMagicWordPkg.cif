@@ -1,0 +1,13 @@
+<component>
+	name = "AaeonMagicWordPkg"
+	category = Flavor
+	LocalRoot = "AaeonCommonPkg\AaeonMagicWordPkg\"
+	RefName = "AaeonCommonPkg.AaeonMagicWordPkg"
+[INF]
+"AaeonMagicWordPkg.inf"
+
+[files]
+"AaeonMagicWordPkg.sdl"
+"AaeonMagicWordPkg.c"
+
+<endComponent>

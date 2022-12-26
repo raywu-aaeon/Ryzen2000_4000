@@ -1,0 +1,13 @@
+<component>
+	name = "MacToUUID"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\MacToUUID\"
+	RefName = "AaeonCommonPkg.MacToUUID"
+[INF]
+"MacToUUID.inf"
+[files]
+"MacToUUID.sdl"	
+"MacToUUIDSetup.c"
+"MacToUUIDSetup.uni"
+"MacToUUID.sd"
+<endComponent>

@@ -1,0 +1,156 @@
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:	UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+#endif
+
+//------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROL_DEFINITION
+//------------------------------------------------------------
+    #define AAEON_GPIO_ID_FORM\
+		goto AAEON_GPIO_ID_FORM_ID, \
+			prompt = STRING_TOKEN(STR_AAEON_GPIO_ID_FORM),\
+			help = STRING_TOKEN(STR_AAEON_GPIO_ID_FORM_HELP);		
+
+	#define ONEOF_AAEON_HW_BOARD_ID\
+		numeric varid = AAEON_SETUP_DATA.BoardId,\
+			prompt    = STRING_TOKEN(STR_AAEON_HW_BOARD_ID_PROMPT),\
+			help      = STRING_TOKEN(STR_AAEON_HW_BOARD_ID_HELP),\
+			flags     = RESET_REQUIRED,\
+			minimum   = 0,\
+			maximum   = 255,\
+			step      = 1,\
+       		default   = AAEON_HW_BOARD_ID_DEFAULT,\
+		endnumeric;
+
+	#define ONEOF_AAEON_HW_PANEL_ID\
+		numeric varid = AAEON_SETUP_DATA.PanelId,\
+			prompt    = STRING_TOKEN(STR_AAEON_HW_PANEL_ID_PROMPT),\
+			help      = STRING_TOKEN(STR_AAEON_HW_PANEL_ID_HELP),\
+			flags     = RESET_REQUIRED,\
+			minimum   = 0,\
+			maximum   = 255,\
+			step      = 1,\
+       		default   = AAEON_HW_PANEL_ID_DEFAULT,\
+		endnumeric;		
+
+	#define ONEOF_AAEON_HW_OEM_ID\
+		numeric varid = AAEON_SETUP_DATA.OemId,\
+			prompt    = STRING_TOKEN(STR_AAEON_HW_OEM_ID_PROMPT),\
+			help      = STRING_TOKEN(STR_AAEON_HW_OEM_ID_HELP),\
+			flags     = RESET_REQUIRED,\
+			minimum   = 0,\
+			maximum   = 255,\
+			step      = 1,\
+       		default   = AAEON_HW_OEM_ID_DEFAULT,\
+		endnumeric;
+
+	#define ONEOF_AAEON_SW_BOARD_ID\
+		numeric varid = AAEON_SETUP_DATA.SwBoardId,\
+			prompt    = STRING_TOKEN(STR_AAEON_SW_BOARD_ID_PROMPT),\
+			help      = STRING_TOKEN(STR_AAEON_SW_BOARD_ID_HELP),\
+			flags     = RESET_REQUIRED,\
+			minimum   = 0,\
+			maximum   = 255,\
+			step      = 1,\
+       		default   = AAEON_SW_BOARD_ID_DEFAULT,\
+		endnumeric;
+
+	#define ONEOF_AAEON_SW_PANEL_ID\
+		numeric varid = AAEON_SETUP_DATA.SwPanelId,\
+			prompt    = STRING_TOKEN(STR_AAEON_SW_PANEL_ID_PROMPT),\
+			help      = STRING_TOKEN(STR_AAEON_SW_PANEL_ID_HELP),\
+			flags     = RESET_REQUIRED,\
+			minimum   = 0,\
+			maximum   = 255,\
+			step      = 1,\
+       		default   = AAEON_SW_PANEL_ID_DEFAULT,\
+		endnumeric;		
+
+	#define ONEOF_AAEON_SW_OEM_ID\
+		numeric varid = AAEON_SETUP_DATA.SwOemId,\
+			prompt    = STRING_TOKEN(STR_AAEON_SW_OEM_ID_PROMPT),\
+			help      = STRING_TOKEN(STR_AAEON_SW_OEM_ID_HELP),\
+			flags     = RESET_REQUIRED,\
+			minimum   = 0,\
+			maximum   = 255,\
+			step      = 1,\
+       		default   = AAEON_SW_OEM_ID_DEFAULT,\
+		endnumeric;	
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+#ifdef CONTROLS_WITH_DEFAULTS
+//------------------------------------------------------------
+		ONEOF_AAEON_HW_BOARD_ID
+		ONEOF_AAEON_HW_PANEL_ID
+	  	ONEOF_AAEON_HW_OEM_ID
+	  	ONEOF_AAEON_SW_BOARD_ID
+	  	ONEOF_AAEON_SW_PANEL_ID
+	  	ONEOF_AAEON_SW_OEM_ID
+//------------------------------------------------------------
+#endif
+//------------------------------------------------------------
+
+//------------------------------------------------------------
+// Define Macro
+//------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//                CHIPSET - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+	//-------------------------------------------------------------------------
+	//	AAEON OEM ID Form
+	//-------------------------------------------------------------------------        
+    #ifdef FORM_SET_TYPEDEF
+    #endif
+
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+	#endif //FORM_SET_ITEM
+
+	#ifdef FORM_SET_GOTO
+	// Define goto commands for the forms defined in this file
+		AAEON_GPIO_ID_FORM
+	#endif //FORM_SET_GOTO
+
+	#ifdef FORM_SET_FORM
+	// Define forms
+        #ifndef AAEON_GPIO_ID_FORM_MAIN
+        #define AAEON_GPIO_ID_FORM_MAIN
+
+		    form formid = AUTO_ID(AAEON_GPIO_ID_FORM_ID),
+			    title = STRING_TOKEN(STR_AAEON_GPIO_ID_FORM);
+                
+                SUBTITLE(STRING_TOKEN(STR_AAEON_GPIO_ID_FORM))
+                SEPARATOR
+
+                // H/W GPIO ID is designed to read from actual GPIO
+                grayoutif TRUE;
+				ONEOF_AAEON_HW_BOARD_ID
+				ONEOF_AAEON_HW_PANEL_ID
+				ONEOF_AAEON_HW_OEM_ID
+                endif;
+                // S/W GPIO ID is designed to be configured by S/W like AMI BCP or SCE
+				ONEOF_AAEON_SW_BOARD_ID
+				ONEOF_AAEON_SW_PANEL_ID
+				ONEOF_AAEON_SW_OEM_ID
+
+		    endform;  // AAEON_GPIO_ID_FORM_ID
+
+        #endif // AAEON_GPIO_ID_FORM_MAIN
+	#endif  // FORM_SET_FORM
+
+#endif  // ADVANCED_FORM_SET

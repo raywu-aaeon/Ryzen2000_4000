@@ -1,0 +1,95 @@
+TOKEN
+	Name  = "AAEON_OEM_BEEP_MAP_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Aaeon OEM Beep Map support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "BEEP_ERROR_CODES_MAP"
+	Value  = "AaeonErrorBeepMap"
+	Help  = "Name of the table that establishes mapping between error codes and number of beeps.\Clone this token to support custom beep codes."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_MEMORY_NOT_DETECTED_BEEP_COUNT"
+	Value  = "0"
+	Help  = "PEI_MEMORY_NOT_DETECTED beep count"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_MEMORY_NONE_USEFUL_BEEP_COUNT"
+	Value  = "0"
+	Help  = "PEI_MEMORY_NONE_USEFUL beep count"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_MEM_NOT_INSTALLED_BEEP_COUNT"
+	Value  = "6"
+	Help  = "PEI_MEMORY_NOT_INSTALLED beep count"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+PATH
+	Name  = "AaeonOemBeepMap_DIR"
+End
+
+INFComponent
+	Name  = "AaeonOemPeiBeepMap"
+	File  = "AaeonOemPeiBeepMap.inf"
+	Package  = "AaeonCommonPkg"
+End
+
+INFComponent
+	Name  = "AaeonOemDxeBeepMap"
+	File  = "AaeonOemDxeBeepMap.inf"
+	Package  = "AaeonCommonPkg"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AaeonCommonPkg.AaeonOemPeiBeepMap"
+	Override  = "AmiModulePkg.StatusCodePEI"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AaeonCommonPkg.AaeonOemDxeBeepMap"
+	Override  = "AmiModulePkg.StatusCodeDxe"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AaeonCommonPkg.AaeonOemDxeBeepMap"
+	Override  = "AmiModulePkg.StatusCodeSmm"
+End
+
+ELINK
+	Name  = "AaeonPostBeep,"
+	Parent  = "HandoffToTse,"
+	InvokeOrder = BeforeParent
+	Token = "BEEP_ENABLE" "=" "1"
+End
+ELINK
+	Name  = "ConInAvailabilityBeep,"
+	Parent  = "/* Connect ConIn Devices */"
+	Token = "BEEP_ENABLE" "=" "1"
+	InvokeOrder = AfterParent
+	Disable = YES
+End
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AaeonCommonPkg.AaeonOemDxeBeepMap"
+	Override  = "AmiModulePkg.Bds"
+End

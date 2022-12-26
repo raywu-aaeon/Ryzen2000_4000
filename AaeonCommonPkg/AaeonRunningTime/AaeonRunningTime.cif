@@ -1,0 +1,17 @@
+<component>
+	name = "AaeonRunningTime"
+	category = ModulePart
+	LocalRoot = "AaeonCommonPkg\AaeonRunningTime"
+	RefName = "AaeonCommonPkg.AaeonRunningTime"
+
+[files]
+"AaeonRunningTimeDxe.c"
+"AaeonRunningTime.c"
+"AaeonRunningTime.sdl"
+"S5andPowerBtnSMI.c"
+[parts]
+
+[INF]
+"AaeonRunningTimeDxe.inf"
+
+<endComponent>

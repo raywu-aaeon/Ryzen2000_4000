@@ -1,0 +1,29 @@
+#ifdef SETUP_DATA_DEFINITION
+//----------------------------------------------------------------------------
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+//----------------------------------------------------------------------------
+    // Nothing
+#endif
+//----------------------------------------------------------------------------
+//                CONTROL DEFINITION
+//----------------------------------------------------------------------------
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+    // Nothing
+#endif //ENDIF CONTROL_DEFINITION
+
+//----------------------------------------------------------------------------
+//                MAIN - CRB Configuration Form
+//----------------------------------------------------------------------------
+#ifdef MAIN_FORM_SET
+        #ifdef AAEON_FORM_SET_ITEM
+		    INTERACTIVE_TEXT(STRING_TOKEN(STR_EMPTY), STRING_TOKEN(AAEON_STR_RUN_TIME), STRING_TOKEN(AAEON_STR_RUN_TIME_VAL),  AUTO_ID(AAEON_RUN_TIME_INTERACTIVE_KEY))
+            SEPARATOR
+        #endif      
+#endif  // MAIN_FORM_SET

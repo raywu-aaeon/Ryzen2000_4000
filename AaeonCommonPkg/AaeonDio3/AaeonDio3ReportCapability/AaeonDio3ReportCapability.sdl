@@ -1,0 +1,562 @@
+TOKEN
+	Name  = "AAEON_DIO3_REPORT_CAPABILITY"
+	Value  = "1"
+	Help  = "Main switch to Miscellaneous tokens and tokens automatically generated for report capability to WMI caller. Tokens here are basically needs no porting."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "WMI_DIO_SUPPORT"
+	Value  = "1"
+	Help  = "Support DIO WMI Method"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for DIO capability ======================"
+    Value  = "====================== Tokens for DIO capability ======================"
+	Help  = "Porting required if there is 3rd DIO controller"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "DIOC"
+	Value  = '"{ \"Label\":\"DIO\", \"Instance Number\":$(DIO_INSTANCE_NUMBER), \"Instance Data\":[$(DIOC_DIO)$(DIOC_SECOND_DIO)]}"'
+	Help  = "DIO capability reported in BFPI"
+	TokenType = Expression
+	TargetASL = Yes
+End
+
+TOKEN
+	Name  = "DIO_TOTAL_NUMBER"
+	Value  = "$(FIRST_DIO_NUMBER) + $(SECOND_DIO_NUMBER)"
+	Help  = "Total number of DIO pins"
+	TokenType = Integer
+	TargetH = Yes
+	Range = "1-128"
+End
+
+TOKEN
+	Name  = "DIO_END_NUMBER"
+	Value  = "$(FIRST_DIO_NUMBER) - 1"
+	Help  = "Last number of 1st DIO controller amount total DIO pins"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SECOND_DIO_END_NUMBER"
+	Value  = "$(FIRST_DIO_NUMBER) + $(SECOND_DIO_NUMBER) - 1"
+	Help  = "Last number of 2nd DIO controller amount total DIO pins"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_INSTANCE_NUMBER"
+	Value  = "1"
+	Help  = "DIO Instance number in DIOC"
+	TokenType = Integer
+End
+
+TOKEN
+	Name  = "DIO_INSTANCE_NUMBER"
+	Value  = "2"
+	Help  = "DIO Instance number in DIOC"
+	TokenType = Integer
+	Token = "SECOND_DIO_NUMBER" ">" "0"
+End
+
+TOKEN
+	Name  = "DIOC_DIO"
+	Value  = '{ \"Name\": \"$(FIRST_DIO_NAME)\", \"Start\": 0, \"End\": $(DIO_END_NUMBER) }'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "DIOC_SECOND_DIO"
+	Value  = ""
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+End
+
+TOKEN
+	Name  = "DIOC_SECOND_DIO"
+	Value  = ', { \"Name\": \"$(SECOND_DIO_NAME)\", \"Start\": $(FIRST_DIO_NUMBER), \"End\": $(SECOND_DIO_END_NUMBER) }'
+	Help  = "String reported in BRGC"
+	TokenType = Expression
+	Token = "SECOND_DIO_NUMBER" ">" "0"
+End
+
+TOKEN
+    Name  = "====================== Tokens requires porting if DIO number > 32 ======================"
+    Value  = "====================== Tokens requires porting if DIO number > 32 ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "DIO_INPUT_CAPABLE_MAP2"
+	Value  = "Porting required"
+	Help = "A map for DIO input capability, pin 32~63. Each bit represents correspond pin supports input mode or not. 1:supported/0:not supported."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FIRST_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "DIO_OUTPUT_CAPABLE_MAP2"
+	Value  = "Porting required"
+	Help = "A map for DIO output capability, pin 32~63. Each bit represents correspond pin supports output mode or not. 1:supported/0:not supported."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FIRST_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "DIO_INTERRUPT_CAPABLE_MAP2"
+	Value  = "Porting required"
+	Help = "A map for DIO interrupt capability, pin 32~63. Each bit represents correspond pin supports generating interrupt or not. 1:supported/0:not supported.\Correspond pin should also support input."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FIRST_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "SECOND_DIO_INPUT_CAPABLE_MAP2"
+	Value  = "Porting required"
+	Help = "A map for DIO input capability, pin 32~63. Each bit represents correspond pin supports input mode or not. 1:supported/0:not supported."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SECOND_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "SECOND_DIO_OUTPUT_CAPABLE_MAP2"
+	Value  = "Porting required"
+	Help = "A map for DIO output capability, pin 32~63. Each bit represents correspond pin supports output mode or not. 1:supported/0:not supported."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SECOND_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "SECOND_DIO_INTERRUPT_CAPABLE_MAP2"
+	Value  = "Porting required"
+	Help = "A map for DIO interrupt capability, pin 32~63. Each bit represents correspond pin supports generating interrupt or not. 1:supported/0:not supported.\Correspond pin should also support input."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SECOND_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "FIRST_DIO_DIR_DEFAULT2"
+	Value  = "Porting required"
+	Help  = "A map of direction default for first DIO, pin 32~63. Each bit represents direction default for correspond pin."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FIRST_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "FIRST_DIO_LV_DEFAULT2"
+	Value  = "Porting required"
+	Help  = "A map of level default for first DIO, pin 32~63. Each bit represents level default for correspond pin."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FIRST_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "FIRST_DIO_INT_DEFAULT2"
+	Value  = "Porting required"
+	Help  = "A map of interrupt default for first DIO, pin 32~63. Each bit represents interrupt default for correspond pin.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "FIRST_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "SECOND_DIO_DIR_DEFAULT2"
+	Value  = "Porting required"
+	Help  = "A map of direction default for 2nd DIO, pin 32~63. Each bit represents direction default for correspond pin."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SECOND_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "SECOND_DIO_LV_DEFAULT2"
+	Value  = "Porting required"
+	Help  = "A map of level default for 2nd DIO, pin 32~63. Each bit represents level default for correspond pin."
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SECOND_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+	Name  = "SECOND_DIO_INT_DEFAULT2"
+	Value  = "Porting required"
+	Help  = "A map of interrupt default for 2nd DIO, pin 32~63. Each bit represents interrupt default for correspond pin.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+	Token = "SECOND_DIO_NUMBER" ">" "32"
+End
+
+TOKEN
+    Name  = "====================== Tokens for DIO Chip type support ======================"
+    Value  = "====================== Tokens for DIO Chip type support ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "DIO_TYPE_OEM_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling DIO from an OEM DIO controller in ASL code\\Note: Porting required to switch token on. Refor to porting guide for detail."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SOC_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling DIO from SoC GPIO in ASL code\\Note: Porting required to switch token on. Refor to porting guide for detail."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO2_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO3_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_EC1_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_EC2_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SMBUS_SUPPORT"
+	Value  = "0"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens override for DIO Chip type support ======================"
+    Value  = "====================== Tokens override for DIO Chip type support ======================"
+	Help  = "Enable DIO chip type support automatically depends on tokens from other module.\Porting may be required if new chip type is supported."
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81866_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81801_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8728F_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8625_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81866_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "W83627DHG_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81966_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "F81804_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DIO_TYPE_EC1_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8518_SUPPORT" "=" "1"
+	Token = "IT851X_DIO_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "DIO_TYPE_EC2_SUPPORT"
+	Value  = "1"
+	Help  = "1 - Support controlling DIO from first SIO in ASL code"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IT8518SEC_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "====================== Tokens for DIO Chip type support ======================"
+    Value  = "====================== Tokens for DIO Chip type support ======================"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "DIO_TYPE_OEM"
+	Value  = "180"
+	Help  = "DIO Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SOC"
+	Value  = "$(SOC_CHIP_TYPE)"
+	Help  = "DIO Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1"
+	Value  = "101"
+	Help  = "DIO Type value. If there is new chip in future, and provide same ASL methods, it should be porting to be same as SIO1 style."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO1_GROUP_LIST"
+	Value  = "{ $(F81866_CHIP_TYPE), $(F81801_CHIP_TYPE), $(IT8728F_CHIP_TYPE), $(W83627DHG_CHIP_TYPE), $(F81966_CHIP_TYPE), $(F81804_CHIP_TYPE), $(IT8625_CHIP_TYPE), 0xFF }"
+	Help  = "List of possible SIO1 source. Sources in this list provide ASL methods with same name. So their CHIP_TYPE value will be reported as DIO_TYPE_SIO1 instead of own individual value."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO2"
+	Value  = "102"
+	Help  = "DIO Type value. If there is new chip in future, and provide same ASL methods, it should be porting to be same as SIO1 style."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO2_GROUP_LIST"
+	Value  = "{ 0xFF }"
+	Help  = "List of possible SIO source. Sources in this list provide ASL methods with same name. So their CHIP_TYPE value will be reported as DIO_TYPE_SIO2 instead of own individual value."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO3"
+	Value  = "103"
+	Help  = "DIO Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SIO3_GROUP_LIST"
+	Value  = "{ 0xFF }"
+	Help  = "List of possible SIO3 source. Sources in this list provide ASL methods with same name. So their CHIP_TYPE value will be reported as DIO_TYPE_SIO3 instead of own individual value."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_EC1"
+	Value  = "104"
+	Help  = "DIO Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_EC1_GROUP_LIST"
+	Value  = "{ $(IT851X_CHIP_TYPE), 0xFF }"
+	Help  = "List of possible EC1 source. Sources in this list provide ASL methods with same name. So their CHIP_TYPE value will be reported as DIO_TYPE_EC1 instead of own individual value."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_EC2"
+	Value  = "105"
+	Help  = "DIO Type value."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_EC2_GROUP_LIST"
+	Value  = "{ 0xFF }"
+	Help  = "List of possible EC2 source. Sources in this list provide ASL methods with same name. So their CHIP_TYPE value will be reported as DIO_TYPE_EC2 instead of own individual value."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DIO_TYPE_SMBUS"
+	Value  = "106"
+	Help  = "DIO Type value. If there is new chip in future, and provide same ASL methods, it should be porting to be same as SIO1 style."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====================== Tokens for OEM DIO ======================"
+    Value  = "====================== Tokens for OEM DIO ======================"
+    TokenType = Expression
+End
+
+PCIDEVICE
+	Title  = "OEM DIO Container"
+	Parent  = "PciHost (Virtual)"
+	Attribute  = "0x0"
+	Dev_type  = "Container"
+	Dev  = 00h
+	Fun  = 00h
+	SleepNum  = 01h
+	ASLfile  = "'AaeonCommonPkg/AaeonDio3/OemDioTemplate.asl;After Pci Tree'"
+	DeviceType = OnBoard
+	PCIBusSize = 32bit
+	ROMMain = No
+	Virtual = Yes
+	Token = "DIO_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_DIO_GL_METHOD"
+	Value  = "\_SB.ODIO.ODGL(Arg1)"
+	Help  = "OEM DIO Get Level"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "DIO_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_DIO_SL_METHOD"
+	Value  = "\_SB.ODIO.ODSL(Arg1, Arg2)"
+	Help  = "OEM DIO Set Level"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "DIO_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_DIO_GD_METHOD"
+	Value  = "\_SB.ODIO.ODGD(Arg1)"
+	Help  = "OEM DIO Get Direction"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "DIO_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_DIO_SD_METHOD"
+	Value  = "\_SB.ODIO.ODSD(Arg1, Arg2)"
+	Help  = "OEM DIO Set Direction"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "DIO_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_DIO_GO_METHOD"
+	Value  = "\_SB.ODIO.ODGO(Arg1)"
+	Help  = "OEM DIO Get Driving"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "DIO_TYPE_OEM_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_DIO_SO_METHOD"
+	Value  = "\_SB.ODIO.ODSO(Arg1, Arg2)"
+	Help  = "OEM DIO Set Driving"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "DIO_TYPE_OEM_SUPPORT" "=" "1"
+End

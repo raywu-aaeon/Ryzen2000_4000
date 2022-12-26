@@ -1,0 +1,101 @@
+TOKEN
+	Name  = "Ptn3460PeiPkg_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name = "PTN3460_SLAVE_ADDRESS"
+	Value = "0x60"
+	Help = "7 bit Smbus Slave Address of PTN3460"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+	TargetEQU = Yes
+End
+TOKEN
+	Name = "SECOND_PTN3460_SLAVE_ADDRESS"
+	Value = "0"
+	Help = "7 bit Smbus Slave Address of PTN3460"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+	TargetEQU = Yes
+End
+TOKEN
+	Name  = "PTN3460_COLORDEPTH_DEFAULT"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "PTN3460_DATAENABLE_DEFAULT"
+	Value  = "0"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "PTN3460_PANELMODE_DEFAULT"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "PTN3460_PANELTYPE_DEFAULT"
+	Value  = "4"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "PTN3460EN_DEFAULT"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name = "PTN3460_MAGIC_CODE"
+	Value = "{0x12, 0x34, 0x56, 0x78}"
+	TokenType = Expression
+	TargetH = Yes
+End
+TOKEN
+	Name = "PTN3460_MAGIC_OFFSET"
+	Value = "{0xEC, 0xED, 0xEE, 0xEF}"
+	TokenType = Expression
+	TargetH = Yes
+End
+PATH
+	Name  = "Ptn3460PeiPkg_DIR"
+End
+INFComponent
+	Name  = "Ptn3460PeiPkg"
+	File  = "Ptn3460PeiPkg.inf"
+	Package  = "AaeonCommonPkg"
+	ModuleTypes  = "PEIM"
+End
+ELINK
+	Name  = "$(Ptn3460PeiPkg_DIR)\Ptn3460PeiPkg.uni"
+	Parent  = "SetupStringFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(Ptn3460PeiPkg_DIR)\Ptn3460PeiPkg.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	##Priority  = 255
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "$(Ptn3460PeiPkg_DIR)\Ptn3460Callback.c"
+	Parent  = "SetupCallbackFiles"
+	InvokeOrder = AfterParent
+End
+ELINK
+	Name  = "ITEM_CALLBACK(CHIPSET_FORM_SET_CLASS, 0, AAEON_PTN3460_INTERACTIVE_KEY, Ptn3460CallbackEntry),"
+	Parent  = "SetupItemCallbacks"
+	InvokeOrder = AfterParent
+End
