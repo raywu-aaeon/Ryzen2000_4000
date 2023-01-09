@@ -1,0 +1,32 @@
+TOKEN
+	Name  = "AaeonProjectOverride_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+    Name  = "AaeonProjectOverride_DIR"
+End
+
+INFComponent
+	Name  = "AmdCpmOemInitPeim"
+	File  = "Pei/AmdCpmOemInitPei/AmdCpm3OemInitPeim.inf"
+	Package  = "AmdCpmPkg"
+	Arch  = "IA32"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmOemInitPeim_SUPPORT" "=" "1"
+	Disable = Yes
+End
+
+INFComponent
+	Name  = "AmdCpmOemInitPeim"
+	File  = "AmdCpmPkg/Addendum/Pei/AmdCpmOemInitPei/AmdCpm3OemInitPeim.inf"
+	Package  = "AmdCpmPkg"
+	Arch  = "IA32"
+	ModuleTypes  = "PEIM"
+	Token = "AmdCpmOemInitPeim_SUPPORT" "=" "1"
+End

@@ -1,0 +1,9 @@
+<component>
+	name = "AaeonProjectOverride"
+	category = Flavor
+	Rank = 60
+	LocalRoot = "AaeonProject\"
+	RefName = "AaeonProjectOverride"
+[files]
+"AaeonProjectOverride.sdl"
+<endComponent>
