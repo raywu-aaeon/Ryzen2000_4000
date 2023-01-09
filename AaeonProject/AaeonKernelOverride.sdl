@@ -26,6 +26,72 @@ TOKEN
 End
 
 TOKEN
+    Name  = "====== AmdCpmPkg\Addendum\Oem\Bilby\Bilby.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_I2cMaster_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling I2cMaster support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_xGbEI2cMaster_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable xGbEI2cMaster support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_AmdXgbeAndDisplayConfigureDxe_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AmdXgbeAndDisplayConfigureDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_M24LC128_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling M24LC128 support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_Pca9535a_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling Pca9535a support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_Pca9545a_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling Pca9545a support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_AmdXgbeWorkaround_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AmdXgbeWorkaround support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_FanPolicyDxe_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable FanPolicyDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
     Name  = "====== MandolinPkg\Crb.sdl ======"
     TokenType = Expression
 End
