@@ -510,6 +510,138 @@ TOKEN
 End
 
 TOKEN
+    Name  = "====== Digital I/O ======"
+    TokenType = Expression
+End
+TOKEN
+	Name  = "AaeonDio3_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FIRST_DIO_NUMBER"
+	Value  = "12"
+	Help  = "Number of DIO pins provided by 1st DIO controller."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FIRST_DIO_TYPE"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Select chip type for the DIO controller.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value.\This token is also taken as Default value of the <DIO Source> option."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_INPUT_CAPABLE_MAP"
+	Value  = "0x0000003F"
+	Help = "A map for DIO input capability. Each bit represents correspond pin supports input mode or not. 1:supported/0:not supported."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_OUTPUT_CAPABLE_MAP"
+	Value  = "0x00000FC0"
+	Help = "A map for DIO output capability Each bit represents correspond pin supports output mode or not. 1:supported/0:not supported."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FIRST_DIO_DIR_DEFAULT"
+	Value  = "0x00000FC0"
+	Help  = "A map of direction default for first DIO. Each bit represents direction default for correspond pin.\0: Input\1: Output"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_0_GPIO_DEFAULT"
+	Value  = "74"
+	Help = "Default value of the <GPIO Number> option for DIO 1.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_1_GPIO_DEFAULT"
+	Value  = "75"
+	Help = "Default value of the <GPIO Number> option for DIO 2.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_2_GPIO_DEFAULT"
+	Value  = "76"
+	Help = "Default value of the <GPIO Number> option for DIO 3.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_3_GPIO_DEFAULT"
+	Value  = "77"
+	Help = "Default value of the <GPIO Number> option for DIO 4.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_4_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 5.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_5_GPIO_DEFAULT"
+	Value  = "1"
+	Help = "Default value of the <GPIO Number> option for DIO 6.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_6_GPIO_DEFAULT"
+	Value  = "80"
+	Help = "Default value of the <GPIO Number> option for DIO 7.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_7_GPIO_DEFAULT"
+	Value  = "81"
+	Help = "Default value of the <GPIO Number> option for DIO 8.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_8_GPIO_DEFAULT"
+	Value  = "82"
+	Help = "Default value of the <GPIO Number> option for DIO 9.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_9_GPIO_DEFAULT"
+	Value  = "83"
+	Help = "Default value of the <GPIO Number> option for DIO 10.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_10_GPIO_DEFAULT"
+	Value  = "04"
+	Help = "Default value of the <GPIO Number> option for DIO 11.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_11_GPIO_DEFAULT"
+	Value  = "17"
+	Help = "Default value of the <GPIO Number> option for DIO 12.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
     Name  = "====== AaeonCommon Configuration ======"
     TokenType = Expression
 End
