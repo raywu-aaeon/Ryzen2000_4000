@@ -30,6 +30,7 @@
   AmiHiiUpdateLib
   AmiSdlLib
   AmiSioDxeLib
+  IoLib
 
 [Protocols]
   gAmiBoardInfo2ProtocolGuid  

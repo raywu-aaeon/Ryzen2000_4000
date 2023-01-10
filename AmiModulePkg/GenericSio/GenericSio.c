@@ -980,6 +980,38 @@ EFI_STATUS EFIAPI SioEnumerateAll(GSIO2 *Spio){
 		SIO_TRACE((TRACE_SIO,"=================================================\n"));
         SIO_TRACE((TRACE_SIO,"+> SIO_LD[%d]; AslName[%s];Implemented=%d; FLAGS=%X;", i,dev->DeviceInfo->AslName,dev->DeviceInfo->Implemented, dev->DeviceInfo->Flags));
         //Taking care of issue 1 in EIP72716 
+		/**
+		 * @brief Detected F81866 GPIO20 to Implemented COM3/4/5/6
+		 * 
+		 */
+		if (dev->DeviceInfo->Ldn == 0x12 || dev->DeviceInfo->Ldn == 0x13 || dev->DeviceInfo->Ldn == 0x14 || dev->DeviceInfo->Ldn == 0x15)
+		{
+			if(!dev->Owner->InCfgMode) SioCfgMode(dev->Owner, TRUE);
+			IoWrite8(Spio->SpioSdlInfo->SioIndex, dev->Owner->SpioSdlInfo->DevSelReg);
+			IoWrite8(dev->Owner->SpioSdlInfo->SioData, 0x06);
+			IoWrite8(Spio->SpioSdlInfo->SioIndex, 0xD2);
+			if (IoRead8(dev->Owner->SpioSdlInfo->SioData) & BIT0)
+			{
+				dev->DeviceInfo->Implemented = FALSE;
+				dev->VlData.DevImplemented = FALSE;
+				dev->NvData.DevEnable = FALSE;
+				dev->DeviceInfo->HasSetup = FALSE;
+				Spio->DeviceList[i]->DeviceInfo->Implemented = FALSE;
+				Spio->DeviceList[i]->VlData.DevImplemented = FALSE;
+				Spio->DeviceList[i]->NvData.DevEnable = FALSE;
+				Spio->DeviceList[i]->DeviceInfo->HasSetup = FALSE;
+
+				IoWrite8(Spio->SpioSdlInfo->SioIndex, dev->Owner->SpioSdlInfo->DevSelReg);
+ 				IoWrite8(dev->Owner->SpioSdlInfo->SioData, dev->DeviceInfo->Ldn);
+ 				IoWrite8(Spio->SpioSdlInfo->SioIndex, dev->Owner->SpioSdlInfo->Base1HiReg);
+ 				IoWrite8(dev->Owner->SpioSdlInfo->SioData, 0);
+ 				IoWrite8(Spio->SpioSdlInfo->SioIndex, dev->Owner->SpioSdlInfo->Base1LoReg);
+ 				IoWrite8(dev->Owner->SpioSdlInfo->SioData, 0);
+ 				IoWrite8(Spio->SpioSdlInfo->SioIndex, dev->Owner->SpioSdlInfo->Irq1Reg);
+ 				IoWrite8(dev->Owner->SpioSdlInfo->SioData, 0);
+			}
+		}
+		
 		if (!dev->DeviceInfo->Implemented){
 			SIO_TRACE((TRACE_SIO,"<-\n"));
 			continue;
@@ -3241,9 +3273,9 @@ EFI_STATUS EFIAPI CreateSioDevStatusVar()
 	                SIO_TRACE((TRACE_SIO,"SIO[%d]Dev[%d] PS2M is Implemented=%d\n",i,j,Implemented));
 					break;
 				case dsUART:	
-					if (UID == 0) SioDevStatusVar.SerialA = Implemented;
+					if (UID == 1) SioDevStatusVar.SerialA = Implemented;
 					else 
-						if (UID == 1) SioDevStatusVar.SerialB = Implemented;
+						if (UID == 2) SioDevStatusVar.SerialB = Implemented;
 	                SIO_TRACE((TRACE_SIO,"SIO[%d]Dev[%d] UART(UID=%x) is Implemented=%d\n",i,j,UID,Implemented));
 					break;
 				case dsLPT:		SioDevStatusVar.Lpt = Implemented;
@@ -3308,9 +3340,9 @@ EFI_STATUS EFIAPI DisableDevInSioDevStatusVar(SIO_DEV2 *Dev)
 			case dsPS2CM:
 			case dsPS2M: 	SioDevStatusVar.Ps2Mouse = 0;
 										break;
-			case dsUART:	if (UID == 0) { 	
+			case dsUART:	if (UID == 1) { 	
 											SioDevStatusVar.SerialA = 0;
-										} else if (UID == 1) {
+										} else if (UID == 2) {
 											SioDevStatusVar.SerialB = 0;
 										}
 										break;
