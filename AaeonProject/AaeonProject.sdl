@@ -168,6 +168,65 @@ TOKEN
 End
 
 TOKEN
+    Name  = "F81866_CONFIG_INDEX"
+    Value  = "0x4E"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_CONFIG_DATA"
+    Value  = "0x4F"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+SIODEVICE
+    Name  = "F81866"
+    Parent  = "LpcBridge"
+    IndexPort  = 04eh
+    DataPort  = 04fh
+    StdSioType  = "Yes"
+    DevSelReg  = 07h
+    ActivateReg  = 030h
+    ActivateVal  = 01h
+    DeActivateVal  = 00h
+    BaseHiReg1  = 060h
+    BaseLoReg1  = 061h
+    BaseHiReg2  = 062h
+    BaseLoReg2  = 063h
+    Irq1Reg  = 070h
+    Irq2Reg  = 072h
+    Dma1Reg  = 074h
+    Dma2Reg  = 075h
+    GblRegFlag  = "0x3fe000000000"
+    LocalRegFlag  = "0xffffffff0000000000000000000000000033000f000000000001000000000000"
+    EnterConfig  = "Script,'Index;Write;87h','Index;Write;87h'"
+    ExitConfig  = "Script,'Index;Write;aah'"
+    SMBIOSStr  = "Test String"
+    GPEbit  = 01dh
+    SleepNum  = 03h
+    ASLfile  = "'AaeonIoPkg\F81866\F81866DEV.asl','AaeonIoPkg\F81866\F81866EVT.asl'"
+    ASLdeviceName  = "SIO1"
+# >> AAEON_OVERRIDE
+#    ASL_PTS  = "Method;\_SB.PCI0.SBRG.SIO1.SIOS(Arg0)"
+#    ASL_WAK  = "Method;\_SB.PCI0.SBRG.SIO1.SIOW(Arg0)"
+    ASL_PTS  = "Method;SIO_PTS(Arg0)"
+    ASL_WAK  = "Method;SIO_WAK(Arg0)"
+# << AAEON_OVERRIDE
+End
+
+TOKEN
+    Name  = "F81866_PARALLEL_PORT_PRESENT"
+    Value  = "0"
+    Help  = "LPT Port Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
     Name  = "F81866_KEYBOARD_PRESENT"
     Value  = "0"
     Help  = "Keyboard Present / Not Present."
@@ -184,6 +243,14 @@ TOKEN
 End
 
 TOKEN
+	Name  = "F81866_ERP_SUPPORT"
+	Value  = "0"
+	Help = "F81866_ERP_Miles++"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
     Name  = " "
     TokenType = Integer
 End
@@ -192,7 +259,120 @@ TOKEN
     Name  = "====== SIO Configuration \ Hardware Monitor ======"
     TokenType = Expression
 End
+TOKEN
+	Name  = "SCL_PIN67_EN"
+	Value  = "0"
+	Help  = "0: Disable SCL\1: Enable SCL"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SDA_PIN68_EN"
+	Value  = "0"
+	Help  = "0: Disable SDA\1: Enable SDA"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO67_EN"
+	Value  = "1"
+	Help  = "0: S5#\1: GPIO67"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO14_EN"
+	Value  = "1"
+	Help  = "0: ATX_AT_TRAP\1: GPIO14"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO22_EN"
+	Value  = "1"
+	Help  = "0: PWSIN#\1: GPIO22"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO23_EN"
+	Value  = "1"
+	Help  = "0: PWSOUT#\1: GPIO23"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO24_EN"
+	Value  = "1"
+	Help  = "0: S3#\1: GPIO24"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO25_EN"
+	Value  = "1"
+	Help  = "0: PSON#\1: GPIO25"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO26_EN"
+	Value  = "1"
+	Help  = "0: PWOK\1: GPIO26"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO27_EN"
+	Value  = "1"
+	Help  = "0: RSMRST#\1: GPIO27"
+	TokenType = Integer
+	TargetH = Yes
+End
 
+TOKEN
+	Name  = "F81866_T1_MODE"
+	Value  = "0"
+	Help  = "0: TEMP1 is connected to a thermistor\1: TEMP1 is connected to a BJT.(default)"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN2_RA"
+	Value  = "200"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN2_RB"
+	Value  = "47"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN3_RA"
+	Value  = "200"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN3_RB"
+	Value  = "47"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN4_RA"
+	Value  = "10"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN4_RB"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
 TOKEN
 	Name  = "F81866_SMF1_SUPPORT"
 	Value  = "1"
@@ -202,7 +382,6 @@ TOKEN
 	TargetH = Yes
 	Token = "F81866_SMF_SUPPORT" "=" "1"
 End
-
 TOKEN
 	Name  = "F81866_SMF2_SUPPORT"
 	Value  = "1"
@@ -214,8 +393,412 @@ TOKEN
 End
 
 TOKEN
+	Name  = "F81866GPIO10_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO11_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO11_VAL_DEFAULT"
+	Value  = "0"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO12_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO13_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO13_VAL_DEFAULT"
+	Value  = "0"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO70_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO71_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO71_VAL_DEFAULT"
+	Value  = "0"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO72_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO73_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO73_VAL_DEFAULT"
+	Value  = "0"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO80_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO81_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO82_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO83_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
     Name  = " "
     TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== Digital I/O ======"
+    TokenType = Expression
+End
+TOKEN
+	Name  = "AaeonDio3_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FIRST_DIO_NUMBER"
+	Value  = "12"
+	Help  = "Number of DIO pins provided by 1st DIO controller."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FIRST_DIO_TYPE"
+	Value  = "$(F81866_CHIP_TYPE)"
+	Help = "Select chip type for the DIO controller.\Refer to TOKEN xxxx_CHIP_TYPE in AaeonCommonPkg.sdl for possible value.\This token is also taken as Default value of the <DIO Source> option."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_INPUT_CAPABLE_MAP"
+	Value  = "0x0000003F"
+	Help = "A map for DIO input capability. Each bit represents correspond pin supports input mode or not. 1:supported/0:not supported."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_OUTPUT_CAPABLE_MAP"
+	Value  = "0x00000FC0"
+	Help = "A map for DIO output capability Each bit represents correspond pin supports output mode or not. 1:supported/0:not supported."
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "FIRST_DIO_DIR_DEFAULT"
+	Value  = "0x00000FC0"
+	Help  = "A map of direction default for first DIO. Each bit represents direction default for correspond pin.\0: Input\1: Output"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_0_GPIO_DEFAULT"
+	Value  = "74"
+	Help = "Default value of the <GPIO Number> option for DIO 1.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_1_GPIO_DEFAULT"
+	Value  = "75"
+	Help = "Default value of the <GPIO Number> option for DIO 2.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_2_GPIO_DEFAULT"
+	Value  = "76"
+	Help = "Default value of the <GPIO Number> option for DIO 3.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_3_GPIO_DEFAULT"
+	Value  = "77"
+	Help = "Default value of the <GPIO Number> option for DIO 4.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_4_GPIO_DEFAULT"
+	Value  = "0"
+	Help = "Default value of the <GPIO Number> option for DIO 5.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_5_GPIO_DEFAULT"
+	Value  = "1"
+	Help = "Default value of the <GPIO Number> option for DIO 6.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_6_GPIO_DEFAULT"
+	Value  = "80"
+	Help = "Default value of the <GPIO Number> option for DIO 7.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_7_GPIO_DEFAULT"
+	Value  = "81"
+	Help = "Default value of the <GPIO Number> option for DIO 8.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_8_GPIO_DEFAULT"
+	Value  = "82"
+	Help = "Default value of the <GPIO Number> option for DIO 9.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_9_GPIO_DEFAULT"
+	Value  = "83"
+	Help = "Default value of the <GPIO Number> option for DIO 10.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_10_GPIO_DEFAULT"
+	Value  = "04"
+	Help = "Default value of the <GPIO Number> option for DIO 11.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "DIO_11_GPIO_DEFAULT"
+	Value  = "17"
+	Help = "Default value of the <GPIO Number> option for DIO 12.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "====== UART Mode Configuration ======"
+    TokenType = Expression
+End
+TOKEN
+	Name  = "AaeonUartMode2Pkg_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+TOKEN
+	Name = "F81438_RS232_TRUTH_TABLE"
+	Value = "{1, 0}"
+	Help = "GPIO value for RS232 mode, {GPIO0, GPIO1}"
+	TokenType = Expression
+	TargetH = Yes
+End
+TOKEN
+	Name = "F81438_RS422_TRUTH_TABLE"
+	Value = "{1, 1}"
+	Help = "GPIO value for RS422 mode, {GPIO0, GPIO1}"
+	TokenType = Expression
+	TargetH = Yes
+End
+TOKEN
+	Name = "F81438_RS485_TRUTH_TABLE"
+	Value = "{0, 1}"
+	Help = "GPIO value for RS485 mode, {GPIO0, GPIO1}"
+	TokenType = Expression
+	TargetH = Yes
+End
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART1MODE_DEFAULT"
+	Value  = "1"
+	Help = "Default value of the <RS232/422/485 Support> option for COM1.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART1MODE_GPIO0_DEFAULT"
+	Value  = "10"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM1.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART1MODE_GPIO1_DEFAULT"
+	Value  = "11"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM1.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART2MODE_DEFAULT"
+	Value  = "1"
+	Help = "Default value of the <RS232/422/485 Support> option for COM2.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART2MODE_GPIO0_DEFAULT"
+	Value  = "12"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM2.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART2MODE_GPIO1_DEFAULT"
+	Value  = "13"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM2.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART3MODE_DEFAULT"
+	Value  = "1"
+	Help = "Default value of the <RS232/422/485 Support> option for COM3.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART3MODE_GPIO0_DEFAULT"
+	Value  = "70"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM3.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART3MODE_GPIO1_DEFAULT"
+	Value  = "71"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM3.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART4MODE_DEFAULT"
+	Value  = "1"
+	Help = "Default value of the <RS232/422/485 Support> option for COM4.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART4MODE_GPIO0_DEFAULT"
+	Value  = "72"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM4.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART4MODE_GPIO1_DEFAULT"
+	Value  = "73"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM4.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART5MODE_DEFAULT"
+	Value  = "1"
+	Help = "Default value of the <RS232/422/485 Support> option for COM5.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART5MODE_GPIO0_DEFAULT"
+	Value  = "84"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM5.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART5MODE_GPIO1_DEFAULT"
+	Value  = "85"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM5.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "CHECKBOX_AAEON_UART6MODE_DEFAULT"
+	Value  = "1"
+	Help = "Default value of the <RS232/422/485 Support> option for COM6.\0: Disabled\1: Enabled"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART6MODE_GPIO0_DEFAULT"
+	Value  = "86"
+	Help = "Default value of the <Mode 0 GPIO Number> option for COM6.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "NUMERIC_AAEON_UART6MODE_GPIO1_DEFAULT"
+	Value  = "87"
+	Help = "Default value of the <Mode 1 GPIO Number> option for COM6.\minimum: 0\maximum: 100\step: 1"
+	TokenType = Integer
+	TargetH = Yes
 End
 
 TOKEN

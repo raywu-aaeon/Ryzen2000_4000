@@ -53,6 +53,7 @@ VOID RayDebug80(UINT8 Time, UINT8 Code){
 
 #define		UART_IRQ_SHARE_REGISTER			0xF0
 	#define		RS485_EN			BIT4
+	#define		RS485_INV			BIT5
 
 #define		ACPICONTROLREGISTER1			0xF4
 	#define		PWRCTRL				BIT1|BIT2
@@ -207,9 +208,9 @@ VOID F81866MiscSetupFunction(IN CONST EFI_PEI_SERVICES	**PeiServices)
 		{
 			F81866LDNSelect(F81866AllUartLdn[i]);		// All UART LDN
 			Data8 = F81866ConfigRegisterRead(UART_IRQ_SHARE_REGISTER);
-			Data8 &= ~(RS485_EN);
+			Data8 &= ~(RS485_EN + RS485_INV);
 			if(SetupData.F81866UartAutoFlowControlEnable[i] == 1)
-				Data8 |= RS485_EN;
+				Data8 |= (RS485_EN + RS485_INV);
 			F81866ConfigRegisterWrite(UART_IRQ_SHARE_REGISTER, Data8);
 		}
 	}
