@@ -1,0 +1,27 @@
+TOKEN
+	Name  = "AaeonKernelModuleDisable_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+    Name  = "====== AmiModulePkg\AhciRecovery\AhciRecovery.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AhciRecovery_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable Ahci Recovery support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End

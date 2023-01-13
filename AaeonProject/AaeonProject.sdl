@@ -8,6 +8,10 @@ TOKEN
 	Master = Yes
 End
 
+PATH
+	Name  = "AAEONPROJECT_DIR"
+End
+
 TOKEN
 	Name  = "PROJECT_TAG"
 	Value  = "4000A"
@@ -95,6 +99,25 @@ TOKEN
 	TargetMAK = Yes
 	TargetH = Yes
 	Range  = "valid file name"
+End
+
+##// {2fc00def-f583-4150-9f45-97702e9990b7}
+##static const struct GUID __NAME__ = {0x2fc00def, 0xf583, 0x4150, {0x9f, 0x45, 0x97, 0x70, 0x2e, 0x99, 0x90, 0xb7}};
+TOKEN
+	Name  = "PLATFORM_GUID"
+	Value  = "2fc00def-f583-4150-9f45-97702e9990b7"
+	Help  = "The unique platform GUID that does into the description file.\MUST BE CLONED IN EVERY PROJECT!"
+	TokenType = Expression
+	TargetDSC = Yes
+End
+
+TOKEN
+	Name  = "FW_VERSION_GUID"
+	Value  = "{0x2fc00def, 0xf583, 0x4150, {0x9f, 0x45, 0x97, 0x70, 0x2e, 0x99, 0x90, 0xb7}}
+	Help  = "FW Version GUID inserted into Firmware ID structure.\FW version has to be overridden for every project."
+	TokenType = Expression
+	TargetH = Yes
+	Range  = "GUID"
 End
 
 TOKEN
@@ -286,6 +309,51 @@ TOKEN
 	Help = "{LastState, Always-on, Always-off}"
 	TokenType = Expression
 	TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== Setup Configuration ======"
+    TokenType = Expression
+End
+
+ELINK
+	Name  = "$(AAEONPROJECT_DIR)$(PATH_SLASH)Override$(PATH_SLASH)AaeonSetup$(PATH_SLASH)AaeonDefaultOverride.sd"
+	Parent  = "$(AaeonSetup_DIR)\AaeonDefaultOverride.sd"
+	InvokeOrder = ReplaceParent
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== DEBUG_MODE Configuration ======"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "DEBUG_MODE"
+	Value  = "0"
+	Help  = "Main switch to enable/disable debug mode."
+	TokenType = Boolean
+	TargetMAK = Yes
+End
+
+PcdMapping
+    Name  = "PcdDebugPropertyMask"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x07"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "DEBUG_MODE" "=" "1"
 End
 
 TOKEN

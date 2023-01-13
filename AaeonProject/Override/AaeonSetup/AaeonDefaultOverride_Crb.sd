@@ -1,0 +1,211 @@
+#if defined(CRB_ONBOARD_TPM_SUPPORT) && (CRB_ONBOARD_TPM_SUPPORT == 1)
+#undef PSP_ONEOF_AMD_FTPM_SWITCH
+#define PSP_ONEOF_AMD_FTPM_SWITCH\
+            oneof varid = SETUP_DATA.fTPMSwitch,\
+                prompt = STRING_TOKEN(STR_FTPM_SWITCH),\
+                help = STRING_TOKEN(STR_CRB_ONBOARD_TPM_PROMPT_HELP),\
+                option text = STRING_TOKEN(STR_TPM_AMDFTPM), value = 0, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_CRB_LPC_TPM), value = 1, flags = RESET_REQUIRED;\
+                option text = STRING_TOKEN(STR_CRB_SPI_TPM), value = 2, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+			endoneof;
+#endif // CRB_ONBOARD_TPM_SUPPORT
+
+#undef CRB_ROOT_PORT_D0_ASPM
+#define CRB_ROOT_PORT_D0_ASPM\
+        oneof varid  = SETUP_DATA.Device0AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D1_ASPM
+#define CRB_ROOT_PORT_D1_ASPM\
+        oneof varid  = SETUP_DATA.Device1AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D2_ASPM
+#define CRB_ROOT_PORT_D2_ASPM\
+        oneof varid  = SETUP_DATA.Device2AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D3_ASPM
+#define CRB_ROOT_PORT_D3_ASPM\
+        oneof varid  = SETUP_DATA.Device3AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D4_ASPM
+#define CRB_ROOT_PORT_D4_ASPM\
+        oneof varid  = SETUP_DATA.Device4AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D5_ASPM
+#define CRB_ROOT_PORT_D5_ASPM\
+        oneof varid  = SETUP_DATA.Device5AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D6_ASPM
+#define CRB_ROOT_PORT_D6_ASPM\
+        oneof varid  = SETUP_DATA.Device6AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D7_ASPM
+#define CRB_ROOT_PORT_D7_ASPM\
+        oneof varid  = SETUP_DATA.Device7AspmMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_ASPM_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_ASPM_L0S), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L1), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_ASPM_L0S_L1), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D0_HOTPLUGMODE
+#define CRB_ROOT_PORT_D0_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device0HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D1_HOTPLUGMODE
+#define CRB_ROOT_PORT_D1_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device1HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D2_HOTPLUGMODE
+#define CRB_ROOT_PORT_D2_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device2HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D3_HOTPLUGMODE
+#define CRB_ROOT_PORT_D3_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device3HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D4_HOTPLUGMODE
+#define CRB_ROOT_PORT_D4_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device4HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D5_HOTPLUGMODE
+#define CRB_ROOT_PORT_D5_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device5HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D6_HOTPLUGMODE
+#define CRB_ROOT_PORT_D6_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device6HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;
+
+#undef CRB_ROOT_PORT_D7_HOTPLUGMODE
+#define CRB_ROOT_PORT_D7_HOTPLUGMODE\
+        oneof varid  = SETUP_DATA.Device7HotPlugMode,\
+            prompt      = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE),\
+            help        = STRING_TOKEN(STR_NB_ROOT_PORT_HOTPLUG_MODE_HELP),\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
+            option text = STRING_TOKEN(STR_HOTPLUG_BASIC), value = 1, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_SERVER), value = 2, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_ENHANCED), value = 3, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_HOTPLUG_INBOARD), value = 4, flags = RESET_REQUIRED;\
+            option text = STRING_TOKEN(STR_AUTO), value = 0xFF, flags = RESET_REQUIRED;\
+        endoneof;

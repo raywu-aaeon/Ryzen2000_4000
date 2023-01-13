@@ -1,0 +1,9 @@
+<component>
+	name = "AaeonKernelModuleDisable"
+	category = Flavor
+	Rank = 60
+	LocalRoot = "AaeonProject\"
+	RefName = "AaeonKernelModuleDisable"
+[files]
+"AaeonKernelModuleDisable.sdl"
+<endComponent>

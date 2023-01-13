@@ -20,6 +20,17 @@ TOKEN
     TokenType = Boolean
 End
 
+PcdMapping
+	Name  = "PcdSerialUseMmio"
+	GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Boolean"
+	Value  = "FALSE"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+End
+
 TOKEN
     Name  = " "
     TokenType = Integer
@@ -86,6 +97,28 @@ TOKEN
     TokenType = Boolean
 End
 
+PcdMapping 
+    Name  = "PcdEspiEnable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdEspiEc0Enable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
 TOKEN
     Name  = " "
     TokenType = Integer
@@ -119,6 +152,43 @@ TOKEN
     Help  = "Enables/disables silent build mode.\In silent build mode executed commands are not displayed, and certain auxiliary build process messages are suppressed or displayed in a condensed format.\In non-silent build mode executed command are displayed prior to execution, and all auxiliary messages are visible.\Silent build mode is typically faster because less information goes into a build log.\Non-silent mode is useful for debugging of the build issues."
     TokenType = Boolean
     TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "CRB_FEATURE_ASL_SUPPORT"
+    Value  = "0"
+    Help  = "Enable Light sensor related ASL porting code for CRB board."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "UPDATE_SLOT_TYPE9"
+    Value  = "0"
+    Help  = "Alternate token name for SYSTEM_SLOT_INFO"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CRB_SMBIOS_UPDATE" "=" "1"
+End
+
+TOKEN
+	Name  = "DEFAULT_FAST_BOOT"
+	Value  = "0"
+	Help  = "Default value of the Fast Boot option"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+ELINK
+	Name  = "{(UINT32) 0x10EC0899, (UINTN)&CrbHdaVerbTbl0[0]},"
+	Parent  = "OEM_HDA_VERB_TABLE"
+	Help  = "CRB HDA Verb Table context"
+	Token = "MANDOLIN_CRB_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+    Disable = Yes
 End
 
 TOKEN
@@ -170,6 +240,33 @@ TOKEN
 	TokenType = Boolean
 	TargetMAK = Yes
 	TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== SecureFlash.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "CIM_LEGACY_FREE"
+    Value  = "0"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "KBC_SUPPORT"
+    Value  = "0"
+    Help  = "Enable/Disable KBC support"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
 End
 
 TOKEN
