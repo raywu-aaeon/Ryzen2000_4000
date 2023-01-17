@@ -273,3 +273,20 @@ TOKEN
     Name  = " "
     TokenType = Integer
 End
+
+TOKEN
+    Name  = "====== AmiModulePkg\AMISetupNVLock\AMISetupNVLock.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AmiSetupNvLock_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AMISetupNVLock support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
