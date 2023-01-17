@@ -71,6 +71,7 @@
 #include <Ppi/MemoryDiscovered.h>
 
 #include <Library/BaseMemoryLib.h>
+#include <Library/IoLib.h>
 
 extern EFI_GUID gFchResetDataHobGuid;
 extern FCH_RESET_DATA_BLOCK   InitResetCfgDefault;
@@ -220,6 +221,32 @@ FchPeiInit (
   DEBUG ((DEBUG_INFO, "[FchInitPei] Fch Pei Init ...Start.\n"));
   Status = FchInitPei (FchParams);
   DEBUG ((DEBUG_INFO, "[FchInitPei] Fch Pei Init ...Complete.\n"));
+
+  IoWrite8(0x4e, 0x87);
+  IoWrite8(0x4e, 0x87);
+
+  IoWrite8(0x4e, 0x27);
+  IoWrite8(0x4f, (IoRead8(0x4f) & ~(BIT0 + BIT2 + BIT3)) | BIT2);
+  IoWrite8(0x4e, 0x2C);
+  IoWrite8(0x4f, (IoRead8(0x4f) | (BIT0 + BIT1)));
+
+  IoWrite8(0x4e, 0x07);
+  IoWrite8(0x4f, 0x06);
+  
+  IoWrite8(0x4e, 0x30);
+  IoWrite8(0x4f, 0x01);
+
+  IoWrite8(0x4e, 0xE0);
+  IoWrite8(0x4f, IoRead8(0x4f) | (BIT0 + BIT1));
+
+  IoWrite8(0x4e, 0xE1);
+  IoWrite8(0x4f, (IoRead8(0x4f) & ~(BIT0 + BIT1)) | BIT0);
+
+  IoWrite8(0x4e, 0xE3);
+  IoWrite8(0x4f, (IoRead8(0x4f) & ~(BIT0 + BIT1)));
+
+  IoWrite8(0x4e, 0xAA);
+
   //
   // Update the boot mode
   //
