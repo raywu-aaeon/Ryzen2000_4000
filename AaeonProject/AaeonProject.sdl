@@ -624,6 +624,46 @@ TOKEN
 End
 
 TOKEN
+    Name  = "====== Platform Configuration ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "APCB_RV_FP5_SODIMM_BINARY_SUPPORT"
+    Value  = "1"
+    Help  = "The master token for Apcb RV AM4 SODIMM binary."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+    Name  = "APCB_RV_FP5_UDIMM_BINARY_SUPPORT"
+    Value  = "0"
+    Help  = "The master token for Apcb RV AM4 SODIMM binary."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+    Name  = "PSP_APCB_FILENAME_RV"
+    Value  = "$(BUILD_DIR)\$(APCB_IN_BUILD_DIR)\$(RELEASE_RV_FP5_SODIMM)\APCB_RV_D4.bin"
+    Help  = "The APCB OEM binary 'APCB_RV_D4.bin'."
+    TokenType = File
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
     Name  = "====== DEBUG_MODE Configuration ======"
     TokenType = Expression
 End
