@@ -36,6 +36,15 @@ PcdMapping
 End
 
 TOKEN
+    Name  = "EMUL6064_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable KBC Emulation support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AMIUSB_SUPPORT" "=" "1"
+End
+
+TOKEN
     Name  = " "
     TokenType = Integer
 End
