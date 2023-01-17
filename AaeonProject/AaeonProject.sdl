@@ -962,7 +962,7 @@ End
 
 TOKEN
 	Name  = "DEBUG_MODE"
-	Value  = "0"
+	Value  = "1"
 	Help  = "Main switch to enable/disable debug mode."
 	TokenType = Boolean
 	TargetMAK = Yes
