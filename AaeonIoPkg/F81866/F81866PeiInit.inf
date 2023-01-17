@@ -63,6 +63,7 @@
   MdePkg/MdePkg.dec
   AmiModulePkg/AmiModulePkg.dec
   AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AgesaModulePkg\Fch\Sandstone\FchSandstone.dec
 
 [LibraryClasses]
   AmiPeiLib
