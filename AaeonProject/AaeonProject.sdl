@@ -800,6 +800,26 @@ TOKEN
 End
 
 TOKEN
+    Name  = "AmiSerialUart0_SUPPORT"
+    Value  = "0"
+    Help  = "Serial Protocol"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AmiSerialUart1_SUPPORT"
+    Value  = "0"
+    Help  = "Serial Protocol"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
     Name  = " "
     TokenType = Integer
 End
