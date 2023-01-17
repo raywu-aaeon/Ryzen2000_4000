@@ -771,11 +771,23 @@ End
 
 TOKEN
     Name  = "OPTIMIZATION"
-    Value  = "1"
+    Value  = "0"
     Help  = "Enables/disables C compiler optimization."
     TokenType = Boolean
     TargetMAK = Yes
     Token = "DEBUG_MODE" "=" "1"
+End
+
+TOKEN
+	Name  = "FV_BB_SIZE"
+	Value  = "0x1D0000"
+	Help  = "Size of the FV_BB area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+	Token = "DEBUG_MODE" "=" "1"
 End
 
 TOKEN
