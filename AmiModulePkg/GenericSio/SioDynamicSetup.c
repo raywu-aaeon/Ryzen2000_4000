@@ -38,6 +38,7 @@
 #include <Library/AmiSioDxeLib.h>
 #include <Library/BaseLib.h>
 #include <Library/PrintLib.h>
+#include <Library\IoLib.h>
 
 ///
 /// Global Variable Definitions
@@ -112,6 +113,7 @@ VOID CreateNvVarName(LD_SETUP_GOTO_DATA  *Ldgotodata)
 EFI_STATUS EFIAPI CreateGotoString(LD_SETUP_GOTO_DATA *LdGotoData){
     EFI_STRING 			s=NULL, ldnamestr=NULL, configstr=NULL, statusstr=NULL;
     UINTN               StrSize = 200;
+	BOOLEAN DataBoolean;
 //--------------------------------
     //
     // Create goto title string
@@ -138,6 +140,24 @@ EFI_STATUS EFIAPI CreateGotoString(LD_SETUP_GOTO_DATA *LdGotoData){
 			break;
 		case dsUART: 
 			ldnamestr=HiiGetString(gSioHiiHandle,STRING_TOKEN(STR_SERIAL_PORT),NULL);
+			if (LdGotoData->SdlInfo->Uid == 3 || LdGotoData->SdlInfo->Uid == 4 || LdGotoData->SdlInfo->Uid == 5 || LdGotoData->SdlInfo->Uid == 6)
+			{
+    				IoWrite8(0x4E, 0x87);
+    				IoWrite8(0x4E, 0x87);
+
+    				IoWrite8(0x4E, 0x07);
+    				IoWrite8(0x4F, 0x06);
+
+    				IoWrite8(0x4E, 0xD2);
+				DataBoolean = IoRead8(0x4F) & BIT0;
+    				
+				IoWrite8(0x4E, 0xAA);
+
+				if (DataBoolean)
+				{
+					return EFI_NOT_FOUND;
+				}
+			}			
 			break;
 		case dsLPT: 
 			ldnamestr=HiiGetString(gSioHiiHandle,STRING_TOKEN(STR_PARALLEL_PORT),NULL);
