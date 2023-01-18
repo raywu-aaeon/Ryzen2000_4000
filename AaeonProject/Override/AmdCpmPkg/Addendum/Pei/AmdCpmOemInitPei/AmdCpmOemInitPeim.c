@@ -363,6 +363,7 @@ AmdCpmOemInitPeimEntryPoint (
     DEBUG((DEBUG_INFO, "OEM-PEI-AmdCpmOemInitPeimEntryPoint, Notification of mCpmOemGpioInitPeimNotify failed, Status = %r\n", Status));
     return Status;
   }
+  DEBUG((DEBUG_INFO, "ray_trace::PcdGet8(PcdXgbeDisable) = 0x%X\n", PcdGet8(PcdXgbeDisable)));
   if(!PcdGet8(PcdXgbeDisable)){
     Status = (**PeiServices).NotifyPpi(PeiServices, &mAmdNbioPcieComplexPpiNotify);
     if (EFI_ERROR(Status)) {

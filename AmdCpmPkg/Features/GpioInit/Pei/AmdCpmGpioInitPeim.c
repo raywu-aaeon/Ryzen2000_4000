@@ -1034,6 +1034,7 @@ AmdCpmGpioInitPeim (
 
   RECORD_TIME_PEI (BeginAmdCpmGpioInitStage1);
 
+  DEBUG((-1, "ray_trace::%a Start\n",__FUNCTION__));
   Status = (*PeiServices)->LocatePpi (
                               (CPM_PEI_SERVICES**)PeiServices,
                               &gAmdCpmTablePpiGuid,
