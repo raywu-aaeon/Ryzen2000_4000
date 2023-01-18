@@ -334,8 +334,8 @@ formset
       varid       = AMD_PBS_SETUP.AmdBlinkLed,
       prompt      = STRING_TOKEN(STR_AMD_BLINK_LED_STRING),
       help        = STRING_TOKEN(STR_AMD_BLINK_LED_HELP),
-      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED;
-      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
       option text = STRING_TOKEN(STR_GPIO11_LOW_TEXT),  value = 2, flags = INTERACTIVE | RESET_REQUIRED;
       option text = STRING_TOKEN(STR_GPIO11_HIGH_TEXT), value = 3, flags = INTERACTIVE | RESET_REQUIRED;
     endoneof;
