@@ -846,6 +846,12 @@ AMD_CPM_DEVICE_PATH_TABLE gCpmDevicePathTable = {
   }
 };
 
+typedef enum {
+
+  CPM_SIGNATURE_DISPLAY_FEATURE_OVERRIDE =             '0FF$',         ///< The signature of AMD_CPM_DISPLAY_FEATURE_TABLE
+
+} AMD_CPM_TABLE_SIGNATURE_OVERRIDE;
+
 //
 // CPM Display Feature Table
 //
@@ -856,7 +862,7 @@ AMD_CPM_DISPLAY_FEATURE_TABLE gCpmDisplayFeatureTable = {
 //   UINT8  ContentRevision;  // Revision of table content
 //   UINT32 PlatformMask;     // The mask of platform table supports
 //   UINT32 Attribute;        // Table attribute},
-  {CPM_SIGNATURE_DISPLAY_FEATURE, sizeof (gCpmDisplayFeatureTable) / sizeof (UINT8), 0, 0, 0, 0x0000000F},
+  {CPM_SIGNATURE_DISPLAY_FEATURE_OVERRIDE, sizeof (gCpmDisplayFeatureTable) / sizeof (UINT8), 0, 0, 0, 0x0000000F},
   1,                            // UINT8  FunctionDisableMask;  // BIT0: Disable SetSsid. BIT1: Disable AddSsdt
   DEVICE_ID_MXM,                // UINT8  MxmDeviceId;          // Device Id for MXM
   0xFF,                         // UINT8  MxmOverTempEvent;     // GEVENT pin number for MXM_OVERT#
