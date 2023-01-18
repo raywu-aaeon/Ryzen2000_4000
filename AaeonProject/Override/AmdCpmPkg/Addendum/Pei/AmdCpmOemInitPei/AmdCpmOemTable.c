@@ -1794,10 +1794,12 @@ AmdCpmTableOverride (
         UpdateXgbeFchPcds(PeiServices, &DxioPort);
         }
         else{
+/* 
           DxioPort[6].EngineData.EngineType = DxioUnusedEngine; //Entry 6 is XGBE
           DxioPort[6].Port.PortPresent = DxioPortDisabled;
           DxioPort[7].EngineData.EngineType = DxioUnusedEngine; // Entry 7 is XGBE
           DxioPort[7].Port.PortPresent = DxioPortDisabled;
+ */
           PcdSetBool (PcdXgbePort0ConfigEn,0); 
           PcdSetBool (PcdXgbePort1ConfigEn,0);
           DEBUG((DEBUG_INFO, "OEM-PEI-AmdCpmTableOverride default XGBE disabled\n"));
