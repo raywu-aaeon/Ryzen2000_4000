@@ -807,6 +807,7 @@ TOKEN
     TargetEQU = Yes
     TargetMAK = Yes
     TargetH = Yes
+    Token = "Terminal_SUPPORT" "=" "0"
 End
 
 TOKEN
@@ -817,6 +818,18 @@ TOKEN
     TargetEQU = Yes
     TargetMAK = Yes
     TargetH = Yes
+    Token = "Terminal_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "Terminal_SUPPORT"
+    Value  = "0"
+    Help  = "Enable/Disable 'Serial Redirection' module. \This module contains Terminal.lib/Terminalx64.lib,\the compiled binary of module 'Serial Redirection \Sources.' It also contains all setup related material\for the module.\"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "1"
 End
 
 TOKEN
