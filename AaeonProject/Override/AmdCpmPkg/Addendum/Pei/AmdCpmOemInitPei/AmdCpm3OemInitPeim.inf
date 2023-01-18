@@ -110,6 +110,7 @@
   AmdPbsConfigLib
   IoLib
   AmdBaseLib
+  FchSandstonePeiLib
 
 [Guids]
   gAmdCpmTableHobGuid

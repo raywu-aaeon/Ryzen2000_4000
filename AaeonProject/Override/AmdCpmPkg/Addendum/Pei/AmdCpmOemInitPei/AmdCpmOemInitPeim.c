@@ -88,6 +88,8 @@
 #include <Ppi/M24Lc128Ppi.h>
 #include <Ppi/NbioPcieComplexPpi.h>
 #include <Fch.h>
+#include <Library/PciLib.h>
+#include <FchPlatform.h>
 
 extern  AMD_CPM_PLATFORM_ID_TABLE             gCpmPlatformIdTable;
 extern  AMD_CPM_PLATFORM_ID_CONVERT_TABLE     gCpmPlatformIdConvertTable;
@@ -241,6 +243,48 @@ VOID *gCpmTableList[] = {
   NULL
 };
 
+REG8_MASK FchInitSandstoneResetLpcPciTable[] =
+{
+  //
+  // LPC Device (Bus 0, Dev 20, Func 3)
+  //
+  {0x00, LPC_BUS_DEV_FUN, 0},
+
+  {FCH_LPC_REG48, 0x00, BIT0 + BIT1 + BIT2},
+  {FCH_LPC_REG44, 0x00, BIT6},
+  {0xFF, 0xFF, 0xFF},
+};
+
+VOID
+ProgramPciByteTable (
+  IN       REG8_MASK           *pPciByteTable,
+  IN       UINT16              dwTableSize,
+  IN       AMD_CONFIG_PARAMS   *StdHeader
+  )
+{
+  UINT8     i;
+  UINT8     dbBusNo;
+  UINT8     dbDevFnNo;
+  UINTN     PciAddress;
+
+  dbBusNo = pPciByteTable->RegIndex;
+  dbDevFnNo = pPciByteTable->AndMask;
+  pPciByteTable++;
+
+  for ( i = 1; i < dwTableSize; i++ ) {
+    if ( (pPciByteTable->RegIndex == 0xFF) && (pPciByteTable->AndMask == 0xFF) && (pPciByteTable->OrMask == 0xFF) ) {
+      pPciByteTable++;
+      dbBusNo = pPciByteTable->RegIndex;
+      dbDevFnNo = pPciByteTable->AndMask;
+      pPciByteTable++;
+      i++;
+    } else {
+      PciAddress = (dbBusNo << 20) + (dbDevFnNo << 12) + pPciByteTable->RegIndex;
+      PciAndThenOr8 (PciAddress, pPciByteTable->AndMask, pPciByteTable->OrMask);
+      pPciByteTable++;
+    }
+  }
+}
 /*----------------------------------------------------------------------------------------*/
 /**
  * Entry point of the AMD CPM OEM Init PEIM driver
@@ -266,6 +310,34 @@ AmdCpmOemInitPeimEntryPoint (
   EFI_PEI_NOTIFY_DESCRIPTOR       NotifyDescriptorV9;
   VOID                            *PpiV9 = NULL;
 #endif
+
+  RwPci ((LPC_BUS_DEV_FUN << 16) + FCH_LPC_REG6C, AccessWidth32, 0xFFFFFF00, 0, NULL);
+  ProgramPciByteTable ( (REG8_MASK*) (&FchInitSandstoneResetLpcPciTable[0]), sizeof (FchInitSandstoneResetLpcPciTable) / sizeof (REG8_MASK), NULL);
+
+  IoWrite8(0x4e, 0x87);
+  IoWrite8(0x4e, 0x87);
+
+  IoWrite8(0x4e, 0x27);
+  IoWrite8(0x4f, (IoRead8(0x4f) & ~(BIT0 + BIT2 + BIT3)) | BIT2);
+  IoWrite8(0x4e, 0x2C);
+  IoWrite8(0x4f, (IoRead8(0x4f) | (BIT0 + BIT1)));
+
+  IoWrite8(0x4e, 0x07);
+  IoWrite8(0x4f, 0x06);
+  
+  IoWrite8(0x4e, 0x30);
+  IoWrite8(0x4f, 0x01);
+
+  IoWrite8(0x4e, 0xE0);
+  IoWrite8(0x4f, IoRead8(0x4f) | (BIT0 + BIT1));
+
+  IoWrite8(0x4e, 0xE1);
+  IoWrite8(0x4f, (IoRead8(0x4f) & ~(BIT0 + BIT1)) | BIT0);
+
+  IoWrite8(0x4e, 0xE3);
+  IoWrite8(0x4f, (IoRead8(0x4f) & ~(BIT0 + BIT1)));
+
+  IoWrite8(0x4e, 0xAA);
 
   DEBUG((DEBUG_INFO, "OEM-PEI-AmdCpmOemInitPeimEntryPoint-Start\n"));
   PcdSetBool (PcdVddOffVidCtrl, 1);
