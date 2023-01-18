@@ -314,14 +314,14 @@ AMD_CPM_GPIO_DEVICE_CONFIG_TABLE    gCpmGpioDeviceConfigTable = {
 //   UINT32 Attribute;        // Table attribute},
   {CPM_SIGNATURE_GPIO_DEVICE_CONFIG, sizeof (gCpmGpioDeviceConfigTable) / sizeof (UINT8), 0, 0, 0, 0x0000000F},
   {//                       DeviceId          Enable            Assert  Deassert  Hotplugs
-      GPIO_DEVICE_DEFINITION (DEVICE_ID_MXM,    CPM_DEVICE_AUTO,    0,          1,          0   ),
+//      GPIO_DEVICE_DEFINITION (DEVICE_ID_MXM,    CPM_DEVICE_AUTO,    0,          1,          0   ),
 //    GPIO_DEVICE_DEFINITION (DEVICE_ID_ODD,    CPM_DEVICE_AUTO,    0,          0,          0   ),
 //    GPIO_DEVICE_DEFINITION (DEVICE_ID_SD,     CPM_DEVICE_ON,      0,          0,          0   ),
-      GPIO_DEVICE_DEFINITION (DEVICE_ID_DT,     CPM_DEVICE_ON,      1,          0,          0   ),
+//      GPIO_DEVICE_DEFINITION (DEVICE_ID_DT,     CPM_DEVICE_ON,      1,          0,          0   ),
 //    GPIO_DEVICE_DEFINITION (DEVICE_ID_WLAN,   CPM_DEVICE_ON,      0,          0,          0   ),    //SATA 0;/    GPIO_DEVICE_DEFINITION (DEVICE_ID_LAN,    CPM_DEVICE_ON,      1,          1,          0   ),
 //    GPIO_DEVICE_DEFINITION (DEVICE_ID_WWAN,   CPM_DEVICE_ON,      0,          0,          0   ),    //WWAN 0;
 //    GPIO_DEVICE_DEFINITION (DEVICE_ID_LAN,    CPM_DEVICE_ON,      0,          0,          0   ),
-      GPIO_DEVICE_DEFINITION (DEVICE_ID_HDD0,   CPM_DEVICE_AUTO,    0,          0,          0   ),    //SATA 0;
+//      GPIO_DEVICE_DEFINITION (DEVICE_ID_HDD0,   CPM_DEVICE_AUTO,    0,          0,          0   ),    //SATA 0;
 //    GPIO_DEVICE_DEFINITION (DEVICE_ID_ODD,    CPM_DEVICE_ON,      0,          0,          0   ),    //SATA 1;
 //    GPIO_DEVICE_DEFINITION (DEVICE_ID_SSD,    CPM_DEVICE_ON,      0,          0,          0   ),    //SSD   ;
 //    GPIO_DEVICE_DEFINITION (DEVICE_ID_RCAM,   CPM_DEVICE_ON,      0,          0,          0   ),    //SATA 0;
@@ -354,10 +354,10 @@ AMD_CPM_GPIO_DEVICE_DETECTION_TABLE gCpmGpioDeviceDetectionTable = {
 //   UINT16 PinNum3;  // Pin number of GPIO 3
 //   UINT8  Value3;   // Value of GPIO 3},
 //  { DEVICE_ID_ODD,   0,    ZPODD_DETECT_PIN,  ZPODD_DETECT_VALUE,     0,  0 },          // ODD_PLUGIN#: GEVENT14#
-    { DEVICE_ID_MXM,   0,    MXM_PRESENT,       MXM_DETECT_VALUE,       0,  0 },
-    { DEVICE_ID_SSD,   0,    0x5C,              1               ,       0,  0 },
+//    { DEVICE_ID_MXM,   0,    MXM_PRESENT,       MXM_DETECT_VALUE,       0,  0 },
+//    { DEVICE_ID_SSD,   0,    0x5C,              1               ,       0,  0 },
 //  { DEVICE_ID_WWAN,  0,    0x233,             1               ,       0,  0 },
-    { DEVICE_ID_DT,    0,    DTDEVICE_DETECT,   DTDEVICE_DETECT_VALUE,  0,  0 },
+//    { DEVICE_ID_DT,    0,    DTDEVICE_DETECT,   DTDEVICE_DETECT_VALUE,  0,  0 },
     0xFF,
   }
 };
@@ -379,14 +379,14 @@ AMD_CPM_GPIO_DEVICE_RESET_TABLE gCpmGpioDeviceResetTable = {
 //   UINT8  Type;           // Register type  // 0: GPIO.         // 1: Special pin.if Mode = 0 or 1
 //   UINT32 ((UINT16)Pin + ((UINT8)Value << 16));                 // GPIO pin value
 //   UINT8  InitFlag;       // Init flag in post},
-    { DEVICE_ID_MXM,  CPM_RESET_ASSERT,   CPM_RESET_GPIO, CPM_GPIO_PIN (MXM_RESET, 0),        GPIO_DEVICE_INIT_STAGE_DUMMY},  // FCH GPIO140
-    { DEVICE_ID_DT,   CPM_RESET_ASSERT,   CPM_RESET_GPIO, CPM_GPIO_PIN (DT_RESET, 0),   GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[6] (BIT46)
+//    { DEVICE_ID_MXM,  CPM_RESET_ASSERT,   CPM_RESET_GPIO, CPM_GPIO_PIN (MXM_RESET, 0),        GPIO_DEVICE_INIT_STAGE_DUMMY},  // FCH GPIO140
+//    { DEVICE_ID_DT,   CPM_RESET_ASSERT,   CPM_RESET_GPIO, CPM_GPIO_PIN (DT_RESET, 0),   GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[6] (BIT46)
     //{ DEVICE_ID_WLAN, CPM_RESET_ASSERT,   CPM_RESET_GPIO, CPM_ECRAM_GPIO_PIN (WLAN_RESET, 0), GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[7] (BIT47)
     //{ DEVICE_ID_LAN,  CPM_RESET_ASSERT,   CPM_RESET_GPIO, CPM_ECRAM_GPIO_PIN (LAN_RESET, 0),  GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[4] (BIT44)
     //{ DEVICE_ID_WWAN, CPM_RESET_ASSERT,   CPM_RESET_GPIO, CPM_ECRAM_GPIO_PIN (WWAN_RESET, 0), GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[5] (BIT45)
     //{ DEVICE_ID_SSD,  CPM_RESET_ASSERT,   CPM_RESET_GPIO, CPM_GPIO_PIN (SSD_RESET, 0),        GPIO_DEVICE_INIT_STAGE_DUMMY},  // FCH GPIO40
-    { DEVICE_ID_MXM,  CPM_RESET_DEASSERT, CPM_RESET_GPIO, CPM_GPIO_PIN (MXM_RESET, 1),        GPIO_DEVICE_INIT_STAGE_DUMMY},  // FCH GPIO140
-    { DEVICE_ID_DT,   CPM_RESET_DEASSERT, CPM_RESET_GPIO, CPM_GPIO_PIN (DT_RESET, 1),   GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[6] (BIT46)
+//    { DEVICE_ID_MXM,  CPM_RESET_DEASSERT, CPM_RESET_GPIO, CPM_GPIO_PIN (MXM_RESET, 1),        GPIO_DEVICE_INIT_STAGE_DUMMY},  // FCH GPIO140
+//    { DEVICE_ID_DT,   CPM_RESET_DEASSERT, CPM_RESET_GPIO, CPM_GPIO_PIN (DT_RESET, 1),   GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[6] (BIT46)
     //{ DEVICE_ID_WLAN, CPM_RESET_DEASSERT, CPM_RESET_GPIO, CPM_ECRAM_GPIO_PIN (WLAN_RESET, 1), GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[7] (BIT47)
     //{ DEVICE_ID_LAN,  CPM_RESET_DEASSERT, CPM_RESET_GPIO, CPM_ECRAM_GPIO_PIN (LAN_RESET, 1),  GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[4] (BIT44)
     //{ DEVICE_ID_WWAN, CPM_RESET_DEASSERT, CPM_RESET_GPIO, CPM_ECRAM_GPIO_PIN (WWAN_RESET, 1), GPIO_DEVICE_INIT_STAGE_DUMMY},  // ECRAM xB1[5] (BIT45)
@@ -515,14 +515,14 @@ AMD_CPM_PCIE_CLOCK_TABLE    gCpmPcieClockTable_RV2 = {
 //   UINT8  Function;           // Function Number of PCIe bridge
 //   UINT8  SlotCheck;          // Slot Check Flag: // BIT0: Check PCI Space // BIT1: Check GPIO pin // BIT2: Check Clock Power Management Enable // BIT3~6: Reserved // BIT7: Change PCIe Clock in ACPI method
 //   UINT32 SpecialFunctionId;  // Id of Special Function}
-//        (socket,die, ClkId,     ClkReq,     DeviceId,             Device,Function,SlotCheck)
-    PCIE_INCLK (0, 0,  GPP_CLK0,  CLK_REQ0,   DEVICE_ID_LAN,         1,     1,       CLKPM_CHECK), // LAN1 RTL8125BG (LAN1_1)
-    PCIE_INCLK (0, 0,  GPP_CLK1,  CLK_REQ1,   DEVICE_ID_LAN,         1,     2,       CLKPM_CHECK), // LAN2 RTL8125BG (LAN2_1)
-    PCIE_INCLK (0, 0,  GPP_CLK2,  CLK_REQ2,   DEVICE_ID_M2_CONNECT,  1,     3,       CLKPM_CHECK), // M.2-B Key (B_KEY1)
-    PCIE_INCLK (0, 0,  GPP_CLK5,  CLK_REQ5,   DEVICE_ID_DT,          1,     6,       CLKPM_CHECK), // Mini-PCIe (MINIPCIE1)
-    PCIE_INCLK (0, 0,  GPP_CLK3,  CLK_REQ3,   DEVICE_ID_M2_CONNECT2, 1,     4,       CLKPM_CHECK), // M.2-M Key (M_KEY1)
-    PCIE_INCLK (0, 0,  GPP_CLK4,  CLK_ENABLE, DEVICE_ID_DT,          1,     5,       CLKPM_CHECK), // PCI-E X8 SLOT (PCIE1)
-    PCIE_INCLK (0, 0,  GPP_CLK6,  CLK_ENABLE, DEVICE_ID_DT,          1,     7,       CLKPM_CHECK), // PCI-E X8 SLOT (PCIE1)
+//        (socket,die, ClkId,     ClkReq,       DeviceId,             Device,Function,SlotCheck)
+    PCIE_INCLK (0, 0,  GPP_CLK0,  CLK_ENABLE,   DEVICE_ID_LAN,         1,     1,       SLOT_CHECK), // LAN1 RTL8125BG (LAN1_1)
+    PCIE_INCLK (0, 0,  GPP_CLK1,  CLK_ENABLE,   DEVICE_ID_LAN,         1,     2,       SLOT_CHECK), // LAN2 RTL8125BG (LAN2_1)
+    PCIE_INCLK (0, 0,  GPP_CLK2,  CLK_ENABLE,   DEVICE_ID_M2_CONNECT,  1,     3,       SLOT_CHECK), // M.2-B Key (B_KEY1)
+    PCIE_INCLK (0, 0,  GPP_CLK5,  CLK_ENABLE,   DEVICE_ID_DT,          1,     6,       SLOT_CHECK), // Mini-PCIe (MINIPCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK3,  CLK_ENABLE,   DEVICE_ID_M2_CONNECT2, 1,     4,       SLOT_CHECK), // M.2-M Key (M_KEY1)
+    PCIE_INCLK (0, 0,  GPP_CLK4,  CLK_ENABLE,   DEVICE_ID_DT,          1,     5,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK6,  CLK_ENABLE,   DEVICE_ID_DT,          1,     7,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
     0xFF,
   }
 };
@@ -578,8 +578,8 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
         DxioGenMaxSupported,                  // Max Link Speed
         DxioGenMaxSupported,                  // Max Link Capability
         DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
-       DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
-       DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
         DxioClkPmSupportEnabled,              // Clock PM
         CLK_ENABLE                            // CLKREQ#
       )
@@ -840,8 +840,8 @@ AMD_CPM_DEVICE_PATH_TABLE gCpmDevicePathTable = {
 //   UINT8                           Mode;        // Power mode
 //   UINT8                           DeviceIdVcc; // Device Id for Vcc when D3Cold is supported}
     {0x80000003, 0x00, {8, 1}, {0, 0}},                                                    // PowerXpress|HCF, iGPU, (0,8,1)/(0,0)
-    {0x8000000B, 0x01, {1, 1}, {0, 0}, DEVICE_ID_VGAMUXSEL, CPM_POWER_OFF, DEVICE_ID_MXM}, // PowerXpress|HCF, dGPU, (0,1,1)/(0,0)
-    {0x80000000, 0x01, {1, 2}, {0, 0}},                                                    // dGPU, (0,1,2)/(0,0)
+//    {0x8000000B, 0x01, {1, 1}, {0, 0}, DEVICE_ID_VGAMUXSEL, CPM_POWER_OFF, DEVICE_ID_MXM}, // PowerXpress|HCF, dGPU, (0,1,1)/(0,0)
+//    {0x80000000, 0x01, {1, 2}, {0, 0}},                                                    // dGPU, (0,1,2)/(0,0)
     {0x00000000, 0x00, {0, 0}, {0, 0}},
   }
 };
