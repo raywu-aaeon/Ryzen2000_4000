@@ -213,6 +213,7 @@ EFI_STATUS EFIAPI AmiBoardEntryPoint(
         &gAmiBoardInfo2Handle,
         &gAmiBoardInfo2Guid, &gAmiBoard2Protocol, NULL
     );
+    DEBUG((-1, "ray_trace::InstallMultipleProtocolInterfaces(gAmiBoardInfo2Guid) Status = %r\n",Status));
 
 	return Status;
 }
