@@ -568,7 +568,7 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
       )
     },
     {
-      0,
+      DESCRIPTOR_TERMINATE_LIST,
       DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 1, 1, HotPluggableDisabled, DEVICE_ID_LAN),
       DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
         DxioPortEnabled,                      // Port Present
