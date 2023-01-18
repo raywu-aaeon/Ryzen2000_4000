@@ -483,13 +483,13 @@ AMD_CPM_PCIE_CLOCK_TABLE    gCpmPcieClockTable = {
 //   UINT8  SlotCheck;          // Slot Check Flag: // BIT0: Check PCI Space // BIT1: Check GPIO pin // BIT2: Check Clock Power Management Enable // BIT3~6: Reserved // BIT7: Change PCIe Clock in ACPI method
 //   UINT32 SpecialFunctionId;  // Id of Special Function}
 //        (socket,die, ClkId,     ClkReq,     DeviceId,             Device,Function,SlotCheck)
-    PCIE_INCLK (0, 0,  GPP_CLK0,  CLK_REQ0,   DEVICE_ID_LAN,         1,     1,       CLKPM_CHECK), // LAN1 RTL8125BG (LAN1_1)
-    PCIE_INCLK (0, 0,  GPP_CLK1,  CLK_REQ1,   DEVICE_ID_LAN,         1,     2,       CLKPM_CHECK), // LAN2 RTL8125BG (LAN2_1)
-    PCIE_INCLK (0, 0,  GPP_CLK2,  CLK_REQ2,   DEVICE_ID_M2_CONNECT,  1,     3,       CLKPM_CHECK), // M.2-B Key (B_KEY1)
-    PCIE_INCLK (0, 0,  GPP_CLK5,  CLK_REQ5,   DEVICE_ID_DT,          1,     6,       CLKPM_CHECK), // Mini-PCIe (MINIPCIE1)
-    PCIE_INCLK (0, 0,  GPP_CLK3,  CLK_REQ3,   DEVICE_ID_M2_CONNECT2, 1,     4,       CLKPM_CHECK), // M.2-M Key (M_KEY1)
-    PCIE_INCLK (0, 0,  GPP_CLK4,  CLK_ENABLE, DEVICE_ID_DT,          1,     5,       CLKPM_CHECK), // PCI-E X8 SLOT (PCIE1)
-    PCIE_INCLK (0, 0,  GPP_CLK6,  CLK_ENABLE, DEVICE_ID_DT,          1,     7,       CLKPM_CHECK), // PCI-E X8 SLOT (PCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK0,  CLK_ENABLE,   DEVICE_ID_LAN,         1,     1,       SLOT_CHECK), // LAN1 RTL8125BG (LAN1_1)
+    PCIE_INCLK (0, 0,  GPP_CLK1,  CLK_ENABLE,   DEVICE_ID_LAN,         1,     2,       SLOT_CHECK), // LAN2 RTL8125BG (LAN2_1)
+    PCIE_INCLK (0, 0,  GPP_CLK2,  CLK_ENABLE,   DEVICE_ID_M2_CONNECT,  1,     3,       SLOT_CHECK), // M.2-B Key (B_KEY1)
+    PCIE_INCLK (0, 0,  GPP_CLK5,  CLK_ENABLE,   DEVICE_ID_DT,          1,     6,       SLOT_CHECK), // Mini-PCIe (MINIPCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK3,  CLK_ENABLE,   DEVICE_ID_M2_CONNECT2, 1,     4,       SLOT_CHECK), // M.2-M Key (M_KEY1)
+    PCIE_INCLK (0, 0,  GPP_CLK4,  CLK_ENABLE,   DEVICE_ID_DT,          1,     5,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK6,  CLK_ENABLE,   DEVICE_ID_DT,          1,     7,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
     0xFF,
   }
 };
@@ -550,9 +550,9 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
 //    #define DXIO_ENGINE_DATA_INITIALIZER(mType, mStartLane, mEndLane, mHotplug, mGpioGroupId) {mType, mHotplug, 0, mStartLane, mEndLane, mGpioGroupId, 0, 0, 0}
 //    #define DXIO_PORT_DATA_INITIALIZER_PCIE(mPortPresent, mDevAddress, mDevFunction, mHotplug, mMaxLinkSpeed, mMaxLinkCap, mAspm, mAspmL1_1, mAspmL1_2,  mClkPmSupport) \
 //            {mPortPresent, mDevAddress, mDevFunction, mMaxLinkSpeed, mAspm, mAspmL1_1, mAspmL1_2, 0, mHotplug, {0, mMaxLinkCap, 0, mClkPmSupport}, {0, 0, 0}, DxioEndpointDetect}
-    { // DEVICE_ID_MXM                        Entry 0
+    {
       0,
-      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 15, 8, HotPluggableDisabled, DEVICE_ID_MXM),
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 0, 0, HotPluggableDisabled, DEVICE_ID_LAN),
       DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
         DxioPortEnabled,                      // Port Present
         1,                                    // Requested Device
@@ -560,16 +560,16 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
         DxioHotplugDisabled,                  // Hotplug
         DxioGenMaxSupported,                  // Max Link Speed
         DxioGenMaxSupported,                  // Max Link Capability
-        DxioAspmL1,                           // DxioAspmL0sL1, // ASPM
-        DxioAspmL11Enabled,                   // ASPM L1.1  // 0:disabled, 1:Enabled
-        DxioAspmL12Enabled,                   // ASPM L1.2  // 0:disabled, 1:Enabled
-        DxioClkPmSupportDisabled,             // Clock PM
-        CLK_REQ3                              // CLKREQ#
+        DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
+        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioClkPmSupportEnabled,              // Clock PM
+        CLK_ENABLE                            // CLKREQ#
       )
     },
-    { // DEVICE_ID_DT                         Entry 1
-      0,
-      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 4, 7, HotPluggableDisabled, DEVICE_ID_DT),
+    {
+      DESCRIPTOR_TERMINATE_LIST,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 1, 1, HotPluggableDisabled, DEVICE_ID_LAN),
       DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
         DxioPortEnabled,                      // Port Present
         1,                                    // Requested Device
@@ -577,148 +577,11 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
         DxioHotplugDisabled,                  // Hotplug
         DxioGenMaxSupported,                  // Max Link Speed
         DxioGenMaxSupported,                  // Max Link Capability
-        DxioAspmL1,                           // DxioAspmL0sL1, // ASPM
-        DxioAspmL11Enabled,                   // ASPM L1.1  // 0:disabled, 1:Enabled
-        DxioAspmL12Enabled,                   // ASPM L1.2  // 0:disabled, 1:Enabled
-        DxioClkPmSupportDisabled,             // Clock PM
-        CLK_REQ4                              // CLKREQ#
-      )
-    },
-    { // PCIE M.2 x2                         Entry 2
-     0,
-     DXIO_ENGINE_DATA_INITIALIZER(DxioUnusedEngine, 2, 3, HotPluggableDisabled, DEVICE_ID_SSD),
-     DXIO_PORT_DATA_INITIALIZER_PCIE_V2(
-       DxioPortEnabled,                      // Port Present
-       1,                                    // Requested Device
-       5,                                    // Requested Function
-       DxioHotplugDisabled,                  // Hotplug
-       DxioGenMaxSupported,                  // Max Link Speed
-       DxioGenMaxSupported,                  // Max Link Capability
-       DxioAspmL1,                           // DxioAspmL0sL1, // ASPM
+        DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
        DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
-       DxioClkPmSupportDisabled,             // Clock PM
-       CLK_REQ2                              // CLKREQ#
-       )
-    },
-    { // PCIE M.2 x4                         Entry 3
-     0,
-     DXIO_ENGINE_DATA_INITIALIZER(DxioUnusedEngine, 0, 3, HotPluggableDisabled, DEVICE_ID_SSD),
-     DXIO_PORT_DATA_INITIALIZER_PCIE_V2(
-       DxioPortEnabled,                      // Port Present
-       1,                                    // Requested Device
-       5,                                    // Requested Function
-       DxioHotplugDisabled,                  // Hotplug
-       DxioGenMaxSupported,                  // Max Link Speed
-       DxioGenMaxSupported,                  // Max Link Capability
-       DxioAspmL1,                           // DxioAspmL0sL1, // ASPM
-       DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
-       DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
-       DxioClkPmSupportDisabled,             // Clock PM
-       CLK_REQ2                              // CLKREQ#
-       )
-    },
-    { // DEVICE_ID_SATA_EXPRESS    iSata         Entry 4
-      0,
-      DXIO_ENGINE_DATA_INITIALIZER (DxioSATAEngine, 3, 3, HotPluggableDisabled, 1),
-      DXIO_PORT_DATA_INITIALIZER_SATA_V2 (DxioPortEnabled, DxioSataChannelLong)    // Port Present
-      PHY_PARAMS_START                         // The SATA PHY tuning values must be configured to all DxioSATAEngine 
-        PHY_PARAM (GEN1_txX_eq_pre, 0),        // otherwise the values won't be changed in the register.
-        PHY_PARAM (GEN1_txX_eq_main, 0x20),
-        PHY_PARAM (GEN1_txX_eq_post, 0x06),
-        PHY_PARAM (GEN2_txX_eq_pre, 0),
-        PHY_PARAM (GEN2_txX_eq_main, 0x22),
-        PHY_PARAM (GEN2_txX_eq_post, 0x18),
-        PHY_PARAM (GEN3_txX_eq_pre, 0x0),
-        PHY_PARAM (GEN3_txX_eq_main, 0x1D),
-        PHY_PARAM (GEN3_txX_eq_post, 0x2C),
-      PHY_PARAMS_END
-    },
-    { // DEVICE_ID_SATA_EXPRESS     M.2 Sata      Entry 5  
-      0,
-      DXIO_ENGINE_DATA_INITIALIZER (DxioSATAEngine, 2, 2, HotPluggableDisabled, 1),
-      DXIO_PORT_DATA_INITIALIZER_SATA_V2 (DxioPortEnabled, DxioSataChannelLong)    // Port Present
-      PHY_PARAMS_START
-        PHY_PARAM (GEN1_txX_eq_pre, 0),
-        PHY_PARAM (GEN1_txX_eq_main, 0x20),
-        PHY_PARAM (GEN1_txX_eq_post, 0x06),
-        PHY_PARAM (GEN2_txX_eq_pre, 0),
-        PHY_PARAM (GEN2_txX_eq_main, 0x22),
-        PHY_PARAM (GEN2_txX_eq_post, 0x18),
-        PHY_PARAM (GEN3_txX_eq_pre, 0x0),
-        PHY_PARAM (GEN3_txX_eq_main, 0x1D),
-        PHY_PARAM (GEN3_txX_eq_post, 0x2C),
-      PHY_PARAMS_END
-    },
-
-    { // P0 - Ehernet Port 0        		Entry 6
-      0,
-      DXIO_ENGINE_DATA_INITIALIZER (DxioEthernetEngine, 0, 0, HotPluggableDisabled, 1),
-      DXIO_PORT_DATA_INITIALIZER_ENET (
-        DxioPortEnabled,            // Port Present
-        0,    /// mPortNum
-        8,    /// mPlatConf 		(10G Base T => Default, 8 = SFP+)
-        0,    /// mMdioId           (If MDIO is not used by this port, set this to 0)
-        0xD,  /// mSuppSpeed		(For SFP+ connectors, 10G, 1G and 100M support should be indicated)
-        1,    /// mConnType  		(1 = SFP+ Connection I2C interface, 2 = MDIO PHY)
-        0,    /// mMdioReset 		(MDIO Reset Type, Integrated GPIO)
-        0,    /// mMdioGpioResetNum (Integrated GPIO number for reset)
-        1,    /// mSfpGpioAdd 		(Lower I2C address of GPIO Expander PCA9535)
-        0xE,  /// mTxFault,		    (I/O1_6 connected SFP+_XGB0_TX_FAULT 0_0 to 0_7 = 8 , 1_0 to 1_6 = 7 , 8+7= 15-1 = E ( -1 for excluding for 0)
-        0,    /// mRs,
-        0xC,  /// mModAbs,
-        0xD,  /// mRxLoss,
-        0x2,  /// mSfpGpioMask, 	(xx1xb = RS not supported)
-        0x3,  /// mSfpMux, 		    (Lower address of Mux PCA 9545 or 111b if SFP+ directly connected to I2C) //SFP+ TWI Multiplexer
-        0x0,  /// mSfpBusSeg, 		(SFP BUS Segment. Downstream channels of PCA9545) //SFP+ TWI Bus Segment
-        0x1C, /// mSfpMuxUpAdd, 	(Upper address of Mux PCA 9545) 
-        0x0,  /// mRedriverAddress,
-        1,    /// mRedriverInterface, 	(1 => I2C, 0 => MDIO)
-        0,    /// mRedriverLane,
-        0,    /// mRedriverModel,
-        0,    /// mRedriverPresent,
-        0x1,  /// mPadMux0, 		(Pad Mux Setting)
-        0,    /// mPadMux1, 		(Pad Mux Setting)
-        0x0,  /// mMacAddressLo,    (TO BE FILLED IN BY CODE)
-        0x0,  /// mMacAddressHi,    (TO BE FILLED IN BY CODE)
-        0,  /// mTxEqPre,
-        32,  /// mTxEqMain,
-        32   /// mTxEqPost
-      )
-    },
-    {   // P1 - Ethernet Port1      	//entry 7
-        DESCRIPTOR_TERMINATE_LIST,
-        DXIO_ENGINE_DATA_INITIALIZER (DxioEthernetEngine, 1, 1, HotPluggableDisabled, 1),
-        DXIO_PORT_DATA_INITIALIZER_ENET (
-        DxioPortEnabled,            // Port Present
-        1,    /// mPortNum
-        8,    /// mPlatConf 		(10G Base T => Default, 8 = SFP+)
-        0,    /// mMdioId           (If MDIO is not used by this port, set this to 0)
-        0xD,  /// mSuppSpeed		(For SFP+ connectors, 10G, 1G and 100M support should be indicated)
-        1,    /// mConnType  		(1 = SFP+ Connection I2C interface, 2 = MDIO PHY)
-        0,    /// mMdioReset 		(MDIO Reset Type, Integrated GPIO)
-        0,    /// mMdioGpioResetNum (Integrated GPIO number for reset)
-        1,    /// mSfpGpioAdd 		(Lower I2C address of GPIO Expander PCA9535)
-        0x6,  /// mTxFault,		    (I/O0_6 connected SFP+_XGB1_TX_FAULT 0_0 to 0_6 = 7  7-1 = 6 ( -1 for excluding for 0)
-        0,    /// mRs,
-        0x4,  /// mModAbs,
-        0x5,  /// mRxLoss,
-        0x2,  /// mSfpGpioMask, 	(xx1xb = RS not supported)
-        0x3,  /// mSfpMux, 		    (Lower address of Mux PCA 9545 or 111b if SFP+ directly connected to I2C) //SFP+ TWI Multiplexer
-        0x1,  /// mSfpBusSeg, 		(SFP BUS Segment. Downstream channels of PCA954) //SFP+ TWI Bus Segment
-        0x1C, /// mSfpMuxUpAdd, 	(Upper address of Mux PCA 9545) 
-        0x0,  /// mRedriverAddress,
-        1,    /// mRedriverInterface, 	(1 => I2C, 0 => MDIO)
-        0,    /// mRedriverLane,
-        0,    /// mRedriverModel,
-        0,    /// mRedriverPresent,
-        0x1,  /// mPadMux0, 		(Pad Mux Setting)
-        0,    /// mPadMux1, 		(Pad Mux Setting)
-        0x0,  /// mMacAddressLo,    (TO BE FILLED IN BY CODE)
-        0x0,  /// mMacAddressHi,    (TO BE FILLED IN BY CODE)
-        0,  /// mTxEqPre,
-        32,  /// mTxEqMain,
-        32   /// mTxEqPost
+        DxioClkPmSupportEnabled,              // Clock PM
+        CLK_ENABLE                            // CLKREQ#
       )
     }
   },  // End of DXIO_PORT_DESCRIPTOR
