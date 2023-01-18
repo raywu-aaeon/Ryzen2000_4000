@@ -474,14 +474,14 @@ RV_COMPLEX_CONFIG ComplexDataRV = {
       offsetof (RV_COMPLEX_CONFIG, PortPBR0) - offsetof (RV_COMPLEX_CONFIG, PortPBR1),
       0
     },
-    { PciePortEngine, UNUSED_LANE_ID, UNUSED_LANE_ID},  // EngineData
+    { PciePortEngine, 1, 1 },                       // EngineData
     0,                                                  // Initialization Status
     0xFF,                                               // Scratch
     {
       {
         {0},                  // Port Data  PCIe_PORT_DATA
-        4,                    // Start Core Lane
-        7,                    // End Core Lane
+        1,                    // Start Core Lane
+        1,                    // End Core Lane
         PBR1_NATIVE_PCI_DEV,  // NativeDevNumber          [0:4]
         PBR1_NATIVE_PCI_FUN,  // NativeFunNumber          [5:7]
         PBR1_CORE_ID,         // CoreID                   [0:3]
@@ -529,14 +529,14 @@ RV_COMPLEX_CONFIG ComplexDataRV = {
       0,
       0
     },
-    { PciePortEngine, 0, 3 },                       // EngineData
+    { PciePortEngine, 0, 0 },                       // EngineData
     0,                                              // Initialization Status
     0xFF,                                           // Scratch
     {
       {
         {0},                  // Port Data  PCIe_PORT_DATA
         0,                    // Start Core Lane
-        3,                    // End Core Lane
+        0,                    // End Core Lane
         PBR0_NATIVE_PCI_DEV,  // NativeDevNumber          [0:4]
         PBR0_NATIVE_PCI_FUN,  // NativeFunNumber          [5:7]
         PBR0_CORE_ID,         // CoreID                   [0:3]
