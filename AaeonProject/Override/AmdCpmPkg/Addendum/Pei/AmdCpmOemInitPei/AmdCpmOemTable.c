@@ -1795,6 +1795,7 @@ AmdCpmTableOverride (
 
   DxioPort = &(DxioTopologyTablePtr->Port[0]);
 
+  DEBUG((-1,"ray_trace::DxioPort[0].EngineData.StartLane = 0x%X\n",DxioPort[0].EngineData.StartLane));
   //RV2 workaround
   if (BoardId >= 0x0008) {
     DEBUG((DEBUG_INFO, "Apply RV2 workaround\n"));
