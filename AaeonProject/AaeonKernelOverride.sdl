@@ -233,6 +233,16 @@ ELINK
 End
 
 TOKEN
+	Name  = "CRB_AMD_PCIE_CONTROL_SUPPORT"
+	Value  = "0"
+	Help  = "Switch the CRB GNB PCIE Port configure"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
     Name  = " "
     TokenType = Integer
 End
