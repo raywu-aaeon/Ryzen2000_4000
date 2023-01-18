@@ -477,12 +477,14 @@ TOKEN
     TokenType = Expression
 End
 
-INFComponent
-	Name  = "AaeonDio3Dxe"
-	File  = "AaeonDio3Dxe.inf"
-	Package  = "AaeonCommonPkg"
-	ModuleTypes  = "DXE_DRIVER"
-End
+# >> Ryzen2000 -
+#INFComponent
+#	Name  = "AaeonDio3Dxe"
+#	File  = "AaeonDio3Dxe.inf"
+#	Package  = "AaeonCommonPkg"
+#	ModuleTypes  = "DXE_DRIVER"
+#End
+# << Ryzen2000 -
 
 ELINK
 	Name  = "AaeonDio3DxeInit,"

@@ -9,6 +9,47 @@ TOKEN
 End
 
 TOKEN
+    Name  = "====== AES-R2000.sdl ======"
+    TokenType = Expression
+End
+
+PcdMapping
+    Name  = "PcdXgbePort0ConfigEn"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdXgbePort1ConfigEn"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "EMUL6064_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable KBC Emulation support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AMIUSB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
     Name  = "====== AmdCpmPkg\AmiCpmWrapper\AmiCpmWrapper.sdl ======"
     TokenType = Expression
 End
@@ -284,6 +325,24 @@ TOKEN
     Value  = "0"
     Help  = "Main switch to enable AMISetupNVLock support in Project"
     TokenType = Boolean
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== AmiChipsetModulePkg\Sb.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "NONE_SIO_KBC_SUPPORT"
+	Value  = "0"
+	Help  = "Turn on this token if there is no KBC/SIO controller( Turn on Inchip KBC emulation function )."
+	TokenType = Boolean
+	TargetH = Yes
 End
 
 TOKEN

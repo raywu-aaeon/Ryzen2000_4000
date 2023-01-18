@@ -8641,7 +8641,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -8675,7 +8675,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -8709,7 +8709,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>1</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -8743,7 +8743,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -8777,7 +8777,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -8811,7 +8811,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -8853,7 +8853,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -8887,7 +8887,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.FchUart0LegacyEnable</PCD>
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -8933,7 +8933,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -8967,7 +8967,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.FchUart1LegacyEnable</PCD>
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9013,7 +9013,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9047,7 +9047,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.FchUart2LegacyEnable</PCD>
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9093,7 +9093,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD />
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9127,7 +9127,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.FchUart3LegacyEnable</PCD>
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9251,7 +9251,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0ConfigEn(BOOL)</PCD>
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9283,7 +9283,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1ConfigEn(BOOL)</PCD>
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9323,7 +9323,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcEnable</PCD>
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9455,7 +9455,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcD3Support(BOOL)</PCD>
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9489,7 +9489,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcBoot(BOOL)</PCD>
         <Additional_information />
-        <BIOS_Default>0xf</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9661,7 +9661,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggresiveDevSlpP0</PCD>
         <Additional_information />
-        <BIOS_Default>0xF</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>
@@ -9695,7 +9695,7 @@ Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]</Help_te
         <Apcb_structure />
         <PCD>gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggresiveDevSlpP1</PCD>
         <Additional_information />
-        <BIOS_Default>0xF</BIOS_Default>
+        <BIOS_Default>0</BIOS_Default>
         <GBS>No</GBS>
         <Time_point />
         <Key_function>0</Key_function>

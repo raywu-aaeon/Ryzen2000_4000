@@ -26,16 +26,6 @@
     #ifndef ONEOF_AAEONRESTOREACPOWERLOSS
     #define ONEOF_AAEONRESTOREACPOWERLOSS
     #endif
-	
-	#define ONEOF_AAEONRIWAKEENABLE\
-		oneof varid    = SETUP_DATA.AaeonRIWakeEnable,\
-		prompt       = STRING_TOKEN (STR_AAEONRIWAKEENABLE),\
-		help         = STRING_TOKEN (STR_AAEONRIWAKEENABLE_HELP),\
-		default = ONEOF_AAEONRIWAKEENABLE_DEFAULT,\
-		default = ONEOF_AAEONRIWAKEENABLE_DEFAULT, defaultstore = AmiMfgDefault,\
-		option text  = STRING_TOKEN (STR_COMMON_DISABLED), value = 0, flags = RESET_REQUIRED;\
-		option text  = STRING_TOKEN (STR_COMMON_ENABLED), value = 1, flags = RESET_REQUIRED;\
-		endoneof;
 
 	//Do not remove this item
 	#define BOARD_ONEOF_ENGINEER_ITEM \
@@ -45,11 +35,12 @@
 		flags = RESET_REQUIRED,\
 		default = DEFAULT_ENGINEERING_MODE,\
 		default = DEFAULT_ENGINEERING_MODE, defaultstore = AmiMfgDefault,\
-		endcheckbox;   
+		endcheckbox;
+
 #endif //ENDIF CONTROL_DEFINITION
 
 #ifdef CONTROLS_WITH_DEFAULTS
-	ONEOF_AAEONRIWAKEENABLE
+
 #endif // CONTROLS_WITH_DEFAULTS
 //----------------------------------------------------------------------------
 //                VAR_SETUP
@@ -79,49 +70,52 @@
 	#ifdef AAEON_FORM_SET_GOTO
 
 		// CPU Configuration
-		goto AAEON_CPU_FORM_ID, 
+		goto OEM_CPU_FORM_ID, 
 		prompt = STRING_TOKEN(STR_CPU_FORM),
 		help = STRING_TOKEN(STR_CPU_FORM_HELP);
 		// SATA Configuration
-		goto AAEON_IDE_CONFIG_FORM_ID,
+		goto OEM_SATA_CONFIG_FORM_ID,
 		prompt  = STRING_TOKEN(STR_SATA_CONFIG_FORM),
 		help    = STRING_TOKEN(STR_SATA_CONFIG_FORM_HELP);
 		// USB Configuration
-		goto AAEON_USB_CONFIG_FORM_ID,
+		goto OEM_USB_CONFIG_FORM_ID,
 		prompt  = STRING_TOKEN(STR_USB_CONFIGURATION),
 		help    = STRING_TOKEN(STR_USB_CONFIGURATION_HELP);
 		// Hardware Monitor
-		goto AAEON_HARDWARE_MONITOR_CONFIG_FORM_ID,
-		prompt  = STRING_TOKEN(STR_AAEON_HARDWARE_MONITOR_CONFIG_FORM),
-		help    = STRING_TOKEN(STR_AAEON_HARDWARE_MONITOR_CONFIG_FORM_HELP);
+		goto HARDWARE_MONITOR_CONFIG_FORM_ID,
+		prompt  = STRING_TOKEN(STR_F81866_HMM_CONFIGURATION),
+		help    = STRING_TOKEN(STR_F81866_HMM_CONFIGURATION_HELP);
 		// SIO Configuration
-		#if SIO_SUPPORT
+		#if defined(SIO_SUPPORT) && (SIO_SUPPORT == 1)
 		goto formsetguid = SIO_FORM_SET_GUID, formid = SIO_MAIN_FORM_ID,
 		question = AUTO_ID(AAEON_SIO_KEY),
 		prompt  = STRING_TOKEN(STR_SIO_CONFIGURATION),
 		help    = STRING_TOKEN(STR_SIO_CONFIGURATION_HELP); 
-		#endif
+		#endif // SIO_SUPPORT
+
+		SEPARATOR
+		SUBTITLE(STRING_TOKEN(STR_OEM_FEATURES_FORM))
+		// Digital IO Port Configuration
+		#if defined (AaeonDio3_SUPPORT) && (AaeonDio3_SUPPORT == 1)
+		suppressif ideqval AAEON_SETUP_DATA.EgrMode == 0;
+		goto AAEON_DIO_FORM_ID,
+		    prompt  = STRING_TOKEN(STR_DIO_FORM),
+		    help    = STRING_TOKEN(STR_DIO_FORM_HELP);
+		endif;
+		#endif // AaeonDio3_SUPPORT
 
 		SEPARATOR
 
-		SUBTITLE(STRING_TOKEN(STR_AAEON_FEATURES_FORM))
-		// Power Management
-		goto AAEON_POWER_MANAGEMENT_FORM_ID,
-		prompt = STRING_TOKEN(STR_POWER_MANAGEMENT),
-		help = STRING_TOKEN(STR_POWER_MANAGEMENT_HELP);
-		// Digital IO Port Configuration
-		#if AaeonDioPkg_SUPPORT
-		goto AAEON_DIO_FORM_ID,
-		prompt  = STRING_TOKEN(STR_DIO_FORM),
-		help    = STRING_TOKEN(STR_DIO_FORM_HELP);
-		#endif
+        	#if SETUP_GROUP_DYNAMIC_PAGES
+        	    AMI_TSE_GROUP_DYNAMIC_PAGES
+        	#endif
 
 	#endif //AAEON_FORM_SET_GOTO
   
 	#ifdef FORM_SET_FORM
 
 // CPU Configuration BEGIN >>
-		form formid = AUTO_ID(AAEON_CPU_FORM_ID),
+		form formid = AUTO_ID(OEM_CPU_FORM_ID),
 			title = STRING_TOKEN(STR_CPU_FORM);
 			SUBTITLE(STRING_TOKEN(STR_CPU_FORM))
 		
@@ -132,7 +126,7 @@
 // CPU Configuration END <<
 
 // SATA Configuration BEGIN >>
-		form formid = AUTO_ID(AAEON_IDE_CONFIG_FORM_ID),
+		form formid = AUTO_ID(OEM_SATA_CONFIG_FORM_ID),
 			title = STRING_TOKEN(STR_SATA_CONFIG_FORM);
 			SUBTITLE(STRING_TOKEN(STR_SATA_CONFIG_FORM))
 		
@@ -143,7 +137,7 @@
 // SATA Configuration END <<
 
 // USB Configuration BEGIN >>
-		form formid = AUTO_ID(AAEON_USB_CONFIG_FORM_ID),
+		form formid = AUTO_ID(OEM_USB_CONFIG_FORM_ID),
 			title = STRING_TOKEN(STR_USB_CONFIGURATION);
 			SUBTITLE(STRING_TOKEN(STR_USB_CONFIGURATION))
 		
@@ -154,46 +148,16 @@
 // USB Configuration END <<
 
 // Hardware Monitor BEGIN >>
-		form formid = AUTO_ID(AAEON_HARDWARE_MONITOR_CONFIG_FORM_ID),
-			title = STRING_TOKEN(STR_AAEON_HARDWARE_MONITOR_CONFIG_FORM);
-			SUBTITLE(STRING_TOKEN(STR_AAEON_HARDWARE_MONITOR_CONFIG_FORM_HELP))
+		form formid = AUTO_ID(HARDWARE_MONITOR_CONFIG_FORM_ID),
+			title = STRING_TOKEN(STR_F81866_HMM_CONFIGURATION);
+
+			SUBTITLE(STRING_TOKEN(STR_PC_HEALTH))
 		
 			SEPARATOR
 
 
 		endform;
 // Hardware Monitor END <<
-
-// Power Management BEGIN >>
-		form formid = AUTO_ID(AAEON_POWER_MANAGEMENT_FORM_ID),
-			title = STRING_TOKEN(STR_POWER_MANAGEMENT);
-			SUBTITLE(STRING_TOKEN(STR_POWER_MANAGEMENT))
-		
-			SEPARATOR
-
-			ONEOF_AAEONPOWERMODE
-			#if defined(AAEONPOWERMODE_SUPPORT) && (AAEONPOWERMODE_SUPPORT == 1)
-			suppressif ideqval SETUP_DATA.AaeonPowerMode == 0x01;
-				ONEOF_AAEON_ERPPOWERMODE
-
-				ONEOF_AAEONRESTOREACPOWERLOSS
-				suppressif ideqval AAEON_SETUP_DATA.EgrMode == 0;
-					ONEOF_AAEONRESTOREACPOWERLOSS_SRC
-				endif;
-
-				SEPARATOR
-
-				SUBTITLE(STRING_TOKEN(STR_AAEON_WAKE_EVENTS))
-				ONEOF_AAEONRIWAKEENABLE
-				#if defined(AaeonRtcWakePkg_SUPPORT) && (AaeonRtcWakePkg_SUPPORT == 1)
-				#define AAEON_RTCWAKE_FORM_SET_ITEM
-				#include "AaeonCommonPkg/AaeonRtcWakePkg/AaeonRtcWakePkg.sd"
-				#undef AAEON_RTCWAKE_FORM_SET_ITEM
-				#endif
-			endif;
-			#endif //AAEONPOWERMODE_SUPPORT
-		endform;
-// Power Management END <<
 
 		form formid = AUTO_ID(AAEON_ADVANCED_MAIN),
 			title = STRING_TOKEN(STR_AAEON_ADVANCED);
