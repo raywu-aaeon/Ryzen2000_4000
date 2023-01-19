@@ -561,7 +561,7 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
         DxioGenMaxSupported,                  // Max Link Speed
         DxioGenMaxSupported,                  // Max Link Capability
         DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
-        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL11Enabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
         DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
         DxioClkPmSupportEnabled,              // Clock PM
         CLK_REQ0                            // CLKREQ#
@@ -578,7 +578,7 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
         DxioGenMaxSupported,                  // Max Link Speed
         DxioGenMaxSupported,                  // Max Link Capability
         DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
-        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL11Enabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
         DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
         DxioClkPmSupportEnabled,              // Clock PM
         CLK_REQ1                            // CLKREQ#
@@ -638,7 +638,7 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable_RV2 = {
         DxioGenMaxSupported,                  // Max Link Speed
         DxioGenMaxSupported,                  // Max Link Capability
         DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
-        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL11Enabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
         DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
         DxioClkPmSupportEnabled,              // Clock PM
         CLK_REQ0                            // CLKREQ#
@@ -655,7 +655,7 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable_RV2 = {
         DxioGenMaxSupported,                  // Max Link Speed
         DxioGenMaxSupported,                  // Max Link Capability
         DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
-        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL11Enabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
         DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
         DxioClkPmSupportEnabled,              // Clock PM
         CLK_REQ1                            // CLKREQ#
