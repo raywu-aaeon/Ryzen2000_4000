@@ -979,6 +979,106 @@ PcdMapping
     Token = "DEBUG_MODE" "=" "1"
 End
 
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "BOOLEAN"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "#Switch for Debug Print function."
+    TargetDSC = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPortEnable"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "BOOLEAN"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "Switch for Serial port support of AGESA debug print, NOTE, AGESA will not init the serial port, serial port should be initialized before call AGESA debug print"
+    TargetDSC = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+  
+PcdMapping
+    Name  = "PcdAmdIdsDebugPrintSerialPort"
+    GuidSpace  = "gEfiAmdAgesaPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT64"
+    Value  = "0x3F8"
+    Offset  = 00h
+    Length  = 01h
+    Help  = "#Specify the IO port for serial out"
+    TargetDSC = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+TOKEN
+    Name  = "AGESA_DEBUG_MESSAGES_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AGESA DEBUG MESSAGES in Project. You must enable Debug_Mode as well to get messages."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialRegisterBase"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint64"
+    Value  = "0x3F8"
+    Offset  = 00h
+    Length  = 08h
+    TargetDSC = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialUseMmio"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+TOKEN
+    Name  = "CRB_EXT_SERIAL_PORT_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AMD CRB external serial port support in Project"
+    TokenType = Boolean
+    Token = "FCH_UART_DEBUG_SELECT" "=" "0"
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+TOKEN
+    Name  = "OPTIMIZATION"
+    Value  = "1"
+    Help  = "Enables/disables C compiler optimization."
+    TokenType = Boolean
+    TargetMAK = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+TOKEN
+    Name  = "STRING_STATUS_SUPPORT"
+    Value  = "1"
+    Help  = "Enables/Disables all string-based status code routines \defined by the ReportStringStatus eLink"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
 TOKEN
     Name  = " "
     TokenType = Integer
