@@ -483,13 +483,13 @@ AMD_CPM_PCIE_CLOCK_TABLE    gCpmPcieClockTable = {
 //   UINT8  SlotCheck;          // Slot Check Flag: // BIT0: Check PCI Space // BIT1: Check GPIO pin // BIT2: Check Clock Power Management Enable // BIT3~6: Reserved // BIT7: Change PCIe Clock in ACPI method
 //   UINT32 SpecialFunctionId;  // Id of Special Function}
 //        (socket,die, ClkId,     ClkReq,     DeviceId,             Device,Function,SlotCheck)
-    PCIE_INCLK (0, 0,  GPP_CLK0,  CLK_REQ0,   DEVICE_ID_LAN,         1,     1,       SLOT_CHECK), // LAN1 RTL8125BG (LAN1_1)
-    PCIE_INCLK (0, 0,  GPP_CLK1,  CLK_REQ1,   DEVICE_ID_LAN,         1,     2,       SLOT_CHECK), // LAN2 RTL8125BG (LAN2_1)
-    PCIE_INCLK (0, 0,  GPP_CLK2,  CLK_ENABLE,   DEVICE_ID_M2_CONNECT,  1,     3,       SLOT_CHECK), // M.2-B Key (B_KEY1)
-    PCIE_INCLK (0, 0,  GPP_CLK5,  CLK_ENABLE,   DEVICE_ID_DT,          1,     6,       SLOT_CHECK), // Mini-PCIe (MINIPCIE1)
-    PCIE_INCLK (0, 0,  GPP_CLK3,  CLK_ENABLE,   DEVICE_ID_M2_CONNECT2, 1,     4,       SLOT_CHECK), // M.2-M Key (M_KEY1)
-    PCIE_INCLK (0, 0,  GPP_CLK4,  CLK_ENABLE,   DEVICE_ID_DT,          1,     5,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
-    PCIE_INCLK (0, 0,  GPP_CLK6,  CLK_ENABLE,   DEVICE_ID_DT,          1,     7,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK0,  CLK_REQ0,     DEVICE_ID_LAN,         1,     1,       SLOT_CHECK), // LAN1 RTL8125BG (LAN1_1)
+    PCIE_INCLK (0, 0,  GPP_CLK1,  CLK_REQ1,     DEVICE_ID_LAN,         1,     2,       SLOT_CHECK), // LAN2 RTL8125BG (LAN2_1)
+    PCIE_INCLK (0, 0,  GPP_CLK2,  CLK_REQ2,     DEVICE_ID_M2_CONNECT,  1,     3,       SLOT_CHECK), // M.2-B Key (B_KEY1)
+    PCIE_INCLK (0, 0,  GPP_CLK5,  CLK_REQ5,     DEVICE_ID_DT,          1,     6,       SLOT_CHECK), // Mini-PCIe (MINIPCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK3,  CLK_REQ3,     DEVICE_ID_M2_CONNECT2, 1,     4,       SLOT_CHECK), // M.2-M Key (M_KEY1)
+    PCIE_INCLK (0, 0,  GPP_CLK4,  CLK_ENABLE,   DEVICE_ID_MXM,         8,     1,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK6,  CLK_ENABLE,   DEVICE_ID_MXM,         8,     1,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
     0xFF,
   }
 };
@@ -516,13 +516,13 @@ AMD_CPM_PCIE_CLOCK_TABLE    gCpmPcieClockTable_RV2 = {
 //   UINT8  SlotCheck;          // Slot Check Flag: // BIT0: Check PCI Space // BIT1: Check GPIO pin // BIT2: Check Clock Power Management Enable // BIT3~6: Reserved // BIT7: Change PCIe Clock in ACPI method
 //   UINT32 SpecialFunctionId;  // Id of Special Function}
 //        (socket,die, ClkId,     ClkReq,       DeviceId,             Device,Function,SlotCheck)
-    PCIE_INCLK (0, 0,  GPP_CLK0,  CLK_REQ0,   DEVICE_ID_LAN,         1,     1,       SLOT_CHECK), // LAN1 RTL8125BG (LAN1_1)
-    PCIE_INCLK (0, 0,  GPP_CLK1,  CLK_REQ1,   DEVICE_ID_LAN,         1,     2,       SLOT_CHECK), // LAN2 RTL8125BG (LAN2_1)
-    PCIE_INCLK (0, 0,  GPP_CLK2,  CLK_ENABLE,   DEVICE_ID_M2_CONNECT,  1,     3,       SLOT_CHECK), // M.2-B Key (B_KEY1)
-    PCIE_INCLK (0, 0,  GPP_CLK5,  CLK_ENABLE,   DEVICE_ID_DT,          1,     6,       SLOT_CHECK), // Mini-PCIe (MINIPCIE1)
-    PCIE_INCLK (0, 0,  GPP_CLK3,  CLK_ENABLE,   DEVICE_ID_M2_CONNECT2, 1,     4,       SLOT_CHECK), // M.2-M Key (M_KEY1)
-    PCIE_INCLK (0, 0,  GPP_CLK4,  CLK_ENABLE,   DEVICE_ID_DT,          1,     5,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
-    PCIE_INCLK (0, 0,  GPP_CLK6,  CLK_ENABLE,   DEVICE_ID_DT,          1,     7,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK0,  CLK_REQ0,     DEVICE_ID_LAN,         1,     1,       SLOT_CHECK), // LAN1 RTL8125BG (LAN1_1)
+    PCIE_INCLK (0, 0,  GPP_CLK1,  CLK_REQ1,     DEVICE_ID_LAN,         1,     2,       SLOT_CHECK), // LAN2 RTL8125BG (LAN2_1)
+    PCIE_INCLK (0, 0,  GPP_CLK2,  CLK_REQ2,     DEVICE_ID_M2_CONNECT,  1,     3,       SLOT_CHECK), // M.2-B Key (B_KEY1)
+    PCIE_INCLK (0, 0,  GPP_CLK5,  CLK_REQ5,     DEVICE_ID_DT,          1,     6,       SLOT_CHECK), // Mini-PCIe (MINIPCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK3,  CLK_REQ3,     DEVICE_ID_M2_CONNECT2, 1,     4,       SLOT_CHECK), // M.2-M Key (M_KEY1)
+    PCIE_INCLK (0, 0,  GPP_CLK4,  CLK_ENABLE,   DEVICE_ID_MXM,         8,     1,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
+    PCIE_INCLK (0, 0,  GPP_CLK6,  CLK_ENABLE,   DEVICE_ID_MXM,         8,     1,       SLOT_CHECK), // PCI-E X8 SLOT (PCIE1)
     0xFF,
   }
 };
@@ -564,11 +564,11 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
         DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
         DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
         DxioClkPmSupportEnabled,              // Clock PM
-        CLK_REQ0                            // CLKREQ#
+        CLK_REQ0                              // CLKREQ#
       )
     },
     {
-      DESCRIPTOR_TERMINATE_LIST,
+      0,
       DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 5, 5, HotPluggableDisabled, DEVICE_ID_LAN),
       DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
         DxioPortEnabled,                      // Port Present
@@ -581,7 +581,107 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
         DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
         DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
         DxioClkPmSupportEnabled,              // Clock PM
-        CLK_REQ1                            // CLKREQ#
+        CLK_REQ1                              // CLKREQ#
+      )
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 6, 6, HotPluggableDisabled, DEVICE_ID_LAN),
+      DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
+        DxioPortEnabled,                      // Port Present
+        1,                                    // Requested Device
+        3,                                    // Requested Function
+        DxioHotplugDisabled,                  // Hotplug
+        DxioGenMaxSupported,                  // Max Link Speed
+        DxioGenMaxSupported,                  // Max Link Capability
+        DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
+        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioClkPmSupportEnabled,              // Clock PM
+        CLK_REQ2                              // CLKREQ#
+      )
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 7, 7, HotPluggableDisabled, DEVICE_ID_LAN),
+      DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
+        DxioPortEnabled,                      // Port Present
+        1,                                    // Requested Device
+        4,                                    // Requested Function
+        DxioHotplugDisabled,                  // Hotplug
+        DxioGenMaxSupported,                  // Max Link Speed
+        DxioGenMaxSupported,                  // Max Link Capability
+        DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
+        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioClkPmSupportEnabled,              // Clock PM
+        CLK_REQ5                              // CLKREQ#
+      )
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 0, 1, HotPluggableDisabled, DEVICE_ID_LAN),
+      DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
+        DxioPortEnabled,                      // Port Present
+        1,                                    // Requested Device
+        5,                                    // Requested Function
+        DxioHotplugDisabled,                  // Hotplug
+        DxioGenMaxSupported,                  // Max Link Speed
+        DxioGenMaxSupported,                  // Max Link Capability
+        DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
+        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioClkPmSupportEnabled,              // Clock PM
+        CLK_REQ3                              // CLKREQ#
+      )
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioSATAEngine, 2, 2, HotPluggableDisabled, 1),
+      DXIO_PORT_DATA_INITIALIZER_SATA_V2 (DxioPortEnabled, DxioSataChannelLong)    // Port Present
+      PHY_PARAMS_START                         // The SATA PHY tuning values must be configured to all DxioSATAEngine 
+        PHY_PARAM (GEN1_txX_eq_pre, 0),        // otherwise the values won't be changed in the register.
+        PHY_PARAM (GEN1_txX_eq_main, 0x20),
+        PHY_PARAM (GEN1_txX_eq_post, 0x06),
+        PHY_PARAM (GEN2_txX_eq_pre, 0),
+        PHY_PARAM (GEN2_txX_eq_main, 0x22),
+        PHY_PARAM (GEN2_txX_eq_post, 0x18),
+        PHY_PARAM (GEN3_txX_eq_pre, 0x0),
+        PHY_PARAM (GEN3_txX_eq_main, 0x1D),
+        PHY_PARAM (GEN3_txX_eq_post, 0x2C),
+      PHY_PARAMS_END
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioSATAEngine, 3, 3, HotPluggableDisabled, 1),
+      DXIO_PORT_DATA_INITIALIZER_SATA_V2 (DxioPortEnabled, DxioSataChannelLong)    // Port Present
+      PHY_PARAMS_START                         // The SATA PHY tuning values must be configured to all DxioSATAEngine 
+        PHY_PARAM (GEN1_txX_eq_pre, 0),        // otherwise the values won't be changed in the register.
+        PHY_PARAM (GEN1_txX_eq_main, 0x20),
+        PHY_PARAM (GEN1_txX_eq_post, 0x06),
+        PHY_PARAM (GEN2_txX_eq_pre, 0),
+        PHY_PARAM (GEN2_txX_eq_main, 0x22),
+        PHY_PARAM (GEN2_txX_eq_post, 0x18),
+        PHY_PARAM (GEN3_txX_eq_pre, 0x0),
+        PHY_PARAM (GEN3_txX_eq_main, 0x1D),
+        PHY_PARAM (GEN3_txX_eq_post, 0x2C),
+      PHY_PARAMS_END
+    },
+    {
+      DESCRIPTOR_TERMINATE_LIST,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 15, 8, HotPluggableDisabled, DEVICE_ID_MXM),
+      DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
+        DxioPortEnabled,                      // Port Present
+        8,                                    // Requested Device
+        1,                                    // Requested Function
+        DxioHotplugDisabled,                  // Hotplug
+        DxioGenMaxSupported,                  // Max Link Speed
+        DxioGenMaxSupported,                  // Max Link Capability
+        DxioAspmL1,                           // DxioAspmL0sL1, // ASPM
+        DxioAspmL11Enabled,                   // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Enabled,                   // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioClkPmSupportDisabled,             // Clock PM
+        CLK_REQ3                              // CLKREQ#
       )
     }
   },  // End of DXIO_PORT_DESCRIPTOR
@@ -641,11 +741,11 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable_RV2 = {
         DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
         DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
         DxioClkPmSupportEnabled,              // Clock PM
-        CLK_REQ0                            // CLKREQ#
+        CLK_REQ0                              // CLKREQ#
       )
     },
     {
-      DESCRIPTOR_TERMINATE_LIST,
+      0,
       DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 5, 5, HotPluggableDisabled, DEVICE_ID_LAN),
       DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
         DxioPortEnabled,                      // Port Present
@@ -658,7 +758,107 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable_RV2 = {
         DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
         DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
         DxioClkPmSupportEnabled,              // Clock PM
-        CLK_REQ1                            // CLKREQ#
+        CLK_REQ1                              // CLKREQ#
+      )
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 6, 6, HotPluggableDisabled, DEVICE_ID_LAN),
+      DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
+        DxioPortEnabled,                      // Port Present
+        1,                                    // Requested Device
+        3,                                    // Requested Function
+        DxioHotplugDisabled,                  // Hotplug
+        DxioGenMaxSupported,                  // Max Link Speed
+        DxioGenMaxSupported,                  // Max Link Capability
+        DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
+        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioClkPmSupportEnabled,              // Clock PM
+        CLK_REQ2                              // CLKREQ#
+      )
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 7, 7, HotPluggableDisabled, DEVICE_ID_LAN),
+      DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
+        DxioPortEnabled,                      // Port Present
+        1,                                    // Requested Device
+        4,                                    // Requested Function
+        DxioHotplugDisabled,                  // Hotplug
+        DxioGenMaxSupported,                  // Max Link Speed
+        DxioGenMaxSupported,                  // Max Link Capability
+        DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
+        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioClkPmSupportEnabled,              // Clock PM
+        CLK_REQ5                              // CLKREQ#
+      )
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 0, 1, HotPluggableDisabled, DEVICE_ID_LAN),
+      DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
+        DxioPortEnabled,                      // Port Present
+        1,                                    // Requested Device
+        5,                                    // Requested Function
+        DxioHotplugDisabled,                  // Hotplug
+        DxioGenMaxSupported,                  // Max Link Speed
+        DxioGenMaxSupported,                  // Max Link Capability
+        DxioAspmDisabled,                     // DxioAspmL0sL1, // ASPM
+        DxioAspmL11Disabled,                  // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Disabled,                  // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioClkPmSupportEnabled,              // Clock PM
+        CLK_REQ3                              // CLKREQ#
+      )
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioSATAEngine, 2, 2, HotPluggableDisabled, 1),
+      DXIO_PORT_DATA_INITIALIZER_SATA_V2 (DxioPortEnabled, DxioSataChannelLong)    // Port Present
+      PHY_PARAMS_START                         // The SATA PHY tuning values must be configured to all DxioSATAEngine 
+        PHY_PARAM (GEN1_txX_eq_pre, 0),        // otherwise the values won't be changed in the register.
+        PHY_PARAM (GEN1_txX_eq_main, 0x20),
+        PHY_PARAM (GEN1_txX_eq_post, 0x06),
+        PHY_PARAM (GEN2_txX_eq_pre, 0),
+        PHY_PARAM (GEN2_txX_eq_main, 0x22),
+        PHY_PARAM (GEN2_txX_eq_post, 0x18),
+        PHY_PARAM (GEN3_txX_eq_pre, 0x0),
+        PHY_PARAM (GEN3_txX_eq_main, 0x1D),
+        PHY_PARAM (GEN3_txX_eq_post, 0x2C),
+      PHY_PARAMS_END
+    },
+    {
+      0,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioSATAEngine, 3, 3, HotPluggableDisabled, 1),
+      DXIO_PORT_DATA_INITIALIZER_SATA_V2 (DxioPortEnabled, DxioSataChannelLong)    // Port Present
+      PHY_PARAMS_START                         // The SATA PHY tuning values must be configured to all DxioSATAEngine 
+        PHY_PARAM (GEN1_txX_eq_pre, 0),        // otherwise the values won't be changed in the register.
+        PHY_PARAM (GEN1_txX_eq_main, 0x20),
+        PHY_PARAM (GEN1_txX_eq_post, 0x06),
+        PHY_PARAM (GEN2_txX_eq_pre, 0),
+        PHY_PARAM (GEN2_txX_eq_main, 0x22),
+        PHY_PARAM (GEN2_txX_eq_post, 0x18),
+        PHY_PARAM (GEN3_txX_eq_pre, 0x0),
+        PHY_PARAM (GEN3_txX_eq_main, 0x1D),
+        PHY_PARAM (GEN3_txX_eq_post, 0x2C),
+      PHY_PARAMS_END
+    },
+    {
+      DESCRIPTOR_TERMINATE_LIST,
+      DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 15, 8, HotPluggableDisabled, DEVICE_ID_MXM),
+      DXIO_PORT_DATA_INITIALIZER_PCIE_V2 (
+        DxioPortEnabled,                      // Port Present
+        8,                                    // Requested Device
+        1,                                    // Requested Function
+        DxioHotplugDisabled,                  // Hotplug
+        DxioGenMaxSupported,                  // Max Link Speed
+        DxioGenMaxSupported,                  // Max Link Capability
+        DxioAspmL1,                           // DxioAspmL0sL1, // ASPM
+        DxioAspmL11Enabled,                   // ASPM L1.1  // 0:disabled, 1:Enabled
+        DxioAspmL12Enabled,                   // ASPM L1.2  // 0:disabled, 1:Enabled
+        DxioClkPmSupportDisabled,             // Clock PM
+        CLK_REQ3                              // CLKREQ#
       )
     }
   },  // End of DXIO_PORT_DESCRIPTOR
