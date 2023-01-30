@@ -31,7 +31,7 @@ TOKEN
 End
 TOKEN
 	Name  = "AAEON_MINOR_VERSION"
-	Value  = "1"
+	Value  = "2"
 	TokenType = Expression
 	TargetMAK = Yes
 	TargetH = Yes
