@@ -414,13 +414,6 @@ TOKEN
 	TargetH = Yes
 End
 TOKEN
-	Name  = "LOGO_FILE_NAME"
-	Value  = "AaeonCommonPkg/AAEON_2017_800x600.jpg"
-	TokenType = Expression
-	TargetMAK = Yes
-	TargetFDF = Yes
-End
-TOKEN
 	Name  = "SETUP_HIDE_BIOS_SIGNON_MESSAGE2"
 	Value  = "1"
 	Help  = "1 => Hides the BIOS signon message. 0 => Shows the BIOS sign on message."
