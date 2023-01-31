@@ -583,7 +583,7 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable = {
         DxioClkPmSupportDisabled,              // Clock PM
         CLK_ENABLE                            // CLKREQ#
       )
-    }
+    },
     {
       0,
       DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 6, 6, HotPluggableDisabled, DEVICE_ID_M2_CONNECT),
@@ -777,7 +777,7 @@ AMD_CPM_DXIO_TOPOLOGY_TABLE gCpmDxioTopologyTable_RV2 = {
         DxioClkPmSupportDisabled,              // Clock PM
         CLK_ENABLE                            // CLKREQ#
       )
-    }
+    },
     {
       0,
       DXIO_ENGINE_DATA_INITIALIZER (DxioPcieEngine, 6, 6, HotPluggableDisabled, DEVICE_ID_M2_CONNECT),
