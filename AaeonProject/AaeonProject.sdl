@@ -241,6 +241,130 @@ SIODEVICE
 # << AAEON_OVERRIDE
 End
 
+LDEVICE
+    Name  = "Com1"
+    SioDevice  = "F81866"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "010h"
+    UID  = "01h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81866_COM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\ACPI\UART1.ASL'"
+    ASLdeviceName  = "URT1"
+    Token = "F81866_SERIAL_PORT1_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com2"
+    SioDevice  = "F81866"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "011h"
+    UID  = "02h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81866_COM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\ACPI\UART2.ASL'"
+    ASLdeviceName  = "URT2"
+    Token = "F81866_SERIAL_PORT2_PRESENT" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com3"
+    SioDevice  = "F81866"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "012h"
+    UID  = "03h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x0"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81866_COM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\F81866\UART3_Edge.ASL'"
+    ASLdeviceName  = "URT3"
+    Token = "F81866_SERIAL_PORT3_PRESENT" "=" "1"
+    Token = "F81866_UART3_LEVEL_EDGE_SHARE_MODE" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com4"
+    SioDevice  = "F81866"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "013h"
+    UID  = "04h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x4"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81866_COM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\F81866\UART4_Edge.ASL'"
+    ASLdeviceName  = "URT4"
+    Token = "F81866_SERIAL_PORT4_PRESENT" "=" "1"
+    Token = "F81866_UART4_LEVEL_EDGE_SHARE_MODE" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com5"
+    SioDevice  = "F81866"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "014h"
+    UID  = "05h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x4"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81866_COM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\F81866\UART5_Edge.ASL'"
+    ASLdeviceName  = "URT5"
+    Token = "F81866_SERIAL_PORT5_PRESENT" "=" "1"
+    Token = "F81866_UART5_LEVEL_EDGE_SHARE_MODE" "=" "1"
+End
+
+LDEVICE
+    Name  = "Com6"
+    SioDevice  = "F81866"
+    Dev_Type  = "dsUART"
+    LDev_Num  = "015h"
+    UID  = "06h"
+    PnPID  = "0501h"
+    SIO_RES_Flag  = "0x4"
+    HasSetup = Yes
+    ResBaseAddr1  = "00h"
+    ResLength1  = "00h"
+    ResBaseAddr2  = "00h"
+    ResLength2  = "00h"
+    InitRoutine  = "F81866_COM_Init"
+    SleepNum  = 01h
+    ASLfile  = "'AaeonIoPkg\F81866\UART6_Edge.ASL'"
+    ASLdeviceName  = "URT6"
+    Token = "F81866_SERIAL_PORT6_PRESENT" "=" "1"
+    Token = "F81866_UART6_LEVEL_EDGE_SHARE_MODE" "=" "1"
+End
+
 TOKEN
     Name  = "F81866_PARALLEL_PORT_PRESENT"
     Value  = "0"
