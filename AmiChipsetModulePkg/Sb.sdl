@@ -77,7 +77,7 @@ PCIDEVICE
 	Dev  = 00h
 	Fun  = 00h
 	SleepNum  = 01h
-	ASLfile  = "'AmiChipsetModulePkg/Asl/Pci0_ini.asl;After Pci Tree','AgesaModulePkg/Fch/Sandstone/FchSandstoneCore/Sandstone/FchRaven.asi;After Pci Tree'"
+	ASLfile  = "'AmiChipsetModulePkg/Asl/Pci0_ini.asl;After Pci Tree'"
 	DeviceType = OnBoard
 	PCIBusSize = 32bit
 	ROMMain = No
