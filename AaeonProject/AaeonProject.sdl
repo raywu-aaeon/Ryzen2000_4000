@@ -14,7 +14,7 @@ End
 
 TOKEN
 	Name  = "PROJECT_TAG"
-	Value  = "4000A"
+	Value  = "4000T"
 	TokenType = Expression
 	TargetMAK = Yes
 	TargetH = Yes
