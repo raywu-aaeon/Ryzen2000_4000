@@ -167,371 +167,371 @@ TOKEN
     TokenType = Integer
 End
 
-#TOKEN
-#    Name  = "====== SIO Configuration ======"
-#    TokenType = Expression
-#End
-#
-#TOKEN
-#	Name  = "AaeonIoPkg_SUPPORT"
-#	Value  = "1"
-#	TokenType = Boolean
-#	TargetEQU = Yes
-#	TargetMAK = Yes
-#	TargetH = Yes
-#End
-#
-#TOKEN
-#    Name  = "F81866_SUPPORT"
-#    Value  = "1"
-#    Help  = "Main switch to enable F81866 support in Project"
-#    TokenType = Boolean
-#    TargetEQU = Yes
-#    TargetH = Yes
-#End
-#
-#TOKEN
-#    Name  = "F81866_CONFIG_INDEX"
-#    Value  = "0x4E"
-#    TokenType = Integer
-#    TargetEQU = Yes
-#    TargetH = Yes
-#End
-#
-#TOKEN
-#    Name  = "F81866_CONFIG_DATA"
-#    Value  = "0x4F"
-#    TokenType = Integer
-#    TargetEQU = Yes
-#    TargetH = Yes
-#End
-#
-#SIODEVICE
-#    Name  = "F81866"
-#    Parent  = "LpcBridge"
-#    IndexPort  = 04eh
-#    DataPort  = 04fh
-#    StdSioType  = "Yes"
-#    DevSelReg  = 07h
-#    ActivateReg  = 030h
-#    ActivateVal  = 01h
-#    DeActivateVal  = 00h
-#    BaseHiReg1  = 060h
-#    BaseLoReg1  = 061h
-#    BaseHiReg2  = 062h
-#    BaseLoReg2  = 063h
-#    Irq1Reg  = 070h
-#    Irq2Reg  = 072h
-#    Dma1Reg  = 074h
-#    Dma2Reg  = 075h
-#    GblRegFlag  = "0x3fe000000000"
-#    LocalRegFlag  = "0xffffffff0000000000000000000000000033000f000000000001000000000000"
-#    EnterConfig  = "Script,'Index;Write;87h','Index;Write;87h'"
-#    ExitConfig  = "Script,'Index;Write;aah'"
-#    SMBIOSStr  = "Test String"
-#    GPEbit  = 01dh
-#    SleepNum  = 03h
-#    ASLfile  = "'AaeonIoPkg\F81866\F81866DEV.asl','AaeonIoPkg\F81866\F81866EVT.asl'"
-#    ASLdeviceName  = "SIO1"
-## >> AAEON_OVERRIDE
-##    ASL_PTS  = "Method;\_SB.PCI0.SBRG.SIO1.SIOS(Arg0)"
-##    ASL_WAK  = "Method;\_SB.PCI0.SBRG.SIO1.SIOW(Arg0)"
-#    ASL_PTS  = "Method;SIO_PTS(Arg0)"
-#    ASL_WAK  = "Method;SIO_WAK(Arg0)"
-## << AAEON_OVERRIDE
-#End
-#
-#TOKEN
-#    Name  = "F81866_PARALLEL_PORT_PRESENT"
-#    Value  = "0"
-#    Help  = "LPT Port Present / Not Present."
-#    TokenType = Boolean
-#    TargetH = Yes
-#End
-#
-#TOKEN
-#    Name  = "F81866_KEYBOARD_PRESENT"
-#    Value  = "0"
-#    Help  = "Keyboard Present / Not Present."
-#    TokenType = Boolean
-#    TargetH = Yes
-#End
-#
-#TOKEN
-#    Name  = "F81866_MOUSE_PRESENT"
-#    Value  = "0"
-#    Help  = "Mouse Present / Not Present."
-#    TokenType = Boolean
-#    TargetH = Yes
-#End
-#
-#TOKEN
-#	Name  = "F81866_ERP_SUPPORT"
-#	Value  = "0"
-#	Help = "F81866_ERP_Miles++"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#
-#TOKEN
-#    Name  = " "
-#    TokenType = Integer
-#End
-#
-#TOKEN
-#    Name  = "====== SIO Configuration \ Hardware Monitor ======"
-#    TokenType = Expression
-#End
-#TOKEN
-#	Name  = "SCL_PIN67_EN"
-#	Value  = "0"
-#	Help  = "0: Disable SCL\1: Enable SCL"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "SDA_PIN68_EN"
-#	Value  = "0"
-#	Help  = "0: Disable SDA\1: Enable SDA"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "GPIO67_EN"
-#	Value  = "1"
-#	Help  = "0: S5#\1: GPIO67"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "GPIO14_EN"
-#	Value  = "1"
-#	Help  = "0: ATX_AT_TRAP\1: GPIO14"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "GPIO22_EN"
-#	Value  = "1"
-#	Help  = "0: PWSIN#\1: GPIO22"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "GPIO23_EN"
-#	Value  = "1"
-#	Help  = "0: PWSOUT#\1: GPIO23"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "GPIO24_EN"
-#	Value  = "1"
-#	Help  = "0: S3#\1: GPIO24"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "GPIO25_EN"
-#	Value  = "1"
-#	Help  = "0: PSON#\1: GPIO25"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "GPIO26_EN"
-#	Value  = "1"
-#	Help  = "0: PWOK\1: GPIO26"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "GPIO27_EN"
-#	Value  = "1"
-#	Help  = "0: RSMRST#\1: GPIO27"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#
-#TOKEN
-#	Name  = "F81866_T1_MODE"
-#	Value  = "0"
-#	Help  = "0: TEMP1 is connected to a thermistor\1: TEMP1 is connected to a BJT.(default)"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "VIN2_RA"
-#	Value  = "200"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "VIN2_RB"
-#	Value  = "47"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "VIN3_RA"
-#	Value  = "200"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "VIN3_RB"
-#	Value  = "47"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "VIN4_RA"
-#	Value  = "10"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "VIN4_RB"
-#	Value  = "1"
-#	TokenType = Integer
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866_SMF1_SUPPORT"
-#	Value  = "1"
-#	Help  = "F81866 SmartFan 1 control support"
-#	TokenType = Boolean
-#	TargetMAK = Yes
-#	TargetH = Yes
-#	Token = "F81866_SMF_SUPPORT" "=" "1"
-#End
-#TOKEN
-#	Name  = "F81866_SMF2_SUPPORT"
-#	Value  = "1"
-#	Help  = "F81866 SmartFan 2 control support"
-#	TokenType = Boolean
-#	TargetMAK = Yes
-#	TargetH = Yes
-#	Token = "F81866_SMF_SUPPORT" "=" "1"
-#End
-#
-#TOKEN
-#	Name  = "F81866GPIO10_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO11_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO11_VAL_DEFAULT"
-#	Value  = "0"
-#	Help  = "0: Low\1: High"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO12_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO13_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO13_VAL_DEFAULT"
-#	Value  = "0"
-#	Help  = "0: Low\1: High"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO70_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO71_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO71_VAL_DEFAULT"
-#	Value  = "0"
-#	Help  = "0: Low\1: High"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO72_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO73_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO73_VAL_DEFAULT"
-#	Value  = "0"
-#	Help  = "0: Low\1: High"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO80_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO81_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO82_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#	Name  = "F81866GPIO83_OE_DEFAULT"
-#	Value  = "1"
-#	Help  = "0: Input\1: Output"
-#	TokenType = Boolean
-#	TargetH = Yes
-#End
-#TOKEN
-#    Name  = " "
-#    TokenType = Integer
-#End
-#
+TOKEN
+    Name  = "====== SIO Configuration ======"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "AaeonIoPkg_SUPPORT"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable F81866 support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_CONFIG_INDEX"
+    Value  = "0x4E"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_CONFIG_DATA"
+    Value  = "0x4F"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+SIODEVICE
+    Name  = "F81866"
+    Parent  = "LpcBridge"
+    IndexPort  = 04eh
+    DataPort  = 04fh
+    StdSioType  = "Yes"
+    DevSelReg  = 07h
+    ActivateReg  = 030h
+    ActivateVal  = 01h
+    DeActivateVal  = 00h
+    BaseHiReg1  = 060h
+    BaseLoReg1  = 061h
+    BaseHiReg2  = 062h
+    BaseLoReg2  = 063h
+    Irq1Reg  = 070h
+    Irq2Reg  = 072h
+    Dma1Reg  = 074h
+    Dma2Reg  = 075h
+    GblRegFlag  = "0x3fe000000000"
+    LocalRegFlag  = "0xffffffff0000000000000000000000000033000f000000000001000000000000"
+    EnterConfig  = "Script,'Index;Write;87h','Index;Write;87h'"
+    ExitConfig  = "Script,'Index;Write;aah'"
+    SMBIOSStr  = "Test String"
+    GPEbit  = 01dh
+    SleepNum  = 03h
+    ASLfile  = "'AaeonIoPkg\F81866\F81866DEV.asl','AaeonIoPkg\F81866\F81866EVT.asl'"
+    ASLdeviceName  = "SIO1"
+# >> AAEON_OVERRIDE
+#    ASL_PTS  = "Method;\_SB.PCI0.SBRG.SIO1.SIOS(Arg0)"
+#    ASL_WAK  = "Method;\_SB.PCI0.SBRG.SIO1.SIOW(Arg0)"
+    ASL_PTS  = "Method;SIO_PTS(Arg0)"
+    ASL_WAK  = "Method;SIO_WAK(Arg0)"
+# << AAEON_OVERRIDE
+End
+
+TOKEN
+    Name  = "F81866_PARALLEL_PORT_PRESENT"
+    Value  = "0"
+    Help  = "LPT Port Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_KEYBOARD_PRESENT"
+    Value  = "0"
+    Help  = "Keyboard Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_MOUSE_PRESENT"
+    Value  = "0"
+    Help  = "Mouse Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81866_ERP_SUPPORT"
+	Value  = "0"
+	Help = "F81866_ERP_Miles++"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== SIO Configuration \ Hardware Monitor ======"
+    TokenType = Expression
+End
+TOKEN
+	Name  = "SCL_PIN67_EN"
+	Value  = "0"
+	Help  = "0: Disable SCL\1: Enable SCL"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "SDA_PIN68_EN"
+	Value  = "0"
+	Help  = "0: Disable SDA\1: Enable SDA"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO67_EN"
+	Value  = "1"
+	Help  = "0: S5#\1: GPIO67"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO14_EN"
+	Value  = "1"
+	Help  = "0: ATX_AT_TRAP\1: GPIO14"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO22_EN"
+	Value  = "1"
+	Help  = "0: PWSIN#\1: GPIO22"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO23_EN"
+	Value  = "1"
+	Help  = "0: PWSOUT#\1: GPIO23"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO24_EN"
+	Value  = "1"
+	Help  = "0: S3#\1: GPIO24"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO25_EN"
+	Value  = "1"
+	Help  = "0: PSON#\1: GPIO25"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO26_EN"
+	Value  = "1"
+	Help  = "0: PWOK\1: GPIO26"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GPIO27_EN"
+	Value  = "1"
+	Help  = "0: RSMRST#\1: GPIO27"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "F81866_T1_MODE"
+	Value  = "0"
+	Help  = "0: TEMP1 is connected to a thermistor\1: TEMP1 is connected to a BJT.(default)"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN2_RA"
+	Value  = "200"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN2_RB"
+	Value  = "47"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN3_RA"
+	Value  = "200"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN3_RB"
+	Value  = "47"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN4_RA"
+	Value  = "10"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "VIN4_RB"
+	Value  = "1"
+	TokenType = Integer
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866_SMF1_SUPPORT"
+	Value  = "1"
+	Help  = "F81866 SmartFan 1 control support"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "F81866_SMF_SUPPORT" "=" "1"
+End
+TOKEN
+	Name  = "F81866_SMF2_SUPPORT"
+	Value  = "1"
+	Help  = "F81866 SmartFan 2 control support"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "F81866_SMF_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "F81866GPIO10_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO11_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO11_VAL_DEFAULT"
+	Value  = "0"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO12_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO13_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO13_VAL_DEFAULT"
+	Value  = "0"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO70_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO71_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO71_VAL_DEFAULT"
+	Value  = "0"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO72_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO73_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO73_VAL_DEFAULT"
+	Value  = "0"
+	Help  = "0: Low\1: High"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO80_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO81_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO82_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+	Name  = "F81866GPIO83_OE_DEFAULT"
+	Value  = "1"
+	Help  = "0: Input\1: Output"
+	TokenType = Boolean
+	TargetH = Yes
+End
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
 #TOKEN
 #    Name  = "====== Digital I/O ======"
 #    TokenType = Expression
