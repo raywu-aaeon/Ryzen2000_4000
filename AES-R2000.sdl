@@ -534,7 +534,7 @@ End
 TOKEN
     Name  = "ALWAYS_PUBLISH_HII_RESOURCES"
     Value  = "1"
-    Help  = "This token controls loading of the Setup related HII resources \(setup screens and strings). If this token is ‘0’, setup resources are \only published into HII database if the user enters setup. If \this token is ‘1’, setup resources are always published into the HiiDatabase. Keep it off for speed \optimization.  Set it to on if Runtime resources processing support is required."
+    Help  = "This token controls loading of the Setup related HII resources \(setup screens and strings). If this token is ï¿½0ï¿½, setup resources are \only published into HII database if the user enters setup. If \this token is ï¿½1ï¿½, setup resources are always published into the HiiDatabase. Keep it off for speed \optimization.  Set it to on if Runtime resources processing support is required."
     TokenType = Boolean
     TargetH = Yes
 End
@@ -1007,3 +1007,34 @@ End
 #    Help  = "Portinf for Sandstone(Flavor 2) PCIE SATA Controller Specific Initialization"
 #    InvokeOrder = AfterParent
 #End
+
+
+TOKEN
+    Name  = "APCB_RV_FP5_SODIMM_BINARY_SUPPORT"
+    Value  = "1"
+    Help  = "The master token for Apcb RV AM4 SODIMM binary."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+    Name  = "APCB_RV_FP5_UDIMM_BINARY_SUPPORT"
+    Value  = "0"
+    Help  = "The master token for Apcb RV AM4 SODIMM binary."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "SOLUTION_TYPE" "=" "0"
+    Token = "MULTI_CPU_SUPPORT" "&" "4"
+End
+
+TOKEN
+    Name  = "PSP_APCB_FILENAME_RV"
+    Value  = "$(BUILD_DIR)\$(APCB_IN_BUILD_DIR)\$(RELEASE_RV_FP5_SODIMM)\APCB_RV_D4.bin"
+    Help  = "The APCB OEM binary 'APCB_RV_D4.bin'."
+    TokenType = File
+    TargetMAK = Yes
+End
