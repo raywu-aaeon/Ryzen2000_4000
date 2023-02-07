@@ -298,6 +298,38 @@ TOKEN
 End
 
 TOKEN
+    Name  = "F81866_PME_CONTROLLER_PRESENT"
+    Value  = "0"
+    Help  = "Powe Management Controller Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_HWM_PRESENT"
+    Value  = "0"
+    Help  = "HWM Port Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_GPIO_PORT_PRESENT"
+    Value  = "0"
+    Help  = "GPIO Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_WDT_PRESENT"
+    Value  = "0"
+    Help  = "Watch Dog Time Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
     Name  = "F81866_KEYBOARD_PRESENT"
     Value  = "0"
     Help  = "Keyboard Present / Not Present."
