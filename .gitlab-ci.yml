@@ -45,7 +45,7 @@ variables:
   ##          $CI_COMMIT_SHA: Full sha
   PROJECT_REBUILD: 1
   PROJECT_SHA: $CI_COMMIT_SHA
-  PROJECT_VEB_FILE: CB4000
+  PROJECT_VEB_FILE: AES-R2000
   PROJECT_VEB_TOOL: Aptio_5.x_TOOLS_35_2
   PROJECT_BUILD_BATCH: N/A  ## Set to build.bat if project uses build.bat instead of make
 
