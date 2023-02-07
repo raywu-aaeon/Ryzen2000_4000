@@ -2771,7 +2771,7 @@ End
 
 TOKEN
     Name  = "SILENT"
-    Value  = "0"
+    Value  = "1"
     Help  = "Enables/disables silent build mode.\In silent build mode executed commands are not displayed, and certain auxiliary build process messages are suppressed or displayed in a condensed format.\In non-silent build mode executed command are displayed prior to execution, and all auxiliary messages are visible.\Silent build mode is typically faster because less information goes into a build log.\Non-silent mode is useful for debugging of the build issues."
     TokenType = Boolean
     TargetMAK = Yes
