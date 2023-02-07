@@ -998,14 +998,14 @@ ELINK
 End
 
 ELINK
-    Name  = "-D SIO_PTS=\_SB.PCI0.SBRG.SIO1.SIOS"
+    Name  = "-D SIO_PTS=\_SB.PCI0.SBRG.SIO2.SIOS"
     Parent  = "*_*_*_ASLPP_FLAGS"
     Type  = "BuildOptions"
     InvokeOrder = AfterParent
 End
 
 ELINK
-    Name  = "-D SIO_WAK=\_SB.PCI0.SBRG.SIO1.SIOW"
+    Name  = "-D SIO_WAK=\_SB.PCI0.SBRG.SIO2.SIOW"
     Parent  = "*_*_*_ASLPP_FLAGS"
     Type  = "BuildOptions"
     InvokeOrder = AfterParent
