@@ -250,6 +250,54 @@ TOKEN
 End
 
 TOKEN
+    Name  = "F81866_SERIAL_PORT1_PRESENT"
+    Value  = "0"
+    Help  = "Serial Port 1 (COMA / UART1) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_SERIAL_PORT2_PRESENT"
+    Value  = "0"
+    Help  = "Serial Port 2 (COMB / UART2) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_SERIAL_PORT3_PRESENT"
+    Value  = "0"
+    Help  = "Serial Port 3 (COMC / UART3) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_SERIAL_PORT4_PRESENT"
+    Value  = "0"
+    Help  = "Serial Port 4 (COMD / UART4) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_SERIAL_PORT5_PRESENT"
+    Value  = "0"
+    Help  = "Serial Port 5 (COME / UART5) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "F81866_SERIAL_PORT6_PRESENT"
+    Value  = "0"
+    Help  = "Serial Port 6 (COMF / UART6) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
     Name  = "F81866_KEYBOARD_PRESENT"
     Value  = "0"
     Help  = "Keyboard Present / Not Present."
