@@ -736,7 +736,7 @@ LibraryMapping
 	Class  = "SerialPortLib"
 	Instance  = "MdePkg.BaseSerialPortLibNull"
 	Help  = "Build pass for 5.004_UefiCpuPkg_03 if there is no SIO-Serial port component."
-	Token = "NO_SIO_SUPPORT" "=" "1"
+#	Token = "NO_SIO_SUPPORT" "=" "1"
 	Token = "FCH_UART_DEBUG_SELECT" "=" "0"
 End
 
