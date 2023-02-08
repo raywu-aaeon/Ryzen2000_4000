@@ -229,7 +229,7 @@ End
 
 TOKEN
     Name  = "F81866_CONFIG_INDEX"
-    Value  = "0x2E"
+    Value  = "0x4E"
     TokenType = Integer
     TargetEQU = Yes
     TargetH = Yes
@@ -237,7 +237,7 @@ End
 
 TOKEN
     Name  = "F81866_CONFIG_DATA"
-    Value  = "0x2F"
+    Value  = "0x4F"
     TokenType = Integer
     TargetEQU = Yes
     TargetH = Yes
