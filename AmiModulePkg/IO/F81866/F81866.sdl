@@ -1810,7 +1810,7 @@ End
 
 TOKEN
 	Name  = "F81866_SMF1_SUPPORT"
-	Value  = "0"
+	Value  = "1"
 	Help  = "F81866 SmartFan 1 control support"
 	TokenType = Boolean
 	TargetMAK = Yes
@@ -3955,9 +3955,17 @@ End
 
 TOKEN
 	Name  = "F81866_ERP_SUPPORT"
-	Value  = "1"
+	Value  = "0"
 	Help = "F81866_ERP_Miles++"
 	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name = "STATEAFTERG3_MAP"
+	Value = "{3, 1, 0}"
+	Help = "{LastState, Always-on, Always-off}"
+	TokenType = Expression
 	TargetH = Yes
 End
 
