@@ -74,8 +74,7 @@ Method(SIOS, 1){
         }
         //4. Enable PME /wakeup
         Or(0x0F, ^CR2D,^CR2D)           //enable kbc/mouse wakeup
-//F81866_ERP_Miles--        Or(0x80, ^RGE0, ^RGE0)          //enable ERP function,bit7   
-        And(0x7F, ^RGE0, ^RGE0)         //F81866_ERP_Miles++, disable ERP for S3/S4
+        Or(0x80, ^RGE0, ^RGE0)          //enable ERP function,bit7   
         ^EXFG()
     }
 }
@@ -100,7 +99,7 @@ Method(SIOW, 1){
 
     //2. Disable PME
     And(0xF0, ^CR2D,^CR2D)      //disable kbc/mouse wakeup
-//F81866_ERP_Miles--    And(0x7F, ^RGE0, ^RGE0)     //disable ERP function,bit7        
+    And(0x7F, ^RGE0, ^RGE0)     //disable ERP function,bit7        
     ^EXFG()
 }
 
