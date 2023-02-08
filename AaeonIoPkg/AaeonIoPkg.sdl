@@ -97,30 +97,30 @@ TOKEN
 	TargetH = Yes
 End
 
-TOKEN
-	Name  = "HIDK"
-	Value  = '"MSFT0001"'
-	TokenType = Expression
-	TargetASL = Yes
-End
-TOKEN
-	Name  = "HIDM"
-	Value  = '"MSFT0003"'
-	TokenType = Expression
-	TargetASL = Yes
-End
-TOKEN
-	Name  = "CIDK"
-	Value  = 'EISAID("PNP0303")'
-	TokenType = Expression
-	TargetASL = Yes
-End
-TOKEN
-	Name  = "CIDM"
-	Value  = 'EISAID("PNP0F13")'
-	TokenType = Expression
-	TargetASL = Yes
-End
+#TOKEN
+#	Name  = "HIDK"
+#	Value  = '"MSFT0001"'
+#	TokenType = Expression
+#	TargetASL = Yes
+#End
+#TOKEN
+#	Name  = "HIDM"
+#	Value  = '"MSFT0003"'
+#	TokenType = Expression
+#	TargetASL = Yes
+#End
+#TOKEN
+#	Name  = "CIDK"
+#	Value  = 'EISAID("PNP0303")'
+#	TokenType = Expression
+#	TargetASL = Yes
+#End
+#TOKEN
+#	Name  = "CIDM"
+#	Value  = 'EISAID("PNP0F13")'
+#	TokenType = Expression
+#	TargetASL = Yes
+#End
 
 ###########################################################################
 ##	
