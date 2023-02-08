@@ -231,13 +231,13 @@ SIODEVICE
     SMBIOSStr  = "Test String"
     GPEbit  = 01dh
     SleepNum  = 03h
-    ASLfile  = "'AaeonIoPkg\F81866\F81866DEV.asl','AaeonIoPkg\F81866\F81866EVT.asl'"
+#    ASLfile  = "'AaeonIoPkg\F81866\F81866DEV.asl','AaeonIoPkg\F81866\F81866EVT.asl'"
     ASLdeviceName  = "SIO2"
 # >> AAEON_OVERRIDE
 #    ASL_PTS  = "Method;\_SB.PCI0.SBRG.SIO1.SIOS(Arg0)"
 #    ASL_WAK  = "Method;\_SB.PCI0.SBRG.SIO1.SIOW(Arg0)"
-    ASL_PTS  = "Method;SIO_PTS(Arg0)"
-    ASL_WAK  = "Method;SIO_WAK(Arg0)"
+#    ASL_PTS  = "Method;SIO_PTS(Arg0)"
+#    ASL_WAK  = "Method;SIO_WAK(Arg0)"
 # << AAEON_OVERRIDE
 End
 
