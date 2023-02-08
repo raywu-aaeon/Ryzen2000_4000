@@ -12,10 +12,6 @@
 "F81866.sdl"
 "F81866.mak"
 "F81866.chm"
-"F81866MiscSetup.sd"
-"F81866MiscSetup.uni"
-"F81866OemReadyToBootCallback.c"
-
 [parts]
 "F81866Asl"
 "F81866Setup"
