@@ -39,17 +39,17 @@ TOKEN
     TargetH = Yes
     Master = Yes
 End
-##RayWu, REMOVE 2015/04/23 >>
-##TOKEN
-##    Name  = "SIO_SUPPORT"
-##    Value  = "1"
-##    Help  = "Main switch to enable SIO support in Project"
-##    TokenType = Boolean
-##    TargetEQU = Yes
-##    TargetMAK = Yes
-##    TargetH = Yes
-##End
-##RayWu, REMOVE 2015/04/23 <<
+
+TOKEN
+    Name  = "SIO_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SIO support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
 TOKEN
     Name  = "F81866_DBG_SUPPORT"
     Value  = "0" ##RayWu, 1->0 2014/09/03
