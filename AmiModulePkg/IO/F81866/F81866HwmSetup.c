@@ -27,7 +27,7 @@
 #include <AmiDxeLib.h>
 #include <Setup.h>
 #include <SioSetup.h>
-
+//#include "AaeonIoSetup.h"
 //----------------------------------------------------------------------
 // Constants, Macros and Type Definitions
 //----------------------------------------------------------------------
@@ -72,6 +72,50 @@ GetValueWithIO (
     return;
 }
 
+//RayWu, ADD 2014/12/03 >>
+#if defined(AAEON_CPU_CORE_TEMP_DETECTION) && (AAEON_CPU_CORE_TEMP_DETECTION)
+void AaeonCpuCoreTemperatureDetection(IN OUT HWM_DATA * Data)
+{
+	UINTN	T1;
+	
+	Data->Token = STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1_VALUE);
+	Data->Type = TEMPERATURE;
+	Data->OddPos = 0x00;
+
+	#if defined(INTEL_DTS_SUPPORT) && (INTEL_DTS_SUPPORT)
+	{
+		// F81866_IntelDTS_Miles, remove depency for baytrail code >>>>>
+		//#include "Vlv2DeviceRefCodePkg/ValleyView2Soc/CPU/Include/CpuRegs.h"
+		#ifndef EFI_MSR_CPU_THERM_TEMPERATURE
+		#define EFI_MSR_CPU_THERM_TEMPERATURE 0x1A2
+        #endif
+		#ifndef EFI_MSR_IA32_CR_THERM_STATUS
+		#define EFI_MSR_IA32_CR_THERM_STATUS 0x19C
+		#endif
+		// F81866_IntelDTS_Miles <<<<<
+		extern UINT64 ReadMsr(UINT32 Msr);
+		
+		EFI_STATUS Status = EFI_SUCCESS;
+		UINT8 RegTmp8, TjMax;
+		UINT64 RegTmp64;
+		
+		TjMax = (UINT8)(ReadMsr(EFI_MSR_CPU_THERM_TEMPERATURE) >> 16);
+		RegTmp64 = ReadMsr(EFI_MSR_IA32_CR_THERM_STATUS);
+		RegTmp8 = (UINT8)TjMax - (UINT8)((RegTmp64 >> 16) & 0x7F);
+		
+		T1 = (UINTN)RegTmp8;
+	}
+	#endif //INTEL_DTS_SUPPORT
+
+
+	if(T1 ==  0x80)
+		Data->Value = 0x00;
+	else
+		Data->Value = (UINT16)T1;
+
+	return;
+}
+#endif //AAEON_CPU_CORE_TEMP_DETECTION
 //<AMI_PHDR_START>
 //----------------------------------------------------------------------
 // Procedure:   GetAndUpdateTemperature1
@@ -422,7 +466,7 @@ GetAndUpdateFan3Speed (
 
     return;
 }
-
+//RayWu, ADD 2014/12/03 >>
 //<AMI_PHDR_START>
 //----------------------------------------------------------------------
 // Procedure:   GetAndUpdateVIN1Voltage
@@ -443,6 +487,8 @@ GetAndUpdateVIN1Voltage (
 )
 {
     UINTN       VIN1;
+	UINTN	Ra = VIN1_RA;
+	UINTN	Rb = VIN1_RB;
 
     Data->Token = STRING_TOKEN(STR_HWM1_VIN1_VALUE);
     Data->Type = VOLTAGE;
@@ -450,7 +496,7 @@ GetAndUpdateVIN1Voltage (
 
     //OEM_TODO:Get value with HWM IO interface
     GetValueWithIO(0x00,0x21,&VIN1) ; // Register 0x21
-    VIN1 = VIN1*8;
+    VIN1 = VIN1*8*(Ra+Rb)/Rb;
 
     Data->Value = (UINT16)VIN1;
 
@@ -478,6 +524,8 @@ GetAndUpdateVIN2Voltage (
 )
 {
     UINTN       VIN2;
+	UINTN	Ra = VIN2_RA;
+	UINTN	Rb = VIN2_RB;
 
     Data->Token = STRING_TOKEN(STR_HWM1_VIN2_VALUE);
     Data->Type = VOLTAGE;
@@ -485,7 +533,7 @@ GetAndUpdateVIN2Voltage (
 
     //OEM_TODO:Get value with HWM IO interface
     GetValueWithIO(0x00,0x22,&VIN2) ; // Register 0x22
-    VIN2 = VIN2*8*(20+47)/47;
+    VIN2 = VIN2*8*(Ra+Rb)/Rb;
     Data->Value = (UINT16)VIN2;
 
     return;
@@ -512,6 +560,8 @@ GetAndUpdateVIN3Voltage (
 )
 {
     UINTN       VIN3;
+	UINTN	Ra = VIN3_RA;
+	UINTN	Rb = VIN3_RB;	
 
     Data->Token = STRING_TOKEN(STR_HWM1_VIN3_VALUE);
     Data->Type = VOLTAGE;
@@ -519,7 +569,7 @@ GetAndUpdateVIN3Voltage (
 
     //OEM_TODO:Get value with HWM IO interface
     GetValueWithIO(0x00,0x23,&VIN3) ; // Register 0x23
-    VIN3 = VIN3*8;
+    VIN3 = VIN3*8*(Ra+Rb)/Rb;
     Data->Value = (UINT16)VIN3;
 
     return;
@@ -546,6 +596,8 @@ GetAndUpdateVIN4Voltage (
 )
 {
     UINTN       VIN4;
+	UINTN	Ra = VIN4_RA;
+	UINTN	Rb = VIN4_RB;
 
     Data->Token = STRING_TOKEN(STR_HWM1_VIN4_VALUE);
     Data->Type = VOLTAGE;
@@ -553,7 +605,7 @@ GetAndUpdateVIN4Voltage (
 
     //OEM_TODO:Get value with HWM IO interface
     GetValueWithIO(0x00,0x24,&VIN4) ; // Register 0x24
-    VIN4 = VIN4*8*(100+100)/100;
+    VIN4 = VIN4*8*(Ra+Rb)/Rb;
     Data->Value = (UINT16)VIN4;
 
     return;
@@ -587,12 +639,183 @@ GetAndUpdateVSB5VVoltage (
 
     //OEM_TODO:Get value with HWM IO interface
     GetValueWithIO(0x00,0x27,&VSB5V) ; // Register 0x27
-    VSB5V = VSB5V*8*2;
+    VSB5V = VSB5V*8*3;
     Data->Value = (UINT16)VSB5V;
 
     return;
 }
-
+//RayWu, ADD 2014/12/03 <<
+//RayWu, REMOVE 2014/12/03 >>
+////<AMI_PHDR_START>
+////----------------------------------------------------------------------
+//// Procedure:   GetAndUpdateVIN1Voltage
+////
+//// Description: Get the Voltage value in HWM space register.
+////
+//// Input:
+////  UINTN    IN OUT HWM_DATA * Data
+////
+//// Output:
+////  None
+////
+////----------------------------------------------------------------------
+////<AMI_PHDR_END>
+//void
+//GetAndUpdateVIN1Voltage (
+//    IN OUT HWM_DATA * Data
+//)
+//{
+//    UINTN       VIN1;
+//
+//    Data->Token = STRING_TOKEN(STR_HWM1_VIN1_VALUE);
+//    Data->Type = VOLTAGE;
+//    Data->OddPos = 0x03;
+//
+//    //OEM_TODO:Get value with HWM IO interface
+//    GetValueWithIO(0x00,0x21,&VIN1) ; // Register 0x21
+//    VIN1 = VIN1*8;
+//
+//    Data->Value = (UINT16)VIN1;
+//
+//    return;
+//
+//}
+//
+////<AMI_PHDR_START>
+////----------------------------------------------------------------------
+//// Procedure:   GetAndUpdateVIN2Voltage
+////
+//// Description: Get the Voltage value in HWM space register.
+////
+//// Input:
+////  UINTN    IN OUT HWM_DATA * Data
+////
+//// Output:
+////  None
+////
+////----------------------------------------------------------------------
+////<AMI_PHDR_END>
+//void
+//GetAndUpdateVIN2Voltage (
+//    IN OUT HWM_DATA * Data
+//)
+//{
+//    UINTN       VIN2;
+//
+//    Data->Token = STRING_TOKEN(STR_HWM1_VIN2_VALUE);
+//    Data->Type = VOLTAGE;
+//    Data->OddPos = 0x03;
+//
+//    //OEM_TODO:Get value with HWM IO interface
+//    GetValueWithIO(0x00,0x22,&VIN2) ; // Register 0x22
+//    VIN2 = VIN2*8*(20+47)/47;
+//    Data->Value = (UINT16)VIN2;
+//
+//    return;
+//}
+//
+////<AMI_PHDR_START>
+////----------------------------------------------------------------------
+//// Procedure:   GetAndUpdateVIN3Voltage
+////
+//// Description:
+////  Get the Voltage value in HWM space register.
+////
+//// Input:
+////  UINTN    IN OUT HWM_DATA * Data
+////
+//// Output:
+////  None
+////
+////----------------------------------------------------------------------
+////<AMI_PHDR_END>
+//void
+//GetAndUpdateVIN3Voltage (
+//    IN OUT HWM_DATA * Data
+//)
+//{
+//    UINTN       VIN3;
+//
+//    Data->Token = STRING_TOKEN(STR_HWM1_VIN3_VALUE);
+//    Data->Type = VOLTAGE;
+//    Data->OddPos = 0x03;
+//
+//    //OEM_TODO:Get value with HWM IO interface
+//    GetValueWithIO(0x00,0x23,&VIN3) ; // Register 0x23
+//    VIN3 = VIN3*8;
+//    Data->Value = (UINT16)VIN3;
+//
+//    return;
+//}
+//
+////<AMI_PHDR_START>
+////----------------------------------------------------------------------
+//// Procedure:   GetAndUpdateVIN4Voltage
+////
+//// Description:
+////  Get the Voltage value in HWM space register.
+////
+//// Input:
+////  UINTN    IN OUT HWM_DATA * Data
+////
+//// Output:
+////  None
+////
+////----------------------------------------------------------------------
+////<AMI_PHDR_END>
+//void
+//GetAndUpdateVIN4Voltage (
+//    IN OUT HWM_DATA * Data
+//)
+//{
+//    UINTN       VIN4;
+//
+//    Data->Token = STRING_TOKEN(STR_HWM1_VIN4_VALUE);
+//    Data->Type = VOLTAGE;
+//    Data->OddPos = 0x03;
+//
+//    //OEM_TODO:Get value with HWM IO interface
+//    GetValueWithIO(0x00,0x24,&VIN4) ; // Register 0x24
+//    VIN4 = VIN4*8*(100+100)/100;
+//    Data->Value = (UINT16)VIN4;
+//
+//    return;
+//}
+//
+////<AMI_PHDR_START>
+////----------------------------------------------------------------------
+//// Procedure:   GetAndUpdateVSB5VVoltage
+////
+//// Description:
+////  Get the Voltage value in HWM space register.
+////
+//// Input:
+////  UINTN    IN OUT HWM_DATA * Data
+////
+//// Output:
+////  None
+////
+////----------------------------------------------------------------------
+////<AMI_PHDR_END>
+//void
+//GetAndUpdateVSB5VVoltage (
+//    IN OUT HWM_DATA * Data
+//)
+//{
+//    UINTN       VSB5V;
+//
+//    Data->Token = STRING_TOKEN(STR_HWM1_VSB5V_VALUE);
+//    Data->Type = VOLTAGE;
+//    Data->OddPos = 0x03;
+//
+//    //OEM_TODO:Get value with HWM IO interface
+//    GetValueWithIO(0x00,0x27,&VSB5V) ; // Register 0x27
+//    VSB5V = VSB5V*8*2;
+//    Data->Value = (UINT16)VSB5V;
+//
+//    return;
+//}
+//RayWu, REMOVE 2014/12/03 <<
 //<AMI_PHDR_START>
 //----------------------------------------------------------------------
 // Procedure:   GetAndUpdateVCC3VVoltage
@@ -701,12 +924,31 @@ GetAndUpdateVBATVoltage (
 }
 
 SIO_EXTERNAL_FUN *F81866ExternalFunList[] = {
-    GetAndUpdateTemperature1,
-    GetAndUpdateTemperature2,
-    GetAndUpdateTemperature3,
-    GetAndUpdateTemperature4,
-    GetAndUpdateTemperature5,
-    GetAndUpdateTemperature6,
+    //RayWu, ADD 2014/12/03 >>
+    #if defined(AAEON_CPU_CORE_TEMP_DETECTION) && (AAEON_CPU_CORE_TEMP_DETECTION)
+	AaeonCpuCoreTemperatureDetection,
+	GetAndUpdateTemperature2,
+	GetAndUpdateTemperature3,
+	GetAndUpdateTemperature4,
+	GetAndUpdateTemperature5,
+	GetAndUpdateTemperature6,
+    #else
+	GetAndUpdateTemperature1,
+	GetAndUpdateTemperature2,
+	GetAndUpdateTemperature3,
+	GetAndUpdateTemperature4,
+	GetAndUpdateTemperature5,
+	GetAndUpdateTemperature6,
+    #endif //AAEON_CPU_CORE_TEMP_DETECTION
+    //RayWu, ADD 2014/12/03 <<
+    //RayWu, REMOVE 2014/12/03 >>
+    //GetAndUpdateTemperature1,
+    //GetAndUpdateTemperature2,
+    //GetAndUpdateTemperature3,
+    //GetAndUpdateTemperature4,
+    //GetAndUpdateTemperature5,
+    //GetAndUpdateTemperature6,
+    //RayWu, REMOVE 2014/12/03 <<
     GetAndUpdateFan1Speed,
     GetAndUpdateFan2Speed,
     GetAndUpdateFan3Speed,
@@ -760,6 +1002,7 @@ VOID F81866_HWM_CallBack(
 
     for(index=0; F81866ExternalFunList[index]; index++) {
         F81866ExternalFunList[index](&Data);
+        //AaeonHHMCommon(Data.Value, Data.Type, Data.Token, Data.OddPos, HiiHandle);
         HHMCommon(Data.Value, Data.Type, Data.Token, Data.OddPos, HiiHandle);
     }
 

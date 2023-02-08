@@ -4,9 +4,8 @@
 	LocalRoot = "AmiModulePkg\IO\F81866\"
 	RefName = "F81866HwMonitor"
 [files]
-"F81866HwmSetup.sdl"	
-"F81866HwmSetup.c"	
-"F81866HwmSetup.sd"	
-"F81866HwmSetup.uni"	
-"F81866SmartFansSetup.h"	
+"F81866HwmSetup.sdl"
+"F81866HwmSetup.c"
+"F81866HwmSetup.sd"
+"F81866HwmSetup.uni"
 <endComponent>

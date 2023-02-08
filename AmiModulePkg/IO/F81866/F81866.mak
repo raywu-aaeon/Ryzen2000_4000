@@ -33,7 +33,7 @@ Prepare : BuildPeiInitTable BuildSioElink
 #       3. Generate SIO PEI "Debug IO Decode table"
 #       4. Generate SIO PEI "Debug IO initialization table"
 #----------------------------------------------------------------------
-BuildPeiInitTable : $(SIO_PEI_TABLE_DEFINITIONS) $(BUILD_DIR)/Token.mak
+BuildPeiInitTable : $(SIO_PEI_TABLE_DEFINITIONS) $(BUILD_DIR)/token.mak
 	$(ECHO) \
 "$(if $(SIO_PEI_TABLE_DEFINITIONS), $(foreach S_DEF, $(SIO_PEI_TABLE_DEFINITIONS),#include<$(S_DEF)>$(EOL)))"\
 >$(BUILD_DIR)/PrivateSioPeiInitTable.h
@@ -42,7 +42,7 @@ BuildPeiInitTable : $(SIO_PEI_TABLE_DEFINITIONS) $(BUILD_DIR)/Token.mak
 #       Generate SIO elink table
 #		1. SIO init string table for SioSetup.c
 #----------------------------------------------------------------------
-BuildSioElink : $(BUILD_DIR)/Token.mak
+BuildSioElink : $(BUILD_DIR)/token.mak
 	$(ECHO) \
 "\
 #ifndef _SIO_ELINK_H_$(EOL)\
@@ -50,7 +50,7 @@ BuildSioElink : $(BUILD_DIR)/Token.mak
 $(EOL)\
 #define SIO_Init_Str_LIST $(SetupStrTableList)$(EOL)\
 #endif$(EOL)\
-"> $(BUILD_DIR)/SIOElink.h
+"> $(BUILD_DIR)\SIOElink.h
 
 #----------------------------------------------------------------------
 #endif

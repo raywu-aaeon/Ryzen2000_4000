@@ -387,7 +387,7 @@
         //Note. DMA channel 0 is currently not decoded, although it can be 
         //used on some of SIO chipsets.
         If(LAnd(LLess(DMCH,4), LNotEqual(And(DMCH, 3, Local1),0))){
-            rDMA(Arg0, Arg1, Increment(Local1))
+//            rDMA(Arg0, Arg1, Increment(Local1))
         }
         Store(Arg1, ACTR)           //Update Activate Register
         ShiftLeft(IOAH, 8, local1)  //Get IO Base address
@@ -397,7 +397,7 @@
         //Arg1      0/1 Disable/Enable resource decoding
         //Arg2      Port to Route/Release
         //Arg3      Port SIZE to Route 
-        RRIO(Arg0, Arg1, Local1, 0x08)
+//        RRIO(Arg0, Arg1, Local1, 0x08)
         EXFG()                      //Exit Config Mode
     }
 
@@ -446,11 +446,11 @@
     Name(CRS3, ResourceTemplate(){
         IO(Decode16, 0, 0, 1, 0, IO04)
         IRQ(Level,ActiveLow,Shared,IRQ3){}    
-        DMA(Compatibility, NotBusMaster, Transfer8, DMA3) {}
+        //DMA(Compatibility, NotBusMaster, Transfer8, DMA3) {} //RayWu, REMOVE 2014/09/03
     })
     CreateWordField(CRS3, IRQ3._INT, IRQT)    //IRQ mask 0x9
     CreateByteField(CRS3, 0x0B,IRQS)          //IRQ Shared/Active-Low/Edge-Triggered/=0x19 0xB
-    CreateByteField(CRS3, DMA3._DMA, DMAT)    //DMA 0x4
+    //CreateByteField(CRS3, DMA3._DMA, DMAT)    //DMA 0x4  //RayWu, REMOVE 2014/09/03
     CreateWordField(CRS3, IO04._MIN, IO41)    //Range 1 Min Base Word 0x2
     CreateWordField(CRS3, IO04._MAX, IO42)    //Range 1 Max Base Word 0x4
     CreateByteField(CRS3, IO04._LEN, LEN4)    //Length 1 0x7
@@ -577,19 +577,55 @@
         //} Else {
         //   Store(1, IRQS)        //IRQ Type: Active-High-Edge-Triggered,No-Shared(default)
         //}
+		 //AAEON_OVERRIDE >>
+		 If(And(OPT0,0x01)){
+		 	//Report IRQ Receiver mode to ACPI OS by IRQS.
+		 	//IRQ Receiver - ACPI IRQS: bit4:_SHR,bit3:_LL,bit0:_HE
+		 	//IRQ Sender - Fintek IRQ_MODE1(OTP6[3]) and IRQ_MODE0(OPT0[1]):
+		 	//    00 : Sharing IRQ active low Level mode.
+		 	//    01 : Sharing IRQ active high edge mode.
+		 	//    10 : Sharing IRQ active high Level mode.
+		 	//    11 : Reserved
+			If(And(OPT0,0x02)){
+				If(And(OPT6,0x08)){
+					// Sender : 11 : Reserved
+					// Code shoud not come here because IRQ type for "Reserved" is undefined.
+					// F81966 Patch, reture 0x19 assuming as is.
+					// Receiver: Low-Edge-Triggered : 0x19
+					Store(0x19, IRQS)	}
+				Else{
+					// Sender : 01 : Sharing IRQ active high edge mode.
+					// Receiver: High-Edge-Triggered : 0x11
+					// F81966 patch, Force receiver to operat in Low-Edge-Triggered : 0x19
+					//Store(0x11, IRQS)	}
+					Store(0x19, IRQS)	}
+			}Else{
+				If(And(OPT6,0x08)){
+					// Sender : 10 : Sharing IRQ active high Level mode.
+					// Receiver: high-Level-Triggered : 0x10
+					Store(0x10, IRQS)	}	// IRQ Type: Active-High-Level-Triggered,Shared.
+				Else{
+					// Sender : 00 : Sharing IRQ active low Level mode.
+					// Receiver: Low-Level-Triggered : 0x18
+					Store(0x18, IRQS)	}	// IRQ Type: Active-Low-Level-Triggered,Shared.
+			}
+		 }
+		 //AAEON_OVERRIDE <<
         }Else{
             Store(0, IRQT)          //No IRQ used
         }
-        //Write Current Settings into DMA descriptor
-        //Note. DMA channel 0 is currently decoded as reserved,
-        //although, it can be used on some of SIO chipsets.
-        //If(Or(LGreater(DMCH,3), LEqual(And(DMCH, 3, Local1),0))){
-        If(LOr(LGreater(DMCH,3), LEqual(Arg1, 0))){
-            Store(0, DMAT)          //No DMA
-        } Else {
-            And(DMCH, 3, Local1)
-            ShiftLeft(1, Local1, DMAT)
-        }
+        //RayWu, REMOVE 2014/09/03 >>
+        ////Write Current Settings into DMA descriptor
+        ////Note. DMA channel 0 is currently decoded as reserved,
+        ////although, it can be used on some of SIO chipsets.
+        ////If(Or(LGreater(DMCH,3), LEqual(And(DMCH, 3, Local1),0))){
+        //If(LOr(LGreater(DMCH,3), LEqual(Arg1, 0))){
+        //    Store(0, DMAT)          //No DMA
+        //} Else {
+        //    And(DMCH, 3, Local1)
+        //    ShiftLeft(1, Local1, DMAT)
+        //}
+        //RayWu, REMOVE 2014/09/03 <<
         EXFG()                      //Exit Config Mode
         Return(CRS3)                //Return Current Resources
     }
@@ -706,7 +742,7 @@
         CreateWordField(Arg0, ^IO04._MIN, IO41)     //Range 1 Min Base Word 0x8
         CreateWordField(Arg0, ^IRQ3._INT, IRQT)     //IRQ mask 0x1
         CreateByteField(Arg0, 0x0B, IRQS)           //IRQ Flag
-        CreateByteField(Arg0, ^DMA3._DMA, DMAT)     //DMA
+        //CreateByteField(Arg0, ^DMA3._DMA, DMAT)     //DMA //RayWu, REMOVE 2014/09/03
         //Enter Config Mode
         ENFG(CGLD(Arg1))
         //Set Base IO Address
@@ -716,18 +752,57 @@
         If(IRQT){
             FindSetRightBit(IRQT, Local0)
             Subtract(Local0, 1, INTR)
-        //Set IRQ flag,AMI_TODO: bit4:_SHR,bit3:_LL,bit0:_HE
-        //Store(IRQS, INTT) //some relative share,active-low/high registers
+            Or(OPT0, 0x01, OPT0) //B403_042_RayWu, ADD 2014/10/01
+	    //AAEON_OVERRIDE >>
+            //Set IRQ sender(F81866) mode according to Arg0 (expecting it is resource description ACPI OS get from UART3~6.asl)
+            //IRQ Receiver - ACPI IRQS: bit4:_SHR,bit3:_LL,bit0:_HE
+            //IRQ Sender - Fintek IRQ_MODE1(OTP6[3]) and IRQ_MODE0(OPT0[1]):
+            //    00 : Sharing IRQ active low Level mode.
+            //    01 : Sharing IRQ active high edge mode.
+            //    10 : Sharing IRQ active high Level mode.
+            //    11 : Reserved
+            If(And(IRQS,0x10)){			// IRQ Shared? 1 - Shared
+                If(And(IRQS,0x01)){		// IRQ Mode? 1 - Edge, 0 -Level
+                    // Edge-Triggered
+                    If(And(IRQS,0x08)){	// IRQ Polarity? 1 - Low, 0 - High
+                        // Receiver: Low-Edge-Triggered : 0x19
+                        // F81966 Patch, Set sender to 01 : Sharing IRQ active high edge mode.
+                        And(OPT6, 0xF7, OPT6)
+                        Or(OPT0, 0x02, OPT0)
+                    } Else{
+                        // Receiver: High-Edge-Triggered : 0x11
+                        // Sender: 01 : Sharing IRQ active high edge mode.
+                        And(OPT6, 0xF7, OPT6)
+                        Or(OPT0, 0x02, OPT0)
+                    }							
+                }Else{
+                    // Level-Triggered
+                    If(And(IRQS,0x08)){	// IRQ Polarity? 1 - Low, 0 - High
+                        // Receiver: Low-Level-Triggered : 0x18
+                        // Sender: 00 : Sharing IRQ active low Level mode.
+                        And(OPT6, 0xF7, OPT6)
+                        And(OPT0, 0xFD, OPT0)
+                    }Else{
+                        // Receiver: high-Level-Triggered : 0x10
+                        // Sender: 10 : Sharing IRQ active high Level mode.
+                        Or(OPT6, 0x08, OPT6)
+                        And(OPT0, 0xFD, OPT0)
+                    }	
+                }		
+            }	
+	    //AAEON_OVERRIDE <<
         }Else{
             Store(0, INTR)                          //No IRQ used
         }
-        //Set DMA
-        If(DMAT){
-           FindSetRightBit(DMAT, Local0)
-           Subtract(Local0, 1, DMCH)
-        }Else{
-           Store(4, DMCH)                           //No DMA
-        }
+        //RayWu, REMOVE 2014/09/03 >>
+        ////Set DMA
+        //If(DMAT){
+        //   FindSetRightBit(DMAT, Local0)
+        //   Subtract(Local0, 1, DMCH)
+        //}Else{
+        //   Store(4, DMCH)                           //No DMA
+        //}
+        //RayWu, REMOVE 2014/09/03 <<
         //Exit Config Mode
         EXFG()
         //Enable ACTR

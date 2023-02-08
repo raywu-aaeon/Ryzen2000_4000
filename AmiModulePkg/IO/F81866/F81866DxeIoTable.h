@@ -138,12 +138,29 @@ SIO_DEVICE_INIT_DATA   DXE_HWM_Init_Table_After_Active[] = {
     //| Reg16 | AndData8  | OrData8  |
     //-----------------------------
     //OEM_TODO: Base on OEM board.
-    // Configuration Setting
-    {0x6B, 0xF9, 0x00 }, //BIT2: 0: TEMP2 is connected to a thermistor.\1: TEMP2 is connected to a BJT. (default)
-                         //BIT1: 0: TEMP1 is connected to a thermistor.\1: TEMP2 is connected to a BJT. (default)
+//RayWu, ADD 2014/12/03 >>
+	{0x6B, 0xF9, (F81866_T2_MODE << 2) | (F81866_T1_MODE << 1) },
+//RayWu, ADD 2014/12/03 <<
+//RayWu, REMOVE 2014/12/03 >>
+//    // Configuration Setting
+//    {0x6B, 0xF9, 0x00 }, //BIT2: 0: TEMP2 is connected to a thermistor.\1: TEMP2 is connected to a BJT. (default)
+//                         //BIT1: 0: TEMP1 is connected to a thermistor.\1: TEMP2 is connected to a BJT. (default)
+//RayWu, REMOVE 2014/12/03 <<
+#if F81866_HWM_PECI_SUPPORT
+	// PECI Setting
+	{0x0A, 0xDE, 0x21 }, //Enable PECI
+    {0x0C, 0x00, F81866_HWM_PECI_TCC },
+#endif
     //Hardware Monitor Startup!
     {0x01, 0xF8, 0x03},  //BIT1: Enable startup of fan monitoring operations
                          //BIT0: Enable startup of temperature and voltage monitoring operations
+
+    //F81866_SMF_Miles++ >>>>>
+	//Fan type Setting
+    #if F81866_SMF_SUPPORT
+    {0x94, 0xC0, (FAN3_TYPE<<4)|(FAN2_TYPE<<2)|FAN1_TYPE },
+    #endif
+	//F81866_SMF_Miles++ <<<<<
 
 }; // DXE_HWM_Init_Table_After_Active
 #endif //F81866_HWM_PRESENT
