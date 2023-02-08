@@ -878,8 +878,8 @@ End
 SIODEVICE
     Name  = "F81866"
     Parent  = "LpcBridge"
-    IndexPort  = 02eh
-    DataPort  = 02fh
+    IndexPort  = 04eh
+    DataPort  = 04fh
     StdSioType  = "Yes"
     DevSelReg  = 07h
     ActivateReg  = 030h
