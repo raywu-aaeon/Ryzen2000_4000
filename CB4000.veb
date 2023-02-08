@@ -624,7 +624,7 @@
 "MandolinPkg\DsmAsl\DsmAsl.cif"= Private
 "AmdAptioV.cif"= Private
 "AES-R2000.cif"= Private
-"AaeonIoPkg/AaeonIoPkg.cif"= Private
+
 "AaeonCommonPkg\AaeonCommonPkg.cif"= Private
 "AaeonCommonPkg\AaeonBfpi\AaeonBfpi.cif"= Private
 "AaeonCommonPkg\AaeonBfpi\AaeonBfpiReportCapability\AaeonBfpiReportCapability.cif"= Private
