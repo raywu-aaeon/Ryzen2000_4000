@@ -1465,16 +1465,16 @@ End
 #==============================================================================
 #elink DXE Initialization Source file
 #==============================================================================
-ELINK
-	Name  = "../$(F81866_DIR)/F81866DxeInit.c"
-	Parent  = "SIOLINK_LIB_SRC"
-	InvokeOrder = AfterParent
-End
-ELINK
-	Name  = "../../$(F81866_DIR)/F81866DxeInit.h"
-	Parent  = "SIOLINK_LIB_H"
-	InvokeOrder = AfterParent
-End
+#ELINK
+#	Name  = "../$(F81866_DIR)/F81866DxeInit.c"
+#	Parent  = "SIOLINK_LIB_SRC"
+#	InvokeOrder = AfterParent
+#End
+#ELINK
+#	Name  = "../../$(F81866_DIR)/F81866DxeInit.h"
+#	Parent  = "SIOLINK_LIB_H"
+#	InvokeOrder = AfterParent
+#End
 
 TOKEN
 	Name  = "F81866_FAN3_PRESENT"
