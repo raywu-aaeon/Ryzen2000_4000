@@ -2413,16 +2413,16 @@ TOKEN
 End
 ##INTERNAL_085_RayWu, ADD 2015/01/28 <<
 
-ELINK
-	Name  = "$(F81866_DIR)\F81866MiscSetup.sd"
-	Parent  = "SETUP_DEFINITIONS"
-	InvokeOrder = AfterParent
-End
-ELINK
-	Name  = "$(F81866_DIR)\F81866MiscSetup.uni"
-	Parent  = "SetupStringFiles"
-	InvokeOrder = AfterParent
-End
+#ELINK
+#	Name  = "$(F81866_DIR)\F81866MiscSetup.sd"
+#	Parent  = "SETUP_DEFINITIONS"
+#	InvokeOrder = AfterParent
+#End
+#ELINK
+#	Name  = "$(F81866_DIR)\F81866MiscSetup.uni"
+#	Parent  = "SetupStringFiles"
+#	InvokeOrder = AfterParent
+#End
 TOKEN
 	Name  = "F81866GPIO00_OE_DEFAULT"
 	Value  = "0"
@@ -3969,16 +3969,16 @@ TOKEN
 	TargetH = Yes
 End
 
-ELINK
-	Name  = "$(F81866_DIR)\F81866OemReadyToBootCallback.c"
-	Parent  = "AMI_CSP_DXE_SOURCES"
-	InvokeOrder = AfterParent
-End
-ELINK
-	Name  = "F81866OemReadyToBootCallback,"
-	Parent  = "AAEON_READY_TO_BOOT_INIT_FUNCTIONS"
-	InvokeOrder = BeforeParent
-End
+#ELINK
+#	Name  = "$(F81866_DIR)\F81866OemReadyToBootCallback.c"
+#	Parent  = "AMI_CSP_DXE_SOURCES"
+#	InvokeOrder = AfterParent
+#End
+#ELINK
+#	Name  = "F81866OemReadyToBootCallback,"
+#	Parent  = "AAEON_READY_TO_BOOT_INIT_FUNCTIONS"
+#	InvokeOrder = BeforeParent
+#End
 #**********************************************************************
 #**********************************************************************
 #**                                                                  **

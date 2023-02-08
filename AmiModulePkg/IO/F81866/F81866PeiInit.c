@@ -158,199 +158,199 @@ VOID F81866SetGpioPin(IN UINT8 GpioNum, IN UINT8 Type, IN UINT8 Level, IN UINT8 
 	F81866ExitConfigMode();
 }
 
-VOID F81866MiscSetupFunction(IN CONST EFI_PEI_SERVICES	**PeiServices)
-{
-	EFI_STATUS	Status;
-	SETUP_DATA				SetupData;
-	UINTN           			VariableSize = sizeof( SETUP_DATA );
-	EFI_GUID				gSetupGuid = SETUP_GUID;
-	EFI_PEI_READ_ONLY_VARIABLE2_PPI 	*ReadOnlyVariable = NULL;
-       	
-	Status = (*PeiServices)->LocatePpi( PeiServices, &gEfiPeiReadOnlyVariable2PpiGuid, 0, NULL, &ReadOnlyVariable );
-	Status = ReadOnlyVariable->GetVariable( ReadOnlyVariable, L"Setup", &gSetupGuid, NULL, &VariableSize, &SetupData );
-
-	F81866EnterConfigMode();	
-
-	// Restore AC Power Loss control _Begin >>
-	{
-		UINT8	Data8;
-
-		F81866LDNSelect(F81866_LDN_PME);		// PME, ACPI and ERP Device Configuration Registers (LDN CR0A)
-		Data8 = F81866ConfigRegisterRead(ACPICONTROLREGISTER1);
-		Data8 &= ~(PWRCTRL);
-		switch(SetupData.F81866RestoreACPowerLoss)
-		{
-			default:
-			case 0: // Last State
-				Data8 |= KEEP_LAST_STATE;
-				break;
-			case 1: // Always On
-				Data8 |= ALWAYS_ON;
-				break;
-			case 2: // Always Off
-				Data8 |= ALWAYS_OFF;
-				break;
-			case 3: // Bypass
-				Data8 |= BYPASS_MODE;
-				break;
-		}
-		F81866ConfigRegisterWrite(ACPICONTROLREGISTER1, Data8);
-	}
-	// Restore AC Power Loss control _End <<
-
-	// UART RS485 auto flow control Enabled/Disabled _Begin >>
-	{
-		UINT8	Data8, i;
-		UINT8	F81866AllUartLdn[6] = { F81866_LDN_UART1, F81866_LDN_UART2, F81866_LDN_UART3,\
-						F81866_LDN_UART4, F81866_LDN_UART5, F81866_LDN_UART6 };
-
-		for(i = 0; i < 6; i++)
-		{
-			F81866LDNSelect(F81866AllUartLdn[i]);		// All UART LDN
-			Data8 = F81866ConfigRegisterRead(UART_IRQ_SHARE_REGISTER);
-			Data8 &= ~(RS485_EN + RS485_INV);
-			if(SetupData.F81866UartAutoFlowControlEnable[i] == 1)
-				Data8 |= (RS485_EN + RS485_INV);
-			F81866ConfigRegisterWrite(UART_IRQ_SHARE_REGISTER, Data8);
-		}
-	}
-	// UART RS485 auto flow control Enabled/Disabled _End <<
-
-	// Parallel Port / Gpio multi function selection _Begin >>
-	{
-		UINT8	Data8;
-
-		Data8 = F81866ConfigRegisterRead(PORT_SELECT_REGISTER);
-		Data8 &= ~(GPIO_PROG_SEL);
-		Data8 |= GPIO0_EN;
-
-		Data8 = F81866ConfigRegisterRead(MULTI_FUNCTION_SELECT_1_REGISTER);
-		Data8 &= ~(LPT_GP_EN);
-		if(SetupData.F81866Gpio7x8x_Lpt_Switch == 0)
-			Data8 |= LPT_GP_EN;
-		F81866ConfigRegisterWrite(MULTI_FUNCTION_SELECT_1_REGISTER, Data8);
-	}
-	// Parallel Port / Gpio multi function selection _End <<
-
-	// GPIO setup variable _Begin >>
-	{
-		UINT8	i;
-		UINT8	Gpio_Oe, Gpio_Val, Gpio_DrvEn;
-
-		F81866LDNSelect(F81866_LDN_GPIO);		//GPIO Device Configuration Registers
-
-		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
-		// GPIO0X Misc configuration
-		for (i = 0; i < 8; i++)
-		{
-			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio0x_Oe[i]) << i );
-			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio0x_Val[i]) << i ) ;
-			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio0x_DrvEn[i]) << i );
-		}
-		F81866ConfigRegisterWrite(GPIO0_OUTPUT_DATA_REGISTER, Gpio_Val);
-		F81866ConfigRegisterWrite(GPIO0_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
-		F81866ConfigRegisterWrite(GPIO0_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
-
-		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
-		// GPIO1X Misc configuration
-		for (i = 0; i < 8; i++)
-		{
-			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio1x_Oe[i]) << i );
-			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio1x_Val[i]) << i ) ;
-			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio1x_DrvEn[i]) << i );
-		}
-		F81866ConfigRegisterWrite(GPIO1_OUTPUT_DATA_REGISTER, Gpio_Val);
-		F81866ConfigRegisterWrite(GPIO1_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
-		F81866ConfigRegisterWrite(GPIO1_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
-
-		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
-		// GPIO2X Misc configuration
-		for (i = 0; i < 8; i++)
-		{
-			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio2x_Oe[i]) << i );
-			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio2x_Val[i]) << i ) ;
-			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio2x_DrvEn[i]) << i );
-		}
-		F81866ConfigRegisterWrite(GPIO2_OUTPUT_DATA_REGISTER, Gpio_Val);
-		F81866ConfigRegisterWrite(GPIO2_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
-		F81866ConfigRegisterWrite(GPIO2_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
-
-		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
-		// GPIO3X Misc configuration
-		for (i = 0; i < 8; i++)
-		{
-			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio3x_Oe[i]) << i );
-			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio3x_Val[i]) << i ) ;
-			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio3x_DrvEn[i]) << i );
-		}
-		F81866ConfigRegisterWrite(GPIO3_OUTPUT_DATA_REGISTER, Gpio_Val);
-		F81866ConfigRegisterWrite(GPIO3_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
-		F81866ConfigRegisterWrite(GPIO3_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
-
-		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
-		// GPIO4X Misc configuration
-		for (i = 0; i < 8; i++)
-		{
-			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio4x_Oe[i]) << i );
-			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio4x_Val[i]) << i ) ;
-			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio4x_DrvEn[i]) << i );
-		}
-		F81866ConfigRegisterWrite(GPIO4_OUTPUT_DATA_REGISTER, Gpio_Val);
-		F81866ConfigRegisterWrite(GPIO4_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
-		F81866ConfigRegisterWrite(GPIO4_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
-
-		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
-		// GPIO5X Misc configuration
-		for (i = 0; i < 8; i++)
-		{
-			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio5x_Oe[i]) << i );
-			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio5x_Val[i]) << i ) ;
-			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio5x_DrvEn[i]) << i );
-		}
-		F81866ConfigRegisterWrite(GPIO5_OUTPUT_DATA_REGISTER, Gpio_Val);
-		F81866ConfigRegisterWrite(GPIO5_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
-		F81866ConfigRegisterWrite(GPIO5_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
-
-		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
-		// GPIO6X Misc configuration
-		for (i = 0; i < 8; i++)
-		{
-			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio6x_Oe[i]) << i );
-			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio6x_Val[i]) << i ) ;
-			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio6x_DrvEn[i]) << i );
-		}
-		F81866ConfigRegisterWrite(GPIO6_OUTPUT_DATA_REGISTER, Gpio_Val);
-		F81866ConfigRegisterWrite(GPIO6_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
-		F81866ConfigRegisterWrite(GPIO6_OUTPUT_ENABLE_REGISTER, Gpio_Oe);												
-
-		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
-		// GPIO7X Misc configuration
-		for (i = 0; i < 8; i++)
-		{
-			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio7x_Oe[i]) << i );
-			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio7x_Val[i]) << i ) ;
-			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio7x_DrvEn[i]) << i );
-		}
-		F81866ConfigRegisterWrite(GPIO7_OUTPUT_DATA_REGISTER, Gpio_Val);
-		F81866ConfigRegisterWrite(GPIO7_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
-		F81866ConfigRegisterWrite(GPIO7_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
-
-		// GPIO8X Misc configuration
-		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
-		for (i = 0; i < 8; i++)
-		{
-			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio8x_Oe[i]) << i );
-			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio8x_Val[i]) << i );
-			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio8x_DrvEn[i]) << i );
-		}
-		F81866ConfigRegisterWrite(GPIO8_OUTPUT_DATA_REGISTER, Gpio_Val);
-		F81866ConfigRegisterWrite(GPIO8_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
-		F81866ConfigRegisterWrite(GPIO8_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
-	}
-	// GPIO setup variable _End <<
-
-	F81866ExitConfigMode();
-}
+//VOID F81866MiscSetupFunction(IN CONST EFI_PEI_SERVICES	**PeiServices)
+//{
+//	EFI_STATUS	Status;
+//	SETUP_DATA				SetupData;
+//	UINTN           			VariableSize = sizeof( SETUP_DATA );
+//	EFI_GUID				gSetupGuid = SETUP_GUID;
+//	EFI_PEI_READ_ONLY_VARIABLE2_PPI 	*ReadOnlyVariable = NULL;
+//       	
+//	Status = (*PeiServices)->LocatePpi( PeiServices, &gEfiPeiReadOnlyVariable2PpiGuid, 0, NULL, &ReadOnlyVariable );
+//	Status = ReadOnlyVariable->GetVariable( ReadOnlyVariable, L"Setup", &gSetupGuid, NULL, &VariableSize, &SetupData );
+//
+//	F81866EnterConfigMode();	
+//
+//	// Restore AC Power Loss control _Begin >>
+//	{
+//		UINT8	Data8;
+//
+//		F81866LDNSelect(F81866_LDN_PME);		// PME, ACPI and ERP Device Configuration Registers (LDN CR0A)
+//		Data8 = F81866ConfigRegisterRead(ACPICONTROLREGISTER1);
+//		Data8 &= ~(PWRCTRL);
+//		switch(SetupData.F81866RestoreACPowerLoss)
+//		{
+//			default:
+//			case 0: // Last State
+//				Data8 |= KEEP_LAST_STATE;
+//				break;
+//			case 1: // Always On
+//				Data8 |= ALWAYS_ON;
+//				break;
+//			case 2: // Always Off
+//				Data8 |= ALWAYS_OFF;
+//				break;
+//			case 3: // Bypass
+//				Data8 |= BYPASS_MODE;
+//				break;
+//		}
+//		F81866ConfigRegisterWrite(ACPICONTROLREGISTER1, Data8);
+//	}
+//	// Restore AC Power Loss control _End <<
+//
+//	// UART RS485 auto flow control Enabled/Disabled _Begin >>
+//	{
+//		UINT8	Data8, i;
+//		UINT8	F81866AllUartLdn[6] = { F81866_LDN_UART1, F81866_LDN_UART2, F81866_LDN_UART3,\
+//						F81866_LDN_UART4, F81866_LDN_UART5, F81866_LDN_UART6 };
+//
+//		for(i = 0; i < 6; i++)
+//		{
+//			F81866LDNSelect(F81866AllUartLdn[i]);		// All UART LDN
+//			Data8 = F81866ConfigRegisterRead(UART_IRQ_SHARE_REGISTER);
+//			Data8 &= ~(RS485_EN + RS485_INV);
+//			if(SetupData.F81866UartAutoFlowControlEnable[i] == 1)
+//				Data8 |= (RS485_EN + RS485_INV);
+//			F81866ConfigRegisterWrite(UART_IRQ_SHARE_REGISTER, Data8);
+//		}
+//	}
+//	// UART RS485 auto flow control Enabled/Disabled _End <<
+//
+//	// Parallel Port / Gpio multi function selection _Begin >>
+//	{
+//		UINT8	Data8;
+//
+//		Data8 = F81866ConfigRegisterRead(PORT_SELECT_REGISTER);
+//		Data8 &= ~(GPIO_PROG_SEL);
+//		Data8 |= GPIO0_EN;
+//
+//		Data8 = F81866ConfigRegisterRead(MULTI_FUNCTION_SELECT_1_REGISTER);
+//		Data8 &= ~(LPT_GP_EN);
+//		if(SetupData.F81866Gpio7x8x_Lpt_Switch == 0)
+//			Data8 |= LPT_GP_EN;
+//		F81866ConfigRegisterWrite(MULTI_FUNCTION_SELECT_1_REGISTER, Data8);
+//	}
+//	// Parallel Port / Gpio multi function selection _End <<
+//
+//	// GPIO setup variable _Begin >>
+//	{
+//		UINT8	i;
+//		UINT8	Gpio_Oe, Gpio_Val, Gpio_DrvEn;
+//
+//		F81866LDNSelect(F81866_LDN_GPIO);		//GPIO Device Configuration Registers
+//
+//		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
+//		// GPIO0X Misc configuration
+//		for (i = 0; i < 8; i++)
+//		{
+//			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio0x_Oe[i]) << i );
+//			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio0x_Val[i]) << i ) ;
+//			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio0x_DrvEn[i]) << i );
+//		}
+//		F81866ConfigRegisterWrite(GPIO0_OUTPUT_DATA_REGISTER, Gpio_Val);
+//		F81866ConfigRegisterWrite(GPIO0_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
+//		F81866ConfigRegisterWrite(GPIO0_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
+//
+//		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
+//		// GPIO1X Misc configuration
+//		for (i = 0; i < 8; i++)
+//		{
+//			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio1x_Oe[i]) << i );
+//			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio1x_Val[i]) << i ) ;
+//			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio1x_DrvEn[i]) << i );
+//		}
+//		F81866ConfigRegisterWrite(GPIO1_OUTPUT_DATA_REGISTER, Gpio_Val);
+//		F81866ConfigRegisterWrite(GPIO1_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
+//		F81866ConfigRegisterWrite(GPIO1_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
+//
+//		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
+//		// GPIO2X Misc configuration
+//		for (i = 0; i < 8; i++)
+//		{
+//			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio2x_Oe[i]) << i );
+//			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio2x_Val[i]) << i ) ;
+//			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio2x_DrvEn[i]) << i );
+//		}
+//		F81866ConfigRegisterWrite(GPIO2_OUTPUT_DATA_REGISTER, Gpio_Val);
+//		F81866ConfigRegisterWrite(GPIO2_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
+//		F81866ConfigRegisterWrite(GPIO2_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
+//
+//		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
+//		// GPIO3X Misc configuration
+//		for (i = 0; i < 8; i++)
+//		{
+//			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio3x_Oe[i]) << i );
+//			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio3x_Val[i]) << i ) ;
+//			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio3x_DrvEn[i]) << i );
+//		}
+//		F81866ConfigRegisterWrite(GPIO3_OUTPUT_DATA_REGISTER, Gpio_Val);
+//		F81866ConfigRegisterWrite(GPIO3_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
+//		F81866ConfigRegisterWrite(GPIO3_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
+//
+//		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
+//		// GPIO4X Misc configuration
+//		for (i = 0; i < 8; i++)
+//		{
+//			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio4x_Oe[i]) << i );
+//			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio4x_Val[i]) << i ) ;
+//			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio4x_DrvEn[i]) << i );
+//		}
+//		F81866ConfigRegisterWrite(GPIO4_OUTPUT_DATA_REGISTER, Gpio_Val);
+//		F81866ConfigRegisterWrite(GPIO4_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
+//		F81866ConfigRegisterWrite(GPIO4_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
+//
+//		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
+//		// GPIO5X Misc configuration
+//		for (i = 0; i < 8; i++)
+//		{
+//			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio5x_Oe[i]) << i );
+//			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio5x_Val[i]) << i ) ;
+//			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio5x_DrvEn[i]) << i );
+//		}
+//		F81866ConfigRegisterWrite(GPIO5_OUTPUT_DATA_REGISTER, Gpio_Val);
+//		F81866ConfigRegisterWrite(GPIO5_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
+//		F81866ConfigRegisterWrite(GPIO5_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
+//
+//		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
+//		// GPIO6X Misc configuration
+//		for (i = 0; i < 8; i++)
+//		{
+//			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio6x_Oe[i]) << i );
+//			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio6x_Val[i]) << i ) ;
+//			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio6x_DrvEn[i]) << i );
+//		}
+//		F81866ConfigRegisterWrite(GPIO6_OUTPUT_DATA_REGISTER, Gpio_Val);
+//		F81866ConfigRegisterWrite(GPIO6_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
+//		F81866ConfigRegisterWrite(GPIO6_OUTPUT_ENABLE_REGISTER, Gpio_Oe);												
+//
+//		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
+//		// GPIO7X Misc configuration
+//		for (i = 0; i < 8; i++)
+//		{
+//			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio7x_Oe[i]) << i );
+//			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio7x_Val[i]) << i ) ;
+//			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio7x_DrvEn[i]) << i );
+//		}
+//		F81866ConfigRegisterWrite(GPIO7_OUTPUT_DATA_REGISTER, Gpio_Val);
+//		F81866ConfigRegisterWrite(GPIO7_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
+//		F81866ConfigRegisterWrite(GPIO7_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
+//
+//		// GPIO8X Misc configuration
+//		Gpio_Oe = Gpio_Val = Gpio_DrvEn = 0;
+//		for (i = 0; i < 8; i++)
+//		{
+//			Gpio_Oe |= ( (BOOLEAN)(SetupData.F81866Gpio8x_Oe[i]) << i );
+//			Gpio_Val |= ( (BOOLEAN)(SetupData.F81866Gpio8x_Val[i]) << i );
+//			Gpio_DrvEn |= ( (BOOLEAN)(SetupData.F81866Gpio8x_DrvEn[i]) << i );
+//		}
+//		F81866ConfigRegisterWrite(GPIO8_OUTPUT_DATA_REGISTER, Gpio_Val);
+//		F81866ConfigRegisterWrite(GPIO8_DRIVE_ENABLE_REGISTER, Gpio_DrvEn);
+//		F81866ConfigRegisterWrite(GPIO8_OUTPUT_ENABLE_REGISTER, Gpio_Oe);
+//	}
+//	// GPIO setup variable _End <<
+//
+//	F81866ExitConfigMode();
+//}
 
 //**********************************************************************
 // belows are functions defined
@@ -424,7 +424,7 @@ EFI_STATUS F81866PeiInitEntryPoint(
 //    for(index=0; index<sizeof(F81866PeiDecodeTable)/sizeof(IO_DECODE_DATA); index++)
 //        AmiSioLibSetLpcDeviceDecoding(NULL, F81866PeiDecodeTable[index].BaseAdd, F81866PeiDecodeTable[index].UID, F81866PeiDecodeTable[index].Type);
 //#endif
-// <<>>>> Edward_Mod
+// << Edward_Mod
     
     ProgramRtRegisterTable(0, F81866PeiInitTable, sizeof(F81866PeiInitTable)/sizeof(SIO_DEVICE_INIT_DATA));
     // Enter Configuration Mode.
@@ -468,7 +468,7 @@ EFI_STATUS F81866PeiInitEntryPoint(
     // Exit Configuration Mode
     IoWrite8(F81866_CONFIG_INDEX, F81866_CONFIG_MODE_EXIT_VALUE);
 
-    F81866MiscSetupFunction(PeiServices);
+//    F81866MiscSetupFunction(PeiServices);
 
     return EFI_SUCCESS;
 }
