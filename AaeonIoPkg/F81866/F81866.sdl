@@ -3961,17 +3961,6 @@ TOKEN
 	TokenType = Integer
 	TargetH = Yes
 End
-
-ELINK
-	Name  = "$(F81866_DIR)\F81866OemReadyToBootCallback.c"
-	Parent  = "AMI_CSP_DXE_SOURCES"
-	InvokeOrder = AfterParent
-End
-ELINK
-	Name  = "F81866OemReadyToBootCallback,"
-	Parent  = "AAEON_READY_TO_BOOT_INIT_FUNCTIONS"
-	InvokeOrder = BeforeParent
-End
 #**********************************************************************
 #**********************************************************************
 #**                                                                  **
