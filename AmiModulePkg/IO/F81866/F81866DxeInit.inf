@@ -1,7 +1,7 @@
 #**********************************************************************
 #**********************************************************************
 #**                                                                  **
-#**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
 #**                                                                  **
 #**                       All Rights Reserved.                       **
 #**                                                                  **
@@ -23,7 +23,6 @@
 [Sources]
   F81866DxeInit.c
   F81866DxeIoTable.h
-  F81866SmartFan.c
 
 [LibraryClasses]
   AmiDxeLib
@@ -31,16 +30,8 @@
   UefiDriverEntryPoint
 
 [Protocols]
-  gEfiAmiSioProtocolGuid
-  gAmiBoardSioInitProtocolGuid
-  gEfiDevicePathProtocolGuid
-  gEfiSimpleTextOutProtocolGuid
-  gEfiGraphicsOutputProtocolGuid
-  gEfiUgaDrawProtocolGuid
-  gEfiHiiFontProtocolGuid
-  gEfiHiiDatabaseProtocolGuid
-  gEfiDriverBindingProtocolGuid
-
+  gEfiSmmVariableProtocolGuid
+  
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
@@ -50,7 +41,7 @@
 #**********************************************************************
 #**********************************************************************
 #**                                                                  **
-#**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
 #**                                                                  **
 #**                       All Rights Reserved.                       **
 #**                                                                  **

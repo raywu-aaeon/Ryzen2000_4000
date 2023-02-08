@@ -1,7 +1,7 @@
 //**********************************************************************
 //**********************************************************************
 //**                                                                  **
-//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
 //**                                                                  **
 //**                       All Rights Reserved.                       **
 //**                                                                  **
@@ -11,16 +11,11 @@
 //**                                                                  **
 //**********************************************************************
 //**********************************************************************
-//**********************************************************************
-//<AMI_FHDR_START>
-//
-// Name:  <F81866DxeInit.c>
-//
-// Description: 1. Port SIO DXE initial table and routine for GenericSio.c
-//              2. Define SIO bootscriptable table
-//
-//<AMI_FHDR_END>
-//**********************************************************************
+/** @file F81866DxeInit.c
+
+  1. Port SIO DXE initial table and routine for GenericSio.c
+  2. Define SIO bootscriptable table
+**/
 //----------------------------------------------------------------------
 //Include Files
 //----------------------------------------------------------------------
@@ -28,155 +23,14 @@
 #include <Library/AmiSioDxeLib.h>
 #include <AmiGenericSio.h>
 #include "F81866DxeIoTable.h"
-//INTERNAL_085_RayWu, ADD 2015/01/28 >>
-#include <Token.h>
-#include <Setup.h>
-//INTERNAL_085_RayWu, ADD 2015/01/28 <<
+#include <F81866SmartFansSetup.h>
+#include <Protocol\SmmVariable.h>
 
-//INTERNAL_085_RayWu, ADD 2015/01/28 >>
-#if defined(F81866_SMF_SUPPORT) && (F81866_SMF_SUPPORT == 1)
-extern VOID F81866SmartFunction(VOID);
-extern VOID SmartFanBootScript(EFI_S3_SAVE_STATE_PROTOCOL *BootScriptProtocol);
-#endif //F81866_SMF_SUPPORT == 1
-//INTERNAL_085_RayWu, ADD 2015/01/28 <<
+/**
+  This function will clear SIO resource.
 
-#if !defined(AAEONPOWERMODE_SUPPORT) || (AAEONPOWERMODE_SUPPORT == 0)
-#define AAEON_ACLOSS_LAST_STATE  0
-#define AAEON_ACLOSS_ALWAYS_ON   1
-#define AAEON_ACLOSS_ALWAYS_OFF  2
-
-#if !defined(STATEAFTERG3_MAP)
-  #if defined(CRB_USE_VAR_STATEAFTERG3) && (CRB_USE_VAR_STATEAFTERG3 == 1)
-    UINT8 MapToACPowerLoss[3] = STATEAFTERG3_MAP {2, 0, 1}
-  #else
-    UINT8 MapToACPowerLoss[3] = STATEAFTERG3_MAP {2, 1, 0}
-  #endif
-#endif
-
-#endif
-
-// F81866_ERP_Miles++ >>>>>
-#if F81866_ERP_SUPPORT
-EFI_STATUS F81866ErpModeCfg(VOID)
-{
-	EFI_GUID     SetupGuid = SETUP_GUID;
-	UINTN        VariableSize = sizeof(SETUP_DATA);  
-    EFI_STATUS   Status;
-    SETUP_DATA   *SetupData = NULL;
-	UINT8 reg8;
-
-	TRACE((TRACE_ALWAYS, "[F81866ErpModeCfg]Enter F81866ErpModeCfg\n"));
-	
-	Status = GetEfiVariable(L"Setup", &SetupGuid, NULL, &VariableSize, &SetupData);
-
-	IoWrite8(F81866_CONFIG_INDEX, F81866_CONFIG_MODE_ENTER_VALUE);
-	IoWrite8(F81866_CONFIG_INDEX, F81866_CONFIG_MODE_ENTER_VALUE);
-	
-	IoWrite8(F81866_CONFIG_INDEX, F81866_LDN_SEL_REGISTER);
-	IoWrite8(F81866_CONFIG_DATA, F81866_LDN_PME);
-
-#if AAEONPOWERMODE_SUPPORT
-	if((SetupData->F81866ErpMode != 0x00) && (SetupData->AaeonPowerMode == 0x0))
-#else
-	if(SetupData->F81866ErpMode != 0x00)
-#endif
-	{
-	    if(SetupData->F81866ErpMode == 1)
-	    {
-	    	//Intel DSW mode
-#if AAEONPOWERMODE_SUPPORT
-			if(SetupData->AaeonRestoreACPowerLoss == 2)
-#else
-#if CRB_USE_VAR_STATEAFTERG3
-       		if((SetupData->F81866RestoreACPowerLoss == 0x02) || ((SetupData->F81866RestoreACPowerLoss == 0x03) && (SetupData.StateAfterG3 == MapToACPowerLoss[AAEON_ACLOSS_ALWAYS_OFF])))
-#else
-    		if((SetupData->F81866RestoreACPowerLoss == 0x02) || ((SetupData->F81866RestoreACPowerLoss == 0x03) && (SetupData->LastState == MapToACPowerLoss[AAEON_ACLOSS_ALWAYS_OFF])))
-#endif
-#endif
-		    {
-		    	//Always off: Set ERP on for S5 and AC_Failure
-		    	IoWrite8(F81866_CONFIG_INDEX, 0xE1);
-		    	reg8 = (IoRead8(F81866_CONFIG_DATA) & 0xF0) | 0x05;
-		    	IoWrite8(F81866_CONFIG_DATA, reg8); 
-			} else
-		    {
-		    	//Always on/Last state-on: Set ERP off for AC_Failure, ERP on for S5
-		    	IoWrite8(F81866_CONFIG_INDEX, 0xE1);
-		    	reg8 = (IoRead8(F81866_CONFIG_DATA) & 0xF0) | 0x04;
-		    	IoWrite8(F81866_CONFIG_DATA, reg8); 
-			}
-		} else
-	    {
-	    	//ERP mode
-#if AAEONPOWERMODE_SUPPORT
-			if(SetupData->AaeonRestoreACPowerLoss == 2)
-#else
-#if CRB_USE_VAR_STATEAFTERG3
-       		if((SetupData->F81866RestoreACPowerLoss == 0x02) || ((SetupData->F81866RestoreACPowerLoss == 0x03) && (SetupData->StateAfterG3 == MapToACPowerLoss[AAEON_ACLOSS_ALWAYS_OFF])))
-#else
-    		if((SetupData->F81866RestoreACPowerLoss == 0x02) || ((SetupData->F81866RestoreACPowerLoss == 0x03) && (SetupData->LastState == MapToACPowerLoss[AAEON_ACLOSS_ALWAYS_OFF])))
-#endif
-#endif
-		    {
-		    	//Always off: Set ERP on for S5 and AC_Failure
-		    	IoWrite8(F81866_CONFIG_INDEX, 0xE1);
-		    	reg8 = (IoRead8(F81866_CONFIG_DATA) & 0xF0) | 0x0F;
-		    	IoWrite8(F81866_CONFIG_DATA, reg8); 
-			} else
-		    {
-		    	//Always on/Last state-on: Set ERP off for AC_Failure, ERP on for S5
-		    	IoWrite8(F81866_CONFIG_INDEX, 0xE1);
-		    	reg8 = (IoRead8(F81866_CONFIG_DATA) & 0xF0) | 0x0C;
-		    	IoWrite8(F81866_CONFIG_DATA, reg8); 
-			}
-		}
-		
-		IoWrite8(F81866_CONFIG_INDEX, 0xEC);
-#if INTEL_DEEP_SX_SUPPORT
-	    if(SetupData->F81866ErpMode == 1)
-	    	reg8 = (IoRead8(F81866_CONFIG_DATA) & 0x3F) | 0xC0;
-	    else
-	    	reg8 = IoRead8(F81866_CONFIG_DATA) & 0x3F;
-//	    	reg8 = (IoRead8(F81866_CONFIG_DATA) & 0x3F) | 0x40;	    
-
-#else
-    	reg8 = IoRead8(F81866_CONFIG_DATA) & 0x3F;
-#endif
-    	IoWrite8(F81866_CONFIG_DATA, reg8); 
-
-    	IoWrite8(F81866_CONFIG_INDEX, 0xE0);
-		reg8 = IoRead8(F81866_CONFIG_DATA) | 0x80;
-    	IoWrite8(F81866_CONFIG_DATA, reg8); 
-	} else
-	{
-		IoWrite8(F81866_CONFIG_INDEX, 0xE0);
-		reg8 = IoRead8(F81866_CONFIG_DATA) & 0x7F;
-    	IoWrite8(F81866_CONFIG_DATA, reg8); 
-	}
-
-	IoWrite8(F81866_CONFIG_INDEX, F81866_CONFIG_MODE_EXIT_VALUE);
-
-	if (SetupData) pBS->FreePool(SetupData);
-	return EFI_SUCCESS;
-}
-#endif //F81866_ERP_SUPPORT
-// F81866_ERP_Miles++ <<<<<
-
-// <AMI_PHDR_START>
-//----------------------------------------------------------------------
-//
-// Procedure: F81866_ClearDevResource
-//
-// Description:
-//  This function will Clear SIO resource.
-//
-// Input:
-//  SIO_DEV2* Dev
-// Output:
-//  NONE
-//
-//----------------------------------------------------------------------
-// <AMI_PHDR_END>
+  @param  Dev                   Pointer to SIO device private data structure.
+**/
 VOID F81866_ClearDevResource(
     IN  SIO_DEV2    *Dev
 )
@@ -201,30 +55,251 @@ VOID F81866_ClearDevResource(
     return;
 }
 
-// <AMI_PHDR_START>
-//----------------------------------------------------------------------
-//
-// Procedure: F81866_FDC_Init
-//
-// Description:
-//  This function provide each initial routine in genericsio.c
-//
-// Input:
-// IN  AMI_BOARD_INIT_PROTOCOL      *This - AMI Board Int Protocol.
-// IN  UINTN                        *Function - AMI Sdl SIO Init Routine.
-// IN  OUT VOID                     *ParameterBlock - SIO Component Initialization Routine Parameters Block...
-//
-// Output:
-//  EFI_SUCCESS - Initial step sucessfully
-//  EFI_INVALID_PARAMETER - not find the initial step
-//
-// Modified: Nothing
-//
-// Referrals: None
-//
-// Notes:
-//----------------------------------------------------------------------
-// <AMI_PHDR_END>
+/**
+    Get the register value form HWM space register.
+
+    @param  Register  Register value.
+    @param  *Value    Data in the register.
+
+**/
+void
+GetValueWithIO (
+    IN UINT8 Register,
+    OUT UINT8 *Value
+)
+{
+    //Read the data from register
+    IoWrite8(F81866_HWM_INDEX_PORT, Register);
+    *Value = IoRead8(F81866_HWM_DATA_PORT);
+    return;
+}
+
+/**
+    Write the register value to HWM space register.
+
+    @param  SaveState Point to s3 save state protocol.
+    @param  Register  Register value.
+    @param  *Value    Data in the register.
+
+**/
+void
+WriteValueWithIO (
+    IN EFI_S3_SAVE_STATE_PROTOCOL *SaveState,
+    IN UINT8 Register,
+    IN UINT8 Value
+)
+{
+    UINT16      IndexReg = F81866_HWM_INDEX_PORT;
+    UINT16      DataReg = F81866_HWM_DATA_PORT;
+    
+    if(SaveState == NULL) {      
+        //Write the value to register
+        IoWrite8(IndexReg, Register);
+        IoWrite8(DataReg, Value);
+    }
+    else {
+        //Save register into boot script.
+        //Select register.
+        IoWrite8(IndexReg, Register);
+        //Read actual data.
+        Value = IoRead8(DataReg);
+        SaveState->Write(SaveState, 0x00, EfiBootScriptWidthUint8, (UINT64)IndexReg, (UINTN)1, &Register);
+        SaveState->Write(SaveState, 0x00, EfiBootScriptWidthUint8, (UINT64)DataReg,  (UINTN)1, &Value);
+    }
+
+    return;
+}
+
+/**
+    Program smart fan with setup setting.
+
+    @param  SaveState Point to s3 save state protocol.
+    @param  InSmm     Indicate in smm or not.
+**/
+VOID ProgramSmartFan(EFI_S3_SAVE_STATE_PROTOCOL *SaveState, BOOLEAN InSmm) 
+{
+    F81866_SMF_CONTROL          FanControl;
+    UINTN                       Size = sizeof(F81866_SMF_CONTROL);
+    EFI_GUID                    F81866HwmConfigGuid = F81866_SMF_GUID;
+    EFI_STATUS                  Status;
+    UINT8                       TempData;
+    EFI_SMM_VARIABLE_PROTOCOL   *SmmVariable;
+    UINT8                       Index;
+    
+    if(InSmm == FALSE) {
+    //Get Setup variable
+    Status = pRS->GetVariable( L"F81866_SMF", &F81866HwmConfigGuid, NULL, &Size, &FanControl);
+    if(EFI_ERROR(Status))
+        return;
+    }
+    else {
+        Status = pSmst->SmmLocateProtocol(&gEfiSmmVariableProtocolGuid, NULL, (VOID**)&SmmVariable);
+        if(EFI_ERROR(Status))
+            return;        
+        Status = SmmVariable->SmmGetVariable (
+                                 L"F81866_SMF",
+                                 &F81866HwmConfigGuid,
+                                 NULL,
+                                 &Size,
+                                 &FanControl
+                                 );
+        if(EFI_ERROR(Status))
+            return;        
+    }
+    
+    //Fan 1 setting
+    switch (FanControl.Fan1SmartMode) {
+    case 0://Manual Mode
+        //Index 96h[1] = 1 [0]:0/1 RPM/PWM
+        GetValueWithIO(0x96, &TempData);
+        TempData &= ~BIT0;
+        WriteValueWithIO(SaveState, 0x96, TempData | BIT1 | FanControl.Fan1Type); //Index 0x96[1-0]
+        WriteValueWithIO(SaveState, 0xA2, (UINT8)FanControl.Fan1ManualControl); //Index 0xA2(MSB) Control value.
+        WriteValueWithIO(SaveState, 0xA3, (UINT8)(FanControl.Fan1ManualControl >> 8)); //Index 0xA3(LSB) Control value.
+        break;
+    case 1://Automatic Mode
+        //Index 96h[1] = 0 [0]:0/1 RPM/PWM
+        //Fan type & mode            
+        GetValueWithIO(0x96, &TempData);
+        TempData &= ~(BIT0 | BIT1);
+        WriteValueWithIO(SaveState, 0x96, TempData | FanControl.Fan1Type); //Index 0x96[1-0]
+        GetValueWithIO(0xAF, &TempData);
+        TempData &= ~(BIT0 | BIT1 | BIT7);
+        WriteValueWithIO(SaveState, 0xAF, TempData | FanControl.Fan1Tempin); //Index 0xAF[7,1-0]
+        //Set Boundary hysteresis 98h[3-0]
+        GetValueWithIO(0x98, &TempData);
+        TempData &= ~(BIT0 | BIT1 | BIT2 | BIT3);
+        WriteValueWithIO(SaveState, 0x98, TempData | FanControl.Fan1Hysteresis);
+        for(Index = 0;Index < 4;Index ++) {
+            // Boundary A6h~A9h
+            WriteValueWithIO(SaveState, 0xA6 + Index, FanControl.Fan1Boundary[Index]);
+        }
+        for(Index = 0;Index < 5;Index ++) {
+            // Speed AAh~AEh
+            TempData = FanControl.Fan1Segment[Index];
+            if(FanControl.Fan1Type == 0) {
+                //RPM mode
+                //X% of full speed = (100-X)*32/X
+                FanControl.Fan1Segment[Index] = (100 - TempData) * 32 / TempData;
+            }
+            else {
+                FanControl.Fan1Segment[Index] = 0xFF * TempData / 100;
+            }
+            WriteValueWithIO(SaveState, 0xAA + Index, FanControl.Fan1Segment[Index]);
+        }
+        //Multi temperature 94h, 95h, 96h(9Fh[7]=1)
+        if(FanControl.MultiTemp == 1) {
+            GetValueWithIO(0x9F, &TempData);
+            WriteValueWithIO(SaveState, 0x9F, TempData | BIT7);
+            WriteValueWithIO(SaveState, 0x94, FanControl.Fan1Tb);
+            WriteValueWithIO(SaveState, 0x96, FanControl.Fan1Ta);
+            GetValueWithIO(0x95, &TempData);
+            TempData &= ~(BIT6 | BIT5 | BIT4 | BIT2 | BIT1 | BIT0);
+            WriteValueWithIO(SaveState, 0x95, (TempData | (FanControl.Fan1Ctup << 4) | FanControl.Fan1Ctdn));
+            GetValueWithIO(0x9F, &TempData);
+            TempData &= ~BIT7;
+            WriteValueWithIO(SaveState, 0x9F, TempData);
+        }
+        break;
+    }
+    
+    //Fan 2 setting
+    switch (FanControl.Fan2SmartMode) {
+    case 0://Manual Mode
+        //Index 96h[3] = 1 [2]:0/1 RPM/PWM
+        GetValueWithIO(0x96, &TempData);
+        TempData &= ~(BIT2 | BIT3);
+        WriteValueWithIO(SaveState, 0x96, TempData | BIT1 | FanControl.Fan2Type); //Index 0x96[3-2]
+        WriteValueWithIO(SaveState, 0xB2, (UINT8)FanControl.Fan2ManualControl); //Index 0xB2(MSB) Control value.
+        WriteValueWithIO(SaveState, 0xB3, (UINT8)(FanControl.Fan2ManualControl >> 8)); //Index 0xB3(LSB) Control value.
+        break;
+    case 1://Automatic Mode
+        //Index 96h[3] = 0 [2]:0/1 RPM/PWM
+        //Fan type & mode            
+        GetValueWithIO(0x96, &TempData);
+        TempData &= ~(BIT2 | BIT3);
+        WriteValueWithIO(SaveState, 0x96, TempData | FanControl.Fan2Type); //Index 0x96[3-2]
+        GetValueWithIO(0xBF, &TempData);
+        TempData &= ~(BIT0 | BIT1 | BIT7);
+        WriteValueWithIO(SaveState, 0xBF, TempData | FanControl.Fan2Tempin); //Index 0xAF[7,1-0]
+        //Set Boundary hysteresis 98h[7-4]
+        GetValueWithIO(0x98, &TempData);
+        TempData &= ~(BIT4 | BIT5 | BIT6 | BIT7);
+        WriteValueWithIO(SaveState, 0x98, TempData | FanControl.Fan2Hysteresis);
+        for(Index = 0;Index < 4;Index ++) {
+            // Boundary B6h~B9h
+            WriteValueWithIO(SaveState, 0xB6 + Index, FanControl.Fan2Boundary[Index]);
+        }
+        for(Index = 0;Index < 5;Index ++) {
+            // Speed BAh~BEh
+            TempData = FanControl.Fan2Segment[Index];
+            if(FanControl.Fan2Type == 0) {
+                //RPM mode
+                //X% of full speed = (100-X)*32/X
+                FanControl.Fan2Segment[Index] = (100 - TempData) * 32 / TempData;
+            }
+            else {
+                FanControl.Fan2Segment[Index] = 0xFF * TempData / 100;
+            }
+            WriteValueWithIO(SaveState, 0xBA + Index, FanControl.Fan2Segment[Index]);
+        }
+        break;
+    }
+    
+    //Fan 3 setting
+    switch (FanControl.Fan3SmartMode) {
+    case 0://Manual Mode
+        //Index 96h[5] = 1 [4]:0/1 RPM/PWM
+        GetValueWithIO(0x96, &TempData);
+        TempData &= ~(BIT4 | BIT5);
+        WriteValueWithIO(SaveState, 0x96, TempData | BIT1 | FanControl.Fan3Type); //Index 0x96[5-4]
+        WriteValueWithIO(SaveState, 0xC2, (UINT8)FanControl.Fan3ManualControl); //Index 0xC2(MSB) Control value.
+        WriteValueWithIO(SaveState, 0xC3, (UINT8)(FanControl.Fan3ManualControl >> 8)); //Index 0xC3(LSB) Control value.
+        break;
+    case 1://Automatic Mode
+        //Index 96h[5] = 0 [4]:0/1 RPM/PWM
+        //Fan type & mode
+        GetValueWithIO(0x96, &TempData);
+        TempData &= ~(BIT4 | BIT5);
+        WriteValueWithIO(SaveState, 0x96, TempData | FanControl.Fan3Type); //Index 0x96[5-4]
+        GetValueWithIO(0xCF, &TempData);
+        TempData &= ~(BIT0 | BIT1 | BIT7);
+        WriteValueWithIO(SaveState, 0xCF, TempData | FanControl.Fan3Tempin); //Index 0xCF[7,1-0]
+        //Set Boundary hysteresis 99h[3-0]
+        GetValueWithIO(0x99, &TempData);
+        TempData &= ~(BIT0 | BIT1 | BIT2 | BIT3);
+        WriteValueWithIO(SaveState, 0x99, TempData | FanControl.Fan3Hysteresis);
+        for(Index = 0;Index < 4;Index ++) {
+            // Boundary C6h~C9h
+            WriteValueWithIO(SaveState, 0xC6 + Index, FanControl.Fan3Boundary[Index]);
+        }
+        for(Index = 0;Index < 5;Index ++) {
+            // Speed CAh~CEh
+            TempData = FanControl.Fan3Segment[Index];
+            if(FanControl.Fan3Type == 0) {
+                //RPM mode
+                //X% of full speed = (100-X)*32/X
+                FanControl.Fan3Segment[Index] = (100 - TempData) * 32 / TempData;
+            }
+            else {
+                FanControl.Fan3Segment[Index] = 0xFF * TempData / 100;
+            }
+            WriteValueWithIO(SaveState, 0xCA + Index, FanControl.Fan3Segment[Index]);
+        }
+        break;
+    }
+}
+
+/**
+  This function provide Floppy port initial routine in GenericSio.c
+
+  @param  This                      AMI board initial protocol.
+  @param  Function                  AMI sdl SIO initial routine.
+  @param  ParameterBlock            SIO component initial routine parameters block...
+
+  @retval  EFI_SUCCESS              Initial step sucessfully.
+  @retval  EFI_INVALID_PARAMETER    Not find the initial step.
+**/
 #if F81866_FLOPPY_PORT_PRESENT
 EFI_STATUS F81866_FDC_Init(
     IN AMI_BOARD_INIT_PROTOCOL      *This,
@@ -256,14 +331,12 @@ EFI_STATUS F81866_FDC_Init(
         break;
 
     case isBeforeActivate:
-#if !defined(SecDecodePkg_SUPPORT) || (SecDecodePkg_SUPPORT == 0)
         //Decode?
         if(Dev->DeviceInfo->Implemented && Dev->NvData.DevEnable) {
             AmiSioLibSetLpcDeviceDecoding(PciIo,Dev->VlData.DevBase1, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
         } else {
             AmiSioLibSetLpcDeviceDecoding(PciIo,0, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
         }
-#endif
         //AMI_TODO: please check the register define and program FDC mode
         //Read FDC Mode register
         Status=AmiSio->Access(AmiSio,FALSE,FALSE,0xF0,&rv);
@@ -302,12 +375,10 @@ EFI_STATUS F81866_FDC_Init(
 
     case isAfterBootScript:
         break;
-
 #if  AMI_SIO_MINOR_VERSION >= 6     
     case isAfterSmmBootScript:      
         break;
 #endif
-
     default:
         Status=EFI_INVALID_PARAMETER;
     } //switch
@@ -316,30 +387,16 @@ EFI_STATUS F81866_FDC_Init(
 }
 #endif
 
-// <AMI_PHDR_START>
-//----------------------------------------------------------------------
-//
-// Procedure: F81866_COM_Init
-//
-// Description:
-//  This function provide each initial routine in genericsio.c
-//
-// Input:
-// IN  AMI_BOARD_INIT_PROTOCOL      *This - AMI Board Int Protocol.
-// IN  UINTN                        *Function - AMI Sdl SIO Init Routine.
-// IN  OUT VOID                     *ParameterBlock - SIO Component Initialization Routine Parameters Block...
-//
-// Output:
-//  EFI_SUCCESS - Initial step sucessfully
-//  EFI_INVALID_PARAMETER - not find the initial step
-//
-// Modified:  Nothing
-//
-// Referrals: None
-//
-// Notes:
-//----------------------------------------------------------------------
-// <AMI_PHDR_END>
+/**
+  This function provide COMs initial routine in GenericSio.c
+
+  @param  This                      AMI board initial protocol.
+  @param  Function                  AMI sdl SIO initial routine.
+  @param  ParameterBlock            SIO component initial routine parameters block...
+
+  @retval  EFI_SUCCESS              Initial step sucessfully.
+  @retval  EFI_INVALID_PARAMETER    Not find the initial step.
+**/
 //#if F81866_SERIAL_PORT1_PRESENT | F81866_SERIAL_PORT2_PRESENT
 EFI_STATUS F81866_COM_Init(
     IN AMI_BOARD_INIT_PROTOCOL      *This,
@@ -355,7 +412,7 @@ EFI_STATUS F81866_COM_Init(
 
     EFI_STATUS                      Status=EFI_SUCCESS;
     SIO_DEV2                        *Dev=(SIO_DEV2*)AmiSio;
-//    UINT8                           rv; //ComMode Register //RayWu, REMOVE 2015/04/14
+    UINT8                           rv; //ComMode Register
     //Check if parameters passed are VALID and
     if(Args->Signature != AMI_SIO_PARAM_SIG) return EFI_INVALID_PARAMETER;
 
@@ -373,153 +430,132 @@ EFI_STATUS F81866_COM_Init(
     case isBeforeActivate:
         //Only decode UART1/UART2. More others UART port is decode in PEI
         //Attention! Remove the more com ports to PEI decode.
-// >> Edward_Mod
-//#if !defined(SecDecodePkg_SUPPORT) || (SecDecodePkg_SUPPORT == 0)
-//        if(Dev->DeviceInfo->Uid < 0x02) {
-//            //Decode?
-//            if(Dev->DeviceInfo->Implemented && Dev->NvData.DevEnable) {
-//                AmiSioLibSetLpcDeviceDecoding(PciIo,Dev->VlData.DevBase1, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
-//            } else {
-//                AmiSioLibSetLpcDeviceDecoding(PciIo,0, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
-//            }
-//        }
-//#endif
-// <<>>>> Edward_Mod
-//RayWu, REMOVE 2015/04/14 >>
-//        //Program COM RS485/RS232 Mode Registers.
-//        if(F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].AndData8 == 0xFF) {
-//            rv=F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].OrData8;
-//        } else {
-//            Status=AmiSio->Access(AmiSio, FALSE, FALSE, F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].Reg8,&rv);
-//            ASSERT_EFI_ERROR(Status);
-//            rv &= F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].AndData8;
-//            rv |= F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].OrData8;
-//        }
-//        Status=AmiSio->Access(AmiSio,TRUE,FALSE,F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].Reg8,&rv);
-//        ASSERT_EFI_ERROR(Status);
-//        //Program COM Clock Source Registers.
-//        if(F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].AndData8 == 0xFF) {
-//            rv=F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].OrData8;
-//        } else {
-//            Status=AmiSio->Access(AmiSio, FALSE, FALSE, F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].Reg8,&rv);
-//            ASSERT_EFI_ERROR(Status);
-//            rv &= F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].AndData8;
-//            rv |= F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].OrData8;
-//        }
-//        Status=AmiSio->Access(AmiSio,TRUE,FALSE,F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].Reg8,&rv);
-//        ASSERT_EFI_ERROR(Status);
-//        //Programm Device Mode register here(if NEEDED)use AmiSioProtocol
-//        //AMI_TODO: You can program device mode as follow:
-//        if(Dev->DeviceInfo->Uid == 0x05) {
-//            //if(Dev->DeviceInfo->Uid == 0x01)    {
-//            Status=AmiSio->Access(AmiSio,FALSE,FALSE,0xF1,&rv);
-//            ASSERT_EFI_ERROR(Status);
-//            if(EFI_ERROR(Status))return Status;
-//            //clear Bit4~3 where COM Port mode is:
-//            rv &= 0xE7;
-//            switch (Dev->NvData.DevMode) {
-//            case 0:
-//                rv |= 0x00;    //Bit4~3 = 000, Disable IR1 function
-//                break;
-//            case 1:
-//                rv |= 0x10;    //Bit4~3 = 010, Enable IR1 function, active pulse is 1.6uS
-//                break;
-//            case 2:
-//                rv |= 0x18;    //Bit4~3 = 011, Enable IR1 function, active pulse is 3/16 bit time
-//                break;
-//            default:
-//                return EFI_INVALID_PARAMETER;
-//            }
-//            Status=AmiSio->Access(AmiSio,TRUE,FALSE,0xF1,&rv);
-//            ASSERT_EFI_ERROR(Status);
-//            if (Dev->NvData.DevMode > 0) {
-//                //Get DSDT.. we have to update it.
-//                ACPI_HDR                        *dsdt;
-//                EFI_PHYSICAL_ADDRESS            a;
-//
-//                Status=LibGetDsdt(&a,EFI_ACPI_TABLE_VERSION_ALL);
-//                if(EFI_ERROR(Status)) {
-//                    SIO_TRACE((TRACE_SIO,"F81866_COM_Init: Fail to Get DSDT - returned %r\n", Status));
-//                    ASSERT_EFI_ERROR(Status);
-//                } else dsdt=(ACPI_HDR*)a;
-//                Status=UpdateAslNameOfDevice(dsdt, Dev->DeviceInfo->AslName, "_HID", 0x1005D041);
-//                ASSERT_EFI_ERROR(Status);
-//                //Checksum
-//                dsdt->Checksum = 0;
-//                dsdt->Checksum = ChsumTbl((UINT8*)dsdt, dsdt->Length);
-//            }
-//        }
-//RayWu, REMOVE 2015/04/14 <<
-//RayWu, REMOVE 2015/04/14 >> Transfer to PEI phase
-////RayWu, ADD 2014/12/05 >>
-//        // All UART default as 128 byte FIFO
-//        {
-//        	UINT8	Value8;
-//
-//        	Status = AmiSio->Access(AmiSio, FALSE, FALSE, 0xF6, &Value8);
-//        	Value8 |= (BIT0 + BIT1);
-//        	Status = AmiSio->Access(AmiSio, TRUE, FALSE, 0xF6, &Value8);
-//        }
-////RayWu, ADD 2014/12/05 <<
-//RayWu, REMOVE 2015/04/14 <<
-//RayWu, REMOVE 2014/12/05 >>
-//        //Programm Device to PCI IRQ shanre mode
-//        if((Dev->DeviceInfo->Flags & SIO_SHR_IRQ1) && Dev->ResOwner) {
-//            //Programm ResOwner
-//            //1. Config the share bit
-//            Status=AmiSio->Access((AMI_SIO_PROTOCOL *)Dev->ResOwner,FALSE,FALSE,0xF0,&rv);
-//            ASSERT_EFI_ERROR(Status);
-//            rv &= 0xFC;
-//            rv |= 0x01; //Bit0: 1: IRQ is ahring with other device
-//                        //Bit1: 0: Sharing IRQ active low level mode
-//            Status=AmiSio->Access((AMI_SIO_PROTOCOL *)Dev->ResOwner,TRUE,FALSE,0xF0,&rv);
-//            ASSERT_EFI_ERROR(Status);
-//            //Programm Device
-//            //1. Config the share bit
-//            Status=AmiSio->Access(AmiSio,FALSE,FALSE,0xF0,&rv);
-//            ASSERT_EFI_ERROR(Status);
-//            rv &= 0xFC;
-//            rv |= 0x01; //Bit0: 1: IRQ is ahring with other device
-//                        //Bit1: 1: Sharing IRQ active low level mode
-//            Status=AmiSio->Access(AmiSio,TRUE,FALSE,0xF0,&rv);
-//            ASSERT_EFI_ERROR(Status);
-//            //2. Config the IRQ resource
-//            //Status=AmiSio->Access(AmiSio,FALSE,FALSE,0x70,&rv);
-//            //ASSERT_EFI_ERROR(Status);
-//            //rv = Dev->ResOwner->VlData.DevIrq1; //Get the IRQ from the ResOwner
-//            //Status=AmiSio->Access(AmiSio,TRUE,FALSE,0x70,&rv);
-//            //ASSERT_EFI_ERROR(Status);
-//            //3. Update the Device Private Data
-//            //Dev->VlData.DevIrq1 = Dev->ResOwner->VlData.DevIrq1;
-//        }
-//RayWu, REMOVE 2014/12/05 <<
+        if(Dev->DeviceInfo->Uid < 0x02) {
+            //Decode?
+            if(Dev->DeviceInfo->Implemented && Dev->NvData.DevEnable) {
+                AmiSioLibSetLpcDeviceDecoding(PciIo,Dev->VlData.DevBase1, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
+            } else {
+                AmiSioLibSetLpcDeviceDecoding(PciIo,0, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
+            }
+        }
+        //Program COM RS485/RS232 Mode Registers.
+        if(F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].AndData8 == 0xFF) {
+            rv=F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].OrData8;
+        } else {
+            Status=AmiSio->Access(AmiSio, FALSE, FALSE, F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].Reg8,&rv);
+            ASSERT_EFI_ERROR(Status);
+            rv &= F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].AndData8;
+            rv |= F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].OrData8;
+        }
+        Status=AmiSio->Access(AmiSio,TRUE,FALSE,F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid].Reg8,&rv);
+        ASSERT_EFI_ERROR(Status);
+        //Program COM Clock Source Registers.
+        if(F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].AndData8 == 0xFF) {
+            rv=F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].OrData8;
+        } else {
+            Status=AmiSio->Access(AmiSio, FALSE, FALSE, F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].Reg8,&rv);
+            ASSERT_EFI_ERROR(Status);
+            rv &= F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].AndData8;
+            rv |= F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].OrData8;
+        }
+        Status=AmiSio->Access(AmiSio,TRUE,FALSE,F81866_DXE_COM_Mode_Init_Table[Dev->DeviceInfo->Uid+6].Reg8,&rv);
+        ASSERT_EFI_ERROR(Status);
+        //Programm Device Mode register here(if NEEDED)use AmiSioProtocol
+        //AMI_TODO: You can program device mode as follow:
+        if(Dev->DeviceInfo->Uid == 0x05) {
+            //if(Dev->DeviceInfo->Uid == 0x01)    {
+            Status=AmiSio->Access(AmiSio,FALSE,FALSE,0xF1,&rv);
+            ASSERT_EFI_ERROR(Status);
+            if(EFI_ERROR(Status))return Status;
+            //clear Bit4~3 where COM Port mode is:
+            rv &= 0xE7;
+            switch (Dev->NvData.DevMode) {
+            case 0:
+                rv |= 0x00;    //Bit4~3 = 000, Disable IR1 function
+                break;
+            case 1:
+                rv |= 0x10;    //Bit4~3 = 010, Enable IR1 function, active pulse is 1.6uS
+                break;
+            case 2:
+                rv |= 0x18;    //Bit4~3 = 011, Enable IR1 function, active pulse is 3/16 bit time
+                break;
+            default:
+                return EFI_INVALID_PARAMETER;
+            }
+            Status=AmiSio->Access(AmiSio,TRUE,FALSE,0xF1,&rv);
+            ASSERT_EFI_ERROR(Status);
+
+            if (Dev->NvData.DevMode > 0) {
+                //Get DSDT.. we have to update it.
+                ACPI_HDR                        *dsdt;
+                EFI_PHYSICAL_ADDRESS            a;
+
+                Status=LibGetDsdt(&a,EFI_ACPI_TABLE_VERSION_ALL);
+                if(EFI_ERROR(Status)) {
+                    SIO_TRACE((TRACE_SIO,"F81866_COM_Init: Fail to Get DSDT - returned %r\n", Status));
+                    ASSERT_EFI_ERROR(Status);
+                } else dsdt=(ACPI_HDR*)a;
+                Status=UpdateAslNameOfDevice(dsdt, Dev->DeviceInfo->AslName, "_HID", 0x1005D041);
+                ASSERT_EFI_ERROR(Status);
+                //Checksum
+                dsdt->Checksum = 0;
+                dsdt->Checksum = ChsumTbl((UINT8*)dsdt, dsdt->Length);
+            }
+        }
+        //Programm Device to PCI IRQ shanre mode
+        if((Dev->DeviceInfo->Flags & SIO_SHR_IRQ1) && Dev->ResOwner) {
+            //Programm ResOwner
+            //1. Config the share bit
+            Status=AmiSio->Access((AMI_SIO_PROTOCOL *)Dev->ResOwner,FALSE,FALSE,0xF0,&rv);
+            ASSERT_EFI_ERROR(Status);
+            rv &= 0xFC;
+            rv |= 0x01; //Bit0: 1: IRQ is ahring with other device
+                        //Bit1: 0: Sharing IRQ active low level mode
+            Status=AmiSio->Access((AMI_SIO_PROTOCOL *)Dev->ResOwner,TRUE,FALSE,0xF0,&rv);
+            ASSERT_EFI_ERROR(Status);
+            //Programm Device
+            //1. Config the share bit
+            Status=AmiSio->Access(AmiSio,FALSE,FALSE,0xF0,&rv);
+            ASSERT_EFI_ERROR(Status);
+            rv &= 0xFC;
+            rv |= 0x01; //Bit0: 1: IRQ is ahring with other device
+                        //Bit1: 1: Sharing IRQ active low level mode
+            Status=AmiSio->Access(AmiSio,TRUE,FALSE,0xF0,&rv);
+            ASSERT_EFI_ERROR(Status);
+            //2. Config the IRQ resource
+            //Status=AmiSio->Access(AmiSio,FALSE,FALSE,0x70,&rv);
+            //ASSERT_EFI_ERROR(Status);
+            //rv = Dev->ResOwner->VlData.DevIrq1; //Get the IRQ from the ResOwner
+            //Status=AmiSio->Access(AmiSio,TRUE,FALSE,0x70,&rv);
+            //ASSERT_EFI_ERROR(Status);
+            //3. Update the Device Private Data
+            //Dev->VlData.DevIrq1 = Dev->ResOwner->VlData.DevIrq1;
+        }
         break;
 
     case isGetModeData:
-//RayWu, REMOVE 2015/04/14 >>
-//        if(Dev->DeviceInfo->Uid == 0x05) {
-//            //COM6 Has 3 possible modes
-//            //Make sure Device Mode Strings are Static VAR!
-//            //Otherwise The string will gone after control flow leave this function
-//            static CHAR16 Com6ModeStr1[] = L"Disable IR1";
-//            static CHAR16 Com6ModeStr2[] = L"Enable IR1 (pulse 1.6uS)";
-//            static CHAR16 Com6ModeStr3[] = L"Enable IR1 (pulse 3/16 bit time)";
-//            static CHAR16 Com6ModeHelp[] = L"Change the Serial Port mode. Enable, Disable and Configure IR function.";
-//            //---------------------------------------------------
-//            Dev->DevModeCnt=3;
-//            //Make room for 2 floppy modes + Help String...
-//            Dev->DevModeStr=MallocZ(sizeof(CHAR16*)*(Dev->DevModeCnt+1));
-//            if(Dev->DevModeStr==NULL) {
-//                Status=EFI_OUT_OF_RESOURCES;
-//                ASSERT_EFI_ERROR(Status);
-//                return Status;
-//            }
-//            Dev->DevModeStr[0]=&Com6ModeStr1[0];
-//            Dev->DevModeStr[1]=&Com6ModeStr2[0];
-//            Dev->DevModeStr[2]=&Com6ModeStr3[0];
-//            Dev->DevModeStr[3]=&Com6ModeHelp[0];
-//        }
-//RayWu, REMOVE 2015/04/14 <<
+        if(Dev->DeviceInfo->Uid == 0x05) {
+            //COM6 Has 3 possible modes
+            //Make sure Device Mode Strings are Static VAR!
+            //Otherwise The string will gone after control flow leave this function
+            static CHAR16 Com6ModeStr1[] = L"Disable IR1";
+            static CHAR16 Com6ModeStr2[] = L"Enable IR1 (pulse 1.6uS)";
+            static CHAR16 Com6ModeStr3[] = L"Enable IR1 (pulse 3/16 bit time)";
+            static CHAR16 Com6ModeHelp[] = L"Change the Serial Port mode. Enable, Disable and Configure IR function.";
+            //---------------------------------------------------
+            Dev->DevModeCnt=3;
+            //Make room for 2 floppy modes + Help String...
+            Dev->DevModeStr=MallocZ(sizeof(CHAR16*)*(Dev->DevModeCnt+1));
+            if(Dev->DevModeStr==NULL) {
+                Status=EFI_OUT_OF_RESOURCES;
+                ASSERT_EFI_ERROR(Status);
+                return Status;
+            }
+            Dev->DevModeStr[0]=&Com6ModeStr1[0];
+            Dev->DevModeStr[1]=&Com6ModeStr2[0];
+            Dev->DevModeStr[2]=&Com6ModeStr3[0];
+            Dev->DevModeStr[3]=&Com6ModeHelp[0];
+        }
         break;
 
     case isAfterActivate:
@@ -527,12 +563,10 @@ EFI_STATUS F81866_COM_Init(
 
     case isAfterBootScript:
         break;
-
 #if  AMI_SIO_MINOR_VERSION >= 6     
     case isAfterSmmBootScript:      
         break;
 #endif
-
     default:
         Status=EFI_INVALID_PARAMETER;
     }//switch
@@ -540,30 +574,16 @@ EFI_STATUS F81866_COM_Init(
 }
 //#endif
 
-//<AMI_PHDR_START>
-//----------------------------------------------------------------------
-//
-//Procedure: F81866_LPT_Init
-//
-//Description:
-// This function provide each initial routine in genericsio.c
-//
-//Input:
-// IN  AMI_BOARD_INIT_PROTOCOL      *This - AMI Board Int Protocol.
-// IN  UINTN                        *Function - AMI Sdl SIO Init Routine.
-// IN  OUT VOID                     *ParameterBlock - SIO Component Initialization Routine Parameters Block...
-//
-//Output:
-// EFI_SUCCESS - Initial step sucessfully
-// EFI_INVALID_PARAMETER - not find the initial step
-//
-//Modified:  Nothing
-//
-//Referrals: None
-//
-//Notes:
-//----------------------------------------------------------------------
-//<AMI_PHDR_END>
+/**
+  This function provide LPT initial routine in GenericSio.c
+
+  @param  This                      AMI board initial protocol.
+  @param  Function                  AMI sdl SIO initial routine.
+  @param  ParameterBlock            SIO component initial routine parameters block...
+
+  @retval  EFI_SUCCESS              Initial step sucessfully.
+  @retval  EFI_INVALID_PARAMETER    Not find the initial step.
+**/
 #if F81866_PARALLEL_PORT_PRESENT
 EFI_STATUS F81866_LPT_Init(
     IN AMI_BOARD_INIT_PROTOCOL      *This,
@@ -634,15 +654,12 @@ EFI_STATUS F81866_LPT_Init(
         break;
 
     case isBeforeActivate:
-#if !defined(SecDecodePkg_SUPPORT) || (SecDecodePkg_SUPPORT == 0)
-
         //Decode?
         if(Dev->DeviceInfo->Implemented && Dev->NvData.DevEnable) {
             AmiSioLibSetLpcDeviceDecoding(PciIo,Dev->VlData.DevBase1, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
         } else {
             AmiSioLibSetLpcDeviceDecoding(PciIo,0, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
         }
-#endif
         //Programm Device Mode register here(if NEEDED)use AmiSioProtocol
         //AMI_TODO: You can program device mode as follow:
         Status=AmiSio->Access(AmiSio,FALSE,FALSE,0xF0,&rv);    //LPT Configuration Reg, Read the reg value
@@ -719,12 +736,10 @@ EFI_STATUS F81866_LPT_Init(
 
     case isAfterBootScript:
         break;
-
 #if  AMI_SIO_MINOR_VERSION >= 6     
     case isAfterSmmBootScript:      
         break;
 #endif
-
     default:
         Status=EFI_INVALID_PARAMETER;
     } //switch
@@ -733,30 +748,16 @@ EFI_STATUS F81866_LPT_Init(
 }
 #endif
 
-//<AMI_PHDR_START>
-//----------------------------------------------------------------------
-//
-//Procedure: F81866_KBC_Init
-//
-//Description:
-// This function provide each initial routine in genericsio.c
-//
-//Input:
-// IN  AMI_BOARD_INIT_PROTOCOL      *This - AMI Board Int Protocol.
-// IN  UINTN                        *Function - AMI Sdl SIO Init Routine.
-// IN  OUT VOID                     *ParameterBlock - SIO Component Initialization Routine Parameters Block...
-//
-//Output:
-// EFI_SUCCESS - Initial step sucessfully
-// EFI_INVALID_PARAMETER - not find the initial step
-//
-//Modified:  Nothing
-//
-//Referrals: None
-//
-//Notes:
-//----------------------------------------------------------------------
-//<AMI_PHDR_END>
+/**
+  This function provide PS/2 KBC initial routine in GenericSio.c
+
+  @param  This                      AMI board initial protocol.
+  @param  Function                  AMI sdl SIO initial routine.
+  @param  ParameterBlock            SIO component initial routine parameters block...
+
+  @retval  EFI_SUCCESS              Initial step sucessfully.
+  @retval  EFI_INVALID_PARAMETER    Not find the initial step.
+**/
 #if F81866_KEYBOARD_PRESENT
 EFI_STATUS F81866_KBC_Init(
     IN AMI_BOARD_INIT_PROTOCOL      *This,
@@ -784,21 +785,17 @@ EFI_STATUS F81866_KBC_Init(
         break;
 
     case isBeforeActivate:
-#if !defined(SecDecodePkg_SUPPORT) || (SecDecodePkg_SUPPORT == 0)
         //Decode?
         if(Dev->DeviceInfo->Implemented && Dev->NvData.DevEnable) {
             AmiSioLibSetLpcDeviceDecoding(PciIo,Dev->VlData.DevBase1, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
         } else {
             AmiSioLibSetLpcDeviceDecoding(PciIo,0, Dev->DeviceInfo->Uid, Dev->DeviceInfo->Type);
         }
-#endif
         break;
-
 #if  AMI_SIO_MINOR_VERSION >= 6     
     case isAfterSmmBootScript:      
         break;
 #endif
-
     default:
         Status=EFI_INVALID_PARAMETER;
     } //switch
@@ -807,30 +804,16 @@ EFI_STATUS F81866_KBC_Init(
 }
 #endif
 
-//<AMI_PHDR_START>
-//----------------------------------------------------------------------
-//
-//Procedure: F81866_PME_Init
-//
-//Description:
-// This function provide each initial routine in genericsio.c
-//
-//Input:
-// IN  AMI_BOARD_INIT_PROTOCOL      *This - AMI Board Int Protocol.
-// IN  UINTN                        *Function - AMI Sdl SIO Init Routine.
-// IN  OUT VOID                     *ParameterBlock - SIO Component Initialization Routine Parameters Block...
-//
-//Output:
-// EFI_SUCCESS - Initial step sucessfully
-// EFI_INVALID_PARAMETER - not find the initial step
-//
-//Modified:  Nothing
-//
-//Referrals: None
-//
-//Notes:
-//----------------------------------------------------------------------
-//<AMI_PHDR_END>
+/**
+  This function provide PME initial routine in GenericSio.c
+
+  @param  This                      AMI board initial protocol.
+  @param  Function                  AMI sdl SIO initial routine.
+  @param  ParameterBlock            SIO component initial routine parameters block...
+
+  @retval  EFI_SUCCESS              Initial step sucessfully.
+  @retval  EFI_INVALID_PARAMETER    Not find the initial step.
+**/
 #if F81866_PME_CONTROLLER_PRESENT
 EFI_STATUS F81866_PME_Init(
     IN AMI_BOARD_INIT_PROTOCOL      *This,
@@ -864,22 +847,15 @@ EFI_STATUS F81866_PME_Init(
         break;
 
     case isAfterActivate:
-    	// F81866_ERP_Miles++ >>>>>
-    	#if F81866_ERP_SUPPORT
-    		F81866ErpModeCfg(); 
-    	#endif //F81866_ERP_SUPPORT
-    	// F81866_ERP_Miles++ <<<<<
-    	break;
+        break;
 
     case isAfterBootScript:
     case isGetModeData:
         break;
-
 #if  AMI_SIO_MINOR_VERSION >= 6     
     case isAfterSmmBootScript:      
         break;
 #endif
-
     default:
         Status=EFI_INVALID_PARAMETER;
     } //switch
@@ -888,30 +864,16 @@ EFI_STATUS F81866_PME_Init(
 }
 #endif
 
-//<AMI_PHDR_START>
-//----------------------------------------------------------------------
-//
-//Procedure: F81866_HWM_Init
-//
-//Description:
-// This function provide each initial routine in genericsio.c
-//
-//Input:
-// IN  AMI_BOARD_INIT_PROTOCOL      *This - AMI Board Int Protocol.
-// IN  UINTN                        *Function - AMI Sdl SIO Init Routine.
-// IN  OUT VOID                     *ParameterBlock - SIO Component Initialization Routine Parameters Block...
-//
-//Output:
-// EFI_SUCCESS - Initial step sucessfully
-// EFI_INVALID_PARAMETER - not find the initial step
-//
-//Modified:  Nothing
-//
-//Referrals: None
-//
-//Notes:
-//----------------------------------------------------------------------
-//<AMI_PHDR_END>
+/**
+  This function provide HWM initial routine in GenericSio.c
+
+  @param  This                      AMI board initial protocol.
+  @param  Function                  AMI sdl SIO initial routine.
+  @param  ParameterBlock            SIO component initial routine parameters block...
+
+  @retval  EFI_SUCCESS              Initial step sucessfully.
+  @retval  EFI_INVALID_PARAMETER    Not find the initial step.
+**/
 #if F81866_HWM_PRESENT
 EFI_STATUS F81866_HWM_Init(
     IN AMI_BOARD_INIT_PROTOCOL      *This,
@@ -927,7 +889,7 @@ EFI_STATUS F81866_HWM_Init(
 
     EFI_STATUS                      Status=EFI_SUCCESS;
     SIO_DEV2                        *Dev=(SIO_DEV2*)AmiSio;
-    EFI_S3_SAVE_STATE_PROTOCOL      *BootScriptProtocol = Dev->Owner->SaveState;
+    EFI_S3_SAVE_STATE_PROTOCOL      *BootScriptProtocol;
     //Check if parameters passed are VALID and
     if(Args->Signature != AMI_SIO_PARAM_SIG) return EFI_INVALID_PARAMETER;
 
@@ -947,11 +909,7 @@ EFI_STATUS F81866_HWM_Init(
         //OEM_TODO: You need to fill DXE_HWM_Init_Table_After_Active[] first.
         ProgramIsaRegisterTable(F81866_HWM_INDEX_PORT, F81866_HWM_DATA_PORT,\
                                 DXE_HWM_Init_Table_After_Active,sizeof(DXE_HWM_Init_Table_After_Active)/(sizeof(SIO_DEVICE_INIT_DATA)));
-        //INTERNAL_085_RayWu, ADD 2015/01/28 >>
-	#if defined(F81866_SMF_SUPPORT) && (F81866_SMF_SUPPORT == 1)
-	F81866SmartFunction();
-	#endif
-	//INTERNAL_085_RayWu, ADD 2015/01/28 <<
+        ProgramSmartFan(NULL, FALSE);
         break;
 
     case isAfterBootScript:
@@ -959,21 +917,24 @@ EFI_STATUS F81866_HWM_Init(
         //Below HWM read/write interface is LPC/ISA interface,
         //if other interface, please re-program it.
         //This, Width, Address, Count, Buffer
-        BootScriptProtocol = (EFI_S3_SAVE_STATE_PROTOCOL*)Dev->Owner->SaveState;
+        BootScriptProtocol=(EFI_S3_SAVE_STATE_PROTOCOL*)Dev->Owner->SaveState;
         SioLib_BootScriptSioS3SaveTable(F81866_HWM_INDEX_PORT, F81866_HWM_DATA_PORT, \
                                         DXE_HWM_Init_Table_After_Active,sizeof(DXE_HWM_Init_Table_After_Active)/(sizeof(SIO_DEVICE_INIT_DATA)), BootScriptProtocol);
-		//F81866_SMF_Miles++ >>>>>
-		#if defined(F81866_SMF_SUPPORT) && (F81866_SMF_SUPPORT == 1)
-        	SmartFanBootScript(BootScriptProtocol);
-		#endif
-		//F81866_SMF_Miles++ <<<<<
+        ProgramSmartFan(BootScriptProtocol, FALSE);
         break;
-
 #if  AMI_SIO_MINOR_VERSION >= 6     
-    case isAfterSmmBootScript:      
+    case isAfterSmmBootScript:   
+        //Restore HWM registers after Sx resume, if needed.
+        //Below HWM read/write interface is LPC/ISA interface,
+        //if other interface, please re-program it.
+        //This, Width, Address, Count, Buffer
+        BootScriptProtocol=(EFI_S3_SMM_SAVE_STATE_PROTOCOL*)Args->Param3;
+        //If No Bank exist in HWM Config register.
+        SioLib_BootScriptSioS3SaveTable(F81866_HWM_INDEX_PORT, F81866_HWM_DATA_PORT, 
+                                        DXE_HWM_Init_Table_After_Active,sizeof(DXE_HWM_Init_Table_After_Active)/(sizeof(SIO_DEVICE_INIT_DATA)),BootScriptProtocol);
+        ProgramSmartFan(BootScriptProtocol, TRUE);
         break;
 #endif
-        
     default:
         Status=EFI_INVALID_PARAMETER;
     } //switch
@@ -982,30 +943,16 @@ EFI_STATUS F81866_HWM_Init(
 }
 #endif
 
-//<AMI_PHDR_START>
-//----------------------------------------------------------------------
-//
-//Procedure: F81866_GPIO_Init
-//
-//Description:
-// This function provide each initial routine in genericsio.c
-//
-//Input:
-// IN  AMI_BOARD_INIT_PROTOCOL      *This - AMI Board Int Protocol.
-// IN  UINTN                        *Function - AMI Sdl SIO Init Routine.
-// IN  OUT VOID                     *ParameterBlock - SIO Component Initialization Routine Parameters Block...
-//
-//Output:
-// EFI_SUCCESS - Initial step sucessfully
-// EFI_INVALID_PARAMETER - not find the initial step
-//
-//Modified:  Nothing
-//
-//Referrals: None
-//
-//Notes:
-//----------------------------------------------------------------------
-//<AMI_PHDR_END>
+/**
+  This function provide GPIO initial routine in GenericSio.c
+
+  @param  This                      AMI board initial protocol.
+  @param  Function                  AMI sdl SIO initial routine.
+  @param  ParameterBlock            SIO component initial routine parameters block...
+
+  @retval  EFI_SUCCESS              Initial step sucessfully.
+  @retval  EFI_INVALID_PARAMETER    Not find the initial step.
+**/
 //#if F81866_GPIO_PORT_PRESENT
 EFI_STATUS F81866_GPIO_Init(
     IN AMI_BOARD_INIT_PROTOCOL      *This,
@@ -1044,12 +991,10 @@ EFI_STATUS F81866_GPIO_Init(
 
     case isAfterBootScript:
         break;
-
 #if  AMI_SIO_MINOR_VERSION >= 6     
     case isAfterSmmBootScript:      
         break;
 #endif
-       
     default:
         Status=EFI_INVALID_PARAMETER;
     } //switch
@@ -1061,7 +1006,7 @@ EFI_STATUS F81866_GPIO_Init(
 //**********************************************************************
 //**********************************************************************
 //**                                                                  **
-//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
 //**                                                                  **
 //**                       All Rights Reserved.                       **
 //**                                                                  **
