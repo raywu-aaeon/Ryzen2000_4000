@@ -1,0 +1,25 @@
+<component>
+	name = "AaeonIoPkg"
+	category = Flavor
+	LocalRoot = "AaeonIoPkg\"
+	RefName = "AaeonIoPkg"
+[files]
+"AaeonIoPkg.dec"	
+"AaeonIoPkg.sdl"	
+"AaeonIoSetup.c"
+"AaeonIoSetup.h"	
+"GenUniFile.exe"
+[parts]
+"AaeonIoPkg.SioDynamicSetupLoadDefaults"
+"AaeonIoPkg.F81866"
+"AaeonIoPkg.F81966"
+"AaeonIoPkg.NCT6791D"
+"AaeonIoPkg.F81216SEC"
+"AaeonIoPkg.IT8728F"
+"AaeonIoPkg.W83627DHG"
+"AaeonIoPkg.NCT5538D"
+"AaeonIoPkg.F81804"
+"AaeonIoPkg.IT8518"
+"AaeonIoPkg.IT8625"
+"AaeonIoPkg.F75113"
+<endComponent>

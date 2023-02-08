@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "SioDynamicSetup_LoadDefaults"
+	Value  = "1"
+	Help  = "Main switch to enable SioDynamicSetup load defaults support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+	Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "0"
+End
+
+PATH
+	Name  = "SioDynamicSetupLoadDefaults_DIR"
+	Help  = "Path to AMI Board Info Module in Project"
+End
+
+ELINK
+	Name  = "SioLoadSetupDefaults,"
+	Parent  = "LoadSetupDefaultsHook,"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SioDynamicSetupLoadDefaults_DIR)\SioDynamicSetupLoadDefaults.c"
+    Parent  = "TSE_SOURCE_FILES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiSdlLib"
+    Parent  = "ADDITIONAL_AMITSE_LibraryClasses"
+    InvokeOrder = AfterParent
+End

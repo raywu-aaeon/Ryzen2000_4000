@@ -1,0 +1,361 @@
+TOKEN
+	Name  = "AaeonIoPkg_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+## If need to support SIO, add tokens below what your need in AaeonProjectPkg.
+##TOKEN
+##	Name  = "F81866_SUPPORT"
+##	Value  = "1"
+##	Help  = "Main switch to enable F81866 support in Project"
+##	TokenType = Boolean
+##	TargetEQU = Yes
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name  = "NCT6791D_SUPPORT"
+##	Value  = "1"
+##	Help  = "Main switch to enable NCT6791D support in Project"
+##	TokenType = Boolean
+##	TargetEQU = Yes
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name  = "F81216SEC_SUPPORT"
+##	Value  = "1"
+##	Help  = "Main switch to enable F81216SEC support in Project"
+##	TokenType = Boolean
+##	TargetEQU = Yes
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name  = "IT8728F_SUPPORT"
+##	Value  = "1"
+##	Help  = "Main switch to enable IT8728F support in Project"
+##	TokenType = Boolean
+##	TargetEQU = Yes
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name  = "W83627DHG_SUPPORT"
+##	Value  = "1"
+##	Help  = "Main switch to enable W83627DHG support in Project"
+##	TokenType = Boolean
+##	TargetEQU = Yes
+##	TargetH = Yes
+##End
+##TOKEN
+##	Name  = "NCT5538D_SUPPORT"
+##	Value  = "1"
+##	Help  = "Main switch to enable NCT5538D support in Project"
+##	TokenType = Boolean
+##	TargetEQU = Yes
+##	TargetH = Yes
+##End
+
+###########################################################################
+##	
+##	TODO:
+##		Override TOKENs value
+###########################################################################
+TOKEN
+	Name  = "SIO_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SIO support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+TOKEN
+	Name  = "GenericSio_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AMI Generic SIO support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+TOKEN
+	Name  = "PS2Ctl_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PS2 Controller support in the project."
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+End
+TOKEN
+	Name  = "SIO_SETUP_USE_UID_AS_NUMBERS"
+	Value  = "1"
+	Help  = "If multiple number of same type devices shown in Setup\this will tell to use LDs UID as Device Number in Setup\If set to OFF 1 base ordering numbers will be used."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "HIDK"
+	Value  = '"MSFT0001"'
+	TokenType = Expression
+	TargetASL = Yes
+End
+TOKEN
+	Name  = "HIDM"
+	Value  = '"MSFT0003"'
+	TokenType = Expression
+	TargetASL = Yes
+End
+TOKEN
+	Name  = "CIDK"
+	Value  = 'EISAID("PNP0303")'
+	TokenType = Expression
+	TargetASL = Yes
+End
+TOKEN
+	Name  = "CIDM"
+	Value  = 'EISAID("PNP0F13")'
+	TokenType = Expression
+	TargetASL = Yes
+End
+
+###########################################################################
+##	
+##	Standard string Constants to be used in HWM setup menu and BFPI
+##
+###########################################################################
+TOKEN
+	Name = "STD_CPU_TEMP"
+	Value = "CPU Temperature"
+	Help = "Standard name for CPU temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_CPU_TEMP2"
+	Value = "CPU Temperature 2"
+	Help = "Standard name for CPU temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP"
+	Value = "System Temperature"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP2"
+	Value = "System Temperature 2"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP3"
+	Value = "System Temperature 3"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP4"
+	Value = "System Temperature 4"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP5"
+	Value = "System Temperature 5"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_TEMP6"
+	Value = "System Temperature 6"
+	Help = "Standard name for System temperature sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_CPU_FAN"
+	Value = "CPU FAN"
+	Help = "Standard name for CPU FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_CPU_FAN2"
+	Value = "CPU FAN 2"
+	Help = "Standard name for CPU FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_FAN"
+	Value = "System FAN"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_FAN2"
+	Value = "System FAN 2"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_FAN3"
+	Value = "System FAN 3"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_FAN4"
+	Value = "System FAN 4"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_FAN5"
+	Value = "System FAN 5"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_SYS_FAN6"
+	Value = "System FAN 6"
+	Help = "Standard name for System FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_CHS_FAN"
+	Value = "Chassis FAN"
+	Help = "Standard name for Chassis FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_CHS_FAN2"
+	Value = "Chassis FAN2"
+	Help = "Standard name for Chassis FAN sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_VCORE"
+	Value = "VCORE"
+	Help = "Standard name for VCORE voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_VMEM"
+	Value = "VMEM"
+	Help = "Standard name for VMEM/2.5V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_12V"
+	Value = "+12V"
+	Help = "Standard name for +12V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_5V"
+	Value = "+5V"
+	Help = "Standard name for +5V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_3V3"
+	Value = "+3.3V"
+	Help = "Standard name for +3.3V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_1V8"
+	Value = "+1.8V"
+	Help = "Standard name for +1.8V voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_5VSB"
+	Value = "5VSB"
+	Help = "Standard name for 5VSB voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_3VSB"
+	Value = "3VSB"
+	Help = "Standard name for 3VSB voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STD_VBAT"
+	Value = "VBAT"
+	Help = "Standard name for VBAT voltage sensor"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+PATH
+	Name  = "AAEONIO_DIR"
+End
+
+TOKEN
+	Name  = "IO_GENUNIFILE"
+	Value  = "$(AAEONIO_DIR)\GenUniFile.exe"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+ELINK
+	Name  = "$(AAEONIO_DIR)/AaeonIoSetup.c"
+	Parent  = "SetupCallbackFiles"
+	Token = "SIO_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
