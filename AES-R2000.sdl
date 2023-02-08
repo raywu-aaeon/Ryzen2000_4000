@@ -1038,3 +1038,356 @@ TOKEN
     TokenType = File
     TargetMAK = Yes
 End
+
+
+TOKEN
+    Name  = "====== AES-R2000.sdl ======"
+    TokenType = Expression
+End
+
+PcdMapping
+    Name  = "PcdXgbePort0ConfigEn"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdXgbePort1ConfigEn"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = "EMUL6064_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable KBC Emulation support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AMIUSB_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== AmdCpmPkg\AmiCpmWrapper\AmiCpmWrapper.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AmiCpmFchUartDriver_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AmiCpmFchUartDriver support in the project"
+    TokenType = Boolean
+End
+
+PcdMapping
+	Name  = "PcdSerialUseMmio"
+	GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	DataType  = "Boolean"
+	Value  = "FALSE"
+	Offset  = 00h
+	Length  = 01h
+	TargetDSC = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== AmdCpmPkg\Addendum\Oem\Bilby\Bilby.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_I2cMaster_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling I2cMaster support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_xGbEI2cMaster_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable xGbEI2cMaster support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_AmdXgbeAndDisplayConfigureDxe_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AmdXgbeAndDisplayConfigureDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_M24LC128_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling M24LC128 support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_Pca9535a_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling Pca9535a support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_Pca9545a_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling Pca9545a support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_AmdXgbeWorkaround_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AmdXgbeWorkaround support in the project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmdCpmPkg_FanPolicyDxe_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable FanPolicyDxe support in Project"
+    TokenType = Boolean
+End
+
+PcdMapping 
+    Name  = "PcdEspiEnable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+PcdMapping 
+    Name  = "PcdEspiEc0Enable"
+    GuidSpace  = "gEfiAmdAgesaModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    DataType  = "Boolean"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== MandolinPkg\Crb.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "FCH_UART_DEBUG_SELECT"
+    Value  = "0"
+    Help  = "0: Disable,1:UART0,2:UART1. Select Fch Uart port as debug port."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "EcPs2Kbd_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "SILENT"
+    Value  = "1"
+    Help  = "Enables/disables silent build mode.\In silent build mode executed commands are not displayed, and certain auxiliary build process messages are suppressed or displayed in a condensed format.\In non-silent build mode executed command are displayed prior to execution, and all auxiliary messages are visible.\Silent build mode is typically faster because less information goes into a build log.\Non-silent mode is useful for debugging of the build issues."
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "CRB_FEATURE_ASL_SUPPORT"
+    Value  = "0"
+    Help  = "Enable Light sensor related ASL porting code for CRB board."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "UPDATE_SLOT_TYPE9"
+    Value  = "0"
+    Help  = "Alternate token name for SYSTEM_SLOT_INFO"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CRB_SMBIOS_UPDATE" "=" "1"
+End
+
+TOKEN
+	Name  = "DEFAULT_FAST_BOOT"
+	Value  = "0"
+	Help  = "Default value of the Fast Boot option"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+ELINK
+	Name  = "{(UINT32) 0x10EC0899, (UINTN)&CrbHdaVerbTbl0[0]},"
+	Parent  = "OEM_HDA_VERB_TABLE"
+	Help  = "CRB HDA Verb Table context"
+	Token = "MANDOLIN_CRB_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+    Disable = Yes
+End
+
+TOKEN
+	Name  = "CRB_AMD_PCIE_CONTROL_SUPPORT"
+	Value  = "0"
+	Help  = "Switch the CRB GNB PCIE Port configure"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== MandolinPkg\Csp.sdl ======"
+    TokenType = Expression
+End
+
+LibraryMapping
+    Class  = "SerialPortLib"
+    Instance  = "MdeModulePkg.BaseSerialPortLib16550"
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== AmiModulePkg\Ps2Ctl\Ps2Ctl.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "PS2Ctl_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable PS2 Controller support in the project."
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== SecureFlash.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "SecureMod_SUPPORT"
+	Value  = "0"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== SecureFlash.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "CIM_LEGACY_FREE"
+    Value  = "0"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "KBC_SUPPORT"
+    Value  = "0"
+    Help  = "Enable/Disable KBC support"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== AmiModulePkg\AMISetupNVLock\AMISetupNVLock.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AmiSetupNvLock_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AMISetupNVLock support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== AmiChipsetModulePkg\Sb.sdl ======"
+    TokenType = Expression
+End
+
+TOKEN
+	Name  = "NONE_SIO_KBC_SUPPORT"
+	Value  = "0"
+	Help  = "Turn on this token if there is no KBC/SIO controller( Turn on Inchip KBC emulation function )."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
