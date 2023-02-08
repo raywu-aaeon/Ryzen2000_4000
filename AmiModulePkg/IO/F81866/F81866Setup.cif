@@ -1,0 +1,11 @@
+<component>
+	name = "F81866Setup"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\IO\F81866\"
+	RefName = "F81866Setup"
+[files]
+"F81866Setup.sd"
+"F81866Setup.uni"
+"F81866Setup.c"
+"F81866Setup.h"
+<endComponent>

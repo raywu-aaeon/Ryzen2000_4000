@@ -1,0 +1,785 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:  <F81866HwmSetup.sd>
+//
+// Description: HWM form template, setup screen definition file.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+/* Put NVRAM data definitions here.
+/* For example:    UINT8 Data1;
+/* These definitions will be converted by the build process
+/* to a definitions of SETUP_DATA fields.
+/***********************************************************/
+#endif //SETUP_DATA_DEFINITION
+
+//----------------------------------------------------------------------
+//Select Top level menu itmem (forset) for you pages
+//----------------------------------------------------------------------
+#ifdef ADVANCED_FORM_SET
+
+//----------------------------------------------------------------------
+//If you need any additional type definitions add them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_TYPEDEF
+    #include "Token.h"
+    #include "F81866SmartFansSetup.h"
+#endif
+
+//----------------------------------------------------------------------
+//If you need custom varstore's define them here
+//----------------------------------------------------------------------
+#ifdef FORM_SET_VARSTORE
+    varstore F81866_SMF_CONTROL,
+        key   = AUTO_ID(F81866_SMF_KEY),
+        name  = F81866_SMF,
+        guid  = F81866_SMF_GUID;
+#endif
+
+//----------------------------------------------------------------------
+//Define controls to be added to the top level page of the formset
+//----------------------------------------------------------------------
+#ifdef FORM_SET_ITEM
+#endif
+
+//----------------------------------------------------------------------
+//Define goto commands for the forms defined in this file
+//----------------------------------------------------------------------
+#ifdef FORM_SET_GOTO
+
+    #if F81866_HWM_PRESENT
+    goto HMM_CONFIG_FORM_ID,
+    prompt  = STRING_TOKEN(STR_F81866_HMM_CONFIGURATION),
+    help    = STRING_TOKEN(STR_F81866_HMM_CONFIGURATION_HELP);
+    #endif
+
+#endif
+
+//----------------------------------------------------------------------
+// Define forms
+//----------------------------------------------------------------------
+#ifdef FORM_SET_FORM
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////Define HWM formset form////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #if F81866_HWM_PRESENT
+    //Define HWM formset form
+    form formid = AUTO_ID(HMM_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_F81866_HMM_CONFIGURATION);
+     
+        SUBTITLE(STRING_TOKEN(STR_PC_HEALTH))
+     
+        SEPARATOR
+        //
+        // System Temperature1
+        #if EFI_SPECIFICATION_VERSION>0x20000
+        INTERACTIVE_TEXT(STRING_TOKEN(STR_EMPTY), STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1), STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1_VALUE),  AUTO_ID(F81866_INTERACTIVE_KEY))
+        #else
+        text
+        help   = STRING_TOKEN(STR_EMPTY),
+        text   = STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1),
+        text   = STRING_TOKEN(STR_HWM1_SYSTEM_TEMP1_VALUE),
+        flags  = INTERACTIVE,
+        key    = F81866_INTERACTIVE_KEY;
+        #endif
+
+
+        HWM1_TEXT_TEMP2
+        //
+        // System Temperature3
+        #if (F81866_PECI_SUPPORT)
+        HWM1_TEXT_TEMP3
+        #endif
+        //
+        // System Temperature4/5/6
+        #if (F81866_IBEX_SUPPORT)
+        HWM1_TEXT_TEMP4
+        HWM1_TEXT_TEMP5
+        HWM1_TEXT_TEMP6
+        #endif
+        
+        HWM1_TEXT_FAN1_SPEED
+        HWM1_TEXT_FAN2_SPEED
+        HWM1_TEXT_FAN3_SPEED
+
+        HWM1_TEXT_VIN1
+        HWM1_TEXT_VIN2
+        HWM1_TEXT_VIN3
+        HWM1_TEXT_VIN4
+        
+        HWM1_TEXT_VCC3V
+        HWM1_TEXT_VSB3V
+        HWM1_TEXT_VSB5V
+        HWM1_TEXT_VBAT
+        goto SMF_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_F81866_SMF_CONFIGURATION),
+        help    = STRING_TOKEN(STR_F81866_SMF_CONFIGURATION_HELP);
+
+    endform;//HWM form
+    
+    form formid = AUTO_ID(SMF_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_F81866_SMF_CONFIGURATION);        
+        
+        goto SMF1_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_F81866_FAN1_SETTING),
+        help    = STRING_TOKEN(STR_F81866_SMF_CONFIGURATION_HELP);
+        
+        goto SMF2_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_F81866_FAN2_SETTING),
+        help    = STRING_TOKEN(STR_F81866_SMF_CONFIGURATION_HELP);
+        
+        goto SMF3_CONFIG_FORM_ID,
+        prompt  = STRING_TOKEN(STR_F81866_FAN3_SETTING),
+        help    = STRING_TOKEN(STR_F81866_SMF_CONFIGURATION_HELP);
+        
+    endform;
+    
+
+    form formid = AUTO_ID(SMF1_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_F81866_SMF_CONFIGURATION);
+        SUBTITLE(STRING_TOKEN(STR_F81866_FAN1_SETTING))
+        //FAN1 Smart function setting--
+        oneof varid     = F81866_SMF_CONTROL.Fan1SmartMode,
+            prompt      = STRING_TOKEN(STR_F81866_SMARTFAN1_CONFIG),
+            help        = STRING_TOKEN(STR_F81866_SMARTFAN_CONFIG_HELP),
+            option text = STRING_TOKEN(STR_F81866_SMARTFAN_MODE0), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_SMARTFAN_MODE1), value = 1, flags = DEFAULT | RESET_REQUIRED;
+        endoneof;       
+        
+        oneof varid     = F81866_SMF_CONTROL.Fan1Type,
+            prompt      = STRING_TOKEN(STR_F81866_FAN1_TYPE),
+            help        = STRING_TOKEN(STR_F81866_FAN_TYPE_HELP),
+            option text = STRING_TOKEN(STR_F81866_FAN_TYPE0), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_FAN_TYPE1), value = 1, flags = DEFAULT | RESET_REQUIRED;
+        endoneof;
+
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x00;
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1Type == 0x00;
+        numeric varid = F81866_SMF_CONTROL.Fan1ManualControl,
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_MANUAL_CONTROL),
+            help      = STRING_TOKEN(STR_F81866_FAN_MANUAL_CONTROL_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 65535,
+            step      = 1,
+            default   = 1,
+        endnumeric;
+        endif;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x00;
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1Type == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1ManualControl,
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_MANUAL_CONTROL),
+            help      = STRING_TOKEN(STR_F81866_FAN_MANUAL_CONTROL_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 255,
+            step      = 1,
+            default   = 1,
+        endnumeric;
+        endif;
+        endif;
+
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        oneof varid     = F81866_SMF_CONTROL.Fan1Tempin,
+            prompt      = STRING_TOKEN(STR_F81866_FAN1_TEMP_IN),
+            help        = STRING_TOKEN(STR_F81866_TEMP_IN_HELP),
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN1), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN2), value = 1, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN3), value = 2, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN4), value = 3, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN5), value = 80, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN6), value = 81, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN7), value = 82, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN8), value = 83, flags = RESET_REQUIRED;
+        endoneof;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Hysteresis,
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_HYSTERESIS),
+            help      = STRING_TOKEN(STR_F81866_FAN1_HYSTERESIS_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 15,
+            step      = 1,
+            default   = 2,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Boundary[0],
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_BOUNDARY1),
+            help      = STRING_TOKEN(STR_F81866_FAN1_BOUNDARY1_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 60,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Boundary[1],
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_BOUNDARY2),
+            help      = STRING_TOKEN(STR_F81866_FAN1_BOUNDARY2_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 50,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Boundary[2],
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_BOUNDARY3),
+            help      = STRING_TOKEN(STR_F81866_FAN1_BOUNDARY3_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 40,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Boundary[3],
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_BOUNDARY4),
+            help      = STRING_TOKEN(STR_F81866_FAN1_BOUNDARY4_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 30,
+        endnumeric;
+        endif;
+
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Segment[0],
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_SEGMENT1),
+            help      = STRING_TOKEN(STR_F81866_FAN1_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 100,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Segment[1],
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_SEGMENT2),
+            help      = STRING_TOKEN(STR_F81866_FAN1_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 85,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Segment[2],
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_SEGMENT3),
+            help      = STRING_TOKEN(STR_F81866_FAN1_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 70,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Segment[3],
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_SEGMENT4),
+            help      = STRING_TOKEN(STR_F81866_FAN1_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 60,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Segment[4],
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_SEGMENT5),
+            help      = STRING_TOKEN(STR_F81866_FAN1_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 50,
+        endnumeric;
+        endif;
+        //FAN1 Multi temperature setting
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        checkbox varid    = F81866_SMF_CONTROL.MultiTemp,\
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_MULTI_TEMP),\
+            help    = STRING_TOKEN(STR_F81866_FAN1_MULTI_TEMP_HELP),\
+            flags    = RESET_REQUIRED,\
+            default = 0, defaultstore = AmiMfgDefault,\
+        endcheckbox;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        suppressif NOT ideqval F81866_SMF_CONTROL.MultiTemp == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan1Tb,
+            prompt    = STRING_TOKEN(STR_F81866_FAN1_TB),
+            help      = STRING_TOKEN(STR_F81866_FAN1_TB_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 255,
+            step      = 1,
+            default   = 0,
+        endnumeric;
+        endif;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        suppressif NOT ideqval F81866_SMF_CONTROL.MultiTemp == 0x01;
+        oneof varid     = F81866_SMF_CONTROL.Fan1Ta,
+            prompt      = STRING_TOKEN(STR_F81866_FAN1_TA),
+            help        = STRING_TOKEN(STR_F81866_FAN1_TA_HELP),
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN1), value = 0, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN2), value = 1, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN3), value = 2, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN4), value = 3, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN5), value = 4, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN6), value = 5, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN7), value = 6, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN8), value = 7, flags = RESET_REQUIRED;
+        endoneof;
+        endif;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        suppressif NOT ideqval F81866_SMF_CONTROL.MultiTemp == 0x01;
+        oneof varid     = F81866_SMF_CONTROL.Fan1Ctup,
+            prompt      = STRING_TOKEN(STR_F81866_FAN1_CTUP),
+            help        = STRING_TOKEN(STR_F81866_FAN1_CTUP_HELP),
+            option text = STRING_TOKEN(STR_F81866_FAN1_CT1), value = 1, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_FAN1_CT2), value = 2, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_FAN1_CT3), value = 3, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_FAN1_CT4), value = 4, flags = RESET_REQUIRED;
+        endoneof;
+        endif;
+        endif;        
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan1SmartMode == 0x01;
+        suppressif NOT ideqval F81866_SMF_CONTROL.MultiTemp == 0x01;
+        oneof varid     = F81866_SMF_CONTROL.Fan1Ctdn,
+            prompt      = STRING_TOKEN(STR_F81866_FAN1_CTDN),
+            help        = STRING_TOKEN(STR_F81866_FAN1_CTDN_HELP),
+            option text = STRING_TOKEN(STR_F81866_FAN1_CT1), value = 1, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_FAN1_CT2), value = 2, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_FAN1_CT3), value = 3, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_FAN1_CT4), value = 4, flags = RESET_REQUIRED;
+        endoneof;
+        endif;
+        endif;
+                
+    endform;
+
+    form formid = AUTO_ID(SMF2_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_F81866_SMF_CONFIGURATION);
+        SUBTITLE(STRING_TOKEN(STR_F81866_FAN2_SETTING))
+        //FAN2 Smart function setting--
+        oneof varid     = F81866_SMF_CONTROL.Fan2SmartMode,
+            prompt      = STRING_TOKEN(STR_F81866_SMARTFAN2_CONFIG),
+            help        = STRING_TOKEN(STR_F81866_SMARTFAN_CONFIG_HELP),
+            option text = STRING_TOKEN(STR_F81866_SMARTFAN_MODE0), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_SMARTFAN_MODE1), value = 1, flags = DEFAULT | RESET_REQUIRED;
+        endoneof;       
+        
+        oneof varid     = F81866_SMF_CONTROL.Fan2Type,
+            prompt      = STRING_TOKEN(STR_F81866_FAN2_TYPE),
+            help        = STRING_TOKEN(STR_F81866_FAN_TYPE_HELP),
+            option text = STRING_TOKEN(STR_F81866_FAN_TYPE0), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_FAN_TYPE1), value = 1, flags = DEFAULT | RESET_REQUIRED;
+        endoneof;
+
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x00;
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2Type == 0x00;
+        numeric varid = F81866_SMF_CONTROL.Fan2ManualControl,
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_MANUAL_CONTROL),
+            help      = STRING_TOKEN(STR_F81866_FAN_MANUAL_CONTROL_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 65535,
+            step      = 1,
+            default   = 1,
+        endnumeric;
+        endif;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x00;
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2Type == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2ManualControl,
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_MANUAL_CONTROL),
+            help      = STRING_TOKEN(STR_F81866_FAN_MANUAL_CONTROL_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 255,
+            step      = 1,
+            default   = 1,
+        endnumeric;
+        endif;
+        endif;
+
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        oneof varid     = F81866_SMF_CONTROL.Fan2Tempin,
+            prompt      = STRING_TOKEN(STR_F81866_FAN2_TEMP_IN),
+            help        = STRING_TOKEN(STR_F81866_TEMP_IN_HELP),
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN1), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN2), value = 1, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN3), value = 2, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN4), value = 3, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN5), value = 80, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN6), value = 81, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN7), value = 82, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN8), value = 83, flags = RESET_REQUIRED;
+        endoneof;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Hysteresis,
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_HYSTERESIS),
+            help      = STRING_TOKEN(STR_F81866_FAN2_HYSTERESIS_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 15,
+            step      = 1,
+            default   = 2,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Boundary[0],
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_BOUNDARY1),
+            help      = STRING_TOKEN(STR_F81866_FAN2_BOUNDARY1_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 60,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Boundary[1],
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_BOUNDARY2),
+            help      = STRING_TOKEN(STR_F81866_FAN2_BOUNDARY2_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 50,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Boundary[2],
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_BOUNDARY3),
+            help      = STRING_TOKEN(STR_F81866_FAN2_BOUNDARY3_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 40,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Boundary[3],
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_BOUNDARY4),
+            help      = STRING_TOKEN(STR_F81866_FAN2_BOUNDARY4_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 30,
+        endnumeric;
+        endif;
+
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Segment[0],
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_SEGMENT1),
+            help      = STRING_TOKEN(STR_F81866_FAN2_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 100,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Segment[1],
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_SEGMENT2),
+            help      = STRING_TOKEN(STR_F81866_FAN2_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 85,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Segment[2],
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_SEGMENT3),
+            help      = STRING_TOKEN(STR_F81866_FAN2_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 70,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Segment[3],
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_SEGMENT4),
+            help      = STRING_TOKEN(STR_F81866_FAN2_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 60,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan2SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan2Segment[4],
+            prompt    = STRING_TOKEN(STR_F81866_FAN2_SEGMENT5),
+            help      = STRING_TOKEN(STR_F81866_FAN2_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 50,
+        endnumeric;
+        endif;
+        
+    endform;
+    
+    form formid = AUTO_ID(SMF3_CONFIG_FORM_ID),
+        title = STRING_TOKEN(STR_F81866_SMF_CONFIGURATION);
+        SUBTITLE(STRING_TOKEN(STR_F81866_FAN3_SETTING))
+        //FAN3 Smart function setting--
+        oneof varid     = F81866_SMF_CONTROL.Fan3SmartMode,
+            prompt      = STRING_TOKEN(STR_F81866_SMARTFAN3_CONFIG),
+            help        = STRING_TOKEN(STR_F81866_SMARTFAN_CONFIG_HELP),
+            option text = STRING_TOKEN(STR_F81866_SMARTFAN_MODE0), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_SMARTFAN_MODE1), value = 1, flags = DEFAULT | RESET_REQUIRED;
+        endoneof;       
+        
+        oneof varid     = F81866_SMF_CONTROL.Fan3Type,
+            prompt      = STRING_TOKEN(STR_F81866_FAN3_TYPE),
+            help        = STRING_TOKEN(STR_F81866_FAN_TYPE_HELP),
+            option text = STRING_TOKEN(STR_F81866_FAN_TYPE0), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_FAN_TYPE1), value = 1, flags = DEFAULT | RESET_REQUIRED;
+        endoneof;
+
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x00;
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3Type == 0x00;
+        numeric varid = F81866_SMF_CONTROL.Fan3ManualControl,
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_MANUAL_CONTROL),
+            help      = STRING_TOKEN(STR_F81866_FAN_MANUAL_CONTROL_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 65535,
+            step      = 1,
+            default   = 1,
+        endnumeric;
+        endif;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x00;
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3Type == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3ManualControl,
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_MANUAL_CONTROL),
+            help      = STRING_TOKEN(STR_F81866_FAN_MANUAL_CONTROL_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 255,
+            step      = 1,
+            default   = 1,
+        endnumeric;
+        endif;
+        endif;
+
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        oneof varid     = F81866_SMF_CONTROL.Fan3Tempin,
+            prompt      = STRING_TOKEN(STR_F81866_FAN3_TEMP_IN),
+            help        = STRING_TOKEN(STR_F81866_TEMP_IN_HELP),
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN1), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN2), value = 1, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN3), value = 2, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN4), value = 3, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN5), value = 80, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN6), value = 81, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN7), value = 82, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_F81866_TEMP_IN8), value = 83, flags = RESET_REQUIRED;
+        endoneof;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Hysteresis,
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_HYSTERESIS),
+            help      = STRING_TOKEN(STR_F81866_FAN3_HYSTERESIS_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 15,
+            step      = 1,
+            default   = 2,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Boundary[0],
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_BOUNDARY1),
+            help      = STRING_TOKEN(STR_F81866_FAN3_BOUNDARY1_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 60,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Boundary[1],
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_BOUNDARY2),
+            help      = STRING_TOKEN(STR_F81866_FAN3_BOUNDARY2_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 50,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Boundary[2],
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_BOUNDARY3),
+            help      = STRING_TOKEN(STR_F81866_FAN3_BOUNDARY3_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 40,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Boundary[3],
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_BOUNDARY4),
+            help      = STRING_TOKEN(STR_F81866_FAN3_BOUNDARY4_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 127,
+            step      = 1,
+            default   = 30,
+        endnumeric;
+        endif;
+
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Segment[0],
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_SEGMENT1),
+            help      = STRING_TOKEN(STR_F81866_FAN3_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 100,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Segment[1],
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_SEGMENT2),
+            help      = STRING_TOKEN(STR_F81866_FAN3_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 85,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Segment[2],
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_SEGMENT3),
+            help      = STRING_TOKEN(STR_F81866_FAN3_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 70,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Segment[3],
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_SEGMENT4),
+            help      = STRING_TOKEN(STR_F81866_FAN3_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 60,
+        endnumeric;
+        endif;
+        
+        suppressif NOT ideqval F81866_SMF_CONTROL.Fan3SmartMode == 0x01;
+        numeric varid = F81866_SMF_CONTROL.Fan3Segment[4],
+            prompt    = STRING_TOKEN(STR_F81866_FAN3_SEGMENT5),
+            help      = STRING_TOKEN(STR_F81866_FAN3_SEGMENT_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 100,
+            step      = 1,
+            default   = 50,
+        endnumeric;
+        endif;
+    endform;
+    #endif//End of #if F81866_HWM_PRESENT
+
+#endif //FORM_SET_FORM
+
+#endif//ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

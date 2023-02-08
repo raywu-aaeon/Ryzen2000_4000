@@ -1,0 +1,18 @@
+<component>
+	name = "F81866"
+	category = IO
+	LocalRoot = "AmiModulePkg\IO\F81866\"
+	RefName = "F81866"
+[INF]
+"F81866DxeInit.inf"
+"F81866PeiInit.inf"
+"F81866PlatformHookSerialPortLib.inf"
+[files]
+"F81866.sdl"
+"F81866.mak"
+"F81866.chm"
+[parts]
+"F81866Asl"
+"F81866Setup"
+"F81866HwMonitor"
+<endComponent>
