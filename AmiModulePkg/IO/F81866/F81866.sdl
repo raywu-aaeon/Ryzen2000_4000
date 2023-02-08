@@ -246,7 +246,7 @@ End
 
 TOKEN
 	Name  = "F81866_UART3_LEVEL_EDGE_SHARE_MODE"
-	Value  = "1"
+	Value  = "0"
 	Help  = "Select IRQ Share active by Level or edge mode.\ 0: Sharing IRQ active low Level mode.\ 1: Sharing IRQ active high edge mode.\ Note: For details, please refer to F81866\Porting_Guide.md."
 	TokenType = Boolean
 	TargetH = Yes
@@ -262,7 +262,7 @@ End
 
 TOKEN
 	Name  = "F81866_UART4_LEVEL_EDGE_SHARE_MODE"
-	Value  = "1"
+	Value  = "0"
 	Help  = "Select IRQ Share active by Level or edge mode.\ 0: Sharing IRQ active low Level mode.\ 1: Sharing IRQ active high edge mode.\ Note: For details, please refer to F81866\Porting_Guide.md."
 	TokenType = Boolean
 	TargetH = Yes
@@ -278,7 +278,7 @@ End
 
 TOKEN
 	Name  = "F81866_UART5_LEVEL_EDGE_SHARE_MODE"
-	Value  = "1"
+	Value  = "0"
 	Help  = "Select IRQ Share active by Level or edge mode.\ 0: Sharing IRQ active low Level mode.\ 1: Sharing IRQ active high edge mode.\ Note: For details, please refer to F81866\Porting_Guide.md."
 	TokenType = Boolean
 	TargetH = Yes
@@ -294,7 +294,7 @@ End
 
 TOKEN
 	Name  = "F81866_UART6_LEVEL_EDGE_SHARE_MODE"
-	Value  = "1"
+	Value  = "0"
 	Help  = "Select IRQ Share active by Level or edge mode.\ 0: Sharing IRQ active low Level mode.\ 1: Sharing IRQ active high edge mode.\ Note: For details, please refer to F81866\Porting_Guide.md."
 	TokenType = Boolean
 	TargetH = Yes
