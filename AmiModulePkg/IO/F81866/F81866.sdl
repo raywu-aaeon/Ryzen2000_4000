@@ -964,7 +964,6 @@ LDEVICE
     ##ASLfile  = "'AaeonIoPkg\ACPI\PS2_KB.asl'" ##RayWu, ADD 2015/09/04
     ASLdeviceName  = "PS2K"
     WakeEnabled = Yes
-    ASL_HID = Yes ##RayWu, ADD 2014/09/03
     Token = "F81866_KEYBOARD_PRESENT" "=" "1"
 End
 
@@ -987,7 +986,6 @@ LDEVICE
     ##ASLfile  = "'AaeonIoPkg\ACPI\PS2_MS.asl'" ##RayWu, ADD 2015/09/04
     ASLdeviceName  = "PS2M"
     WakeEnabled = Yes
-    ASL_HID = Yes ##RayWu, ADD 2014/09/03
     Token = "F81866_MOUSE_PRESENT" "=" "1"
 End
 
