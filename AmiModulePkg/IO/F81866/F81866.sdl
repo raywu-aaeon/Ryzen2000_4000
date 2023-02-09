@@ -1192,65 +1192,6 @@ LDEVICE
     Token = "F81866_WDT_PRESENT" "=" "1"
 End
 
-TOKEN
-	Name  = "VIN1_RA"
-	Value  = "0"
-	TokenType = Integer
-	TargetH = Yes
-End
-TOKEN
-	Name  = "VIN1_RB"
-	Value  = "1"
-	TokenType = Integer
-	TargetH = Yes
-End
-TOKEN
-	Name  = "VIN2_RA"
-	Value  = "0"
-	TokenType = Integer
-	TargetH = Yes
-End
-TOKEN
-	Name  = "VIN2_RB"
-	Value  = "1"
-	TokenType = Integer
-	TargetH = Yes
-End
-TOKEN
-	Name  = "VIN3_RA"
-	Value  = "0"
-	TokenType = Integer
-	TargetH = Yes
-End
-TOKEN
-	Name  = "VIN3_RB"
-	Value  = "1"
-	TokenType = Integer
-	TargetH = Yes
-End
-TOKEN
-	Name  = "VIN4_RA"
-	Value  = "0"
-	TokenType = Integer
-	TargetH = Yes
-End
-TOKEN
-	Name  = "VIN4_RB"
-	Value  = "1"
-	TokenType = Integer
-	TargetH = Yes
-End
-
-#ELINK
-#	Name  = "$(F81866_DIR)\F81866OemReadyToBootCallback.c"
-#	Parent  = "AMI_CSP_DXE_SOURCES"
-#	InvokeOrder = AfterParent
-#End
-#ELINK
-#	Name  = "F81866OemReadyToBootCallback,"
-#	Parent  = "AAEON_READY_TO_BOOT_INIT_FUNCTIONS"
-#	InvokeOrder = BeforeParent
-#End
 #**********************************************************************
 #**********************************************************************
 #**                                                                  **

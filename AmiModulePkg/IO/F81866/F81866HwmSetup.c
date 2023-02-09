@@ -487,8 +487,6 @@ GetAndUpdateVIN1Voltage (
 )
 {
     UINTN       VIN1;
-	UINTN	Ra = VIN1_RA;
-	UINTN	Rb = VIN1_RB;
 
     Data->Token = STRING_TOKEN(STR_HWM1_VIN1_VALUE);
     Data->Type = VOLTAGE;
@@ -496,7 +494,7 @@ GetAndUpdateVIN1Voltage (
 
     //OEM_TODO:Get value with HWM IO interface
     GetValueWithIO(0x00,0x21,&VIN1) ; // Register 0x21
-    VIN1 = VIN1*8*(Ra+Rb)/Rb;
+    VIN1 = VIN1*8;
 
     Data->Value = (UINT16)VIN1;
 
@@ -524,8 +522,6 @@ GetAndUpdateVIN2Voltage (
 )
 {
     UINTN       VIN2;
-	UINTN	Ra = VIN2_RA;
-	UINTN	Rb = VIN2_RB;
 
     Data->Token = STRING_TOKEN(STR_HWM1_VIN2_VALUE);
     Data->Type = VOLTAGE;
@@ -533,7 +529,7 @@ GetAndUpdateVIN2Voltage (
 
     //OEM_TODO:Get value with HWM IO interface
     GetValueWithIO(0x00,0x22,&VIN2) ; // Register 0x22
-    VIN2 = VIN2*8*(Ra+Rb)/Rb;
+    VIN2 = VIN2*8*(20+47)/47;
     Data->Value = (UINT16)VIN2;
 
     return;
@@ -560,8 +556,6 @@ GetAndUpdateVIN3Voltage (
 )
 {
     UINTN       VIN3;
-	UINTN	Ra = VIN3_RA;
-	UINTN	Rb = VIN3_RB;	
 
     Data->Token = STRING_TOKEN(STR_HWM1_VIN3_VALUE);
     Data->Type = VOLTAGE;
@@ -569,7 +563,7 @@ GetAndUpdateVIN3Voltage (
 
     //OEM_TODO:Get value with HWM IO interface
     GetValueWithIO(0x00,0x23,&VIN3) ; // Register 0x23
-    VIN3 = VIN3*8*(Ra+Rb)/Rb;
+    VIN3 = VIN3*8;
     Data->Value = (UINT16)VIN3;
 
     return;
@@ -596,8 +590,6 @@ GetAndUpdateVIN4Voltage (
 )
 {
     UINTN       VIN4;
-	UINTN	Ra = VIN4_RA;
-	UINTN	Rb = VIN4_RB;
 
     Data->Token = STRING_TOKEN(STR_HWM1_VIN4_VALUE);
     Data->Type = VOLTAGE;
@@ -605,7 +597,7 @@ GetAndUpdateVIN4Voltage (
 
     //OEM_TODO:Get value with HWM IO interface
     GetValueWithIO(0x00,0x24,&VIN4) ; // Register 0x24
-    VIN4 = VIN4*8*(Ra+Rb)/Rb;
+    VIN4 = VIN4*8*(100+100)/100;
     Data->Value = (UINT16)VIN4;
 
     return;
