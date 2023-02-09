@@ -49,7 +49,7 @@ TOKEN
 End
 TOKEN
     Name  = "F81866_DBG_SUPPORT"
-    Value  = "0" ##RayWu, 1->0 2014/09/03
+    Value  = "1"
     TokenType = Boolean
     TargetEQU = Yes
     TargetMAK = Yes
@@ -212,180 +212,6 @@ TOKEN
     Help  = "HWM Port Present / Not Present."
     TokenType = Boolean
     TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_SMF_SUPPORT"
-	Value  = "1"
-	Help  = "F81866 SmartFan control support"
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_SMF_SUPPORT"
-	Value  = "0"
-	Help  = "F81866 SmartFan control support"
-	TokenType = Boolean
-	TargetH = Yes
-	Token = "F81866_HWM_PRESENT" "=" "0"
-End
-
-TOKEN
-    Name  = "=== COM Port Mode Settings =========="
-    TokenType = Expression
-End
-
-TOKEN
-	Name  = "F81866_UART3_IRQ_SHARE"
-	Value  = "1"
-	Help  = "Select to share IRQ with other UART or not.\1: IRQ is sharing with the other device.\\Note: When switching this token off for independent IRQ, additional porting required : uartx.asl file."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART3_LEVEL_EDGE_SHARE_MODE"
-	Value  = "0"
-	Help  = "Select IRQ Share active by Level or edge mode.\ 0: Sharing IRQ active low Level mode.\ 1: Sharing IRQ active high edge mode.\ Note: For details, please refer to F81866\Porting_Guide.md."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART4_IRQ_SHARE"
-	Value  = "1"
-	Help  = "Select to share IRQ with other UART or not.\1: IRQ is sharing with the other device.\\Note: When switching this token off for independent IRQ, additional porting required : uartx.asl file."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART4_LEVEL_EDGE_SHARE_MODE"
-	Value  = "0"
-	Help  = "Select IRQ Share active by Level or edge mode.\ 0: Sharing IRQ active low Level mode.\ 1: Sharing IRQ active high edge mode.\ Note: For details, please refer to F81866\Porting_Guide.md."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART5_IRQ_SHARE"
-	Value  = "1"
-	Help  = "Select to share IRQ with other UART or not.\1: IRQ is sharing with the other device.\\Note: When switching this token off for independent IRQ, additional porting required : uartx.asl file."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART5_LEVEL_EDGE_SHARE_MODE"
-	Value  = "0"
-	Help  = "Select IRQ Share active by Level or edge mode.\ 0: Sharing IRQ active low Level mode.\ 1: Sharing IRQ active high edge mode.\ Note: For details, please refer to F81866\Porting_Guide.md."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART6_IRQ_SHARE"
-	Value  = "1"
-	Help  = "Select to share IRQ with other UART or not.\1: IRQ is sharing with the other device.\\Note: When switching this token off for independent IRQ, additional porting required : uartx.asl file."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART6_LEVEL_EDGE_SHARE_MODE"
-	Value  = "0"
-	Help  = "Select IRQ Share active by Level or edge mode.\ 0: Sharing IRQ active low Level mode.\ 1: Sharing IRQ active high edge mode.\ Note: For details, please refer to F81866\Porting_Guide.md."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART3_FUNC_SEL"
-	Value  = "3"
-	Help  = "UART3 Function Select. 0: No UART\ 1: Simple UART(SIN3 and SOUT3)\ 2: Simple UART with RTS\ 3: Full UART"
-	TokenType = Integer
-	TargetEQU = Yes
-	TargetH = Yes
-    	Token = "F81866_SERIAL_PORT3_PRESENT" "=" "1"
-End
-
-TOKEN
-	Name  = "F81866_UART4_FUNC_SEL"
-	Value  = "3"
-	Help  = "UART4 Function Select. 0: No UART\ 1: Simple UART(SIN4 and SOUT4)\ 2: Simple UART with RTS\ 3: Full UART"
-	TokenType = Integer
-	TargetEQU = Yes
-	TargetH = Yes
-    	Token = "F81866_SERIAL_PORT4_PRESENT" "=" "1"
-End
-
-TOKEN
-	Name  = "F81866_UART5_FUNC_SEL"
-	Value  = "3"
-	Help  = "UART5 Function Select. 0: No UART\ 1: Simple UART(SIN5 and SOUT5)\ 2: Simple UART with RTS\ 3: Full UART"
-	TokenType = Integer
-	TargetEQU = Yes
-	TargetH = Yes
-    	Token = "F81866_SERIAL_PORT5_PRESENT" "=" "1"
-End
-
-TOKEN
-	Name  = "F81866_UART6_FUNC_SEL"
-	Value  = "3"
-	Help  = "UART6 Function Select. 0: No UART\ 1: Simple UART(SIN6 and SOUT6)\ 2: Simple UART with RTS\ 3: Full UART"
-	TokenType = Integer
-	TargetEQU = Yes
-	TargetH = Yes
-    	Token = "F81866_SERIAL_PORT6_PRESENT" "=" "1"
-End
-
-TOKEN
-	Name  = "F81866_UART1_RS485_EN"
-	Value  = "0"
-	Help  = "1: Enabled, RTS# is driven high automatically\0: Disabled"
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART2_RS485_EN"
-	Value  = "0"
-	Help  = "1: Enabled, RTS# is driven high automatically\0: Disabled"
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART3_RS485_EN"
-	Value  = "0"
-	Help  = "1: Enabled, RTS# is driven high automatically\0: Disabled"
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART4_RS485_EN"
-	Value  = "0"
-	Help  = "1: Enabled, RTS# is driven high automatically\0: Disabled"
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART5_RS485_EN"
-	Value  = "0"
-	Help  = "1: Enabled, RTS# is driven high automatically\0: Disabled"
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "F81866_UART6_RS485_EN"
-	Value  = "0"
-	Help  = "1: Enabled, RTS# is driven high automatically\0: Disabled"
-	TokenType = Boolean
-	TargetH = Yes
 End
 
 #==============================================================================
@@ -969,21 +795,6 @@ ELINK
     Parent  = "SetupStringFiles"
     InvokeOrder = AfterParent
     Token = "SIO_SETUP_USE_APTIO_4_STYLE" "=" "1"
-End
-
-ELINK
-    Name  = "$(F81866_DIR)\F81866SmartFanSetup.sd"
-    Parent  = "SETUP_DEFINITIONS"
-    Priority  = 40
-    InvokeOrder = AfterParent
-    Token = "F81866_SMF_PRESENT" "=" "1"
-End
-
-ELINK
-    Name  = "$(F81866_DIR)\F81866SmartFanSetup.uni"
-    Parent  = "SetupStringFiles"
-    InvokeOrder = AfterParent
-    Token = "F81866_SMF_PRESENT" "=" "1"
 End
 
 ELINK
