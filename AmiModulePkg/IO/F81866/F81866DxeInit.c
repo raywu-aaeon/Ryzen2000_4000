@@ -110,184 +110,184 @@ WriteValueWithIO (
     return;
 }
 
-/**
-    Program smart fan with setup setting.
+// /**
+//     Program smart fan with setup setting.
 
-    @param  SaveState Point to s3 save state protocol.
-    @param  InSmm     Indicate in smm or not.
-**/
-VOID ProgramSmartFan(EFI_S3_SAVE_STATE_PROTOCOL *SaveState, BOOLEAN InSmm) 
-{
-    F81866_SMF_CONTROL          FanControl;
-    UINTN                       Size = sizeof(F81866_SMF_CONTROL);
-    EFI_GUID                    F81866HwmConfigGuid = F81866_SMF_GUID;
-    EFI_STATUS                  Status;
-    UINT8                       TempData;
-    EFI_SMM_VARIABLE_PROTOCOL   *SmmVariable;
-    UINT8                       Index;
+//     @param  SaveState Point to s3 save state protocol.
+//     @param  InSmm     Indicate in smm or not.
+// **/
+// VOID ProgramSmartFan(EFI_S3_SAVE_STATE_PROTOCOL *SaveState, BOOLEAN InSmm) 
+// {
+//     F81866_SMF_CONTROL          FanControl;
+//     UINTN                       Size = sizeof(F81866_SMF_CONTROL);
+//     EFI_GUID                    F81866HwmConfigGuid = F81866_SMF_GUID;
+//     EFI_STATUS                  Status;
+//     UINT8                       TempData;
+//     EFI_SMM_VARIABLE_PROTOCOL   *SmmVariable;
+//     UINT8                       Index;
     
-    if(InSmm == FALSE) {
-    //Get Setup variable
-    Status = pRS->GetVariable( L"F81866_SMF", &F81866HwmConfigGuid, NULL, &Size, &FanControl);
-    if(EFI_ERROR(Status))
-        return;
-    }
-    else {
-        Status = pSmst->SmmLocateProtocol(&gEfiSmmVariableProtocolGuid, NULL, (VOID**)&SmmVariable);
-        if(EFI_ERROR(Status))
-            return;        
-        Status = SmmVariable->SmmGetVariable (
-                                 L"F81866_SMF",
-                                 &F81866HwmConfigGuid,
-                                 NULL,
-                                 &Size,
-                                 &FanControl
-                                 );
-        if(EFI_ERROR(Status))
-            return;        
-    }
+//     if(InSmm == FALSE) {
+//     //Get Setup variable
+//     Status = pRS->GetVariable( L"F81866_SMF", &F81866HwmConfigGuid, NULL, &Size, &FanControl);
+//     if(EFI_ERROR(Status))
+//         return;
+//     }
+//     else {
+//         Status = pSmst->SmmLocateProtocol(&gEfiSmmVariableProtocolGuid, NULL, (VOID**)&SmmVariable);
+//         if(EFI_ERROR(Status))
+//             return;        
+//         Status = SmmVariable->SmmGetVariable (
+//                                  L"F81866_SMF",
+//                                  &F81866HwmConfigGuid,
+//                                  NULL,
+//                                  &Size,
+//                                  &FanControl
+//                                  );
+//         if(EFI_ERROR(Status))
+//             return;        
+//     }
     
-    //Fan 1 setting
-    switch (FanControl.Fan1SmartMode) {
-    case 0://Manual Mode
-        //Index 96h[1] = 1 [0]:0/1 RPM/PWM
-        GetValueWithIO(0x96, &TempData);
-        TempData &= ~BIT0;
-        WriteValueWithIO(SaveState, 0x96, TempData | BIT1 | FanControl.Fan1Type); //Index 0x96[1-0]
-        WriteValueWithIO(SaveState, 0xA2, (UINT8)FanControl.Fan1ManualControl); //Index 0xA2(MSB) Control value.
-        WriteValueWithIO(SaveState, 0xA3, (UINT8)(FanControl.Fan1ManualControl >> 8)); //Index 0xA3(LSB) Control value.
-        break;
-    case 1://Automatic Mode
-        //Index 96h[1] = 0 [0]:0/1 RPM/PWM
-        //Fan type & mode            
-        GetValueWithIO(0x96, &TempData);
-        TempData &= ~(BIT0 | BIT1);
-        WriteValueWithIO(SaveState, 0x96, TempData | FanControl.Fan1Type); //Index 0x96[1-0]
-        GetValueWithIO(0xAF, &TempData);
-        TempData &= ~(BIT0 | BIT1 | BIT7);
-        WriteValueWithIO(SaveState, 0xAF, TempData | FanControl.Fan1Tempin); //Index 0xAF[7,1-0]
-        //Set Boundary hysteresis 98h[3-0]
-        GetValueWithIO(0x98, &TempData);
-        TempData &= ~(BIT0 | BIT1 | BIT2 | BIT3);
-        WriteValueWithIO(SaveState, 0x98, TempData | FanControl.Fan1Hysteresis);
-        for(Index = 0;Index < 4;Index ++) {
-            // Boundary A6h~A9h
-            WriteValueWithIO(SaveState, 0xA6 + Index, FanControl.Fan1Boundary[Index]);
-        }
-        for(Index = 0;Index < 5;Index ++) {
-            // Speed AAh~AEh
-            TempData = FanControl.Fan1Segment[Index];
-            if(FanControl.Fan1Type == 0) {
-                //RPM mode
-                //X% of full speed = (100-X)*32/X
-                FanControl.Fan1Segment[Index] = (100 - TempData) * 32 / TempData;
-            }
-            else {
-                FanControl.Fan1Segment[Index] = 0xFF * TempData / 100;
-            }
-            WriteValueWithIO(SaveState, 0xAA + Index, FanControl.Fan1Segment[Index]);
-        }
-        //Multi temperature 94h, 95h, 96h(9Fh[7]=1)
-        if(FanControl.MultiTemp == 1) {
-            GetValueWithIO(0x9F, &TempData);
-            WriteValueWithIO(SaveState, 0x9F, TempData | BIT7);
-            WriteValueWithIO(SaveState, 0x94, FanControl.Fan1Tb);
-            WriteValueWithIO(SaveState, 0x96, FanControl.Fan1Ta);
-            GetValueWithIO(0x95, &TempData);
-            TempData &= ~(BIT6 | BIT5 | BIT4 | BIT2 | BIT1 | BIT0);
-            WriteValueWithIO(SaveState, 0x95, (TempData | (FanControl.Fan1Ctup << 4) | FanControl.Fan1Ctdn));
-            GetValueWithIO(0x9F, &TempData);
-            TempData &= ~BIT7;
-            WriteValueWithIO(SaveState, 0x9F, TempData);
-        }
-        break;
-    }
+//     //Fan 1 setting
+//     switch (FanControl.Fan1SmartMode) {
+//     case 0://Manual Mode
+//         //Index 96h[1] = 1 [0]:0/1 RPM/PWM
+//         GetValueWithIO(0x96, &TempData);
+//         TempData &= ~BIT0;
+//         WriteValueWithIO(SaveState, 0x96, TempData | BIT1 | FanControl.Fan1Type); //Index 0x96[1-0]
+//         WriteValueWithIO(SaveState, 0xA2, (UINT8)FanControl.Fan1ManualControl); //Index 0xA2(MSB) Control value.
+//         WriteValueWithIO(SaveState, 0xA3, (UINT8)(FanControl.Fan1ManualControl >> 8)); //Index 0xA3(LSB) Control value.
+//         break;
+//     case 1://Automatic Mode
+//         //Index 96h[1] = 0 [0]:0/1 RPM/PWM
+//         //Fan type & mode            
+//         GetValueWithIO(0x96, &TempData);
+//         TempData &= ~(BIT0 | BIT1);
+//         WriteValueWithIO(SaveState, 0x96, TempData | FanControl.Fan1Type); //Index 0x96[1-0]
+//         GetValueWithIO(0xAF, &TempData);
+//         TempData &= ~(BIT0 | BIT1 | BIT7);
+//         WriteValueWithIO(SaveState, 0xAF, TempData | FanControl.Fan1Tempin); //Index 0xAF[7,1-0]
+//         //Set Boundary hysteresis 98h[3-0]
+//         GetValueWithIO(0x98, &TempData);
+//         TempData &= ~(BIT0 | BIT1 | BIT2 | BIT3);
+//         WriteValueWithIO(SaveState, 0x98, TempData | FanControl.Fan1Hysteresis);
+//         for(Index = 0;Index < 4;Index ++) {
+//             // Boundary A6h~A9h
+//             WriteValueWithIO(SaveState, 0xA6 + Index, FanControl.Fan1Boundary[Index]);
+//         }
+//         for(Index = 0;Index < 5;Index ++) {
+//             // Speed AAh~AEh
+//             TempData = FanControl.Fan1Segment[Index];
+//             if(FanControl.Fan1Type == 0) {
+//                 //RPM mode
+//                 //X% of full speed = (100-X)*32/X
+//                 FanControl.Fan1Segment[Index] = (100 - TempData) * 32 / TempData;
+//             }
+//             else {
+//                 FanControl.Fan1Segment[Index] = 0xFF * TempData / 100;
+//             }
+//             WriteValueWithIO(SaveState, 0xAA + Index, FanControl.Fan1Segment[Index]);
+//         }
+//         //Multi temperature 94h, 95h, 96h(9Fh[7]=1)
+//         if(FanControl.MultiTemp == 1) {
+//             GetValueWithIO(0x9F, &TempData);
+//             WriteValueWithIO(SaveState, 0x9F, TempData | BIT7);
+//             WriteValueWithIO(SaveState, 0x94, FanControl.Fan1Tb);
+//             WriteValueWithIO(SaveState, 0x96, FanControl.Fan1Ta);
+//             GetValueWithIO(0x95, &TempData);
+//             TempData &= ~(BIT6 | BIT5 | BIT4 | BIT2 | BIT1 | BIT0);
+//             WriteValueWithIO(SaveState, 0x95, (TempData | (FanControl.Fan1Ctup << 4) | FanControl.Fan1Ctdn));
+//             GetValueWithIO(0x9F, &TempData);
+//             TempData &= ~BIT7;
+//             WriteValueWithIO(SaveState, 0x9F, TempData);
+//         }
+//         break;
+//     }
     
-    //Fan 2 setting
-    switch (FanControl.Fan2SmartMode) {
-    case 0://Manual Mode
-        //Index 96h[3] = 1 [2]:0/1 RPM/PWM
-        GetValueWithIO(0x96, &TempData);
-        TempData &= ~(BIT2 | BIT3);
-        WriteValueWithIO(SaveState, 0x96, TempData | BIT1 | FanControl.Fan2Type); //Index 0x96[3-2]
-        WriteValueWithIO(SaveState, 0xB2, (UINT8)FanControl.Fan2ManualControl); //Index 0xB2(MSB) Control value.
-        WriteValueWithIO(SaveState, 0xB3, (UINT8)(FanControl.Fan2ManualControl >> 8)); //Index 0xB3(LSB) Control value.
-        break;
-    case 1://Automatic Mode
-        //Index 96h[3] = 0 [2]:0/1 RPM/PWM
-        //Fan type & mode            
-        GetValueWithIO(0x96, &TempData);
-        TempData &= ~(BIT2 | BIT3);
-        WriteValueWithIO(SaveState, 0x96, TempData | FanControl.Fan2Type); //Index 0x96[3-2]
-        GetValueWithIO(0xBF, &TempData);
-        TempData &= ~(BIT0 | BIT1 | BIT7);
-        WriteValueWithIO(SaveState, 0xBF, TempData | FanControl.Fan2Tempin); //Index 0xAF[7,1-0]
-        //Set Boundary hysteresis 98h[7-4]
-        GetValueWithIO(0x98, &TempData);
-        TempData &= ~(BIT4 | BIT5 | BIT6 | BIT7);
-        WriteValueWithIO(SaveState, 0x98, TempData | FanControl.Fan2Hysteresis);
-        for(Index = 0;Index < 4;Index ++) {
-            // Boundary B6h~B9h
-            WriteValueWithIO(SaveState, 0xB6 + Index, FanControl.Fan2Boundary[Index]);
-        }
-        for(Index = 0;Index < 5;Index ++) {
-            // Speed BAh~BEh
-            TempData = FanControl.Fan2Segment[Index];
-            if(FanControl.Fan2Type == 0) {
-                //RPM mode
-                //X% of full speed = (100-X)*32/X
-                FanControl.Fan2Segment[Index] = (100 - TempData) * 32 / TempData;
-            }
-            else {
-                FanControl.Fan2Segment[Index] = 0xFF * TempData / 100;
-            }
-            WriteValueWithIO(SaveState, 0xBA + Index, FanControl.Fan2Segment[Index]);
-        }
-        break;
-    }
+//     //Fan 2 setting
+//     switch (FanControl.Fan2SmartMode) {
+//     case 0://Manual Mode
+//         //Index 96h[3] = 1 [2]:0/1 RPM/PWM
+//         GetValueWithIO(0x96, &TempData);
+//         TempData &= ~(BIT2 | BIT3);
+//         WriteValueWithIO(SaveState, 0x96, TempData | BIT1 | FanControl.Fan2Type); //Index 0x96[3-2]
+//         WriteValueWithIO(SaveState, 0xB2, (UINT8)FanControl.Fan2ManualControl); //Index 0xB2(MSB) Control value.
+//         WriteValueWithIO(SaveState, 0xB3, (UINT8)(FanControl.Fan2ManualControl >> 8)); //Index 0xB3(LSB) Control value.
+//         break;
+//     case 1://Automatic Mode
+//         //Index 96h[3] = 0 [2]:0/1 RPM/PWM
+//         //Fan type & mode            
+//         GetValueWithIO(0x96, &TempData);
+//         TempData &= ~(BIT2 | BIT3);
+//         WriteValueWithIO(SaveState, 0x96, TempData | FanControl.Fan2Type); //Index 0x96[3-2]
+//         GetValueWithIO(0xBF, &TempData);
+//         TempData &= ~(BIT0 | BIT1 | BIT7);
+//         WriteValueWithIO(SaveState, 0xBF, TempData | FanControl.Fan2Tempin); //Index 0xAF[7,1-0]
+//         //Set Boundary hysteresis 98h[7-4]
+//         GetValueWithIO(0x98, &TempData);
+//         TempData &= ~(BIT4 | BIT5 | BIT6 | BIT7);
+//         WriteValueWithIO(SaveState, 0x98, TempData | FanControl.Fan2Hysteresis);
+//         for(Index = 0;Index < 4;Index ++) {
+//             // Boundary B6h~B9h
+//             WriteValueWithIO(SaveState, 0xB6 + Index, FanControl.Fan2Boundary[Index]);
+//         }
+//         for(Index = 0;Index < 5;Index ++) {
+//             // Speed BAh~BEh
+//             TempData = FanControl.Fan2Segment[Index];
+//             if(FanControl.Fan2Type == 0) {
+//                 //RPM mode
+//                 //X% of full speed = (100-X)*32/X
+//                 FanControl.Fan2Segment[Index] = (100 - TempData) * 32 / TempData;
+//             }
+//             else {
+//                 FanControl.Fan2Segment[Index] = 0xFF * TempData / 100;
+//             }
+//             WriteValueWithIO(SaveState, 0xBA + Index, FanControl.Fan2Segment[Index]);
+//         }
+//         break;
+//     }
     
-    //Fan 3 setting
-    switch (FanControl.Fan3SmartMode) {
-    case 0://Manual Mode
-        //Index 96h[5] = 1 [4]:0/1 RPM/PWM
-        GetValueWithIO(0x96, &TempData);
-        TempData &= ~(BIT4 | BIT5);
-        WriteValueWithIO(SaveState, 0x96, TempData | BIT1 | FanControl.Fan3Type); //Index 0x96[5-4]
-        WriteValueWithIO(SaveState, 0xC2, (UINT8)FanControl.Fan3ManualControl); //Index 0xC2(MSB) Control value.
-        WriteValueWithIO(SaveState, 0xC3, (UINT8)(FanControl.Fan3ManualControl >> 8)); //Index 0xC3(LSB) Control value.
-        break;
-    case 1://Automatic Mode
-        //Index 96h[5] = 0 [4]:0/1 RPM/PWM
-        //Fan type & mode
-        GetValueWithIO(0x96, &TempData);
-        TempData &= ~(BIT4 | BIT5);
-        WriteValueWithIO(SaveState, 0x96, TempData | FanControl.Fan3Type); //Index 0x96[5-4]
-        GetValueWithIO(0xCF, &TempData);
-        TempData &= ~(BIT0 | BIT1 | BIT7);
-        WriteValueWithIO(SaveState, 0xCF, TempData | FanControl.Fan3Tempin); //Index 0xCF[7,1-0]
-        //Set Boundary hysteresis 99h[3-0]
-        GetValueWithIO(0x99, &TempData);
-        TempData &= ~(BIT0 | BIT1 | BIT2 | BIT3);
-        WriteValueWithIO(SaveState, 0x99, TempData | FanControl.Fan3Hysteresis);
-        for(Index = 0;Index < 4;Index ++) {
-            // Boundary C6h~C9h
-            WriteValueWithIO(SaveState, 0xC6 + Index, FanControl.Fan3Boundary[Index]);
-        }
-        for(Index = 0;Index < 5;Index ++) {
-            // Speed CAh~CEh
-            TempData = FanControl.Fan3Segment[Index];
-            if(FanControl.Fan3Type == 0) {
-                //RPM mode
-                //X% of full speed = (100-X)*32/X
-                FanControl.Fan3Segment[Index] = (100 - TempData) * 32 / TempData;
-            }
-            else {
-                FanControl.Fan3Segment[Index] = 0xFF * TempData / 100;
-            }
-            WriteValueWithIO(SaveState, 0xCA + Index, FanControl.Fan3Segment[Index]);
-        }
-        break;
-    }
+//     //Fan 3 setting
+//     switch (FanControl.Fan3SmartMode) {
+//     case 0://Manual Mode
+//         //Index 96h[5] = 1 [4]:0/1 RPM/PWM
+//         GetValueWithIO(0x96, &TempData);
+//         TempData &= ~(BIT4 | BIT5);
+//         WriteValueWithIO(SaveState, 0x96, TempData | BIT1 | FanControl.Fan3Type); //Index 0x96[5-4]
+//         WriteValueWithIO(SaveState, 0xC2, (UINT8)FanControl.Fan3ManualControl); //Index 0xC2(MSB) Control value.
+//         WriteValueWithIO(SaveState, 0xC3, (UINT8)(FanControl.Fan3ManualControl >> 8)); //Index 0xC3(LSB) Control value.
+//         break;
+//     case 1://Automatic Mode
+//         //Index 96h[5] = 0 [4]:0/1 RPM/PWM
+//         //Fan type & mode
+//         GetValueWithIO(0x96, &TempData);
+//         TempData &= ~(BIT4 | BIT5);
+//         WriteValueWithIO(SaveState, 0x96, TempData | FanControl.Fan3Type); //Index 0x96[5-4]
+//         GetValueWithIO(0xCF, &TempData);
+//         TempData &= ~(BIT0 | BIT1 | BIT7);
+//         WriteValueWithIO(SaveState, 0xCF, TempData | FanControl.Fan3Tempin); //Index 0xCF[7,1-0]
+//         //Set Boundary hysteresis 99h[3-0]
+//         GetValueWithIO(0x99, &TempData);
+//         TempData &= ~(BIT0 | BIT1 | BIT2 | BIT3);
+//         WriteValueWithIO(SaveState, 0x99, TempData | FanControl.Fan3Hysteresis);
+//         for(Index = 0;Index < 4;Index ++) {
+//             // Boundary C6h~C9h
+//             WriteValueWithIO(SaveState, 0xC6 + Index, FanControl.Fan3Boundary[Index]);
+//         }
+//         for(Index = 0;Index < 5;Index ++) {
+//             // Speed CAh~CEh
+//             TempData = FanControl.Fan3Segment[Index];
+//             if(FanControl.Fan3Type == 0) {
+//                 //RPM mode
+//                 //X% of full speed = (100-X)*32/X
+//                 FanControl.Fan3Segment[Index] = (100 - TempData) * 32 / TempData;
+//             }
+//             else {
+//                 FanControl.Fan3Segment[Index] = 0xFF * TempData / 100;
+//             }
+//             WriteValueWithIO(SaveState, 0xCA + Index, FanControl.Fan3Segment[Index]);
+//         }
+//         break;
+//     }
 }
 
 /**
@@ -909,7 +909,7 @@ EFI_STATUS F81866_HWM_Init(
         //OEM_TODO: You need to fill DXE_HWM_Init_Table_After_Active[] first.
         ProgramIsaRegisterTable(F81866_HWM_INDEX_PORT, F81866_HWM_DATA_PORT,\
                                 DXE_HWM_Init_Table_After_Active,sizeof(DXE_HWM_Init_Table_After_Active)/(sizeof(SIO_DEVICE_INIT_DATA)));
-        ProgramSmartFan(NULL, FALSE);
+//        ProgramSmartFan(NULL, FALSE);
         break;
 
     case isAfterBootScript:
@@ -920,7 +920,7 @@ EFI_STATUS F81866_HWM_Init(
         BootScriptProtocol=(EFI_S3_SAVE_STATE_PROTOCOL*)Dev->Owner->SaveState;
         SioLib_BootScriptSioS3SaveTable(F81866_HWM_INDEX_PORT, F81866_HWM_DATA_PORT, \
                                         DXE_HWM_Init_Table_After_Active,sizeof(DXE_HWM_Init_Table_After_Active)/(sizeof(SIO_DEVICE_INIT_DATA)), BootScriptProtocol);
-        ProgramSmartFan(BootScriptProtocol, FALSE);
+//        ProgramSmartFan(BootScriptProtocol, FALSE);
         break;
 #if  AMI_SIO_MINOR_VERSION >= 6     
     case isAfterSmmBootScript:   
@@ -932,7 +932,7 @@ EFI_STATUS F81866_HWM_Init(
         //If No Bank exist in HWM Config register.
         SioLib_BootScriptSioS3SaveTable(F81866_HWM_INDEX_PORT, F81866_HWM_DATA_PORT, 
                                         DXE_HWM_Init_Table_After_Active,sizeof(DXE_HWM_Init_Table_After_Active)/(sizeof(SIO_DEVICE_INIT_DATA)),BootScriptProtocol);
-        ProgramSmartFan(BootScriptProtocol, TRUE);
+//        ProgramSmartFan(BootScriptProtocol, TRUE);
         break;
 #endif
     default:
