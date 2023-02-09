@@ -1052,7 +1052,6 @@ LDEVICE
     ASLfile  = "'AmiModulePkg/IO/F81866/UART3.asl'"
     ASLdeviceName  = "UAR3"
     Token = "F81866_SERIAL_PORT3_PRESENT" "=" "1"
-    Token = "F81866_UART3_LEVEL_EDGE_SHARE_MODE" "=" "0"
 End
 
 LDEVICE
@@ -1074,7 +1073,6 @@ LDEVICE
     ASLfile  = "'AmiModulePkg/IO/F81866/UART4.asl'"
     ASLdeviceName  = "UAR4"
     Token = "F81866_SERIAL_PORT4_PRESENT" "=" "1"
-    Token = "F81866_UART4_LEVEL_EDGE_SHARE_MODE" "=" "0"
 End
 
 LDEVICE
@@ -1096,7 +1094,6 @@ LDEVICE
     ASLfile  = "'AmiModulePkg/IO/F81866/UART5.asl'"
     ASLdeviceName  = "UAR5"
     Token = "F81866_SERIAL_PORT5_PRESENT" "=" "1"
-    Token = "F81866_UART5_LEVEL_EDGE_SHARE_MODE" "=" "0"
 End
 
 LDEVICE
@@ -1118,91 +1115,6 @@ LDEVICE
     ASLfile  = "'AmiModulePkg/IO/F81866/UART6.asl'"
     ASLdeviceName  = "UAR6"
     Token = "F81866_SERIAL_PORT6_PRESENT" "=" "1"
-    Token = "F81866_UART6_LEVEL_EDGE_SHARE_MODE" "=" "0"
-End
-
-LDEVICE
-    Name  = "Com3"
-    SioDevice  = "F81866"
-    Dev_Type  = "dsUART"
-    LDev_Num  = "012h"
-    UID  = "02h"
-    PnPID  = "0501h"
-    SIO_RES_Flag  = "0x0"
-    HasSetup = Yes
-    ResBaseAddr1  = "00h"
-    ResLength1  = "00h"
-    ResBaseAddr2  = "00h"
-    ResLength2  = "00h"
-    InitRoutine  = "F81866_COM_Init"
-    SleepNum  = 01h
-    ASLfile  = "'AmiModulePkg/IO/F81866/UART3_Edge.ASL'"
-    ASLdeviceName  = "UAR3"
-    Token = "F81866_SERIAL_PORT3_PRESENT" "=" "1"
-    Token = "F81866_UART3_LEVEL_EDGE_SHARE_MODE" "=" "1"
-End
-
-LDEVICE
-    Name  = "Com4"
-    SioDevice  = "F81866"
-    Dev_Type  = "dsUART"
-    LDev_Num  = "013h"
-    UID  = "03h"
-    PnPID  = "0501h"
-    SIO_RES_Flag  = "0x4"
-    HasSetup = Yes
-    ResBaseAddr1  = "00h"
-    ResLength1  = "00h"
-    ResBaseAddr2  = "00h"
-    ResLength2  = "00h"
-    InitRoutine  = "F81866_COM_Init"
-    SleepNum  = 01h
-    ASLfile  = "'AmiModulePkg/IO/F81866/UART4_Edge.ASL'"
-    ASLdeviceName  = "UAR4"
-    Token = "F81866_SERIAL_PORT4_PRESENT" "=" "1"
-    Token = "F81866_UART4_LEVEL_EDGE_SHARE_MODE" "=" "1"
-End
-
-LDEVICE
-    Name  = "Com5"
-    SioDevice  = "F81866"
-    Dev_Type  = "dsUART"
-    LDev_Num  = "014h"
-    UID  = "04h"
-    PnPID  = "0501h"
-    SIO_RES_Flag  = "0x4"
-    HasSetup = Yes
-    ResBaseAddr1  = "00h"
-    ResLength1  = "00h"
-    ResBaseAddr2  = "00h"
-    ResLength2  = "00h"
-    InitRoutine  = "F81866_COM_Init"
-    SleepNum  = 01h
-    ASLfile  = "'AmiModulePkg/IO/F81866/UART5_Edge.ASL'"
-    ASLdeviceName  = "UAR5"
-    Token = "F81866_SERIAL_PORT5_PRESENT" "=" "1"
-    Token = "F81866_UART5_LEVEL_EDGE_SHARE_MODE" "=" "1"
-End
-
-LDEVICE
-    Name  = "Com6"
-    SioDevice  = "F81866"
-    Dev_Type  = "dsUART"
-    LDev_Num  = "015h"
-    UID  = "05h"
-    PnPID  = "0501h"
-    SIO_RES_Flag  = "0x4"
-    HasSetup = Yes
-    ResBaseAddr1  = "00h"
-    ResLength1  = "00h"
-    ResBaseAddr2  = "00h"
-    ResLength2  = "00h"
-    InitRoutine  = "F81866_COM_Init"
-    SleepNum  = 01h
-    ASLfile  = "'AmiModulePkg/IO/F81866/UART6_Edge.ASL'"
-    ASLdeviceName  = "UAR6"
-    Token = "F81866_SERIAL_PORT6_PRESENT" "=" "1"
-    Token = "F81866_UART6_LEVEL_EDGE_SHARE_MODE" "=" "1"
 End
 
 LDEVICE
