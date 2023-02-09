@@ -23,7 +23,7 @@
 #include <Library/AmiSioDxeLib.h>
 #include <AmiGenericSio.h>
 #include "F81866DxeIoTable.h"
-#include <F81866SmartFansSetup.h>
+//#include <F81866SmartFansSetup.h>
 #include <Protocol\SmmVariable.h>
 
 /**
