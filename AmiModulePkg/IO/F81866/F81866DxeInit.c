@@ -288,7 +288,7 @@ WriteValueWithIO (
 //         }
 //         break;
 //     }
-}
+//}
 
 /**
   This function provide Floppy port initial routine in GenericSio.c
