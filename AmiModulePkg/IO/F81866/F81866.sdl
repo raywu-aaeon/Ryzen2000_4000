@@ -104,7 +104,7 @@ End
 
 TOKEN
     Name  = "F81866_FLOPPY_PORT_PRESENT"
-    Value  = "0" ##RayWu, 1->0 2014/09/03
+    Value  = "1" ##RayWu, 1->0 2014/09/03
     Help  = "Floppy Port Present / Not Present."
     TokenType = Boolean
     TargetH = Yes
