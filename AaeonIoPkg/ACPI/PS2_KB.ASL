@@ -32,18 +32,18 @@
 // PS2 Keyboard Device, IO category # - 10
 //---------------------------------------------------------------------
 
-//EIP129301 >>
-//Device(PS2K) {
-//    Name(_HID,EISAID("PNP0303"))        // Standard Keyboard 101/102
-        Method(_HID,0){
-            Return (\HIDK)
-        }
+// //EIP129301 >>
+// //Device(PS2K) {
+// //    Name(_HID,EISAID("PNP0303"))        // Standard Keyboard 101/102
+//         Method(_HID,0){
+//             Return (\HIDK)
+//         }
 
-    //Name(_CID,EISAID("PNP030b"))        // Compatible ID, PC/AT Enhanced Keyboard 101/102
-        Method(_CID,0){
-            Return (\CIDK)
-        }
-//EIP129301 <<
+//     //Name(_CID,EISAID("PNP030b"))        // Compatible ID, PC/AT Enhanced Keyboard 101/102
+//         Method(_CID,0){
+//             Return (\CIDK)
+//         }
+// //EIP129301 <<
 
 // EIP216053 >>
     Method(_STA,0) {
