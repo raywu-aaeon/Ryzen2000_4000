@@ -1,0 +1,17 @@
+#undef SB_ONEOF_UART0ENABLE
+#define SB_ONEOF_UART0ENABLE\
+        oneof varid       = SETUP_DATA.Uart0Enable,\
+            prompt      = STRING_TOKEN(STR_UART0_ENABLE_STRING),\
+            help        = STRING_TOKEN(STR_UART0_ENABLE_HELP),\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = MANUFACTURING;\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | RESET_REQUIRED;\
+        endoneof;
+
+#undef SB_ONEOF_UART1ENABLE
+#define SB_ONEOF_UART1ENABLE\
+        oneof varid       = SETUP_DATA.Uart1Enable,\
+            prompt      = STRING_TOKEN(STR_UART1_ENABLE_STRING),\
+            help        = STRING_TOKEN(STR_UART1_ENABLE_HELP),\
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = MANUFACTURING;\
+            option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED | DEFAULT | RESET_REQUIRED;\
+        endoneof;

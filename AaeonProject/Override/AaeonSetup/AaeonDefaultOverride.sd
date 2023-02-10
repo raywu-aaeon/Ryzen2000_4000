@@ -53,6 +53,9 @@
 // MandolinPkg\CrbSetup\Crb.sd
 #include "AaeonProject\Override\AaeonSetup\AaeonDefaultOverride_Crb.sd"
 
+// AmiChipsetModulePkg\SB\SbSetup\Sb.sd
+#include "AaeonProject\Override\AaeonSetup\AaeonDefaultOverride_Sb.sd"
+
 #endif //ENDIF CONTROL_DEFINITION
 
 
