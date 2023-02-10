@@ -527,9 +527,3 @@ TOKEN
 	Range  = "$(CSMSETUP_ENABLE_ALL_BOOT_OPTIONS) - Both UEFI and Legacy boot options enabled\$(CSMSETUP_LEGACY_ONLY_BOOT_OPTIONS) - Only Legacy boot options enabled\$(CSMSETUP_UEFI_ONLY_BOOT_OPTIONS) - Only UEFI boot options enabled"
 	Token = "CSM_SUPPORT" "=" "1"
 End
-ELINK
-    Name  = "-D PCI0=PC00"
-    Parent  = "*_*_*_ASLPP_FLAGS"
-    InvokeOrder = AfterParent
-	Token = "CORE_BUILD_NUMBER" ">" "19"
-End
