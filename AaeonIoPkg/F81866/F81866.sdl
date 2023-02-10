@@ -1137,7 +1137,7 @@ LDEVICE
     SioDevice  = "F81866"
     Dev_Type  = "dsPS2CK"
     LDev_Num  = "05h"
-    UID  = "00h"
+    UID  = "01h"
     PnPID  = "0303h"
     SIO_RES_Flag  = "0x0"
     ##HasSetup = Yes ##FINETUNE_092_RayWu, REMOVE 2015/02/09
@@ -1161,7 +1161,7 @@ LDEVICE
     SioDevice  = "F81866"
     Dev_Type  = "dsPS2CM"
     LDev_Num  = "05h"
-    UID  = "00h"
+    UID  = "01h"
     PnPID  = "0f03h"
     SIO_RES_Flag  = "0x3"
     ##HasSetup = Yes ##FINETUNE_092_RayWu, REMOVE 2015/02/09
