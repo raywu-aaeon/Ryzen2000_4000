@@ -47,15 +47,16 @@
 
 // EIP216053 >>
     Method(_STA,0) {
-    	        If (LGreater (OSYS, 2009)){
-			If(And(\IOST, 0x0400)){
-				Return (0x0F)
-			} else {
-				Return (0x00)
-			}
-    	        } else {
-			Return (0x0F)   
-		}
+    	        // If (LGreater (OSYS, 2009)){
+		// 	If(And(\IOST, 0x0400)){
+		// 		Return (0x0F)
+		// 	} else {
+		// 		Return (0x00)
+		// 	}
+    	        // } else {
+		// 	Return (0x0F)   
+		// }
+		Return (0x0F)
 	}
 // EIP216053 <<
 

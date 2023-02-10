@@ -36,16 +36,16 @@
 					// check if MSFT Mouse driver supports D3 properly on all MSFT OSes. 
 					// It may prevent OS to go to S3 sleep state
 					// Use Logitech _HID instead if OS rejecting to go to S3.
-//EIP129301 >>
-        Method(_HID,0){
-            Return (\HIDM)
-        }
-//        Name(_HID, EISAID("PNP0F12"))	// Logitech PS2 Mouse ID
-//        Name(_CID, EISAID("PNP0F13"))	// Compatible ID
-        Method(_CID,0){
-            Return (\CIDM)
-        }
-//EIP129301 <<
+// //EIP129301 >>
+//         Method(_HID,0){
+//             Return (\HIDM)
+//         }
+// //        Name(_HID, EISAID("PNP0F12"))	// Logitech PS2 Mouse ID
+// //        Name(_CID, EISAID("PNP0F13"))	// Compatible ID
+//         Method(_CID,0){
+//             Return (\CIDM)
+//         }
+// //EIP129301 <<
 
         Method(_STA, 0) {
                 // Check if PS2Mouse detected in BIOS Post
