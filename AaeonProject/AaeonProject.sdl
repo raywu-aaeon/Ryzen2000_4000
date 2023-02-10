@@ -251,7 +251,7 @@ End
 
 TOKEN
     Name  = "F81866_KEYBOARD_PRESENT"
-    Value  = "0"
+    Value  = "1"
     Help  = "Keyboard Present / Not Present."
     TokenType = Boolean
     TargetH = Yes
@@ -259,7 +259,7 @@ End
 
 TOKEN
     Name  = "F81866_MOUSE_PRESENT"
-    Value  = "0"
+    Value  = "1"
     Help  = "Mouse Present / Not Present."
     TokenType = Boolean
     TargetH = Yes
